@@ -1,0 +1,32 @@
+###> symfony ###
+/api/.env.local
+/api/.env.local.php
+/api/.env.*.local
+/api/config/secrets/prod/prod.decrypt.private.php
+/api/public/bundles/
+/api/private/
+/api/public/uploads/
+/api/var/
+/api/vendor/
+/api/config/jwt/*.pem
+###< symfony ###
+
+###> next ###
+/front/logs
+###< next ###
+
+###> docker ###
+/compose.override.yaml
+/compose.override.prod.yaml
+###< docker ###
+
+###> prod-context ###
+/.env.local
+###< prod-context ###
+
+###> Extra ###
+/.DS_Store/
+/.vscode/
+/.php-cs-fixer.cache
+###< Extra ###
+

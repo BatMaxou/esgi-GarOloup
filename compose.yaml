@@ -1,0 +1,32 @@
+services:
+  php:
+    depends_on:
+      - db
+    build: ./api
+    volumes:
+      - ./api:/srv
+
+  web:
+    depends_on:
+      - php
+    build: ./api/.devops/nginx
+    volumes:
+      - ./api/public:/srv/public
+
+  node:
+    build:
+      context: ./front
+      target: dev
+    volumes:
+      - ./front:/app
+
+  db:
+    image: mariadb:11.8
+    volumes:
+      - db_data:/var/lib/mysql
+
+  mailbox:
+    image: mailhog/mailhog
+
+volumes:
+  db_data:

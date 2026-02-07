@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Miltonian+Tattoo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Eczar:wght@400..800&display=swap');
+
+@layer theme, base, components, utilities;
+
+@import "tailwindcss";
+
+@theme {
+  --color-neutral-100: #FFFFFF;
+  --color-neutral-200: #F2F2FF;
+  --color-neutral-300: #E3E4F5;
+  --color-neutral-400: #C8C9E0;
+  --color-neutral-500: #9EA0B8;
+  --color-neutral-600: #505461;
+  --color-neutral-700: #3E415A;
+  --color-neutral-800: #2B2E44;
+  --color-neutral-900: #1A1C2E;
+
+  --color-base-text: var(--color-neutral-800);
+  --color-light: var(--color-neutral-200);
+
+  --color-primary: #9F9AD6;
+  --color-primary-2: #4F4C70;
+
+  --color-yellow: #ECA72C;
+  --color-yellow-pastel: #F5E6A6;
+
+  --color-success: #32BA55;
+  --color-success-pastel: #C9F3D3;
+
+  --color-error: #D33E36;
+  --color-error-pastel: #FFF3F3;
+
+  --color-shadow: #4F4C7014;
+
+  --breakpoint-xs: 24rem; /* 384px*/
+  --breakpoint-sm: 40rem; /* 640px */
+  --breakpoint-md: 48rem; /* 768px */
+  --breakpoint-lg: 64rem; /* 1024px */
+  --breakpoint-xl: 80rem; /* 1280px */
+  --breakpoint-2xl: 87rem; /* 1392px */
+  --breakpoint-3xl: 100rem; /* 1600px */
+
+  --container-xs: 24rem;
+  --container-sm: 40rem;
+  --container-md: 48rem;
+  --container-lg: 64rem;
+  --container-xl: 80rem;
+  --container-2xl: 87rem;
+  --container-3xl: 96rem;
+
+  --radius-lg: 100px;
+  --radius-md: 32px;
+  --radius-sm: 16px;
+  --radius-xs: 8px;
+  --radius-xxs: 6px;
+
+  --primary-gradient: 90deg, var(--color-primary-2) 0%, var(--color-primary) 100%;
+
+  --background-gradient: 180deg, var(--color-neutral-100) 0%, var(--color-neutral-200) 100%;
+
+  --shadow: 0px 8px 24px 0px var(--color-shadow);
+
+  --default-transition-duration: .2s;
+  --default-transition-timing-function: linear;
+
+  --font-title: "Eczar", sans-serif;
+  --font-special: "Miltonian Tattoo", sans-serif;
+  --font-normal: "Eczar", sans-serif;
+}
+
+@property --border-gradient-fill {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@utility bg-border-* {
+  --border-gradient-fill: var(--color-neutral-100);
+  background:
+    conic-gradient(var(--border-gradient-fill)) padding-box,
+    linear-gradient(--value(--*)) border-box;
+  border-color: transparent;
+  transition: --border-gradient-fill var(--default-transition-duration) var(--default-transition-timing-function);
+}
+
+@utility bg-border-hover-* {
+  &:hover {
+    --border-gradient-fill: transparent;
+  }
+}
+
+@utility bg-border-focus-* {
+  &:focus {
+    --border-gradient-fill: transparent;
+  }
+}
+
+@utility scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--color-neutral-200);
+    border-radius: var(--radius-lg);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    width: 8px;
+    background-color: var(--color-primary);
+    border-radius: var(--radius-lg);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-primary-2);
+  }
+}
