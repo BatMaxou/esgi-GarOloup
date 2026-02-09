@@ -3,12 +3,22 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Patch;
 use App\Enum\GameStepEnum;
 use App\Repository\GameRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GameRepository::class)]
-#[ApiResource(mercure: true)]
+#[ApiResource(
+    mercure: [
+        'topics' => [
+            '@=iri(object)',
+        ],
+    ],
+    operations: [
+        new Patch(name: 'api_game_update'),
+    ],
+)]
 class Game
 {
     #[ORM\Id]
