@@ -16,6 +16,9 @@ const buttonCva = cva('flex items-center cursor-pointer rounded-lg focus:outline
       true: 'w-full',
       false: 'w-fit',
     },
+    disabled: {
+      true: 'cursor-not-allowed opacity-50 hover:bg-transparent',
+    },
   },
   compoundVariants: [
   ],
@@ -32,13 +35,14 @@ type Props = VariantProps<typeof buttonCva> & {
   label?: string;
   className?: string;
   asLink?: boolean;
+  onClick?: () => void;
 };
 
-const Button = ({ label, className, asLink, variant, size, full, ...props }: Props) => {
+const Button = ({ label, className, asLink, variant, size, full, disabled, ...props }: Props) => {
   const Tag: Tags = asLink ? 'a' : 'button';
 
   return (
-    <Tag className={buttonCva({ variant, size, full,  className })} {...props}>
+    <Tag className={buttonCva({ variant, size, full, disabled, className })} {...props}>
       <Typography variant="button" textColor="controlled" bold center>{label}</Typography>
     </Tag>
   );

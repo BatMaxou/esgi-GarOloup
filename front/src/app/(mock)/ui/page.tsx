@@ -10,7 +10,7 @@ import Typography from "@/components/ui/atoms/typography";
 
 const UiPage = () => {
   useEffect(() => {
-    const url = new URL('http://localhost:3001/.well-known/mercure');
+    const url = new URL('http://localhost:8888/.well-known/mercure');
     url.searchParams.append('topic', 'http://localhost:8000/api/games/3');
 
     const eventSource = new EventSource(url);

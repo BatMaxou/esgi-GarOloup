@@ -15,6 +15,7 @@
 /front/.next
 /front/node_modules
 /front/logs
+/front/.env.local
 ###< next ###
 
 ###> docker ###
