@@ -1,7 +1,7 @@
-import { eraseCookie, getCookie, setCookie } from "@/lib/cookie/cookies";
-import { ApiClientError } from "./ApiClientError";
-import { handleApiError } from "./handleApiError";
-import { GameResource } from "./resources/GameResource";
+import { ApiClientError } from "@/lib/api/ApiClientError";
+import { handleApiError } from "@/lib/api/handleApiError";
+import { GameResource } from "@/lib/api/resources/GameResource";
+import { CookieRegistryInterface } from "@/lib/cookie/CookieRegistryInterface";
 // import type { User } from "@/utils/types";
 
 export interface LoginResponse {
@@ -31,16 +31,21 @@ export enum ResponseType {
 }
 
 export class ApiClient {
-  baseUrl: string;
-  token: string | null;
+  token: string | null = null;
 
   game: GameResource;
 
-  constructor(apiBaseUrl: string) {
-    this.baseUrl = apiBaseUrl;
-    this.token = getCookie("token");
+  constructor(
+    public baseUrl: string,
+    public cookieRegistry: CookieRegistryInterface,
+  ) {
+    this.retrieveToken();
 
     this.game = new GameResource(this);
+  }
+
+  private async retrieveToken() {
+    this.token = await this.cookieRegistry.getCookie("token");
   }
 
   async get<T>(url: string, additionnalHeaders: HeadersInit = {}): Promise<T | ApiClientError> {
@@ -151,9 +156,10 @@ export class ApiClient {
     return this.post<LoginResponse>("/login", { username: email, password })
       .then((response) => {
         if (!(response instanceof ApiClientError) && response.token) {
-          const decodedTokenExp: number = JSON.parse(atob(response.token.split(".")[1]))?.exp ?? 0;
-          setCookie("token", response.token, new Date(decodedTokenExp * 1000));
           this.token = response.token;
+
+          const decodedTokenExp: number = JSON.parse(atob(response.token.split(".")[1]))?.exp ?? 0;
+          this.cookieRegistry.setCookie("token", response.token, new Date(decodedTokenExp * 1000));
         }
 
         return response;
@@ -172,7 +178,7 @@ export class ApiClient {
 
   logout(): void {
     this.token = null;
-    eraseCookie("token");
+    this.cookieRegistry.eraseCookie("token");
   }
 }
 

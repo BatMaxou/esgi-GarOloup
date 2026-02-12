@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Patch;
 use App\Enum\GameStepEnum;
 use App\Repository\GameRepository;
@@ -16,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
         ],
     ],
     operations: [
+        new Get(name: 'api_game_get'),
         new Patch(name: 'api_game_update'),
     ],
 )]

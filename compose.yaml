@@ -18,7 +18,7 @@ services:
       - ./api/public:/srv/public
     networks:
       - api
-      - garoloup
+      - front_ssr
 
   mercure:
     image: dunglas/mercure
@@ -44,7 +44,7 @@ services:
     volumes:
       - ./front:/app
     networks:
-      - garoloup
+      - front_ssr
 
   db:
     image: mariadb:11.8
@@ -66,4 +66,4 @@ volumes:
 networks:
   mercure:
   api:
-  garoloup:
+  front_ssr:
