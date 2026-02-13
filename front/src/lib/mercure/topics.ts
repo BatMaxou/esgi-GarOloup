@@ -1,3 +1,3 @@
 export const topics = {
-  game: (id: number) => `/games/${id}`,
+  game: (id: string) => `/games/${id}`,
 };

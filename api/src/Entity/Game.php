@@ -5,9 +5,12 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
 use App\Enum\GameStepEnum;
 use App\Repository\GameRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Types\UuidType;
+use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: GameRepository::class)]
 #[ApiResource(
@@ -18,15 +21,17 @@ use Doctrine\ORM\Mapping as ORM;
     ],
     operations: [
         new Get(name: 'api_game_get'),
+        new Post(name: 'api_game_create'),
         new Patch(name: 'api_game_update'),
     ],
 )]
 class Game
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: UuidType::NAME, unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    private ?Uuid $id = null;
 
     #[ORM\Column(enumType: GameStepEnum::class)]
     private ?GameStepEnum $step = null;
@@ -36,7 +41,7 @@ class Game
         $this->step = GameStepEnum::INITIALISATION;
     }
 
-    public function getId(): ?int
+    public function getId(): ?Uuid
     {
         return $this->id;
     }

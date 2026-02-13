@@ -1,3 +1,4 @@
+import { GameStepEnum } from "@/utils/enums";
 import { topics } from "./topics";
 
 export class MercureClient {
@@ -16,7 +17,7 @@ export class MercureClient {
     eventSource.onmessage = onMessage;
   }
 
-  public watchGame(id: number, action: (game: { step: string }) => void): void {
+  public watchGame(id: string, action: (game: { step: GameStepEnum }) => void): void {
     this.subscribe(`${this.apiBaseUrl}${topics.game(id)}`, ({ data }: { data: string }) => {
       const retrieve = JSON.parse(data);
 

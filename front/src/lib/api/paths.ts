@@ -1,6 +1,6 @@
 export const apiPaths = {
   game: {
-    get: (id: number) => `/games/${id}`,
-    update: (id: number) => `/games/${id}`,
+    get: (id: string) => `/games/${id}`,
+    update: (id: string) => `/games/${id}`,
   }
 };
