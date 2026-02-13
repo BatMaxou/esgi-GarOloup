@@ -3,6 +3,14 @@ services:
     ports:
       - "8000:80"
 
+  mercure:
+    ports:
+      - "8888:80"
+    environment:
+      # Set the URL of your Symfony project (without trailing slash!) as value of the cors_origins directive
+      MERCURE_EXTRA_DIRECTIVES: |
+        cors_origins http://localhost:8000 http://localhost:3000
+
   node:
     ports:
       - "3000:3000"

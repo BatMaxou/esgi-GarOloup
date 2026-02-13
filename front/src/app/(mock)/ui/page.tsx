@@ -1,18 +1,7 @@
-import Buttons from "@/components/pages/ui/buttons";
-import Colors from "@/components/pages/ui/colors";
-import Gradients from "@/components/pages/ui/gradients";
-import Typographies from "@/components/pages/ui/typographies";
-import Typography from "@/components/ui/atoms/typography";
+import UiClient from "@/components/pages/ui/ui-client";
 
 const UiPage = () => {
-  return <main className="p-8">
-    <Typography tag="h1" variant="heading-1" bold center className="block">Page UI</Typography>
-
-    <Colors />
-    <Gradients />
-    <Typographies />
-    <Buttons />
-  </main>
+  return <UiClient />
 }
 
 export default UiPage;
