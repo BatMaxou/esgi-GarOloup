@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Security\RoleTrait;
 use App\Entity\Uuid\UuidTrait;
 use App\Enum\RoleEnum;
 use App\Repository\UserRepository;
@@ -14,13 +15,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use UuidTrait;
+    use RoleTrait;
 
     #[ORM\Column(length: 180)]
     private ?string $email = null;
-
-    /** @var RoleEnum[] */
-    #[ORM\Column]
-    private array $roles = [];
 
     #[ORM\Column]
     private ?string $password = null;
@@ -29,11 +27,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $username = null;
-
-    public function __construct()
-    {
-        $this->roles[] = RoleEnum::USER;
-    }
 
     public function getEmail(): ?string
     {
@@ -52,46 +45,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
-    /** @return RoleEnum[] */
-    public function getRoles(): array
-    {
-        if (!in_array(RoleEnum::USER, $this->roles)) {
-            $this->roles[] = RoleEnum::USER;
-        }
-
-        return $this->roles;
-    }
-
-    /** @param RoleEnum[] $roles */
-    public function setRoles(array $roles): static
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    public function addRole(RoleEnum $role): static
-    {
-        if (!in_array($role->value, $this->roles, true)) {
-            $this->roles[] = $role->value;
-        }
-
-        return $this;
-    }
-
-    public function removeRole(RoleEnum $role): static
-    {
-        if (in_array($role->value, $this->roles, true)) {
-            $this->roles = array_diff($this->roles, [$role->value]);
-        }
-
-        return $this;
-    }
-
-    public function hasRole(RoleEnum $role): bool
-    {
-        return in_array($role->value, $this->roles, true);
-    }
 
     public function getPlainPassword(): ?string
     {
@@ -143,5 +96,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // @deprecated, to be removed when upgrading to Symfony 8
         $this->plainPassword = null;
+    }
+
+    public function getDefaultRole(): RoleEnum
+    {
+        return RoleEnum::USER;
     }
 }

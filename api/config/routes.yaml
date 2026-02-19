@@ -9,6 +9,3 @@
 
 controllers:
     resource: routing.controllers
-
-
-

@@ -7,29 +7,56 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+        temp_user_provider:
+            entity:
+                class: App\Entity\TempUser
+                property: id
+        player_provider:
+            chain:
+                providers: [user_provider, temp_user_provider]
 
     firewalls:
-        dev:
-            pattern: ^/_(profiler|wdt)
-            security: false
-
-        api:
-            pattern: ^/api
+        login:
+            pattern: ^/api/login
             provider: user_provider
             stateless: true
-            entry_point: jwt
             json_login:
                 check_path: /api/login
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-            jwt: ~
+
+        refresh_token:
+            pattern: ^/api/token/refresh
+            provider: user_provider
             refresh_jwt:
                 check_path: /api/token/refresh
+
+        user:
+            pattern: ^/api/user
+            provider: user_provider
+            stateless: true
+            entry_point: jwt
+            jwt: ~
+
+        game:
+            pattern: ^/api/game
+            provider: player_provider
+            stateless: true
+            entry_point: jwt
+            jwt: ~
+
+        api:
+            pattern: ^/api
+            stateless: true
+
+        dev:
+            pattern: ^/_(profiler|wdt)
+            security: false
 
     access_control:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/token/refresh, roles: PUBLIC_ACCESS }
-        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/(user|game), roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:
