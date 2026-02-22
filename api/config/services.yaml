@@ -17,3 +17,5 @@ services:
             - '../src/Entity/'
             - '../src/Model/'
             - '../src/Kernel.php'
+            - '../src/Domain/Command/**/*Command.php'
+            - '../src/Api/Model/'

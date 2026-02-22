@@ -4,8 +4,14 @@ namespace App\Enum;
 
 enum GameStepEnum: string
 {
-    case INITIALISATION = 'initialisation';
-    case DAY = 'day';
+    case NEW = 'new';
+    case GAME_MASTER_CHOICE = 'game_master_choice';
+    case CONFIGURATION = 'configuration';
+
+    case LAUNCH = 'launch';
+
     case NIGHT = 'night';
-    case FINISHED = 'finished';
+    case DAY = 'day';
+
+    case FINISH = 'finish';
 }

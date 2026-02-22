@@ -2,14 +2,26 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use App\Api\Provider\TempUserProvider;
 use App\Entity\Security\RoleTrait;
 use App\Entity\Uuid\UuidTrait;
 use App\Enum\RoleEnum;
 use App\Repository\TempUserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
+#[ApiResource(
+    operations: [
+        new Get(
+            name: 'api_temp_user_get',
+            uriTemplate: '/temp_user',
+            provider: TempUserProvider::class,
+        ),
+    ],
+)]
 #[ORM\Entity(repositoryClass: TempUserRepository::class)]
 class TempUser implements UserInterface
 {
@@ -18,9 +30,15 @@ class TempUser implements UserInterface
         __construct as private initialiseRole;
     }
 
-    public function __construct()
-    {
-        $this->id = Uuid::v7();
+    #[ORM\Column(length: 255)]
+    #[Assert\Ip]
+    private ?string $ip = null;
+
+    public function __construct(
+        string $ip,
+    ) {
+        $this->id = $this->generateUuid();
+        $this->ip = $ip;
         $this->initialiseRole();
     }
 
@@ -38,5 +56,17 @@ class TempUser implements UserInterface
     public function getDefaultRole(): RoleEnum
     {
         return RoleEnum::TEMP_USER;
+    }
+
+    public function getIp(): ?string
+    {
+        return $this->ip;
+    }
+
+    public function setIp(string $ip): static
+    {
+        $this->ip = $ip;
+
+        return $this;
     }
 }

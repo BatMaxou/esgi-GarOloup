@@ -18,4 +18,9 @@ trait UuidTrait
     {
         return $this->id;
     }
+
+    private function generateUuid(): Uuid
+    {
+        return Uuid::v7();
+    }
 }
