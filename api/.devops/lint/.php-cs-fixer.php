@@ -4,6 +4,8 @@ $finder = PhpCsFixer\Finder::create()
     ->exclude('vendor')
     ->exclude('var')
     ->in('./api/src')
+    ->in('./api/tests')
+    ->in('./api/fixtures')
 ;
 
 return (new PhpCsFixer\Config())

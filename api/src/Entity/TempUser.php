@@ -47,10 +47,8 @@ class TempUser implements UserInterface
         return (string) $this->id;
     }
 
-    #[\Deprecated]
     public function eraseCredentials(): void
     {
-        // @deprecated, to be removed when upgrading to Symfony 8
     }
 
     public function getDefaultRole(): RoleEnum

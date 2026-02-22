@@ -47,7 +47,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+            "App\\Fixture\\": "fixtures/"
         }
     },
     "autoload-dev": {
@@ -87,8 +88,12 @@
         }
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^8.6",
         "doctrine/doctrine-fixtures-bundle": "^4.3",
         "fakerphp/faker": "^1.24",
-        "symfony/maker-bundle": "^1.65"
+        "phpunit/phpunit": "^13.0",
+        "symfony/browser-kit": "7.4.*",
+        "symfony/maker-bundle": "^1.65",
+        "zenstruck/foundry": "^2.9"
     }
 }

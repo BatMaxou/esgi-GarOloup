@@ -9,6 +9,8 @@
 /api/var/
 /api/vendor/
 /api/config/jwt/*.pem
+/api/phpunit.xml
+/api/.phpunit.cache/
 ###< symfony ###
 
 ###> next ###
