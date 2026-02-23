@@ -3,58 +3,74 @@
 namespace App\Tests\Helper;
 
 use ApiPlatform\Symfony\Bundle\Test\Client;
+use App\Fixtures\Factory\UserFactory;
+use App\Tests\Helper\Behavior\Game\GameBehavior;
 use App\Tests\Helper\Behavior\Security\AuthBehavior;
+use App\Tests\Helper\Behavior\User\TempUserBehavior;
+use App\Tests\Helper\Builder\User\TempUserBuilder;
 use App\Tests\Helper\Builder\User\UserBuilder;
 
-class When
+final class When
 {
     private static Client $client;
 
     public static function setClient(Client $client): void
     {
-        static::$client = $client;
+        self::$client = $client;
     }
 
     public static function auth(): AuthBehavior
     {
-        return new AuthBehavior(static::$client);
+        return new AuthBehavior(self::$client);
+    }
+
+    public static function tempUser(): TempUserBehavior
+    {
+        return new TempUserBehavior(self::$client);
+    }
+
+    public static function game(): GameBehavior
+    {
+        return new GameBehavior(self::$client);
     }
 
     public static function asUser(UserBuilder $userBuilder): static
     {
-        $response = static::auth()->login($userBuilder->email, $userBuilder->password);
+        $email = $userBuilder->email ?? $userBuilder->getEntity()->getEmail();
+        $password = $userBuilder->password ?? UserFactory::DEFAULT_TEST_PASSWORD;
 
+        $response = self::auth()->login($email, $password);
         if (200 !== $response->getStatusCode()) {
             throw new \RuntimeException('Login failed.');
         }
 
-        $data = json_decode($response->getContent(false), true);
-
-        $token = $data['token'] ?? null;
-        if (null === $token) {
-            throw new \RuntimeException('Auth token not found.');
-        }
-
-        static::$client = static::$client->withOptions([
-            'headers' => [
-                'Authorization' => \sprintf('Bearer %s', $token),
-            ],
-        ]);
-
-        static::$client->disableReboot();
-
-        return new static();
+        return self::as($response->get('[token]'));
     }
 
-    public function asAnonymous(): static
+    public static function asTempUser(TempUserBuilder $tempUserBuilder): static
     {
-        static::$client = static::$client->withOptions([
+        $response = self::tempUser()->get($tempUserBuilder->username ?? $tempUserBuilder->getEntity()->getUsername());
+        if (200 !== $response->getStatusCode()) {
+            throw new \RuntimeException('Temp user retrieval failed.');
+        }
+
+        return self::as($response->get('[token]'));
+    }
+
+    public static function asAnonymous(): static
+    {
+        return self::as(null);
+    }
+
+    private static function as(?string $token): static
+    {
+        self::$client = static::$client->withOptions([
             'headers' => [
-                'Authorization' => '',
+                ...(empty($token) ? [] : ['Authorization' => \sprintf('Bearer %s', $token)]),
             ],
         ]);
 
-        static::$client->disableReboot();
+        self::$client->disableReboot();
 
         return new static();
     }

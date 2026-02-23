@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Fixture;
+namespace App\Fixtures;
 
 use App\Tests\Helper\ThereIs;
 use Doctrine\Bundle\FixturesBundle\Fixture;

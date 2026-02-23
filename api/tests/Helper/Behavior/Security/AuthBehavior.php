@@ -3,17 +3,26 @@
 namespace App\Tests\Helper\Behavior\Security;
 
 use App\Tests\Helper\Behavior\AbstractBehavior;
-use Symfony\Contracts\HttpClient\ResponseInterface;
+use App\Tests\Helper\Behavior\BehaviorResponse;
 
 class AuthBehavior extends AbstractBehavior
 {
-    public function login(?string $email, ?string $password): ResponseInterface
+    public function login(?string $email, ?string $password): BehaviorResponse
     {
-        return $this->client->request('POST', '/api/login', [
+        return new BehaviorResponse($this->client->request('POST', '/api/login', [
             'json' => [
                 'username' => $email,
                 'password' => $password,
             ],
-        ]);
+        ]));
+    }
+
+    public function refresh(?string $refreshToken): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('POST', '/api/token/refresh', [
+            'json' => [
+                'refresh_token' => $refreshToken,
+            ],
+        ]));
     }
 }

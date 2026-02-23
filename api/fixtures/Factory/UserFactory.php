@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Fixture\Factory;
+namespace App\Fixtures\Factory;
 
 use App\Entity\User;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
@@ -8,6 +8,8 @@ use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 /** @extends PersistentObjectFactory<User> */
 final class UserFactory extends PersistentObjectFactory
 {
+    public const DEFAULT_TEST_PASSWORD = 'azertyuiAZ123#';
+
     public function __construct()
     {
     }
@@ -23,7 +25,7 @@ final class UserFactory extends PersistentObjectFactory
     {
         return [
             'email' => self::faker()->email(),
-            'password' => 'azertyuiAZ123#',
+            'password' => self::DEFAULT_TEST_PASSWORD,
             'username' => self::faker()->userName(),
         ];
     }

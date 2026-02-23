@@ -1,0 +1,4 @@
+mercure:
+    hubs:
+        default:
+            public_url: 'http://mercure/dummy'

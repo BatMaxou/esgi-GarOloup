@@ -8,7 +8,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 abstract class GarOloupApiTestCase extends ApiTestCase
 {
-    private HttpClientInterface $client;
+    private readonly HttpClientInterface $client;
 
     protected function setUp(): void
     {

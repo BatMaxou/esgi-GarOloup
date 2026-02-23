@@ -8,33 +8,28 @@ use App\Tests\Helper\When;
 
 class LoginTest extends GarOloupApiTestCase
 {
-    public function testUserCanRetrieveApiTokens(): void
+    public function test_user_can_retrieve_api_tokens(): void
     {
-        ThereIs::anUser()->withEmail('test@garoloup.fr')->withPassword('password')->build();
+        $userBuilder = ThereIs::anUser()->withEmail('sliipman@garoloup.fr')->withPassword('slaap')->build();
 
-        $response = When::auth()->login('test@garoloup.fr', 'password');
-        $data = $response->toArray();
-
+        $response = When::auth()->login($userBuilder->email, $userBuilder->password);
         $this->assertResponseStatusCodeSame(200);
-        $this->assertArrayHasKey('token', $data);
-        $this->assertNotEmpty($data['token']);
-        $this->assertArrayHasKey('refresh_token', $data);
-        $this->assertNotEmpty($data['refresh_token']);
+
+        $this->assertNotEmpty($response->get('[token]'));
+        $this->assertNotEmpty($response->get('[refresh_token]'));
     }
 
-    public function testUserCantLoginWithInvalidEmail(): void
+    public function test_user_cant_login_with_invalid_email(): void
     {
         When::auth()->login('invalid@garoloup.fr', 'password');
-
         $this->assertResponseStatusCodeSame(401);
     }
 
-    public function testUserCantLoginWithInvalidPassword(): void
+    public function test_user_cant_login_with_invalid_password(): void
     {
-        ThereIs::anUser()->withEmail('test@garoloup.fr')->withPassword('password')->build();
+        $userBuilder = ThereIs::anUser()->withEmail('sliipman@garoloup.fr')->withPassword('slaap')->build();
 
-        When::auth()->login('test@garoloup.fr', 'invalid');
-
+        When::auth()->login($userBuilder->email, 'invalid');
         $this->assertResponseStatusCodeSame(401);
     }
 }

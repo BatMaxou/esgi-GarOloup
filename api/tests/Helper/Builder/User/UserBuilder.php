@@ -2,7 +2,8 @@
 
 namespace App\Tests\Helper\Builder\User;
 
-use App\Fixture\Factory\UserFactory;
+use App\Entity\User;
+use App\Fixtures\Factory\UserFactory;
 use App\Tests\Helper\Builder\AbstractBuilder;
 
 /** @extends AbstractBuilder<User> */
