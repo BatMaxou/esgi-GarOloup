@@ -11,16 +11,16 @@ final class Version20260222110403 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Add ip field to temp_user entity';
+        return 'Add ip and username fields to temp_user entity';
     }
 
     public function up(Schema $schema): void
     {
-        $this->addSql('ALTER TABLE temp_user ADD ip VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE temp_user ADD ip VARCHAR(255) NOT NULL, ADD username VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
-        $this->addSql('ALTER TABLE temp_user DROP ip');
+        $this->addSql('ALTER TABLE temp_user DROP ip, DROP username');
     }
 }

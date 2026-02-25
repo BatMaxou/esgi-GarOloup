@@ -1,0 +1,3 @@
+services:
+    mercure.hub.default:
+        class: App\Tests\Mock\Mercure\MockHub

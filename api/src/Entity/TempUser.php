@@ -34,11 +34,16 @@ class TempUser implements UserInterface
     #[Assert\Ip]
     private ?string $ip = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $username = null;
+
     public function __construct(
         string $ip,
+        string $username,
     ) {
         $this->id = $this->generateUuid();
         $this->ip = $ip;
+        $this->username = $username;
         $this->initialiseRole();
     }
 
@@ -47,10 +52,8 @@ class TempUser implements UserInterface
         return (string) $this->id;
     }
 
-    #[\Deprecated]
     public function eraseCredentials(): void
     {
-        // @deprecated, to be removed when upgrading to Symfony 8
     }
 
     public function getDefaultRole(): RoleEnum
@@ -66,6 +69,18 @@ class TempUser implements UserInterface
     public function setIp(string $ip): static
     {
         $this->ip = $ip;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): static
+    {
+        $this->username = $username;
 
         return $this;
     }

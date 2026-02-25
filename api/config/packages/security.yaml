@@ -25,18 +25,18 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
-        refresh_token:
-            pattern: ^/api/token/refresh
-            provider: user_provider
-            refresh_jwt:
-                check_path: /api/token/refresh
-
-        user:
-            pattern: ^/api/user
-            provider: user_provider
+        temp_user:
+            pattern: ^/api/temp_user
+            provider: player_provider
             stateless: true
             entry_point: jwt
             jwt: ~
+
+        refresh_token:
+            pattern: ^/api/token/refresh
+            provider: player_provider
+            refresh_jwt:
+                check_path: /api/token/refresh
 
         game:
             pattern: ^/api/game
@@ -47,7 +47,12 @@ security:
 
         api:
             pattern: ^/api
+            provider: user_provider
             stateless: true
+            entry_point: jwt
+            jwt: ~
+
+        # Add pattern for endpoints of homepage and role presentations
 
         dev:
             pattern: ^/_(profiler|wdt)

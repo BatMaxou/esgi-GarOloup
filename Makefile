@@ -41,6 +41,7 @@ jwt:
 
 invalidate-tokens:
 	@docker compose exec php php bin/console gesdinet:jwt:clear
+.PHONY: invalidate-tokens
 
 database:
 	@docker compose exec php php bin/console doctrine:database:drop --if-exists --force
@@ -60,6 +61,22 @@ phpcs:
 php-lint:
 	@${MAKE} phpcs
 .PHONY: php-lint
+
+# --- TESTS ---
+pretests:
+	@docker compose exec php php bin/console doctrine:database:drop --if-exists --force --env=test
+	@docker compose exec php php bin/console doctrine:database:create --env=test
+	@docker compose exec php php bin/console doctrine:schema:update --force --env=test
+	@docker compose exec php php bin/console lexik:jwt:generate-keypair --env=test
+.PHONY: pretests
+
+tests:
+	@docker compose exec php php bin/phpunit
+.PHONY: test
+
+test-coverage:
+	@docker compose exec php php bin/phpunit --coverage-html var/coverage
+.PHONY: test-coverage
 
 # --- DEV UTILS ---
 

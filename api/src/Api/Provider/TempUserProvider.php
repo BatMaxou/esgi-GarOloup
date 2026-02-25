@@ -12,6 +12,7 @@ use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 /**
@@ -33,25 +34,16 @@ final class TempUserProvider implements ProviderInterface
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): ?TempUserTokens
     {
         $currentUser = $this->security->getUser();
-        if ($currentUser) {
+        if ($currentUser && !$currentUser instanceof TempUser) {
             throw new ConflictHttpException('You already have a user');
         }
 
-        $ip = $this->getIpFromContext($context);
-        if (!$ip) {
-            return null;
-        }
-
-        $currentUser = $this->tempUserRepository->findOneBy(['ip' => $ip]);
-        if (!$currentUser) {
-            $currentUser = new TempUser($ip);
-            $this->em->persist($currentUser);
-        }
+        $tempUser = $currentUser ?? $this->getTempUserFromContext($context);
 
         $output = new TempUserTokens();
-        $output->token = $this->jwtManager->create($currentUser);
+        $output->token = $this->jwtManager->create($tempUser);
 
-        $refreshToken = $this->refreshTokenGenerator->createForUserWithTtl($currentUser, self::TWELVE_HOURS_VALIDITY);
+        $refreshToken = $this->refreshTokenGenerator->createForUserWithTtl($tempUser, self::TWELVE_HOURS_VALIDITY);
         $output->refreshToken = $refreshToken->getRefreshToken();
         $this->em->persist($refreshToken);
         $this->em->flush();
@@ -59,13 +51,48 @@ final class TempUserProvider implements ProviderInterface
         return $output;
     }
 
-    private function getIpFromContext(array $context): ?string
+    private function getRequest(array $context): ?Request
     {
         $request = $context['request'] ?? null;
         if (!$request instanceof Request) {
             return null;
         }
 
+        return $request;
+    }
+
+    private function getIpFromContext(array $context): ?string
+    {
+        $request = $this->getRequest($context);
+
         return $request->getClientIp();
+    }
+
+    private function getUsernameFromContext(array $context): ?string
+    {
+        $request = $this->getRequest($context);
+
+        return $request->query->get('username');
+    }
+
+    private function getTempUserFromContext(array $context): TempUser
+    {
+        $ip = $this->getIpFromContext($context);
+        if (!$ip) {
+            throw new BadRequestHttpException('Impossible to retrieve ip');
+        }
+
+        $username = $this->getUsernameFromContext($context);
+        if (!$username) {
+            throw new BadRequestHttpException('Undefined username');
+        }
+
+        $tempUser = $this->tempUserRepository->findOneBy(['ip' => $ip, 'username' => $username]);
+        if (!$tempUser) {
+            $tempUser = new TempUser($ip, $username);
+            $this->em->persist($tempUser);
+        }
+
+        return $tempUser;
     }
 }
