@@ -1,22 +1,31 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\User;
 
-use App\Entity\Security\RoleTrait;
-use App\Entity\Uuid\UuidTrait;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use App\Api\Provider\User\MeProvider;
 use App\Enum\RoleEnum;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
+#[ApiResource(
+    operations: [
+        new Get(
+            name: 'api_me',
+            uriTemplate: '/me',
+            provider: MeProvider::class,
+            normalizationContext: [
+                'groups' => 'me:read',
+            ],
+        ),
+    ],
+)]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User extends AbstractUser implements PasswordAuthenticatedUserInterface
 {
-    use UuidTrait;
-    use RoleTrait;
-
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
@@ -24,9 +33,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     private ?string $plainPassword = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $username = null;
 
     public function getEmail(): ?string
     {
@@ -63,18 +69,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->plainPassword = $password;
             $this->password = null;
         }
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): static
-    {
-        $this->username = $username;
 
         return $this;
     }

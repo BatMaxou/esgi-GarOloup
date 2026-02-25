@@ -22,7 +22,7 @@ final class PlayerFactory extends PersistentObjectFactory
         return [
             'user' => null,
             'tempUser' => TempUserFactory::new(),
-            'isDead' => false,
+            'dead' => false,
         ];
     }
 }

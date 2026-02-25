@@ -1,0 +1,8 @@
+App\Entity\Game:
+    attributes:
+        id:
+            groups:
+                - me:read
+        finished:
+            groups:
+                - me:read

@@ -5,7 +5,9 @@ namespace App\Tests\Helper;
 use ApiPlatform\Symfony\Bundle\Test\Client;
 use App\Fixtures\Factory\UserFactory;
 use App\Tests\Helper\Behavior\Game\GameBehavior;
+use App\Tests\Helper\Behavior\Player\PlayerBehavior;
 use App\Tests\Helper\Behavior\Security\AuthBehavior;
+use App\Tests\Helper\Behavior\User\MeBehavior;
 use App\Tests\Helper\Behavior\User\TempUserBehavior;
 use App\Tests\Helper\Builder\User\TempUserBuilder;
 use App\Tests\Helper\Builder\User\UserBuilder;
@@ -24,6 +26,11 @@ final class When
         return new AuthBehavior(self::$client);
     }
 
+    public static function me(): MeBehavior
+    {
+        return new MeBehavior(self::$client);
+    }
+
     public static function tempUser(): TempUserBehavior
     {
         return new TempUserBehavior(self::$client);
@@ -32,6 +39,11 @@ final class When
     public static function game(): GameBehavior
     {
         return new GameBehavior(self::$client);
+    }
+
+    public static function player(): PlayerBehavior
+    {
+        return new PlayerBehavior(self::$client);
     }
 
     public static function asUser(UserBuilder $userBuilder): static

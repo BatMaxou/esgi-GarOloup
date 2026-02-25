@@ -25,16 +25,13 @@ const TestClient = ({ game }: Props) => {
   }, []);
 
   useEffect(() => {
-    const callable = (game: { step: GameStepEnum }) => {
-      setCurrentStep(game.step);
-    };
-
-    mercureClient.watchGame('019c58aa-7230-7239-a8dc-62af8d19d9c9', callable);
-  }, [mercureClient]);
+    const callable = (game: Game) => setCurrentStep(game.step);
+    mercureClient.watchGame(game.id, callable);
+  }, [mercureClient, game]);
 
   const changeStep = useCallback(async (step: GameStepEnum) => {
-    await apiClient.game.update('019c58aa-7230-7239-a8dc-62af8d19d9c9', { step });
-  }, [apiClient]);
+    await apiClient.game.update(game.id, { step });
+  }, [apiClient, game]);
 
   return <main className="p-8">
     <Typography tag="h1" variant="heading-1" bold center className="block">Page de test</Typography>

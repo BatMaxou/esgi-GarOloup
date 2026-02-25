@@ -5,11 +5,11 @@ security:
     providers:
         user_provider:
             entity:
-                class: App\Entity\User
+                class: App\Entity\User\User
                 property: email
         temp_user_provider:
             entity:
-                class: App\Entity\TempUser
+                class: App\Entity\User\TempUser
                 property: id
         player_provider:
             chain:
@@ -25,25 +25,21 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
-        temp_user:
-            pattern: ^/api/temp_user
-            provider: player_provider
-            stateless: true
-            entry_point: jwt
-            jwt: ~
-
         refresh_token:
             pattern: ^/api/token/refresh
             provider: player_provider
             refresh_jwt:
                 check_path: /api/token/refresh
 
-        game:
-            pattern: ^/api/game
+        player:
+            pattern: ^/api/(temp_user|me|game)
             provider: player_provider
             stateless: true
             entry_point: jwt
             jwt: ~
+
+        public:
+            pattern: ^/api/public
 
         api:
             pattern: ^/api
@@ -52,17 +48,15 @@ security:
             entry_point: jwt
             jwt: ~
 
-        # Add pattern for endpoints of homepage and role presentations
-
         dev:
             pattern: ^/_(profiler|wdt)
             security: false
 
     access_control:
-        - { path: ^/api/login, roles: PUBLIC_ACCESS }
-        - { path: ^/api/token/refresh, roles: PUBLIC_ACCESS }
-        - { path: ^/api/game, methods: POST, roles: PUBLIC_ACCESS }
-        - { path: ^/api/(user|game), roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/(login|temp_user)$, roles: PUBLIC_ACCESS }
+        - { path: ^/api/token/refresh$, roles: PUBLIC_ACCESS }
+        - { path: ^/api/public, roles: PUBLIC_ACCESS }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:

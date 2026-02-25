@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Security;
+namespace App\Entity\Trait;
 
 use App\Enum\RoleEnum;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +9,7 @@ trait RoleTrait
 {
     /** @var string[] */
     #[ORM\Column]
-    private array $roles = [];
+    protected array $roles = [];
 
     abstract public function getDefaultRole(): RoleEnum;
 

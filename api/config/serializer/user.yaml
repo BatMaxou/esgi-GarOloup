@@ -1,0 +1,17 @@
+App\Entity\User\AbstractUser:
+    attributes:
+        id:
+            groups:
+                - me:read
+        username:
+            groups:
+                - me:read
+        roles:
+            groups:
+                - me:read
+
+App\Entity\User\User:
+    attributes:
+        email:
+            groups:
+                - me:read

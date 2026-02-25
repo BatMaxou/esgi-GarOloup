@@ -2,15 +2,34 @@
 
 namespace App\Entity;
 
-use App\Entity\Uuid\UuidTrait;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use App\Api\Provider\Player\CurrentPlayerProvider;
+use App\Entity\Trait\TimestampableTrait;
+use App\Entity\Trait\UuidTrait;
+use App\Entity\User\TempUser;
+use App\Entity\User\User;
 use App\Repository\PlayerRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+#[ApiResource(
+    operations: [
+        new Get(
+            name: 'api_current_player',
+            uriTemplate: '/game/player',
+            provider: CurrentPlayerProvider::class,
+            normalizationContext: [
+                'groups' => 'me:read',
+            ],
+        ),
+    ],
+)]
 #[ORM\Entity(repositoryClass: PlayerRepository::class)]
 class Player
 {
     use UuidTrait;
+    use TimestampableTrait;
 
     #[ORM\ManyToOne]
     private ?User $user = null;
@@ -19,17 +38,23 @@ class Player
     private ?TempUser $tempUser = null;
 
     #[ORM\Column]
-    private ?bool $isDead = null;
+    private ?bool $dead = null;
+
+    #[ORM\ManyToOne(inversedBy: 'players')]
+    private ?Game $game = null;
 
     public function __construct(
         ?UserInterface $user = null,
     ) {
-        match (true) {
-            $user instanceof User => $this->user = $user,
-            $user instanceof TempUser => $this->tempUser = $user,
-            default => throw new \InvalidArgumentException('User not supported'),
-        };
-        $this->isDead = false;
+        if ($user) {
+            match (true) {
+                $user instanceof User => $this->user = $user,
+                $user instanceof TempUser => $this->tempUser = $user,
+                default => throw new \InvalidArgumentException('User not supported'),
+            };
+        }
+
+        $this->dead = false;
     }
 
     public function getUser(): ?User
@@ -58,12 +83,24 @@ class Player
 
     public function isDead(): ?bool
     {
-        return $this->isDead;
+        return $this->dead;
     }
 
     public function setDead(bool $isDead): static
     {
-        $this->isDead = $isDead;
+        $this->dead = $isDead;
+
+        return $this;
+    }
+
+    public function getGame(): ?Game
+    {
+        return $this->game;
+    }
+
+    public function setGame(?Game $game): static
+    {
+        $this->game = $game;
 
         return $this;
     }

@@ -1,5 +1,5 @@
-import { GameStepEnum } from "@/utils/enums";
 import { topics } from "./topics";
+import { Game } from "@/utils/types";
 
 export class MercureClient {
   constructor(
@@ -17,12 +17,8 @@ export class MercureClient {
     eventSource.onmessage = onMessage;
   }
 
-  public watchGame(id: string, action: (game: { step: GameStepEnum }) => void): void {
-    this.subscribe(`${this.apiBaseUrl}${topics.game(id)}`, ({ data }: { data: string }) => {
-      const retrieve = JSON.parse(data);
-
-      action(retrieve);
-    });
+  public watchGame(id: string, action: (game: Game) => void): void {
+    this.subscribe(`${this.apiBaseUrl}${topics.game(id)}`, ({ data }: { data: string }) => action(JSON.parse(data)));
   }
 }
 

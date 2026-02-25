@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\TempUser;
+use App\Entity\User\TempUser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

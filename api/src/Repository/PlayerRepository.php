@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Player;
-use App\Entity\TempUser;
-use App\Entity\User;
+use App\Entity\User\TempUser;
+use App\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -31,5 +31,24 @@ class PlayerRepository extends ServiceEntityRepository
             ->setParameter('uuid', $user->getId(), 'uuid')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findCurrentByUser(UserInterface $user): ?Player
+    {
+        if (!$user instanceof User && !$user instanceof TempUser) {
+            return null;
+        }
+
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.game', 'g')
+            ->where('p.user = :uuid')
+            ->orWhere('p.tempUser = :uuid')
+            ->andWhere('g.finished = :finished')
+            ->orderBy('g.createdAt', 'DESC')
+            ->setParameter('uuid', $user->getId(), 'uuid')
+            ->setParameter('finished', false)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }

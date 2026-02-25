@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Api\Provider;
+namespace App\Api\Provider\User;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use App\Api\Model\TempUser\TempUserTokens;
-use App\Entity\TempUser;
+use App\Entity\User\TempUser;
 use App\Repository\TempUserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
