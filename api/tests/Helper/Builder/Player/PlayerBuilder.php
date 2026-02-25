@@ -5,6 +5,7 @@ namespace App\Tests\Helper\Builder\Player;
 use App\Entity\Player;
 use App\Fixtures\Factory\PlayerFactory;
 use App\Tests\Helper\Builder\AbstractBuilder;
+use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\User\TempUserBuilder;
 use App\Tests\Helper\Builder\User\UserBuilder;
 
@@ -13,14 +14,16 @@ class PlayerBuilder extends AbstractBuilder
 {
     public ?UserBuilder $user = null;
     public ?TempUserBuilder $tempUser = null;
-    public ?bool $isDead = null;
+    public ?bool $dead = null;
+    public ?GameBuilder $game = null;
 
     protected function doBuild(): object
     {
         return PlayerFactory::createOne([
-            ...($this->user ? ['user' => $this->user->getEntity()] : []),
-            ...($this->tempUser ? ['tempUser' => $this->tempUser->getEntity()] : []),
-            ...($this->isDead ? ['isDead' => $this->isDead] : []),
+            ...($this->user ? ['user' => $this->user->getEntity(), 'tempUser' => null] : []),
+            ...($this->tempUser ? ['tempUser' => $this->tempUser->getEntity(), 'user' => null] : []),
+            ...($this->dead ? ['dead' => $this->dead] : []),
+            ...($this->game ? ['game' => $this->game->getEntity()] : []),
         ]);
     }
 
@@ -38,9 +41,16 @@ class PlayerBuilder extends AbstractBuilder
         return $this;
     }
 
-    public function isDead(): static
+    public function dead(): static
     {
-        $this->isDead = true;
+        $this->dead = true;
+
+        return $this;
+    }
+
+    public function withGame(GameBuilder $gameBuilder): static
+    {
+        $this->game = $gameBuilder;
 
         return $this;
     }

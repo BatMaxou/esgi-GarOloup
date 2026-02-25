@@ -2,7 +2,7 @@
 
 namespace App\Tests\Helper\Builder\User;
 
-use App\Entity\TempUser;
+use App\Entity\User\TempUser;
 use App\Fixtures\Factory\TempUserFactory;
 use App\Tests\Helper\Builder\AbstractBuilder;
 

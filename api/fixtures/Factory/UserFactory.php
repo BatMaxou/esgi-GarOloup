@@ -2,7 +2,7 @@
 
 namespace App\Fixtures\Factory;
 
-use App\Entity\User;
+use App\Entity\User\User;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /** @extends PersistentObjectFactory<User> */

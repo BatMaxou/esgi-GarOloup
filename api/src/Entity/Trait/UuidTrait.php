@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Uuid;
+namespace App\Entity\Trait;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Types\UuidType;
@@ -12,14 +12,14 @@ trait UuidTrait
     #[ORM\Column(type: UuidType::NAME, unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
-    private ?Uuid $id = null;
+    protected ?Uuid $id = null;
 
     public function getId(): ?Uuid
     {
         return $this->id;
     }
 
-    private function generateUuid(): Uuid
+    protected function generateUuid(): Uuid
     {
         return Uuid::v7();
     }

@@ -1,0 +1,17 @@
+App\Entity\Player:
+    attributes:
+        id:
+            groups:
+                - me:read
+        user:
+            groups:
+                - me:read
+        tempUser:
+            groups:
+                - me:read
+        dead:
+            groups:
+                - me:read
+        game:
+            groups:
+                - me:read

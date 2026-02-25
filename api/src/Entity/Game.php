@@ -8,9 +8,12 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Api\Model\Game\CreateGameOutput;
 use App\Domain\Command\Game\Initialisation\CreateGameCommand;
-use App\Entity\Uuid\UuidTrait;
+use App\Entity\Trait\TimestampableTrait;
+use App\Entity\Trait\UuidTrait;
 use App\Enum\GameStepEnum;
 use App\Repository\GameRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GameRepository::class)]
@@ -34,6 +37,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Game
 {
     use UuidTrait;
+    use TimestampableTrait;
 
     #[ORM\Column(enumType: GameStepEnum::class)]
     private GameStepEnum $step;
@@ -45,6 +49,13 @@ class Game
     #[ORM\Column(length: 8)]
     private ?string $joinCode = null;
 
+    /** @var Collection<int, Player> */
+    #[ORM\OneToMany(targetEntity: Player::class, mappedBy: 'game', orphanRemoval: true)]
+    private Collection $players;
+
+    #[ORM\Column]
+    private ?bool $finished = null;
+
     public function __construct(
         Player $host,
     ) {
@@ -54,6 +65,8 @@ class Game
         $uuid = $this->generateUuid();
         $this->id = $uuid;
         $this->joinCode = substr($uuid->toBase32(), -8);
+        $this->players = new ArrayCollection();
+        $this->finished = false;
     }
 
     public function getStep(): ?GameStepEnum
@@ -88,6 +101,48 @@ class Game
     public function setJoinCode(string $joinCode): static
     {
         $this->joinCode = $joinCode;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Player>
+     */
+    public function getPlayers(): Collection
+    {
+        return $this->players;
+    }
+
+    public function addPlayer(Player $player): static
+    {
+        if (!$this->players->contains($player)) {
+            $this->players->add($player);
+            $player->setGame($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlayer(Player $player): static
+    {
+        if ($this->players->removeElement($player)) {
+            // set the owning side to null (unless already changed)
+            if ($player->getGame() === $this) {
+                $player->setGame(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isFinished(): ?bool
+    {
+        return $this->finished;
+    }
+
+    public function setFinished(bool $isFinished): static
+    {
+        $this->finished = $isFinished;
 
         return $this;
     }

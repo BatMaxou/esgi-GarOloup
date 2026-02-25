@@ -2,7 +2,7 @@
 
 namespace App\Fixtures\Factory;
 
-use App\Entity\TempUser;
+use App\Entity\User\TempUser;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**

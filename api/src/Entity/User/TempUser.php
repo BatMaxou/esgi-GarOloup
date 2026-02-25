@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\User;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
-use App\Api\Provider\TempUserProvider;
-use App\Entity\Security\RoleTrait;
-use App\Entity\Uuid\UuidTrait;
+use App\Api\Provider\User\MeProvider;
+use App\Api\Provider\User\TempUserProvider;
 use App\Enum\RoleEnum;
 use App\Repository\TempUserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
@@ -20,31 +18,32 @@ use Symfony\Component\Validator\Constraints as Assert;
             uriTemplate: '/temp_user',
             provider: TempUserProvider::class,
         ),
+        new Get(
+            name: 'api_me',
+            uriTemplate: '/me',
+            provider: MeProvider::class,
+            normalizationContext: [
+                'groups' => 'me:read',
+            ],
+        ),
     ],
 )]
 #[ORM\Entity(repositoryClass: TempUserRepository::class)]
-class TempUser implements UserInterface
+class TempUser extends AbstractUser
 {
-    use UuidTrait;
-    use RoleTrait {
-        __construct as private initialiseRole;
-    }
-
     #[ORM\Column(length: 255)]
     #[Assert\Ip]
     private ?string $ip = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $username = null;
 
     public function __construct(
         string $ip,
         string $username,
     ) {
+        parent::__construct();
+
         $this->id = $this->generateUuid();
         $this->ip = $ip;
         $this->username = $username;
-        $this->initialiseRole();
     }
 
     public function getUserIdentifier(): string

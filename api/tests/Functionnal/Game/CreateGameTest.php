@@ -12,7 +12,7 @@ class CreateGameTest extends GarOloupApiTestCase
     public function test_anonymous_cant_create_game(): void
     {
         When::game()->create();
-        $this->assertResponseStatusCodeSame(403);
+        $this->assertResponseStatusCodeSame(401);
 
         $this->assertEquals(0, GameFactory::count());
     }
