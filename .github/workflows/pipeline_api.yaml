@@ -1,0 +1,33 @@
+name: Pipeline API
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+    paths:
+      - 'api/**'
+  pull_request:
+    paths:
+      - 'api/**'
+
+jobs:
+  pipeline-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Docker up
+        run: make up php
+
+      - name: Vendor
+        run: make vendor
+
+      - name: Linter
+        run: make php-lint
+
+      - name: Tests
+        run: make tests
