@@ -1,0 +1,13 @@
+type: folder
+model: folder
+id: fl_bh6aMuFF23
+createdAt: 2026-02-27T17:48:42.134431857
+updatedAt: 2026-02-27T17:48:42.134432100
+workspaceId: wk_uXtATNFQmZ
+folderId: null
+authentication: {}
+authenticationType: null
+description: ''
+headers: []
+name: Game
+sortPriority: 2.0

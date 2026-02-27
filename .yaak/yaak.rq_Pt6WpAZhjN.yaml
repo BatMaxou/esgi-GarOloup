@@ -1,0 +1,19 @@
+type: http_request
+model: http_request
+id: rq_Pt6WpAZhjN
+createdAt: 2026-02-27T17:48:42.133521745
+updatedAt: 2026-02-27T18:08:15.947676396
+workspaceId: wk_uXtATNFQmZ
+folderId: null
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body: {}
+bodyType: null
+description: ''
+headers: []
+method: GET
+name: Me
+sortPriority: 10.0
+url: ${[ BASE_URL ]}/api/me
+urlParameters: []

@@ -1,0 +1,15 @@
+type: workspace
+model: workspace
+id: wk_uXtATNFQmZ
+createdAt: 2026-02-27T17:48:42.131963860
+updatedAt: 2026-02-27T17:49:57.190944668
+authentication: {}
+authenticationType: null
+description: ''
+headers: []
+name: ESGI - GarOloup
+encryptionKeyChallenge: eUE0azNuQwHcW02m5EESIHTJvvCW2vntXPhr6GSUEo/jdAEdgOy6SR5U+h3Gu/tiYIMI5+zWtKEAuTXBpbeF2wCxexnty6BjAb5qUx6Lpf56PXreC0kYyGuexuEHGAct2Vg=
+settingValidateCertificates: true
+settingFollowRedirects: true
+settingRequestTimeout: 0
+settingDnsOverrides: []

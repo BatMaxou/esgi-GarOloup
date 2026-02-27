@@ -1,0 +1,27 @@
+type: http_request
+model: http_request
+id: rq_KmJ58wRtsX
+createdAt: 2026-02-27T17:48:42.133699235
+updatedAt: 2026-02-27T18:08:21.405171704
+workspaceId: wk_uXtATNFQmZ
+folderId: null
+authentication: {}
+authenticationType: null
+body:
+  text: |-
+    {
+        "username": "test@garoloup.com",
+        "password": "azertyuiAZ123#"
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/json
+  id: null
+method: POST
+name: Login
+sortPriority: 11.0
+url: ${[ BASE_URL ]}/api/login
+urlParameters: []

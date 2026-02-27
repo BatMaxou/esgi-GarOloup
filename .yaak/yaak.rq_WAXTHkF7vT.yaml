@@ -1,0 +1,28 @@
+type: http_request
+model: http_request
+id: rq_WAXTHkF7vT
+createdAt: 2026-02-27T17:48:42.132568082
+updatedAt: 2026-02-27T18:16:20.832295665
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_bh6aMuFF23
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body:
+  text: '{}'
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/ld+json
+  id: NcSQucREyF
+- enabled: true
+  name: ''
+  value: ''
+  id: 0TkCedAc45
+method: POST
+name: Create Game
+sortPriority: 3.0
+url: ${[ BASE_URL ]}/api/games
+urlParameters: []

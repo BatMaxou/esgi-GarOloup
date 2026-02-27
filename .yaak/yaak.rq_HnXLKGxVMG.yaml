@@ -1,0 +1,19 @@
+type: http_request
+model: http_request
+id: rq_HnXLKGxVMG
+createdAt: 2026-02-27T17:48:42.132340261
+updatedAt: 2026-02-27T18:04:32.419701305
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_8Kdq4f4Uv5
+authentication:
+  token: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3R0d3WGxzS0M5WXBWdkl4YWlOMTMzK2hDU254aDRobU9LNVcvUVJMQ3BhYXVYdDJsQTI1SzN3QW5ob0R0ZTg1V09XaDNLWA') ]}
+authenticationType: bearer
+body: {}
+bodyType: null
+description: ''
+headers: []
+method: GET
+name: Get Current Player
+sortPriority: 1.0
+url: ${[ BASE_URL ]}/api/game/player
+urlParameters: []
