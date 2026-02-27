@@ -17,6 +17,7 @@ class UserBuilder extends AbstractBuilder
     {
         return UserFactory::createOne([
             ...($this->username ? ['username' => $this->username] : []),
+            // use setPassword(...)
             ...($this->password ? ['password' => $this->password] : []),
             ...($this->email ? ['email' => $this->email] : []),
         ]);

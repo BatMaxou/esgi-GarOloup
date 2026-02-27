@@ -65,7 +65,9 @@ class Game
         $uuid = $this->generateUuid();
         $this->id = $uuid;
         $this->joinCode = substr($uuid->toBase32(), -8);
+
         $this->players = new ArrayCollection();
+        $this->addPlayer($host);
     }
 
     public function getStep(): GameStepEnum
