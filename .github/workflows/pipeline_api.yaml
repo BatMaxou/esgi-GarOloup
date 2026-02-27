@@ -30,4 +30,4 @@ jobs:
         run: make php-lint
 
       - name: Tests
-        run: make tests
+        run: make pretests && make tests
