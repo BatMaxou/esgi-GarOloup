@@ -42,8 +42,8 @@ class GetCurrentPlayerTest extends GarOloupApiTestCase
         $response = When::player()->getCurrent();
         $this->assertResponseStatusCodeSame(200);
 
-        $this->assertEquals($playerBuilder->getEntity()->getUser()->getId(), $response->get('[user][id]'));
-        $this->assertEquals($playerBuilder->getEntity()->getGame()->getId(), $response->get('[game][id]'));
+        $this->assertEquals($playerBuilder->getEntity()->getUser()?->getId(), $response->get('[user][id]'));
+        $this->assertEquals($playerBuilder->getEntity()->getGame()?->getId(), $response->get('[game][id]'));
     }
 
     public function test_temp_user_can_retrieve_it_own_current_player(): void
@@ -56,8 +56,8 @@ class GetCurrentPlayerTest extends GarOloupApiTestCase
         $response = When::player()->getCurrent();
         $this->assertResponseStatusCodeSame(200);
 
-        $this->assertEquals($playerBuilder->getEntity()->getTempUser()->getId(), $response->get('[tempUser][id]'));
-        $this->assertEquals($playerBuilder->getEntity()->getGame()->getId(), $response->get('[game][id]'));
+        $this->assertEquals($playerBuilder->getEntity()->getTempUser()?->getId(), $response->get('[tempUser][id]'));
+        $this->assertEquals($playerBuilder->getEntity()->getGame()?->getId(), $response->get('[game][id]'));
     }
 
     public function test_user_retrieve_player_of_the_most_recent_game(): void
@@ -72,7 +72,7 @@ class GetCurrentPlayerTest extends GarOloupApiTestCase
         $response = When::player()->getCurrent();
         $this->assertResponseStatusCodeSame(200);
 
-        $this->assertEquals($secondPlayerBuilder->getEntity()->getUser()->getId(), $response->get('[user][id]'));
+        $this->assertEquals($secondPlayerBuilder->getEntity()->getUser()?->getId(), $response->get('[user][id]'));
     }
 
     public function test_temp_user_retrieve_player_of_the_most_recent_game(): void
@@ -87,7 +87,7 @@ class GetCurrentPlayerTest extends GarOloupApiTestCase
         $response = When::player()->getCurrent();
         $this->assertResponseStatusCodeSame(200);
 
-        $this->assertEquals($secondPlayerBuilder->getEntity()->getTempUser()->getId(), $response->get('[tempUser][id]'));
+        $this->assertEquals($secondPlayerBuilder->getEntity()->getTempUser()?->getId(), $response->get('[tempUser][id]'));
     }
 
     public function test_user_retrieve_only_player_of_not_finished_game(): void

@@ -56,17 +56,32 @@ final class When
             throw new \RuntimeException('Login failed.');
         }
 
-        return self::as($response->get('[token]'));
+        $token = $response->get('[token]');
+        if (!is_string($token)) {
+            throw new \RuntimeException('Token not found.');
+        }
+
+        return self::as($token);
     }
 
     public static function asTempUser(TempUserBuilder $tempUserBuilder): static
     {
-        $response = self::tempUser()->get($tempUserBuilder->username ?? $tempUserBuilder->getEntity()->getUsername());
+        $username = $tempUserBuilder->username ?? $tempUserBuilder->getEntity()->getUsername();
+        if (!$username) {
+            throw new \RuntimeException('Username not set.');
+        }
+
+        $response = self::tempUser()->get($username);
         if (200 !== $response->getStatusCode()) {
             throw new \RuntimeException('Temp user retrieval failed.');
         }
 
-        return self::as($response->get('[token]'));
+        $token = $response->get('[token]');
+        if (!is_string($token)) {
+            throw new \RuntimeException('Token not found.');
+        }
+
+        return self::as($token);
     }
 
     public static function asAnonymous(): static

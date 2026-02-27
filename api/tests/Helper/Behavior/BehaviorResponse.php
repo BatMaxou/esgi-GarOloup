@@ -26,6 +26,7 @@ class BehaviorResponse
         return $this->response->getStatusCode();
     }
 
+    /** @return mixed[] */
     public function getData(): array
     {
         return $this->response->toArray();
