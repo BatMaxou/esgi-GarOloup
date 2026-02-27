@@ -19,12 +19,14 @@ class PlayerRepository extends ServiceEntityRepository
         parent::__construct($registry, Player::class);
     }
 
+    /** @return Player[] */
     public function findByUser(UserInterface $user): array
     {
         if (!$user instanceof User && !$user instanceof TempUser) {
             return [];
         }
 
+        /** @var Player[] */
         return $this->createQueryBuilder('p')
             ->where('p.user = :uuid')
             ->orWhere('p.tempUser = :uuid')
@@ -39,6 +41,7 @@ class PlayerRepository extends ServiceEntityRepository
             return null;
         }
 
+        /** @var Player|null */
         return $this->createQueryBuilder('p')
             ->innerJoin('p.game', 'g')
             ->where('p.user = :uuid')

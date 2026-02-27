@@ -38,7 +38,7 @@ class Player
     private ?TempUser $tempUser = null;
 
     #[ORM\Column]
-    private ?bool $dead = null;
+    private bool $dead = false;
 
     #[ORM\ManyToOne(inversedBy: 'players')]
     private ?Game $game = null;
@@ -53,8 +53,6 @@ class Player
                 default => throw new \InvalidArgumentException('User not supported'),
             };
         }
-
-        $this->dead = false;
     }
 
     public function getUser(): ?User
@@ -81,7 +79,7 @@ class Player
         return $this;
     }
 
-    public function isDead(): ?bool
+    public function isDead(): bool
     {
         return $this->dead;
     }

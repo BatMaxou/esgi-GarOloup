@@ -6,10 +6,7 @@ use App\Api\Model\Game\CreateGameOutput;
 use App\Domain\Spec\GameSpec;
 use App\Entity\Game;
 use App\Entity\Player;
-use App\Repository\PlayerRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
@@ -22,9 +19,6 @@ class CreateGameHandler
 
     public function __construct(
         private readonly Security $security,
-        private readonly JWTTokenManagerInterface $jwtManager,
-        private readonly RefreshTokenGeneratorInterface $refreshTokenGenerator,
-        private readonly PlayerRepository $playerRepository,
         private readonly EntityManagerInterface $em,
         private readonly GameSpec $gameSpec,
     ) {
@@ -36,6 +30,7 @@ class CreateGameHandler
         if (null === $currentUser) {
             throw new AccessDeniedHttpException('You are not logged in');
         }
+
         if (!$this->gameSpec->canCreate($currentUser)) {
             throw new ConflictHttpException('You are already playing a game');
         }

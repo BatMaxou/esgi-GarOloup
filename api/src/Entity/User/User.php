@@ -27,14 +27,14 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 class User extends AbstractUser implements PasswordAuthenticatedUserInterface
 {
     #[ORM\Column(length: 180)]
-    private ?string $email = null;
+    private string $email;
 
     #[ORM\Column]
-    private ?string $password = null;
+    private ?string $password = null; // @phpstan-ignore-line
 
     private ?string $plainPassword = null;
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -48,7 +48,11 @@ class User extends AbstractUser implements PasswordAuthenticatedUserInterface
 
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        if (empty($this->email)) {
+            throw new \LogicException('User email is not set.');
+        }
+
+        return $this->email;
     }
 
     public function getPlainPassword(): ?string
@@ -79,7 +83,9 @@ class User extends AbstractUser implements PasswordAuthenticatedUserInterface
     public function __serialize(): array
     {
         $data = (array) $this;
-        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+        if ($this->password) {
+            $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+        }
 
         return $data;
     }

@@ -17,7 +17,7 @@ abstract class AbstractUser implements UserInterface
     }
 
     #[ORM\Column(length: 255)]
-    protected ?string $username = null;
+    protected string $username;
 
     public function __construct()
     {
@@ -26,7 +26,7 @@ abstract class AbstractUser implements UserInterface
 
     abstract public function getUserIdentifier(): string;
 
-    public function getUsername(): ?string
+    public function getUsername(): string
     {
         return $this->username;
     }
