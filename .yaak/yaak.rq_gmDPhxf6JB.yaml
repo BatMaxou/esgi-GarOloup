@@ -1,0 +1,19 @@
+type: http_request
+model: http_request
+id: rq_gmDPhxf6JB
+createdAt: 2026-02-27T17:48:42.133137775
+updatedAt: 2026-02-27T18:07:55.441911713
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_AoV9qXywXa
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body: {}
+bodyType: null
+description: ''
+headers: []
+method: GET
+name: Test
+sortPriority: 7.0
+url: ${[ BASE_URL ]}/api/test
+urlParameters: []

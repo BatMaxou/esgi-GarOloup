@@ -1,0 +1,22 @@
+type: environment
+model: environment
+id: ev_tdWYkaGeP5
+workspaceId: wk_uXtATNFQmZ
+createdAt: 2026-02-27T17:49:25.047317508
+updatedAt: 2026-02-27T18:22:05.240245436
+name: User
+public: true
+base: false
+parentModel: environment
+parentId: null
+variables:
+- enabled: true
+  name: TOKEN
+  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RmhyVWtwZVlMbmxwWUtUd3c2RHc4RVRWNnA2T25oaTd0dDZLeE9wTXFaQ2dEN25QRXlVa25VaDl1bmlWSVd1N2xwSUNkL3lPcnBDWjdncCtUZ0pIREIyZWoyM3pMbUhxZWhOQUlMTUFJcU9FaW9GNExvSlJBMEJRVkcxRTRPQ0lFWnRGWlF1Ry9qV1pmZHNuNUwyRTQydmZWVnQ5RjRmcVRWNDZYL3hwQTNrQnByanBicTV2czVBWE1jaXNuV2JxdUhHRXN6TkhiYmoyalEvMzBoVXp4Umc4WXdha08wcU9uK1Ewdz0') ]}
+  id: g82fJMIPc3
+- enabled: true
+  name: REFRESH_TOKEN
+  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3SGRVbEJTYmhscWV5RVNQMzdMK2tPZjhMN0FkenpEbVhSR2lsaGJCQjFUSGo5Y1gvRTdKc2RTQVdjcXZ1VHhDTkRBU1Y5ZS9nYlRsMkwrOEdGMG9GblArN2o2TTJvMXNJNFg2RlhYSUFEelRoaVhHdXF2K1lqSSt4Z0lHQk1ybWhEZkJ0eHIxWjdia1MwTzAvWW5pTkZCTmJMSXpJWlBQQXd3K2E0Y09peUdTbTNWQXRoM3V6K2haRkx1SXQrKzBlUW1RUkxES3VVSmhiWDRZVUFwUU53c0g3Q2dxV3M2aWtMU211TXNRTTVTRlU1dFh4YzRnRGV4') ]}
+  id: Fup0qgFVEQ
+color: var(--success)
+sortPriority: 0.0

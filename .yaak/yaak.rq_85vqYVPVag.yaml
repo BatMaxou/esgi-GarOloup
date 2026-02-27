@@ -1,0 +1,27 @@
+type: http_request
+model: http_request
+id: rq_85vqYVPVag
+createdAt: 2026-02-27T17:48:42.133337646
+updatedAt: 2026-02-27T18:14:43.733919675
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_AnBZa5VmeS
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body: {}
+bodyType: null
+description: ''
+headers:
+- enabled: false
+  name: Content-Type
+  value: application/merge-patch+json
+  id: null
+method: GET
+name: Get Temp User
+sortPriority: 9.0
+url: ${[ BASE_URL ]}/api/temp_user
+urlParameters:
+- enabled: true
+  name: username
+  value: SLiiper
+  id: null
