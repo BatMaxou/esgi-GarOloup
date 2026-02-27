@@ -1,0 +1,10 @@
+parameters:
+    level: max
+    doctrine:
+        objectManagerLoader: ../../tests/object-manager.php
+    excludePaths:
+    paths:
+        - ../../fixtures
+        - ../../migrations
+        - ../../src
+        - ../../tests

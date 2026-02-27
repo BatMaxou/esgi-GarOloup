@@ -15,9 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
-/**
- * @implements ProviderInterface<TempUserTokens|null>
- */
+/** @implements ProviderInterface<TempUserTokens> */
 final class TempUserProvider implements ProviderInterface
 {
     public const TWELVE_HOURS_VALIDITY = 43200;
@@ -31,7 +29,7 @@ final class TempUserProvider implements ProviderInterface
     ) {
     }
 
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): ?TempUserTokens
+    public function provide(Operation $operation, array $uriVariables = [], array $context = []): TempUserTokens
     {
         $currentUser = $this->security->getUser();
         if ($currentUser && !$currentUser instanceof TempUser) {
@@ -51,7 +49,8 @@ final class TempUserProvider implements ProviderInterface
         return $output;
     }
 
-    private function getRequest(array $context): ?Request
+    /** @param mixed[] $context */
+    private function getRequestFromContext(array $context): ?Request
     {
         $request = $context['request'] ?? null;
         if (!$request instanceof Request) {
@@ -61,28 +60,20 @@ final class TempUserProvider implements ProviderInterface
         return $request;
     }
 
-    private function getIpFromContext(array $context): ?string
-    {
-        $request = $this->getRequest($context);
-
-        return $request->getClientIp();
-    }
-
-    private function getUsernameFromContext(array $context): ?string
-    {
-        $request = $this->getRequest($context);
-
-        return $request->query->get('username');
-    }
-
+    /** @param mixed[] $context */
     private function getTempUserFromContext(array $context): TempUser
     {
-        $ip = $this->getIpFromContext($context);
+        $request = $this->getRequestFromContext($context);
+        if (!$request) {
+            throw new BadRequestHttpException('Impossible to retrieve request');
+        }
+
+        $ip = $request->getClientIp();
         if (!$ip) {
             throw new BadRequestHttpException('Impossible to retrieve ip');
         }
 
-        $username = $this->getUsernameFromContext($context);
+        $username = $request->query->get('username');
         if (!$username) {
             throw new BadRequestHttpException('Undefined username');
         }

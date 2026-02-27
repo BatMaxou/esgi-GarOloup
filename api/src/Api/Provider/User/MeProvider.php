@@ -7,6 +7,7 @@ use ApiPlatform\State\ProviderInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/** @implements ProviderInterface<UserInterface> */
 class MeProvider implements ProviderInterface
 {
     public function __construct(

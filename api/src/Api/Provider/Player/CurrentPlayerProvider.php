@@ -9,6 +9,7 @@ use App\Entity\Player;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/** @implements ProviderInterface<Player> */
 class CurrentPlayerProvider implements ProviderInterface
 {
     public function __construct(

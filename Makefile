@@ -1,6 +1,10 @@
 -include .env
 -include .env.local
 
+# --- CONTAINER ---
+php = docker compose exec php
+node = docker compose exec node
+
 # --- HANDLE PARAMS ---
 %:
 	@:
@@ -12,19 +16,22 @@ PHP_CS_FIXER_CONFIGURATION_FILE = ./api/.devops/lint/.php-cs-fixer.php
 PHP_FIXER_VERSION = 3-php8.4
 phpcsfixer = docker run --rm -v `pwd`:/code ghcr.io/php-cs-fixer/php-cs-fixer:${PHP_FIXER_VERSION}
 
+# --- PHPSTAN CONFIG ---
+PHPSTAN_CONFIGURATION_FILE = ./.devops/lint/phpstan.neon
+
 # --- DEV COMMANDS ---
 fixtures:
 	@read -p "This action will delete all existing data, are you shure to continue? (y/n): " choice; \
 	if [ "$$choice" = "y" ]; then \
 		${MAKE} database; \
-		docker compose exec php php bin/console doctrine:fixtures:load --no-interaction; \
+		${php} bin/console doctrine:fixtures:load --no-interaction; \
 	else \
 		echo "Aborted"; \
 	fi
 .PHONY: fixtures
 
 vendor:
-	@docker compose exec php composer install
+	${php} composer install
 .PHONY: vendor
 
 up:
@@ -36,17 +43,17 @@ down:
 .PHONY: down
 
 jwt:
-	@docker compose exec php php bin/console lexik:jwt:generate-keypair
+	@${php} php bin/console lexik:jwt:generate-keypair
 .PHONY: jwt
 
 invalidate-tokens:
-	@docker compose exec php php bin/console gesdinet:jwt:clear
+	@${php} php bin/console gesdinet:jwt:clear
 .PHONY: invalidate-tokens
 
 database:
-	@docker compose exec php php bin/console doctrine:database:drop --if-exists --force
-	@docker compose exec php php bin/console doctrine:database:create --if-not-exists
-	@docker compose exec php php bin/console doctrine:migrations:migrate --no-interaction
+	@${php} php bin/console doctrine:database:drop --if-exists --force
+	@${php} php bin/console doctrine:database:create --if-not-exists
+	@${php} php bin/console doctrine:migrations:migrate --no-interaction
 .PHONY: database
 
 # --- LINTERS ---
@@ -58,24 +65,29 @@ phpcs:
 	@$(phpcsfixer) fix --config=$(PHP_CS_FIXER_CONFIGURATION_FILE) --dry-run
 .PHONY: phpcs
 
+phpstan:
+	@$(php) vendor/bin/phpstan analyse --configuration=$(PHPSTAN_CONFIGURATION_FILE)
+.PHONY: phpstan
+
 php-lint:
 	@${MAKE} phpcs
+	@${MAKE} phpstan
 .PHONY: php-lint
 
 # --- TESTS ---
 pretests:
-	@docker compose exec php php bin/console doctrine:database:drop --if-exists --force --env=test
-	@docker compose exec php php bin/console doctrine:database:create --env=test
-	@docker compose exec php php bin/console doctrine:schema:update --force --env=test
-	@docker compose exec php php bin/console lexik:jwt:generate-keypair --env=test
+	@${php} php bin/console doctrine:database:drop --if-exists --force --env=test
+	@${php} php bin/console doctrine:database:create --env=test
+	@${php} php bin/console doctrine:schema:update --force --env=test
+	@${php} php bin/console lexik:jwt:generate-keypair --env=test --overwrite --no-interaction
 .PHONY: pretests
 
 tests:
-	@docker compose exec php php bin/phpunit
+	@${php} bin/phpunit
 .PHONY: test
 
 test-coverage:
-	@docker compose exec php php bin/phpunit --coverage-html var/coverage
+	@${php} bin/phpunit --coverage-html var/coverage
 .PHONY: test-coverage
 
 # --- DEV UTILS ---

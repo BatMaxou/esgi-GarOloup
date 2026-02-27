@@ -44,17 +44,17 @@ class Game
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Player $host = null;
+    private Player $host;
 
     #[ORM\Column(length: 8)]
-    private ?string $joinCode = null;
+    private string $joinCode;
 
     /** @var Collection<int, Player> */
     #[ORM\OneToMany(targetEntity: Player::class, mappedBy: 'game', orphanRemoval: true)]
     private Collection $players;
 
     #[ORM\Column]
-    private ?bool $finished = null;
+    private bool $finished = false;
 
     public function __construct(
         Player $host,
@@ -66,10 +66,9 @@ class Game
         $this->id = $uuid;
         $this->joinCode = substr($uuid->toBase32(), -8);
         $this->players = new ArrayCollection();
-        $this->finished = false;
     }
 
-    public function getStep(): ?GameStepEnum
+    public function getStep(): GameStepEnum
     {
         return $this->step;
     }
@@ -81,7 +80,7 @@ class Game
         return $this;
     }
 
-    public function getHost(): ?Player
+    public function getHost(): Player
     {
         return $this->host;
     }
@@ -93,7 +92,7 @@ class Game
         return $this;
     }
 
-    public function getJoinCode(): ?string
+    public function getJoinCode(): string
     {
         return $this->joinCode;
     }
@@ -135,7 +134,7 @@ class Game
         return $this;
     }
 
-    public function isFinished(): ?bool
+    public function isFinished(): bool
     {
         return $this->finished;
     }

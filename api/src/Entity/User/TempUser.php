@@ -33,7 +33,7 @@ class TempUser extends AbstractUser
 {
     #[ORM\Column(length: 255)]
     #[Assert\Ip]
-    private ?string $ip = null;
+    private string $ip;
 
     public function __construct(
         string $ip,
@@ -48,7 +48,11 @@ class TempUser extends AbstractUser
 
     public function getUserIdentifier(): string
     {
-        return (string) $this->id;
+        if (!$this->id) {
+            throw new \LogicException('User id is not set.');
+        }
+
+        return $this->id->toString();
     }
 
     public function eraseCredentials(): void
@@ -60,7 +64,7 @@ class TempUser extends AbstractUser
         return RoleEnum::TEMP_USER;
     }
 
-    public function getIp(): ?string
+    public function getIp(): string
     {
         return $this->ip;
     }
@@ -72,7 +76,7 @@ class TempUser extends AbstractUser
         return $this;
     }
 
-    public function getUsername(): ?string
+    public function getUsername(): string
     {
         return $this->username;
     }

@@ -12,7 +12,9 @@ return (new PhpCsFixer\Config())
     ->setRules([
         '@Symfony' => true,
         '@PHP84Migration' => true,
-        'php_unit_method_casing' => ['case' => 'snake_case'],       '@DoctrineAnnotation' => true,
+        'php_unit_method_casing' => ['case' => 'snake_case'],
+        'phpdoc_var_without_name' => false,
+        'phpdoc_to_comment' => false,
     ])
     ->setFinder($finder)
 ;
