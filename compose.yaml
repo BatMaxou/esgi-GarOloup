@@ -1,6 +1,5 @@
 services:
   php:
-    user: 1000:1000
     depends_on:
       - db
     build: ./api
@@ -37,7 +36,6 @@ services:
       - mercure
 
   node:
-    user: 1000:1000
     build:
       context: ./front
       target: dev
@@ -50,6 +48,9 @@ services:
     image: mariadb:11.8
     volumes:
       - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: garoloup
     networks:
       - api
 

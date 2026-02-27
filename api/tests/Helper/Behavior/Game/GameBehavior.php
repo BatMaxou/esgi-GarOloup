@@ -13,4 +13,13 @@ class GameBehavior extends AbstractBehavior
             'json' => [],
         ]));
     }
+
+    public function join(?string $joinCode): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('POST', '/api/game/join', [
+            'json' => [
+                'joinCode' => $joinCode,
+            ],
+        ]));
+    }
 }

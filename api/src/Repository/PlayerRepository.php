@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Player;
 use App\Entity\User\TempUser;
 use App\Entity\User\User;
+use App\Enum\GameStepEnum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -46,10 +47,10 @@ class PlayerRepository extends ServiceEntityRepository
             ->innerJoin('p.game', 'g')
             ->where('p.user = :uuid')
             ->orWhere('p.tempUser = :uuid')
-            ->andWhere('g.finished = :finished')
+            ->andWhere('g.step != :gameStep')
             ->orderBy('g.createdAt', 'DESC')
             ->setParameter('uuid', $user->getId(), 'uuid')
-            ->setParameter('finished', false)
+            ->setParameter('gameStep', GameStepEnum::FINISH)
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();

@@ -10,7 +10,7 @@ class RefreshTest extends GarOloupApiTestCase
 {
     public function test_user_can_refresh_token(): void
     {
-        $userBuilder = ThereIs::anUser()->withEmail('test@garoloup.fr')->withPassword('password')->build();
+        $userBuilder = ThereIs::anUser()->build();
         $refreshTokenBuilder = ThereIs::aRefreshToken()->withUsername($userBuilder->getEntity()->getUserIdentifier())->withToken('_refresh_')->build();
 
         $response = When::auth()->refresh($refreshTokenBuilder->token);
@@ -22,7 +22,7 @@ class RefreshTest extends GarOloupApiTestCase
 
     public function test_user_cant_refresh_token_with_invalid_token(): void
     {
-        $userBuilder = ThereIs::anUser()->withEmail('test@garoloup.fr')->withPassword('password')->build();
+        $userBuilder = ThereIs::anUser()->build();
         ThereIs::aRefreshToken()->withUsername($userBuilder->getEntity()->getUserIdentifier())->withToken('_refresh_')->build();
 
         When::auth()->refresh('invalid');

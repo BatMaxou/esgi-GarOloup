@@ -5,9 +5,11 @@ namespace App\Enum;
 enum GameStepEnum: string
 {
     case NEW = 'new';
-    case GAME_MASTER_CHOICE = 'game_master_choice';
-    case CONFIGURATION = 'configuration';
 
+    case CONFIGURATION = 'configuration';
+    case GAME_MASTER_CHOICE = 'game_master_choice';
+
+    case DISPATCH = 'dispatch';
     case LAUNCH = 'launch';
 
     case NIGHT = 'night';

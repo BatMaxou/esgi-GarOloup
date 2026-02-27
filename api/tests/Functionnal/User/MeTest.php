@@ -16,25 +16,25 @@ class MeTest extends GarOloupApiTestCase
 
     public function test_user_can_get_it_own_information(): void
     {
-        $userBuilder = ThereIs::anUser()->build();
+        $userBuilder = ThereIs::anUser()->withUsername('SliipMan')->build();
 
         When::asUser($userBuilder);
         $response = When::me()->get();
         $this->assertResponseStatusCodeSame(200);
 
         $this->assertEquals('User', $response->get('[@type]'));
-        $this->assertEquals($userBuilder->getEntity()->getUsername(), $response->get('[username]'));
+        $this->assertEquals($userBuilder->username, $response->get('[username]'));
     }
 
     public function test_temp_user_can_get_it_own_information(): void
     {
-        $tempUserBuilder = ThereIs::aTempUser()->build();
+        $tempUserBuilder = ThereIs::aTempUser()->withUsername('SLiipMan')->build();
 
         When::asTempUser($tempUserBuilder);
         $response = When::me()->get();
         $this->assertResponseStatusCodeSame(200);
 
         $this->assertEquals('TempUser', $response->get('[@type]'));
-        $this->assertEquals($tempUserBuilder->getEntity()->getUsername(), $response->get('[username]'));
+        $this->assertEquals($tempUserBuilder->username, $response->get('[username]'));
     }
 }

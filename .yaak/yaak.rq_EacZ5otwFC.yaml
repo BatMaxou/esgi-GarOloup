@@ -1,0 +1,31 @@
+type: http_request
+model: http_request
+id: rq_EacZ5otwFC
+createdAt: 2026-02-27T22:27:37.596897221
+updatedAt: 2026-02-27T22:32:26.439485425
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_bh6aMuFF23
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body:
+  text: |-
+    {
+      "joinCode": "${[ JOIN_CODE ]}"
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/ld+json
+  id: NcSQucREyF
+- enabled: true
+  name: ''
+  value: ''
+  id: 0TkCedAc45
+method: POST
+name: Join Game
+sortPriority: 3.001
+url: ${[ BASE_URL ]}/api/game/join
+urlParameters: []

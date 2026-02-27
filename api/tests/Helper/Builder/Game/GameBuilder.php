@@ -23,7 +23,6 @@ class GameBuilder extends AbstractBuilder
             ...($this->host ? ['host' => $this->host->getEntity()] : []),
             ...($this->joinCode ? ['joinCode' => $this->joinCode] : []),
             ...($this->step ? ['step' => $this->step] : []),
-            ...($this->finished ? ['finished' => $this->finished] : []),
             ...($this->createdAt ? ['createdAt' => $this->createdAt] : []),
         ]);
     }
@@ -49,9 +48,16 @@ class GameBuilder extends AbstractBuilder
         return $this;
     }
 
+    public function closed(): static
+    {
+        $this->withStep(GameStepEnum::CONFIGURATION);
+
+        return $this;
+    }
+
     public function finished(): static
     {
-        $this->finished = true;
+        $this->withStep(GameStepEnum::FINISH);
 
         return $this;
     }

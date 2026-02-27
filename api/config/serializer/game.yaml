@@ -3,6 +3,6 @@ App\Entity\Game:
         id:
             groups:
                 - me:read
-        finished:
+        step:
             groups:
                 - me:read
