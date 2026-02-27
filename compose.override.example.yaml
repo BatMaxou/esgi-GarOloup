@@ -15,11 +15,6 @@ services:
     ports:
       - "3000:3000"
 
-  db:
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: garoloup
-
   mailbox:
     ports:
       - "8025:8025"

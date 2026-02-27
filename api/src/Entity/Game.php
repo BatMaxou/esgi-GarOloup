@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Api\Model\Game\CreateGameOutput;
 use App\Domain\Command\Game\Initialisation\CreateGameCommand;
+use App\Domain\Command\Game\Initialisation\JoinGameCommand;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Enum\GameStepEnum;
@@ -31,6 +32,12 @@ use Doctrine\ORM\Mapping as ORM;
             input: CreateGameCommand::class,
             output: CreateGameOutput::class,
         ),
+        new Post(
+            name: 'api_game_join',
+            uriTemplate: '/game/join',
+            messenger: 'input',
+            input: JoinGameCommand::class,
+        ),
         new Patch(name: 'api_game_update'),
     ],
 )]
@@ -52,9 +59,6 @@ class Game
     /** @var Collection<int, Player> */
     #[ORM\OneToMany(targetEntity: Player::class, mappedBy: 'game', orphanRemoval: true)]
     private Collection $players;
-
-    #[ORM\Column]
-    private bool $finished = false;
 
     public function __construct(
         Player $host,
@@ -132,18 +136,6 @@ class Game
                 $player->setGame(null);
             }
         }
-
-        return $this;
-    }
-
-    public function isFinished(): bool
-    {
-        return $this->finished;
-    }
-
-    public function setFinished(bool $isFinished): static
-    {
-        $this->finished = $isFinished;
 
         return $this;
     }
