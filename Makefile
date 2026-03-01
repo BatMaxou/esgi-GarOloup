@@ -90,8 +90,15 @@ test-coverage:
 	@${php} bin/phpunit --coverage-html var/coverage
 .PHONY: test-coverage
 
-# --- DEV UTILS ---
+# --- PROD DEPLOYMENT COMMANDS ---
 
+deploy:
+	@docker compose down $(ARGS)
+	@docker compose pull $(ARGS)
+	@docker compose up -d $(ARGS)
+.PHONY: deploy
+
+# --- DEV UTILS ---
 exec-db:
 	@docker compose exec ${DB_HOST} mariadb -u${DB_USER} -p${DB_PASSWORD} ${DB_NAME}
 .PHONY: exec-db

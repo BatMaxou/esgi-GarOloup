@@ -1,0 +1,41 @@
+name: Build / Push images to registry
+
+inputs:
+  context:
+    description: 'Path to the context'
+    type: string
+    required: true
+  dockerfile:
+    description: 'Path to the Dockerfile'
+    type: string
+    required: true
+  image:
+    description: 'Name of the image to build and push'
+    type: string
+    required: true
+  target:
+    description: 'Target stage in the Dockerfile'
+    type: string
+    required: false
+    default: ''
+  build_args:
+    description: 'Build arguments for docker build'
+    type: string
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build / Push images
+      uses: docker/build-push-action@v6
+      with:
+        context: ${{ inputs.context }}
+        file: ${{ inputs.dockerfile }} 
+        tags: ${{ env.IMAGE_PREFIX }}-${{ inputs.image }}:latest
+        push: true
+        target: ${{ inputs.target }}
+        build-args: ${{ inputs.build_args }}

@@ -12,7 +12,9 @@ services:
   web:
     depends_on:
       - php
-    build: ./api/.devops/nginx
+    build:
+      context: ./api
+      dockerfile: ./api/.devops/nginx/Dockerfile
     volumes:
       - ./api/public:/srv/public
     networks:

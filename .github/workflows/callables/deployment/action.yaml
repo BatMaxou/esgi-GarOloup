@@ -1,0 +1,40 @@
+name: Deployment
+
+inputs:
+  key:
+    description: 'User SSH private key on the server'
+    type: string
+    required: true
+  host:
+    description: 'Host IP'
+    type: string
+    required: true
+  user:
+    description: 'SSH user for deployment'
+    type: string
+    required: true
+  path:
+    description: 'Path of the project on the server'
+    type: string
+    required: true
+  images:
+    description: 'Images to deploy, space-separated'
+    type: string
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.9.0
+      with:
+        ssh-private-key: ${{ inputs.key }}
+    - name: Add server to known hosts
+      shell: bash
+      run: |
+        ssh-keyscan -H ${{ inputs.host }} >> ~/.ssh/known_hosts
+    - name: Deploy to server
+      shell: bash
+      run: |
+        ssh ${{ inputs.user }}@${{ inputs.host }} 'cd ${{ inputs.path }} && make deploy ${{ inputs.images }}'
