@@ -22,4 +22,9 @@ class GameBehavior extends AbstractBehavior
             ],
         ]));
     }
+
+    public function getCurrent(): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('GET', '/api/game'));
+    }
 }

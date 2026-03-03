@@ -4,9 +4,9 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Api\Model\Game\CreateGameOutput;
+use App\Api\Provider\Game\CurrentGameProvider;
 use App\Domain\Command\Game\Initialisation\CreateGameCommand;
 use App\Domain\Command\Game\Initialisation\JoinGameCommand;
 use App\Entity\Trait\TimestampableTrait;
@@ -25,7 +25,14 @@ use Doctrine\ORM\Mapping as ORM;
         ],
     ],
     operations: [
-        new Get(name: 'api_game_get'),
+        new Get(
+            name: 'api_current_game',
+            uriTemplate: '/game',
+            provider: CurrentGameProvider::class,
+            normalizationContext: [
+                'groups' => 'game:read',
+            ],
+        ),
         new Post(
             name: 'api_game_create',
             messenger: 'input',
@@ -38,7 +45,6 @@ use Doctrine\ORM\Mapping as ORM;
             messenger: 'input',
             input: JoinGameCommand::class,
         ),
-        new Patch(name: 'api_game_update'),
     ],
 )]
 class Game

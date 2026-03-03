@@ -4,8 +4,8 @@ namespace App\Api\Provider\Player;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
-use App\Domain\Spec\PlayerSpec;
 use App\Entity\Player;
+use App\Repository\PlayerRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -14,7 +14,7 @@ class CurrentPlayerProvider implements ProviderInterface
 {
     public function __construct(
         private readonly Security $security,
-        private readonly PlayerSpec $playerSpec,
+        private readonly PlayerRepository $playerRepository,
     ) {
     }
 
@@ -25,6 +25,6 @@ class CurrentPlayerProvider implements ProviderInterface
             return null;
         }
 
-        return $this->playerSpec->getCurrentPlayer($currentUser);
+        return $this->playerRepository->findCurrentByUser($currentUser);
     }
 }

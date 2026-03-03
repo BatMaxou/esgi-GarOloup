@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Api\Provider\Game;
+
+use ApiPlatform\Metadata\Operation;
+use ApiPlatform\State\ProviderInterface;
+use App\Entity\Game;
+use App\Entity\Player;
+use App\Entity\User\AbstractUser;
+use App\Repository\PlayerRepository;
+use Symfony\Bundle\SecurityBundle\Security;
+
+/** @implements ProviderInterface<Player> */
+class CurrentGameProvider implements ProviderInterface
+{
+    public function __construct(
+        private readonly Security $security,
+        private readonly PlayerRepository $playerRepository,
+    ) {
+    }
+
+    public function provide(Operation $operation, array $uriVariables = [], array $context = []): ?Game
+    {
+        $currentUser = $this->security->getUser();
+        if (!$currentUser instanceof AbstractUser) {
+            return null;
+        }
+
+        $player = $this->playerRepository->findCurrentByUser($currentUser);
+        if (!$player) {
+            return null;
+        }
+
+        if (null === $player->getGame()) {
+            return null;
+        }
+
+        return $player->getGame();
+    }
+}
