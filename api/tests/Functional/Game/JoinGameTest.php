@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Functionnal\Security;
+namespace App\Tests\Functional\Game;
 
 use App\Fixtures\Factory\GameFactory;
 use App\Fixtures\Factory\PlayerFactory;
@@ -23,10 +23,11 @@ class JoinGameTest extends GarOloupApiTestCase
         $userBuilder = ThereIs::anUser()->build();
         $gameBuilder = ThereIs::aGame()->withJoinCode('Do!BeShy')->build();
 
-        When::asUser($userBuilder)->game()->join($gameBuilder->joinCode);
+        $response = When::asUser($userBuilder)->game()->join($gameBuilder->joinCode);
         $this->assertResponseStatusCodeSame(201);
 
         $this->assertEquals(2, $gameBuilder->getEntity()->getPlayers()->count());
+        $this->assertTrue($response->get('[success]'));
     }
 
     public function test_temp_user_can_join_game(): void
@@ -34,10 +35,11 @@ class JoinGameTest extends GarOloupApiTestCase
         $tempUserBuilder = ThereIs::aTempUser()->build();
         $gameBuilder = ThereIs::aGame()->withJoinCode('Do!BeShy')->build();
 
-        When::asTempUser($tempUserBuilder)->game()->join($gameBuilder->joinCode);
+        $response = When::asTempUser($tempUserBuilder)->game()->join($gameBuilder->joinCode);
         $this->assertResponseStatusCodeSame(201);
 
         $this->assertEquals(2, $gameBuilder->getEntity()->getPlayers()->count());
+        $this->assertTrue($response->get('[success]'));
     }
 
     public function test_user_cant_join_game_if_already_have_one(): void
@@ -71,10 +73,11 @@ class JoinGameTest extends GarOloupApiTestCase
         $secondGameBuilder = ThereIs::aGame()->withJoinCode('Do!BeShy')->build();
         ThereIs::aPlayer()->withUser($userBuilder)->withGame($firstGameBuilder)->dead()->build();
 
-        When::asUser($userBuilder)->game()->join($secondGameBuilder->joinCode);
+        $response = When::asUser($userBuilder)->game()->join($secondGameBuilder->joinCode);
         $this->assertResponseStatusCodeSame(201);
 
         $this->assertEquals(2, $secondGameBuilder->getEntity()->getPlayers()->count());
+        $this->assertTrue($response->get('[success]'));
     }
 
     public function test_temp_user_can_join_game_if_all_its_players_are_dead(): void
@@ -84,10 +87,11 @@ class JoinGameTest extends GarOloupApiTestCase
         $secondGameBuilder = ThereIs::aGame()->withJoinCode('Do!BeShy')->build();
         ThereIs::aPlayer()->withTempUser($tempUserBuilder)->withGame($firstGameBuilder)->dead()->build();
 
-        When::asTempUser($tempUserBuilder)->game()->join($secondGameBuilder->joinCode);
+        $response = When::asTempUser($tempUserBuilder)->game()->join($secondGameBuilder->joinCode);
         $this->assertResponseStatusCodeSame(201);
 
         $this->assertEquals(2, $secondGameBuilder->getEntity()->getPlayers()->count());
+        $this->assertTrue($response->get('[success]'));
     }
 
     public function test_user_cant_join_game_without_join_code(): void

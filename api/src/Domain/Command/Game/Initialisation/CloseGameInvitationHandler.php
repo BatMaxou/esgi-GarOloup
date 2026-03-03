@@ -4,48 +4,48 @@ namespace App\Domain\Command\Game\Initialisation;
 
 use App\Api\Model\BasicActionOutput;
 use App\Domain\Spec\GameSpec;
-use App\Entity\Game;
-use App\Entity\Player;
 use App\Entity\User\AbstractUser;
-use App\Repository\GameRepository;
+use App\Enum\GameStepEnum;
+use App\Repository\PlayerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-class JoinGameHandler
+class CloseGameInvitationHandler
 {
     public function __construct(
         private readonly Security $security,
-        private readonly GameRepository $gameRepository,
         private readonly EntityManagerInterface $em,
         private readonly GameSpec $gameSpec,
+        private readonly PlayerRepository $playerRepository,
     ) {
     }
 
-    public function __invoke(JoinGameCommand $command): BasicActionOutput
+    public function __invoke(CloseGameInvitationCommand $command): BasicActionOutput
     {
         $currentUser = $this->security->getUser();
         if (!$currentUser instanceof AbstractUser) {
             throw new AccessDeniedHttpException('You are not logged in');
         }
 
-        if (!$this->gameSpec->canJoin($currentUser)) {
-            throw new ConflictHttpException('You are already playing a game');
+        $player = $this->playerRepository->findCurrentByUser($currentUser);
+        if (null === $player) {
+            throw new AccessDeniedHttpException('You do not have a current player');
         }
 
-        $game = $this->gameRepository->findByJoinCode($command->joinCode);
-        if (!$game instanceof Game) {
-            throw new NotFoundHttpException('Game not found');
+        $game = $player->getGame();
+        if (!$game) {
+            throw new AccessDeniedHttpException('You are not in a game');
         }
 
-        $player = new Player($currentUser);
-        $game->addPlayer($player);
+        if (!$this->gameSpec->canCloseGameInvitation($currentUser, $game)) {
+            throw new AccessDeniedHttpException('You can not close this game invitation');
+        }
 
-        $this->em->persist($player);
+        $game->setStep(GameStepEnum::CONFIGURATION);
+
         $this->em->flush();
 
         return new BasicActionOutput(true);

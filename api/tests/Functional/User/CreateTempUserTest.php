@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Functionnal\User;
+namespace App\Tests\Functional\User;
 
 use App\Fixtures\Factory\TempUserFactory;
 use App\Tests\GarOloupApiTestCase;

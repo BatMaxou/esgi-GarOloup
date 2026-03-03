@@ -27,4 +27,12 @@ class GameBehavior extends AbstractBehavior
     {
         return new BehaviorResponse($this->client->request('GET', '/api/game'));
     }
+
+    public function closeInvitation(): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/invitation/close', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [],
+        ]));
+    }
 }

@@ -12,4 +12,12 @@ abstract class AbstractBehavior
     {
         $this->client = $client;
     }
+
+    /** @return array<string, string> */
+    protected function getPatchHeaders(): array
+    {
+        return [
+            'Content-Type' => 'application/merge-patch+json',
+        ];
+    }
 }

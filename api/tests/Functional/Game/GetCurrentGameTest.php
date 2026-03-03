@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Functionnal\User;
+namespace App\Tests\Functional\Game;
 
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;
