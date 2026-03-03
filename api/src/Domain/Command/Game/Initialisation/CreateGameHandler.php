@@ -6,6 +6,7 @@ use App\Api\Model\Game\CreateGameOutput;
 use App\Domain\Spec\GameSpec;
 use App\Entity\Game;
 use App\Entity\Player;
+use App\Entity\User\AbstractUser;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -15,8 +16,6 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 class CreateGameHandler
 {
-    public const TWELVE_HOURS_VALIDITY = 43200;
-
     public function __construct(
         private readonly Security $security,
         private readonly EntityManagerInterface $em,
@@ -27,7 +26,7 @@ class CreateGameHandler
     public function __invoke(CreateGameCommand $command): CreateGameOutput
     {
         $currentUser = $this->security->getUser();
-        if (null === $currentUser) {
+        if (!$currentUser instanceof AbstractUser) {
             throw new AccessDeniedHttpException('You are not logged in');
         }
 

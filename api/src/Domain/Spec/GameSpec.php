@@ -3,9 +3,9 @@
 namespace App\Domain\Spec;
 
 use App\Entity\Game;
+use App\Entity\User\AbstractUser;
 use App\Enum\GameStepEnum;
 use App\Repository\PlayerRepository;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class GameSpec
 {
@@ -14,7 +14,7 @@ class GameSpec
     ) {
     }
 
-    public function canCreate(UserInterface $user): bool
+    public function canCreate(AbstractUser $user): bool
     {
         $players = $this->playerRepository->findByUser($user);
         if (0 === \count($players)) {
@@ -30,7 +30,7 @@ class GameSpec
         return true;
     }
 
-    public function canJoin(UserInterface $user): bool
+    public function canJoin(AbstractUser $user): bool
     {
         $players = $this->playerRepository->findByUser($user);
         if (0 === \count($players)) {
@@ -46,10 +46,10 @@ class GameSpec
         return true;
     }
 
-    public function canCloseGameInvitation(UserInterface $user, Game $game): bool
+    public function canCloseGameInvitation(AbstractUser $user, Game $game): bool
     {
         $host = $game->getHost();
-        if ($host !== $user) {
+        if ($user !== $host->getUser() && $user !== $host->getTempUser()) {
             return false;
         }
 

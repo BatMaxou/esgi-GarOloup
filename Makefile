@@ -1,5 +1,5 @@
--include .env
--include .env.local
+-include ./api/.env
+-include ./api/.env.local
 
 # --- CONTAINER ---
 php = docker compose exec php
@@ -54,6 +54,7 @@ database:
 	@${php} php bin/console doctrine:database:drop --if-exists --force
 	@${php} php bin/console doctrine:database:create --if-not-exists
 	@${php} php bin/console doctrine:migrations:migrate --no-interaction
+	@${php} php bin/console doctrine:schema:update --force
 .PHONY: database
 
 # --- LINTERS ---
@@ -76,6 +77,7 @@ php-lint:
 
 # --- TESTS ---
 pretests:
+	@${php} php bin/console c:c
 	@${php} php bin/console doctrine:database:drop --if-exists --force --env=test
 	@${php} php bin/console doctrine:database:create --env=test
 	@${php} php bin/console doctrine:schema:update --force --env=test

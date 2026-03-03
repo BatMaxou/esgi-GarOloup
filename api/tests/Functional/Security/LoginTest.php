@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Functionnal\Security;
+namespace App\Tests\Functional\Security;
 
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;

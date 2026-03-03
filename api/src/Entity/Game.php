@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use App\Api\Model\BasicActionOutput;
 use App\Api\Model\Game\CreateGameOutput;
 use App\Api\Provider\Game\CurrentGameProvider;
+use App\Domain\Command\Game\Initialisation\CloseGameInvitationCommand;
 use App\Domain\Command\Game\Initialisation\CreateGameCommand;
 use App\Domain\Command\Game\Initialisation\JoinGameCommand;
 use App\Entity\Trait\TimestampableTrait;
@@ -44,6 +47,14 @@ use Doctrine\ORM\Mapping as ORM;
             uriTemplate: '/game/join',
             messenger: 'input',
             input: JoinGameCommand::class,
+            output: BasicActionOutput::class,
+        ),
+        new Patch(
+            name: 'api_game_close_invitation',
+            uriTemplate: '/game/invitation/close',
+            messenger: 'input',
+            input: CloseGameInvitationCommand::class,
+            output: BasicActionOutput::class,
         ),
     ],
 )]

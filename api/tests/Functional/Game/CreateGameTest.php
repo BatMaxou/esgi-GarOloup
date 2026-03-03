@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Functionnal\Security;
+namespace App\Tests\Functional\Game;
 
 use App\Fixtures\Factory\GameFactory;
 use App\Tests\GarOloupApiTestCase;
