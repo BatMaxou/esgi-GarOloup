@@ -3,15 +3,19 @@ App\Entity\Player:
         id:
             groups:
                 - me:read
+                - game:read
         user:
             groups:
                 - me:read
+                - game:read
         tempUser:
             groups:
                 - me:read
+                - game:read
         dead:
             groups:
                 - me:read
+                - game:read
         game:
             groups:
                 - me:read

@@ -3,9 +3,11 @@ App\Entity\User\AbstractUser:
         id:
             groups:
                 - me:read
+                - game:read
         username:
             groups:
                 - me:read
+                - game:read
         roles:
             groups:
                 - me:read

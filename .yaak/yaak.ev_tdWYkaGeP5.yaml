@@ -3,7 +3,7 @@ model: environment
 id: ev_tdWYkaGeP5
 workspaceId: wk_uXtATNFQmZ
 createdAt: 2026-02-27T17:49:25.047317508
-updatedAt: 2026-02-27T18:22:05.240245436
+updatedAt: 2026-03-02T11:58:16.073245971
 name: User
 public: true
 base: false
@@ -12,7 +12,7 @@ parentId: null
 variables:
 - enabled: true
   name: TOKEN
-  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RmhyVWtwZVlMbmxwWUtUd3c2RHc4RVRWNnA2T25oaTd0dDZLeE9wTXFaQ2dEN25QRXlVa25VaDl1bmlWSVd1N2xwSUNkL3lPcnBDWjdncCtUZ0pIREIyZWoyM3pMbUhxZWhOQUlMTUFJcU9FaW9GNExvSlJBMEJRVkcxRTRPQ0lFWnRGWlF1Ry9qV1pmZHNuNUwyRTQydmZWVnQ5RjRmcVRWNDZYL3hwQTNrQnByanBicTV2czVBWE1jaXNuV2JxdUhHRXN6TkhiYmoyalEvMzBoVXp4Umc4WXdha08wcU9uK1Ewdz0') ]}
+  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3R0hTRkt2NU8xRXRCYUxYbndHcGsvTnpRTnZDYkZWRkRqM2UrV2N5TFJEa2cyYnRXb1Jlbnl6YXZEbHhrMERqblp5T3g4dUd6ekx0OFN1RHFuWi81Rk9mclRUNy9xbXRUbjFkZ2FXZkhYejUveUtBZXNKVnJIWEJLTThzdTk2U1h0dG9ScVIzQXp2RENxUEV0c1kwL2I5U1M2aUJkRGNEM1dkTFBaa0dqcnhOSzA2TUlWR2IyMStxVkZ6b1BWWkdjMTNQNUtWVEkzUnFVR3hpZFhlL2U1eDB2YnhadWxmcDNtWUN3PT0') ]}
   id: g82fJMIPc3
 - enabled: true
   name: REFRESH_TOKEN

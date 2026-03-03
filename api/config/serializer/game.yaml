@@ -3,6 +3,14 @@ App\Entity\Game:
         id:
             groups:
                 - me:read
+                - game:read
         step:
             groups:
                 - me:read
+                - game:read
+        joinCode:
+            groups:
+                - game:read
+        players:
+            groups:
+                - game:read

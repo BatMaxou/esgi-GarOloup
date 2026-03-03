@@ -17,6 +17,9 @@ WORKDIR /srv
 
 COPY . .
 
+# Development image
+FROM base as dev
+
 # Production image
 FROM base as prod
 

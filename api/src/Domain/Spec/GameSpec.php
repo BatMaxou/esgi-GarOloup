@@ -2,6 +2,8 @@
 
 namespace App\Domain\Spec;
 
+use App\Entity\Game;
+use App\Enum\GameStepEnum;
 use App\Repository\PlayerRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -39,6 +41,20 @@ class GameSpec
             if (!$player->isDead()) {
                 return false;
             }
+        }
+
+        return true;
+    }
+
+    public function canCloseGameInvitation(UserInterface $user, Game $game): bool
+    {
+        $host = $game->getHost();
+        if ($host !== $user) {
+            return false;
+        }
+
+        if (GameStepEnum::NEW !== $game->getStep()) {
+            return false;
         }
 
         return true;
