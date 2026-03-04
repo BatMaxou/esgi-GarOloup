@@ -20,7 +20,7 @@ class UserBehavior extends AbstractBehavior
 
     public function forgotPassword(?string $email): BehaviorResponse
     {
-        return new BehaviorResponse($this->client->request('POST', '/api/forgot-password', [
+        return new BehaviorResponse($this->client->request('POST', '/api/forgot_password', [
             'json' => [
                 'email' => $email,
             ],
@@ -29,7 +29,7 @@ class UserBehavior extends AbstractBehavior
 
     public function resetPassword(?string $token, ?string $password): BehaviorResponse
     {
-        return new BehaviorResponse($this->client->request('POST', '/api/reset-password', [
+        return new BehaviorResponse($this->client->request('POST', '/api/reset_password', [
             'json' => [
                 'token' => $token,
                 'password' => $password,

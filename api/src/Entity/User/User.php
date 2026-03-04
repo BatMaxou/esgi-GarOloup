@@ -28,7 +28,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             output: BasicActionOutput::class,
         ),
         new Post(
-            uriTemplate: '/forgot-password',
+            uriTemplate: '/forgot_password',
             name: 'api_forgot_password',
             messenger: 'input',
             input: ForgotPasswordCommand::class,
@@ -36,7 +36,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             status: Response::HTTP_OK,
         ),
         new Post(
-            uriTemplate: '/reset-password',
+            uriTemplate: '/reset_password',
             name: 'api_reset_password',
             messenger: 'input',
             input: ResetPasswordCommand::class,
