@@ -1,6 +1,3 @@
--include ./api/.env
--include ./api/.env.local
-
 # --- CONTAINER ---
 php = docker compose exec php
 node = docker compose exec node
@@ -20,6 +17,9 @@ phpcsfixer = docker run --rm -v `pwd`:/code ghcr.io/php-cs-fixer/php-cs-fixer:${
 PHPSTAN_CONFIGURATION_FILE = ./.devops/lint/phpstan.neon
 
 # --- DEV COMMANDS ---
+install: up vendor node-modules jwt database
+.PHONY: install
+
 fixtures:
 	@read -p "This action will delete all existing data, are you shure to continue? (y/n): " choice; \
 	if [ "$$choice" = "y" ]; then \
@@ -33,6 +33,10 @@ fixtures:
 vendor:
 	${php} composer install
 .PHONY: vendor
+
+node-modules:
+	${node} npm install
+.PHONY: node_modules
 
 up:
 	@docker compose up -d $(ARGS)
@@ -74,6 +78,27 @@ php-lint:
 	@${MAKE} phpcs
 	@${MAKE} phpstan
 .PHONY: php-lint
+
+eslint:
+	@${node} npm run lint
+.PHONY: eslint
+
+prettier:
+	@${node} npm run format
+.PHONY: prettier
+
+prettier-fix:
+	@${node} npm run format:fix
+.PHONY: prettier-fix
+
+front-lint:
+	@${MAKE} eslint
+	@${MAKE} prettier
+.PHONY: front-lint
+
+front-build:
+	@${node} npm run build
+.PHONY: front-build
 
 # --- TESTS ---
 pretests:

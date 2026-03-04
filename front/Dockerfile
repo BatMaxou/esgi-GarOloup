@@ -15,16 +15,22 @@ RUN npm i;
 # Dev image
 FROM main AS dev
 
+WORKDIR /app
+
 COPY . .
+
+COPY --from=main /app/node_modules /app/node_modules
 
 CMD ["npm", "run", "dev"]
 
 # Builder image
 FROM main AS builder
 
+WORKDIR /app
+
 COPY . .
 
-CMD ["npm", "run", "build"]
+RUN npm run build;
 
 # Production image
 FROM base AS prod

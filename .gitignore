@@ -18,6 +18,7 @@
 /front/node_modules
 /front/logs
 /front/.env.local
+/front/tsconfig.tsbuildinfo
 ###< next ###
 
 ###> docker ###
