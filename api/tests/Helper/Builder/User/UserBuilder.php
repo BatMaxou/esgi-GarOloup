@@ -12,6 +12,7 @@ class UserBuilder extends AbstractBuilder
     public ?string $username = null;
     public ?string $password = null;
     public ?string $email = null;
+    public ?string $resetToken = null;
 
     protected function doBuild(): object
     {
@@ -20,6 +21,7 @@ class UserBuilder extends AbstractBuilder
             // use setPassword(...)
             ...($this->password ? ['password' => $this->password] : []),
             ...($this->email ? ['email' => $this->email] : []),
+            ...($this->resetToken ? ['resetToken' => $this->resetToken] : []),
         ]);
     }
 
@@ -40,6 +42,13 @@ class UserBuilder extends AbstractBuilder
     public function withEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function withResetToken(string $resetToken): static
+    {
+        $this->resetToken = $resetToken;
 
         return $this;
     }

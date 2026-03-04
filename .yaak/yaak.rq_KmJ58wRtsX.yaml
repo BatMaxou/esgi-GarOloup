@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_KmJ58wRtsX
 createdAt: 2026-02-27T17:48:42.133699235
-updatedAt: 2026-03-02T11:55:06.412443263
+updatedAt: 2026-03-03T18:28:49.153047614
 workspaceId: wk_uXtATNFQmZ
 folderId: null
 authentication: {}
@@ -10,8 +10,8 @@ authenticationType: null
 body:
   text: |-
     {
-        "username": "test@garoloup.com",
-        "password": "azertyuiAZ123#"
+      "username": "test@garoloup.com",
+      "password": "azertyuiAZ123#"
     }
 bodyType: application/json
 description: ''
