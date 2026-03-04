@@ -98,6 +98,7 @@ deploy:
 	@docker compose down $(ARGS)
 	@docker compose pull $(ARGS)
 	@docker compose up -d $(ARGS)
+	@${php} php bin/console doctrine:migrations:migrate --no-interaction
 .PHONY: deploy
 
 # --- DEV UTILS ---

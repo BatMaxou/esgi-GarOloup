@@ -1,7 +1,7 @@
 ARG PHP_VERSION=8.4
 
 # Base image
-FROM php:${PHP_VERSION}-fpm-alpine as base
+FROM php:${PHP_VERSION}-fpm-alpine AS base
 
 ENV MEMORY_LIMIT="256M"
 COPY ./.devops/php/php.ini $PHP_INI_DIR/conf.d/
@@ -18,18 +18,12 @@ WORKDIR /srv
 COPY . .
 
 # Development image
-FROM base as dev
+FROM base AS dev
 
 # Production image
-FROM base as prod
+FROM base AS prod
 
 RUN composer install
 
 RUN php bin/console lexik:jwt:generate-keypair --overwrite --no-interaction
-
-RUN php bin/console doctrine:database:drop --if-exists --force
-RUN php bin/console doctrine:database:create --if-not-exists
-RUN php bin/console doctrine:migrations:migrate --no-interaction
-RUN php bin/console doctrine:schema:update --force
-
 RUN php bin/console cache:clear
