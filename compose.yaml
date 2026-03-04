@@ -14,7 +14,7 @@ services:
       - php
     build:
       context: ./api
-      dockerfile: ./api/.devops/nginx/Dockerfile
+      dockerfile: ./.devops/nginx/Dockerfile
     networks:
       - api
       - front_ssr

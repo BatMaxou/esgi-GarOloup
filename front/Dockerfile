@@ -3,34 +3,33 @@ ARG NODE_VERSION=22
 # Base image
 FROM node:${NODE_VERSION}-alpine AS base
 
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+RUN corepack enable;
+
 # Main image
 FROM base AS main
 
 WORKDIR /app
 
-COPY package.json .
-
-RUN npm i;
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm fetch;
+RUN pnpm install --frozen-lockfile --ignore-scripts=false;
 
 # Dev image
 FROM main AS dev
 
-WORKDIR /app
-
 COPY . .
 
-COPY --from=main /app/node_modules /app/node_modules
-
-CMD ["npm", "run", "dev"]
+CMD ["pnpm", "run", "dev"]
 
 # Builder image
 FROM main AS builder
 
-WORKDIR /app
-
 COPY . .
 
-RUN npm run build;
+RUN pnpm run build;
 
 # Production image
 FROM base AS prod
@@ -42,9 +41,6 @@ RUN adduser --system --uid 1001 nextjs;
 USER nextjs
 
 COPY --from=builder /app/public ./public
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 

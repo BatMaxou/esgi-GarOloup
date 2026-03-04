@@ -1,6 +1,7 @@
 # --- CONTAINER ---
 php = docker compose exec php
 node = docker compose exec node
+run-node = docker compose run --rm node
 
 # --- HANDLE PARAMS ---
 %:
@@ -17,7 +18,13 @@ phpcsfixer = docker run --rm -v `pwd`:/code ghcr.io/php-cs-fixer/php-cs-fixer:${
 PHPSTAN_CONFIGURATION_FILE = ./.devops/lint/phpstan.neon
 
 # --- DEV COMMANDS ---
-install: up vendor node-modules jwt database
+install:
+	@${MAKE} up
+	@${MAKE} vendor
+	@${MAKE} jwt
+	@${MAKE} database
+	@${MAKE} front-vendor
+	@${MAKE} up node -d
 .PHONY: install
 
 fixtures:
@@ -30,14 +37,6 @@ fixtures:
 	fi
 .PHONY: fixtures
 
-vendor:
-	${php} composer install
-.PHONY: vendor
-
-node-modules:
-	${node} npm install
-.PHONY: node_modules
-
 up:
 	@docker compose up -d $(ARGS)
 .PHONY: up
@@ -46,8 +45,12 @@ down:
 	@docker compose down $(ARGS)
 .PHONY: down
 
+vendor:
+	${php} composer install
+.PHONY: vendor
+
 jwt:
-	@${php} php bin/console lexik:jwt:generate-keypair
+	@${php} php bin/console lexik:jwt:generate-keypair --overwrite
 .PHONY: jwt
 
 invalidate-tokens:
@@ -60,6 +63,10 @@ database:
 	@${php} php bin/console doctrine:migrations:migrate --no-interaction
 	@${php} php bin/console doctrine:schema:update --force
 .PHONY: database
+
+front-vendor:
+	${run-node} pnpm install --frozen-lockfile --ignore-scripts=false
+.PHONY: front-vendor
 
 # --- LINTERS ---
 fixcs:
@@ -80,15 +87,15 @@ php-lint:
 .PHONY: php-lint
 
 eslint:
-	@${node} npm run lint
+	@${node} pnpm run lint
 .PHONY: eslint
 
 prettier:
-	@${node} npm run format
+	@${node} pnpm run format
 .PHONY: prettier
 
 prettier-fix:
-	@${node} npm run format:fix
+	@${node} pnpm run format:fix
 .PHONY: prettier-fix
 
 front-lint:
@@ -97,7 +104,7 @@ front-lint:
 .PHONY: front-lint
 
 front-build:
-	@${node} npm run build
+	@${node} pnpm run build
 .PHONY: front-build
 
 # --- TESTS ---
