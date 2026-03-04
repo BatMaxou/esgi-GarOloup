@@ -1,7 +1,7 @@
-import { ApiClient, BasicActionResponse } from "@/lib/api/ApiClient";
-import { ApiClientError } from "@/lib/api/ApiClientError";
-import { apiPaths } from "@/lib/api/paths";
-import type { Game } from "@/utils/types";
+import { ApiClient, BasicActionResponse } from '@/lib/api/ApiClient';
+import { ApiClientError } from '@/lib/api/ApiClientError';
+import { apiPaths } from '@/lib/api/paths';
+import type { Game } from '@/utils/types';
 
 export interface CreateGameResponse {
   joinCode: string;
@@ -26,4 +26,3 @@ export class GameResource {
     return this.apiClient.post<BasicActionResponse>(apiPaths.game.close);
   }
 }
-

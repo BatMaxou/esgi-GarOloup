@@ -1,6 +1,6 @@
-import { cookies } from "next/headers"
+import { cookies } from 'next/headers';
 
-import { CookieRegistryInterface } from "@/lib/cookie/CookieRegistryInterface";
+import { CookieRegistryInterface } from '@/lib/cookie/CookieRegistryInterface';
 
 // @see https://nextjs.org/docs/app/api-reference/functions/cookies
 // if cookies have to be set on server side, consider using Server Function
@@ -11,7 +11,7 @@ export class ServerCookieRegistry implements CookieRegistryInterface {
     const cookie = cookieStore.get(name);
 
     if (cookie === undefined) {
-      return null
+      return null;
     }
 
     return cookie.value;

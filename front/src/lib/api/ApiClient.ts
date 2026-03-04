@@ -1,13 +1,13 @@
-import { ApiClientError } from "@/lib/api/ApiClientError";
-import { handleApiError } from "@/lib/api/handleApiError";
-import { GameResource } from "@/lib/api/resources/GameResource";
-import { CookieRegistryInterface } from "@/lib/cookie/CookieRegistryInterface";
-import type { User } from "@/utils/types";
-import { apiPaths } from "./paths";
-import { MeResource } from "./resources/MeResource";
-import { UserResource } from "./resources/UserResource";
-import { TempUserResource } from "./resources/TempUserResource";
-import { PlayerResource } from "./resources/PlayerResource";
+import { ApiClientError } from '@/lib/api/ApiClientError';
+import { handleApiError } from '@/lib/api/handleApiError';
+import { GameResource } from '@/lib/api/resources/GameResource';
+import { CookieRegistryInterface } from '@/lib/cookie/CookieRegistryInterface';
+import type { User } from '@/utils/types';
+import { apiPaths } from './paths';
+import { MeResource } from './resources/MeResource';
+import { UserResource } from './resources/UserResource';
+import { TempUserResource } from './resources/TempUserResource';
+import { PlayerResource } from './resources/PlayerResource';
 
 export interface LoginResponse {
   token: string;
@@ -32,8 +32,8 @@ export interface CollectionResponse<T> {
   member: T[];
   totalItems: number;
   view: {
-    "@id": string;
-    "@type": string;
+    '@id': string;
+    '@type': string;
     first: string;
     last: string;
     next: string;
@@ -41,8 +41,8 @@ export interface CollectionResponse<T> {
 }
 
 export enum ResponseType {
-  RAW = "raw",
-  JSON = "json",
+  RAW = 'raw',
+  JSON = 'json',
 }
 
 export class ApiClient {
@@ -57,7 +57,7 @@ export class ApiClient {
 
   constructor(
     public baseUrl: string,
-    public cookieRegistry: CookieRegistryInterface,
+    public cookieRegistry: CookieRegistryInterface
   ) {
     this.retrieveTokens();
 
@@ -69,11 +69,14 @@ export class ApiClient {
   }
 
   private async retrieveTokens() {
-    this.token = await this.cookieRegistry.getCookie("token");
-    this.refreshToken = await this.cookieRegistry.getCookie("refresh_token");
+    this.token = await this.cookieRegistry.getCookie('token');
+    this.refreshToken = await this.cookieRegistry.getCookie('refresh_token');
   }
 
-  private async refreshAndRetryOn401<T>(error: ApiClientError, callback: () => Promise<T>) {
+  private async refreshAndRetryOn401<T>(
+    error: ApiClientError,
+    callback: () => Promise<T>
+  ) {
     if (error.code === 401 && error.message.includes('JWT')) {
       const refreshResponse = await this.refresh();
       if (refreshResponse instanceof ApiClientError) {
@@ -90,45 +93,61 @@ export class ApiClient {
     this.token = token;
     this.refreshToken = refreshToken;
 
-    const decodedTokenExp: number = JSON.parse(atob(token.split(".")[1]))?.exp ?? 0;
-    this.cookieRegistry.setCookie("token", token, new Date(decodedTokenExp * 1000));
-    this.cookieRegistry.setCookie("refresh_token", refreshToken, new Date(new Date().getTime() + 2592000));
+    const decodedTokenExp: number =
+      JSON.parse(atob(token.split('.')[1]))?.exp ?? 0;
+    this.cookieRegistry.setCookie(
+      'token',
+      token,
+      new Date(decodedTokenExp * 1000)
+    );
+    this.cookieRegistry.setCookie(
+      'refresh_token',
+      refreshToken,
+      new Date(new Date().getTime() + 2592000)
+    );
   }
 
-  async get<T>(url: string, additionnalHeaders: HeadersInit = {}): Promise<T | ApiClientError> {
+  async get<T>(
+    url: string,
+    additionnalHeaders: HeadersInit = {}
+  ): Promise<T | ApiClientError> {
     return fetch(`${this.baseUrl}${url}`, {
       headers: {
-        Accept: "application/json",
+        Accept: 'application/json',
         ...additionnalHeaders,
         ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
       },
     })
       .then(handleApiError)
       .then((response) => response.json())
-      .catch((error: ApiClientError) => this.refreshAndRetryOn401(error, () => this.get(url, additionnalHeaders)));
+      .catch((error: ApiClientError) =>
+        this.refreshAndRetryOn401(error, () =>
+          this.get(url, additionnalHeaders)
+        )
+      );
   }
 
   async post<T>(
     url: string,
     body: object = {},
     additionnalHeaders: HeadersInit = {},
-    responseType: ResponseType = ResponseType.JSON,
+    responseType: ResponseType = ResponseType.JSON
   ): Promise<T | ApiClientError> {
     const isFormData = body instanceof FormData;
 
     const headers: HeadersInit = isFormData
       ? {
-          Accept: "application/json",
+          Accept: 'application/json',
           ...additionnalHeaders,
         }
       : {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
           ...additionnalHeaders,
         };
 
     return fetch(`${this.baseUrl}${url}`, {
-      method: "POST",
+      method: 'POST',
       headers: {
         ...headers,
         ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
@@ -136,19 +155,29 @@ export class ApiClient {
       body: isFormData ? body : JSON.stringify(body),
     })
       .then(handleApiError)
-      .then((response) => (responseType === ResponseType.RAW ? response : response.json()))
-      .catch((error: ApiClientError) => this.refreshAndRetryOn401(error, () => this.post(url, body, additionnalHeaders, responseType)));
+      .then((response) =>
+        responseType === ResponseType.RAW ? response : response.json()
+      )
+      .catch((error: ApiClientError) =>
+        this.refreshAndRetryOn401(error, () =>
+          this.post(url, body, additionnalHeaders, responseType)
+        )
+      );
   }
 
-  async patch<T>(url: string, body: object, additionnalHeaders: HeadersInit = {}): Promise<T | ApiClientError> {
+  async patch<T>(
+    url: string,
+    body: object,
+    additionnalHeaders: HeadersInit = {}
+  ): Promise<T | ApiClientError> {
     const headers: HeadersInit = {
-      Accept: "application/json",
-      "Content-Type": "application/merge-patch+json",
+      Accept: 'application/json',
+      'Content-Type': 'application/merge-patch+json',
       ...additionnalHeaders,
     };
 
     return fetch(`${this.baseUrl}${url}`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
         ...headers,
         ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
@@ -157,25 +186,33 @@ export class ApiClient {
     })
       .then(handleApiError)
       .then((response) => response.json())
-      .catch((error: ApiClientError) => this.refreshAndRetryOn401(error, () => this.patch(url, body, additionnalHeaders)));
+      .catch((error: ApiClientError) =>
+        this.refreshAndRetryOn401(error, () =>
+          this.patch(url, body, additionnalHeaders)
+        )
+      );
   }
 
-  public async put<T>(url: string, body: object = {}, additionnalHeaders: HeadersInit = {}): Promise<T | ApiClientError> {
+  public async put<T>(
+    url: string,
+    body: object = {},
+    additionnalHeaders: HeadersInit = {}
+  ): Promise<T | ApiClientError> {
     const isFormData = body instanceof FormData;
 
     const headers: HeadersInit = isFormData
       ? {
-          Accept: "application/json",
+          Accept: 'application/json',
           ...additionnalHeaders,
         }
       : {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
           ...additionnalHeaders,
         };
 
     return fetch(`${this.baseUrl}${url}`, {
-      method: "PUT",
+      method: 'PUT',
       headers: {
         ...headers,
         ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
@@ -184,23 +221,35 @@ export class ApiClient {
     })
       .then(handleApiError)
       .then((response) => response.json())
-      .catch((error: ApiClientError) => this.refreshAndRetryOn401(error, () => this.put(url, body, additionnalHeaders)));
+      .catch((error: ApiClientError) =>
+        this.refreshAndRetryOn401(error, () =>
+          this.put(url, body, additionnalHeaders)
+        )
+      );
   }
 
   async delete(url: string): Promise<DeleteResponse | ApiClientError> {
     return fetch(`${this.baseUrl}${url}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
         ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
       },
     })
       .then(handleApiError)
       .then((response) => ({ success: response.status === 204 }))
-      .catch((error: ApiClientError) => this.refreshAndRetryOn401(error, () => this.delete(url)));
+      .catch((error: ApiClientError) =>
+        this.refreshAndRetryOn401(error, () => this.delete(url))
+      );
   }
 
-  async login(email: string, password: string): Promise<LoginResponse | ApiClientError> {
-    return this.post<LoginResponse>(apiPaths.login, { username: email, password })
+  async login(
+    email: string,
+    password: string
+  ): Promise<LoginResponse | ApiClientError> {
+    return this.post<LoginResponse>(apiPaths.login, {
+      username: email,
+      password,
+    })
       .then((response) => {
         if (!(response instanceof ApiClientError) && response.token) {
           this.setTokens(response.token, response.refresh_token);
@@ -222,26 +271,26 @@ export class ApiClient {
         }
 
         return response;
-      })
+      });
   }
 
   async refresh(): Promise<RefreshResponse | ApiClientError> {
-    return this.post<RefreshResponse>(apiPaths.refreshToken, { refresh_token: this.refreshToken })
-      .then((response) => {
-        if (!(response instanceof ApiClientError) && response.token) {
-          this.setTokens(response.token, response.refresh_token);
-        }
+    return this.post<RefreshResponse>(apiPaths.refreshToken, {
+      refresh_token: this.refreshToken,
+    }).then((response) => {
+      if (!(response instanceof ApiClientError) && response.token) {
+        this.setTokens(response.token, response.refresh_token);
+      }
 
-        return response;
-      });
+      return response;
+    });
   }
 
   logout(): void {
     this.token = null;
-    this.cookieRegistry.eraseCookie("token");
+    this.cookieRegistry.eraseCookie('token');
 
     this.refreshToken = null;
-    this.cookieRegistry.eraseCookie("refresh_token");
+    this.cookieRegistry.eraseCookie('refresh_token');
   }
 }
-

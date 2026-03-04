@@ -11,4 +11,3 @@ export enum GameStepEnum {
   NIGHT = 'night',
   FINISHED = 'finished',
 }
-

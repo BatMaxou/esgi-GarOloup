@@ -3,35 +3,36 @@
 
 @layer theme, base, components, utilities;
 
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-  --color-neutral-100: #FFFFFF;
-  --color-neutral-200: #F2F2FF;
-  --color-neutral-300: #E3E4F5;
-  --color-neutral-400: #C8C9E0;
-  --color-neutral-500: #9EA0B8;
+  --color-neutral-100: #ffffff;
+  --color-neutral-200: #f2f2ff;
+  --color-neutral-300: #e3e4f5;
+  --color-neutral-400: #c8c9e0;
+  --color-neutral-500: #9ea0b8;
   --color-neutral-600: #505461;
-  --color-neutral-700: #3E415A;
-  --color-neutral-800: #2B2E44;
-  --color-neutral-900: #1A1C2E;
+  --color-neutral-700: #3e415a;
+  --color-neutral-800: #2b2e44;
+  --color-neutral-900: #1a1c2e;
 
   --color-base-text: var(--color-neutral-800);
   --color-light: var(--color-neutral-200);
 
-  --color-primary: #9F9AD6;
-  --color-primary-2: #4F4C70;
+  /* Example */
+  --color-primary: var(--primary);
+  --color-primary-2: #4f4c70;
 
-  --color-yellow: #ECA72C;
-  --color-yellow-pastel: #F5E6A6;
+  --color-secondary: #eca72c;
+  --color-secondary-pastel: #f5e6a6;
 
-  --color-success: #32BA55;
-  --color-success-pastel: #C9F3D3;
+  --color-success: #32ba55;
+  --color-success-pastel: #c9f3d3;
 
-  --color-error: #D33E36;
-  --color-error-pastel: #FFF3F3;
+  --color-error: #d33e36;
+  --color-error-pastel: #fff3f3;
 
-  --color-shadow: #4F4C7014;
+  --color-shadow: #4f4c7014;
 
   --breakpoint-xs: 24rem; /* 384px*/
   --breakpoint-sm: 40rem; /* 640px */
@@ -55,19 +56,35 @@
   --radius-xs: 8px;
   --radius-xxs: 6px;
 
-  --primary-gradient: 90deg, var(--color-primary-2) 0%, var(--color-primary) 100%;
+  --primary-gradient:
+    90deg, var(--color-primary-2) 0%, var(--color-primary) 100%;
 
-  --background-gradient: 180deg, var(--color-neutral-100) 0%, var(--color-neutral-200) 100%;
+  --background-gradient:
+    180deg, var(--color-neutral-100) 0%, var(--color-neutral-200) 100%;
 
   --shadow: 0px 8px 24px 0px var(--color-shadow);
 
-  --default-transition-duration: .2s;
+  --default-transition-duration: 0.2s;
   --default-transition-timing-function: linear;
 
-  --font-title: "Eczar", sans-serif;
-  --font-special: "Miltonian Tattoo", sans-serif;
-  --font-normal: "Eczar", sans-serif;
+  --font-title: 'Eczar', sans-serif;
+  --font-special: 'Miltonian Tattoo', sans-serif;
+  --font-normal: 'Eczar', sans-serif;
 }
+
+@layer base {
+  :root {
+    /* Example */
+    --primary: #9f9ad6;
+  }
+
+  :root[data-theme='dark'] {
+    /* Example */
+    --primary: #4f4c70;
+  }
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @utility bg-border-* {
   position: relative;
@@ -82,7 +99,8 @@
     inset: 0;
     border-radius: inherit;
     background: var(--color-neutral-100);
-    transition: opacity var(--default-transition-duration) var(--default-transition-timing-function);
+    transition: opacity var(--default-transition-duration)
+      var(--default-transition-timing-function);
     pointer-events: none;
     z-index: -1;
   }

@@ -1,4 +1,4 @@
-import { ApiClientError } from "@/lib/api/ApiClientError";
+import { ApiClientError } from '@/lib/api/ApiClientError';
 
 export const handleApiError = async (response: Response): Promise<Response> => {
   if (!response.ok) {
@@ -8,4 +8,3 @@ export const handleApiError = async (response: Response): Promise<Response> => {
 
   return response;
 };
-

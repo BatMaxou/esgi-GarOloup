@@ -9,23 +9,23 @@ type Props = {
 };
 
 const Providers = ({ children }: Props) => {
-  return <>
-    <ApiClientProvider>
-      <MercureClientProvider>
-        {children}
-      </MercureClientProvider>
-    </ApiClientProvider>
-  </>
+  return (
+    <>
+      <ApiClientProvider>
+        <MercureClientProvider>{children}</MercureClientProvider>
+      </ApiClientProvider>
+    </>
+  );
 };
 
 const RootLayout = ({ children }: Props) => {
-  return <html lang="fr">
-    <body className="bg-linear-(--background-gradient) bg-no-repeat min-h-screen">
-      <Providers>
-        {children}
-      </Providers>
-    </body>
-  </html>
+  return (
+    <html lang="fr">
+      <body className="bg-linear-(--background-gradient) bg-no-repeat min-h-screen scrollbar">
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
 };
 
 export default RootLayout;

@@ -5,8 +5,6 @@ services:
     build:
       context: ./api
       target: dev
-    volumes:
-      - ./api:/srv
     networks:
       - mercure
       - api
@@ -17,8 +15,6 @@ services:
     build:
       context: ./api
       dockerfile: ./api/.devops/nginx/Dockerfile
-    volumes:
-      - ./api/public:/srv/public
     networks:
       - api
       - front_ssr
@@ -43,8 +39,6 @@ services:
     build:
       context: ./front
       target: dev
-    volumes:
-      - ./front:/app
     networks:
       - front_ssr
 
