@@ -1,17 +1,29 @@
-import { ApiClient } from "@/lib/api/ApiClient";
+import { ApiClient, BasicActionResponse } from "@/lib/api/ApiClient";
 import { ApiClientError } from "@/lib/api/ApiClientError";
 import { apiPaths } from "@/lib/api/paths";
-import { Game } from "@/utils/types";
+import type { Game } from "@/utils/types";
+
+export interface CreateGameResponse {
+  joinCode: string;
+}
 
 export class GameResource {
   constructor(private apiClient: ApiClient) {}
 
-  public async get(id: string): Promise<Game | ApiClientError> {
-    return this.apiClient.get<Game>(apiPaths.game.get(id));
+  public async getCurrent(): Promise<Game | ApiClientError> {
+    return this.apiClient.get<Game>(apiPaths.game.getCurrent);
   }
 
-  public async update(id: string, data: Partial<Game>): Promise<Game | ApiClientError> {
-    return this.apiClient.patch<Game>(apiPaths.game.update(id), data);
+  public async create(): Promise<CreateGameResponse | ApiClientError> {
+    return this.apiClient.post<CreateGameResponse>(apiPaths.game.create);
+  }
+
+  public async join(): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.post<BasicActionResponse>(apiPaths.game.join);
+  }
+
+  public async close(): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.post<BasicActionResponse>(apiPaths.game.close);
   }
 }
 

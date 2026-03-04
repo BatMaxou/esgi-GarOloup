@@ -2,9 +2,9 @@ type: http_request
 model: http_request
 id: rq_xbk33k8pEh
 createdAt: 2026-03-03T18:10:40.454193019
-updatedAt: 2026-03-03T18:28:31.537856998
+updatedAt: 2026-03-04T08:53:11.446471667
 workspaceId: wk_uXtATNFQmZ
-folderId: null
+folderId: fl_atLrLXdSCb
 authentication: {}
 authenticationType: null
 body:
@@ -22,6 +22,6 @@ headers:
   id: null
 method: POST
 name: Reset Password
-sortPriority: 11.003
-url: ${[ BASE_URL ]}/api/reset-password
+sortPriority: 1000.0
+url: ${[ BASE_URL ]}/api/reset_password
 urlParameters: []
