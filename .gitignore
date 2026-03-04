@@ -15,6 +15,7 @@
 
 ###> next ###
 /front/.next
+/front/.pnpm-store
 /front/node_modules
 /front/logs
 /front/.env.local

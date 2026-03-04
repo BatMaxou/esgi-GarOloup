@@ -23,7 +23,7 @@ FROM base AS dev
 # Production image
 FROM base AS prod
 
-RUN composer install
+RUN composer install;
 
-RUN php bin/console lexik:jwt:generate-keypair --overwrite --no-interaction
-RUN php bin/console cache:clear
+RUN php bin/console lexik:jwt:generate-keypair --overwrite --no-interaction;
+RUN php bin/console cache:clear;
