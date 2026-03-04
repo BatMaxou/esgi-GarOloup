@@ -1,7 +1,7 @@
 ARG NODE_VERSION=22
 
 # Base image
-FROM node:${NODE_VERSION}-alpine as base
+FROM node:${NODE_VERSION}-alpine AS base
 
 # Main image
 FROM base AS main
