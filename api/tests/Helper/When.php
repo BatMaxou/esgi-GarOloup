@@ -9,6 +9,7 @@ use App\Tests\Helper\Behavior\Player\PlayerBehavior;
 use App\Tests\Helper\Behavior\Security\AuthBehavior;
 use App\Tests\Helper\Behavior\User\MeBehavior;
 use App\Tests\Helper\Behavior\User\TempUserBehavior;
+use App\Tests\Helper\Behavior\User\UserBehavior;
 use App\Tests\Helper\Builder\User\TempUserBuilder;
 use App\Tests\Helper\Builder\User\UserBuilder;
 
@@ -29,6 +30,11 @@ final class When
     public static function me(): MeBehavior
     {
         return new MeBehavior(self::$client);
+    }
+
+    public static function user(): UserBehavior
+    {
+        return new UserBehavior(self::$client);
     }
 
     public static function tempUser(): TempUserBehavior

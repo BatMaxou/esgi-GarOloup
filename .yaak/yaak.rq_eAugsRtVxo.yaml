@@ -1,8 +1,8 @@
 type: http_request
 model: http_request
-id: rq_FnJG5KNzHw
-createdAt: 2026-02-27T17:48:42.133896723
-updatedAt: 2026-03-03T18:02:59.485626755
+id: rq_eAugsRtVxo
+createdAt: 2026-03-03T18:00:34.528306909
+updatedAt: 2026-03-03T18:25:56.559317390
 workspaceId: wk_uXtATNFQmZ
 folderId: null
 authentication: {}
@@ -10,7 +10,9 @@ authenticationType: null
 body:
   text: |-
     {
-      "refresh_token": "${[ REFRESH_TOKEN ]}"
+      "username": "${[ faker.internet.username() ]}",
+      "email": "${[ faker.internet.email() ]}",
+      "password": "azertyuiAZ123#"
     }
 bodyType: application/json
 description: ''
@@ -20,7 +22,7 @@ headers:
   value: application/json
   id: null
 method: POST
-name: Refresh Token
-sortPriority: 12.0
-url: ${[ BASE_URL ]}/api/token/refresh
+name: Register
+sortPriority: 11.001
+url: ${[ BASE_URL ]}/api/register
 urlParameters: []

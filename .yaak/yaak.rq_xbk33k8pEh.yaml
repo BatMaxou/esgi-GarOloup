@@ -1,16 +1,17 @@
 type: http_request
 model: http_request
-id: rq_FnJG5KNzHw
-createdAt: 2026-02-27T17:48:42.133896723
-updatedAt: 2026-03-03T18:02:59.485626755
+id: rq_xbk33k8pEh
+createdAt: 2026-03-03T18:10:40.454193019
+updatedAt: 2026-03-03T18:28:31.537856998
 workspaceId: wk_uXtATNFQmZ
 folderId: null
 authentication: {}
 authenticationType: null
 body:
-  text: |-
+  text: |
     {
-      "refresh_token": "${[ REFRESH_TOKEN ]}"
+      "token": "557e5981-e95c-4e0c-adb1-667d21cd8c00",
+      "password": "azertyuiAZ123##"
     }
 bodyType: application/json
 description: ''
@@ -20,7 +21,7 @@ headers:
   value: application/json
   id: null
 method: POST
-name: Refresh Token
-sortPriority: 12.0
-url: ${[ BASE_URL ]}/api/token/refresh
+name: Reset Password
+sortPriority: 11.003
+url: ${[ BASE_URL ]}/api/reset-password
 urlParameters: []
