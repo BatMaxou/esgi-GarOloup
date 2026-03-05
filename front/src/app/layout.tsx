@@ -3,6 +3,9 @@ import { ReactNode } from 'react';
 import './globals.css';
 import { ApiClientProvider } from '@/contexts/api-context';
 import { MercureClientProvider } from '@/contexts/mercure-context';
+import { AuthProvider } from '@/contexts/auth-context';
+import { PlayerProvider } from '@/contexts/player-context';
+import { GameProvider } from '@/contexts/game-context';
 
 type Props = {
   children: ReactNode;
@@ -12,7 +15,13 @@ const Providers = ({ children }: Props) => {
   return (
     <>
       <ApiClientProvider>
-        <MercureClientProvider>{children}</MercureClientProvider>
+        <MercureClientProvider>
+          <AuthProvider>
+            <PlayerProvider>
+              <GameProvider>{children}</GameProvider>
+            </PlayerProvider>
+          </AuthProvider>
+        </MercureClientProvider>
       </ApiClientProvider>
     </>
   );
