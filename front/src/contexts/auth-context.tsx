@@ -22,6 +22,7 @@ type AuthContextType = {
   setUser: (user: User | null) => void;
   tempUser: TempUser | null;
   setTempUser: (user: User | null) => void;
+  login: (email: string, password: string) => void;
   logout: () => void;
 };
 
@@ -39,8 +40,20 @@ export const AuthProvider = ({ children }: Props) => {
     setTempUser(null);
   }, []);
 
+  const login = useCallback(
+    (email: string, password: string) => {
+      apiClient.login(email, password).then((maybeResponse) => {
+        if (!(maybeResponse instanceof ApiClientError) && maybeResponse.user) {
+          setUser(maybeResponse.user);
+          setTempUser(null);
+        }
+      });
+    },
+    [apiClient]
+  );
+
   useEffect(() => {
-    if (apiClient.token) {
+    if (apiClient.token || apiClient.refreshToken) {
       apiClient.me.get().then((maybeUser) => {
         if (!(maybeUser instanceof ApiClientError)) {
           setUser(maybeUser);
@@ -57,6 +70,7 @@ export const AuthProvider = ({ children }: Props) => {
         setUser,
         tempUser,
         setTempUser,
+        login,
         logout,
       }}
     >
