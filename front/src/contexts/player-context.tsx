@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 import type { Player } from '@/utils/types';
 import { useApiClient } from './api-context';
@@ -22,9 +16,7 @@ type PlayerContextType = {
   setPlayer: (player: Player | null) => void;
 };
 
-export const PlayerContext = createContext<PlayerContextType | undefined>(
-  undefined
-);
+export const PlayerContext = createContext<PlayerContextType | undefined>(undefined);
 
 export const PlayerProvider = ({ children }: Props) => {
   const [player, setPlayer] = useState<Player | null>(null);

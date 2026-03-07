@@ -24,30 +24,15 @@ export interface ResetPasswordResponse {
 export class UserResource {
   constructor(private apiClient: ApiClient) {}
 
-  public async register(
-    data: RegisterData
-  ): Promise<BasicActionResponse | ApiClientError> {
-    return this.apiClient.post<BasicActionResponse>(
-      apiPaths.user.register,
-      data
-    );
+  public async register(data: RegisterData): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.post<BasicActionResponse>(apiPaths.user.register, data);
   }
 
-  public async forgotPassword(
-    email: string
-  ): Promise<ForgotPasswordResponse | ApiClientError> {
-    return this.apiClient.post<ForgotPasswordResponse>(
-      apiPaths.user.forgotPassword,
-      { email }
-    );
+  public async forgotPassword(email: string): Promise<ForgotPasswordResponse | ApiClientError> {
+    return this.apiClient.post<ForgotPasswordResponse>(apiPaths.user.forgotPassword, { email });
   }
 
-  public async resetPassword(
-    data: ResetPasswordData
-  ): Promise<ResetPasswordResponse | ApiClientError> {
-    return this.apiClient.post<ResetPasswordResponse>(
-      apiPaths.user.resetPassword,
-      data
-    );
+  public async resetPassword(data: ResetPasswordData): Promise<ResetPasswordResponse | ApiClientError> {
+    return this.apiClient.post<ResetPasswordResponse>(apiPaths.user.resetPassword, data);
   }
 }

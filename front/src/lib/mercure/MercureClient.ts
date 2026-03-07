@@ -7,10 +7,7 @@ export class MercureClient {
     public apiBaseUrl: string
   ) {}
 
-  public async subscribe<T>(
-    topic: string,
-    onMessage: ({ data }: { data: T }) => void
-  ): Promise<void> {
+  public async subscribe<T>(topic: string, onMessage: ({ data }: { data: T }) => void): Promise<void> {
     const url = new URL(this.baseUrl);
     url.searchParams.append('topic', topic);
 
@@ -20,9 +17,6 @@ export class MercureClient {
   }
 
   public watchGame(id: string, action: (game: Game) => void): void {
-    this.subscribe(
-      `${this.apiBaseUrl}${topics.game(id)}`,
-      ({ data }: { data: string }) => action(JSON.parse(data))
-    );
+    this.subscribe(`${this.apiBaseUrl}${topics.game(id)}`, ({ data }: { data: string }) => action(JSON.parse(data)));
   }
 }

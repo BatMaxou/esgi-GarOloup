@@ -8,10 +8,8 @@ const typographyCva = cva('antialiased', {
       'body-lg': 'text-[1rem] leading-[1.5rem]',
       'body-sm': 'text-[0.75rem] leading-[1.25rem]',
       'body-xs': 'text-[0.625rem] leading-[1rem]',
-      'heading-1':
-        'text-[2rem] leading-[2.5rem] sm:text-[2.5rem] sm:leading-[3rem]',
-      'heading-2':
-        'text-[1.625rem] leading-[2.125rem] sm:text-[2rem] sm:leading-[2.5rem]',
+      'heading-1': 'text-[2rem] leading-[2.5rem] sm:text-[2.5rem] sm:leading-[3rem]',
+      'heading-2': 'text-[1.625rem] leading-[2.125rem] sm:text-[2rem] sm:leading-[2.5rem]',
       'heading-3': 'text-[1.25rem] leading-[1.875rem] sm:text-[1.375rem]',
       subtitle: 'text-[1.25rem] leading-[1.75rem]',
       input: 'text-[0.75rem] leading-[1.25rem]',

@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, ReactNode, useContext } from 'react';
+import { createContext, ReactNode, useContext, useEffect } from 'react';
 
 import { ApiClient } from '@/lib/api/ApiClient';
 import { apiBaseUrl } from '@/utils/tools';
@@ -14,20 +14,16 @@ type ApiClientContextType = {
   apiClient: ApiClient;
 };
 
-export const ApiClientContext = createContext<ApiClientContextType | undefined>(
-  undefined
-);
+export const ApiClientContext = createContext<ApiClientContextType | undefined>(undefined);
+
+const apiClient = new ApiClient(apiBaseUrl, new ClientCookieRegistry());
 
 export const ApiClientProvider = ({ children }: Props) => {
-  return (
-    <ApiClientContext.Provider
-      value={{
-        apiClient: new ApiClient(apiBaseUrl, new ClientCookieRegistry()),
-      }}
-    >
-      {children}
-    </ApiClientContext.Provider>
-  );
+  useEffect(() => {
+    apiClient.retrieveTokens();
+  }, []);
+
+  return <ApiClientContext.Provider value={{ apiClient }}>{children}</ApiClientContext.Provider>;
 };
 
 export const useApiClient = () => {

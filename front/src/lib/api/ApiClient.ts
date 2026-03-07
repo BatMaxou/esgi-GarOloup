@@ -59,8 +59,6 @@ export class ApiClient {
     public baseUrl: string,
     public cookieRegistry: CookieRegistryInterface
   ) {
-    this.retrieveTokens();
-
     this.me = new MeResource(this);
     this.user = new UserResource(this);
     this.tempUser = new TempUserResource(this);
@@ -68,16 +66,8 @@ export class ApiClient {
     this.game = new GameResource(this);
   }
 
-  private async retrieveTokens() {
-    this.token = await this.cookieRegistry.getCookie('token');
-    this.refreshToken = await this.cookieRegistry.getCookie('refresh_token');
-  }
-
-  private async refreshAndRetryOn401<T>(
-    error: ApiClientError,
-    callback: () => Promise<T>
-  ) {
-    if (error.code === 401 && error.message.includes('JWT')) {
+  private async refreshAndRetryOn401<T>(error: ApiClientError, callback: () => Promise<T>) {
+    if (error.code === 401 && error.message.includes('JWT Token')) {
       const refreshResponse = await this.refresh();
       if (refreshResponse instanceof ApiClientError) {
         return error;
@@ -89,27 +79,26 @@ export class ApiClient {
     return error;
   }
 
+  public async retrieveTokens() {
+    this.token = await this.cookieRegistry.getCookie('token');
+    this.refreshToken = await this.cookieRegistry.getCookie('refresh_token');
+
+    return this;
+  }
+
   public async setTokens(token: string, refreshToken: string) {
     this.token = token;
     this.refreshToken = refreshToken;
 
-    const decodedTokenExp: number =
-      JSON.parse(atob(token.split('.')[1]))?.exp ?? 0;
-    this.cookieRegistry.setCookie(
-      'token',
-      token,
-      new Date(decodedTokenExp * 1000)
-    );
-    this.cookieRegistry.setCookie(
-      'refresh_token',
-      refreshToken,
-      new Date(new Date().getTime() + 2592000)
-    );
+    const decodedTokenExp: number = JSON.parse(atob(token.split('.')[1]))?.exp ?? 0;
+    this.cookieRegistry.setCookie('token', token, new Date(decodedTokenExp * 1000));
+    this.cookieRegistry.setCookie('refresh_token', refreshToken, new Date(new Date().getTime() + 2592000));
   }
 
   async get<T>(
     url: string,
-    additionnalHeaders: HeadersInit = {}
+    additionnalHeaders: HeadersInit = {},
+    autoRefresh: boolean = true
   ): Promise<T | ApiClientError> {
     return fetch(`${this.baseUrl}${url}`, {
       headers: {
@@ -120,18 +109,21 @@ export class ApiClient {
     })
       .then(handleApiError)
       .then((response) => response.json())
-      .catch((error: ApiClientError) =>
-        this.refreshAndRetryOn401(error, () =>
-          this.get(url, additionnalHeaders)
-        )
-      );
+      .catch((error: ApiClientError) => {
+        if (autoRefresh) {
+          return this.refreshAndRetryOn401(error, () => this.get(url, additionnalHeaders));
+        }
+
+        return error;
+      });
   }
 
   async post<T>(
     url: string,
     body: object = {},
     additionnalHeaders: HeadersInit = {},
-    responseType: ResponseType = ResponseType.JSON
+    responseType: ResponseType = ResponseType.JSON,
+    autoRefresh: boolean = true
   ): Promise<T | ApiClientError> {
     const isFormData = body instanceof FormData;
 
@@ -155,20 +147,21 @@ export class ApiClient {
       body: isFormData ? body : JSON.stringify(body),
     })
       .then(handleApiError)
-      .then((response) =>
-        responseType === ResponseType.RAW ? response : response.json()
-      )
-      .catch((error: ApiClientError) =>
-        this.refreshAndRetryOn401(error, () =>
-          this.post(url, body, additionnalHeaders, responseType)
-        )
-      );
+      .then((response) => (responseType === ResponseType.RAW ? response : response.json()))
+      .catch((error: ApiClientError) => {
+        if (autoRefresh) {
+          return this.refreshAndRetryOn401(error, () => this.post(url, body, additionnalHeaders, responseType));
+        }
+
+        return error;
+      });
   }
 
   async patch<T>(
     url: string,
     body: object,
-    additionnalHeaders: HeadersInit = {}
+    additionnalHeaders: HeadersInit = {},
+    autoRefresh: boolean = true
   ): Promise<T | ApiClientError> {
     const headers: HeadersInit = {
       Accept: 'application/json',
@@ -186,17 +179,20 @@ export class ApiClient {
     })
       .then(handleApiError)
       .then((response) => response.json())
-      .catch((error: ApiClientError) =>
-        this.refreshAndRetryOn401(error, () =>
-          this.patch(url, body, additionnalHeaders)
-        )
-      );
+      .catch((error: ApiClientError) => {
+        if (autoRefresh) {
+          return this.refreshAndRetryOn401(error, () => this.patch(url, body, additionnalHeaders));
+        }
+
+        return error;
+      });
   }
 
   public async put<T>(
     url: string,
     body: object = {},
-    additionnalHeaders: HeadersInit = {}
+    additionnalHeaders: HeadersInit = {},
+    autoRefresh: boolean = true
   ): Promise<T | ApiClientError> {
     const isFormData = body instanceof FormData;
 
@@ -221,14 +217,16 @@ export class ApiClient {
     })
       .then(handleApiError)
       .then((response) => response.json())
-      .catch((error: ApiClientError) =>
-        this.refreshAndRetryOn401(error, () =>
-          this.put(url, body, additionnalHeaders)
-        )
-      );
+      .catch((error: ApiClientError) => {
+        if (autoRefresh) {
+          return this.refreshAndRetryOn401(error, () => this.put(url, body, additionnalHeaders));
+        }
+
+        return error;
+      });
   }
 
-  async delete(url: string): Promise<DeleteResponse | ApiClientError> {
+  async delete(url: string, autoRefresh: boolean = true): Promise<DeleteResponse | ApiClientError> {
     return fetch(`${this.baseUrl}${url}`, {
       method: 'DELETE',
       headers: {
@@ -237,15 +235,16 @@ export class ApiClient {
     })
       .then(handleApiError)
       .then((response) => ({ success: response.status === 204 }))
-      .catch((error: ApiClientError) =>
-        this.refreshAndRetryOn401(error, () => this.delete(url))
-      );
+      .catch((error: ApiClientError) => {
+        if (autoRefresh) {
+          return this.refreshAndRetryOn401(error, () => this.delete(url));
+        }
+
+        return error;
+      });
   }
 
-  async login(
-    email: string,
-    password: string
-  ): Promise<LoginResponse | ApiClientError> {
+  async login(email: string, password: string): Promise<LoginResponse | ApiClientError> {
     return this.post<LoginResponse>(apiPaths.login, {
       username: email,
       password,
@@ -275,9 +274,14 @@ export class ApiClient {
   }
 
   async refresh(): Promise<RefreshResponse | ApiClientError> {
-    return this.post<RefreshResponse>(apiPaths.refreshToken, {
-      refresh_token: this.refreshToken,
-    }).then((response) => {
+    return this.post<RefreshResponse>(
+      apiPaths.refreshToken,
+      { refresh_token: this.refreshToken },
+      {},
+      ResponseType.JSON,
+      false
+    ).then((response) => {
+      console.log(this.refreshToken);
       if (!(response instanceof ApiClientError) && response.token) {
         this.setTokens(response.token, response.refresh_token);
       }

@@ -29,6 +29,10 @@ use Doctrine\ORM\Mapping as ORM;
     ],
     operations: [
         new Get(
+            // set security here, currently used to map mercure topic to /games/:id
+            name: 'api_get_game'
+        ),
+        new Get(
             name: 'api_current_game',
             uriTemplate: '/game',
             provider: CurrentGameProvider::class,
