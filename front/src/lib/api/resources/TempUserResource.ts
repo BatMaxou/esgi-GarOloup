@@ -10,17 +10,13 @@ export interface GetTempUserResponse {
 export class TempUserResource {
   constructor(private apiClient: ApiClient) {}
 
-  public async get(
-    username: string
-  ): Promise<GetTempUserResponse | ApiClientError> {
-    return this.apiClient
-      .post<GetTempUserResponse>(apiPaths.tempUser.get(username))
-      .then((response) => {
-        if (!(response instanceof ApiClientError) && response.token) {
-          this.apiClient.setTokens(response.token, response.refreshToken);
-        }
+  public async get(username: string): Promise<GetTempUserResponse | ApiClientError> {
+    return this.apiClient.post<GetTempUserResponse>(apiPaths.tempUser.get(username)).then((response) => {
+      if (!(response instanceof ApiClientError) && response.token) {
+        this.apiClient.setTokens(response.token, response.refreshToken);
+      }
 
-        return response;
-      });
+      return response;
+    });
   }
 }

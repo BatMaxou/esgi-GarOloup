@@ -1,3 +1,7 @@
+# --- ACCESS ENV VARS (used for exec-db) ---
+-include ./api/.env
+-include ./api/.env.local
+
 # --- CONTAINER ---
 php = docker compose exec php
 node = docker compose exec node

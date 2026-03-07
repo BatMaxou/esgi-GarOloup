@@ -20,16 +20,10 @@ const Gradients = () => {
       <div className="flex flex-col flex-wrap gap-8">
         <ul className="bg-neutral-100 rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
           <li>
-            <Gradient
-              gradient="bg-linear-(--background-gradient)"
-              name="Background Gradient"
-            />
+            <Gradient gradient="bg-linear-(--background-gradient)" name="Background Gradient" />
           </li>
           <li>
-            <Gradient
-              gradient="bg-linear-(--primary-gradient)"
-              name="Primary Gradient"
-            />
+            <Gradient gradient="bg-linear-(--primary-gradient)" name="Primary Gradient" />
           </li>
         </ul>
       </div>

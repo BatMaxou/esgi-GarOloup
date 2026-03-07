@@ -13,15 +13,11 @@ type MercureClientContextType = {
   mercureClient: MercureClient;
 };
 
-export const MercureClientContext = createContext<
-  MercureClientContextType | undefined
->(undefined);
+export const MercureClientContext = createContext<MercureClientContextType | undefined>(undefined);
 
 export const MercureClientProvider = ({ children }: Props) => {
   return (
-    <MercureClientContext.Provider
-      value={{ mercureClient: new MercureClient(mercureUrl, apiBaseUrl) }}
-    >
+    <MercureClientContext.Provider value={{ mercureClient: new MercureClient(mercureUrl, apiBaseUrl) }}>
       {children}
     </MercureClientContext.Provider>
   );
@@ -30,9 +26,7 @@ export const MercureClientProvider = ({ children }: Props) => {
 export const useMercureClient = () => {
   const context = useContext(MercureClientContext);
   if (!context) {
-    throw new Error(
-      'useMercureClient must be used within an MercureClientProvider'
-    );
+    throw new Error('useMercureClient must be used within an MercureClientProvider');
   }
 
   return context;

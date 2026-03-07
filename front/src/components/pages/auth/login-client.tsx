@@ -22,21 +22,9 @@ const LoginClient = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        className="border border-primary"
-        type="email"
-        name="email"
-        onChange={handleChange}
-      />
-      <input
-        className="border border-primary"
-        type="password"
-        name="password"
-        onChange={handleChange}
-      />
-      <button className="bg-primary text-white px-4 py-2 rounded-full">
-        test
-      </button>
+      <input className="border border-primary" type="email" name="email" onChange={handleChange} />
+      <input className="border border-primary" type="password" name="password" onChange={handleChange} />
+      <button className="bg-primary text-white px-4 py-2 rounded-full">test</button>
     </form>
   );
 };

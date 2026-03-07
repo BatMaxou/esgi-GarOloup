@@ -56,11 +56,9 @@
   --radius-xs: 8px;
   --radius-xxs: 6px;
 
-  --primary-gradient:
-    90deg, var(--color-primary-2) 0%, var(--color-primary) 100%;
+  --primary-gradient: 90deg, var(--color-primary-2) 0%, var(--color-primary) 100%;
 
-  --background-gradient:
-    180deg, var(--color-neutral-100) 0%, var(--color-neutral-200) 100%;
+  --background-gradient: 180deg, var(--color-neutral-100) 0%, var(--color-neutral-200) 100%;
 
   --shadow: 0px 8px 24px 0px var(--color-shadow);
 
@@ -99,8 +97,7 @@
     inset: 0;
     border-radius: inherit;
     background: var(--color-neutral-100);
-    transition: opacity var(--default-transition-duration)
-      var(--default-transition-timing-function);
+    transition: opacity var(--default-transition-duration) var(--default-transition-timing-function);
     pointer-events: none;
     z-index: -1;
   }

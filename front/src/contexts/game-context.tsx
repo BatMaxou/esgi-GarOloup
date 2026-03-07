@@ -1,37 +1,43 @@
 'use client';
 
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, ReactNode, useCallback, useContext, useEffect, useRef, useState } from 'react';
 
 import type { Game } from '@/utils/types';
-import { useApiClient } from './api-context';
-import { useAuth } from './auth-context';
+import { useApiClient } from '@/contexts/api-context';
+import { useAuth } from '@/contexts/auth-context';
 import { ApiClientError } from '@/lib/api/ApiClientError';
+import { useMercureClient } from './mercure-context';
 
 type Props = {
   children: ReactNode;
+  initialGame?: Game | null;
 };
 
 type GameContextType = {
   game: Game | null;
   setGame: (game: Game | null) => void;
+  leaveGame: () => void;
 };
 
-export const GameContext = createContext<GameContextType | undefined>(
-  undefined
-);
+export const GameContext = createContext<GameContextType | undefined>(undefined);
 
-export const GameProvider = ({ children }: Props) => {
-  const [game, setGame] = useState<Game | null>(null);
+export const GameProvider = ({ children, initialGame = null }: Props) => {
+  const [game, setGame] = useState<Game | null>(initialGame);
+  const isWatching = useRef<boolean>(false);
   const { apiClient } = useApiClient();
+  const { mercureClient } = useMercureClient();
   const { user } = useAuth();
 
+  const leaveGame = useCallback(() => {
+    isWatching.current = false;
+    setGame(null);
+  }, []);
+
   useEffect(() => {
+    if (game) {
+      return;
+    }
+
     if (user) {
       apiClient.game.getCurrent().then((maybeGame) => {
         if (!(maybeGame instanceof ApiClientError)) {
@@ -39,25 +45,22 @@ export const GameProvider = ({ children }: Props) => {
         }
       });
     }
-  }, [apiClient, user]);
+  }, [apiClient, user, game]);
 
-  return (
-    <GameContext.Provider
-      value={{
-        game,
-        setGame,
-      }}
-    >
-      {children}
-    </GameContext.Provider>
-  );
+  useEffect(() => {
+    if (game && mercureClient && !isWatching.current) {
+      isWatching.current = true;
+      mercureClient.watchGame(game.id, (game: Game) => {
+        setGame(game);
+      });
+    }
+  }, [mercureClient, game, isWatching]);
+
+  return <GameContext.Provider value={{ game, setGame, leaveGame }}>{children}</GameContext.Provider>;
 };
 
 export const useGame = () => {
   const context = useContext(GameContext);
-  if (!context) {
-    throw new Error('useGame must be used within an gameProvider');
-  }
-
+  if (!context) throw new Error('useGame must be used within a GameProvider');
   return context;
 };

@@ -7,9 +7,7 @@ export class ClientCookieRegistry implements CookieRegistryInterface {
     }
 
     const cookies = document.cookie.split('; ');
-    const value = cookies
-      .find((cookie) => cookie.startsWith(`${name}=`))
-      ?.split('=')[1];
+    const value = cookies.find((cookie) => cookie.startsWith(`${name}=`))?.split('=')[1];
 
     if (value === undefined) {
       return null;
