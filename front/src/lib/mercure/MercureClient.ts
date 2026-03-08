@@ -1,5 +1,5 @@
 import { topics } from './topics';
-import { Game } from '@/utils/types';
+import { Game, Player } from '@/utils/types';
 
 export class MercureClient {
   constructor(
@@ -18,5 +18,9 @@ export class MercureClient {
 
   public watchGame(id: string, action: (game: Game) => void): void {
     this.subscribe(`${this.apiBaseUrl}${topics.game(id)}`, ({ data }: { data: string }) => action(JSON.parse(data)));
+  }
+
+  public watchPlayer(id: string, action: (player: Player) => void): void {
+    this.subscribe(`${this.apiBaseUrl}${topics.player(id)}`, ({ data }: { data: string }) => action(JSON.parse(data)));
   }
 }

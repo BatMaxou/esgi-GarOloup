@@ -22,9 +22,18 @@ const GameLayout = async ({ children }: Props) => {
     return notFound();
   }
 
+  const maybePlayer = await apiClient.player.getCurrent();
+  if (maybePlayer instanceof ApiClientError) {
+    return notFound();
+  }
+
   return (
-    <PlayerProvider>
-      <GameProvider initialGame={maybeGame}>{children}</GameProvider>
+    <PlayerProvider initialPlayer={maybePlayer}>
+      <GameProvider initialGame={maybeGame}>
+        <div className="bg-linear-(--background-gradient) bg-no-repeat text-foreground min-h-screen transition-colors">
+          {children}
+        </div>
+      </GameProvider>
     </PlayerProvider>
   );
 };

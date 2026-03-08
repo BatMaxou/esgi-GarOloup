@@ -53,10 +53,16 @@ class GameSpec
             return false;
         }
 
-        if (GameStepEnum::NEW !== $game->getStep()) {
+        return GameStepEnum::NEW === $game->getStep();
+    }
+
+    public function canReOpenGameInvitation(AbstractUser $user, Game $game): bool
+    {
+        $host = $game->getHost();
+        if ($user !== $host->getUser() && $user !== $host->getTempUser()) {
             return false;
         }
 
-        return true;
+        return GameStepEnum::CONFIGURATION === $game->getStep();
     }
 }

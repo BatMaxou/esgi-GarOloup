@@ -26,4 +26,5 @@ export type Player = {
   user?: User;
   dead?: boolean;
   game?: Game;
+  host?: boolean;
 };

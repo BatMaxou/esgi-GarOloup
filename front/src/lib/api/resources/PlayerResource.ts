@@ -7,6 +7,6 @@ export class PlayerResource {
   constructor(private apiClient: ApiClient) {}
 
   public async getCurrent(): Promise<Player | ApiClientError> {
-    return this.apiClient.get<Player>(apiPaths.game.getCurrent);
+    return this.apiClient.get<Player>(apiPaths.player.getCurrent);
   }
 }

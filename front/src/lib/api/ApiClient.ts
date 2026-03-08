@@ -159,7 +159,7 @@ export class ApiClient {
 
   async patch<T>(
     url: string,
-    body: object,
+    body: object = {},
     additionnalHeaders: HeadersInit = {},
     autoRefresh: boolean = true
   ): Promise<T | ApiClientError> {

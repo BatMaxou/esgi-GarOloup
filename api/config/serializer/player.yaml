@@ -19,3 +19,6 @@ App\Entity\Player:
         game:
             groups:
                 - me:read
+        host:
+            groups:
+                - me:read

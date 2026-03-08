@@ -12,6 +12,7 @@ use App\Api\Provider\Game\CurrentGameProvider;
 use App\Domain\Command\Game\Initialisation\CloseGameInvitationCommand;
 use App\Domain\Command\Game\Initialisation\CreateGameCommand;
 use App\Domain\Command\Game\Initialisation\JoinGameCommand;
+use App\Domain\Command\Game\Initialisation\ReOpenGameInvitationCommand;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Enum\GameStepEnum;
@@ -58,6 +59,13 @@ use Doctrine\ORM\Mapping as ORM;
             uriTemplate: '/game/invitation/close',
             messenger: 'input',
             input: CloseGameInvitationCommand::class,
+            output: BasicActionOutput::class,
+        ),
+        new Patch(
+            name: 'api_game_reopen_invitation',
+            uriTemplate: '/game/invitation/open',
+            messenger: 'input',
+            input: ReOpenGameInvitationCommand::class,
             output: BasicActionOutput::class,
         ),
     ],

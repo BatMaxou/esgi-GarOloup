@@ -35,4 +35,12 @@ class GameBehavior extends AbstractBehavior
             'json' => [],
         ]));
     }
+
+    public function reOpenInvitation(): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/invitation/open', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [],
+        ]));
+    }
 }

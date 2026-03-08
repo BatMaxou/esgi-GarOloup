@@ -14,7 +14,16 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ApiResource(
+    mercure: [
+        'topics' => [
+            '@=iri(object)',
+        ],
+    ],
     operations: [
+        new Get(
+            // set security here, currently used to map mercure topic to /players/:id
+            name: 'api_get_player'
+        ),
         new Get(
             name: 'api_current_player',
             uriTemplate: '/game/player',
@@ -101,5 +110,10 @@ class Player
         $this->game = $game;
 
         return $this;
+    }
+
+    public function isHost(): bool
+    {
+        return $this->game && $this->game->getHost() === $this;
     }
 }
