@@ -7,7 +7,7 @@ const Typographies = () => {
         Typographies
       </Typography>
       <div className="flex flex-wrap gap-8">
-        <ul className="bg-neutral-100 rounded-sm p-8 flex flex-col flex-wrap gap-2 shadow-(--shadow)">
+        <ul className="bg-background rounded-sm p-8 flex flex-col flex-wrap gap-2 shadow-(--shadow)">
           <li>
             <Typography variant="heading-1" special bold>
               GarOloup
@@ -34,7 +34,7 @@ const Typographies = () => {
             </Typography>
           </li>
         </ul>
-        <ul className="bg-neutral-100 rounded-sm p-8 flex flex-col flex-wrap gap-2 shadow-(--shadow)">
+        <ul className="bg-background rounded-sm p-8 flex flex-col flex-wrap gap-2 shadow-(--shadow)">
           <li>
             <Typography variant="body">Text Body</Typography>
           </li>
@@ -79,7 +79,7 @@ const Typographies = () => {
             <Typography underline>Text Body Underline</Typography>
           </li>
         </ul>
-        <ul className="bg-neutral-100 rounded-sm p-8 flex flex-col flex-wrap gap-2 shadow-(--shadow)">
+        <ul className="bg-background rounded-sm p-8 flex flex-col flex-wrap gap-2 shadow-(--shadow)">
           <li>
             <Typography bold textColor="controlled">
               Text color controlled

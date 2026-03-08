@@ -8,7 +8,7 @@ type Props = {
 
 const WebsiteLayout = ({ children }: Props) => {
   return (
-    <div className="bg-linear-(--background-gradient) bg-no-repeat text-foreground grid grid-rows-[auto_1fr_auto] min-h-screen scrollbar">
+    <div className="bg-linear-(--background-gradient) bg-no-repeat text-foreground grid grid-rows-[auto_1fr_auto] min-h-screen scrollbar transition-colors">
       <Navbar />
       {children}
       <Footer />

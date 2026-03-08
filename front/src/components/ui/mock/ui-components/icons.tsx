@@ -9,7 +9,7 @@ const Icons = () => {
         Icons
       </Typography>
       <div className="flex flex-wrap gap-8">
-        <ul className="bg-neutral-100 rounded-sm p-8 flex flex-wrap gap-8 shadow-(--shadow)">
+        <ul className="bg-background rounded-sm p-8 flex flex-wrap gap-8 shadow-(--shadow)">
           {Object.keys(icons).map((iconName) => (
             <li key={iconName}>
               <Icon name={iconName} title={iconName} className="w-16 h-16" />
