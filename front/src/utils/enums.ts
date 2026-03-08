@@ -11,3 +11,8 @@ export enum GameStepEnum {
   NIGHT = 'night',
   FINISHED = 'finished',
 }
+
+export enum ThemeEnum {
+  LIGHT = 'light',
+  DARK = 'dark',
+}

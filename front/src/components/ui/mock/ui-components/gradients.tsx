@@ -5,7 +5,7 @@ import Typography from '@/components/ui/atoms/typography';
 const Gradient = ({ gradient, name }: { gradient: string; name: string }) => {
   return (
     <div className="flex flex-col gap-2 items-center">
-      <div className={cn('w-45 h-15 rounded bg-no-repeat', gradient)} />
+      <div className={cn('w-45 h-15 rounded bg-no-repeat shadow-(--shadow)', gradient)} />
       <Typography center>{name}</Typography>
     </div>
   );
@@ -18,7 +18,7 @@ const Gradients = () => {
         Gradients
       </Typography>
       <div className="flex flex-col flex-wrap gap-8">
-        <ul className="bg-neutral-100 rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
+        <ul className="bg-background rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
           <li>
             <Gradient gradient="bg-linear-(--background-gradient)" name="Background Gradient" />
           </li>

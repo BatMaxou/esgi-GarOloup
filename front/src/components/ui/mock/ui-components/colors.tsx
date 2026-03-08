@@ -5,7 +5,7 @@ import Typography from '@/components/ui/atoms/typography';
 const Color = ({ color, name }: { color: string; name: string }) => {
   return (
     <div className="flex flex-col gap-2 items-center">
-      <div className={cn('w-15 h-15 rounded', color)} />
+      <div className={cn('w-15 h-15 rounded shadow-(--shadow)', color)} />
       <Typography center>{name}</Typography>
     </div>
   );
@@ -18,7 +18,7 @@ const Colors = () => {
         Colors
       </Typography>
       <div className="flex flex-col flex-wrap gap-8">
-        <ul className="bg-neutral-100 rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
+        <ul className="bg-background rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
           <li>
             <Color color="bg-primary" name="Primary" />
           </li>
@@ -26,7 +26,7 @@ const Colors = () => {
             <Color color="bg-primary-2" name="Primary 2" />
           </li>
         </ul>
-        <ul className="bg-neutral-100 rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
+        <ul className="bg-background rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
           <li>
             <Color color="bg-primary/20" name="20%" />
           </li>
@@ -43,7 +43,10 @@ const Colors = () => {
             <Color color="bg-primary" name="100%" />
           </li>
         </ul>
-        <ul className="bg-neutral-100 rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
+        <ul className="bg-background rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
+          <li>
+            <Color color="bg-neutral-100" name="Neutral 100" />
+          </li>
           <li>
             <Color color="bg-neutral-200" name="Neutral 200" />
           </li>
@@ -69,7 +72,7 @@ const Colors = () => {
             <Color color="bg-neutral-900" name="Neutral 900" />
           </li>
         </ul>
-        <ul className="bg-neutral-100 rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
+        <ul className="bg-background rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
           <li>
             <Color color="bg-secondary" name="Secondary" />
           </li>
@@ -77,7 +80,7 @@ const Colors = () => {
             <Color color="bg-secondary-pastel" name="Secondary Pastel" />
           </li>
         </ul>
-        <ul className="bg-neutral-100 rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
+        <ul className="bg-background rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
           <li>
             <Color color="bg-success" name="Success" />
           </li>
