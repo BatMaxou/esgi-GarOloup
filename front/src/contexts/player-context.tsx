@@ -1,29 +1,43 @@
 'use client';
 
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { createContext, ReactNode, useCallback, useContext, useEffect, useRef, useState } from 'react';
 
 import type { Player } from '@/utils/types';
-import { useApiClient } from './api-context';
-import { useAuth } from './auth-context';
+import { useApiClient } from '@/contexts/api-context';
+import { useAuth } from '@/contexts/auth-context';
 import { ApiClientError } from '@/lib/api/ApiClientError';
+import { useMercureClient } from './mercure-context';
 
 type Props = {
   children: ReactNode;
+  initialPlayer?: Player | null;
 };
 
 type PlayerContextType = {
   player: Player | null;
   setPlayer: (player: Player | null) => void;
+  desyncPlayer: () => void;
 };
 
 export const PlayerContext = createContext<PlayerContextType | undefined>(undefined);
 
-export const PlayerProvider = ({ children }: Props) => {
-  const [player, setPlayer] = useState<Player | null>(null);
+export const PlayerProvider = ({ children, initialPlayer = null }: Props) => {
+  const [player, setPlayer] = useState<Player | null>(initialPlayer);
+  const isWatching = useRef<boolean>(false);
   const { apiClient } = useApiClient();
+  const { mercureClient } = useMercureClient();
   const { user } = useAuth();
 
+  const desyncPlayer = useCallback(() => {
+    isWatching.current = false;
+    setPlayer(null);
+  }, []);
+
   useEffect(() => {
+    if (player) {
+      return;
+    }
+
     if (user) {
       apiClient.player.getCurrent().then((maybePlayer) => {
         if (!(maybePlayer instanceof ApiClientError)) {
@@ -31,24 +45,24 @@ export const PlayerProvider = ({ children }: Props) => {
         }
       });
     }
-  }, [apiClient, user]);
+  }, [apiClient, user, player]);
 
-  return (
-    <PlayerContext.Provider
-      value={{
-        player,
-        setPlayer,
-      }}
-    >
-      {children}
-    </PlayerContext.Provider>
-  );
+  useEffect(() => {
+    if (player && mercureClient && !isWatching.current) {
+      isWatching.current = true;
+      mercureClient.watchPlayer(player.id, (player: Player) => {
+        setPlayer(player);
+      });
+    }
+  }, [mercureClient, player, isWatching]);
+
+  return <PlayerContext.Provider value={{ player, setPlayer, desyncPlayer }}>{children}</PlayerContext.Provider>;
 };
 
 export const usePlayer = () => {
   const context = useContext(PlayerContext);
   if (!context) {
-    throw new Error('usePlayer must be used within an playerProvider');
+    throw new Error('usePlayer must be used within a PlayerProvider');
   }
 
   return context;

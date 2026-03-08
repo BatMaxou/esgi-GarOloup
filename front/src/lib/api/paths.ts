@@ -3,7 +3,8 @@ export const apiPaths = {
     getCurrent: '/game',
     create: '/games',
     join: '/game/join',
-    close: '/game/invtation/close',
+    close: '/game/invitation/close',
+    open: '/game/invitation/open',
   },
   player: {
     getCurrent: '/game/player',

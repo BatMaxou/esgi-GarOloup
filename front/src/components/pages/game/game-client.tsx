@@ -1,17 +1,27 @@
 'use client';
 
 import Typography from '@/components/ui/atoms/typography';
+import Button from '@/components/ui/molecules/button';
+import { useApiClient } from '@/contexts/api-context';
 import { useGame } from '@/contexts/game-context';
-import { useEffect } from 'react';
+import { usePlayer } from '@/contexts/player-context';
+import { GameStepEnum } from '@/utils/enums';
+import { useCallback } from 'react';
 
 const GameClient = () => {
   const { game } = useGame();
+  const { player } = usePlayer();
+  const { apiClient } = useApiClient();
 
-  useEffect(() => {
-    console.log('game', game);
-  }, [game]);
+  const closeInvitation = useCallback(() => {
+    apiClient.game.close();
+  }, [apiClient]);
 
-  if (!game) {
+  const openInvitation = useCallback(() => {
+    apiClient.game.open();
+  }, [apiClient]);
+
+  if (!game || !player) {
     return <>Loading...</>;
   }
 
@@ -22,6 +32,13 @@ const GameClient = () => {
       </Typography>
 
       <Typography>Step: {game.step}</Typography>
+
+      {player.host && (
+        <div>
+          {game.step === GameStepEnum.NEW && <Button onClick={closeInvitation} label="Close invitation" />}
+          {game.step === GameStepEnum.CONFIGURATION && <Button onClick={openInvitation} label="Open invitation" />}
+        </div>
+      )}
     </main>
   );
 };

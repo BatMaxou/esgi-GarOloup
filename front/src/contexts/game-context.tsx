@@ -7,6 +7,7 @@ import { useApiClient } from '@/contexts/api-context';
 import { useAuth } from '@/contexts/auth-context';
 import { ApiClientError } from '@/lib/api/ApiClientError';
 import { useMercureClient } from './mercure-context';
+import { usePlayer } from './player-context';
 
 type Props = {
   children: ReactNode;
@@ -27,11 +28,13 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
   const { apiClient } = useApiClient();
   const { mercureClient } = useMercureClient();
   const { user } = useAuth();
+  const { desyncPlayer } = usePlayer();
 
   const leaveGame = useCallback(() => {
     isWatching.current = false;
     setGame(null);
-  }, []);
+    desyncPlayer();
+  }, [desyncPlayer]);
 
   useEffect(() => {
     if (game) {
@@ -61,6 +64,9 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
 
 export const useGame = () => {
   const context = useContext(GameContext);
-  if (!context) throw new Error('useGame must be used within a GameProvider');
+  if (!context) {
+    throw new Error('useGame must be used within a GameProvider');
+  }
+
   return context;
 };

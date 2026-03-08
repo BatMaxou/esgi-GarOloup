@@ -1,8 +1,8 @@
 type: http_request
 model: http_request
-id: rq_gTDsoeeSQP
-createdAt: 2026-03-03T15:35:32.955479211
-updatedAt: 2026-03-08T21:49:59.279685864
+id: rq_cXqBJZpTDg
+createdAt: 2026-03-08T21:50:02.266702031
+updatedAt: 2026-03-08T21:50:12.833908871
 workspaceId: wk_uXtATNFQmZ
 folderId: fl_bh6aMuFF23
 authentication:
@@ -22,7 +22,7 @@ headers:
   value: ''
   id: CVxRI3YD2A
 method: PATCH
-name: Close Invitation
-sortPriority: 3000.0
-url: ${[ BASE_URL ]}/api/game/invitation/close
+name: Open Invitation
+sortPriority: 3000.001
+url: ${[ BASE_URL ]}/api/game/invitation/open
 urlParameters: []

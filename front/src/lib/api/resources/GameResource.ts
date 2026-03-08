@@ -23,6 +23,10 @@ export class GameResource {
   }
 
   public async close(): Promise<BasicActionResponse | ApiClientError> {
-    return this.apiClient.post<BasicActionResponse>(apiPaths.game.close);
+    return this.apiClient.patch<BasicActionResponse>(apiPaths.game.close);
+  }
+
+  public async open(): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.patch<BasicActionResponse>(apiPaths.game.open);
   }
 }
