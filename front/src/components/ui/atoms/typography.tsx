@@ -17,7 +17,7 @@ const typographyCva = cva('antialiased', {
     },
     textColor: {
       controlled: 'text-inherit',
-      text: 'text-base-text',
+      text: 'text-foreground',
       light: 'text-light',
       primary: 'text-primary',
       'primary-2': 'text-primary-2',
