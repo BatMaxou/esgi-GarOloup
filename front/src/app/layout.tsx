@@ -24,7 +24,7 @@ const Providers = ({ children }: Props) => {
 const RootLayout = ({ children }: Props) => {
   return (
     <html lang="fr">
-      <body className="bg-linear-(--background-gradient) bg-no-repeat min-h-screen scrollbar">
+      <body>
         <Providers>{children}</Providers>
       </body>
     </html>
