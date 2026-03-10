@@ -2,71 +2,138 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import Typography from '@/components/ui/atoms/typography';
 import { formatCva } from '@/utils/format';
 
-const buttonCva = cva('flex items-center cursor-pointer rounded-lg focus:outline-none transition-colors', {
-  variants: {
-    variant: {
-      neutral: '',
-      primary: '',
-      secondary: '',
-      gradient:
-        'bg-border-primary-gradient bg-border-hover-primary-gradient bg-border-focus-primary-gradient border-2 hover:text-light focus:text-light',
-      text: 'bg-transparent',
+const buttonCva = cva(
+  'px-3.5 py-2 h-fit flex items-center cursor-pointer rounded-xs focus:outline-none transition-colors transition-shadow',
+  {
+    variants: {
+      variant: {
+        primary: '',
+        secondary: '',
+        accent: '',
+        neutral: '',
+        error: '',
+        success: '',
+        gradient: formatCva(
+          'bg-border-primary-gradient bg-border-hover-primary-gradient bg-border-focus-primary-gradient border-2',
+          'hover:text-light',
+          'focus:text-light'
+        ),
+        text: formatCva('bg-transparent', 'hover:underline', 'focus:underline'),
+      },
+      size: {
+        lg: 'px-3.5 py-2 h-fit xs:h-[48px]',
+        md: 'px-3.5 py-2 h-fit xs:h-[40px]',
+        sm: 'px-3.5 py-1 h-fit xs:h-[32px]',
+      },
+      full: { true: 'w-full', false: 'w-fit' },
+      disabled: { true: 'cursor-not-allowed opacity-50 hover:bg-transparent' },
+      glass: {
+        true: 'border-2 backdrop-blur-sm hover:shadow-(--button-shadow) hover:inset-shadow-(--button-inset-shadow)',
+      },
     },
-    size: {
-      lg: 'px-3.5 py-2 h-fit xs:h-[48px]',
-      md: 'px-3.5 py-2 h-fit xs:h-[40px]',
-      sm: 'px-3.5 py-1 h-fit xs:h-[32px]',
-    },
-    full: { true: 'w-full', false: 'w-fit' },
-    disabled: { true: 'cursor-not-allowed opacity-50 hover:bg-transparent' },
-    glass: { true: 'border backdrop-blur-sm' },
-  },
-  compoundVariants: [
-    {
+    compoundVariants: [
+      {
+        variant: ['primary', 'secondary', 'accent', 'neutral', 'error', 'success', 'gradient'],
+        class: formatCva('hover:-translate-y-0.5', 'active:-translate-y-0'),
+      },
+      {
+        glass: true,
+        class: formatCva('hover-shadow-(--button-shadow) hover:inset-shadow-(--button-inset-shadow)'),
+      },
+      {
+        variant: 'primary',
+        glass: false,
+        class: formatCva('bg-primary text-light', 'hover:bg-primary/80', 'focus:bg-primary/80'),
+      },
+      {
+        variant: 'primary',
+        glass: true,
+        class: formatCva(
+          'bg-primary-pastel/20 dark:bg-primary-pastel/10 border-primary/80 text-primary',
+          'hover:bg-primary-pastel/40 dark:hover:bg-primary-pastel/20 hover:border-primary',
+          'focus:bg-primary-pastel/40 dark:focus:bg-primary-pastel/20 focus:border-primary'
+        ),
+      },
+      {
+        variant: 'secondary',
+        glass: false,
+        class: formatCva('bg-secondary text-light', 'hover:bg-secondary/80', 'focus:bg-secondary/80'),
+      },
+      {
+        variant: 'secondary',
+        glass: true,
+        class: formatCva(
+          'bg-secondary-pastel/20 dark:bg-secondary-pastel/10 border-secondary/80 text-secondary',
+          'hover:bg-secondary-pastel/40 dark:hover:bg-secondary-pastel/20 hover:border-secondary',
+          'focus:bg-secondary-pastel/40 dark:focus:bg-secondary-pastel/20 focus:border-secondary'
+        ),
+      },
+      {
+        variant: 'accent',
+        glass: false,
+        class: formatCva('bg-accent text-light', 'hover:bg-accent/80', 'focus:bg-accent/80'),
+      },
+      {
+        variant: 'accent',
+        glass: true,
+        class: formatCva(
+          'bg-accent-pastel/20 dark:bg-accent-pastel/10 border-accent/80 text-accent',
+          'hover:bg-accent-pastel/40 dark:hover:bg-accent-pastel/20 hover:border-accent',
+          'focus:bg-accent-pastel/40 dark:focus:bg-accent-pastel/20 focus:border-accent'
+        ),
+      },
+      {
+        variant: 'neutral',
+        glass: false,
+        class: formatCva('bg-foreground text-background', 'hover:bg-foreground/80', 'focus:bg-foreground/80'),
+      },
+      {
+        variant: 'neutral',
+        glass: true,
+        class: formatCva(
+          'bg-foreground/20 border-foreground/80 text-foreground',
+          'hover:bg-foreground/40 hover:border-foreground',
+          'focus:bg-foreground/40 focus:border-foreground'
+        ),
+      },
+      {
+        variant: 'error',
+        glass: false,
+        class: formatCva('bg-error text-light', 'hover:bg-error/80', 'focus:bg-error/80'),
+      },
+      {
+        variant: 'error',
+        glass: true,
+        class: formatCva(
+          'bg-error-pastel/60 dark:bg-error-pastel/10 border-error/80 text-error',
+          'hover:bg-error-pastel/80 dark:hover:bg-error-pastel/20 hover:border-error',
+          'focus:bg-error-pastel/80 dark:focus:bg-error-pastel/20 focus:border-error'
+        ),
+      },
+      {
+        variant: 'success',
+        glass: false,
+        class: formatCva('bg-success text-light', 'hover:bg-success/80', 'focus:bg-success/80'),
+      },
+      {
+        variant: 'success',
+        glass: true,
+        class: formatCva(
+          'bg-success-pastel/60 dark:bg-success-pastel/10 border-success/80 text-success',
+          'hover:bg-success-pastel/80 dark:hover:bg-success/20 hover:border-success',
+          'focus:bg-success-pastel/80 dark:focus:bg-success/20 focus:border-success'
+        ),
+      },
+    ],
+    defaultVariants: {
       variant: 'neutral',
+      size: 'md',
+      full: false,
+      disabled: false,
       glass: false,
-      class: formatCva(
-        'text-neutral-200 bg-neutral-600/80 hover:bg-neutral-600',
-        'dark:text-neutral-600 dark:bg-neutral-400/90 dark:hover:bg-neutral-400'
-      ),
     },
-    {
-      variant: 'neutral',
-      glass: true,
-      class: formatCva(
-        'text-neutral-600 bg-neutral-600/20 border-neutral-600/80 hover:bg-neutral-600/30',
-        'dark:text-neutral-400 dark:bg-neutral-400/20 dark:border-neutral-400/60 dark:hover:bg-neutral-400/30'
-      ),
-    },
-    {
-      variant: 'primary',
-      glass: false,
-      class: 'bg-primary/90 text-light hover:bg-primary dark:bg-primary dark:hover:bg-primary/90',
-    },
-    {
-      variant: 'primary',
-      glass: true,
-      class: 'bg-primary/60 border-primary/80 text-primary dark:bg-primary/40 dark:border-primary/60',
-    },
-    {
-      variant: 'secondary',
-      glass: false,
-      class: 'bg-secondary/90 text-light hover:bg-secondary dark:bg-secondary dark:hover:bg-secondary/90',
-    },
-    {
-      variant: 'secondary',
-      glass: true,
-      class: 'bg-secondary/60 border-secondary/80 text-secondary dark:bg-secondary/40 dark:border-secondary/60',
-    },
-  ],
-  defaultVariants: {
-    variant: 'neutral',
-    size: 'md',
-    full: false,
-    disabled: false,
-    glass: false,
-  },
-});
+  }
+);
 
 type Tags = 'a' | 'button';
 
