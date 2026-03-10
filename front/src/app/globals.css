@@ -23,12 +23,14 @@
   --color-light: var(--color-neutral-100);
   --color-dark: var(--color-neutral-900);
 
-  /* Example */
   --color-primary: #9f9ad6;
-  --color-primary-2: #4f4c70;
+  --color-primary-pastel: #c8c5ed;
 
-  --color-secondary: #eca72c;
-  --color-secondary-pastel: #f5e6a6;
+  --color-secondary: #4f4c70;
+  --color-secondary-pastel: #9e9bbf;
+
+  --color-accent: #eca72c;
+  --color-accent-pastel: #f5e6a6;
 
   --color-success: #32ba55;
   --color-success-pastel: #c9f3d3;
@@ -61,12 +63,15 @@
   --radius-xxs: 6px;
 
   --background-gradient: 180deg, var(--theme-background-gradient-start) 0%, var(--theme-background-gradient-end) 100%;
-  --primary-gradient: 90deg, var(--color-primary-2) 0%, var(--color-primary) 100%;
+  --primary-gradient: 90deg, var(--color-secondary) 0%, var(--color-primary) 100%;
 
   --shadow: 0px 8px 24px 0px var(--color-shadow);
 
+  --button-shadow: 0px 0px 24px 0px;
+  --button-inset-shadow: 0px 0px 8px 0px;
+
   --default-transition-duration: 0.2s;
-  --default-transition-timing-function: ease-in;
+  --default-transition-timing-function: ease-out;
 
   --font-title: 'Eczar', sans-serif;
   --font-special: 'Miltonian Tattoo', sans-serif;
@@ -102,13 +107,15 @@
   background: linear-gradient(--value(--*));
   background-origin: border-box;
   border-color: transparent;
+  color: var(--color-neutral-800);
+  border-radius: var(--radius-xs);
 
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: inherit;
-    background: var(--color-neutral-100);
+    border-radius: var(--radius-xxs);
+    background: var(--color-light);
     transition: opacity var(--default-transition-duration) var(--default-transition-timing-function);
     pointer-events: none;
     z-index: -1;
@@ -116,14 +123,22 @@
 }
 
 @utility bg-border-hover-* {
-  &:hover::before {
-    opacity: 0;
+  &:hover {
+    color: var(--color-ligth);
+
+    &::before {
+      opacity: 0;
+    }
   }
 }
 
 @utility bg-border-focus-* {
-  &:focus::before {
-    opacity: 0;
+  &:focus {
+    color: var(--color-ligth);
+
+    &::before {
+      opacity: 0;
+    }
   }
 }
 
@@ -134,7 +149,7 @@
   }
 
   &::-webkit-scrollbar-track {
-    background-color: var(--color-neutral-200);
+    background-color: var(--color-light);
     border-radius: var(--radius-lg);
   }
 
@@ -145,6 +160,6 @@
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-primary-2);
+    background-color: var(--color-secondary);
   }
 }

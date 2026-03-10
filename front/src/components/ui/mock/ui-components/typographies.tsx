@@ -101,8 +101,23 @@ const Typographies = () => {
             </Typography>
           </li>
           <li>
-            <Typography bold textColor="primary-2">
-              Text color primary-2
+            <Typography bold textColor="secondary">
+              Text color secondary
+            </Typography>
+          </li>
+          <li>
+            <Typography bold textColor="accent">
+              Text color accent
+            </Typography>
+          </li>
+          <li>
+            <Typography bold textColor="error">
+              Text color error
+            </Typography>
+          </li>
+          <li>
+            <Typography bold textColor="success">
+              Text color success
             </Typography>
           </li>
         </ul>

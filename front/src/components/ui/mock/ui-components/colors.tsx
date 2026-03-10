@@ -23,7 +23,7 @@ const Colors = () => {
             <Color color="bg-primary" name="Primary" />
           </li>
           <li>
-            <Color color="bg-primary-2" name="Primary 2" />
+            <Color color="bg-secondary" name="Secondary" />
           </li>
         </ul>
         <ul className="bg-background rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
@@ -74,10 +74,10 @@ const Colors = () => {
         </ul>
         <ul className="bg-background rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
           <li>
-            <Color color="bg-secondary" name="Secondary" />
+            <Color color="bg-accent" name="Accent" />
           </li>
           <li>
-            <Color color="bg-secondary-pastel" name="Secondary Pastel" />
+            <Color color="bg-accent-pastel" name="Accent Pastel" />
           </li>
         </ul>
         <ul className="bg-background rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
