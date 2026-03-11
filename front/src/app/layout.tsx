@@ -4,6 +4,7 @@ import './globals.css';
 import { ApiClientProvider } from '@/contexts/api-context';
 import { MercureClientProvider } from '@/contexts/mercure-context';
 import { AuthProvider } from '@/contexts/auth-context';
+import { ThemeProvider } from '@/contexts/theme-context';
 
 type Props = {
   children: ReactNode;
@@ -12,11 +13,13 @@ type Props = {
 const Providers = ({ children }: Props) => {
   return (
     <>
-      <ApiClientProvider>
-        <MercureClientProvider>
-          <AuthProvider>{children}</AuthProvider>
-        </MercureClientProvider>
-      </ApiClientProvider>
+      <ThemeProvider>
+        <ApiClientProvider>
+          <MercureClientProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </MercureClientProvider>
+        </ApiClientProvider>
+      </ThemeProvider>
     </>
   );
 };

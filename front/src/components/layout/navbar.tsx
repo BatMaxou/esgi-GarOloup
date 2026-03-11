@@ -1,7 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
-import ThemeSwitcher from './theme-switcher';
-import Typography from '../ui/atoms/typography';
+import dynamic from 'next/dynamic';
+
+import Typography from '@/components/ui/atoms/typography';
+
+const ThemeSwitcher = dynamic(() => import('@/components/layout/theme-switcher'), { ssr: false });
 
 const Navbar = () => {
   return (
