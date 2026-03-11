@@ -1,14 +1,7 @@
-import Typography from '@/components/ui/atoms/typography';
-import Link from 'next/link';
+import HomeClient from '@/components/pages/home/home-client';
 
 const HomePage = () => {
-  return (
-    <>
-      <Typography variant="heading-1" bold>
-        <Link href="/game">GAME</Link>
-      </Typography>
-    </>
-  );
+  return <HomeClient />;
 };
 
 export default HomePage;

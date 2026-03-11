@@ -27,7 +27,7 @@ const Providers = ({ children }: Props) => {
 const RootLayout = ({ children }: Props) => {
   return (
     <html lang="fr">
-      <body>
+      <body className="scrollbar">
         <Providers>{children}</Providers>
       </body>
     </html>

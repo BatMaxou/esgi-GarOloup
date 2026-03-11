@@ -3,7 +3,7 @@ import Typography from '@/components/ui/atoms/typography';
 import { formatCva } from '@/utils/format';
 
 const buttonCva = cva(
-  'px-3.5 py-2 h-fit flex items-center cursor-pointer rounded-xs focus:outline-none transition-colors transition-shadow',
+  'h-fit flex items-center justify-center cursor-pointer rounded-xs focus:outline-none transition-colors transition-shadow',
   {
     variants: {
       variant: {
@@ -21,9 +21,9 @@ const buttonCva = cva(
         text: formatCva('bg-transparent', 'hover:underline', 'focus:underline'),
       },
       size: {
-        lg: 'px-3.5 py-2 h-fit xs:h-[48px]',
-        md: 'px-3.5 py-2 h-fit xs:h-[40px]',
-        sm: 'px-3.5 py-1 h-fit xs:h-[32px]',
+        lg: 'px-6 py-3',
+        md: 'px-4 py-2',
+        sm: 'px-3 py-1',
       },
       full: { true: 'w-full', false: 'w-fit' },
       disabled: { true: 'cursor-not-allowed opacity-50 hover:bg-transparent' },
@@ -141,6 +141,7 @@ type Props = VariantProps<typeof buttonCva> & {
   label?: string;
   className?: string;
   asLink?: boolean;
+  href?: string;
   onClick?: () => void;
 };
 
