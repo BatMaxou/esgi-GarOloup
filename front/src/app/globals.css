@@ -149,17 +149,12 @@
   }
 
   &::-webkit-scrollbar-track {
-    background-color: var(--color-light);
-    border-radius: var(--radius-lg);
+    background-color: var(--color-background);
   }
 
   &::-webkit-scrollbar-thumb {
     width: 8px;
-    background-color: var(--color-primary);
-    border-radius: var(--radius-lg);
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
     background-color: var(--color-secondary);
+    border-radius: var(--radius-lg);
   }
 }
