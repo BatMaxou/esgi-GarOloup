@@ -4,8 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 const typographyCva = cva('antialiased', {
   variants: {
     variant: {
-      body: 'text-[0.875rem] leading-[1.375rem]',
-      'body-lg': 'text-[1rem] leading-[1.5rem]',
+      body: 'text-[1rem] leading-[1.5rem]',
       'body-sm': 'text-[0.75rem] leading-[1.25rem]',
       'body-xs': 'text-[0.5rem] leading-[1rem]',
       'heading-1': 'text-[2.5rem] leading-[3rem] xs:text-[4rem] xs:leading-[4.5rem] sm:text-[6.5rem] sm:leading-[7rem]',
@@ -13,7 +12,7 @@ const typographyCva = cva('antialiased', {
       'heading-3': 'text-[1.5rem] leading-[2rem] sm:text-[2rem] sm:leading-[2.5rem]',
       subtitle: 'text-[1.25rem] leading-[1.75rem]',
       input: 'text-[0.75rem] leading-[1.25rem]',
-      button: 'text-[0.875rem] leading-[1.375rem]',
+      button: 'text-[1rem] leading-[1.5rem]',
     },
     textColor: {
       controlled: 'text-inherit',
@@ -40,7 +39,7 @@ const typographyCva = cva('antialiased', {
     },
     {
       special: false,
-      variant: ['body', 'body-lg', 'body-sm', 'body-xs', 'input', 'button'],
+      variant: ['body', 'body-sm', 'body-xs', 'input', 'button'],
       class: 'font-normal',
     },
   ],

@@ -1,21 +1,13 @@
 'use client';
 
-import Image from 'next/image';
-
 import Typography from '@/components/ui/atoms/typography';
 import Button from '@/components/ui/molecules/button';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center isolate pointer-events-none p-8">
-      <Image
-        src="/images/night-camp-background.png"
-        alt="Hero background"
-        className="opacity-90 dark:opacity-60 object-cover object-center z-1"
-        fill
-      />
+    <section className="relative min-h-screen flex items-center justify-center isolate p-8">
       <div className="z-2 flex flex-col items-center gap-10 text-shadow-[0_0_8px] text-shadow-(color:--color-dark)">
-        <Typography tag="h1" variant="heading-1" textColor="light" special>
+        <Typography tag="h1" variant="heading-1" textColor="light" special className="text-glow-accent">
           GarOloup
         </Typography>
         <Typography tag="p" variant="subtitle" textColor="light" center>
@@ -26,7 +18,7 @@ const Hero = () => {
             <Button variant="accent" size="lg" label="Rejoindre une partie" className="w-full sm:w-fit" />
           </li>
           <li className="w-full sm:w-fit">
-            <Button variant="secondary" size="lg" label="Découvrir" className="w-full sm:w-fit" />
+            <Button variant="secondary" glass size="lg" label="Découvrir" className="w-full sm:w-fit" />
           </li>
         </ul>
 

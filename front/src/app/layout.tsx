@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import Image from 'next/image';
 
 import './globals.css';
 import { ApiClientProvider } from '@/contexts/api-context';
@@ -27,7 +28,13 @@ const Providers = ({ children }: Props) => {
 const RootLayout = ({ children }: Props) => {
   return (
     <html lang="fr">
-      <body className="scrollbar">
+      <body className="bg-linear-(--background-gradient) bg-no-repeat text-foreground min-h-screen scrollbar transition-colors">
+        <Image
+          src="/images/night-camp-background.png"
+          alt="Hero background"
+          className="opacity-90 dark:opacity-60 !fixed inset-0 object-cover object-center -z-1"
+          fill
+        />
         <Providers>{children}</Providers>
       </body>
     </html>
