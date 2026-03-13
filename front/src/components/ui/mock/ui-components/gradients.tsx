@@ -1,6 +1,7 @@
 import cn from 'classnames';
 
 import Typography from '@/components/ui/atoms/typography';
+import GlassPanel from '@/components/ui/atoms/glass-panel';
 
 const Gradient = ({ gradient, name }: { gradient: string; name: string }) => {
   return (
@@ -18,14 +19,16 @@ const Gradients = () => {
         Gradients
       </Typography>
       <div className="flex flex-col flex-wrap gap-8">
-        <ul className="bg-background rounded-sm p-8 flex flex-wrap gap-6 shadow-(--shadow) w-fit">
-          <li>
-            <Gradient gradient="bg-linear-(--background-gradient)" name="Background Gradient" />
-          </li>
-          <li>
-            <Gradient gradient="bg-linear-(--primary-gradient)" name="Primary Gradient" />
-          </li>
-        </ul>
+        <GlassPanel className="p-8 w-fit">
+          <ul className="flex flex-wrap gap-6">
+            <li>
+              <Gradient gradient="bg-linear-(--background-gradient)" name="Background Gradient" />
+            </li>
+            <li>
+              <Gradient gradient="bg-linear-(--primary-gradient)" name="Primary Gradient" />
+            </li>
+          </ul>
+        </GlassPanel>
       </div>
     </>
   );

@@ -16,7 +16,7 @@
   --color-neutral-800: #2b2e44;
   --color-neutral-900: #1a1c2e;
 
-  --color-foreground: var(--theme-foreground);
+  --color-foreground: var(--color-neutral-200);
   --color-background: var(--theme-background-gradient-start);
   --color-background-contrast: var(--theme-background-gradient-end);
 
@@ -37,8 +37,6 @@
 
   --color-error: #d33e36;
   --color-error-pastel: #fff3f3;
-
-  --color-shadow: var(--theme-shadow);
 
   --breakpoint-xs: 24rem; /* 384px*/
   --breakpoint-sm: 40rem; /* 640px */
@@ -65,10 +63,10 @@
   --background-gradient: 180deg, var(--theme-background-gradient-start) 0%, var(--theme-background-gradient-end) 100%;
   --primary-gradient: 90deg, var(--color-secondary) 0%, var(--color-primary) 100%;
 
-  --shadow: 0px 8px 24px 0px var(--color-shadow);
+  --shadow:
+    0 20px 60px oklch(from var(--color-dark) l c h / 0.6), 0 0 100px oklch(from var(--color-secondary) l c h / 0.04);
 
-  --button-shadow: 0px 0px 24px 0px;
-  --button-inset-shadow: 0px 0px 8px 0px;
+  --button-inset-shadow: 0px 0px 4px 0px;
 
   --default-transition-duration: 0.2s;
   --default-transition-timing-function: ease-out;
@@ -80,66 +78,29 @@
 
 @layer base {
   :root[data-theme='light'] {
-    --theme-foreground: var(--color-neutral-800);
-
     --theme-background-gradient-start: var(--color-light);
     --theme-background-gradient-end: var(--color-neutral-200);
-
-    --theme-shadow: #4f4c7014;
   }
 
   :root,
   :root[data-theme='dark'] {
-    --theme-foreground: var(--color-neutral-200);
-
     --theme-background-gradient-start: var(--color-dark);
     --theme-background-gradient-end: var(--color-neutral-700);
-
-    --theme-shadow: #9f9ad614;
   }
 }
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-@utility bg-border-* {
-  position: relative;
-  isolation: isolate;
-  background: linear-gradient(--value(--*));
-  background-origin: border-box;
-  border-color: transparent;
-  color: var(--color-neutral-800);
-  border-radius: var(--radius-xs);
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: var(--radius-xxs);
-    background: var(--color-light);
-    transition: opacity var(--default-transition-duration) var(--default-transition-timing-function);
-    pointer-events: none;
-    z-index: -1;
-  }
+@utility button-shadow-* {
+  box-shadow:
+    0 0 48px oklch(from --value(--color-*) l c h / 0.5),
+    0 8px 24px oklch(from var(--color-dark) l c h / 0.3);
 }
 
-@utility bg-border-hover-* {
-  &:hover {
-    color: var(--color-ligth);
-
-    &::before {
-      opacity: 0;
-    }
-  }
-}
-
-@utility bg-border-focus-* {
-  &:focus {
-    color: var(--color-ligth);
-
-    &::before {
-      opacity: 0;
-    }
-  }
+@utility text-glow-* {
+  text-shadow:
+    0 0 64px oklch(from --value(--color-*) l c h / 0.3),
+    0 4px 24px oklch(from var(--color-dark) l c h / 0.7);
 }
 
 @utility scrollbar {
@@ -149,7 +110,7 @@
   }
 
   &::-webkit-scrollbar-track {
-    background-color: var(--color-background);
+    background-color: var(--color-dark);
   }
 
   &::-webkit-scrollbar-thumb {

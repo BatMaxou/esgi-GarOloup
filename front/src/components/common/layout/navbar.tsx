@@ -13,7 +13,7 @@ import { paths } from '@/utils/paths';
 import Button from '@/components/ui/molecules/button';
 
 const navbarCva = cva(
-  'border-b border-primary p-4 flex items-center justify-between fixed top-0 left-0 right-0 backdrop-blur-sm z-24',
+  'border-b border-primary px-4 py-2 flex items-center justify-between fixed top-0 left-0 right-0 backdrop-blur-sm z-24',
   {
     variants: {
       sticky: {
@@ -30,11 +30,11 @@ const Navbar = () => {
 
   return (
     <nav className={navbarCva({ sticky: isSticky })}>
-      <Link href={paths.home} className="flex items-center gap-4">
+      <Link href={paths.home} className="flex items-center">
         <Image src="/logo.svg" alt="Logo" width={64} height={64} />
       </Link>
 
-      <ul className="flex items-center gap-4 text-shadow-[0_0_4px] text-shadow-(color:--color-background)">
+      <ul className="flex items-center gap-4 text-glow-primary">
         <li>
           <Button asLink variant="text" label="UI" href={paths.ui} />
         </li>
@@ -45,10 +45,10 @@ const Navbar = () => {
 
       <ul className="hidden sm:flex items-center gap-4">
         <li>
-          <Button variant="accent" label="Jouer maintenant" />
+          <Button variant="accent" size="sm" label="Jouer maintenant" />
         </li>
         <li>
-          <Button variant="secondary" label="Se connecter" />
+          <Button variant="secondary" size="sm" label="Se connecter" />
         </li>
         <li>
           <ThemeSwitcher />

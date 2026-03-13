@@ -22,8 +22,8 @@ const buttonCva = cva(
 const circleCva = cva('w-6 h-6 m-0.5 rounded-full flex items-center justify-center', {
   variants: {
     theme: {
-      [ThemeEnum.LIGHT]: 'bg-light',
-      [ThemeEnum.DARK]: 'bg-dark',
+      [ThemeEnum.LIGHT]: 'bg-light text-secondary',
+      [ThemeEnum.DARK]: 'bg-dark text-light',
     },
   },
 });

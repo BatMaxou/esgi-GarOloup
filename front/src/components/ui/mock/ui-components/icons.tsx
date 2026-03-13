@@ -1,6 +1,7 @@
 import { icons } from '@/components/ui/atoms/Icon/config';
 import Icon from '@/components/ui/atoms/Icon';
 import Typography from '@/components/ui/atoms/typography';
+import GlassPanel from '@/components/ui/atoms/glass-panel';
 
 const Icons = () => {
   return (
@@ -9,13 +10,15 @@ const Icons = () => {
         Icons
       </Typography>
       <div className="flex flex-wrap gap-8">
-        <ul className="bg-background rounded-sm p-8 flex flex-wrap gap-8 shadow-(--shadow)">
-          {Object.keys(icons).map((iconName) => (
-            <li key={iconName}>
-              <Icon name={iconName} title={iconName} className="w-16 h-16" />
-            </li>
-          ))}
-        </ul>
+        <GlassPanel className="p-8 w-fit">
+          <ul className="flex flex-wrap gap-6">
+            {Object.keys(icons).map((iconName) => (
+              <li key={iconName}>
+                <Icon name={iconName} title={iconName} className="w-16 h-16" />
+              </li>
+            ))}
+          </ul>
+        </GlassPanel>
       </div>
     </>
   );

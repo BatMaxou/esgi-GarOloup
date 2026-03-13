@@ -29,11 +29,7 @@ const GameLayout = async ({ children }: Props) => {
 
   return (
     <PlayerProvider initialPlayer={maybePlayer}>
-      <GameProvider initialGame={maybeGame}>
-        <div className="bg-linear-(--background-gradient) bg-no-repeat text-foreground min-h-screen transition-colors">
-          {children}
-        </div>
-      </GameProvider>
+      <GameProvider initialGame={maybeGame}>{children}</GameProvider>
     </PlayerProvider>
   );
 };
