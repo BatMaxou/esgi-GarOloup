@@ -1,5 +1,5 @@
 import Typography from '@/components/ui/atoms/typography';
-import GlassPanel from '../../atoms/glass-panel';
+import GlassPanel from '@/components/ui/atoms/glass-panel';
 
 const Typographies = () => {
   return (
@@ -62,9 +62,6 @@ const Typographies = () => {
               <Typography variant="body-xs" bold>
                 Text Body XS Bold
               </Typography>
-            </li>
-            <li>
-              <Typography variant="input">Text Input</Typography>
             </li>
             <li>
               <Typography variant="button" bold>

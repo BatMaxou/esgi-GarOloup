@@ -1,5 +1,6 @@
 'use client';
 
+import Divider from '@/components/ui/atoms/divider';
 import Typography from '@/components/ui/atoms/typography';
 import Button from '@/components/ui/molecules/button';
 
@@ -15,14 +16,16 @@ const Hero = () => {
         </Typography>
         <ul className="w-full flex flex-col items-center justify-center gap-4 sm:gap-8 sm:flex-row">
           <li className="w-full sm:w-fit">
-            <Button variant="accent" size="lg" label="Rejoindre une partie" className="w-full sm:w-fit" />
+            <Button variant="accent" size="lg" popup label="Rejoindre une partie" className="w-full sm:w-fit" />
           </li>
           <li className="w-full sm:w-fit">
-            <Button variant="secondary" glass size="lg" label="Découvrir" className="w-full sm:w-fit" />
+            <Button variant="secondary" glass size="lg" popup label="Découvrir" className="w-full sm:w-fit" />
           </li>
         </ul>
 
-        <ul className="hidden sm:flex items-center gap-10 border-t-2 border-light/40 pt-8">
+        <Divider className="w-full" />
+
+        <ul className="hidden sm:flex items-center gap-10">
           <li className="flex flex-col items-center gap-2">
             <Typography variant="heading-3" textColor="light" bold>
               6-20
@@ -31,13 +34,17 @@ const Hero = () => {
               joueurs
             </Typography>
           </li>
-          <li className="border-l-2 border-light/40 h-8" />
+          <li>
+            <Divider orientation="vertical" className="h-12" />
+          </li>
           <li className="flex flex-col items-center gap-2">
             <Typography variant="heading-3" textColor="light" bold>
               En ligne
             </Typography>
           </li>
-          <li className="border-l-2 border-light/40 h-8" />
+          <li>
+            <Divider orientation="vertical" className="h-12" />
+          </li>
           <li className="flex flex-col items-center gap-2">
             <Typography variant="heading-3" textColor="light" bold>
               100%

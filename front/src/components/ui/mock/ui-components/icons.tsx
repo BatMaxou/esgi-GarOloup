@@ -1,5 +1,5 @@
-import { icons } from '@/components/ui/atoms/Icon/config';
-import Icon from '@/components/ui/atoms/Icon';
+import { icons } from '@/components/ui/atoms/icon/config';
+import Icon from '@/components/ui/atoms/icon';
 import Typography from '@/components/ui/atoms/typography';
 import GlassPanel from '@/components/ui/atoms/glass-panel';
 
