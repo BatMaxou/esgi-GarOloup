@@ -6,7 +6,7 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-neutral-100: #ffffff;
+  --color-neutral-100: #f8f8ff;
   --color-neutral-200: #f2f2ff;
   --color-neutral-300: #e3e4f5;
   --color-neutral-400: #c8c9e0;
@@ -16,12 +16,12 @@
   --color-neutral-800: #2b2e44;
   --color-neutral-900: #1a1c2e;
 
-  --color-foreground: var(--color-neutral-200);
-  --color-background: var(--theme-background-gradient-start);
-  --color-background-contrast: var(--theme-background-gradient-end);
-
   --color-light: var(--color-neutral-100);
   --color-dark: var(--color-neutral-900);
+
+  --color-foreground: var(--color-light);
+  --color-background: var(--theme-background-gradient-start);
+  --color-background-contrast: var(--theme-background-gradient-end);
 
   --color-primary: #9f9ad6;
   --color-primary-pastel: #c8c5ed;
@@ -66,8 +66,6 @@
   --shadow:
     0 20px 60px oklch(from var(--color-dark) l c h / 0.6), 0 0 100px oklch(from var(--color-secondary) l c h / 0.04);
 
-  --button-inset-shadow: 0px 0px 4px 0px;
-
   --default-transition-duration: 0.2s;
   --default-transition-timing-function: ease-out;
 
@@ -79,7 +77,7 @@
 @layer base {
   :root[data-theme='light'] {
     --theme-background-gradient-start: var(--color-light);
-    --theme-background-gradient-end: var(--color-neutral-200);
+    --theme-background-gradient-end: var(--color-neutral-400);
   }
 
   :root,
@@ -97,10 +95,22 @@
     0 8px 24px oklch(from var(--color-dark) l c h / 0.3);
 }
 
+@utility input-shadow-* {
+  box-shadow: 0 0 0 3px oklch(from --value(--color-*) l c h / 0.2);
+}
+
 @utility text-glow-* {
   text-shadow:
     0 0 64px oklch(from --value(--color-*) l c h / 0.3),
     0 4px 24px oklch(from var(--color-dark) l c h / 0.7);
+}
+
+@utility divider-horizontal-* {
+  background: linear-gradient(90deg, transparent, oklch(from --value(--color-*) l c h / 0.6), transparent);
+}
+
+@utility divider-vertical-* {
+  background: linear-gradient(0deg, transparent, oklch(from --value(--color-*) l c h / 0.6), transparent);
 }
 
 @utility scrollbar {

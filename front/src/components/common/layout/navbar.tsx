@@ -41,6 +41,9 @@ const Navbar = () => {
         <li>
           <Button asLink variant="text" label="Icons" href={paths.icons} />
         </li>
+        <li>
+          <Button asLink variant="text" label="Form UI" href={paths.formUi} />
+        </li>
       </ul>
 
       <ul className="hidden sm:flex items-center gap-4">

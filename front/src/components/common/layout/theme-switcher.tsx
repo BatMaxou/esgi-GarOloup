@@ -3,7 +3,7 @@
 import { cva } from 'class-variance-authority';
 import { motion } from 'motion/react';
 
-import Icon from '@/components/ui/atoms/Icon';
+import Icon from '@/components/ui/atoms/icon';
 import { ThemeEnum } from '@/utils/enums';
 import { useTheme } from '@/contexts/theme-context';
 

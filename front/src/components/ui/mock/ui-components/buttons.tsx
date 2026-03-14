@@ -1,6 +1,6 @@
 import Typography from '@/components/ui/atoms/typography';
 import Button from '@/components/ui/molecules/button';
-import GlassPanel from '../../atoms/glass-panel';
+import GlassPanel from '@/components/ui/atoms/glass-panel';
 
 const Buttons = () => {
   return (
@@ -9,7 +9,7 @@ const Buttons = () => {
         Buttons
       </Typography>
       <div className="flex flex-col gap-8">
-        <GlassPanel className="p-8 w-fit">
+        <GlassPanel className="p-8">
           <ul className="flex flex-wrap gap-6">
             <li>
               <Button variant="primary" label="Primary" />
@@ -55,8 +55,8 @@ const Buttons = () => {
             </li>
           </ul>
         </GlassPanel>
-        <GlassPanel className="p-8 w-fit">
-          <ul className="flex items-center gap-6">
+        <GlassPanel className="p-8">
+          <ul className="flex flex-wrap items-center gap-6">
             <li>
               <Button variant="gradient" size="lg" label="Large" />
             </li>
@@ -68,8 +68,8 @@ const Buttons = () => {
             </li>
           </ul>
         </GlassPanel>
-        <GlassPanel className="p-8 w-fit">
-          <ul className="flex items-center gap-6">
+        <GlassPanel className="p-8">
+          <ul className="flex flex-wrap items-center gap-6">
             <li>
               <Button variant="gradient" popup label="Popup" />
             </li>

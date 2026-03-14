@@ -1,9 +1,7 @@
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
+import cn from 'classnames';
 
-import Typography from '@/components/ui/atoms/typography';
-import { formatCva } from '@/utils/format';
-
-const buttonCva = cva(
+export const buttonCva = cva(
   'h-fit flex items-center justify-center cursor-pointer rounded-sm border-2 transition-all focus:outline-none',
   {
     variants: {
@@ -42,7 +40,7 @@ const buttonCva = cva(
       {
         variant: 'primary',
         glass: true,
-        class: formatCva(
+        class: cn(
           'bg-primary-pastel/10 border-primary/80 text-primary',
           'hover:bg-primary-pastel/20 hover:border-primary',
           'focus:bg-primary-pastel/20 focus:border-primary'
@@ -56,10 +54,10 @@ const buttonCva = cva(
       {
         variant: 'secondary',
         glass: true,
-        class: formatCva(
-          'bg-secondary/40 border-secondary-pastel/20 text-light',
+        class: cn(
+          'bg-secondary/40 border-secondary-pastel/20 text-neutral-400',
           'hover:bg-secondary/60 hover:border-secondary-pastel/40',
-          'focus:bg-secondary-pastel/20 focus:border-secondary'
+          'focus:bg-secondary/60 focus:border-secondary-pastel/40'
         ),
       },
       {
@@ -70,10 +68,10 @@ const buttonCva = cva(
       {
         variant: 'accent',
         glass: true,
-        class: formatCva(
+        class: cn(
           'bg-accent-pastel/10 border-accent/80 text-accent',
-          'hover:bg-accent/10 hover:border-accent',
-          'focus:bg-accent/10 focus:border-accent'
+          'hover:bg-accent/20 hover:border-accent',
+          'focus:bg-accent/20 focus:border-accent'
         ),
       },
       {
@@ -84,7 +82,7 @@ const buttonCva = cva(
       {
         variant: 'neutral',
         glass: true,
-        class: formatCva(
+        class: cn(
           'bg-foreground/10 border-foreground/20 text-foreground',
           'hover:bg-foreground/20 hover:border-foreground/40',
           'focus:bg-foreground/20 focus:border-foreground/40'
@@ -98,7 +96,7 @@ const buttonCva = cva(
       {
         variant: 'error',
         glass: true,
-        class: formatCva(
+        class: cn(
           'bg-foreground/10 border-foreground/20 text-foreground',
           'hover:bg-error/10 hover:border-error/40 hover:text-error',
           'focus:bg-error/10 focus:border-error/40 focus:text-error'
@@ -107,12 +105,12 @@ const buttonCva = cva(
       {
         variant: 'success',
         glass: false,
-        class: formatCva('bg-success text-light', 'hover:bg-success/80', 'focus:bg-success/80'),
+        class: 'bg-success text-light hover:button-shadow-success focus:button-shadow-success',
       },
       {
         variant: 'success',
         glass: true,
-        class: formatCva(
+        class: cn(
           'bg-foreground/10 border-foreground/20 text-foreground',
           'hover:bg-success/10 hover:border-success/40 hover:text-success',
           'focus:bg-success/10 focus:border-success/40 focus:text-success'
@@ -129,27 +127,3 @@ const buttonCva = cva(
     },
   }
 );
-
-type Tags = 'a' | 'button';
-
-type Props = VariantProps<typeof buttonCva> & {
-  label?: string;
-  className?: string;
-  asLink?: boolean;
-  href?: string;
-  onClick?: () => void;
-};
-
-const Button = ({ label, className, asLink, variant, size, full, disabled, glass, popup, ...props }: Props) => {
-  const Tag: Tags = asLink ? 'a' : 'button';
-
-  return (
-    <Tag className={buttonCva({ variant, size, full, disabled, glass, popup, className })} {...props}>
-      <Typography variant="button" textColor="controlled" bold center>
-        {label}
-      </Typography>
-    </Tag>
-  );
-};
-
-export default Button;

@@ -1,7 +1,6 @@
-import { ReactNode } from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 
-const typographyCva = cva('antialiased', {
+export const typographyCva = cva('antialiased', {
   variants: {
     variant: {
       body: 'text-[1rem] leading-[1.5rem]',
@@ -11,8 +10,8 @@ const typographyCva = cva('antialiased', {
       'heading-2': 'text-[2rem] leading-[2.5rem] sm:text-[4rem] sm:leading-[4.5rem]',
       'heading-3': 'text-[1.5rem] leading-[2rem] sm:text-[2rem] sm:leading-[2.5rem]',
       subtitle: 'text-[1.25rem] leading-[1.75rem]',
-      input: 'text-[0.75rem] leading-[1.25rem]',
       button: 'text-[1rem] leading-[1.5rem]',
+      controlled: '',
     },
     textColor: {
       controlled: 'text-inherit',
@@ -39,7 +38,7 @@ const typographyCva = cva('antialiased', {
     },
     {
       special: false,
-      variant: ['body', 'body-sm', 'body-xs', 'input', 'button'],
+      variant: ['body', 'body-sm', 'body-xs', 'controlled', 'button'],
       class: 'font-normal',
     },
   ],
@@ -53,47 +52,3 @@ const typographyCva = cva('antialiased', {
     special: false,
   },
 });
-
-type Tags = 'span' | 'div' | 'p' | 'h1' | 'h2' | 'h3' | 'a';
-
-type Props = VariantProps<typeof typographyCva> & {
-  children: ReactNode;
-  className?: string;
-  tag?: Tags;
-};
-
-const Typography = ({
-  children,
-  className,
-  tag,
-  variant,
-  textColor,
-  bold,
-  center,
-  underline,
-  ellipsis,
-  special,
-  ...props
-}: Props) => {
-  const Tag: Tags = tag || 'span';
-
-  return (
-    <Tag
-      className={typographyCva({
-        variant,
-        textColor,
-        bold,
-        center,
-        underline,
-        ellipsis,
-        special,
-        className,
-      })}
-      {...props}
-    >
-      {children}
-    </Tag>
-  );
-};
-
-export default Typography;
