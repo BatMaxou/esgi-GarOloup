@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\Get;
 use App\Api\Provider\Player\CurrentPlayerProvider;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
+use App\Entity\User\AbstractUser;
 use App\Entity\User\TempUser;
 use App\Entity\User\User;
 use App\Repository\PlayerRepository;
@@ -62,6 +63,16 @@ class Player
                 default => throw new \InvalidArgumentException('User not supported'),
             };
         }
+    }
+
+    public function getLinkedUser(): AbstractUser
+    {
+        $user = $this->user ?? $this->tempUser;
+        if (!$user) {
+            throw new \LogicException('Player must have a linked user');
+        }
+
+        return $user;
     }
 
     public function getUser(): ?User

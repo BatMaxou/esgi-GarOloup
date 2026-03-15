@@ -4,7 +4,7 @@ namespace App\Domain\Command\User;
 
 use App\Api\Model\User\ForgotPasswordOutput;
 use App\Domain\Command\Email\SendForgotPasswordEmailCommand;
-use App\Repository\UserRepository;
+use App\Repository\User\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;

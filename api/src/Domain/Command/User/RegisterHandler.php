@@ -4,7 +4,7 @@ namespace App\Domain\Command\User;
 
 use App\Api\Model\BasicActionOutput;
 use App\Entity\User\User;
-use App\Repository\UserRepository;
+use App\Repository\User\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;

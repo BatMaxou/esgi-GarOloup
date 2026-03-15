@@ -7,7 +7,7 @@ use ApiPlatform\Metadata\Get;
 use App\Api\Provider\User\MeProvider;
 use App\Api\Provider\User\TempUserProvider;
 use App\Enum\RoleEnum;
-use App\Repository\TempUserRepository;
+use App\Repository\User\TempUserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
