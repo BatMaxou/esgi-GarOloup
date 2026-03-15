@@ -12,6 +12,10 @@ services:
         bind:
             $frontResetUrl: '%env(string:FRONT_RESET_URL)%'
 
+    _instanceof:
+        App\Domain\GameEvent\Applicator\Interface\GameEventApplicatorInterface:
+            tags: ['game_event.applicator']
+
     App\Fixtures\:
         resource: '../fixtures'
 
@@ -24,3 +28,8 @@ services:
             - '../src/Kernel.php'
             - '../src/Domain/Command/**/*Command.php'
             - '../src/Api/Model/'
+
+    App\Domain\GameEvent\GameEventDispatcher:
+        arguments:
+            $applicators: !tagged_iterator game_event.applicator
+

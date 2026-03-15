@@ -3,7 +3,7 @@
 namespace App\Domain\Command\User;
 
 use App\Api\Model\User\ResetPasswordOutput;
-use App\Repository\UserRepository;
+use App\Repository\User\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 

@@ -13,7 +13,7 @@ use App\Domain\Command\User\ForgotPasswordCommand;
 use App\Domain\Command\User\RegisterCommand;
 use App\Domain\Command\User\ResetPasswordCommand;
 use App\Enum\RoleEnum;
-use App\Repository\UserRepository;
+use App\Repository\User\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;

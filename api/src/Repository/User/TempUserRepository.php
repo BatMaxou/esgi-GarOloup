@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\User;
 
 use App\Entity\User\TempUser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;

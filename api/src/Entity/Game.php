@@ -68,6 +68,7 @@ use Doctrine\ORM\Mapping as ORM;
             input: ReOpenGameInvitationCommand::class,
             output: BasicActionOutput::class,
         ),
+        new Patch(),
     ],
 )]
 class Game
