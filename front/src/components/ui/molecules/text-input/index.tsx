@@ -4,7 +4,7 @@ import { InputHTMLAttributes } from 'react';
 import type { VariantProps } from 'class-variance-authority';
 
 import { textInputCva } from './cva';
-import Typography from '../typography';
+import Typography from '@/components/ui/atoms/typography';
 
 type Props = InputHTMLAttributes<HTMLInputElement> &
   VariantProps<typeof textInputCva> & {

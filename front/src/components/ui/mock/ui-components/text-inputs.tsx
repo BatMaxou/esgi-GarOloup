@@ -1,6 +1,6 @@
 import Typography from '@/components/ui/atoms/typography';
 import GlassPanel from '@/components/ui/atoms/glass-panel';
-import TextInput from '@/components/ui/atoms/text-input';
+import TextInput from '@/components/ui/molecules/text-input';
 
 const TextInputs = () => {
   return (

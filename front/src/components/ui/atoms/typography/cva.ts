@@ -11,6 +11,7 @@ export const typographyCva = cva('antialiased', {
       'heading-3': 'text-[1.5rem] leading-[2rem] sm:text-[2rem] sm:leading-[2.5rem]',
       subtitle: 'text-[1.25rem] leading-[1.75rem]',
       button: 'text-[1rem] leading-[1.5rem]',
+      tag: 'text-[0.625rem] leading-[1.25rem]',
       controlled: '',
     },
     textColor: {
@@ -27,6 +28,7 @@ export const typographyCva = cva('antialiased', {
     bold: { true: 'font-bold' },
     center: { true: 'text-center' },
     underline: { true: 'underline' },
+    uppercase: { true: 'uppercase' },
     ellipsis: { true: 'truncate' },
     special: { true: 'font-special' },
   },
