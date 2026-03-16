@@ -3,7 +3,7 @@
 namespace App\Tests\Helper\Builder\User;
 
 use App\Entity\User\User;
-use App\Fixtures\Factory\UserFactory;
+use App\Fixtures\Factory\User\UserFactory;
 use App\Tests\Helper\Builder\AbstractBuilder;
 
 /** @extends AbstractBuilder<User> */

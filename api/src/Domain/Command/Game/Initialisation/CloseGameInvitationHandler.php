@@ -3,10 +3,10 @@
 namespace App\Domain\Command\Game\Initialisation;
 
 use App\Api\Model\BasicActionOutput;
-use App\Domain\GameEvent\Applicator\Exception\GameException;
+use App\Domain\GameEvent\Exception\GameException;
 use App\Domain\GameEvent\GameEventDispatcher;
 use App\Domain\GameEvent\HttpGameExceptionMapper;
-use App\Entity\Event\Game\CloseInvitationEvent;
+use App\Entity\Event\Game\CloseGameInvitationEvent;
 use App\Entity\User\AbstractUser;
 use App\Repository\PlayerRepository;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -35,7 +35,7 @@ class CloseGameInvitationHandler
             throw new AccessDeniedHttpException('You do not have a current player');
         }
 
-        $gameEvent = new CloseInvitationEvent()
+        $gameEvent = new CloseGameInvitationEvent()
             ->setUser($currentUser)
             ->setGame($player->getGame());
 

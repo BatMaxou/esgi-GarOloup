@@ -2,6 +2,9 @@
 
 namespace App\Entity\Event\Game;
 
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity]
 class JoinGameEvent extends GameEvent
 {
 }

@@ -3,7 +3,7 @@
 namespace App\Domain\Command\Game\Initialisation;
 
 use App\Api\Model\Game\CreateGameOutput;
-use App\Domain\GameEvent\Applicator\Exception\GameException;
+use App\Domain\GameEvent\Exception\GameException;
 use App\Domain\GameEvent\GameEventDispatcher;
 use App\Domain\GameEvent\HttpGameExceptionMapper;
 use App\Entity\Event\Game\CreateGameEvent;

@@ -13,7 +13,7 @@ services:
             $frontResetUrl: '%env(string:FRONT_RESET_URL)%'
 
     _instanceof:
-        App\Domain\GameEvent\Applicator\Interface\GameEventApplicatorInterface:
+        App\Domain\GameEvent\Interface\GameEventApplicatorInterface:
             tags: ['game_event.applicator']
 
     App\Fixtures\:

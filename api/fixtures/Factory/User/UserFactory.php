@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Fixtures\Factory;
+namespace App\Fixtures\Factory\User;
 
 use App\Entity\User\User;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;

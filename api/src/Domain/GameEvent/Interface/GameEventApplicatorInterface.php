@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\GameEvent\Applicator\Interface;
+namespace App\Domain\GameEvent\Interface;
 
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Game;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\GameEvent\Applicator\Exception;
+namespace App\Domain\GameEvent\Exception;
 
 class MissingUserException extends GameException
 {

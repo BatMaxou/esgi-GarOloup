@@ -2,19 +2,19 @@
 
 namespace App\Domain\GameEvent\Applicator;
 
-use App\Domain\GameEvent\Applicator\Interface\GameEventApplicatorInterface;
 use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
 use App\Domain\GameEvent\Applicator\Trait\UserAwareTrait;
+use App\Domain\GameEvent\Exception\UnauthorizedGameActionException;
+use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\GameSpec;
 use App\Entity\Event\Game\GameEvent;
-use App\Entity\Event\Game\ReOpenInvitationEvent;
+use App\Entity\Event\Game\ReOpenGameInvitationEvent;
 use App\Entity\Game;
 use App\Enum\GameStepEnum;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-/** @implements GameEventApplicatorInterface<ReOpenInvitationEvent> */
-class ReOpenInvitationEventApplicator implements GameEventApplicatorInterface
+/** @implements GameEventApplicatorInterface<ReOpenGameInvitationEvent> */
+class ReOpenGameInvitationEventApplicator implements GameEventApplicatorInterface
 {
     use GameAwareTrait;
     use UserAwareTrait;
@@ -31,7 +31,7 @@ class ReOpenInvitationEventApplicator implements GameEventApplicatorInterface
         $game = $this->ensureGame($gameEvent);
 
         if (!$this->gameSpec->canReOpenGameInvitation($user, $game)) {
-            throw new AccessDeniedHttpException('You can not open invitation for this game');
+            throw new UnauthorizedGameActionException('You can not open invitation for this game');
         }
 
         $game->setStep(GameStepEnum::NEW);
@@ -43,7 +43,7 @@ class ReOpenInvitationEventApplicator implements GameEventApplicatorInterface
 
     public function supports(GameEvent $gameEvent): bool
     {
-        return $gameEvent instanceof ReOpenInvitationEvent;
+        return $gameEvent instanceof ReOpenGameInvitationEvent;
     }
 
     public static function getPriority(): int

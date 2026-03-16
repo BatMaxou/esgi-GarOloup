@@ -3,7 +3,7 @@
 namespace App\Tests\Helper\Builder\User;
 
 use App\Entity\User\TempUser;
-use App\Fixtures\Factory\TempUserFactory;
+use App\Fixtures\Factory\User\TempUserFactory;
 use App\Tests\Helper\Builder\AbstractBuilder;
 
 /** @extends AbstractBuilder<TempUser> */

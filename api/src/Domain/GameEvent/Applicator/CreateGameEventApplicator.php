@@ -2,10 +2,10 @@
 
 namespace App\Domain\GameEvent\Applicator;
 
-use App\Domain\GameEvent\Applicator\Exception\AlreadyInAnotherGameException;
-use App\Domain\GameEvent\Applicator\Interface\GameEventApplicatorInterface;
 use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
 use App\Domain\GameEvent\Applicator\Trait\UserAwareTrait;
+use App\Domain\GameEvent\Exception\AlreadyInAnotherGameException;
+use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\GameSpec;
 use App\Entity\Event\Game\CreateGameEvent;
 use App\Entity\Event\Game\GameEvent;

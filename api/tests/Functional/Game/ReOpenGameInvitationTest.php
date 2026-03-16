@@ -2,13 +2,17 @@
 
 namespace App\Tests\Functional\Game;
 
+use App\Entity\Event\Game\ReOpenGameInvitationEvent;
 use App\Enum\GameStepEnum;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;
+use App\Tests\Helper\Trait\GameEventAwareTrait;
 use App\Tests\Helper\When;
 
-class ReopenGameInvitationTest extends GarOloupApiTestCase
+class ReOpenGameInvitationTest extends GarOloupApiTestCase
 {
+    use GameEventAwareTrait;
+
     public function test_anonymous_cant_re_open_game_invitation(): void
     {
         When::game()->reOpenInvitation();
@@ -62,5 +66,18 @@ class ReopenGameInvitationTest extends GarOloupApiTestCase
 
         When::asUser($userBuilder)->game()->reOpenInvitation();
         $this->assertResponseStatusCodeSame(403);
+    }
+
+    public function test_game_event_dispatched_by_re_open_game_invitation(): void
+    {
+        $userBuilder = ThereIs::anUser()->withUsername('SLiipMan')->build();
+        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+        $gameBuilder = ThereIs::aGame()->withHost($hostBuilder)->withStep(GameStepEnum::CONFIGURATION)->build();
+
+        $response = When::asUser($userBuilder)->game()->reOpenInvitation();
+        $this->assertResponseStatusCodeSame(200);
+
+        $this->assertCollected(ReOpenGameInvitationEvent::class, $userBuilder->username, $gameBuilder->getEntity()->getId());
+        $this->assertEventCollectedNumber(1);
     }
 }

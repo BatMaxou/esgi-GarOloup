@@ -2,13 +2,17 @@
 
 namespace App\Tests\Functional\Game;
 
+use App\Entity\Event\Game\CreateGameEvent;
 use App\Fixtures\Factory\GameFactory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;
+use App\Tests\Helper\Trait\GameEventAwareTrait;
 use App\Tests\Helper\When;
 
 class CreateGameTest extends GarOloupApiTestCase
 {
+    use GameEventAwareTrait;
+
     public function test_anonymous_cant_create_game(): void
     {
         When::game()->create();
@@ -67,5 +71,21 @@ class CreateGameTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(409);
 
         $this->assertEquals(1, GameFactory::count());
+    }
+
+    public function test_game_event_dispatched_by_game_creation(): void
+    {
+        $userBuilder = ThereIs::anUser()->withUsername('SLiipMan')->build();
+
+        When::asUser($userBuilder);
+        $response = When::game()->create();
+        $this->assertResponseStatusCodeSame(201);
+
+        $joinCode = $response->get('[joinCode]');
+        $game = GameFactory::findBy(['joinCode' => $joinCode])[0] ?? null;
+        $this->assertNotNull($game);
+
+        $this->assertCollected(CreateGameEvent::class, $userBuilder->username, $game->getId());
+        $this->assertEventCollectedNumber(1);
     }
 }

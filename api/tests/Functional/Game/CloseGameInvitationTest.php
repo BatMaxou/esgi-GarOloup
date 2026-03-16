@@ -2,13 +2,17 @@
 
 namespace App\Tests\Functional\Game;
 
+use App\Entity\Event\Game\CloseGameInvitationEvent;
 use App\Enum\GameStepEnum;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;
+use App\Tests\Helper\Trait\GameEventAwareTrait;
 use App\Tests\Helper\When;
 
 class CloseGameInvitationTest extends GarOloupApiTestCase
 {
+    use GameEventAwareTrait;
+
     public function test_anonymous_cant_close_game_invitation(): void
     {
         When::game()->closeInvitation();
@@ -62,5 +66,18 @@ class CloseGameInvitationTest extends GarOloupApiTestCase
 
         When::asUser($userBuilder)->game()->closeInvitation();
         $this->assertResponseStatusCodeSame(403);
+    }
+
+    public function test_game_event_dispatched_by_close_game_invitation(): void
+    {
+        $userBuilder = ThereIs::anUser()->withUsername('SLiipMan')->build();
+        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+        $gameBuilder = ThereIs::aGame()->withHost($hostBuilder)->build();
+
+        $response = When::asUser($userBuilder)->game()->closeInvitation();
+        $this->assertResponseStatusCodeSame(200);
+
+        $this->assertCollected(CloseGameInvitationEvent::class, $userBuilder->username, $gameBuilder->getEntity()->getId());
+        $this->assertEventCollectedNumber(1);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Fixtures\Factory;
 
 use App\Entity\Player;
+use App\Fixtures\Factory\User\TempUserFactory;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
