@@ -2,14 +2,18 @@
 
 namespace App\Tests\Functional\Game;
 
+use App\Entity\Event\Game\JoinGameEvent;
 use App\Fixtures\Factory\GameFactory;
 use App\Fixtures\Factory\PlayerFactory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;
+use App\Tests\Helper\Trait\GameEventAwareTrait;
 use App\Tests\Helper\When;
 
 class JoinGameTest extends GarOloupApiTestCase
 {
+    use GameEventAwareTrait;
+
     public function test_anonymous_cant_join_game(): void
     {
         $gameBuilder = ThereIs::aGame()->withJoinCode('Do!BeShy')->build();
@@ -150,5 +154,17 @@ class JoinGameTest extends GarOloupApiTestCase
 
         When::asTempUser($tempUserBuilder)->game()->join($gameBuilder->joinCode);
         $this->assertResponseStatusCodeSame(404);
+    }
+
+    public function test_game_event_dispatched_when_joining_game(): void
+    {
+        $userBuilder = ThereIs::anUser()->withUsername('SLiipMan')->build();
+        $gameBuilder = ThereIs::aGame()->withJoinCode('Do!BeShy')->build();
+
+        $response = When::asUser($userBuilder)->game()->join($gameBuilder->joinCode);
+        $this->assertResponseStatusCodeSame(201);
+
+        $this->assertCollected(JoinGameEvent::class, $userBuilder->username, $gameBuilder->getEntity()->getId());
+        $this->assertEventCollectedNumber(1);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Tests\Functional\User;
 
-use App\Fixtures\Factory\TempUserFactory;
+use App\Fixtures\Factory\User\TempUserFactory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\When;

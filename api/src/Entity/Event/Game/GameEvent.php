@@ -8,8 +8,19 @@ use App\Entity\Trait\UuidTrait;
 use App\Entity\User\AbstractUser;
 use App\Repository\Event\Game\GameEventRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
+use Doctrine\ORM\Mapping\InheritanceType;
 
 #[ORM\Entity(repositoryClass: GameEventRepository::class)]
+#[InheritanceType('JOINED')]
+#[DiscriminatorColumn(name: 'discr', type: 'string')]
+#[DiscriminatorMap([
+    'close_invitation' => CloseGameInvitationEvent::class,
+    'create_game' => CreateGameEvent::class,
+    'join_game' => JoinGameEvent::class,
+    'reopen_invitation' => ReOpenGameInvitationEvent::class,
+])]
 abstract class GameEvent
 {
     use UuidTrait;
@@ -24,9 +35,9 @@ abstract class GameEvent
     private ?Game $game = null;
     private ?AbstractUser $user = null;
 
-    public function getGameId(): string
+    public function getGameId(): ?string
     {
-        return $this->gameId;
+        return $this->gameId ?? null;
     }
 
     public function setGameId(string $gameId): static
@@ -36,9 +47,9 @@ abstract class GameEvent
         return $this;
     }
 
-    public function getPlayerUsername(): string
+    public function getPlayerUsername(): ?string
     {
-        return $this->playerUsername;
+        return $this->playerUsername ?? null;
     }
 
     public function setPlayerUsername(string $playerUsername): static
@@ -56,6 +67,9 @@ abstract class GameEvent
     public function setGame(?Game $game): static
     {
         $this->game = $game;
+        if ($id = $game?->getId()) {
+            $this->gameId = $id;
+        }
 
         return $this;
     }
@@ -68,6 +82,9 @@ abstract class GameEvent
     public function setUser(?AbstractUser $user): static
     {
         $this->user = $user;
+        if ($usrname = $user?->getUsername()) {
+            $this->playerUsername = $usrname;
+        }
 
         return $this;
     }

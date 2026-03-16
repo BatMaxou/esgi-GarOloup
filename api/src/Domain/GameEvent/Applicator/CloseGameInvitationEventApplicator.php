@@ -2,19 +2,19 @@
 
 namespace App\Domain\GameEvent\Applicator;
 
-use App\Domain\GameEvent\Applicator\Exception\UnauthorizedGameActionException;
-use App\Domain\GameEvent\Applicator\Interface\GameEventApplicatorInterface;
 use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
 use App\Domain\GameEvent\Applicator\Trait\UserAwareTrait;
+use App\Domain\GameEvent\Exception\UnauthorizedGameActionException;
+use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\GameSpec;
-use App\Entity\Event\Game\CloseInvitationEvent;
+use App\Entity\Event\Game\CloseGameInvitationEvent;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Game;
 use App\Enum\GameStepEnum;
 use Doctrine\ORM\EntityManagerInterface;
 
-/** @implements GameEventApplicatorInterface<CloseInvitationEvent> */
-class CloseInvitationEventApplicator implements GameEventApplicatorInterface
+/** @implements GameEventApplicatorInterface<CloseGameInvitationEvent> */
+class CloseGameInvitationEventApplicator implements GameEventApplicatorInterface
 {
     use GameAwareTrait;
     use UserAwareTrait;
@@ -43,7 +43,7 @@ class CloseInvitationEventApplicator implements GameEventApplicatorInterface
 
     public function supports(GameEvent $gameEvent): bool
     {
-        return $gameEvent instanceof CloseInvitationEvent;
+        return $gameEvent instanceof CloseGameInvitationEvent;
     }
 
     public static function getPriority(): int

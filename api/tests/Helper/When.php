@@ -3,7 +3,7 @@
 namespace App\Tests\Helper;
 
 use ApiPlatform\Symfony\Bundle\Test\Client;
-use App\Fixtures\Factory\UserFactory;
+use App\Fixtures\Factory\User\UserFactory;
 use App\Tests\Helper\Behavior\Game\GameBehavior;
 use App\Tests\Helper\Behavior\Player\PlayerBehavior;
 use App\Tests\Helper\Behavior\Security\AuthBehavior;
@@ -20,6 +20,11 @@ final class When
     public static function setClient(Client $client): void
     {
         self::$client = $client;
+    }
+
+    public static function getClient(): Client
+    {
+        return self::$client;
     }
 
     public static function auth(): AuthBehavior
@@ -97,7 +102,7 @@ final class When
 
     private static function as(?string $token): static
     {
-        self::$client = static::$client->withOptions([
+        self::$client = self::$client->withOptions([
             'headers' => [
                 ...(empty($token) ? [] : ['Authorization' => \sprintf('Bearer %s', $token)]),
             ],

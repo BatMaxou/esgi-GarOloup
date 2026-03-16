@@ -2,11 +2,11 @@
 
 namespace App\Domain\GameEvent;
 
-use App\Domain\GameEvent\Applicator\Exception\AlreadyInAnotherGameException;
-use App\Domain\GameEvent\Applicator\Exception\GameException;
-use App\Domain\GameEvent\Applicator\Exception\MissingGameException;
-use App\Domain\GameEvent\Applicator\Exception\MissingUserException;
-use App\Domain\GameEvent\Applicator\Exception\UnauthorizedGameActionException;
+use App\Domain\GameEvent\Exception\AlreadyInAnotherGameException;
+use App\Domain\GameEvent\Exception\GameException;
+use App\Domain\GameEvent\Exception\MissingGameException;
+use App\Domain\GameEvent\Exception\MissingUserException;
+use App\Domain\GameEvent\Exception\UnauthorizedGameActionException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;

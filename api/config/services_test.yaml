@@ -1,3 +1,13 @@
 services:
     mercure.hub.default:
         class: App\Tests\Mock\Mercure\MockHub
+
+    App\Domain\GameEvent\GameEventCollector:
+        class: App\Tests\Mock\GameEvent\MockGameEventCollector
+
+    App\Tests\Mock\GameEvent\MockGameEventCollector:
+        alias: App\Domain\GameEvent\GameEventCollector
+        public: true
+
+    App\Domain\GameEvent\GameEventPersister:
+        class: App\Tests\Mock\GameEvent\MockGameEventPersister
