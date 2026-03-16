@@ -22,6 +22,7 @@ const Typography = ({
   bold,
   center,
   underline,
+  uppercase,
   ellipsis,
   special,
   ...props
@@ -36,6 +37,7 @@ const Typography = ({
         bold,
         center,
         underline,
+        uppercase,
         ellipsis,
         special,
         className,
