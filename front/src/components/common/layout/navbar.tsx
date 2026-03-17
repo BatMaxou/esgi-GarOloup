@@ -1,16 +1,17 @@
 'use client';
 
+import { useMemo } from 'react';
+import { usePathname } from 'next/navigation';
+import { cva } from 'class-variance-authority';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 const ThemeSwitcher = dynamic(() => import('@/components/common/layout/theme-switcher'), { ssr: false });
 
-import { usePathname } from 'next/navigation';
-import { cva } from 'class-variance-authority';
-import { useMemo } from 'react';
 import { paths } from '@/utils/paths';
 import Button from '@/components/ui/molecules/button';
+import { useAuth } from '@/contexts/auth-context';
 
 const navbarCva = cva(
   'border-b border-primary px-4 py-2 flex items-center justify-between fixed top-0 left-0 right-0 backdrop-blur-sm z-24',
@@ -27,6 +28,7 @@ const navbarCva = cva(
 const Navbar = () => {
   const pathname = usePathname();
   const isSticky = useMemo(() => pathname !== paths.home, [pathname]);
+  const { user, logout } = useAuth();
 
   return (
     <nav className={navbarCva({ sticky: isSticky })}>
@@ -51,7 +53,11 @@ const Navbar = () => {
           <Button variant="accent" size="sm" label="Jouer maintenant" />
         </li>
         <li>
-          <Button variant="secondary" size="sm" label="Se connecter" />
+          {user ? (
+            <Button variant="error" size="sm" glass label="Se déconnecter" onClick={logout} />
+          ) : (
+            <Button asLink variant="secondary" size="sm" label="Se connecter" href={paths.login} />
+          )}
         </li>
         <li>
           <ThemeSwitcher />

@@ -8,6 +8,8 @@ import { ApiClientError } from '@/lib/api/ApiClientError';
 
 type Props = {
   children: ReactNode;
+  initialUser?: User | null;
+  initialTempUser?: TempUser | null;
 };
 
 type AuthContextType = {
@@ -21,15 +23,16 @@ type AuthContextType = {
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider = ({ children }: Props) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [tempUser, setTempUser] = useState<TempUser | null>(null);
+export const AuthProvider = ({ initialUser = null, initialTempUser = null, children }: Props) => {
+  const [user, setUser] = useState<User | null>(initialUser);
+  const [tempUser, setTempUser] = useState<TempUser | null>(initialTempUser);
   const { apiClient } = useApiClient();
 
   const logout = useCallback(() => {
     setUser(null);
     setTempUser(null);
-  }, []);
+    apiClient.logout();
+  }, [apiClient]);
 
   const login = useCallback(
     (email: string, password: string) => {
@@ -44,15 +47,17 @@ export const AuthProvider = ({ children }: Props) => {
   );
 
   useEffect(() => {
-    if (apiClient.token || apiClient.refreshToken) {
-      apiClient.me.get().then((maybeUser) => {
-        if (!(maybeUser instanceof ApiClientError)) {
-          setUser(maybeUser);
-          setTempUser(null);
-        }
-      });
+    if (user) {
+      return;
     }
-  }, [apiClient]);
+
+    apiClient.me.get().then((maybeUser) => {
+      if (!(maybeUser instanceof ApiClientError)) {
+        setUser(maybeUser);
+        setTempUser(null);
+      }
+    });
+  }, [apiClient, user]);
 
   return (
     <AuthContext.Provider

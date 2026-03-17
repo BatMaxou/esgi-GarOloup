@@ -12,8 +12,8 @@ export const textInputCva = cva(
     variants: {
       sizing: {
         lg: 'p-4 text-[2rem] leading-[1.75rem] font-special uppercase',
-        md: 'p-4 text-[1rem] leading-[1.5rem]',
-        sm: 'p-2 text-[0.75rem] leading-[1.25rem]',
+        md: 'p-3 text-[1rem] leading-[1.5rem]',
+        sm: 'p-1.5 text-[0.75rem] leading-[1.25rem]',
       },
       fit: { false: 'w-full' },
     },
