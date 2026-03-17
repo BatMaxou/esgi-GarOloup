@@ -23,8 +23,8 @@ jobs:
       - name: Docker up
         run: make up node
 
-      - name: Linter
-        run: make front-lint
-
       - name: Build
         run: make front-build
+
+      - name: Linter
+        run: make front-lint
