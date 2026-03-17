@@ -90,6 +90,10 @@ php-lint:
 	@${MAKE} phpstan
 .PHONY: php-lint
 
+type-check:
+	@${node} pnpm run type:check
+.PHONY: type-check
+
 eslint:
 	@${node} pnpm run lint
 .PHONY: eslint
@@ -103,6 +107,7 @@ prettier-fix:
 .PHONY: prettier-fix
 
 front-lint:
+	@${MAKE} type-check
 	@${MAKE} eslint
 	@${MAKE} prettier
 .PHONY: front-lint
