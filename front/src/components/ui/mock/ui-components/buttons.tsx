@@ -10,7 +10,7 @@ const Buttons = () => {
       </Typography>
       <div className="flex flex-col gap-8">
         <GlassPanel className="p-8">
-          <ul className="flex flex-wrap gap-6">
+          <ul className="flex flex-wrap items-center gap-6">
             <li>
               <Button variant="primary" label="Primary" />
             </li>

@@ -1,31 +1,41 @@
 'use client';
 
-import { useAuth } from '@/contexts/auth-context';
-import { useFormik } from 'formik';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-type LoginFormValues = {
-  email: string;
-  password: string;
-};
+import LoginForm from '@/components/common/form/auth/login-form';
+import Divider from '@/components/ui/atoms/divider';
+import GlassPanel from '@/components/ui/atoms/glass-panel';
+import Typography from '@/components/ui/atoms/typography';
+import { useAuth } from '@/contexts/auth-context';
 
 const LoginClient = () => {
-  const { login } = useAuth();
-  const { handleSubmit, handleChange } = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    onSubmit: (values: LoginFormValues) => {
-      login(values.email, values.password);
-    },
-  });
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      // Get searchParam with key ?redirect= ?
+      router.push('/');
+    }
+  }, [user, router]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input className="border border-primary" type="email" name="email" onChange={handleChange} />
-      <input className="border border-primary" type="password" name="password" onChange={handleChange} />
-      <button className="bg-primary text-white px-4 py-2 rounded-full">test</button>
-    </form>
+    <main className="flex justify-center p-16">
+      <GlassPanel className="w-[min(100%,500px)] flex flex-col justify-start gap-4 p-8 h-fit">
+        <Typography variant="heading-3" textColor="accent" bold center special className="text-glow-accent">
+          GarOloup
+        </Typography>
+        <Typography variant="subtitle" tag="h1" bold center>
+          Bon retour parmi nous (todo)
+        </Typography>
+        <Typography variant="body-sm" tag="p" bold center>
+          Connectez-vous pour reprendre la chasse
+        </Typography>
+        <Divider variant="primary" />
+        {!user && <LoginForm />}
+      </GlassPanel>
+    </main>
   );
 };
 

@@ -14,7 +14,7 @@ export const buttonCva = cva(
         success: '',
         gradient:
           'bg-linear-(--primary-gradient) bg-origin-border hover:button-shadow-primary focus:button-shadow-primary',
-        text: 'bg-transparent hover:underline focus:underline',
+        text: 'bg-transparent hover:underline focus:underline !p-0',
       },
       size: {
         lg: 'px-8 py-4',

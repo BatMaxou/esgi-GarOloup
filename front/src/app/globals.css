@@ -101,8 +101,8 @@
 
 @utility text-glow-* {
   text-shadow:
-    0 0 64px oklch(from --value(--color-*) l c h / 0.3),
-    0 4px 24px oklch(from var(--color-dark) l c h / 0.7);
+    0 0 32px oklch(from --value(--color-*) l c h / 0.4),
+    0 4px 12px oklch(from var(--color-dark) l c h / 0.7);
 }
 
 @utility divider-horizontal-* {
