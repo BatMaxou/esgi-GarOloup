@@ -1,71 +1,49 @@
 'use client';
 
-import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react';
+import { createContext, ReactNode, useCallback, useContext, useMemo } from 'react';
 
-import { TempUser, User } from '@/utils/types';
-import { useApiClient } from '@/contexts/api-context';
-import { ApiClientError } from '@/lib/api/ApiClientError';
+import { User } from '@/utils/types';
+import { signIn, signOut, useSession } from '@/lib/auth/auth-client';
 
 type Props = {
   children: ReactNode;
   initialUser?: User | null;
-  initialTempUser?: TempUser | null;
 };
 
 type AuthContextType = {
   user: User | null;
   setUser: (user: User | null) => void;
-  tempUser: TempUser | null;
-  setTempUser: (user: User | null) => void;
   login: (email: string, password: string) => void;
   logout: () => void;
 };
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider = ({ initialUser = null, initialTempUser = null, children }: Props) => {
-  const [user, setUser] = useState<User | null>(initialUser);
-  const [tempUser, setTempUser] = useState<TempUser | null>(initialTempUser);
-  const { apiClient } = useApiClient();
+export const AuthProvider = ({ children }: Props) => {
+  const { data: session, refetch } = useSession();
 
-  const logout = useCallback(() => {
-    setUser(null);
-    setTempUser(null);
-    apiClient.logout();
-  }, [apiClient]);
+  const user = useMemo(() => {
+    return session?.user ?? null;
+  }, [session]);
 
   const login = useCallback(
-    (email: string, password: string) => {
-      apiClient.login(email, password).then((maybeResponse) => {
-        if (!(maybeResponse instanceof ApiClientError) && maybeResponse.user) {
-          setUser(maybeResponse.user);
-          setTempUser(null);
-        }
-      });
+    async (email: string, password: string) => {
+      await signIn.garoloup({ email, password });
+      // With cookieCache: true, force refetch after login
+      await refetch();
     },
-    [apiClient]
+    [refetch]
   );
 
-  useEffect(() => {
-    if (user) {
-      return;
-    }
-
-    apiClient.me.get().then((maybeUser) => {
-      if (!(maybeUser instanceof ApiClientError)) {
-        setUser(maybeUser);
-        setTempUser(null);
-      }
-    });
-  }, [apiClient, user]);
+  const logout = useCallback(async () => {
+    await signOut();
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         user,
-        setUser,
-        tempUser,
-        setTempUser,
+        setUser: () => {},
         login,
         logout,
       }}

@@ -8,6 +8,7 @@ import Divider from '@/components/ui/atoms/divider';
 import GlassPanel from '@/components/ui/atoms/glass-panel';
 import Typography from '@/components/ui/atoms/typography';
 import { useAuth } from '@/contexts/auth-context';
+import { paths } from '@/utils/paths';
 
 const LoginClient = () => {
   const { user } = useAuth();
@@ -15,8 +16,7 @@ const LoginClient = () => {
 
   useEffect(() => {
     if (user) {
-      // Get searchParam with key ?redirect= ?
-      router.push('/');
+      router.push(paths.home);
     }
   }, [user, router]);
 

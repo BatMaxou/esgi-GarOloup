@@ -11,6 +11,12 @@ App\Entity\User\AbstractUser:
         roles:
             groups:
                 - me:read
+        createdAt:
+            groups:
+                - me:read
+        updatedAt:
+            groups:
+                - me:read
 
 App\Entity\User\User:
     attributes:
