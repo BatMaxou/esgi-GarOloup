@@ -1,28 +1,24 @@
-import type { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { getSessionCookie } from 'better-auth/cookies';
 
-import { authProxy, authMatcher } from '@/proxies/auth';
-
-const routes: Array<{
-  matcher: string[];
-  handler: (request: NextRequest) => Promise<Response>;
-}> = [{ matcher: authMatcher, handler: authProxy }];
+const protectedRoutes = ['/game'];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  for (const route of routes) {
-    const matches = route.matcher.some((pattern) => {
-      const regex = new RegExp(`^${pattern.replace(':path*', '.*')}$`);
+  const isProtected = protectedRoutes.some((route) => pathname === route || pathname.startsWith(`${route}/`));
 
-      return regex.test(pathname);
-    });
+  if (isProtected) {
+    const sessionCookie = getSessionCookie(request);
 
-    if (matches) {
-      return route.handler(request);
+    if (!sessionCookie) {
+      return NextResponse.redirect(new URL('/login', request.url));
     }
   }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: '/((?!_next|favicon.ico).*)',
+  matcher: '/((?!_next|favicon.ico|images|api|logo).*)',
 };

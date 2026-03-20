@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { PlayerProvider } from '@/contexts/player-context';
 import { GameProvider } from '@/contexts/game-context';
-import { getApiClient } from '@/utils/server/clients';
+import { getApiClient, getSession } from '@/utils/server/clients';
 import { ApiClientError } from '@/lib/api/ApiClientError';
 
 type Props = {
@@ -11,11 +11,13 @@ type Props = {
 };
 
 const GameLayout = async ({ children }: Props) => {
-  const apiClient = await getApiClient();
+  const session = await getSession();
 
-  if (!apiClient.token) {
+  if (!session?.user?.token) {
     return notFound();
   }
+
+  const apiClient = await getApiClient();
 
   const maybeGame = await apiClient.game.getCurrent();
   if (maybeGame instanceof ApiClientError) {

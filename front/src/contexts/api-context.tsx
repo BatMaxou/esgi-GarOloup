@@ -4,7 +4,7 @@ import { createContext, ReactNode, useContext, useEffect } from 'react';
 
 import { ApiClient } from '@/lib/api/ApiClient';
 import { apiBaseUrl } from '@/utils/tools';
-import { ClientCookieRegistry } from '@/lib/cookie/ClientCookieRegistry';
+import { updateUser, useSession } from '@/lib/auth/auth-client';
 
 type Props = {
   children: ReactNode;
@@ -16,12 +16,16 @@ type ApiClientContextType = {
 
 export const ApiClientContext = createContext<ApiClientContextType | undefined>(undefined);
 
-const apiClient = new ApiClient(apiBaseUrl, new ClientCookieRegistry());
+const apiClient = new ApiClient(apiBaseUrl, null, null, (token, refreshToken) => {
+  updateUser({ token, refreshToken });
+});
 
 export const ApiClientProvider = ({ children }: Props) => {
+  const { data } = useSession();
+
   useEffect(() => {
-    apiClient.retrieveTokens();
-  }, []);
+    apiClient.changeToken(data?.user?.token, data?.user?.refreshToken);
+  }, [data]);
 
   return <ApiClientContext.Provider value={{ apiClient }}>{children}</ApiClientContext.Provider>;
 };
