@@ -6,7 +6,7 @@ import type { Player } from '@/utils/types';
 import { useApiClient } from '@/contexts/api-context';
 import { useAuth } from '@/contexts/auth-context';
 import { ApiClientError } from '@/lib/api/ApiClientError';
-import { useMercureClient } from './mercure-context';
+import { useMercureClient } from '@/contexts/mercure-context';
 
 type Props = {
   children: ReactNode;

@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
 import LoginForm from '@/components/common/form/auth/login-form';
 import Divider from '@/components/ui/atoms/divider';
@@ -9,6 +8,7 @@ import GlassPanel from '@/components/ui/atoms/glass-panel';
 import Typography from '@/components/ui/atoms/typography';
 import { useAuth } from '@/contexts/auth-context';
 import { paths } from '@/utils/paths';
+import { useRouter } from '@/i18n/navigation';
 
 const LoginClient = () => {
   const { user } = useAuth();

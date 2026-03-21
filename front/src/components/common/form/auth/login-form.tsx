@@ -39,7 +39,7 @@ const LoginForm = ({ className }: Props) => {
         label="Mot de passe oublié ?"
         textVariant="body-xs"
         className="text-neutral-500 self-end"
-        href="#"
+        href="/"
       />
       <Button variant="accent" label="Se connecter" type="submit" full />
     </form>

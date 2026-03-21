@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionCookie } from 'better-auth/cookies';
-import { paths } from './utils/paths';
+import createMiddleware from 'next-intl/middleware';
+
+import { routing } from '@/i18n/routing';
+import { paths } from '@/utils/paths';
 
 const protectedRoutes = ['/game'];
 
@@ -18,9 +21,9 @@ export const proxy = (request: NextRequest) => {
     }
   }
 
-  return NextResponse.next();
+  return createMiddleware(routing)(request);
 };
 
 export const config = {
-  matcher: '/((?!_next|favicon.ico|images|api|logo).*)',
+  matcher: '/((?!_next|favicon\\.ico|api/|.*\\.[a-zA-Z0-9]+$).*)',
 };
