@@ -1,18 +1,17 @@
 import { ApiClientError } from '@/lib/api/ApiClientError';
 import { handleApiError } from '@/lib/api/handleApiError';
 import { GameResource } from '@/lib/api/resources/GameResource';
-import { CookieRegistryInterface } from '@/lib/cookie/CookieRegistryInterface';
-import type { User } from '@/utils/types';
-import { apiPaths } from './paths';
-import { MeResource } from './resources/MeResource';
-import { UserResource } from './resources/UserResource';
-import { TempUserResource } from './resources/TempUserResource';
-import { PlayerResource } from './resources/PlayerResource';
+import { apiPaths } from '@/lib/api/paths';
+import { MeResource } from '@/lib/api/resources/MeResource';
+import { UserResource } from '@/lib/api/resources/UserResource';
+import { TempUserResource } from '@/lib/api/resources/TempUserResource';
+import { PlayerResource } from '@/lib/api/resources/PlayerResource';
+
+type PropagateChangeToken = (token?: string | null, refreshToken?: string | null) => void;
 
 export interface LoginResponse {
   token: string;
   refresh_token: string;
-  user?: User;
 }
 
 export interface RefreshResponse {
@@ -46,9 +45,6 @@ export enum ResponseType {
 }
 
 export class ApiClient {
-  token: string | null = null;
-  refreshToken: string | null = null;
-
   me: MeResource;
   user: UserResource;
   tempUser: TempUserResource;
@@ -57,7 +53,9 @@ export class ApiClient {
 
   constructor(
     public baseUrl: string,
-    public cookieRegistry: CookieRegistryInterface
+    public token: string | null = null,
+    public refreshToken: string | null = null,
+    private propagateChangeToken: PropagateChangeToken = () => {}
   ) {
     this.me = new MeResource(this);
     this.user = new UserResource(this);
@@ -66,36 +64,11 @@ export class ApiClient {
     this.game = new GameResource(this);
   }
 
-  private async refreshAndRetryOn401<T>(error: ApiClientError, callback: () => Promise<T>) {
-    if (error.code === 401 && error.message.includes('JWT Token')) {
-      const refreshResponse = await this.refresh();
-      if (refreshResponse instanceof ApiClientError) {
-        return error;
-      }
-
-      return callback();
-    }
-
-    return error;
+  public initPropagateChangeToken(propagateChangeToken: PropagateChangeToken) {
+    this.propagateChangeToken = propagateChangeToken;
   }
 
-  public async retrieveTokens() {
-    this.token = await this.cookieRegistry.getCookie('token');
-    this.refreshToken = await this.cookieRegistry.getCookie('refresh_token');
-
-    return this;
-  }
-
-  public async setTokens(token: string, refreshToken: string) {
-    this.token = token;
-    this.refreshToken = refreshToken;
-
-    const decodedTokenExp: number = JSON.parse(atob(token.split('.')[1]))?.exp ?? 0;
-    this.cookieRegistry.setCookie('token', token, new Date(decodedTokenExp * 1000));
-    this.cookieRegistry.setCookie('refresh_token', refreshToken, new Date(new Date().getTime() + 2592000));
-  }
-
-  async get<T>(
+  public async get<T>(
     url: string,
     additionnalHeaders: HeadersInit = {},
     autoRefresh: boolean = true
@@ -118,7 +91,7 @@ export class ApiClient {
       });
   }
 
-  async post<T>(
+  public async post<T>(
     url: string,
     body: object = {},
     additionnalHeaders: HeadersInit = {},
@@ -157,7 +130,7 @@ export class ApiClient {
       });
   }
 
-  async patch<T>(
+  public async patch<T>(
     url: string,
     body: object = {},
     additionnalHeaders: HeadersInit = {},
@@ -226,7 +199,7 @@ export class ApiClient {
       });
   }
 
-  async delete(url: string, autoRefresh: boolean = true): Promise<DeleteResponse | ApiClientError> {
+  public async delete(url: string, autoRefresh: boolean = true): Promise<DeleteResponse | ApiClientError> {
     return fetch(`${this.baseUrl}${url}`, {
       method: 'DELETE',
       headers: {
@@ -244,44 +217,11 @@ export class ApiClient {
       });
   }
 
-  async login(email: string, password: string): Promise<LoginResponse | ApiClientError> {
+  public async login(email: string, password: string): Promise<LoginResponse | ApiClientError> {
     return this.post<LoginResponse>(apiPaths.login, {
       username: email,
       password,
-    })
-      .then((response) => {
-        if (!(response instanceof ApiClientError) && response.token) {
-          this.setTokens(response.token, response.refresh_token);
-        }
-
-        return response;
-      })
-      .then(async (response) => {
-        if (!(response instanceof ApiClientError) && response.token) {
-          const maybeUser = await this.me.get();
-          if (maybeUser instanceof ApiClientError) {
-            return maybeUser;
-          }
-
-          return {
-            ...response,
-            user: maybeUser,
-          };
-        }
-
-        return response;
-      });
-  }
-
-  async refresh(): Promise<RefreshResponse | ApiClientError> {
-    return this.post<RefreshResponse>(
-      apiPaths.refreshToken,
-      { refresh_token: this.refreshToken },
-      {},
-      ResponseType.JSON,
-      false
-    ).then((response) => {
-      console.log(this.refreshToken);
+    }).then((response) => {
       if (!(response instanceof ApiClientError) && response.token) {
         this.setTokens(response.token, response.refresh_token);
       }
@@ -290,11 +230,42 @@ export class ApiClient {
     });
   }
 
-  logout(): void {
-    this.token = null;
-    this.cookieRegistry.eraseCookie('token');
+  public setTokens(token?: string | null, refreshToken?: string | null, withPropagation: boolean = true) {
+    this.token = token ?? null;
+    this.refreshToken = refreshToken ?? null;
 
-    this.refreshToken = null;
-    this.cookieRegistry.eraseCookie('refresh_token');
+    if (!withPropagation) {
+      return;
+    }
+
+    this.propagateChangeToken(token, refreshToken);
+  }
+
+  private async refresh(): Promise<RefreshResponse | ApiClientError> {
+    return this.post<RefreshResponse>(
+      apiPaths.refreshToken,
+      { refresh_token: this.refreshToken },
+      {},
+      ResponseType.JSON,
+      false
+    ).then((response) => {
+      if (!(response instanceof ApiClientError) && response.token) {
+        this.setTokens(response.token, response.refresh_token);
+      }
+      return response;
+    });
+  }
+
+  private async refreshAndRetryOn401<T>(error: ApiClientError, callback: () => Promise<T>) {
+    if (error.code === 401 && error.message.includes('JWT Token')) {
+      const refreshResponse = await this.refresh();
+      if (refreshResponse instanceof ApiClientError) {
+        return error;
+      }
+
+      return callback();
+    }
+
+    return error;
   }
 }
