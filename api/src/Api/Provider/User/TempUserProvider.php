@@ -43,6 +43,7 @@ final class TempUserProvider implements ProviderInterface
 
         $refreshToken = $this->refreshTokenGenerator->createForUserWithTtl($tempUser, self::TWELVE_HOURS_VALIDITY);
         $output->refreshToken = $refreshToken->getRefreshToken();
+
         $this->em->persist($refreshToken);
         $this->em->flush();
 

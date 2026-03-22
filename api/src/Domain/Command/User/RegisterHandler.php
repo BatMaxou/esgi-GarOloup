@@ -24,6 +24,10 @@ class RegisterHandler
             throw new ConflictHttpException('You already have an account');
         }
 
+        if ($this->userRepository->findOneBy(['username' => $command->username])) {
+            throw new ConflictHttpException('This username is already taken');
+        }
+
         $newUser = new User()
             ->setEmail($command->email)
             ->setUsername($command->username)

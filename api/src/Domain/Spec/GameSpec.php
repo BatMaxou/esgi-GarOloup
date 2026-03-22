@@ -4,6 +4,7 @@ namespace App\Domain\Spec;
 
 use App\Entity\Game;
 use App\Entity\User\AbstractUser;
+use App\Entity\User\TempUser;
 use App\Enum\GameStepEnum;
 use App\Repository\PlayerRepository;
 
@@ -39,6 +40,22 @@ class GameSpec
 
         foreach ($players as $player) {
             if (!$player->isDead()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public function isUsernameAvailable(TempUser $user, Game $game): bool
+    {
+        $requestedUsername = $user->getUsername();
+        foreach ($game->getPlayers() as $player) {
+            if ($player->getLinkedUser() === $user) {
+                continue;
+            }
+
+            if ($requestedUsername === $player->getLinkedUser()->getUsername()) {
                 return false;
             }
         }

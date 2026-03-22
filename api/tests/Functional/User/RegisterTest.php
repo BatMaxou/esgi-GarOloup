@@ -52,6 +52,14 @@ class RegisterTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(409);
     }
 
+    public function test_user_cant_register_with_existing_username(): void
+    {
+        ThereIs::anUser()->withUsername('SLiipMan')->build();
+
+        When::user()->register('sliipman@garoloup.fr', 'SLiipMan', 'azertyuiAZ123#');
+        $this->assertResponseStatusCodeSame(409);
+    }
+
     public function test_user_can_register_with_valid_credentials(): void
     {
         $response = When::user()->register('sliipman@garoloup.fr', 'Sliipman', 'azertyuiAZ123#');
