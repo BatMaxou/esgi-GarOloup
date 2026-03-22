@@ -62,6 +62,7 @@ final class When
         $email = $userBuilder->email ?? $userBuilder->getEntity()->getEmail();
         $password = $userBuilder->password ?? UserFactory::DEFAULT_TEST_PASSWORD;
 
+        self::asAnonymous();
         $response = self::auth()->login($email, $password);
         if (200 !== $response->getStatusCode()) {
             throw new \RuntimeException('Login failed.');
@@ -82,6 +83,7 @@ final class When
             throw new \RuntimeException('Username not set.');
         }
 
+        self::asAnonymous();
         $response = self::tempUser()->get($username);
         if (200 !== $response->getStatusCode()) {
             throw new \RuntimeException('Temp user retrieval failed.');
@@ -104,7 +106,7 @@ final class When
     {
         self::$client = self::$client->withOptions([
             'headers' => [
-                ...(empty($token) ? [] : ['Authorization' => \sprintf('Bearer %s', $token)]),
+                'Authorization' => empty($token) ? '' : \sprintf('Bearer %s', $token),
             ],
         ]);
 

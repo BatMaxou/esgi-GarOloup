@@ -156,6 +156,61 @@ class JoinGameTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(404);
     }
 
+    public function test_temp_user_cant_join_game_if_username_already_taken_by_another_user(): void
+    {
+        $userBuilder = ThereIs::anUser()->withUsername('SLiipMan')->build();
+        $tempUserBuilder = ThereIs::aTempUser()->withUsername('SLiipMan')->build();
+        $hostUserBuilder = ThereIs::anUser()->withUsername('Mister_man_l-ost')->build();
+        $hostBuilder = ThereIs::aPlayer()->withUser($hostUserBuilder)->build();
+        $gameBuilder = ThereIs::aGame()->withJoinCode('Do!BeShy')->withHost($hostBuilder)->build();
+
+        When::asUser($userBuilder)->game()->join($gameBuilder->joinCode);
+        $this->assertResponseStatusCodeSame(201);
+
+        When::asTempUser($tempUserBuilder)->game()->join($gameBuilder->joinCode);
+        $this->assertResponseStatusCodeSame(409);
+    }
+
+    public function test_user_joining_renames_conflicting_temp_user(): void
+    {
+        $tempUserBuilder = ThereIs::aTempUser()->withUsername('SLiipMan')->build();
+        $userBuilder = ThereIs::anUser()->withUsername('SLiipMan')->build();
+        $hostUserBuilder = ThereIs::anUser()->withUsername('Mister_man_l-ost')->build();
+        $hostBuilder = ThereIs::aPlayer()->withUser($hostUserBuilder)->build();
+        $gameBuilder = ThereIs::aGame()->withJoinCode('Do!BeShy')->withHost($hostBuilder)->build();
+
+        When::asTempUser($tempUserBuilder)->game()->join($gameBuilder->joinCode);
+        $this->assertResponseStatusCodeSame(201);
+
+        When::asUser($userBuilder)->game()->join($gameBuilder->joinCode);
+        $this->assertResponseStatusCodeSame(201);
+
+        $this->assertEquals(3, $gameBuilder->getEntity()->getPlayers()->count());
+        $this->assertEquals('SLiipMan-2', $tempUserBuilder->getEntity()->getUsername());
+    }
+
+    public function test_user_joining_renames_conflicting_temp_user_with_incremented_counter(): void
+    {
+        $tempUserBuilder = ThereIs::aTempUser()->withUsername('SLiipMan')->build();
+        $secondTempUserBuilder = ThereIs::aTempUser()->withUsername('SLiipMan-2')->build();
+        $userBuilder = ThereIs::anUser()->withUsername('SLiipMan')->build();
+        $hostUserBuilder = ThereIs::anUser()->withUsername('Mister_man_l-ost')->build();
+        $hostBuilder = ThereIs::aPlayer()->withUser($hostUserBuilder)->build();
+        $gameBuilder = ThereIs::aGame()->withJoinCode('Do!BeShy')->withHost($hostBuilder)->build();
+
+        When::asTempUser($tempUserBuilder)->game()->join($gameBuilder->joinCode);
+        $this->assertResponseStatusCodeSame(201);
+
+        When::asTempUser($secondTempUserBuilder)->game()->join($gameBuilder->joinCode);
+        $this->assertResponseStatusCodeSame(201);
+
+        When::asUser($userBuilder)->game()->join($gameBuilder->joinCode);
+        $this->assertResponseStatusCodeSame(201);
+
+        $this->assertEquals(4, $gameBuilder->getEntity()->getPlayers()->count());
+        $this->assertEquals('SLiipMan-3', $tempUserBuilder->getEntity()->getUsername());
+    }
+
     public function test_game_event_dispatched_when_joining_game(): void
     {
         $userBuilder = ThereIs::anUser()->withUsername('SLiipMan')->build();

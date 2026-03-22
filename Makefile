@@ -129,7 +129,11 @@ tests:
 	@${php} bin/phpunit
 .PHONY: test
 
-test-coverage:
+test-filter:
+	@${php} bin/phpunit --filter $(ARGS)
+.PHONY: test
+
+tests-coverage:
 	@${php} bin/phpunit --coverage-html var/coverage
 .PHONY: test-coverage
 

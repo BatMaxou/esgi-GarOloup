@@ -8,7 +8,7 @@ COPY ./.devops/php/php.ini $PHP_INI_DIR/conf.d/
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN apk update && apk upgrade;
-RUN install-php-extensions intl pdo_mysql;
+RUN install-php-extensions intl pdo_mysql pcov xdebug;
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer

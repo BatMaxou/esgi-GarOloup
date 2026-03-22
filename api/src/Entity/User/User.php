@@ -55,6 +55,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
 class User extends AbstractUser implements PasswordAuthenticatedUserInterface
 {
     #[ORM\Column(length: 180)]
