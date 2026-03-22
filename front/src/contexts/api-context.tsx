@@ -1,5 +1,7 @@
 'use client';
+
 import { createContext, ReactNode, useCallback, useContext, useEffect } from 'react';
+
 import { ApiClient } from '@/lib/api/ApiClient';
 import { apiBaseUrl } from '@/utils/tools';
 import { updateUser, useSession } from '@/lib/auth/auth-client';

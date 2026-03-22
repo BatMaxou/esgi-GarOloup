@@ -6,8 +6,8 @@ import type { Game } from '@/utils/types';
 import { useApiClient } from '@/contexts/api-context';
 import { useAuth } from '@/contexts/auth-context';
 import { ApiClientError } from '@/lib/api/ApiClientError';
-import { useMercureClient } from './mercure-context';
-import { usePlayer } from './player-context';
+import { useMercureClient } from '@/contexts/mercure-context';
+import { usePlayer } from '@/contexts/player-context';
 
 type Props = {
   children: ReactNode;

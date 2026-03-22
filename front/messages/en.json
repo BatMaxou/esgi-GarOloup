@@ -1,0 +1,29 @@
+{
+  "name": "GarOloup",
+  "components": {
+    "common": {
+      "home": {
+        "hero": {
+          "description": "Strategy, bluff and betrayal… Will you survive the night?",
+          "highlights": {
+            "0": {
+              "title": "6-20",
+              "description": "players"
+            },
+            "1": {
+              "title": "Online"
+            },
+            "2": {
+              "title": "100%",
+              "description": "free"
+            }
+          },
+          "actions": {
+            "join": "Join a game",
+            "discover": "Discover"
+          }
+        }
+      }
+    }
+  }
+}

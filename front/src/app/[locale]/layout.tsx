@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
 import Image from 'next/image';
+import { NextIntlClientProvider } from 'next-intl';
 
-import './globals.css';
+import '@/app/globals.css';
 import { ApiClientProvider } from '@/contexts/api-context';
 import { MercureClientProvider } from '@/contexts/mercure-context';
 import { AuthProvider } from '@/contexts/auth-context';
@@ -18,13 +19,15 @@ type Props = {
 const Providers = ({ children }: ProvidersProps) => {
   return (
     <>
-      <ThemeProvider>
-        <ApiClientProvider>
-          <MercureClientProvider>
-            <AuthProvider>{children}</AuthProvider>
-          </MercureClientProvider>
-        </ApiClientProvider>
-      </ThemeProvider>
+      <NextIntlClientProvider>
+        <ThemeProvider>
+          <ApiClientProvider>
+            <MercureClientProvider>
+              <AuthProvider>{children}</AuthProvider>
+            </MercureClientProvider>
+          </ApiClientProvider>
+        </ThemeProvider>
+      </NextIntlClientProvider>
     </>
   );
 };

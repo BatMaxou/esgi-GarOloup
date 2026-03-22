@@ -1,12 +1,13 @@
 'use client';
 
+import { useCallback } from 'react';
+
 import Typography from '@/components/ui/atoms/typography';
 import Button from '@/components/ui/molecules/button';
 import { useApiClient } from '@/contexts/api-context';
 import { useGame } from '@/contexts/game-context';
 import { usePlayer } from '@/contexts/player-context';
 import { GameStepEnum } from '@/utils/enums';
-import { useCallback } from 'react';
 
 const GameClient = () => {
   const { game } = useGame();

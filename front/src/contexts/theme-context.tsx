@@ -1,8 +1,9 @@
 'use client';
 
-import { ThemeEnum } from '@/utils/enums';
 import { createContext, ReactNode, useCallback, useContext, useEffect } from 'react';
 import { useLocalStorage } from 'react-use';
+
+import { ThemeEnum } from '@/utils/enums';
 
 type Props = {
   children: ReactNode;
