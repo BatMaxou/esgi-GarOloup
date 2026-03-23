@@ -10,8 +10,8 @@ use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\GameSpec;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\SetGameMasterEvent;
-use App\Entity\Game;
-use App\Repository\PlayerRepository;
+use App\Entity\Game\Game;
+use App\Repository\Game\PlayerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 /** @implements GameEventApplicatorInterface<SetGameMasterEvent> */

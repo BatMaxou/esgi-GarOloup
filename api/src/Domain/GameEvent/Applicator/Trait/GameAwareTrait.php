@@ -4,7 +4,7 @@ namespace App\Domain\GameEvent\Applicator\Trait;
 
 use App\Domain\GameEvent\Exception\MissingGameException;
 use App\Entity\Event\Game\GameEvent;
-use App\Entity\Game;
+use App\Entity\Game\Game;
 
 trait GameAwareTrait
 {

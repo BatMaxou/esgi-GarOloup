@@ -1,0 +1,40 @@
+type: http_request
+model: http_request
+id: rq_usJhqLY4bm
+createdAt: 2026-03-28T09:29:08.672634732
+updatedAt: 2026-03-28T09:56:16.575811358
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_WxKE8boAAj
+authentication:
+  token: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3R2FTQll6eFlYWFFjWDErdURlQnhTZVREaVJLdVF6U05hOFBaeFFsODZWZ29Zc1RNbHNvZGlBVCt5M2U1NUF4TG5yOTlqQQ') ]}
+authenticationType: bearer
+body:
+  form:
+  - enabled: true
+    file: /home/maxime/Images/avatar.jpg
+    id: SZd3h7DSQS
+    name: picture
+  - enabled: false
+    id: HysV4PcBjP
+    name: name
+    value: Text
+  - enabled: true
+    id: iwBBEtjrRK
+    name: ''
+    value: ''
+bodyType: multipart/form-data
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: multipart/form-data
+  id: ITXyDZEk5e
+- enabled: true
+  name: ''
+  value: ''
+  id: SS2qUhiwNh
+method: POST
+name: Update Role Files
+sortPriority: 0.003
+url: ${[ BASE_URL ]}/api/roles/${[ LAST_ROLE_ID ]}/files
+urlParameters: []

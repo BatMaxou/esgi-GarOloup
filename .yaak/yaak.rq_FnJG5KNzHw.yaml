@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_FnJG5KNzHw
 createdAt: 2026-02-27T17:48:42.133896723
-updatedAt: 2026-03-07T21:08:25.841730199
+updatedAt: 2026-03-26T22:32:46.501438794
 workspaceId: wk_uXtATNFQmZ
 folderId: null
 authentication: {}
@@ -21,6 +21,6 @@ headers:
   id: null
 method: POST
 name: Refresh Token
-sortPriority: 10.333333333333334
+sortPriority: 7000.0
 url: ${[ BASE_URL ]}/api/token/refresh
 urlParameters: []

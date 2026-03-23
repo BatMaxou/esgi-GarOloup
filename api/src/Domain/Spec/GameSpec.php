@@ -2,11 +2,11 @@
 
 namespace App\Domain\Spec;
 
-use App\Entity\Game;
+use App\Entity\Game\Game;
 use App\Entity\User\AbstractUser;
 use App\Entity\User\TempUser;
-use App\Enum\GameStepEnum;
-use App\Repository\PlayerRepository;
+use App\Enum\Game\GameStepEnum;
+use App\Repository\Game\PlayerRepository;
 
 class GameSpec
 {

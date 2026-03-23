@@ -8,7 +8,7 @@ use App\Domain\GameEvent\GameEventDispatcher;
 use App\Domain\GameEvent\HttpGameExceptionMapper;
 use App\Entity\Event\Game\CloseGameInvitationEvent;
 use App\Entity\User\AbstractUser;
-use App\Repository\PlayerRepository;
+use App\Repository\Game\PlayerRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;

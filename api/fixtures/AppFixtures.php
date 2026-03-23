@@ -13,5 +13,8 @@ class AppFixtures extends Fixture
         ThereIs::anAdmin()->withEmail('admin@garoloup.com')->withUsername('Admin')->build();
         ThereIs::anUser()->withEmail('test@garoloup.com')->withUsername('Test')->build();
         ThereIs::anUser()->build(10);
+
+        ThereIs::aRole()->villager()->build();
+        ThereIs::aRole()->werewolf()->build();
     }
 }

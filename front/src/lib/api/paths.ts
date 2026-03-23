@@ -20,4 +20,10 @@ export const apiPaths = {
   },
   login: '/login',
   refreshToken: '/token/refresh',
+  role: {
+    list: '/roles',
+    get: (id: string) => `/roles/${id}`,
+    update: (id: string) => `/roles/${id}`,
+    updateFiles: (id: string) => `/roles/${id}/files`,
+  },
 };

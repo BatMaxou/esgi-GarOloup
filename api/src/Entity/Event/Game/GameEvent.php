@@ -2,7 +2,7 @@
 
 namespace App\Entity\Event\Game;
 
-use App\Entity\Game;
+use App\Entity\Game\Game;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Entity\User\AbstractUser;

@@ -1,4 +1,4 @@
-import { GameStepEnum, RoleEnum } from './enums';
+import { GameRoleEnum, GameStepEnum, GameTeamEnum, RoleEnum } from './enums';
 
 export type User = {
   id: string;
@@ -27,4 +27,16 @@ export type Player = {
   dead?: boolean;
   game?: Game;
   host?: boolean;
+};
+
+export type Role = {
+  id: string;
+  type?: GameRoleEnum;
+  name?: string;
+  description?: string;
+  ability?: string;
+  picture?: string;
+  minPlayers?: number;
+  maxPerGame?: number;
+  teams?: GameTeamEnum[];
 };

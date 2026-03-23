@@ -3,7 +3,7 @@ model: environment
 id: ev_tdWYkaGeP5
 workspaceId: wk_uXtATNFQmZ
 createdAt: 2026-02-27T17:49:25.047317508
-updatedAt: 2026-03-25T17:31:24.551139312
+updatedAt: 2026-03-27T19:28:13.899282981
 name: User
 public: true
 base: false
@@ -18,5 +18,9 @@ variables:
   name: REFRESH_TOKEN
   value: ${[ response.body.path(request='rq_KmJ58wRtsX', behavior='ttl', ttl='2592000', result='first', join=b64'LCA', path=b64'JC5yZWZyZXNoX3Rva2Vu') ]}
   id: Fup0qgFVEQ
+- enabled: true
+  name: EMAIL
+  value: test@garoloup.com
+  id: T3DAAiJ7jK
 color: var(--success)
-sortPriority: 0.0
+sortPriority: 3111.1111111111113

@@ -6,6 +6,7 @@
 /api/public/bundles/
 /api/private/
 /api/public/uploads/
+/api/fixtures/assets/copy/
 /api/var/
 /api/vendor/
 /api/config/jwt/*.pem

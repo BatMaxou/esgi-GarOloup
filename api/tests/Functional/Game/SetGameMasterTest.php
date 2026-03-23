@@ -3,7 +3,7 @@
 namespace App\Tests\Functional\Game;
 
 use App\Entity\Event\Game\SetGameMasterEvent;
-use App\Enum\GameStepEnum;
+use App\Enum\Game\GameStepEnum;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\Trait\GameEventAwareTrait;

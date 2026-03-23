@@ -2,11 +2,10 @@
 
 namespace App\Tests\Helper\Builder\Game;
 
-use App\Entity\Game;
-use App\Enum\GameStepEnum;
-use App\Fixtures\Factory\GameFactory;
+use App\Entity\Game\Game;
+use App\Enum\Game\GameStepEnum;
+use App\Fixtures\Factory\Game\GameFactory;
 use App\Tests\Helper\Builder\AbstractBuilder;
-use App\Tests\Helper\Builder\Player\PlayerBuilder;
 
 /** @extends AbstractBuilder<Game> */
 class GameBuilder extends AbstractBuilder

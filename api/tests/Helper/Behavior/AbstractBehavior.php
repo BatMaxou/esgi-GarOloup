@@ -20,4 +20,12 @@ abstract class AbstractBehavior
             'Content-Type' => 'application/merge-patch+json',
         ];
     }
+
+    /** @return array<string, string> */
+    protected function getMultipartHeaders(): array
+    {
+        return [
+            'Content-Type' => 'multipart/form-data',
+        ];
+    }
 }

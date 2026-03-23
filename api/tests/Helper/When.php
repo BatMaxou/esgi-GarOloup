@@ -6,6 +6,7 @@ use ApiPlatform\Symfony\Bundle\Test\Client;
 use App\Fixtures\Factory\User\UserFactory;
 use App\Tests\Helper\Behavior\Game\GameBehavior;
 use App\Tests\Helper\Behavior\Player\PlayerBehavior;
+use App\Tests\Helper\Behavior\RoleBehavior;
 use App\Tests\Helper\Behavior\Security\AuthBehavior;
 use App\Tests\Helper\Behavior\User\MeBehavior;
 use App\Tests\Helper\Behavior\User\TempUserBehavior;
@@ -55,6 +56,11 @@ final class When
     public static function player(): PlayerBehavior
     {
         return new PlayerBehavior(self::$client);
+    }
+
+    public static function role(): RoleBehavior
+    {
+        return new RoleBehavior(self::$client);
     }
 
     public static function asUser(UserBuilder $userBuilder): static
