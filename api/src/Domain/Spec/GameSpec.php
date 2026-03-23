@@ -65,8 +65,7 @@ class GameSpec
 
     public function canCloseGameInvitation(AbstractUser $user, Game $game): bool
     {
-        $host = $game->getHost();
-        if ($user !== $host->getUser() && $user !== $host->getTempUser()) {
+        if ($user !== $game->getHost()->getLinkedUser()) {
             return false;
         }
 
@@ -75,11 +74,19 @@ class GameSpec
 
     public function canReOpenGameInvitation(AbstractUser $user, Game $game): bool
     {
-        $host = $game->getHost();
-        if ($user !== $host->getUser() && $user !== $host->getTempUser()) {
+        if ($user !== $game->getHost()->getLinkedUser()) {
             return false;
         }
 
         return GameStepEnum::CONFIGURATION === $game->getStep();
+    }
+
+    public function canSetGameMaster(AbstractUser $user, Game $game): bool
+    {
+        if ($user !== $game->getHost()->getLinkedUser()) {
+            return false;
+        }
+
+        return GameStepEnum::GAME_MASTER_CHOICE === $game->getStep();
     }
 }

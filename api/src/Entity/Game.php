@@ -13,6 +13,7 @@ use App\Domain\Command\Game\Initialisation\CloseGameInvitationCommand;
 use App\Domain\Command\Game\Initialisation\CreateGameCommand;
 use App\Domain\Command\Game\Initialisation\JoinGameCommand;
 use App\Domain\Command\Game\Initialisation\ReOpenGameInvitationCommand;
+use App\Domain\Command\Game\Initialisation\SetGameMasterCommand;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Enum\GameStepEnum;
@@ -68,6 +69,13 @@ use Doctrine\ORM\Mapping as ORM;
             input: ReOpenGameInvitationCommand::class,
             output: BasicActionOutput::class,
         ),
+        new Patch(
+            name: 'api_game_set_game_master',
+            uriTemplate: '/game/game-master',
+            messenger: 'input',
+            input: SetGameMasterCommand::class,
+            output: BasicActionOutput::class,
+        ),
         new Patch(),
     ],
 )]
@@ -82,6 +90,9 @@ class Game
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private Player $host;
+
+    #[ORM\OneToOne]
+    private ?Player $gameMaster = null;
 
     #[ORM\Column(length: 8)]
     private string $joinCode;
@@ -124,6 +135,18 @@ class Game
     public function setHost(Player $host): static
     {
         $this->host = $host;
+
+        return $this;
+    }
+
+    public function getGameMaster(): ?Player
+    {
+        return $this->gameMaster;
+    }
+
+    public function setGameMaster(?Player $gameMaster): static
+    {
+        $this->gameMaster = $gameMaster;
 
         return $this;
     }
