@@ -43,4 +43,14 @@ class GameBehavior extends AbstractBehavior
             'json' => [],
         ]));
     }
+
+    public function setGameMaster(?string $playerId): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/game-master', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [
+                'playerId' => $playerId,
+            ],
+        ]));
+    }
 }

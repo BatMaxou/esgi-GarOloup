@@ -28,6 +28,7 @@ class GameHostNormalizer implements NormalizerInterface, NormalizerAwareInterfac
         }
 
         $normalized['host'] = $this->normalizeHost($data);
+        $normalized['gameMaster'] = $this->normalizeGameMaster($data);
 
         return $normalized;
     }
@@ -55,5 +56,16 @@ class GameHostNormalizer implements NormalizerInterface, NormalizerAwareInterfac
         $host = $data->getHost();
 
         return ['id' => $host->getId()];
+    }
+
+    /** @return mixed[]|null */
+    private function normalizeGameMaster(Game $data): ?array
+    {
+        $gameMaster = $data->getGameMaster();
+        if (null === $gameMaster) {
+            return null;
+        }
+
+        return ['id' => $gameMaster->getId()];
     }
 }

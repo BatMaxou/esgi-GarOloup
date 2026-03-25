@@ -19,7 +19,8 @@ use Doctrine\ORM\Mapping\InheritanceType;
     'close_invitation' => CloseGameInvitationEvent::class,
     'create_game' => CreateGameEvent::class,
     'join_game' => JoinGameEvent::class,
-    'reopen_invitation' => ReOpenGameInvitationEvent::class,
+    're_open_invitation' => ReOpenGameInvitationEvent::class,
+    'set_game_master' => SetGameMasterEvent::class,
 ])]
 abstract class GameEvent
 {
