@@ -60,7 +60,7 @@
   --radius-xs: 8px;
   --radius-xxs: 6px;
 
-  --background-gradient: 180deg, var(--theme-background-gradient-start) 0%, var(--theme-background-gradient-end) 100%;
+  --background-gradient: 180deg, var(--theme-background-gradient-start) 90%, var(--theme-background-gradient-end) 100%;
   --primary-gradient: 90deg, var(--color-secondary) 0%, var(--color-primary) 100%;
 
   --shadow:

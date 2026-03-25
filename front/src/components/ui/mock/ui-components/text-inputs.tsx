@@ -4,7 +4,7 @@ import TextInput from '@/components/ui/molecules/text-input';
 
 const TextInputs = () => {
   return (
-    <>
+    <div className="flex flex-col gap-8">
       <Typography tag="h2" variant="heading-2" bold className="mt-8 mb-4 block">
         Text Inputs
       </Typography>
@@ -23,7 +23,7 @@ const TextInputs = () => {
           </ul>
         </GlassPanel>
       </div>
-    </>
+    </div>
   );
 };
 
