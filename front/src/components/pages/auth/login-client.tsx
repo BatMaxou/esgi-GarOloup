@@ -21,7 +21,7 @@ const LoginClient = () => {
   }, [user, router]);
 
   return (
-    <main className="flex justify-center p-16">
+    <main className="flex justify-center px-2 py-8 xs:px-8 sm:px-16 sm:py-16 md:px-32 md:py-32">
       <GlassPanel className="w-[min(100%,500px)] flex flex-col justify-start gap-4 p-8 h-fit">
         <Typography variant="heading-3" textColor="accent" bold center special className="text-glow-accent">
           GarOloup
