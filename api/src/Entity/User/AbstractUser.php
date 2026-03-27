@@ -8,6 +8,7 @@ use App\Entity\Trait\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+#[ORM\MappedSuperclass]
 abstract class AbstractUser implements UserInterface
 {
     use UuidTrait;

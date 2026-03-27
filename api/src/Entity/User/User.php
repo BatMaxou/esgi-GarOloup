@@ -54,20 +54,23 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
     ],
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\InheritanceType('JOINED')]
+#[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
+#[ORM\DiscriminatorMap(['user' => User::class, 'admin' => Admin::class])]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
 class User extends AbstractUser implements PasswordAuthenticatedUserInterface
 {
     #[ORM\Column(length: 180)]
-    private string $email;
+    protected string $email;
 
     #[ORM\Column]
-    private ?string $password = null; // @phpstan-ignore-line
+    protected ?string $password = null; // @phpstan-ignore-line
 
-    private ?string $plainPassword = null;
+    protected ?string $plainPassword = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $resetToken = null;
+    protected ?string $resetToken = null;
 
     public function getEmail(): string
     {
