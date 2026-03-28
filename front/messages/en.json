@@ -228,6 +228,25 @@
             }
           }
         }
+      },
+      "form": {
+        "auth": {
+          "login": {
+            "emailLabel": "Email",
+            "emailPlaceholder": "garoloup@example.com",
+            "passwordLabel": "Password",
+            "forgotPassword": "Forgot password?",
+            "submit": "Log in"
+          }
+        }
+      }
+    },
+    "pages": {
+      "auth": {
+        "login": {
+          "title": "Welcome back",
+          "subtitle": "Sign in to get back to the hunt"
+        }
       }
     }
   }

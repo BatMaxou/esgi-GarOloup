@@ -228,6 +228,25 @@
             }
           }
         }
+      },
+      "form": {
+        "auth": {
+          "login": {
+            "emailLabel": "E-mail",
+            "emailPlaceholder": "garoloup@example.com",
+            "passwordLabel": "Mot de passe",
+            "forgotPassword": "Mot de passe oublié ?",
+            "submit": "Se connecter"
+          }
+        }
+      }
+    },
+    "pages": {
+      "auth": {
+        "login": {
+          "title": "Bon retour parmi nous",
+          "subtitle": "Connectez-vous pour reprendre la chasse"
+        }
       }
     }
   }
