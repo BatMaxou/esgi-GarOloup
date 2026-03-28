@@ -22,6 +22,230 @@
             "join": "Rejoindre une partie",
             "discover": "Découvrir"
           }
+        },
+        "whyUs": {
+          "eyebrow": "Pourquoi GarOloup",
+          "title": "Le loup-garou réinventé.",
+          "subtitle": "Pas d'application à télécharger, pas de compte obligatoire. Juste un lien et vos amis.",
+          "items": {
+            "0": {
+              "title": "Mode Game Master",
+              "body": "Un joueur endosse le rôle de narrateur. Des scripts lui sont fournis à chaque phase — lever du jour, rebondissements, mort dramatique. Parfait pour mettre l'ambiance quand vous êtes tous dans la même pièce."
+            },
+            "1": {
+              "title": "Lancez une partie en 30s",
+              "body": "Un code, un lien partagé, et c'est parti. Aucune installation, aucun compte requis pour rejoindre une partie."
+            },
+            "2": {
+              "title": "Rôles & variantes",
+              "body": "Des dizaines de rôles disponibles, des configurations personnalisables. Chaque partie est unique."
+            },
+            "3": {
+              "title": "100% en ligne",
+              "body": "Jouez avec vos amis à distance, en visio ou juste via le chat intégré. La distance n'est plus une excuse."
+            },
+            "4": {
+              "title": "Entièrement gratuit",
+              "body": "Pas d'abonnement, pas de microtransactions. GarOloup est et restera gratuit pour tous."
+            },
+            "5": {
+              "title": "En constante évolution",
+              "body": "Nouveaux rôles, nouvelles mécaniques, corrections régulières. La communauté guide le développement."
+            }
+          }
+        },
+        "rules": {
+          "eyebrow": "Comment jouer",
+          "title": "Une nuit, une vie.",
+          "subtitle": "Une partie se déroule en cycles Nuit / Jour jusqu'à ce qu'un camp l'emporte.",
+          "steps": {
+            "0": {
+              "title": "La nuit tombe",
+              "body": "Tout le monde ferme les yeux. Les loups désignent une victime en silence. Les rôles spéciaux agissent à leur tour."
+            },
+            "1": {
+              "title": "Le lever du jour",
+              "body": "La victime de la nuit est révélée. Le Game Master narre les événements et donne le ton de la partie."
+            },
+            "2": {
+              "title": "Le débat",
+              "body": "Les villageois débattent, accusent, défendent. Chaque joueur a un temps de parole limité pour convaincre."
+            },
+            "3": {
+              "title": "Le vote",
+              "body": "Le village vote pour éliminer un suspect. Le joueur avec le plus de votes est éliminé et son rôle révélé."
+            }
+          }
+        },
+        "roles": {
+          "eyebrow": "Des rôles exclusifs",
+          "title": "Qui se cache dans la nuit ?",
+          "subtitle": "Chaque rôle change la donne. Bluff, alliance ou trahison — à vous de jouer.",
+          "newBadge": "Nouveau",
+          "cards": {
+            "werewolf": {
+              "name": "Loup-Garou",
+              "camp": "Camp des Loups",
+              "description": "Chaque nuit, les loups choisissent une victime. Le jour, ils se fondent parmi les villageois."
+            },
+            "witch": {
+              "name": "Sorcière",
+              "camp": "Camp des Villageois",
+              "description": "Possède deux potions : une pour sauver une victime des loups, une pour éliminer n'importe quel joueur."
+            },
+            "hunter": {
+              "name": "Chasseur",
+              "camp": "Camp des Villageois",
+              "description": "À sa mort, il peut emporter une dernière victime avec lui. Une menace même dans la défaite."
+            },
+            "gm": {
+              "name": "Game Master",
+              "camp": "Hors-Jeu",
+              "description": "Ne joue pas, mais anime la partie avec des scripts narrés. Idéal quand tout le monde est dans la même pièce."
+            }
+          },
+          "cta": "Voir tous les rôles"
+        },
+        "fastJoin": {
+          "eyebrow": "En direct",
+          "title": "Rejoignez la chasse.",
+          "subtitle": "Des parties ouvertes vous attendent. Glissez-vous dans le village… ou dans la meute.",
+          "joinButton": "Rejoindre →",
+          "cta": "Voir toutes les parties",
+          "games": {
+            "0": {
+              "code": "XK-4829",
+              "host": "LoupMaître",
+              "players": "6 / 12 joueurs"
+            },
+            "1": {
+              "code": "ZR-0012",
+              "host": "CupidonPro",
+              "players": "3 / 8 joueurs"
+            },
+            "2": {
+              "code": "BT-2241",
+              "host": "Villageois_X",
+              "players": "9 / 10 joueurs"
+            }
+          }
+        },
+        "faq": {
+          "eyebrow": "Questions fréquentes",
+          "title": "On répond à tout.",
+          "cta": "Voir toutes les questions",
+          "items": {
+            "players-min": {
+              "question": "Combien de joueurs faut-il minimum ?",
+              "answer": "Il faut au moins 6 joueurs pour lancer une partie. Au-delà de 20 joueurs, la partie peut devenir difficile à gérer. L'idéal se situe entre 8 et 12."
+            },
+            "account": {
+              "question": "Faut-il créer un compte pour jouer ?",
+              "answer": "Non ! Il suffit de choisir un pseudo et de rejoindre ou créer une partie. Un compte permet de sauvegarder vos stats et pseudos favoris, mais c'est entièrement optionnel."
+            },
+            "duration": {
+              "question": "Combien de temps dure une partie ?",
+              "answer": "Entre 15 et 45 minutes selon le nombre de joueurs et la durée des débats configurée par l'hôte. Une partie à 8 joueurs dure généralement 20 minutes."
+            },
+            "gm-mode": {
+              "question": "Comment fonctionne le mode Game Master ?",
+              "answer": "Le Game Master est un joueur hors-jeu qui anime la partie. Il reçoit des scripts narrés à chaque phase (nuit, lever du jour, mort…) pour maintenir l'immersion. Idéal en présentiel !"
+            },
+            "irl": {
+              "question": "Peut-on jouer en présentiel avec GarOloup ?",
+              "answer": "Absolument. GarOloup peut remplacer le jeu physique : un écran partagé ou un téléphone par joueur suffit. Le mode Game Master est particulièrement adapté à cette situation."
+            }
+          }
+        },
+        "evolutions": {
+          "eyebrow": "Plateforme en développement",
+          "title": "Façonnez GarOloup.",
+          "subtitle": "Le jeu évolue grâce à vous. Un bug, une idée, un rôle à proposer — tout compte.",
+          "bug": {
+            "title": "Signaler un bug",
+            "body": "Vous avez trouvé quelque chose qui cloche ? Une partie qui plante, un rôle qui se comporte bizarrement ? Dites-le nous, chaque rapport aide à améliorer l'expérience pour tous.",
+            "cta": "Signaler un bug →"
+          },
+          "idea": {
+            "title": "Proposer une idée",
+            "body": "Un nouveau rôle en tête ? Une mécanique sympa ? Une amélioration de l'interface ? Partagez vos idées — les meilleures suggestions finissent dans le jeu.",
+            "cta": "Soumettre une idée →"
+          },
+          "community": {
+            "body": "Vous voulez suivre l'avancement du projet, voter pour les prochaines features et échanger avec les autres joueurs ?",
+            "cta": "Rejoindre la communauté →"
+          }
+        }
+      },
+      "layout": {
+        "navbar": {
+          "logoAlt": "GarOloup",
+          "mockLinks": {
+            "ui": "UI",
+            "icons": "Icônes",
+            "formUi": "Form UI"
+          },
+          "playNow": "Jouer maintenant",
+          "logout": "Se déconnecter",
+          "login": "Se connecter"
+        },
+        "footer": {
+          "taglineLine1": "Stratégie, bluff et trahison.",
+          "taglineLine2": "Survivrez-vous à la nuit ?",
+          "navAriaLabel": "Pied de page",
+          "copyright": "© 2026 GarOloup — Fait avec 🐺 par la communauté",
+          "legal": {
+            "legalNotice": "Mentions légales",
+            "privacy": "Confidentialité",
+            "terms": "CGU"
+          },
+          "social": {
+            "discord": "Discord",
+            "github": "GitHub",
+            "twitter": "Twitter / X"
+          },
+          "columns": {
+            "play": {
+              "title": "Jouer",
+              "joinGame": "Rejoindre une partie",
+              "createGame": "Créer une partie",
+              "ongoing": "Parties en cours",
+              "leaderboard": "Classement"
+            },
+            "discover": {
+              "title": "Découvrir",
+              "allRoles": "Tous les rôles",
+              "rules": "Règles du jeu",
+              "gmMode": "Mode Game Master",
+              "faq": "FAQ"
+            },
+            "project": {
+              "title": "Projet",
+              "roadmap": "Roadmap",
+              "reportBug": "Signaler un bug",
+              "suggestIdea": "Proposer une idée",
+              "community": "Communauté"
+            }
+          }
+        }
+      },
+      "form": {
+        "auth": {
+          "login": {
+            "emailLabel": "E-mail",
+            "emailPlaceholder": "garoloup@example.com",
+            "passwordLabel": "Mot de passe",
+            "forgotPassword": "Mot de passe oublié ?",
+            "submit": "Se connecter"
+          }
+        }
+      }
+    },
+    "pages": {
+      "auth": {
+        "login": {
+          "title": "Bon retour parmi nous",
+          "subtitle": "Connectez-vous pour reprendre la chasse"
         }
       }
     }

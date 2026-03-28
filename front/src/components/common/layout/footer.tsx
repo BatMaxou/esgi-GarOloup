@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import cn from 'classnames';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 import Icon from '@/components/ui/atoms/icon';
@@ -9,34 +10,38 @@ import Card from '@/components/ui/molecules/card';
 import BugReportModal from '@/components/ui/organisms/modals/bugReportModal';
 import IdeaReportModal from '@/components/ui/organisms/modals/ideaReportModal';
 
-type FooterNavLink = { label: string; href: string } | { label: string; modal: 'bug' | 'idea' };
+type ColumnId = 'play' | 'discover' | 'project';
 
-const FOOTER_NAV: { title: string; links: readonly FooterNavLink[] }[] = [
+type FooterLink =
+  | { type: 'href'; href: string; labelKey: string }
+  | { type: 'modal'; modal: 'bug' | 'idea'; labelKey: string };
+
+const FOOTER_NAV: { column: ColumnId; links: FooterLink[] }[] = [
   {
-    title: 'Jouer',
+    column: 'play',
     links: [
-      { label: 'Rejoindre une partie', href: '#' },
-      { label: 'Créer une partie', href: '#' },
-      { label: 'Parties en cours', href: '#' },
-      { label: 'Classement', href: '#' },
+      { type: 'href', href: '#', labelKey: 'joinGame' },
+      { type: 'href', href: '#', labelKey: 'createGame' },
+      { type: 'href', href: '#', labelKey: 'ongoing' },
+      { type: 'href', href: '#', labelKey: 'leaderboard' },
     ],
   },
   {
-    title: 'Découvrir',
+    column: 'discover',
     links: [
-      { label: 'Tous les rôles', href: '#' },
-      { label: 'Règles du jeu', href: '#' },
-      { label: 'Mode Game Master', href: '#' },
-      { label: 'FAQ', href: '#' },
+      { type: 'href', href: '#', labelKey: 'allRoles' },
+      { type: 'href', href: '#', labelKey: 'rules' },
+      { type: 'href', href: '#', labelKey: 'gmMode' },
+      { type: 'href', href: '#', labelKey: 'faq' },
     ],
   },
   {
-    title: 'Projet',
+    column: 'project',
     links: [
-      { label: 'Roadmap', href: '#' },
-      { label: 'Signaler un bug', modal: 'bug' },
-      { label: 'Proposer une idée', modal: 'idea' },
-      { label: 'Communauté', href: '#' },
+      { type: 'href', href: '#', labelKey: 'roadmap' },
+      { type: 'modal', modal: 'bug', labelKey: 'reportBug' },
+      { type: 'modal', modal: 'idea', labelKey: 'suggestIdea' },
+      { type: 'href', href: '#', labelKey: 'community' },
     ],
   },
 ];
@@ -52,6 +57,7 @@ const modalTriggerClassName = cn(
 const Footer = () => {
   const [bugModalOpen, setBugModalOpen] = useState(false);
   const [ideaModalOpen, setIdeaModalOpen] = useState(false);
+  const t = useTranslations('components.common.layout.footer');
 
   return (
     <>
@@ -64,47 +70,52 @@ const Footer = () => {
           <div>
             <div className="mb-3.5 font-special text-[2rem] leading-none text-glow-accent">GarOloup</div>
             <p className="mb-6 text-[0.83rem] leading-[1.7] text-neutral-500">
-              Stratégie, bluff et trahison.
+              {t('taglineLine1')}
               <br />
-              Survivrez-vous à la nuit&nbsp;?
+              {t('taglineLine2')}
             </p>
             <div className="flex gap-2">
-              <Link href="#" title="Discord" aria-label="Discord">
+              <Link href="#" title={t('social.discord')} aria-label={t('social.discord')}>
                 <Card orientation="horizontal" className="flex items-center justify-center p-5! cursor-pointer">
                   <Icon name="discord" className="w-6 h-6 text-white!" />
                 </Card>
               </Link>
-              <Link href="https://github.com/BatMaxou/esgi-GarOloup" target="_blank" title="GitHub" aria-label="GitHub">
+              <Link
+                href="https://github.com/BatMaxou/esgi-GarOloup"
+                target="_blank"
+                title={t('social.github')}
+                aria-label={t('social.github')}
+              >
                 <Card orientation="horizontal" className="p-5! cursor-pointer">
                   <Icon name="github" className="w-6 h-6" />
                 </Card>
               </Link>
-              <Link href="#" title="Twitter / X" aria-label="Twitter / X">
+              <Link href="#" title={t('social.twitter')} aria-label={t('social.twitter')}>
                 <Card orientation="horizontal" className="p-5! cursor-pointer">
                   <Icon name="x" className="w-6 h-6" />
                 </Card>
               </Link>
             </div>
           </div>
-          <nav className="grid grid-cols-2 gap-8 md:grid-cols-3" aria-label="Pied de page">
-            {FOOTER_NAV.map((col) => (
-              <div key={col.title} className="flex flex-col gap-2.5">
+          <nav className="grid grid-cols-2 gap-8 md:grid-cols-3" aria-label={t('navAriaLabel')}>
+            {FOOTER_NAV.map(({ column, links }) => (
+              <div key={column} className="flex flex-col gap-2.5">
                 <div className="mb-1 text-[0.72rem] font-bold tracking-[0.12em] text-secondary-pastel uppercase">
-                  {col.title}
+                  {t(`columns.${column}.title`)}
                 </div>
-                {col.links.map((item) =>
-                  'modal' in item ? (
+                {links.map((item) =>
+                  item.type === 'modal' ? (
                     <button
-                      key={item.label}
+                      key={item.labelKey}
                       type="button"
                       className={modalTriggerClassName}
                       onClick={() => (item.modal === 'bug' ? setBugModalOpen(true) : setIdeaModalOpen(true))}
                     >
-                      {item.label}
+                      {t(`columns.${column}.${item.labelKey}`)}
                     </button>
                   ) : (
-                    <Link key={item.label} href={item.href} className={colLinkClassName}>
-                      {item.label}
+                    <Link key={item.labelKey} href={item.href} className={colLinkClassName}>
+                      {t(`columns.${column}.${item.labelKey}`)}
                     </Link>
                   )
                 )}
@@ -113,22 +124,22 @@ const Footer = () => {
           </nav>
         </div>
         <div className="relative mx-auto flex max-w-[1100px] flex-col items-start gap-3 border-t border-primary/8 px-8 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
-          <span className="text-xs text-neutral-600">© 2026 GarOloup — Fait avec 🐺 par la communauté</span>
+          <span className="text-xs text-neutral-600">{t('copyright')}</span>
           <div className="flex flex-wrap items-center gap-2.5">
             <Link href="#" className="text-xs text-neutral-600 no-underline transition-colors hover:text-neutral-400">
-              Mentions légales
+              {t('legal.legalNotice')}
             </Link>
             <span className="text-[0.7rem] text-neutral-700" aria-hidden>
               ·
             </span>
             <Link href="#" className="text-xs text-neutral-600 no-underline transition-colors hover:text-neutral-400">
-              Confidentialité
+              {t('legal.privacy')}
             </Link>
             <span className="text-[0.7rem] text-neutral-700" aria-hidden>
               ·
             </span>
             <Link href="#" className="text-xs text-neutral-600 no-underline transition-colors hover:text-neutral-400">
-              CGU
+              {t('legal.terms')}
             </Link>
           </div>
         </div>
