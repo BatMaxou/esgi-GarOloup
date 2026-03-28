@@ -22,6 +22,211 @@
             "join": "Join a game",
             "discover": "Discover"
           }
+        },
+        "whyUs": {
+          "eyebrow": "Why GarOloup",
+          "title": "Werewolf, reimagined.",
+          "subtitle": "No app to download, no mandatory account. Just a link and your friends.",
+          "items": {
+            "0": {
+              "title": "Game Master mode",
+              "body": "One player becomes the narrator. Scripts guide each phase—dawn, twists, dramatic deaths. Perfect for setting the mood when you're all in the same room."
+            },
+            "1": {
+              "title": "Start a game in 30 seconds",
+              "body": "One code, one shared link, and you're off. No install, no account required to join a game."
+            },
+            "2": {
+              "title": "Roles & variants",
+              "body": "Dozens of roles, customizable setups. Every game is different."
+            },
+            "3": {
+              "title": "100% online",
+              "body": "Play with friends remotely on video or just with the built-in chat. Distance is no excuse."
+            },
+            "4": {
+              "title": "Completely free",
+              "body": "No subscription, no microtransactions. GarOloup is and will stay free for everyone."
+            },
+            "5": {
+              "title": "Always evolving",
+              "body": "New roles, new mechanics, regular fixes. The community shapes development."
+            }
+          }
+        },
+        "rules": {
+          "eyebrow": "How to play",
+          "title": "One night, one life.",
+          "subtitle": "A game runs in Night / Day cycles until one side wins.",
+          "steps": {
+            "0": {
+              "title": "Night falls",
+              "body": "Everyone closes their eyes. Werewolves pick a victim in silence. Special roles act in turn."
+            },
+            "1": {
+              "title": "Dawn breaks",
+              "body": "The night's victim is revealed. The Game Master narrates events and sets the tone."
+            },
+            "2": {
+              "title": "The debate",
+              "body": "Villagers debate, accuse, defend. Each player has limited time to speak and convince others."
+            },
+            "3": {
+              "title": "The vote",
+              "body": "The village votes to eliminate a suspect. The player with the most votes is out and their role is revealed."
+            }
+          }
+        },
+        "roles": {
+          "eyebrow": "Exclusive roles",
+          "title": "Who hides in the night?",
+          "subtitle": "Every role changes the game. Bluff, alliance, or betrayal—your move.",
+          "newBadge": "New",
+          "cards": {
+            "werewolf": {
+              "name": "Werewolf",
+              "camp": "Werewolf team",
+              "description": "Each night, the wolves choose a victim. By day, they blend in with the villagers."
+            },
+            "witch": {
+              "name": "Witch",
+              "camp": "Villager team",
+              "description": "Has two potions: one to save a wolf victim, one to eliminate any player."
+            },
+            "hunter": {
+              "name": "Hunter",
+              "camp": "Villager team",
+              "description": "On death, they can take one last victim with them. A threat even in defeat."
+            },
+            "gm": {
+              "name": "Game Master",
+              "camp": "Out of game",
+              "description": "Doesn't play, but runs the game with narrated scripts. Ideal when everyone is in the same room."
+            }
+          },
+          "cta": "See all roles"
+        },
+        "fastJoin": {
+          "eyebrow": "Live",
+          "title": "Join the hunt.",
+          "subtitle": "Open games are waiting. Slip into the village… or the pack.",
+          "joinButton": "Join →",
+          "cta": "See all games",
+          "games": {
+            "0": {
+              "code": "XK-4829",
+              "host": "LoupMaître",
+              "players": "6 / 12 players"
+            },
+            "1": {
+              "code": "ZR-0012",
+              "host": "CupidonPro",
+              "players": "3 / 8 players"
+            },
+            "2": {
+              "code": "BT-2241",
+              "host": "Villageois_X",
+              "players": "9 / 10 players"
+            }
+          }
+        },
+        "faq": {
+          "eyebrow": "FAQ",
+          "title": "We've got answers.",
+          "cta": "See all questions",
+          "items": {
+            "players-min": {
+              "question": "How many players do you need at minimum?",
+              "answer": "You need at least 6 players to start. Beyond 20, games get harder to run. The sweet spot is 8–12."
+            },
+            "account": {
+              "question": "Do I need an account to play?",
+              "answer": "No! Pick a nickname and join or create a game. An account saves your stats and favorite nicknames, but it's optional."
+            },
+            "duration": {
+              "question": "How long does a game last?",
+              "answer": "About 15–45 minutes depending on player count and debate length set by the host. An 8-player game is usually around 20 minutes."
+            },
+            "gm-mode": {
+              "question": "How does Game Master mode work?",
+              "answer": "The Game Master is an out-of-game player who runs the session. They get narrated scripts each phase (night, dawn, death…) to keep immersion high. Great for in-person play!"
+            },
+            "irl": {
+              "question": "Can we play GarOloup in person?",
+              "answer": "Yes. GarOloup can replace the physical game: one shared screen or a phone per player is enough. Game Master mode fits this setup especially well."
+            }
+          }
+        },
+        "evolutions": {
+          "eyebrow": "Platform in development",
+          "title": "Shape GarOloup.",
+          "subtitle": "The game grows with you. A bug, an idea, a role to suggest—everything counts.",
+          "bug": {
+            "title": "Report a bug",
+            "body": "Found something off? A crashy game, a role acting weird? Tell us—every report helps improve the experience for everyone.",
+            "cta": "Report a bug →"
+          },
+          "idea": {
+            "title": "Suggest an idea",
+            "body": "New role in mind? A fun mechanic? A UI tweak? Share your ideas—the best ones make it into the game.",
+            "cta": "Submit an idea →"
+          },
+          "community": {
+            "body": "Want to follow progress, vote on upcoming features, and chat with other players?",
+            "cta": "Join the community →"
+          }
+        }
+      },
+      "layout": {
+        "navbar": {
+          "logoAlt": "GarOloup",
+          "mockLinks": {
+            "ui": "UI",
+            "icons": "Icons",
+            "formUi": "Form UI"
+          },
+          "playNow": "Play now",
+          "logout": "Log out",
+          "login": "Log in"
+        },
+        "footer": {
+          "taglineLine1": "Strategy, bluff and betrayal.",
+          "taglineLine2": "Will you survive the night?",
+          "navAriaLabel": "Footer",
+          "copyright": "© 2026 GarOloup — Made with 🐺 by the community",
+          "legal": {
+            "legalNotice": "Legal notice",
+            "privacy": "Privacy",
+            "terms": "Terms of use"
+          },
+          "social": {
+            "discord": "Discord",
+            "github": "GitHub",
+            "twitter": "Twitter / X"
+          },
+          "columns": {
+            "play": {
+              "title": "Play",
+              "joinGame": "Join a game",
+              "createGame": "Create a game",
+              "ongoing": "Games in progress",
+              "leaderboard": "Leaderboard"
+            },
+            "discover": {
+              "title": "Discover",
+              "allRoles": "All roles",
+              "rules": "Game rules",
+              "gmMode": "Game Master mode",
+              "faq": "FAQ"
+            },
+            "project": {
+              "title": "Project",
+              "roadmap": "Roadmap",
+              "reportBug": "Report a bug",
+              "suggestIdea": "Suggest an idea",
+              "community": "Community"
+            }
+          }
         }
       }
     }

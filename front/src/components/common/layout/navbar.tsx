@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 import { cva } from 'class-variance-authority';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
@@ -28,34 +29,35 @@ const Navbar = () => {
   const pathname = usePathname();
   const isSticky = useMemo(() => pathname !== paths.home, [pathname]);
   const { user, logout } = useAuth();
+  const t = useTranslations('components.common.layout.navbar');
 
   return (
     <nav className={navbarCva({ sticky: isSticky })}>
       <Link href={paths.home} className="flex items-center">
-        <Image src="/logo.svg" alt="Logo" width={64} height={64} />
+        <Image src="/logo.svg" alt={t('logoAlt')} width={64} height={64} />
       </Link>
 
       <ul className="flex items-center gap-4 text-glow-primary">
         <li>
-          <Button asLink variant="text" label="UI" href={paths.ui} />
+          <Button asLink variant="text" label={t('mockLinks.ui')} href={paths.ui} />
         </li>
         <li>
-          <Button asLink variant="text" label="Icons" href={paths.icons} />
+          <Button asLink variant="text" label={t('mockLinks.icons')} href={paths.icons} />
         </li>
         <li>
-          <Button asLink variant="text" label="Form UI" href={paths.formUi} />
+          <Button asLink variant="text" label={t('mockLinks.formUi')} href={paths.formUi} />
         </li>
       </ul>
 
       <ul className="hidden sm:flex items-center gap-4">
         <li>
-          <Button variant="accent" size="sm" label="Jouer maintenant" />
+          <Button variant="accent" size="sm" label={t('playNow')} />
         </li>
         <li>
           {user ? (
-            <Button variant="error" size="sm" glass label="Se déconnecter" onClick={logout} />
+            <Button variant="error" size="sm" glass label={t('logout')} onClick={logout} />
           ) : (
-            <Button asLink variant="secondary" size="sm" label="Se connecter" href={paths.login} />
+            <Button asLink variant="secondary" size="sm" label={t('login')} href={paths.login} />
           )}
         </li>
         <li>
