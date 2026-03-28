@@ -1,0 +1,23 @@
+type: http_request
+model: http_request
+id: rq_tcadwsnsgV
+createdAt: 2026-03-27T19:14:10.738426939
+updatedAt: 2026-03-28T09:46:32.399030510
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_WxKE8boAAj
+authentication: {}
+authenticationType: none
+body:
+  text: '{}'
+bodyType: null
+description: ''
+headers:
+- enabled: true
+  name: ''
+  value: ''
+  id: 0TkCedAc45
+method: GET
+name: Get Role
+sortPriority: 0.001
+url: ${[ BASE_URL ]}/api/roles/${[ FIRST_ROLE_ITEM_ID ]}
+urlParameters: []

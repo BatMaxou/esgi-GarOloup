@@ -38,8 +38,7 @@ class GetCurrentGameTest extends GarOloupApiTestCase
         $gameBuilder = ThereIs::aGame()->build(3);
         ThereIs::aPlayer()->withUser($userBuilder)->withGame($gameBuilder)->build();
 
-        When::asUser($userBuilder);
-        $response = When::game()->getCurrent();
+        $response = When::asUser($userBuilder)->game()->getCurrent();
         $this->assertResponseStatusCodeSame(200);
 
         $this->assertEquals($gameBuilder->getEntity()->getId(), $response->get('[id]'));
@@ -51,8 +50,7 @@ class GetCurrentGameTest extends GarOloupApiTestCase
         $gameBuilder = ThereIs::aGame()->build(3);
         ThereIs::aPlayer()->withTempUser($tempUserBuilder)->withGame($gameBuilder)->build();
 
-        When::asTempUser($tempUserBuilder);
-        $response = When::game()->getCurrent();
+        $response = When::asTempUser($tempUserBuilder)->game()->getCurrent();
         $this->assertResponseStatusCodeSame(200);
 
         $this->assertEquals($gameBuilder->getEntity()->getId(), $response->get('[id]'));

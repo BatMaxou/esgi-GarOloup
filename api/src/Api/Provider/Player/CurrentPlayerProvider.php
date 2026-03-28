@@ -4,8 +4,8 @@ namespace App\Api\Provider\Player;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
-use App\Entity\Player;
-use App\Repository\PlayerRepository;
+use App\Entity\Game\Player;
+use App\Repository\Game\PlayerRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 

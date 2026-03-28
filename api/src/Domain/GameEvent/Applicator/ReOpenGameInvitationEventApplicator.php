@@ -9,8 +9,8 @@ use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\GameSpec;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\ReOpenGameInvitationEvent;
-use App\Entity\Game;
-use App\Enum\GameStepEnum;
+use App\Entity\Game\Game;
+use App\Enum\Game\GameStepEnum;
 use Doctrine\ORM\EntityManagerInterface;
 
 /** @implements GameEventApplicatorInterface<ReOpenGameInvitationEvent> */

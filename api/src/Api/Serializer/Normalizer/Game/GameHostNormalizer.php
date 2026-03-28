@@ -2,7 +2,7 @@
 
 namespace App\Api\Serializer\Normalizer\Game;
 
-use App\Entity\Game;
+use App\Entity\Game\Game;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;

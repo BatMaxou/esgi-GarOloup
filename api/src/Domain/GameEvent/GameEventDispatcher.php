@@ -6,7 +6,7 @@ use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\GameEvent\Interface\GameEventCollectorInterface;
 use App\Domain\GameEvent\Interface\GameEventDispatcherInterface;
 use App\Entity\Event\Game\GameEvent;
-use App\Entity\Game;
+use App\Entity\Game\Game;
 
 class GameEventDispatcher implements GameEventDispatcherInterface
 {

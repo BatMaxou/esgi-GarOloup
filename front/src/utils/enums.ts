@@ -37,3 +37,15 @@ export enum IdeaCategoryEnum {
   ACCESSIBILITY = 'accessibility',
   OTHER = 'other',
 }
+
+export enum GameRoleEnum {
+  VILLAGER = 'villager',
+  WEREWOLF = 'werewolf',
+}
+
+export enum GameTeamEnum {
+  VILLAGE = 'village',
+  WEREWOLF = 'werewolf',
+  SOLO = 'solo',
+  COUPLE = 'couple',
+}

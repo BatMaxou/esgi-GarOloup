@@ -150,3 +150,13 @@ deploy:
 exec-db:
 	@docker compose exec ${DB_HOST} mariadb -u${DB_USER} -p${DB_PASSWORD} ${DB_NAME}
 .PHONY: exec-db
+
+uploads-dir:
+	@${php} mkdir -p ./public/uploads/roles/pictures
+	@${php} chmod -R 777 ./public/uploads
+.PHONY: uploads-dir
+
+clear-uploads:
+	@${php} rm -rf ./public/uploads/roles
+.PHONY: clear-uploads
+

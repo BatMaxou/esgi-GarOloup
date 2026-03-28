@@ -4,10 +4,10 @@ namespace App\Api\Provider\Game;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
-use App\Entity\Game;
-use App\Entity\Player;
+use App\Entity\Game\Game;
+use App\Entity\Game\Player;
 use App\Entity\User\AbstractUser;
-use App\Repository\PlayerRepository;
+use App\Repository\Game\PlayerRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 
 /** @implements ProviderInterface<Player> */

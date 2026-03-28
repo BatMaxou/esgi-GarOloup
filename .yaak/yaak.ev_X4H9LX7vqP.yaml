@@ -3,7 +3,7 @@ model: environment
 id: ev_X4H9LX7vqP
 workspaceId: wk_uXtATNFQmZ
 createdAt: 2026-02-27T17:51:21.318689424
-updatedAt: 2026-03-25T17:31:34.366963130
+updatedAt: 2026-03-27T19:26:57.233154644
 name: Temp User
 public: true
 base: false
@@ -23,4 +23,4 @@ variables:
   value: SLiipman
   id: NtSzGy5J3N
 color: var(--info)
-sortPriority: 1000.0
+sortPriority: 2000.0

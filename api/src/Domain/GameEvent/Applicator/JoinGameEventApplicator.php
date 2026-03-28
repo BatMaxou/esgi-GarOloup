@@ -10,8 +10,8 @@ use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\GameSpec;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\JoinGameEvent;
-use App\Entity\Game;
-use App\Entity\Player;
+use App\Entity\Game\Game;
+use App\Entity\Game\Player;
 use App\Entity\User\TempUser;
 use Doctrine\ORM\EntityManagerInterface;
 

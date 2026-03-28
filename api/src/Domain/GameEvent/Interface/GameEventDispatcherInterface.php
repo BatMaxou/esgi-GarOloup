@@ -3,7 +3,7 @@
 namespace App\Domain\GameEvent\Interface;
 
 use App\Entity\Event\Game\GameEvent;
-use App\Entity\Game;
+use App\Entity\Game\Game;
 
 interface GameEventDispatcherInterface
 {

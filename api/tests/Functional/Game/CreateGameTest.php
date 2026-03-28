@@ -3,7 +3,7 @@
 namespace App\Tests\Functional\Game;
 
 use App\Entity\Event\Game\CreateGameEvent;
-use App\Fixtures\Factory\GameFactory;
+use App\Fixtures\Factory\Game\GameFactory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\Trait\GameEventAwareTrait;

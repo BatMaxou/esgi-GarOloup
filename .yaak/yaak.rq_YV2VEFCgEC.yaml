@@ -1,0 +1,31 @@
+type: http_request
+model: http_request
+id: rq_YV2VEFCgEC
+createdAt: 2026-03-27T19:18:29.002171204
+updatedAt: 2026-03-28T09:30:02.671599898
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_WxKE8boAAj
+authentication:
+  token: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3R2FTQll6eFlYWFFjWDErdURlQnhTZVREaVJLdVF6U05hOFBaeFFsODZWZ29Zc1RNbHNvZGlBVCt5M2U1NUF4TG5yOTlqQQ') ]}
+authenticationType: bearer
+body:
+  text: |-
+    {
+      "name": "Test"
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/merge-patch+json
+  id: pIptmqAYCF
+- enabled: true
+  name: ''
+  value: ''
+  id: KdZecPp6gM
+method: PATCH
+name: Update Role
+sortPriority: 0.002
+url: ${[ BASE_URL ]}/api/roles/${[ LAST_ROLE_ID ]}
+urlParameters: []

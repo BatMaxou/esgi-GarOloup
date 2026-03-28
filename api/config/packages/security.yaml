@@ -56,6 +56,7 @@ security:
         - { path: ^/api/(login|temp_user|register|forgot_password|reset_password)$, roles: PUBLIC_ACCESS }
         - { path: ^/api/token/refresh$, roles: PUBLIC_ACCESS }
         - { path: ^/api/public, roles: PUBLIC_ACCESS }
+        - { path: ^/api/roles, methods: GET, roles: PUBLIC_ACCESS }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:

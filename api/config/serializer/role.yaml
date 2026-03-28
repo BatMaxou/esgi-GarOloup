@@ -1,0 +1,45 @@
+App\Entity\Role:
+    attributes:
+        id:
+            groups:
+                - role:read
+                - role:list
+        type:
+            groups:
+                - role:read
+                - role:list
+                - role:write
+        name:
+            groups:
+                - role:read
+                - role:list
+                - role:write
+        description:
+            groups:
+                - role:read
+                - role:write
+        ability:
+            groups:
+                - role:read
+                - role:write
+        pictureName:
+            groups:
+                - role:read
+                - role:list
+                - role:files:write
+        picture:
+            groups:
+                - role:files:write
+        minPlayers:
+            groups:
+                - role:read
+                - role:write
+        maxPerGame:
+            groups:
+                - role:read
+                - role:write
+        teams:
+            groups:
+                - role:read
+                - role:list
+                - role:write
