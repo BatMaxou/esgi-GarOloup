@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Tests\Helper\Builder;
+namespace App\Tests\Helper\Builder\Role;
 
 use App\Entity\Role;
 use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameTeamEnum;
 use App\Fixtures\Factory\RoleFactory;
+use App\Tests\Helper\Builder\AbstractBuilder;
 
 /** @extends AbstractBuilder<Role> */
 class RoleBuilder extends AbstractBuilder
