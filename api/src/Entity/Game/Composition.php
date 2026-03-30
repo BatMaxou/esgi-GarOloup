@@ -47,4 +47,16 @@ class Composition
 
         return $this;
     }
+
+    public function clearRoles(): static
+    {
+        $this->roles->clear();
+
+        return $this;
+    }
+
+    public function isEmpty(): bool
+    {
+        return 0 === \count($this->roles);
+    }
 }

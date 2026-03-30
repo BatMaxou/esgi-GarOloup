@@ -5,6 +5,7 @@ export const apiPaths = {
     join: '/game/join',
     close: '/game/invitation/close',
     open: '/game/invitation/open',
+    setConfiguration: '/game/configuration',
   },
   player: {
     getCurrent: '/game/player',

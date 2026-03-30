@@ -13,6 +13,7 @@ use App\Domain\Command\Game\Initialisation\CloseGameInvitationCommand;
 use App\Domain\Command\Game\Initialisation\CreateGameCommand;
 use App\Domain\Command\Game\Initialisation\JoinGameCommand;
 use App\Domain\Command\Game\Initialisation\ReOpenGameInvitationCommand;
+use App\Domain\Command\Game\Initialisation\SetGameConfigurationCommand;
 use App\Domain\Command\Game\Initialisation\SetGameMasterCommand;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
@@ -27,6 +28,9 @@ use Doctrine\ORM\Mapping as ORM;
     mercure: [
         'topics' => [
             '@=iri(object)',
+        ],
+        'normalization_context' => [
+            'groups' => 'game:read',
         ],
     ],
     operations: [
@@ -67,6 +71,13 @@ use Doctrine\ORM\Mapping as ORM;
             uriTemplate: '/game/invitation/open',
             messenger: 'input',
             input: ReOpenGameInvitationCommand::class,
+            output: BasicActionOutput::class,
+        ),
+        new Patch(
+            name: 'api_game_set_configuration',
+            uriTemplate: '/game/configuration',
+            messenger: 'input',
+            input: SetGameConfigurationCommand::class,
             output: BasicActionOutput::class,
         ),
         new Patch(

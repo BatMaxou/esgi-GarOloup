@@ -1,0 +1,11 @@
+App\Entity\Game\Configuration:
+    attributes:
+        composition:
+            groups:
+                - game:read
+        withGameMaster:
+            groups:
+                - game:read
+        withRandomDispatch:
+            groups:
+                - game:read

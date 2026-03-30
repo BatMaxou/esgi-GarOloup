@@ -14,3 +14,6 @@ App\Entity\Game\Game:
         players:
             groups:
                 - game:read
+        configuration:
+            groups:
+                - game:read

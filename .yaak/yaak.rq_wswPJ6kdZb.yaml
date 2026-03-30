@@ -1,0 +1,44 @@
+type: http_request
+model: http_request
+id: rq_wswPJ6kdZb
+createdAt: 2026-03-30T12:00:00
+updatedAt: 2026-03-30T20:35:17.106104164
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_bh6aMuFF23
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body:
+  text: |-
+    {
+      "composition": {
+        "roles": [
+          {
+            "role": "werewolf",
+            "count": 2
+          },
+          {
+            "role": "villager",
+            "count": 2
+          }
+        ]
+      },
+      "withGameMaster": false,
+      "withRandomDispatch": true
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/merge-patch+json
+  id: hR3kM7pLn8
+- enabled: true
+  name: ''
+  value: ''
+  id: qW9vN2xYe4
+method: PATCH
+name: Set Configuration
+sortPriority: 3500.0
+url: ${[ BASE_URL ]}/api/game/configuration
+urlParameters: []
