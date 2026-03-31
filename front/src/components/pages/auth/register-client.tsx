@@ -39,7 +39,9 @@ const RegisterClient = () => {
         <Divider variant="primary" />
         {!user && <RegisterForm />}
         <div className="flex flex-row justify-center items-center gap-2">
-          <Typography variant="body-sm" tag="p" bold center textColor="neutral-500">{t('alreadyHaveAccount')}</Typography>
+          <Typography variant="body-sm" tag="p" bold center textColor="neutral-500">
+            {t('alreadyHaveAccount')}
+          </Typography>
           <Button asLink variant="text" label={t('login')} href={paths.login} />
         </div>
       </GlassPanel>

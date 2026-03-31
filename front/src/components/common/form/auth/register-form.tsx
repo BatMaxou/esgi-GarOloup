@@ -23,7 +23,7 @@ type SigninFormValues = {
 
 const SigninForm = ({ className }: Props) => {
   const t = useTranslations('components.common.form.auth.register');
-  const {apiClient} = useApiClient();
+  const { apiClient } = useApiClient();
   const { handleSubmit, handleChange } = useFormik({
     initialValues: {
       username: '',
@@ -58,8 +58,15 @@ const SigninForm = ({ className }: Props) => {
         onChange={handleChange}
       />
       <TextInput label={t('passwordLabel')} type="password" name="password" onChange={handleChange} />
-      <Typography variant="body-sm" textColor="neutral-500">{t('passwordRequirements')}</Typography>
-      <TextInput label={t('passwordConfirmationLabel')} type="password" name="passwordConfirmation" onChange={handleChange} />
+      <Typography variant="body-sm" textColor="neutral-500">
+        {t('passwordRequirements')}
+      </Typography>
+      <TextInput
+        label={t('passwordConfirmationLabel')}
+        type="password"
+        name="passwordConfirmation"
+        onChange={handleChange}
+      />
       <Button variant="accent" label={t('submit')} type="submit" full />
     </form>
   );

@@ -179,7 +179,7 @@
       },
       "layout": {
         "navbar": {
-          "logoutSuccess": "Déconnexion réussie", 
+          "logoutSuccess": "Déconnexion réussie",
           "logoAlt": "GarOloup",
           "mockLinks": {
             "ui": "UI",

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'react-toastify';
 
@@ -11,7 +11,6 @@ import Typography from '@/components/ui/atoms/typography';
 import { useAuth } from '@/contexts/auth-context';
 import { paths } from '@/utils/paths';
 import { useRouter } from '@/i18n/navigation';
-import Link from 'next/link';
 import Button from '@/components/ui/molecules/button';
 
 const LoginClient = () => {
@@ -19,7 +18,6 @@ const LoginClient = () => {
   const router = useRouter();
   const tg = useTranslations();
   const t = useTranslations('components.pages.auth.login');
-  const [loginPending, setLoginPending] = useState<boolean>(true);
 
   useEffect(() => {
     if (user) {
@@ -28,6 +26,7 @@ const LoginClient = () => {
         router.push(paths.home);
       }, 1000);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, router]);
 
   return (
@@ -45,7 +44,9 @@ const LoginClient = () => {
         <Divider variant="primary" />
         {!user && <LoginForm />}
         <div className="flex flex-row justify-center items-center gap-2">
-          <Typography variant="body-sm" tag="p" bold center textColor="neutral-500">{t('noAccount')}</Typography>
+          <Typography variant="body-sm" tag="p" bold center textColor="neutral-500">
+            {t('noAccount')}
+          </Typography>
           <Button asLink variant="text" label={t('createAccount')} href={paths.register} />
         </div>
       </GlassPanel>

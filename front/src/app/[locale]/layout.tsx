@@ -22,7 +22,7 @@ const Providers = ({ children }: ProvidersProps) => {
     <>
       <NextIntlClientProvider>
         <ThemeProvider>
-          <ToastContainer toastStyle={{ backgroundColor: "var(--color-secondary)", color: "white" }}  />
+          <ToastContainer toastStyle={{ backgroundColor: 'var(--color-secondary)', color: 'white' }} />
           <ApiClientProvider>
             <MercureClientProvider>
               <AuthProvider>{children}</AuthProvider>
