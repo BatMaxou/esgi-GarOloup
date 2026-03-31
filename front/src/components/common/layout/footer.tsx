@@ -77,7 +77,7 @@ const Footer = () => {
             <div className="flex gap-2">
               <Link href="#" title={t('social.discord')} aria-label={t('social.discord')}>
                 <Card orientation="horizontal" className="flex items-center justify-center p-5! cursor-pointer">
-                  <Icon name="discord" className="w-6 h-6 text-white!" />
+                  <Icon name="discord" className="w-6 h-6" />
                 </Card>
               </Link>
               <Link

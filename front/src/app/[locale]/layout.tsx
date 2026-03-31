@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import Image from 'next/image';
 import { NextIntlClientProvider } from 'next-intl';
+import { ToastContainer } from 'react-toastify';
 
 import '@/app/globals.css';
 import { ApiClientProvider } from '@/contexts/api-context';
@@ -21,6 +22,7 @@ const Providers = ({ children }: ProvidersProps) => {
     <>
       <NextIntlClientProvider>
         <ThemeProvider>
+          <ToastContainer toastStyle={{ backgroundColor: "var(--color-secondary)", color: "white" }}  />
           <ApiClientProvider>
             <MercureClientProvider>
               <AuthProvider>{children}</AuthProvider>

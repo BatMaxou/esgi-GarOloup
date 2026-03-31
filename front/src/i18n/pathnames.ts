@@ -8,6 +8,10 @@ export const pathnames = {
     fr: '/connexion',
     en: '/login',
   },
+  '/register': {
+    fr: '/inscription',
+    en: '/register',
+  },
   '/test': {
     fr: '/fr-test',
     en: '/en-test',

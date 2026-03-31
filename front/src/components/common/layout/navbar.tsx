@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { cva } from 'class-variance-authority';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { toast } from 'react-toastify';
 
 const ThemeSwitcher = dynamic(() => import('@/components/common/layout/theme-switcher'), { ssr: false });
 
@@ -12,6 +13,7 @@ import { paths } from '@/utils/paths';
 import Button from '@/components/ui/molecules/button';
 import { useAuth } from '@/contexts/auth-context';
 import { Link, usePathname } from '@/i18n/navigation';
+
 
 const navbarCva = cva(
   'border-b border-primary px-4 py-2 flex items-center justify-between fixed top-0 left-0 right-0 backdrop-blur-sm z-24',
@@ -30,6 +32,11 @@ const Navbar = () => {
   const isSticky = useMemo(() => pathname !== paths.home, [pathname]);
   const { user, logout } = useAuth();
   const t = useTranslations('components.common.layout.navbar');
+
+  const handleLogout = () => {
+    logout();
+    toast.success(t('logoutSuccess'));
+  };
 
   return (
     <nav className={navbarCva({ sticky: isSticky })}>
@@ -55,7 +62,7 @@ const Navbar = () => {
         </li>
         <li>
           {user ? (
-            <Button variant="error" size="sm" glass label={t('logout')} onClick={logout} />
+            <Button variant="error" size="sm" glass label={t('logout')} onClick={handleLogout} />
           ) : (
             <Button asLink variant="secondary" size="sm" label={t('login')} href={paths.login} />
           )}

@@ -1,0 +1,46 @@
+type: environment
+model: environment
+id: ev_LsvJ3ihrMk
+workspaceId: wk_uXtATNFQmZ
+createdAt: 2026-02-27T17:48:42.134815608
+updatedAt: 2026-03-31T10:23:08.984164
+name: Global Variables
+public: true
+base: true
+parentModel: workspace
+parentId: null
+variables:
+- enabled: true
+  name: BASE_URL
+  value: http://localhost:8000
+  id: nf9VxCE3yc
+- enabled: true
+  name: JOIN_CODE
+  value: ${[ response.body.path(request='rq_WAXTHkF7vT', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5qb2luQ29kZQ') ]}
+  id: jMT5SZ5szE
+- enabled: true
+  name: USERNAME
+  value: username
+  id: tyGfHzs6bf
+- enabled: true
+  name: LAST_PLAYER_ID
+  value: ${[ response.body.path(request='rq_HnXLKGxVMG', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}
+  id: kQW2hTpHIp
+- enabled: true
+  name: EMAIL
+  value: ''
+  id: akmdt8ijni
+- enabled: true
+  name: LAST_ROLE_ID
+  value: ${[ response.body.path(request='rq_tcadwsnsgV', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}
+  id: cMIaUYh4vz
+- enabled: true
+  name: FIRST_ROLE_ITEM_ID
+  value: ${[ response.body.path(request='rq_ibkcnhjyp6', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC4wLmlk') ]}
+  id: n3bsw0aq5B
+- enabled: true
+  name: PERSONNAL_EMAIL
+  value: guillaume.couvidou@live.fr
+  id: creaHaKDsj
+color: null
+sortPriority: 0.0

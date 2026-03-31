@@ -7,5 +7,6 @@ export const paths: Record<string, keyof typeof pathnames> = {
   formUi: '/form-ui',
   icons: '/icons',
   login: '/login',
+  register: '/register',
   test: '/test',
 };
