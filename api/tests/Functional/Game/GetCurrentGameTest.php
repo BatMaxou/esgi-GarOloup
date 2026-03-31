@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Functional\Game\Initialisation;
+namespace App\Tests\Functional\Game;
 
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;
@@ -34,8 +34,8 @@ class GetCurrentGameTest extends GarOloupApiTestCase
 
     public function test_user_can_retrieve_it_current_game(): void
     {
-        $userBuilder = ThereIs::anUser()->build(5);
-        $gameBuilder = ThereIs::aGame()->build(3);
+        $userBuilder = ThereIs::anUser()->build();
+        $gameBuilder = ThereIs::aGame()->build();
         ThereIs::aPlayer()->withUser($userBuilder)->withGame($gameBuilder)->build();
 
         $response = When::asUser($userBuilder)->game()->getCurrent();
@@ -46,8 +46,8 @@ class GetCurrentGameTest extends GarOloupApiTestCase
 
     public function test_temp_user_can_retrieve_it_current_game(): void
     {
-        $tempUserBuilder = ThereIs::aTempUser()->build(5);
-        $gameBuilder = ThereIs::aGame()->build(3);
+        $tempUserBuilder = ThereIs::aTempUser()->build();
+        $gameBuilder = ThereIs::aGame()->build();
         ThereIs::aPlayer()->withTempUser($tempUserBuilder)->withGame($gameBuilder)->build();
 
         $response = When::asTempUser($tempUserBuilder)->game()->getCurrent();
@@ -56,5 +56,15 @@ class GetCurrentGameTest extends GarOloupApiTestCase
         $this->assertEquals($gameBuilder->getEntity()->getId(), $response->get('[id]'));
     }
 
-    // TODO: normalization tests
+    public function test_game_master_can_retrieve_it_current_game(): void
+    {
+        $userBuilder = ThereIs::anUser()->build();
+        $gameMasterBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+        $gameBuilder = ThereIs::aGame()->withGameMaster($gameMasterBuilder)->build();
+
+        $response = When::asUser($userBuilder)->game()->getCurrent();
+        $this->assertResponseStatusCodeSame(200);
+
+        $this->assertEquals($gameBuilder->getEntity()->getId(), $response->get('[id]'));
+    }
 }

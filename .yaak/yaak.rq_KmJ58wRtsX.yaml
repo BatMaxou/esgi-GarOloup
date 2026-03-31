@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_KmJ58wRtsX
 createdAt: 2026-02-27T17:48:42.133699235
-updatedAt: 2026-03-31T10:23:53.107120
+updatedAt: 2026-03-31T16:43:51.579004085
 workspaceId: wk_uXtATNFQmZ
 folderId: null
 authentication: {}
@@ -10,8 +10,8 @@ authenticationType: bearer
 body:
   text: |
     {
-      "username": "${[ PERSONNAL_EMAIL ]}",
-      "password": "Guillaume2784!"
+      "username": "${[ EMAIL ]}",
+      "password": "azertyuiAZ123#"
     }
 bodyType: application/json
 description: ''

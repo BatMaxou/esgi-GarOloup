@@ -11,6 +11,7 @@ use App\Tests\Helper\Builder\AbstractBuilder;
 class GameBuilder extends AbstractBuilder
 {
     public ?PlayerBuilder $host = null;
+    public ?PlayerBuilder $gameMaster = null;
     /** @var PlayerBuilder[] */
     public array $players = [];
     public ?string $joinCode = null;
@@ -22,6 +23,7 @@ class GameBuilder extends AbstractBuilder
     {
         return GameFactory::createOne([
             ...($this->host ? ['host' => $this->host->getEntity()] : []),
+            ...($this->gameMaster ? ['gameMaster' => $this->gameMaster->getEntity()] : []),
             ...($this->joinCode ? ['joinCode' => $this->joinCode] : []),
             ...($this->step ? ['step' => $this->step] : []),
             ...($this->createdAt ? ['createdAt' => $this->createdAt] : []),
@@ -32,7 +34,20 @@ class GameBuilder extends AbstractBuilder
     public function withHost(PlayerBuilder $host): static
     {
         $this->host = $host;
-        $this->players[] = $host;
+
+        if ($this->gameMaster !== $host) {
+            $this->players[] = $host;
+        }
+
+        return $this;
+    }
+
+    public function withGameMaster(PlayerBuilder $gameMaster): static
+    {
+        $this->gameMaster = $gameMaster;
+        if (\in_array($gameMaster, $this->players)) {
+            unset($this->players[\array_search($gameMaster, $this->players)]);
+        }
 
         return $this;
     }

@@ -42,13 +42,32 @@ class PlayerRepository extends ServiceEntityRepository
             return null;
         }
 
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->leftJoin('p.game', 'g')
+            ->leftJoin('p.managedGame', 'mg')
+        ;
+
+        $userConditions = $queryBuilder->expr()->orX()
+            ->add('p.user = :uuid')
+            ->add('p.tempUser = :uuid')
+        ;
+
+        $gameConditions = $queryBuilder->expr()->orX()
+            ->add('g.id IS NOT NULL')
+            ->add('mg.id IS NOT NULL')
+        ;
+
+        $stepConditions = $queryBuilder->expr()->orX()
+            ->add('g.step != :gameStep')
+            ->add('mg.step != :gameStep')
+        ;
+
         /** @var Player|null */
-        return $this->createQueryBuilder('p')
-            ->innerJoin('p.game', 'g')
-            ->where('p.user = :uuid')
-            ->orWhere('p.tempUser = :uuid')
-            ->andWhere('g.step != :gameStep')
-            ->orderBy('g.createdAt', 'DESC')
+        return $queryBuilder
+            ->where($userConditions)
+            ->andWhere($gameConditions)
+            ->andWhere($stepConditions)
+            ->orderBy('p.createdAt', 'DESC')
             ->setParameter('uuid', $user->getId(), 'uuid')
             ->setParameter('gameStep', GameStepEnum::FINISH)
             ->setMaxResults(1)

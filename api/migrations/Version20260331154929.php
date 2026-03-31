@@ -7,7 +7,7 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class Version20260329162411 extends AbstractMigration
+final class Version20260331154929 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -19,7 +19,7 @@ final class Version20260329162411 extends AbstractMigration
         $this->addSql('CREATE TABLE admin (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE close_game_invitation_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE composition (id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
-        $this->addSql('CREATE TABLE configuration (id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, composition_id BINARY(16) DEFAULT NULL, UNIQUE INDEX UNIQ_A5E2A5D787A2E12 (composition_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE configuration (with_game_master TINYINT NOT NULL, with_random_dispatch TINYINT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, composition_id BINARY(16) DEFAULT NULL, UNIQUE INDEX UNIQ_A5E2A5D787A2E12 (composition_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE create_game_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE game (step VARCHAR(255) NOT NULL, join_code VARCHAR(8) NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, host_id BINARY(16) NOT NULL, game_master_id BINARY(16) DEFAULT NULL, configuration_id BINARY(16) NOT NULL, UNIQUE INDEX UNIQ_232B318C1FB8D185 (host_id), UNIQUE INDEX UNIQ_232B318CC1151A13 (game_master_id), UNIQUE INDEX UNIQ_232B318C73F32DD8 (configuration_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE game_event (game_id VARCHAR(255) NOT NULL, player_username VARCHAR(255) NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, discr VARCHAR(255) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
@@ -30,6 +30,7 @@ final class Version20260329162411 extends AbstractMigration
         $this->addSql('CREATE TABLE refresh_token (refresh_token VARCHAR(128) NOT NULL, username VARCHAR(255) NOT NULL, valid DATETIME NOT NULL, id INT AUTO_INCREMENT NOT NULL, UNIQUE INDEX UNIQ_C74F2195C74F2195 (refresh_token), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE role (type VARCHAR(255) DEFAULT NULL, name VARCHAR(64) NOT NULL, description LONGTEXT NOT NULL, ability LONGTEXT DEFAULT NULL, picture_name VARCHAR(255) DEFAULT NULL, min_players INT DEFAULT NULL, max_per_game INT DEFAULT NULL, teams LONGTEXT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, UNIQUE INDEX UNIQ_57698A6A8CDE5729 (type), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE role_entry (count INT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, composition_id BINARY(16) NOT NULL, role_id BINARY(16) NOT NULL, INDEX IDX_DCFD755F87A2E12 (composition_id), INDEX IDX_DCFD755FD60322AC (role_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE set_game_configuration_event (with_game_master TINYINT NOT NULL, with_random_dispatch TINYINT NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE set_game_master_event (target_player_id VARCHAR(255) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE temp_user (username VARCHAR(255) NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, roles JSON NOT NULL, ip VARCHAR(255) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE user (username VARCHAR(255) NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, roles JSON NOT NULL, email VARCHAR(180) NOT NULL, password VARCHAR(255) NOT NULL, reset_token VARCHAR(255) DEFAULT NULL, type VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_IDENTIFIER_EMAIL (email), UNIQUE INDEX UNIQ_IDENTIFIER_USERNAME (username), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
@@ -51,6 +52,7 @@ final class Version20260329162411 extends AbstractMigration
         $this->addSql('ALTER TABLE re_open_game_invitation_event ADD CONSTRAINT FK_8337E0E5BF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE role_entry ADD CONSTRAINT FK_DCFD755F87A2E12 FOREIGN KEY (composition_id) REFERENCES composition (id)');
         $this->addSql('ALTER TABLE role_entry ADD CONSTRAINT FK_DCFD755FD60322AC FOREIGN KEY (role_id) REFERENCES role (id)');
+        $this->addSql('ALTER TABLE set_game_configuration_event ADD CONSTRAINT FK_E4473CFABF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE set_game_master_event ADD CONSTRAINT FK_CD7A9ACEBF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE villager_role ADD CONSTRAINT FK_F3B7ADE2BF396750 FOREIGN KEY (id) REFERENCES game_role (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE werewolf_role ADD CONSTRAINT FK_2A5ED8F1BF396750 FOREIGN KEY (id) REFERENCES game_role (id) ON DELETE CASCADE');
@@ -74,6 +76,7 @@ final class Version20260329162411 extends AbstractMigration
         $this->addSql('ALTER TABLE re_open_game_invitation_event DROP FOREIGN KEY FK_8337E0E5BF396750');
         $this->addSql('ALTER TABLE role_entry DROP FOREIGN KEY FK_DCFD755F87A2E12');
         $this->addSql('ALTER TABLE role_entry DROP FOREIGN KEY FK_DCFD755FD60322AC');
+        $this->addSql('ALTER TABLE set_game_configuration_event DROP FOREIGN KEY FK_E4473CFABF396750');
         $this->addSql('ALTER TABLE set_game_master_event DROP FOREIGN KEY FK_CD7A9ACEBF396750');
         $this->addSql('ALTER TABLE villager_role DROP FOREIGN KEY FK_F3B7ADE2BF396750');
         $this->addSql('ALTER TABLE werewolf_role DROP FOREIGN KEY FK_2A5ED8F1BF396750');
@@ -91,6 +94,7 @@ final class Version20260329162411 extends AbstractMigration
         $this->addSql('DROP TABLE refresh_token');
         $this->addSql('DROP TABLE role');
         $this->addSql('DROP TABLE role_entry');
+        $this->addSql('DROP TABLE set_game_configuration_event');
         $this->addSql('DROP TABLE set_game_master_event');
         $this->addSql('DROP TABLE temp_user');
         $this->addSql('DROP TABLE user');

@@ -13,13 +13,20 @@ class ConfigurationSpec
 
     public function isValid(Game $game): bool
     {
-        $composition = $game->getConfiguration()->getComposition();
+        $configuration = $game->getConfiguration();
+        $composition = $configuration->getComposition();
         if (null === $composition || $composition->isEmpty()) {
             return false;
         }
 
         $playerNumber = $game->getPlayers()->count();
-        if ($playerNumber < $this->minimumPlayers) {
+        if (
+            $playerNumber < $this->minimumPlayers
+            || (
+                $configuration->isWithGameMaster()
+                && $playerNumber < $this->minimumPlayers + 1
+            )
+        ) {
             return false;
         }
 

@@ -51,6 +51,9 @@ class Player
     #[ORM\Column]
     private bool $dead = false;
 
+    #[ORM\OneToOne(mappedBy: 'gameMaster')]
+    private ?Game $managedGame = null;
+
     #[ORM\ManyToOne(inversedBy: 'players')]
     private ?Game $game = null;
 
@@ -127,9 +130,26 @@ class Player
         return $this;
     }
 
+    public function getManagedGame(): ?Game
+    {
+        return $this->managedGame;
+    }
+
+    public function setManagedGame(?Game $managedGame): static
+    {
+        $this->managedGame = $managedGame;
+
+        return $this;
+    }
+
     public function isHost(): bool
     {
         return $this->game && $this->game->getHost() === $this;
+    }
+
+    public function isGameMaster(): bool
+    {
+        return $this->game && $this->game->getGameMaster() === $this;
     }
 
     public function getRole(): ?GameRole

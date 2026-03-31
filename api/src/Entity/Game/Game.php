@@ -98,11 +98,11 @@ class Game
     #[ORM\Column(enumType: GameStepEnum::class)]
     private GameStepEnum $step;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne]
     #[ORM\JoinColumn(nullable: false)]
     private Player $host;
 
-    #[ORM\OneToOne]
+    #[ORM\OneToOne(inversedBy: 'managedGame', cascade: ['persist', 'remove'])]
     private ?Player $gameMaster = null;
 
     #[ORM\Column(length: 8)]
@@ -113,7 +113,7 @@ class Game
     private Configuration $configuration;
 
     /** @var Collection<int, Player> */
-    #[ORM\OneToMany(targetEntity: Player::class, mappedBy: 'game', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Player::class, mappedBy: 'game')]
     private Collection $players;
 
     public function __construct(
@@ -176,6 +176,11 @@ class Game
     public function setGameMaster(?Player $gameMaster): static
     {
         $this->gameMaster = $gameMaster;
+
+        if ($gameMaster) {
+            $this->removePlayer($gameMaster);
+            $gameMaster->setManagedGame($this);
+        }
 
         return $this;
     }

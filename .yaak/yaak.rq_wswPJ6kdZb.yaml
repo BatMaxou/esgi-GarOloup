@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_wswPJ6kdZb
 createdAt: 2026-03-30T12:00:00
-updatedAt: 2026-03-30T20:35:17.106104164
+updatedAt: 2026-03-31T16:44:49.623978132
 workspaceId: wk_uXtATNFQmZ
 folderId: fl_bh6aMuFF23
 authentication:
@@ -19,11 +19,11 @@ body:
           },
           {
             "role": "villager",
-            "count": 2
+            "count": 3
           }
         ]
       },
-      "withGameMaster": false,
+      "withGameMaster": true,
       "withRandomDispatch": true
     }
 bodyType: application/json
