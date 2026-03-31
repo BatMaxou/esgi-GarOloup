@@ -32,8 +32,8 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const t = useTranslations('components.common.layout.navbar');
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout()
     toast.success(t('logoutSuccess'));
   };
 

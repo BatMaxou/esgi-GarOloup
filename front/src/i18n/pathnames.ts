@@ -12,6 +12,10 @@ export const pathnames = {
     fr: '/inscription',
     en: '/register',
   },
+  '/forgot-password': {
+    fr: '/mot-de-passe-oublie',
+    en: '/forgot-password',
+  },
   '/test': {
     fr: '/fr-test',
     en: '/en-test',

@@ -250,6 +250,13 @@
             "submit": "Créer mon compte",
             "passwordMismatch": "Les mots de passes ne correspondent pas",
             "passwordRequirements": "12 caractères min., une majuscule, une minuscule, un chiffre et un caractère spécial"
+          },
+          "forgotPassword": {
+            "emailLabel": "E-mail",
+            "emailPlaceholder": "garoloup@example.com",
+            "submit": "Envoyer le lien",
+            "emailSent": "Un lien de réinitialisation a été envoyé à votre e-mail",
+            "emailError": "Erreur lors de l'envoi de l'e-mail"
           }
         }
       }
@@ -268,6 +275,10 @@
           "subtitle": "Crée un compte pour lancer ou rejoindre des parties",
           "alreadyHaveAccount": "Déjà un compte ?",
           "login": "Se connecter"
+        },
+        "forgotPassword": {
+          "title": "Mot de passe oublié",
+          "subtitle": "Entrez votre e-mail pour recevoir un lien de réinitialisation"
         }
       }
     }

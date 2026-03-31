@@ -8,5 +8,6 @@ export const paths: Record<string, keyof typeof pathnames> = {
   icons: '/icons',
   login: '/login',
   register: '/register',
+  forgotPassword: '/forgot-password',
   test: '/test',
 };
