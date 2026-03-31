@@ -31,10 +31,6 @@ class CurrentGameProvider implements ProviderInterface
             return null;
         }
 
-        if (null === $player->getGame()) {
-            return null;
-        }
-
-        return $player->getGame();
+        return $player->getGame() ?? $player->getManagedGame();
     }
 }

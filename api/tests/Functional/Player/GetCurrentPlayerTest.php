@@ -18,8 +18,7 @@ class GetCurrentPlayerTest extends GarOloupApiTestCase
     {
         $userBuilder = ThereIs::anUser()->build();
 
-        When::asUser($userBuilder);
-        When::player()->getCurrent();
+        When::asUser($userBuilder)->player()->getCurrent();
         $this->assertResponseStatusCodeSame(404);
     }
 
@@ -27,8 +26,7 @@ class GetCurrentPlayerTest extends GarOloupApiTestCase
     {
         $tempUserBuilder = ThereIs::aTempUser()->build();
 
-        When::asTempUser($tempUserBuilder);
-        When::player()->getCurrent();
+        When::asTempUser($tempUserBuilder)->player()->getCurrent();
         $this->assertResponseStatusCodeSame(404);
     }
 
@@ -38,8 +36,7 @@ class GetCurrentPlayerTest extends GarOloupApiTestCase
         $gameBuilder = ThereIs::aGame()->build(3);
         $playerBuilder = ThereIs::aPlayer()->withUser($userBuilder)->withGame($gameBuilder)->build();
 
-        When::asUser($userBuilder);
-        $response = When::player()->getCurrent();
+        $response = When::asUser($userBuilder)->player()->getCurrent();
         $this->assertResponseStatusCodeSame(200);
 
         $this->assertEquals($playerBuilder->getEntity()->getUser()?->getId(), $response->get('[user][id]'));
@@ -52,8 +49,7 @@ class GetCurrentPlayerTest extends GarOloupApiTestCase
         $gameBuilder = ThereIs::aGame()->build(3);
         $playerBuilder = ThereIs::aPlayer()->withTempUser($tempUserBuilder)->withGame($gameBuilder)->build();
 
-        When::asTempUser($tempUserBuilder);
-        $response = When::player()->getCurrent();
+        $response = When::asTempUser($tempUserBuilder)->player()->getCurrent();
         $this->assertResponseStatusCodeSame(200);
 
         $this->assertEquals($playerBuilder->getEntity()->getTempUser()?->getId(), $response->get('[tempUser][id]'));
@@ -63,31 +59,51 @@ class GetCurrentPlayerTest extends GarOloupApiTestCase
     public function test_user_retrieve_player_of_the_most_recent_game(): void
     {
         $userBuilder = ThereIs::anUser()->build();
-        $firstGameBuilder = ThereIs::aGame()->createdAt(new \DateTimeImmutable('2026-01-01 00:00:00'))->build();
-        ThereIs::aPlayer()->withUser($userBuilder)->withGame($firstGameBuilder)->build();
-        $secondGameBuilder = ThereIs::aGame()->createdAt(new \DateTimeImmutable('2026-01-01 00:05:00'))->build();
-        $secondPlayerBuilder = ThereIs::aPlayer()->withUser($userBuilder)->withGame($secondGameBuilder)->build();
+        $firstGameBuilder = ThereIs::aGame()->build();
+        $secondGameBuilder = ThereIs::aGame()->build();
 
-        When::asUser($userBuilder);
-        $response = When::player()->getCurrent();
+        $firstPlayerBuilder = ThereIs::aPlayer()
+            ->withUser($userBuilder)
+            ->withGame($firstGameBuilder)
+            ->createdAt(new \DateTimeImmutable('2026-01-01 00:05:00'))
+            ->build()
+        ;
+        ThereIs::aPlayer()
+            ->withUser($userBuilder)
+            ->withGame($secondGameBuilder)
+            ->createdAt(new \DateTimeImmutable('2026-01-01 00:00:00'))
+            ->build()
+        ;
+
+        $response = When::asUser($userBuilder)->player()->getCurrent();
         $this->assertResponseStatusCodeSame(200);
 
-        $this->assertEquals($secondPlayerBuilder->getEntity()->getUser()?->getId(), $response->get('[user][id]'));
+        $this->assertEquals($firstPlayerBuilder->getEntity()->getId(), $response->get('[id]'));
     }
 
     public function test_temp_user_retrieve_player_of_the_most_recent_game(): void
     {
         $tempUserBuilder = ThereIs::aTempUser()->build();
-        $firstGameBuilder = ThereIs::aGame()->createdAt(new \DateTimeImmutable('2026-01-01 00:00:00'))->build();
-        ThereIs::aPlayer()->withTempUser($tempUserBuilder)->withGame($firstGameBuilder)->build();
-        $secondGameBuilder = ThereIs::aGame()->createdAt(new \DateTimeImmutable('2026-01-01 00:05:00'))->build();
-        $secondPlayerBuilder = ThereIs::aPlayer()->withTempUser($tempUserBuilder)->withGame($secondGameBuilder)->build();
+        $firstGameBuilder = ThereIs::aGame()->build();
+        $secondGameBuilder = ThereIs::aGame()->build();
 
-        When::asTempUser($tempUserBuilder);
-        $response = When::player()->getCurrent();
+        $firstPlayerBuilder = ThereIs::aPlayer()
+            ->withTempUser($tempUserBuilder)
+            ->withGame($firstGameBuilder)
+            ->createdAt(new \DateTimeImmutable('2026-01-01 00:05:00'))
+            ->build()
+        ;
+        ThereIs::aPlayer()
+            ->withTempUser($tempUserBuilder)
+            ->withGame($secondGameBuilder)
+            ->createdAt(new \DateTimeImmutable('2026-01-01 00:00:00'))
+            ->build()
+        ;
+
+        $response = When::asTempUser($tempUserBuilder)->player()->getCurrent();
         $this->assertResponseStatusCodeSame(200);
 
-        $this->assertEquals($secondPlayerBuilder->getEntity()->getTempUser()?->getId(), $response->get('[tempUser][id]'));
+        $this->assertEquals($firstPlayerBuilder->getEntity()->getId(), $response->get('[id]'));
     }
 
     public function test_user_retrieve_only_player_of_not_finished_game(): void

@@ -22,3 +22,6 @@ App\Entity\Game\Player:
         host:
             groups:
                 - me:read
+        gameMaster:
+            groups:
+                - me:read

@@ -15,6 +15,7 @@ class PlayerBuilder extends AbstractBuilder
     public ?TempUserBuilder $tempUser = null;
     public ?bool $dead = null;
     public ?GameBuilder $game = null;
+    public ?\DateTimeInterface $createdAt = null;
 
     protected function doBuild(): object
     {
@@ -23,6 +24,7 @@ class PlayerBuilder extends AbstractBuilder
             ...($this->tempUser ? ['tempUser' => $this->tempUser->getEntity(), 'user' => null] : []),
             ...($this->dead ? ['dead' => $this->dead] : []),
             ...($this->game ? ['game' => $this->game->getEntity()] : []),
+            ...($this->createdAt ? ['createdAt' => $this->createdAt] : []),
         ]);
     }
 
@@ -50,6 +52,13 @@ class PlayerBuilder extends AbstractBuilder
     public function withGame(GameBuilder $gameBuilder): static
     {
         $this->game = $gameBuilder;
+
+        return $this;
+    }
+
+    public function createdAt(\DateTimeInterface $createdAt): static
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

@@ -23,8 +23,14 @@ class SetGameMasterTest extends GarOloupApiTestCase
     {
         $hostBuilder = ThereIs::anUser()->build();
         $hostPlayerBuilder = ThereIs::aPlayer()->withUser($hostBuilder)->build();
+
         $targetUserBuilder = ThereIs::anUser()->build();
-        $gameBuilder = ThereIs::aGame()->withHost($hostPlayerBuilder)->withStep(GameStepEnum::GAME_MASTER_CHOICE)->build();
+        $gameBuilder = ThereIs::aGame()
+            ->withHost($hostPlayerBuilder)
+            ->withPlayers(ThereIs::aPlayer()->build(5, true))
+            ->withStep(GameStepEnum::GAME_MASTER_CHOICE)
+            ->build()
+        ;
         $targetPlayerBuilder = ThereIs::aPlayer()->withUser($targetUserBuilder)->withGame($gameBuilder)->build();
 
         $response = When::asUser($hostBuilder)->game()->setGameMaster($targetPlayerBuilder->getEntity()->getId());
