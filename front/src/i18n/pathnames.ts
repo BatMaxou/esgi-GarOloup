@@ -16,6 +16,10 @@ export const pathnames = {
     fr: '/mot-de-passe-oublie',
     en: '/forgot-password',
   },
+  '/reset-password': {
+    fr: '/reinitialiser-mot-de-passe',
+    en: '/reset-password',
+  },
   '/test': {
     fr: '/fr-test',
     en: '/en-test',

@@ -257,6 +257,15 @@
             "submit": "Send link",
             "emailSent": "A reset link has been sent to your email",
             "emailError": "Error sending email"
+          },
+          "resetPassword": {
+            "passwordLabel": "Password",
+            "passwordConfirmationLabel": "Confirm password",
+            "submit": "Reset password",
+            "passwordMismatch": "Passwords doesn't match",
+            "passwordRequirements": "12 characters min., one uppercase letter, one lowercase letter, one number and one special character",
+            "tokenError" : "The link is no longer valid",
+            "passwordUpdatedError": "Error during password update"
           }
         }
       }
@@ -279,6 +288,10 @@
         "forgotPassword": {
           "title": "Forgot password",
           "subtitle": "Enter your email to receive a reset link"
+        },
+        "resetPassword": {
+          "title": "Reset your password",
+          "subtitle": "Enter your new password"
         }
       }
     }

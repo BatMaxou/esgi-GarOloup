@@ -257,6 +257,16 @@
             "submit": "Envoyer le lien",
             "emailSent": "Un lien de réinitialisation a été envoyé à votre e-mail",
             "emailError": "Erreur lors de l'envoi de l'e-mail"
+          },
+          "resetPassword": {
+            "passwordLabel": "Mot de passe",
+            "passwordConfirmationLabel": "Confirmer le mot de passe",
+            "submit": "Réinitialiser le mot de passe",
+            "passwordMismatch": "Les mots de passes ne correspondent pas",
+            "passwordRequirements": "12 caractères min., une majuscule, une minuscule, un chiffre et un caractère spécial",
+            "tokenError" : "Le lien n'est plus valide",
+            "passwordUpdatedError" : "Erreur lors de la réinitialisation du mot de passe",
+            "passwordUpdated" : "Mot de passe réinitialisé !"
           }
         }
       }
@@ -279,6 +289,10 @@
         "forgotPassword": {
           "title": "Mot de passe oublié",
           "subtitle": "Entrez votre e-mail pour recevoir un lien de réinitialisation"
+        },
+        "resetPassword": {
+          "title": "Réinitialiser votre mot de passe",
+          "subtitle": "Entrez votre nouveau mot de passe"
         }
       }
     }

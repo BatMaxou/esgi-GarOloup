@@ -9,5 +9,6 @@ export const paths: Record<string, keyof typeof pathnames> = {
   login: '/login',
   register: '/register',
   forgotPassword: '/forgot-password',
+  resetPassword: '/reset-password',
   test: '/test',
 };
