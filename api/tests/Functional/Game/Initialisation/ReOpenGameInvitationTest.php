@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Functional\Game;
+namespace App\Tests\Functional\Game\Initialisation;
 
 use App\Entity\Event\Game\ReOpenGameInvitationEvent;
 use App\Enum\Game\GameStepEnum;

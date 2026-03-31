@@ -27,4 +27,15 @@ final class GameFactory extends PersistentObjectFactory
             'configuration' => ConfigurationFactory::new(),
         ];
     }
+
+    #[\Override]
+    protected function initialize(): static
+    {
+        return $this->afterInstantiate(function (Game $game): void {
+            $host = $game->getHost();
+            if (!$game->getPlayers()->contains($host)) {
+                $game->addPlayer($host);
+            }
+        });
+    }
 }

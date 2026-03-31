@@ -6,6 +6,11 @@ use App\Entity\Game\Game;
 
 class ConfigurationSpec
 {
+    public function __construct(
+        private readonly int $minimumPlayers,
+    ) {
+    }
+
     public function isValid(Game $game): bool
     {
         $composition = $game->getConfiguration()->getComposition();
@@ -14,7 +19,7 @@ class ConfigurationSpec
         }
 
         $playerNumber = $game->getPlayers()->count();
-        if ($playerNumber < 4) {
+        if ($playerNumber < $this->minimumPlayers) {
             return false;
         }
 
@@ -27,12 +32,18 @@ class ConfigurationSpec
             }
 
             $role = $roleEntry->getRole();
-            if ($playerNumber < $role->getMinPlayers() || $count > $role->getMaxPerGame()) {
+            $roleMinPlayers = $role->getMinPlayers();
+            if (null !== $roleMinPlayers && $playerNumber < $role->getMinPlayers()) {
+                return false;
+            }
+
+            $roleMaxPerGame = $role->getMaxPerGame();
+            if (null !== $roleMaxPerGame && $roleMaxPerGame < $count) {
                 return false;
             }
 
             $type = $role->getType();
-            if (!$type || !\in_array($type->value, $includedRoles)) {
+            if (!$type || \in_array($type->value, $includedRoles)) {
                 return false;
             }
 

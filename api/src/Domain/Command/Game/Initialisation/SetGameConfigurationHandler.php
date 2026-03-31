@@ -6,7 +6,7 @@ use App\Api\Model\BasicActionOutput;
 use App\Domain\GameEvent\Exception\GameException;
 use App\Domain\GameEvent\GameEventDispatcher;
 use App\Domain\GameEvent\HttpGameExceptionMapper;
-use App\Entity\Event\Game\SetConfigurationEvent;
+use App\Entity\Event\Game\SetGameConfigurationEvent;
 use App\Entity\User\AbstractUser;
 use App\Repository\Game\PlayerRepository;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -35,7 +35,7 @@ class SetGameConfigurationHandler
             throw new AccessDeniedHttpException('You do not have a current player');
         }
 
-        $gameEvent = new SetConfigurationEvent()
+        $gameEvent = new SetGameConfigurationEvent()
             ->setComposition($command->composition)
             ->setWithGameMaster($command->withGameMaster)
             ->setWithRandomDispatch($command->withRandomDispatch)

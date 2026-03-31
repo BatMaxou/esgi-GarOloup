@@ -10,7 +10,7 @@ use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\ConfigurationSpec;
 use App\Domain\Spec\GameSpec;
 use App\Entity\Event\Game\GameEvent;
-use App\Entity\Event\Game\SetConfigurationEvent;
+use App\Entity\Event\Game\SetGameConfigurationEvent;
 use App\Entity\Game\Composition;
 use App\Entity\Game\Game;
 use App\Entity\Game\RoleEntry;
@@ -18,8 +18,8 @@ use App\Enum\Game\GameStepEnum;
 use App\Repository\RoleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-/** @implements GameEventApplicatorInterface<SetConfigurationEvent> */
-class SetConfigurationEventApplicator implements GameEventApplicatorInterface
+/** @implements GameEventApplicatorInterface<SetGameConfigurationEvent> */
+class SetGameConfigurationEventApplicator implements GameEventApplicatorInterface
 {
     use GameAwareTrait;
     use UserAwareTrait;
@@ -85,7 +85,7 @@ class SetConfigurationEventApplicator implements GameEventApplicatorInterface
 
     public function supports(GameEvent $gameEvent): bool
     {
-        return $gameEvent instanceof SetConfigurationEvent;
+        return $gameEvent instanceof SetGameConfigurationEvent;
     }
 
     public static function getPriority(): int

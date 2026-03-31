@@ -2,6 +2,8 @@
 
 namespace App\Tests\Helper\Builder\Game;
 
+use App\Api\Model\Game\Composition\CompositionInput;
+use App\Api\Model\Game\Composition\RoleEntryInput;
 use App\Entity\Game\Composition;
 use App\Entity\Role;
 use App\Fixtures\Factory\Game\CompositionFactory;
@@ -35,5 +37,20 @@ class CompositionBuilder extends AbstractBuilder
         $this->roles[] = ['role' => $role, 'count' => $count];
 
         return $this;
+    }
+
+    public function toInput(): CompositionInput
+    {
+        $roles = [];
+        foreach ($this->roles as $role) {
+            $type = $role['role']->getEntity()->getType();
+            if (!$type) {
+                continue;
+            }
+
+            $roles[] = new RoleEntryInput($type, $role['count']);
+        }
+
+        return new CompositionInput($roles);
     }
 }

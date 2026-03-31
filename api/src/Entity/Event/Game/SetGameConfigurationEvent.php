@@ -6,7 +6,7 @@ use App\Api\Model\Game\Composition\CompositionInput;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-class SetConfigurationEvent extends GameEvent
+class SetGameConfigurationEvent extends GameEvent
 {
     #[ORM\Column]
     private bool $withGameMaster = false;
