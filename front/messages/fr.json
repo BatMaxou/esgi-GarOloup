@@ -179,6 +179,7 @@
       },
       "layout": {
         "navbar": {
+          "logoutSuccess": "Déconnexion réussie",
           "logoAlt": "GarOloup",
           "mockLinks": {
             "ui": "UI",
@@ -236,7 +237,19 @@
             "emailPlaceholder": "garoloup@example.com",
             "passwordLabel": "Mot de passe",
             "forgotPassword": "Mot de passe oublié ?",
-            "submit": "Se connecter"
+            "submit": "Se connecter",
+            "loginError": "Erreur lors de la connexion"
+          },
+          "register": {
+            "usernameLabel": "Pseudo",
+            "usernamePlaceholder": "LoupSolitaire",
+            "emailLabel": "E-mail",
+            "emailPlaceholder": "garoloup@example.com",
+            "passwordLabel": "Mot de passe",
+            "passwordConfirmationLabel": "Confirmer le mot de passe",
+            "submit": "Créer mon compte",
+            "passwordMismatch": "Les mots de passes ne correspondent pas",
+            "passwordRequirements": "12 caractères min., une majuscule, une minuscule, un chiffre et un caractère spécial"
           }
         }
       }
@@ -245,7 +258,16 @@
       "auth": {
         "login": {
           "title": "Bon retour parmi nous",
-          "subtitle": "Connectez-vous pour reprendre la chasse"
+          "subtitle": "Connectez-vous pour reprendre la chasse",
+          "loginSuccess": "Connexion réussie",
+          "noAccount": "Pas encore de compte ?",
+          "createAccount": "Rejoignez la meute"
+        },
+        "register": {
+          "title": "Rejoins la meute",
+          "subtitle": "Crée un compte pour lancer ou rejoindre des parties",
+          "alreadyHaveAccount": "Déjà un compte ?",
+          "login": "Se connecter"
         }
       }
     }

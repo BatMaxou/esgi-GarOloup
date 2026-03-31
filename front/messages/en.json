@@ -179,6 +179,7 @@
       },
       "layout": {
         "navbar": {
+          "logoutSuccess": "Logout successful",
           "logoAlt": "GarOloup",
           "mockLinks": {
             "ui": "UI",
@@ -236,7 +237,19 @@
             "emailPlaceholder": "garoloup@example.com",
             "passwordLabel": "Password",
             "forgotPassword": "Forgot password?",
-            "submit": "Log in"
+            "submit": "Log in",
+            "loginError": "Error logging in"
+          },
+          "register": {
+            "usernameLabel": "Username",
+            "usernamePlaceholder": "LoneWolf",
+            "emailLabel": "Email",
+            "emailPlaceholder": "garoloup@example.com",
+            "passwordLabel": "Password",
+            "passwordConfirmationLabel": "Confirm password",
+            "submit": "Create account",
+            "passwordMismatch": "Passwords doesn't match",
+            "passwordRequirements": "12 characters min., one uppercase letter, one lowercase letter, one number and one special character"
           }
         }
       }
@@ -245,7 +258,16 @@
       "auth": {
         "login": {
           "title": "Welcome back",
-          "subtitle": "Sign in to get back to the hunt"
+          "subtitle": "Sign in to get back to the hunt",
+          "loginSuccess": "Login successful",
+          "noAccount": "No account yet?",
+          "createAccount": "Join the pack"
+        },
+        "register": {
+          "title": "Join the pack",
+          "subtitle": "Create an account to start or join games",
+          "alreadyHaveAccount": "Already have an account?",
+          "login": "Log in"
         }
       }
     }

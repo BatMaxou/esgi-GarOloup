@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { cva } from 'class-variance-authority';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { toast } from 'react-toastify';
 
 const ThemeSwitcher = dynamic(() => import('@/components/common/layout/theme-switcher'), { ssr: false });
 
@@ -31,6 +32,11 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const t = useTranslations('components.common.layout.navbar');
 
+  const handleLogout = () => {
+    logout();
+    toast.success(t('logoutSuccess'));
+  };
+
   return (
     <nav className={navbarCva({ sticky: isSticky })}>
       <Link href={paths.home} className="flex items-center">
@@ -55,7 +61,7 @@ const Navbar = () => {
         </li>
         <li>
           {user ? (
-            <Button variant="error" size="sm" glass label={t('logout')} onClick={logout} />
+            <Button variant="error" size="sm" glass label={t('logout')} onClick={handleLogout} />
           ) : (
             <Button asLink variant="secondary" size="sm" label={t('login')} href={paths.login} />
           )}

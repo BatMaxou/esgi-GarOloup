@@ -2,9 +2,8 @@
 
 import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { toast } from 'react-toastify';
 
-import LoginForm from '@/components/common/form/auth/login-form';
+import RegisterForm from '@/components/common/form/auth/register-form';
 import Divider from '@/components/ui/atoms/divider';
 import GlassPanel from '@/components/ui/atoms/glass-panel';
 import Typography from '@/components/ui/atoms/typography';
@@ -13,20 +12,16 @@ import { paths } from '@/utils/paths';
 import { useRouter } from '@/i18n/navigation';
 import Button from '@/components/ui/molecules/button';
 
-const LoginClient = () => {
+const RegisterClient = () => {
   const { user } = useAuth();
   const router = useRouter();
   const tg = useTranslations();
-  const t = useTranslations('components.pages.auth.login');
+  const t = useTranslations('components.pages.auth.register');
 
   useEffect(() => {
     if (user) {
-      toast.success(t('loginSuccess'));
-      setTimeout(() => {
-        router.push(paths.home);
-      }, 1000);
+      router.push(paths.home);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, router]);
 
   return (
@@ -42,16 +37,16 @@ const LoginClient = () => {
           {t('subtitle')}
         </Typography>
         <Divider variant="primary" />
-        {!user && <LoginForm />}
+        {!user && <RegisterForm />}
         <div className="flex flex-row justify-center items-center gap-2">
           <Typography variant="body-sm" tag="p" bold center textColor="neutral-500">
-            {t('noAccount')}
+            {t('alreadyHaveAccount')}
           </Typography>
-          <Button asLink variant="text" label={t('createAccount')} href={paths.register} />
+          <Button asLink variant="text" label={t('login')} href={paths.login} />
         </div>
       </GlassPanel>
     </main>
   );
 };
 
-export default LoginClient;
+export default RegisterClient;
