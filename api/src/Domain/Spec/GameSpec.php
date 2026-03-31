@@ -12,6 +12,7 @@ class GameSpec
 {
     public function __construct(
         private readonly PlayerRepository $playerRepository,
+        private readonly int $minimumPlayers,
     ) {
     }
 
@@ -66,6 +67,10 @@ class GameSpec
     public function canCloseGameInvitation(AbstractUser $user, Game $game): bool
     {
         if ($user !== $game->getHost()->getLinkedUser()) {
+            return false;
+        }
+
+        if ($game->getPlayers()->count() < $this->minimumPlayers) {
             return false;
         }
 

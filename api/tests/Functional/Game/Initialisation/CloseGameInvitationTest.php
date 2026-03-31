@@ -23,7 +23,11 @@ class CloseGameInvitationTest extends GarOloupApiTestCase
     {
         $userBuilder = ThereIs::anUser()->build();
         $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
-        $gameBuilder = ThereIs::aGame()->withHost($hostBuilder)->build();
+        $gameBuilder = ThereIs::aGame()
+            ->withHost($hostBuilder)
+            ->withPlayers(ThereIs::aPlayer()->build(3, true))
+            ->build()
+        ;
 
         $response = When::asUser($userBuilder)->game()->closeInvitation();
         $this->assertResponseStatusCodeSame(200);
@@ -51,7 +55,7 @@ class CloseGameInvitationTest extends GarOloupApiTestCase
     public function test_player_cant_close_game_invitation(): void
     {
         $userBuilder = ThereIs::anUser()->build();
-        $gameBuilder = ThereIs::aGame()->build();
+        $gameBuilder = ThereIs::aGame()->withPlayers(ThereIs::aPlayer()->build(3, true))->build();
         $playerBuilder = ThereIs::aPlayer()->withUser($userBuilder)->withGame($gameBuilder)->build();
 
         When::asUser($userBuilder)->game()->closeInvitation();
@@ -62,7 +66,11 @@ class CloseGameInvitationTest extends GarOloupApiTestCase
     {
         $userBuilder = ThereIs::anUser()->build();
         $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
-        $gameBuilder = ThereIs::aGame()->withHost($hostBuilder)->withStep(GameStepEnum::CONFIGURATION)->build();
+        $gameBuilder = ThereIs::aGame()
+            ->withHost($hostBuilder)
+            ->withPlayers(ThereIs::aPlayer()->build(3, true))
+            ->withStep(GameStepEnum::CONFIGURATION)->build()
+        ;
 
         When::asUser($userBuilder)->game()->closeInvitation();
         $this->assertResponseStatusCodeSame(403);
@@ -72,7 +80,11 @@ class CloseGameInvitationTest extends GarOloupApiTestCase
     {
         $userBuilder = ThereIs::anUser()->withUsername('SLiipMan')->build();
         $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
-        $gameBuilder = ThereIs::aGame()->withHost($hostBuilder)->build();
+        $gameBuilder = ThereIs::aGame()
+            ->withHost($hostBuilder)
+            ->withPlayers(ThereIs::aPlayer()->build(3, true))
+            ->build()
+        ;
 
         $response = When::asUser($userBuilder)->game()->closeInvitation();
         $this->assertResponseStatusCodeSame(200);
