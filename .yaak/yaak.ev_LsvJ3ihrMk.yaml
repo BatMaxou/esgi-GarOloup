@@ -3,7 +3,7 @@ model: environment
 id: ev_LsvJ3ihrMk
 workspaceId: wk_uXtATNFQmZ
 createdAt: 2026-02-27T17:48:42.134815608
-updatedAt: 2026-03-31T10:23:08.984164
+updatedAt: 2026-03-31T10:19:33.835110134
 name: Global Variables
 public: true
 base: true
@@ -38,9 +38,5 @@ variables:
   name: FIRST_ROLE_ITEM_ID
   value: ${[ response.body.path(request='rq_ibkcnhjyp6', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC4wLmlk') ]}
   id: n3bsw0aq5B
-- enabled: true
-  name: PERSONNAL_EMAIL
-  value: guillaume.couvidou@live.fr
-  id: creaHaKDsj
 color: null
 sortPriority: 0.0

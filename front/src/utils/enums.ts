@@ -1,6 +1,7 @@
 export enum RoleEnum {
-  USER = 'user',
-  TEMP_USER = 'temp_user',
+  USER = 'ROLE_USER',
+  TEMP_USER = 'ROLE_TEMP_USER',
+  ADMIN = 'ROLE_ADMIN',
 }
 
 export enum GameStepEnum {

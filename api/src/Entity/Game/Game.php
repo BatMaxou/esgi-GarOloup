@@ -97,6 +97,10 @@ class Game
     #[ORM\Column(length: 8)]
     private string $joinCode;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private Configuration $configuration;
+
     /** @var Collection<int, Player> */
     #[ORM\OneToMany(targetEntity: Player::class, mappedBy: 'game', orphanRemoval: true)]
     private Collection $players;
@@ -113,6 +117,20 @@ class Game
 
         $this->players = new ArrayCollection();
         $this->addPlayer($host);
+
+        $this->configuration = new Configuration();
+    }
+
+    public function getConfiguration(): Configuration
+    {
+        return $this->configuration;
+    }
+
+    public function setConfiguration(Configuration $configuration): static
+    {
+        $this->configuration = $configuration;
+
+        return $this;
     }
 
     public function getStep(): GameStepEnum

@@ -24,6 +24,7 @@ final class GameFactory extends PersistentObjectFactory
             'host' => PlayerFactory::new(),
             'joinCode' => self::faker()->text(8),
             'step' => GameStepEnum::NEW,
+            'configuration' => ConfigurationFactory::new(),
         ];
     }
 }

@@ -5,7 +5,7 @@ namespace App\Entity\Game;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use App\Api\Provider\Player\CurrentPlayerProvider;
-// use App\Entity\Game\Role\GameRole;
+use App\Entity\Game\Role\GameRole;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Entity\User\AbstractUser;
@@ -48,14 +48,14 @@ class Player
     #[ORM\ManyToOne]
     private ?TempUser $tempUser = null;
 
-    // #[ORM\ManyToOne]
-    // private ?GameRole $gameRole = null;
-
     #[ORM\Column]
     private bool $dead = false;
 
     #[ORM\ManyToOne(inversedBy: 'players')]
     private ?Game $game = null;
+
+    #[ORM\ManyToOne]
+    private ?GameRole $role = null;
 
     public function __construct(
         ?UserInterface $user = null,
@@ -127,20 +127,20 @@ class Player
         return $this;
     }
 
-    // public function getGameRole(): ?GameRole
-    // {
-    //     return $this->gameRole;
-    // }
-    //
-    // public function setGameRole(?GameRole $gameRole): static
-    // {
-    //     $this->gameRole = $gameRole;
-    //
-    //     return $this;
-    // }
-
     public function isHost(): bool
     {
         return $this->game && $this->game->getHost() === $this;
+    }
+
+    public function getRole(): ?GameRole
+    {
+        return $this->role;
+    }
+
+    public function setRole(?GameRole $role): static
+    {
+        $this->role = $role;
+
+        return $this;
     }
 }
