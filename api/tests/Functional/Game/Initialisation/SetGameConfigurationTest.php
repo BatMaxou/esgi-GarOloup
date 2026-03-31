@@ -2,6 +2,7 @@
 
 namespace App\Tests\Functional\Game\Initialisation;
 
+use App\Entity\Event\Game\SetGameConfigurationEvent;
 use App\Enum\Game\GameStepEnum;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;
@@ -263,5 +264,50 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
         When::asUser($userBuilder)->game()->setConfiguration($compositionBuilder);
         $this->assertResponseStatusCodeSame(400);
+    }
+
+    public function test_host_cant_set_game_configuration_if_game_has_already_pass_configuration_step(): void
+    {
+        $userBuilder = ThereIs::anUser()->build();
+        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+
+        $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
+        ThereIs::aGame()
+            ->withHost($hostBuilder)
+            ->withPlayers(ThereIs::aPlayer()->build(7, true))
+            ->withStep(GameStepEnum::GAME_MASTER_CHOICE)
+            ->build();
+
+        $compositionBuilder = ThereIs::aComposition()
+            ->withRole($roleBagBuilder->getVillager(), 4)
+            ->withRole($roleBagBuilder->getWerewolf(), 2)
+        ;
+
+        When::asUser($userBuilder)->game()->setConfiguration($compositionBuilder);
+        $this->assertResponseStatusCodeSame(403);
+    }
+
+    public function test_game_event_dispatched_by_set_game_configuration(): void
+    {
+        $userBuilder = ThereIs::anUser()->withUsername('SLiipMan')->build();
+        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+
+        $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
+        $gameBuilder = ThereIs::aGame()
+            ->withHost($hostBuilder)
+            ->withPlayers(ThereIs::aPlayer()->build(5, true))
+            ->withStep(GameStepEnum::CONFIGURATION)
+            ->build();
+
+        $compositionBuilder = ThereIs::aComposition()
+            ->withRole($roleBagBuilder->getVillager(), 4)
+            ->withRole($roleBagBuilder->getWerewolf(), 2)
+        ;
+
+        $response = When::asUser($userBuilder)->game()->setConfiguration($compositionBuilder);
+        $this->assertResponseStatusCodeSame(200);
+
+        $this->assertCollected(SetGameConfigurationEvent::class, $userBuilder->username, $gameBuilder->getEntity()->getId());
+        $this->assertEventCollectedNumber(1);
     }
 }
