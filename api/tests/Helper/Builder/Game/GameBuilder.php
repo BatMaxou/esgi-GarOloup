@@ -11,6 +11,8 @@ use App\Tests\Helper\Builder\AbstractBuilder;
 class GameBuilder extends AbstractBuilder
 {
     public ?PlayerBuilder $host = null;
+    /** @var PlayerBuilder[] */
+    public array $players = [];
     public ?string $joinCode = null;
     public ?GameStepEnum $step = null;
     public ?bool $finished = null;
@@ -23,12 +25,14 @@ class GameBuilder extends AbstractBuilder
             ...($this->joinCode ? ['joinCode' => $this->joinCode] : []),
             ...($this->step ? ['step' => $this->step] : []),
             ...($this->createdAt ? ['createdAt' => $this->createdAt] : []),
+            'players' => array_map(fn (PlayerBuilder $player) => $player->getEntity(), $this->players),
         ]);
     }
 
     public function withHost(PlayerBuilder $host): static
     {
         $this->host = $host;
+        $this->players[] = $host;
 
         return $this;
     }
@@ -43,6 +47,23 @@ class GameBuilder extends AbstractBuilder
     public function withStep(GameStepEnum $step): static
     {
         $this->step = $step;
+
+        return $this;
+    }
+
+    public function withPlayer(PlayerBuilder $player): static
+    {
+        $this->players[] = $player;
+
+        return $this;
+    }
+
+    /** @param PlayerBuilder[] $players */
+    public function withPlayers(array $players): static
+    {
+        foreach ($players as $player) {
+            $this->withPlayer($player);
+        }
 
         return $this;
     }

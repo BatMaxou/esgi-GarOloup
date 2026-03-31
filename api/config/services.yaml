@@ -11,9 +11,10 @@ services:
         autowire: true
         autoconfigure: true
         bind:
-            $frontResetUrl: '%env(string:FRONT_RESET_URL)%'
+            string $frontResetUrl: '%env(string:FRONT_RESET_URL)%'
             string $publicUploadsPath: '%env(string:PUBLIC_UPLOADS_PATH)%'
             string $ssrPublicUploadsPath: '%env(string:SSR_PUBLIC_UPLOADS_PATH)%'
+            int $minimumPlayers: '%env(int:MINIMUM_PLAYERS)%'
 
     _instanceof:
         App\Domain\GameEvent\Interface\GameEventApplicatorInterface:

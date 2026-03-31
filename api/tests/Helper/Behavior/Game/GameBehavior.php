@@ -4,6 +4,7 @@ namespace App\Tests\Helper\Behavior\Game;
 
 use App\Tests\Helper\Behavior\AbstractBehavior;
 use App\Tests\Helper\Behavior\BehaviorResponse;
+use App\Tests\Helper\Builder\Game\CompositionBuilder;
 
 class GameBehavior extends AbstractBehavior
 {
@@ -50,6 +51,18 @@ class GameBehavior extends AbstractBehavior
             'headers' => $this->getPatchHeaders(),
             'json' => [
                 'playerId' => $playerId,
+            ],
+        ]));
+    }
+
+    public function setConfiguration(?CompositionBuilder $composition, bool $withGameMaster = false, bool $withRandomDispatch = true): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/configuration', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [
+                'composition' => $composition?->toInput(),
+                'withGameMaster' => $withGameMaster,
+                'withRandomDispatch' => $withRandomDispatch,
             ],
         ]));
     }

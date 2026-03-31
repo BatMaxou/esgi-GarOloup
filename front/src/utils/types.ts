@@ -1,5 +1,7 @@
 import { GameRoleEnum, GameStepEnum, GameTeamEnum, RoleEnum } from './enums';
 
+// ------------------ Entity ------------------
+
 export type User = {
   id: string;
   username?: string;
@@ -39,4 +41,19 @@ export type Role = {
   minPlayers?: number;
   maxPerGame?: number;
   teams?: GameTeamEnum[];
+};
+
+export type Configuration = {
+  composition?: Composition;
+  withGameMaster?: boolean;
+  withRandomDispatch?: boolean;
+};
+
+export type Composition = {
+  roles?: RoleEntry[];
+};
+
+export type RoleEntry = {
+  role?: Role;
+  count?: number;
 };

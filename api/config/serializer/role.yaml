@@ -4,16 +4,19 @@ App\Entity\Role:
             groups:
                 - role:read
                 - role:list
+                - game:read
         type:
             groups:
                 - role:read
                 - role:list
                 - role:write
+                - game:read
         name:
             groups:
                 - role:read
                 - role:list
                 - role:write
+                - game:read
         description:
             groups:
                 - role:read

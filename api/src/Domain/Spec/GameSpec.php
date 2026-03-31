@@ -81,6 +81,15 @@ class GameSpec
         return GameStepEnum::CONFIGURATION === $game->getStep();
     }
 
+    public function canSetConfiguration(AbstractUser $user, Game $game): bool
+    {
+        if ($user !== $game->getHost()->getLinkedUser()) {
+            return false;
+        }
+
+        return GameStepEnum::CONFIGURATION === $game->getStep();
+    }
+
     public function canSetGameMaster(AbstractUser $user, Game $game): bool
     {
         if ($user !== $game->getHost()->getLinkedUser()) {

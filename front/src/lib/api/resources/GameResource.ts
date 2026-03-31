@@ -1,7 +1,7 @@
 import { ApiClient, BasicActionResponse } from '@/lib/api/ApiClient';
 import { ApiClientError } from '@/lib/api/ApiClientError';
 import { apiPaths } from '@/lib/api/paths';
-import type { Game } from '@/utils/types';
+import type { Configuration, Game } from '@/utils/types';
 
 export interface CreateGameResponse {
   joinCode: string;
@@ -28,5 +28,9 @@ export class GameResource {
 
   public async open(): Promise<BasicActionResponse | ApiClientError> {
     return this.apiClient.patch<BasicActionResponse>(apiPaths.game.open);
+  }
+
+  public async setConfiguration(configuration: Configuration): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.patch<BasicActionResponse>(apiPaths.game.setConfiguration, { configuration });
   }
 }

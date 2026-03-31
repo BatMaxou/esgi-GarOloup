@@ -1,0 +1,8 @@
+App\Entity\Game\RoleEntry:
+    attributes:
+        count:
+            groups:
+                - game:read
+        role:
+            groups:
+                - game:read

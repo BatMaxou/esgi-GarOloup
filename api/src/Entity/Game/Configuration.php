@@ -19,6 +19,12 @@ class Configuration
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Composition $composition = null;
 
+    #[ORM\Column]
+    private bool $withGameMaster = false;
+
+    #[ORM\Column]
+    private bool $withRandomDispatch = false;
+
     public function getGame(): ?Game
     {
         return $this->game;
@@ -39,6 +45,30 @@ class Configuration
     public function setComposition(?Composition $composition): static
     {
         $this->composition = $composition;
+
+        return $this;
+    }
+
+    public function isWithGameMaster(): bool
+    {
+        return $this->withGameMaster;
+    }
+
+    public function setWithGameMaster(bool $withGameMaster): static
+    {
+        $this->withGameMaster = $withGameMaster;
+
+        return $this;
+    }
+
+    public function isWithRandomDispatch(): bool
+    {
+        return $this->withRandomDispatch;
+    }
+
+    public function setWithRandomDispatch(bool $withRandomDispatch): static
+    {
+        $this->withRandomDispatch = $withRandomDispatch;
 
         return $this;
     }
