@@ -24,6 +24,8 @@ final class RoleFactory extends PersistentObjectFactory
             'name' => self::faker()->name(),
             'description' => self::faker()->text(100),
             'teams' => self::faker()->randomElements(GameTeamEnum::cases(), self::faker()->numberBetween(1, 2)),
+            'minPlayers' => self::faker()->numberBetween(1, 10),
+            'maxPerGame' => self::faker()->numberBetween(1, 3),
         ];
     }
 }

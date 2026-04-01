@@ -1,5 +1,11 @@
 {
   "name": "GarOloup",
+  "roles": {
+    "village": "Villageois",
+    "werewolf": "Loup-Garou",
+    "couple": "Couple",
+    "solo": "Solo"
+  },
   "components": {
     "common": {
       "home": {
@@ -294,7 +300,13 @@
           "title": "Réinitialiser votre mot de passe",
           "subtitle": "Entrez votre nouveau mot de passe"
         }
-      }
+      },
+      "roles": {
+        "eyebrow": "Bestiaire",
+        "title": "Les rôles",
+        "subtitle": "Chaque rôle a ses objectifs, ses pouvoirs, ses alliances. Apprenez à les connaître — ou à les craindre.",
+        "game": "partie"
+      }        
     }
   }
 }

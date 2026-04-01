@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_usJhqLY4bm
 createdAt: 2026-03-28T09:29:08.672634732
-updatedAt: 2026-03-28T09:56:16.575811358
+updatedAt: 2026-04-01T09:24:21.858781
 workspaceId: wk_uXtATNFQmZ
 folderId: fl_WxKE8boAAj
 authentication:
@@ -11,7 +11,7 @@ authenticationType: bearer
 body:
   form:
   - enabled: true
-    file: /home/maxime/Images/avatar.jpg
+    file: /Users/guiz/Downloads/IMG_5049.jpg
     id: SZd3h7DSQS
     name: picture
   - enabled: false
@@ -19,7 +19,7 @@ body:
     name: name
     value: Text
   - enabled: true
-    id: iwBBEtjrRK
+    id: aEiEkxFdRs
     name: ''
     value: ''
 bodyType: multipart/form-data
