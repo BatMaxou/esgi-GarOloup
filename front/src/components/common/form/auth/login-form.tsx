@@ -47,7 +47,7 @@ const LoginForm = ({ className }: Props) => {
         label={t('forgotPassword')}
         textVariant="body-xs"
         className="text-neutral-500 self-end"
-        href="/"
+        href="/forgot-password"
       />
       <Button variant="accent" label={t('submit')} type="submit" full />
     </form>
