@@ -30,7 +30,7 @@ const ResetPasswordForm = ({ className }: Props) => {
   const { apiClient } = useApiClient();
   const router = useRouter();
   const t = useTranslations('components.common.form.auth.resetPassword');
-  
+
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
 
@@ -41,7 +41,7 @@ const ResetPasswordForm = ({ className }: Props) => {
   }
 
   const invalidToken = !token || !uuidValidateV4(token);
-  
+
   useEffect(() => {
     if (invalidToken) {
       toast.error(t('tokenError'));
@@ -63,7 +63,7 @@ const ResetPasswordForm = ({ className }: Props) => {
         return;
       }
 
-      if(values.password !== values.passwordConfirmation) {
+      if (values.password !== values.passwordConfirmation) {
         toast.error(t('passwordMismatch'));
         return;
       }

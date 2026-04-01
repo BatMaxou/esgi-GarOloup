@@ -270,7 +270,7 @@
             "submit": "Reset password",
             "passwordMismatch": "Passwords doesn't match",
             "passwordRequirements": "12 characters min., one uppercase letter, one lowercase letter, one number and one special character",
-            "tokenError" : "The link is no longer valid",
+            "tokenError": "The link is no longer valid",
             "passwordUpdatedError": "Error during password update"
           }
         }

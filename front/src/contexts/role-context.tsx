@@ -36,14 +36,14 @@ export const RoleProvider = ({ children }: Props) => {
       setRoleList(roles);
       setRoleListLoading(false);
     });
-  }
+  };
 
   return (
     <RoleContext.Provider
       value={{
         roleList,
         getAllRoles,
-        roleListLoading
+        roleListLoading,
       }}
     >
       {children}

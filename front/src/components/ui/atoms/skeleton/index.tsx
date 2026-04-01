@@ -11,22 +11,11 @@ type Props = VariantProps<typeof textSkeletonCva> & {
   lineClassName?: string;
 };
 
-const TextSkeleton = ({
-  variant,
-  className,
-  lines = 1,
-  lineClassName,
-}: Props) => {
+const TextSkeleton = ({ variant, className, lines = 1, lineClassName }: Props) => {
   return (
-    <div
-      className={classNames('flex w-full flex-col gap-1', className)}
-      aria-hidden
-    >
+    <div className={classNames('flex w-full flex-col gap-1', className)} aria-hidden>
       {Array.from({ length: lines }, (_, i) => (
-        <div
-          key={i}
-          className={classNames(textSkeletonCva({ variant }), lineClassName)}
-        />
+        <div key={i} className={classNames(textSkeletonCva({ variant }), lineClassName)} />
       ))}
     </div>
   );

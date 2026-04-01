@@ -13,8 +13,7 @@ export const typographySizeVariants = {
   },
   'heading-1': {
     text: 'text-[2.5rem] leading-[3rem] xs:text-[4rem] xs:leading-[4.5rem] sm:text-[6.5rem] sm:leading-[7rem]',
-    skeletonLine:
-      'min-h-[3rem] xs:min-h-[4.5rem] sm:min-h-[7rem]',
+    skeletonLine: 'min-h-[3rem] xs:min-h-[4.5rem] sm:min-h-[7rem]',
   },
   'heading-2': {
     text: 'text-[2rem] leading-[2.5rem] sm:text-[4rem] sm:leading-[4.5rem]',

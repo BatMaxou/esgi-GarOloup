@@ -48,7 +48,11 @@ const Card = (props: Props) => {
     : 'base';
 
   return (
-    <div className={` ${cardCva({ orientation, liftOnHover, type, roleVariant, emphasis, fullfilled, className })} ${imagePath ? `bg-[url(${getImagePath(imagePath)})] bg-cover bg-center` : ''}`}>{children}</div>
+    <div
+      className={` ${cardCva({ orientation, liftOnHover, type, roleVariant, emphasis, fullfilled, className })} ${imagePath ? `bg-[url(${getImagePath(imagePath)})] bg-cover bg-center` : ''}`}
+    >
+      {children}
+    </div>
   );
 };
 

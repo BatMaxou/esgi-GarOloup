@@ -27,9 +27,7 @@ const Providers = ({ children }: ProvidersProps) => {
           <ApiClientProvider>
             <MercureClientProvider>
               <AuthProvider>
-                <RoleProvider>
-                  {children}
-                </RoleProvider>
+                <RoleProvider>{children}</RoleProvider>
               </AuthProvider>
             </MercureClientProvider>
           </ApiClientProvider>

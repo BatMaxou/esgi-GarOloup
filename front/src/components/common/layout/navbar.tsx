@@ -33,7 +33,7 @@ const Navbar = () => {
   const t = useTranslations('components.common.layout.navbar');
 
   const handleLogout = async () => {
-    await logout()
+    await logout();
     toast.success(t('logoutSuccess'));
   };
 
