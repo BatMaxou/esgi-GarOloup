@@ -3,6 +3,7 @@
 namespace App\Fixtures\Factory\Game\Role;
 
 use App\Entity\Game\Role\WerewolfRole;
+use App\Enum\Game\GameRoleEnum;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
@@ -21,6 +22,7 @@ final class WerewolfRoleFactory extends PersistentObjectFactory
     {
         return [
             'role' => null,
+            'type' => GameRoleEnum::WEREWOLF,
         ];
     }
 }

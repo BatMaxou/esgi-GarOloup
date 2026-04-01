@@ -11,7 +11,6 @@ use App\Entity\Event\Game\CloseGameInvitationEvent;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Game\Game;
 use App\Enum\Game\GameStepEnum;
-use Doctrine\ORM\EntityManagerInterface;
 
 /** @implements GameEventApplicatorInterface<CloseGameInvitationEvent> */
 class CloseGameInvitationEventApplicator implements GameEventApplicatorInterface
@@ -21,7 +20,6 @@ class CloseGameInvitationEventApplicator implements GameEventApplicatorInterface
 
     public function __construct(
         private readonly GameSpec $gameSpec,
-        private readonly EntityManagerInterface $em,
     ) {
     }
 
@@ -34,11 +32,7 @@ class CloseGameInvitationEventApplicator implements GameEventApplicatorInterface
             throw new UnauthorizedGameActionException('You can not close this game invitation');
         }
 
-        $game->setStep(GameStepEnum::CONFIGURATION);
-
-        $this->em->flush();
-
-        return $game;
+        return $game->setStep(GameStepEnum::CONFIGURATION);
     }
 
     public function supports(GameEvent $gameEvent): bool

@@ -61,7 +61,6 @@ class JoinGameEventApplicator implements GameEventApplicatorInterface
         $game->addPlayer($player);
 
         $this->em->persist($player);
-        $this->em->flush();
 
         return $game;
     }

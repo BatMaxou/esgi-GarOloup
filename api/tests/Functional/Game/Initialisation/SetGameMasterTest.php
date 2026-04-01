@@ -116,6 +116,78 @@ class SetGameMasterTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(404);
     }
 
+    public function test_set_game_master_with_random_dispatch_triggers_random_game_role_dispatch(): void
+    {
+        $hostBuilder = ThereIs::anUser()->build();
+        $hostPlayerBuilder = ThereIs::aPlayer()->withUser($hostBuilder)->build();
+
+        $targetUserBuilder = ThereIs::anUser()->build();
+        $targetPlayerBuilder = ThereIs::aPlayer()->withUser($targetUserBuilder)->build();
+
+        $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
+        $gameBuilder = ThereIs::aGame()
+            ->withHost($hostPlayerBuilder)
+            ->withPlayer($targetPlayerBuilder)
+            ->withPlayers(ThereIs::aPlayer()->build(5, true))
+            ->withStep(GameStepEnum::GAME_MASTER_CHOICE)
+            ->build();
+        ThereIs::aConfiguration()
+            ->forGame($gameBuilder)
+            ->withGameMaster()
+            ->withComposition(
+                ThereIs::aComposition()
+                ->withRole($roleBagBuilder->getVillager(), 4)
+                ->withRole($roleBagBuilder->getWerewolf(), 2)
+                ->build()
+            )
+            ->build();
+
+        $response = When::asUser($hostBuilder)->game()->setGameMaster($targetPlayerBuilder->getEntity()->getId());
+        $this->assertResponseStatusCodeSame(200);
+
+        $game = $gameBuilder->getEntity();
+        $this->assertEquals(GameStepEnum::READY, $game->getStep());
+        foreach ($game->getPlayers() as $player) {
+            $this->assertNotNull($player->getRole());
+        }
+    }
+
+    public function test_set_game_master_without_random_dispatch_does_not_triggers_random_game_role_dispatch(): void
+    {
+        $hostBuilder = ThereIs::anUser()->build();
+        $hostPlayerBuilder = ThereIs::aPlayer()->withUser($hostBuilder)->build();
+
+        $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
+        $gameBuilder = ThereIs::aGame()
+            ->withHost($hostPlayerBuilder)
+            ->withPlayers(ThereIs::aPlayer()->build(5, true))
+            ->withStep(GameStepEnum::GAME_MASTER_CHOICE)
+            ->build();
+        ThereIs::aConfiguration()
+            ->forGame($gameBuilder)
+            ->withGameMaster()
+            ->withoutRandomDispatch()
+            ->withComposition(
+                ThereIs::aComposition()
+                ->withRole($roleBagBuilder->getVillager(), 4)
+                ->withRole($roleBagBuilder->getWerewolf(), 2)
+                ->build()
+            )
+            ->build();
+
+        $targetUserBuilder = ThereIs::anUser()->build();
+        $targetPlayerBuilder = ThereIs::aPlayer()->withUser($targetUserBuilder)->withGame($gameBuilder)->build();
+
+        $response = When::asUser($hostBuilder)->game()->setGameMaster($targetPlayerBuilder->getEntity()->getId());
+        $this->assertResponseStatusCodeSame(200);
+
+        $game = $gameBuilder->getEntity();
+        $this->assertEquals(GameStepEnum::DISPATCH, $game->getStep());
+        foreach ($game->getPlayers() as $player) {
+            $this->assertNull($player->getRole());
+        }
+    }
+
     public function test_game_event_dispatched_by_set_game_master(): void
     {
         $userBuilder = ThereIs::anUser()->withUsername('SLiipMan')->build();

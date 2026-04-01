@@ -3,6 +3,7 @@
 namespace App\Fixtures\Factory\Game\Role;
 
 use App\Entity\Game\Role\VillagerRole;
+use App\Enum\Game\GameRoleEnum;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
@@ -21,6 +22,7 @@ final class VillagerRoleFactory extends PersistentObjectFactory
     {
         return [
             'role' => null,
+            'type' => GameRoleEnum::VILLAGER,
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Domain\GameEvent;
 
 use App\Domain\GameEvent\Exception\AlreadyInAnotherGameException;
 use App\Domain\GameEvent\Exception\GameException;
+use App\Domain\GameEvent\Exception\GameRoleNotFoundException;
 use App\Domain\GameEvent\Exception\InvalidConfigurationException;
 use App\Domain\GameEvent\Exception\MissingGameException;
 use App\Domain\GameEvent\Exception\MissingUserException;
@@ -27,6 +28,7 @@ class HttpGameExceptionMapper
             $e instanceof MissingGameException,
             $e instanceof InvalidConfigurationException => new BadRequestHttpException($msg),
             $e instanceof UnauthorizedGameActionException => new AccessDeniedHttpException($msg),
+            $e instanceof GameRoleNotFoundException,
             $e instanceof PlayerNotFoundException => new NotFoundHttpException($msg),
             $e instanceof AlreadyInAnotherGameException,
             $e instanceof UsernameAlreadyTakenException => new ConflictHttpException($msg),

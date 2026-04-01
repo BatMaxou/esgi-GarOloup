@@ -16,7 +16,6 @@ use App\Entity\Game\Game;
 use App\Entity\Game\RoleEntry;
 use App\Enum\Game\GameStepEnum;
 use App\Repository\RoleRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 /** @implements GameEventApplicatorInterface<SetGameConfigurationEvent> */
 class SetGameConfigurationEventApplicator implements GameEventApplicatorInterface
@@ -27,7 +26,6 @@ class SetGameConfigurationEventApplicator implements GameEventApplicatorInterfac
     public function __construct(
         private readonly GameSpec $gameSpec,
         private readonly ConfigurationSpec $configurationSpec,
-        private readonly EntityManagerInterface $em,
         private readonly RoleRepository $roleRepository,
     ) {
     }
@@ -77,8 +75,6 @@ class SetGameConfigurationEventApplicator implements GameEventApplicatorInterfac
             : GameStepEnum::DISPATCH;
 
         $game->setStep($nextStep);
-
-        $this->em->flush();
 
         return $game;
     }
