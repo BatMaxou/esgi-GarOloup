@@ -11,4 +11,5 @@ export const paths: Record<string, keyof typeof pathnames> = {
   forgotPassword: '/forgot-password',
   resetPassword: '/reset-password',
   test: '/test',
+  roles: '/roles',
 };

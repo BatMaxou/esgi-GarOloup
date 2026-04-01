@@ -1,5 +1,11 @@
 {
   "name": "GarOloup",
+  "roles": {
+    "village": "Villager",
+    "werewolf": "Werewolf",
+    "couple": "Couple",
+    "solo": "Solo"
+  },
   "components": {
     "common": {
       "home": {
@@ -293,6 +299,12 @@
           "title": "Reset your password",
           "subtitle": "Enter your new password"
         }
+      },
+      "roles": {
+        "eyebrow": "Bestiary",
+        "title": "The roles",
+        "subtitle": "Every role has its objectives, powers, and alliances. Learn to know them—or to fear them.",
+        "game": "game"
       }
     }
   }

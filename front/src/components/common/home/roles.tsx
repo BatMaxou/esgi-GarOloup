@@ -9,17 +9,17 @@ const badgeClassName =
   'absolute top-3 right-3 rounded-xxs border border-accent/30 bg-accent/15 px-[7px] py-0.5 text-[0.8rem]! font-bold tracking-[0.08em] text-accent! uppercase';
 
 const ROLE_CARDS = [
-  { variant: 'loup' as const, emoji: '🐺', key: 'werewolf' as const },
-  { variant: 'sorciere' as const, emoji: '🧙‍♀️', key: 'witch' as const },
-  { variant: 'villageois' as const, emoji: '🏹', key: 'hunter' as const },
-  { variant: 'gm' as const, emoji: '🎭', key: 'gm' as const },
+  { variant: 'werewolf' as const, emoji: '🐺', key: 'werewolf' as const },
+  { variant: 'solo' as const, emoji: '🧙‍♀️', key: 'witch' as const },
+  { variant: 'village' as const, emoji: '🏹', key: 'hunter' as const },
+  { variant: 'couple' as const, emoji: '🎭', key: 'gm' as const },
 ] as const;
 
 const campClassName: Record<(typeof ROLE_CARDS)[number]['variant'], string> = {
-  loup: 'mb-2.5 text-[0.68rem] font-bold tracking-[0.1em] text-error! uppercase',
-  sorciere: 'mb-2.5 text-[0.68rem] font-bold tracking-[0.1em] text-success uppercase',
-  villageois: 'mb-2.5 text-[0.68rem] font-bold tracking-[0.1em] text-success uppercase',
-  gm: 'mb-2.5 text-[0.68rem] font-bold tracking-[0.1em] text-accent! uppercase',
+  werewolf: 'mb-2.5 text-[0.68rem] font-bold tracking-[0.1em] text-error! uppercase',
+  solo: 'mb-2.5 text-[0.68rem] font-bold tracking-[0.1em] text-success uppercase',
+  village: 'mb-2.5 text-[0.68rem] font-bold tracking-[0.1em] text-success uppercase',
+  couple: 'mb-2.5 text-[0.68rem] font-bold tracking-[0.1em] text-accent! uppercase',
 };
 
 const Roles = () => {
