@@ -11,12 +11,16 @@ class ConfigurationBuilder extends AbstractBuilder
 {
     public ?GameBuilder $game = null;
     public ?CompositionBuilder $composition = null;
+    public bool $withGameMaster = false;
+    public bool $withRandomDispatch = true;
 
     protected function doBuild(): object
     {
         return ConfigurationFactory::createOne([
             ...($this->game ? ['game' => $this->game->getEntity()] : []),
             ...($this->composition ? ['composition' => $this->composition->getEntity()] : []),
+            'withGameMaster' => $this->withGameMaster,
+            'withRandomDispatch' => $this->withRandomDispatch,
         ]);
     }
 
@@ -30,6 +34,20 @@ class ConfigurationBuilder extends AbstractBuilder
     public function withComposition(CompositionBuilder $composition): static
     {
         $this->composition = $composition;
+
+        return $this;
+    }
+
+    public function withGameMaster(): static
+    {
+        $this->withGameMaster = true;
+
+        return $this;
+    }
+
+    public function withoutRandomDispatch(): static
+    {
+        $this->withRandomDispatch = false;
 
         return $this;
     }

@@ -11,8 +11,8 @@ use App\Domain\Spec\GameSpec;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\SetGameMasterEvent;
 use App\Entity\Game\Game;
+use App\Enum\Game\GameStepEnum;
 use App\Repository\Game\PlayerRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 /** @implements GameEventApplicatorInterface<SetGameMasterEvent> */
 class SetGameMasterEventApplicator implements GameEventApplicatorInterface
@@ -22,7 +22,6 @@ class SetGameMasterEventApplicator implements GameEventApplicatorInterface
 
     public function __construct(
         private readonly GameSpec $gameSpec,
-        private readonly EntityManagerInterface $em,
         private readonly PlayerRepository $playerRepository,
     ) {
     }
@@ -48,9 +47,7 @@ class SetGameMasterEventApplicator implements GameEventApplicatorInterface
 
         $game->setGameMaster($targetPlayer);
 
-        $this->em->flush();
-
-        return $game;
+        return $game->setStep(GameStepEnum::DISPATCH);
     }
 
     public function supports(GameEvent $gameEvent): bool

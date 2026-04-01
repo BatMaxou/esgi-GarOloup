@@ -11,7 +11,6 @@ use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\ReOpenGameInvitationEvent;
 use App\Entity\Game\Game;
 use App\Enum\Game\GameStepEnum;
-use Doctrine\ORM\EntityManagerInterface;
 
 /** @implements GameEventApplicatorInterface<ReOpenGameInvitationEvent> */
 class ReOpenGameInvitationEventApplicator implements GameEventApplicatorInterface
@@ -21,7 +20,6 @@ class ReOpenGameInvitationEventApplicator implements GameEventApplicatorInterfac
 
     public function __construct(
         private readonly GameSpec $gameSpec,
-        private readonly EntityManagerInterface $em,
     ) {
     }
 
@@ -34,11 +32,7 @@ class ReOpenGameInvitationEventApplicator implements GameEventApplicatorInterfac
             throw new UnauthorizedGameActionException('You can not open invitation for this game');
         }
 
-        $game->setStep(GameStepEnum::NEW);
-
-        $this->em->flush();
-
-        return $game;
+        return $game->setStep(GameStepEnum::NEW);
     }
 
     public function supports(GameEvent $gameEvent): bool

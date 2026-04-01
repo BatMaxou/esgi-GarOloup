@@ -8,12 +8,14 @@ enum GameStepEnum: string
 
     case CONFIGURATION = 'configuration';
     case GAME_MASTER_CHOICE = 'game_master_choice';
-
     case DISPATCH = 'dispatch';
-    case LAUNCH = 'launch';
+    case READY = 'ready';
+
+    case PRESETS = 'presets';
 
     case NIGHT = 'night';
     case DAY = 'day';
+    case VOTE = 'vote';
 
     case FINISH = 'finish';
 }

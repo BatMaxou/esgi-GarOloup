@@ -23,7 +23,7 @@ class Configuration
     private bool $withGameMaster = false;
 
     #[ORM\Column]
-    private bool $withRandomDispatch = false;
+    private bool $withRandomDispatch = true;
 
     public function getGame(): ?Game
     {

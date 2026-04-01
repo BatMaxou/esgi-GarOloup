@@ -37,7 +37,6 @@ class CreateGameEventApplicator implements GameEventApplicatorInterface
 
         $this->em->persist($player);
         $this->em->persist($game);
-        $this->em->flush();
 
         return $game;
     }

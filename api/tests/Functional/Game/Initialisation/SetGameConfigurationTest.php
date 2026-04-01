@@ -34,7 +34,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(200);
 
         $this->assertTrue($response->get('[success]'));
-        $this->assertEquals(GameStepEnum::DISPATCH, $gameBuilder->getEntity()->getStep());
+        $this->assertEquals(GameStepEnum::READY, $gameBuilder->getEntity()->getStep());
         $this->assertNotNull($gameBuilder->getEntity()->getConfiguration()->getComposition());
     }
 
@@ -285,6 +285,87 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
         When::asUser($userBuilder)->game()->setConfiguration($compositionBuilder);
         $this->assertResponseStatusCodeSame(403);
+    }
+
+    public function test_configuration_without_game_master_and_random_dispatch_triggers_random_game_role_dispatch(): void
+    {
+        $userBuilder = ThereIs::anUser()->build();
+        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+
+        $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
+        $gameBuilder = ThereIs::aGame()
+            ->withHost($hostBuilder)
+            ->withPlayers(ThereIs::aPlayer()->build(5, true))
+            ->withStep(GameStepEnum::CONFIGURATION)
+            ->build();
+
+        $compositionBuilder = ThereIs::aComposition()
+            ->withRole($roleBagBuilder->getVillager(), 4)
+            ->withRole($roleBagBuilder->getWerewolf(), 2)
+        ;
+
+        When::asUser($userBuilder)->game()->setConfiguration($compositionBuilder);
+        $this->assertResponseStatusCodeSame(200);
+
+        $game = $gameBuilder->getEntity();
+        $this->assertEquals(GameStepEnum::READY, $game->getStep());
+        foreach ($game->getPlayers() as $player) {
+            $this->assertNotNull($player->getRole());
+        }
+    }
+
+    public function test_configuration_with_game_master_and_random_dispatch_does_not_triggers_random_game_role_dispatch(): void
+    {
+        $userBuilder = ThereIs::anUser()->build();
+        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+
+        $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
+        $gameBuilder = ThereIs::aGame()
+            ->withHost($hostBuilder)
+            ->withPlayers(ThereIs::aPlayer()->build(5, true))
+            ->withStep(GameStepEnum::CONFIGURATION)
+            ->build();
+
+        $compositionBuilder = ThereIs::aComposition()
+            ->withRole($roleBagBuilder->getVillager(), 4)
+            ->withRole($roleBagBuilder->getWerewolf(), 2)
+        ;
+
+        When::asUser($userBuilder)->game()->setConfiguration($compositionBuilder, true);
+        $this->assertResponseStatusCodeSame(200);
+
+        $game = $gameBuilder->getEntity();
+        $this->assertEquals(GameStepEnum::GAME_MASTER_CHOICE, $game->getStep());
+        foreach ($game->getPlayers() as $player) {
+            $this->assertNull($player->getRole());
+        }
+    }
+
+    public function test_configuration_with_game_master_and_without_random_dispatch_does_not_trigger_random_game_role_dispatch(): void
+    {
+        $userBuilder = ThereIs::anUser()->build();
+        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+
+        $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
+        $gameBuilder = ThereIs::aGame()
+            ->withHost($hostBuilder)
+            ->withPlayers(ThereIs::aPlayer()->build(5, true))
+            ->withStep(GameStepEnum::CONFIGURATION)
+            ->build();
+
+        $compositionBuilder = ThereIs::aComposition()
+            ->withRole($roleBagBuilder->getVillager(), 4)
+            ->withRole($roleBagBuilder->getWerewolf(), 2)
+        ;
+
+        When::asUser($userBuilder)->game()->setConfiguration($compositionBuilder, true, false);
+        $this->assertResponseStatusCodeSame(200);
+
+        $game = $gameBuilder->getEntity();
+        $this->assertEquals(GameStepEnum::GAME_MASTER_CHOICE, $game->getStep());
+        foreach ($game->getPlayers() as $player) {
+            $this->assertNull($player->getRole());
+        }
     }
 
     public function test_game_event_dispatched_by_set_game_configuration(): void
