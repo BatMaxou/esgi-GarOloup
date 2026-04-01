@@ -30,8 +30,8 @@ class RoleBuilder extends AbstractBuilder
             'type' => $this->type,
             'ability' => $this->ability,
             'pictureName' => $this->pictureName,
-            ...($this->minPlayers !== null ? ['minPlayers' => $this->minPlayers] : []),
-            ...($this->maxPerGame !== null ? ['maxPerGame' => $this->maxPerGame] : []),
+            'minPlayers' => $this->minPlayers,
+            'maxPerGame' => $this->maxPerGame,
         ]);
     }
 
