@@ -36,12 +36,10 @@ App\Entity\Role:
         minPlayers:
             groups:
                 - role:read
-                - role:list
                 - role:write
         maxPerGame:
             groups:
-                - role:read 
-                - role:list
+                - role:read
                 - role:write
         teams:
             groups:

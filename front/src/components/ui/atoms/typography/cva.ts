@@ -1,10 +1,19 @@
 import { cva } from 'class-variance-authority';
 
-import { typographyVariantTextClasses } from './typography-size-variants';
-
 export const typographyCva = cva('antialiased', {
   variants: {
-    variant: typographyVariantTextClasses,
+    variant: {
+      body: 'text-[1rem] leading-[1.5rem]',
+      'body-sm': 'text-[0.875rem] leading-[1.375rem]',
+      'body-xs': 'text-[0.75rem] leading-[1.25rem]',
+      'heading-1': 'text-[2.5rem] leading-[3rem] xs:text-[4rem] xs:leading-[4.5rem] sm:text-[6.5rem] sm:leading-[7rem]',
+      'heading-2': 'text-[2rem] leading-[2.5rem] sm:text-[4rem] sm:leading-[4.5rem]',
+      'heading-3': 'text-[1.5rem] leading-[2rem] sm:text-[2rem] sm:leading-[2.5rem]',
+      subtitle: 'text-[1.375rem] leading-[1.75rem]',
+      button: 'text-[1rem] leading-[1.5rem]',
+      tag: 'text-[0.625rem] leading-[1.25rem]',
+      controlled: '',
+    },
     textColor: {
       controlled: 'text-inherit',
       text: 'text-foreground',
