@@ -3,7 +3,7 @@ model: environment
 id: ev_tdWYkaGeP5
 workspaceId: wk_uXtATNFQmZ
 createdAt: 2026-02-27T17:49:25.047317508
-updatedAt: 2026-03-27T19:28:13.899282981
+updatedAt: 2026-04-01T09:26:49.803647943
 name: User
 public: true
 base: false
@@ -12,15 +12,15 @@ parentId: null
 variables:
 - enabled: true
   name: TOKEN
-  value: ${[ response.body.path(request='rq_KmJ58wRtsX', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC50b2tlbg') ]}
+  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3SHcrbXg4cjNoWUVVdWFhU2J1QnphRndRTmd5cmVsTFYrcEh5WStUV2MxNmRFMnBZMDl4R2hCOHJCOW5UbjlGQnVxQzgwR0gxV3B0eE1HMXRPUFRpRVJ1TlE0UFl1ZGVNRWFoWEp1S2NlSlpkUTJ1bzMrY2JqNFgyMElrank3RU9JZzFzTlJXbjRZdjFJK3h4UkwxTGRFMFRUbEFjQUFjTUdVQmUxS3VjS1RZNWkyL2ZCRWhvVWJja1VVNnQ4UVZaTkhXbmVSQmtGeGVpenBUT1Q4U1h2VGxoN052bjEvVHcyM2FnPT0') ]}
   id: g82fJMIPc3
 - enabled: true
   name: REFRESH_TOKEN
-  value: ${[ response.body.path(request='rq_KmJ58wRtsX', behavior='ttl', ttl='2592000', result='first', join=b64'LCA', path=b64'JC5yZWZyZXNoX3Rva2Vu') ]}
+  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3SFJ3VzBhYjVrSzFkeFAyRVpWOHhFV0IwZnk0WGNUVHJueWszMExNUzA3OEJ1YllIM1ZOV0JmOEcwYmpmTmtLV0ZaVW5NektENTZFeHdoa2VWajZHaGJ0eU1lSjRoY3BRaGViUktkNEpqc0ZRZnJWMVZGTWU5djBsb1FGcTRlZitZcEFSSDI3dEdUa3RTSzBERjUwNVI2MWxLaFQzUG1Ia0pyRXJtbEpOWEs3ZVpjY21MSktFeldRRUovWG4vVEEwN01sRk4rTlg5Wkt5VDdzRFN6YVR5ZWsralg0dFgzajZnQ0dnbEp3amZXR25RNWl5L0l5Ukp2') ]}
   id: Fup0qgFVEQ
 - enabled: true
   name: EMAIL
-  value: test@garoloup.com
+  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3R1lmd2hUVGNJeEpjTEJGcGE4VDlGRW53Y2VIMFBvNnVFc0FmVkNIRnFKRG5ZWWxWOW1ORGwyZU9icmxWVzlHSGpRdFRHa3FQMTcrUDQ9') ]}
   id: T3DAAiJ7jK
 color: var(--success)
 sortPriority: 3111.1111111111113

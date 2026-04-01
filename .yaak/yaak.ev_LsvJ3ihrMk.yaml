@@ -3,7 +3,7 @@ model: environment
 id: ev_LsvJ3ihrMk
 workspaceId: wk_uXtATNFQmZ
 createdAt: 2026-02-27T17:48:42.134815608
-updatedAt: 2026-03-31T10:19:33.835110134
+updatedAt: 2026-04-01T09:26:13.022509542
 name: Global Variables
 public: true
 base: true
@@ -12,19 +12,19 @@ parentId: null
 variables:
 - enabled: true
   name: BASE_URL
-  value: http://localhost:8000
+  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RXFGZGcwck1YK1J2WXZRTElNUTlNWW90K012QXZNYzlmR3Z4Qko2WlVvazJDdW11UEpxNTRuekVkbUJReHlhMUtsa21kc3hNbXpBS3hWUnp3Rg') ]}
   id: nf9VxCE3yc
 - enabled: true
   name: JOIN_CODE
-  value: ${[ response.body.path(request='rq_WAXTHkF7vT', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5qb2luQ29kZQ') ]}
+  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RWloV25nY0VHWXJmeWRQNmZsNmRtQWlEeWU4MTZEb0p0WXloRGhsc1dzYzZGK05OVnNxSktBaWpyaEZGZDVGbVowaUpieTNuZnN3SVFmUmJTM3Z0WlpFV0RmZjc3N1lJRGdhTHpqUDVTVk42RkE1ZGR6aTRiWEJMNUJQNGVuM2Zud3RidVFsT1h4Z1Q3NkcxQ0QwMVJRY242dDgwN1EyNERHaUJPdkJuYmRrdFlUWnM5bkcyZWJDSUgvZkRVOGFXaVBwRE1SS3VjaHloRlNPOFpQN0ZMZVYwN1o4c1FSUlVnekRFMzV6Vm89') ]}
   id: jMT5SZ5szE
 - enabled: true
   name: USERNAME
-  value: username
+  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3SGFyU0FGVkMvRjFKdDU5eCtLREJhYk1iMXdBaDdaaFE2VFExRVpjbEZ0cmRZYjI5RmZNSGlYYXpFdVFBRTRqLzQ9') ]}
   id: tyGfHzs6bf
 - enabled: true
   name: LAST_PLAYER_ID
-  value: ${[ response.body.path(request='rq_HnXLKGxVMG', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}
+  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3SExEdzBkWk1iWEEvYTdIaml1ZzFHUjVxY0tIQXd0ZG9JVCtCQzZPMzBhZEs4Y0xsNEo0NjdyTk5XNnhFL21FTmoxT2VZN3orUVQxbWxGVGtlQXpoNXpZQnZTaGpQZjlJWThxbnFwMnNzR1hxNVRNVlNjblJCN1JJbHlJSUZNN1I5UzF1Qmg1WnZEN1JOemJGaE1yMVQzV1BPOHpGVmRmbURGelpUU2Vyc1k1NmtUZVdCWnNXRHYrcUxYeXZtb0JWcjFuSHpUZE5FS3J6MXVkTTU4Yzk0S0owcHUwYm1O') ]}
   id: kQW2hTpHIp
 - enabled: true
   name: EMAIL
@@ -32,11 +32,11 @@ variables:
   id: akmdt8ijni
 - enabled: true
   name: LAST_ROLE_ID
-  value: ${[ response.body.path(request='rq_tcadwsnsgV', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}
+  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RkUxSm1xU0RlUndON0xTa3lmOEJabHBrQzFhMW55YitBaHZ3anFQMFRzeDNvU1EvaE5vMHVTQUkzcXQ5RGlROGZWUTRtNzlUUTFBVTh3Yi94SFVvUFB2Wmg3SVJsRzcyTmRobGdyeXlPeWlKNDdSd3BtTWZWRDlITE5DWTF4d2szZWRSYVEyaS9oVTViVXI2VTNWUXFOaElvUkFxRlZXOWVCb3h3QWhWbVRNcXYwY1ZScldwSmMyMWUzMDhmV3VmVkE2RWxRcVlyODE2NlRDMTFHaWpCVDhkZUtBWFR1') ]}
   id: cMIaUYh4vz
 - enabled: true
   name: FIRST_ROLE_ITEM_ID
-  value: ${[ response.body.path(request='rq_ibkcnhjyp6', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC4wLmlk') ]}
+  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RVJqK3JQZUJ5bEt3VUphSHNHbHBmajRpY0Z6MFQxZm5salVCSHY5R1NNRWtjc0NQK3RxMC9vOWEveUFsZ0lIVkZ0Z2NDSUU0MjRtTWVxRytRKzlGUzRoeDV0U0V3UHB4bGVlUmJtY2RVZk5MNzh6WDFib09oaUtCUTZEQTRxTDBQOGdEZlNRRlBJVVlzcFF2a2REK2RrUkJ4bC83YnFMeGhWLzluczV0bm1uVytxR1NPTjNsSzUvN3ZLWm50RnEvL1E4VzIrTDJQVmYwRWtqUGp4Y2xEa0hUZi96Y2RQcDlVPQ') ]}
   id: n3bsw0aq5B
 color: null
 sortPriority: 0.0
