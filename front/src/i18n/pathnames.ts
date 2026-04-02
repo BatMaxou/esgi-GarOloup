@@ -24,4 +24,8 @@ export const pathnames = {
     fr: '/fr-test',
     en: '/en-test',
   },
+  '/roles': {
+    fr: '/roles',
+    en: '/roles',
+  },
 };

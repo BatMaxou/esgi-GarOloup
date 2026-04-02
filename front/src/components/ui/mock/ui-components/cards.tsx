@@ -12,7 +12,7 @@ const Cards = () => {
         <GlassPanel className="p-8 justify-start">
           <ul className="flex flex-row flex-wrap gap-6">
             <li>
-              <Card type="role" variant="loup">
+              <Card type="role" variant="werewolf">
                 <Typography
                   tag="span"
                   className="absolute top-3 right-3 rounded-xxs border border-accent/30 bg-accent/15 px-[7px] py-0.5 text-[0.8rem]! font-bold tracking-[0.08em] text-accent! uppercase"

@@ -1,0 +1,110 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useTranslations } from 'next-intl';
+import TextSkeleton from '@/components/ui/atoms/skeleton';
+import Typography from '@/components/ui/atoms/typography';
+import Card from '@/components/ui/molecules/card';
+import { useRole } from '@/contexts/role-context';
+import Tag from '@/components/ui/molecules/tag';
+import Divider from '@/components/ui/atoms/divider';
+import Button from '@/components/ui/molecules/button';
+import getImagePath from '@/utils/getImagePath';
+import { GameTeamEnum } from '@/utils/enums';
+
+const RolesClient = () => {
+  const troles = useTranslations('roles');
+  const t = useTranslations('components.pages.roles');
+  const { roleList, getAllRoles, roleListLoading } = useRole();
+
+  useEffect(() => {
+    getAllRoles();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const getVariantFromType = (type: GameTeamEnum) => {
+    switch (type) {
+      case GameTeamEnum.VILLAGE:
+        return 'success';
+      case GameTeamEnum.WEREWOLF:
+        return 'error';
+      case GameTeamEnum.SOLO:
+        return 'primary';
+      case GameTeamEnum.COUPLE:
+        return 'accent';
+      default:
+        return null;
+    }
+  };
+  return (
+    <main className="px-6 py-[100px] mx-auto max-w-[1100px] w-full">
+      <div className="mb-12">
+        <Typography tag="div">{t('eyebrow')}</Typography>
+        <Typography tag="h1" variant="heading-2" bold>
+          {t('title')}
+        </Typography>
+        <Typography tag="p">{t('subtitle')}</Typography>
+      </div>
+      {roleListLoading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {Array.from({ length: 12 }).map((_, index) => (
+            <Card key={index} fullfilled>
+              <div className="p-4 flex flex-col items-start justify-between bg-cover bg-center aspect-square">
+                <TextSkeleton variant="body" className="max-w-12!" />
+                <TextSkeleton variant="body" className="max-w-24!" />
+              </div>
+              <Divider variant="secondary" className="w-full" />
+              <div className="flex items-center justify-between px-4 py-2">
+                <div className="flex items-center justify-start gap-2 w-full">
+                  <TextSkeleton variant="body" className="max-w-full!" />
+                </div>
+                <div className="flex items-center justify-end w-full">
+                  <TextSkeleton variant="body" className="max-w-3/5!" />
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {roleList.map((role) => (
+            <Card key={role.id} className="" type="role" variant={role.teams?.[0] || 'village'} fullfilled>
+              <div
+                className="pb-4 flex flex-col items-start justify-between bg-cover bg-center aspect-square rounded-t-sm"
+                style={role.picture ? { backgroundImage: `url("${getImagePath(role.picture)}")` } : undefined}
+              >
+                <div className="p-4 pb-6 bg-linear-to-b from-black/50 to-transparent w-full rounded-sm">
+                  <Tag
+                    label={role.teams && role.teams.length > 0 ? troles(`${role.teams[0].toLowerCase()}`) : ''}
+                    variant={role.teams && role.teams.length > 0 ? getVariantFromType(role.teams[0]) : null}
+                  />
+                </div>
+                <div className="px-4">
+                  <Typography variant="subtitle" bold>
+                    {role.name}
+                  </Typography>
+                </div>
+              </div>
+              <Divider variant="secondary" className="w-full" />
+              <div className="flex items-center justify-between px-4 py-2">
+                <div className="flex items-center justify-start gap-2">
+                  <Typography tag="p" variant="body-xs">
+                    min <b>{role.minPlayers}</b>
+                  </Typography>
+                  <Typography tag="p" variant="body-xs">
+                    max <b>{role.maxPerGame}</b>/{t('game')}
+                  </Typography>
+                </div>
+                <div className="flex items-center justify-end">
+                  <Button variant="text" size="sm" label="Voir" />
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      )}
+    </main>
+  );
+};
+
+export default RolesClient;

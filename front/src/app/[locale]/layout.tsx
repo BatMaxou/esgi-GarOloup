@@ -8,6 +8,7 @@ import { ApiClientProvider } from '@/contexts/api-context';
 import { MercureClientProvider } from '@/contexts/mercure-context';
 import { AuthProvider } from '@/contexts/auth-context';
 import { ThemeProvider } from '@/contexts/theme-context';
+import { RoleProvider } from '@/contexts/role-context';
 
 type ProvidersProps = {
   children: ReactNode;
@@ -25,7 +26,9 @@ const Providers = ({ children }: ProvidersProps) => {
           <ToastContainer toastStyle={{ backgroundColor: 'var(--color-secondary)', color: 'white' }} />
           <ApiClientProvider>
             <MercureClientProvider>
-              <AuthProvider>{children}</AuthProvider>
+              <AuthProvider>
+                <RoleProvider>{children}</RoleProvider>
+              </AuthProvider>
             </MercureClientProvider>
           </ApiClientProvider>
         </ThemeProvider>

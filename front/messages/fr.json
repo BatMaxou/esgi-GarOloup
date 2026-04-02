@@ -1,5 +1,11 @@
 {
   "name": "GarOloup",
+  "roles": {
+    "village": "Villageois",
+    "werewolf": "Loup-Garou",
+    "couple": "Couple",
+    "solo": "Solo"
+  },
   "components": {
     "common": {
       "home": {
@@ -264,9 +270,9 @@
             "submit": "Réinitialiser le mot de passe",
             "passwordMismatch": "Les mots de passes ne correspondent pas",
             "passwordRequirements": "12 caractères min., une majuscule, une minuscule, un chiffre et un caractère spécial",
-            "tokenError" : "Le lien n'est plus valide",
-            "passwordUpdatedError" : "Erreur lors de la réinitialisation du mot de passe",
-            "passwordUpdated" : "Mot de passe réinitialisé !"
+            "tokenError": "Le lien n'est plus valide",
+            "passwordUpdatedError": "Erreur lors de la réinitialisation du mot de passe",
+            "passwordUpdated": "Mot de passe réinitialisé !"
           }
         }
       }
@@ -294,6 +300,12 @@
           "title": "Réinitialiser votre mot de passe",
           "subtitle": "Entrez votre nouveau mot de passe"
         }
+      },
+      "roles": {
+        "eyebrow": "Bestiaire",
+        "title": "Les rôles",
+        "subtitle": "Chaque rôle a ses objectifs, ses pouvoirs, ses alliances. Apprenez à les connaître — ou à les craindre.",
+        "game": "partie"
       }
     }
   }
