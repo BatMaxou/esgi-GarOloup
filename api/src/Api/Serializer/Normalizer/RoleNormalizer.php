@@ -12,7 +12,7 @@ final class RoleNormalizer implements NormalizerInterface, NormalizerAwareInterf
 {
     use NormalizerAwareTrait;
 
-    private const ALREADY_CALLED = 'album_normalizer_already_called';
+    private const ALREADY_CALLED = 'role_normalizer_already_called';
 
     public function __construct(
         private readonly StorageInterface $storage,

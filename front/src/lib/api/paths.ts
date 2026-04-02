@@ -27,4 +27,7 @@ export const apiPaths = {
     update: (id: string) => `/roles/${id}`,
     updateFiles: (id: string) => `/roles/${id}/files`,
   },
+  filter: {
+    gameTeam: '/filters/game_teams',
+  },
 };

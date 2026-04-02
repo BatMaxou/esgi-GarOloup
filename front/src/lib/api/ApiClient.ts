@@ -7,6 +7,7 @@ import { UserResource } from '@/lib/api/resources/UserResource';
 import { TempUserResource } from '@/lib/api/resources/TempUserResource';
 import { PlayerResource } from '@/lib/api/resources/PlayerResource';
 import { RoleResource } from '@/lib/api/resources/RoleResource';
+import { FilterResource } from '@/lib/api/resources/FilterResource';
 
 type PropagateChangeToken = (token?: string | null, refreshToken?: string | null) => void;
 
@@ -52,6 +53,7 @@ export class ApiClient {
   player: PlayerResource;
   game: GameResource;
   role: RoleResource;
+  filter: FilterResource;
 
   constructor(
     public baseUrl: string,
@@ -65,6 +67,7 @@ export class ApiClient {
     this.player = new PlayerResource(this);
     this.game = new GameResource(this);
     this.role = new RoleResource(this);
+    this.filter = new FilterResource(this);
   }
 
   public initPropagateChangeToken(propagateChangeToken: PropagateChangeToken) {

@@ -1,0 +1,26 @@
+type: http_request
+model: http_request
+id: rq_QW85xMfqo6
+createdAt: 2026-04-02T07:40:00.958820897
+updatedAt: 2026-04-02T08:41:20.711123750
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_Hf7WGDAEJv
+authentication: {}
+authenticationType: null
+body: {}
+bodyType: null
+description: ''
+headers:
+- enabled: false
+  name: Accept
+  value: application/ld+json
+  id: jxD82ddhJs
+- enabled: true
+  name: ''
+  value: ''
+  id: 6rrDfVNRBC
+method: GET
+name: Game Teams
+sortPriority: 0.002
+url: ${[ BASE_URL ]}/api/filters/game_teams
+urlParameters: []

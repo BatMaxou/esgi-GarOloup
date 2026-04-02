@@ -40,7 +40,7 @@ App\Entity\Role:
                 - role:write
         maxPerGame:
             groups:
-                - role:read 
+                - role:read
                 - role:list
                 - role:write
         teams:
