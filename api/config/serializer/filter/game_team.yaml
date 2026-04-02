@@ -1,0 +1,9 @@
+App\Enum\Game\GameTeamEnum:
+  attributes:
+        value:
+            groups:
+                - filter:read
+                - role:read
+                - role:list
+                - role:write
+

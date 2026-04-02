@@ -4,6 +4,7 @@ namespace App\Tests\Helper;
 
 use ApiPlatform\Symfony\Bundle\Test\Client;
 use App\Fixtures\Factory\User\UserFactory;
+use App\Tests\Helper\Behavior\Filter\FilterBehavior;
 use App\Tests\Helper\Behavior\Game\GameBehavior;
 use App\Tests\Helper\Behavior\Player\PlayerBehavior;
 use App\Tests\Helper\Behavior\RoleBehavior;
@@ -61,6 +62,11 @@ final class When
     public static function role(): RoleBehavior
     {
         return new RoleBehavior(self::$client);
+    }
+
+    public static function filter(): FilterBehavior
+    {
+        return new FilterBehavior(self::$client);
     }
 
     public static function asUser(UserBuilder $userBuilder): static
