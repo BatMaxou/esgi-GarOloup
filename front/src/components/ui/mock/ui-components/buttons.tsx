@@ -68,6 +68,32 @@ const Buttons = () => {
             </li>
           </ul>
         </GlassPanel>
+        <GlassPanel className="flex-col items-center p-8 gap-6">
+          <ul className="flex flex-wrap items-center gap-6">
+            <li>
+              <Button variant="gradient" size="lg" leftIcon="garoloup" label="Large Left Icon" />
+            </li>
+            <li>
+              <Button variant="gradient" size="lg" rightIcon="garoloup" label="Large Left Icon" />
+            </li>
+          </ul>
+          <ul className="flex flex-wrap items-center gap-6">
+            <li>
+              <Button variant="gradient" size="md" leftIcon="garoloup" label="Medium Left Icon" />
+            </li>
+            <li>
+              <Button variant="gradient" size="md" rightIcon="garoloup" label="Medium Left Icon" />
+            </li>
+          </ul>
+          <ul className="flex flex-wrap items-center gap-6">
+            <li>
+              <Button variant="gradient" size="sm" leftIcon="garoloup" label="Small Left Icon" />
+            </li>
+            <li>
+              <Button variant="gradient" size="sm" rightIcon="garoloup" label="Small Left Icon" />
+            </li>
+          </ul>
+        </GlassPanel>
         <GlassPanel className="p-8">
           <ul className="flex flex-wrap items-center gap-6">
             <li>

@@ -17,9 +17,9 @@ export const buttonCva = cva(
         text: 'bg-transparent hover:underline focus:underline !p-0',
       },
       size: {
-        lg: 'px-8 py-4',
-        md: 'px-6 py-3',
-        sm: 'px-4 py-2',
+        lg: 'px-8 py-4 gap-4',
+        md: 'px-6 py-3 gap-3',
+        sm: 'px-4 py-2 gap-2',
       },
       full: { true: 'w-full', false: 'w-fit' },
       disabled: { true: 'cursor-not-allowed opacity-50 hover:bg-transparent focus:bg-transparent' },
@@ -127,3 +127,16 @@ export const buttonCva = cva(
     },
   }
 );
+
+export const buttonIconCva = cva('', {
+  variants: {
+    size: {
+      lg: 'w-8 h-8',
+      md: 'w-6 h-6',
+      sm: 'w-5 h-5',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+  },
+});
