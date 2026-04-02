@@ -2,10 +2,10 @@
 
 import { LucideProps } from 'lucide-react';
 
-import { icons } from './config';
+import { IconName, icons } from './config';
 
 type Props = LucideProps & {
-  name: keyof typeof icons;
+  name: IconName;
   title?: string;
 };
 
