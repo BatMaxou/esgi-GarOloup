@@ -2,12 +2,15 @@
 
 import { ReactNode } from 'react';
 import type { VariantProps } from 'class-variance-authority';
+import cn from 'classnames';
 
-import { buttonCva } from './cva';
+import { buttonCva, buttonIconCva } from './cva';
 import Typography from '@/components/ui/atoms/typography';
 import { typographyCva } from '@/components/ui/atoms/typography/cva';
 import { Link } from '@/i18n/navigation';
 import { pathnames } from '@/i18n/pathnames';
+import { IconName } from '@/components/ui/atoms/icon/config';
+import Icon from '@/components/ui/atoms/icon';
 
 type ButtonType = 'button' | 'submit';
 
@@ -18,6 +21,8 @@ type Props = VariantProps<typeof buttonCva> & {
   href?: keyof typeof pathnames;
   type?: ButtonType;
   textVariant?: VariantProps<typeof typographyCva>['variant'];
+  leftIcon?: IconName;
+  rightIcon?: IconName;
   onClick?: () => void;
 };
 
@@ -51,12 +56,22 @@ const Wrapper = ({
   );
 };
 
-const Button = ({ label, textVariant, ...props }: Props) => {
+const Button = ({ label, textVariant, leftIcon, rightIcon, className, ...props }: Props) => {
   return (
-    <Wrapper {...props}>
+    <Wrapper className={cn('flex', className)} {...props}>
+      {leftIcon && (
+        <Typography variant={textVariant || 'button'} textColor="controlled">
+          <Icon name={leftIcon} className={buttonIconCva({ size: props.size })} />
+        </Typography>
+      )}
       <Typography variant={textVariant || 'button'} textColor="controlled" bold center>
         {label}
       </Typography>
+      {rightIcon && (
+        <Typography variant={textVariant || 'button'} textColor="controlled">
+          <Icon name={rightIcon} className={buttonIconCva({ size: props.size })} />
+        </Typography>
+      )}
     </Wrapper>
   );
 };
