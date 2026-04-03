@@ -21,13 +21,13 @@ const Rules = () => {
   return (
     <section id="regles" className="px-6 py-[100px]">
       <div className="mx-auto max-w-[1100px]">
-        <Typography tag="div" className="mb-2.5 text-[0.72rem] font-bold tracking-[0.16em] text-primary uppercase">
+        <Typography tag="div" textColor="primary" bold>
           {t('eyebrow')}
         </Typography>
-        <Typography tag="h2" special className="mb-4 text-[clamp(2rem,5vw,3rem)] leading-[1.1] text-white">
+        <Typography tag="h2" special variant="heading-2" bold>
           {t('title')}
         </Typography>
-        <Typography tag="p" className="font-semibold mb-12 max-w-[560px] text-base leading-[1.7] text-neutral-400">
+        <Typography tag="p" className="mb-10">
           {t('subtitle')}
         </Typography>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">

@@ -31,7 +31,7 @@ const FastJoin = () => {
           <Dot variant="live" />
           {t('eyebrow')}
         </Typography>
-        <Typography tag="h2" special className="mb-4 text-[clamp(2rem,5vw,3rem)] leading-[1.1] text-white">
+        <Typography tag="h2" special variant="heading-2" bold>
           {t('title')}
         </Typography>
         <Typography tag="p" className="mb-12 max-w-[560px] text-base leading-[1.7] text-neutral-400">

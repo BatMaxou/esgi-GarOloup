@@ -4,6 +4,8 @@ import { useTranslations } from 'next-intl';
 
 import Typography from '@/components/ui/atoms/typography';
 import Card from '@/components/ui/molecules/card';
+import Button from '@/components/ui/molecules/button';
+import { paths } from '@/utils/paths';
 
 const badgeClassName =
   'absolute top-3 right-3 rounded-xxs border border-accent/30 bg-accent/15 px-[7px] py-0.5 text-[0.8rem]! font-bold tracking-[0.08em] text-accent! uppercase';
@@ -28,13 +30,13 @@ const Roles = () => {
   return (
     <section id="roles" className="px-6 py-[100px]">
       <div className="mx-auto max-w-[1100px]">
-        <Typography tag="div" className="mb-2.5 text-[0.72rem] font-bold tracking-[0.16em] text-primary uppercase">
+        <Typography tag="div" textColor="primary" bold>
           {t('eyebrow')}
         </Typography>
-        <Typography tag="h2" special className="mb-4 text-[clamp(2rem,5vw,3rem)] leading-[1.1] text-white">
+        <Typography tag="h2" special variant="heading-2" bold>
           {t('title')}
         </Typography>
-        <Typography tag="p" className="font-semibold mb-12 max-w-[560px] text-base leading-[1.7] text-neutral-400">
+        <Typography tag="p" className="mb-10">
           {t('subtitle')}
         </Typography>
         <div className="mb-9 grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -58,15 +60,7 @@ const Roles = () => {
             </Card>
           ))}
         </div>
-        <a
-          href="#"
-          className="group/cta inline-flex cursor-pointer items-center gap-2 rounded-sm border border-primary/30 bg-transparent px-6 py-[11px] text-[0.88rem] font-bold tracking-[0.04em] text-primary-pastel no-underline transition-all duration-200 hover:translate-x-[3px] hover:border-primary/55 hover:bg-primary/10"
-        >
-          <Typography tag="span" textColor="controlled" className="font-bold">
-            {t('cta')}{' '}
-            <span className="inline-block transition-transform duration-200 group-hover/cta:translate-x-1">→</span>
-          </Typography>
-        </a>
+        <Button asLink href={paths.roles} variant={'secondary'} glass label={t('cta') + ' →'} />
       </div>
     </section>
   );

@@ -32,7 +32,7 @@ export const typographySizeVariants = {
     skeletonLine: 'min-h-[1.5rem]',
   },
   tag: {
-    text: 'text-[0.625rem] leading-[1.25rem]',
+    text: 'text-[0.75rem] leading-[1.25rem]',
     skeletonLine: 'min-h-[1.25rem]',
   },
   controlled: {
