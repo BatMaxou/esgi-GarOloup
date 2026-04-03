@@ -11,8 +11,8 @@ export const tagCva = cva('h-fit w-fit flex items-center justify-center rounded-
       success: 'border-success/40 text-success',
     },
     size: {
-      lg: 'px-3 py-1',
-      md: 'px-2',
+      lg: 'px-3 py-1 gap-1.5',
+      md: 'px-2 gap-1',
     },
     active: {
       true: '',
@@ -37,5 +37,17 @@ export const tagCva = cva('h-fit w-fit flex items-center justify-center rounded-
     variant: 'neutral',
     size: 'md',
     active: false,
+  },
+});
+
+export const tagIconCva = cva('', {
+  variants: {
+    size: {
+      lg: 'w-4 h-4',
+      md: 'w-3 h-3',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
   },
 });
