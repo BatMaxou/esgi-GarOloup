@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import type { VariantProps } from 'class-variance-authority';
 
 import { cardCva } from './cva';
-import { getImagePath } from '@/utils/tools';
+import { getImagePath } from '@/utils/getImagePath';
 
 type CardType = NonNullable<VariantProps<typeof cardCva>['type']>;
 type CardOrientation = NonNullable<VariantProps<typeof cardCva>['orientation']>;

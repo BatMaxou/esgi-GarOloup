@@ -9,7 +9,7 @@ import { useRole } from '@/contexts/role-context';
 import Tag from '@/components/ui/molecules/tag';
 import Divider from '@/components/ui/atoms/divider';
 import Button from '@/components/ui/molecules/button';
-import { getImagePath } from '@/utils/tools';
+import { getImagePath } from '@/utils/getImagePath';
 import { GameTeamEnum } from '@/utils/enums';
 import { Role } from '@/utils/types';
 import { TagFilter } from '@/components/ui/molecules/filters';
