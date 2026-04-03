@@ -36,8 +36,8 @@ class CloseGameInvitationHandler
         }
 
         $gameEvent = new CloseGameInvitationEvent()
-            ->setUser($currentUser)
-            ->setGame($player->getGame());
+            ->setGame($player->getLinkedGame())
+            ->setUser($currentUser);
 
         try {
             $this->gameEventDispatcher->dispatch($gameEvent);

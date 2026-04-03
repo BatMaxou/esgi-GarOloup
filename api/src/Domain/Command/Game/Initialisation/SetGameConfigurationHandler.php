@@ -36,11 +36,11 @@ class SetGameConfigurationHandler
         }
 
         $gameEvent = new SetGameConfigurationEvent()
+            ->setGame($player->getLinkedGame())
+            ->setUser($currentUser)
             ->setComposition($command->composition)
             ->setWithGameMaster($command->withGameMaster)
-            ->setWithRandomDispatch($command->withRandomDispatch)
-            ->setUser($currentUser)
-            ->setGame($player->getGame());
+            ->setWithRandomDispatch($command->withRandomDispatch);
 
         try {
             $this->gameEventDispatcher->dispatch($gameEvent);

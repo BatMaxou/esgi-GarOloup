@@ -5,6 +5,7 @@ namespace App\Tests\Helper\Behavior\Game;
 use App\Tests\Helper\Behavior\AbstractBehavior;
 use App\Tests\Helper\Behavior\BehaviorResponse;
 use App\Tests\Helper\Builder\Game\CompositionBuilder;
+use App\Tests\Helper\Builder\Game\DispatchBuilder;
 
 class GameBehavior extends AbstractBehavior
 {
@@ -63,6 +64,16 @@ class GameBehavior extends AbstractBehavior
                 'composition' => $composition?->toInput(),
                 'withGameMaster' => $withGameMaster,
                 'withRandomDispatch' => $withRandomDispatch,
+            ],
+        ]));
+    }
+
+    public function dispatchRoles(DispatchBuilder $dispatch): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/role-dispatch', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [
+                'dispatch' => $dispatch->toInput(),
             ],
         ]));
     }

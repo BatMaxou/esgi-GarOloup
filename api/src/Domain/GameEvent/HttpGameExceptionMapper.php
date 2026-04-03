@@ -6,6 +6,7 @@ use App\Domain\GameEvent\Exception\AlreadyInAnotherGameException;
 use App\Domain\GameEvent\Exception\GameException;
 use App\Domain\GameEvent\Exception\GameRoleNotFoundException;
 use App\Domain\GameEvent\Exception\InvalidConfigurationException;
+use App\Domain\GameEvent\Exception\InvalidRoleDispatchException;
 use App\Domain\GameEvent\Exception\MissingGameException;
 use App\Domain\GameEvent\Exception\MissingUserException;
 use App\Domain\GameEvent\Exception\PlayerNotFoundException;
@@ -26,7 +27,8 @@ class HttpGameExceptionMapper
         return match (true) {
             $e instanceof MissingUserException,
             $e instanceof MissingGameException,
-            $e instanceof InvalidConfigurationException => new BadRequestHttpException($msg),
+            $e instanceof InvalidConfigurationException,
+            $e instanceof InvalidRoleDispatchException => new BadRequestHttpException($msg),
             $e instanceof UnauthorizedGameActionException => new AccessDeniedHttpException($msg),
             $e instanceof GameRoleNotFoundException,
             $e instanceof PlayerNotFoundException => new NotFoundHttpException($msg),

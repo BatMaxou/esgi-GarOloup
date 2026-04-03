@@ -11,6 +11,7 @@ use App\Api\Model\Game\CreateGameOutput;
 use App\Api\Provider\Game\CurrentGameProvider;
 use App\Domain\Command\Game\Initialisation\CloseGameInvitationCommand;
 use App\Domain\Command\Game\Initialisation\CreateGameCommand;
+use App\Domain\Command\Game\Initialisation\GameRoleDispatchCommand;
 use App\Domain\Command\Game\Initialisation\JoinGameCommand;
 use App\Domain\Command\Game\Initialisation\ReOpenGameInvitationCommand;
 use App\Domain\Command\Game\Initialisation\SetGameConfigurationCommand;
@@ -85,6 +86,13 @@ use Doctrine\ORM\Mapping as ORM;
             uriTemplate: '/game/game-master',
             messenger: 'input',
             input: SetGameMasterCommand::class,
+            output: BasicActionOutput::class,
+        ),
+        new Patch(
+            name: 'api_game_role_dispatch',
+            uriTemplate: '/game/role-dispatch',
+            messenger: 'input',
+            input: GameRoleDispatchCommand::class,
             output: BasicActionOutput::class,
         ),
         new Patch(),

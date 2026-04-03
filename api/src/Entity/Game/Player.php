@@ -82,6 +82,11 @@ class Player
         return $user;
     }
 
+    public function getLinkedGame(): ?Game
+    {
+        return $this->game ?? $this->managedGame;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;

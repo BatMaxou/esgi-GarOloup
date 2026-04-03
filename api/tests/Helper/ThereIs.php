@@ -5,6 +5,7 @@ namespace App\Tests\Helper;
 use App\Tests\Helper\Builder\File\UploadFileBuilder;
 use App\Tests\Helper\Builder\Game\CompositionBuilder;
 use App\Tests\Helper\Builder\Game\ConfigurationBuilder;
+use App\Tests\Helper\Builder\Game\DispatchBuilder;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
 use App\Tests\Helper\Builder\Role\RoleBuilder;
@@ -44,6 +45,11 @@ final class ThereIs
     public static function aGame(): GameBuilder
     {
         return new GameBuilder();
+    }
+
+    public static function aDispatch(): DispatchBuilder
+    {
+        return new DispatchBuilder();
     }
 
     public static function aComposition(): CompositionBuilder

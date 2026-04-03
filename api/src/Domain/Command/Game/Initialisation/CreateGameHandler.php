@@ -28,7 +28,8 @@ class CreateGameHandler
             throw new AccessDeniedHttpException('You are not logged in');
         }
 
-        $gameEvent = new CreateGameEvent()->setUser($currentUser);
+        $gameEvent = new CreateGameEvent()
+            ->setUser($currentUser);
 
         try {
             $game = $this->gameEventDispatcher->dispatch($gameEvent);

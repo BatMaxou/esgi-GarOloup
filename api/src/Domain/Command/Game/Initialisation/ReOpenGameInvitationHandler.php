@@ -36,8 +36,8 @@ class ReOpenGameInvitationHandler
         }
 
         $gameEvent = new ReOpenGameInvitationEvent()
-            ->setUser($currentUser)
-            ->setGame($player->getGame());
+            ->setGame($player->getLinkedGame())
+            ->setUser($currentUser);
 
         try {
             $this->gameEventDispatcher->dispatch($gameEvent);

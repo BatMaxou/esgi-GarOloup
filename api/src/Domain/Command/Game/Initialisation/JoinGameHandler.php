@@ -38,8 +38,8 @@ class JoinGameHandler
         }
 
         $gameEvent = new JoinGameEvent()
-            ->setUser($currentUser)
-            ->setGame($game);
+            ->setGame($game)
+            ->setUser($currentUser);
 
         try {
             $this->gameEventDispatcher->dispatch($gameEvent);
