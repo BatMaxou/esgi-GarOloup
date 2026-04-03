@@ -304,8 +304,16 @@
         "eyebrow": "Bestiary",
         "title": "The roles",
         "subtitle": "Every role has its objectives, powers, and alliances. Learn to know them—or to fear them.",
-        "game": "game"
+        "game": "game",
+        "camp": "Camp",
+        "noRolesFoundForThisCamp": "The roles for this camp are not yet available..."
       }
+    }
+  },
+  "contexts": {
+    "role": {
+      "roleListError": "Error retrieving role list",
+      "gameTeamFiltersError": "Error retrieving game team filters"
     }
   }
 }

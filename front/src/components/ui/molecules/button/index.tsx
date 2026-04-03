@@ -37,6 +37,7 @@ const Wrapper = ({
   glass,
   popup,
   children,
+  onClick,
   ...props
 }: Omit<Props, 'label' | 'textVariant'> & { children: ReactNode }) => {
   const classes = buttonCva({ variant, size, full, disabled, glass, popup, className });
@@ -50,7 +51,7 @@ const Wrapper = ({
   }
 
   return (
-    <button className={classes} {...props}>
+    <button className={classes} onClick={onClick ? onClick : undefined} {...props}>
       {children}
     </button>
   );

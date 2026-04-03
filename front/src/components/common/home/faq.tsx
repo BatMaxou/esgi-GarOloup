@@ -15,10 +15,10 @@ const Faq = () => {
   return (
     <section id="faq" className="px-6 py-[100px]">
       <div className="mx-auto max-w-[720px]">
-        <Typography tag="div" className="mb-2.5 text-[0.72rem] font-bold tracking-[0.16em] text-primary uppercase">
+        <Typography tag="div" textColor="primary" bold>
           {t('eyebrow')}
         </Typography>
-        <Typography tag="h2" special className="mb-10 text-[clamp(2rem,5vw,3rem)] leading-[1.1] text-white">
+        <Typography tag="h2" special variant="heading-2" bold className="mb-10">
           {t('title')}
         </Typography>
         <div className="mb-9 flex flex-col gap-2">

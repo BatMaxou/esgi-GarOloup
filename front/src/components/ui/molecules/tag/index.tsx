@@ -7,6 +7,8 @@ import Typography from '@/components/ui/atoms/typography';
 import { IconName } from '../../atoms/icon/config';
 import Icon from '../../atoms/icon';
 
+export type TagVariantType = VariantProps<typeof tagCva>['variant'];
+
 type Props = VariantProps<typeof tagCva> & {
   label?: string;
   lowerCase?: boolean;
@@ -15,9 +17,9 @@ type Props = VariantProps<typeof tagCva> & {
   rightIcon?: IconName;
 };
 
-const Tag = ({ label, lowerCase, className, variant, size, leftIcon, rightIcon }: Props) => {
+const Tag = ({ label, lowerCase, className, variant, size, active, leftIcon, rightIcon }: Props) => {
   return (
-    <span className={tagCva({ variant, size, className })}>
+    <span className={tagCva({ variant, size, active, className })}>
       {leftIcon && (
         <Typography variant="tag" textColor="controlled">
           <Icon name={leftIcon} className={tagIconCva({ size })} />

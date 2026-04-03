@@ -3,21 +3,40 @@ import { cva } from 'class-variance-authority';
 export const tagCva = cva('h-fit w-fit flex items-center justify-center rounded-xs border transition-all', {
   variants: {
     variant: {
-      primary: 'bg-primary-pastel/20 border-primary text-primary',
-      secondary: 'bg-secondary/60 border-secondary-pastel/40 text-neutral-400',
-      accent: 'bg-accent/20 border-accent text-accent',
-      neutral: 'bg-foreground/20 border-foreground/40 text-foreground',
-      error: 'bg-error/10 border-error/40 text-error',
-      success: 'bg-success/10 border-success/40 text-success',
+      primary: 'border-primary text-primary',
+      secondary: 'border-secondary-pastel/40 text-neutral-400',
+      accent: 'border-accent text-accent',
+      neutral: 'border-foreground/40 text-foreground',
+      error: 'border-error/40 text-error',
+      success: 'border-success/40 text-success',
     },
     size: {
       lg: 'px-3 py-1 gap-1.5',
       md: 'px-2 gap-1',
     },
+    active: {
+      true: '',
+      false: '',
+    },
   },
+  compoundVariants: [
+    { variant: 'primary', active: false, class: 'bg-primary-pastel/20' },
+    { variant: 'primary', active: true, class: 'bg-primary/12' },
+    { variant: 'secondary', active: false, class: 'bg-secondary/40' },
+    { variant: 'secondary', active: true, class: 'bg-secondary-pastel/28' },
+    { variant: 'accent', active: false, class: 'bg-accent/20' },
+    { variant: 'accent', active: true, class: 'bg-accent/12' },
+    { variant: 'neutral', active: false, class: 'bg-foreground/20' },
+    { variant: 'neutral', active: true, class: 'bg-foreground/28' },
+    { variant: 'error', active: false, class: 'bg-error/20' },
+    { variant: 'error', active: true, class: 'bg-error/28' },
+    { variant: 'success', active: false, class: 'bg-success/10' },
+    { variant: 'success', active: true, class: 'bg-success/28' },
+  ],
   defaultVariants: {
     variant: 'neutral',
     size: 'md',
+    active: false,
   },
 });
 
