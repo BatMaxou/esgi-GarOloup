@@ -41,6 +41,24 @@ const Tags = () => {
             </li>
           </ul>
         </GlassPanel>
+        <GlassPanel className="flex flex-col gap-8 p-8 items-center">
+          <ul className="flex flex-wrap items-center gap-6">
+            <li>
+              <Tag variant="accent" size="lg" leftIcon="garoloup" label="Large Left Icon" />
+            </li>
+            <li>
+              <Tag variant="accent" size="lg" rightIcon="garoloup" label="Large Right Icon" />
+            </li>
+          </ul>
+          <ul className="flex flex-wrap items-center gap-6">
+            <li>
+              <Tag variant="accent" size="md" leftIcon="garoloup" label="Medium Left Icon" />
+            </li>
+            <li>
+              <Tag variant="accent" size="md" rightIcon="garoloup" label="Medium Right Icon" />
+            </li>
+          </ul>
+        </GlassPanel>
         <GlassPanel className="p-8">
           <ul className="flex flex-wrap items-center gap-6">
             <li>
