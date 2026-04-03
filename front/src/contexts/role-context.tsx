@@ -35,9 +35,9 @@ export const RoleProvider = ({ children }: Props) => {
   const [gameTeamFilters, setGameTeamFilters] = useState<GameTeamEnum[]>([]);
   const [gameTeamFiltersLoading, setGameTeamFiltersLoading] = useState<boolean>(true);
 
-  const getAllRoles = () => {
+  const getAllRoles = async () => {
     setRoleListLoading(true);
-    apiClient.role.getAll().then((roles) => {
+    await apiClient.role.getAll().then((roles) => {
       if (roles instanceof ApiClientError) {
         toast.error(t('roleListError'));
         setRoleListLoading(false);
@@ -48,9 +48,9 @@ export const RoleProvider = ({ children }: Props) => {
     setRoleListLoading(false);
   };
 
-  const getAllGameTeamFilters = () => {
+  const getAllGameTeamFilters = async () => {
     setGameTeamFiltersLoading(true);
-    apiClient.filter.getGameTeamFilters().then((filters) => {
+    await apiClient.filter.getGameTeamFilters().then((filters) => {
       if (filters instanceof ApiClientError) {
         toast.error(t('gameTeamFiltersError'));
         setGameTeamFiltersLoading(false);

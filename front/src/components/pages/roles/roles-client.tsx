@@ -18,7 +18,16 @@ import { gameTeamVariant } from '@/utils/variants';
 const RolesClient = () => {
   const troles = useTranslations('roles');
   const t = useTranslations('components.pages.roles');
-  const { roleList, roleListLoading, filteredRoleList, setFilteredRoleList, getAllRoles, getAllGameTeamFilters, gameTeamFilters, gameTeamFiltersLoading } = useRole();
+  const {
+    roleList,
+    roleListLoading,
+    filteredRoleList,
+    setFilteredRoleList,
+    getAllRoles,
+    getAllGameTeamFilters,
+    gameTeamFilters,
+    gameTeamFiltersLoading,
+  } = useRole();
   const [selectedGameTeamFilter, setSelectedGameTeamFilter] = useState<GameTeamEnum | 'all'>('all');
   const roleListDynamic = useMemo(() => {
     return selectedGameTeamFilter !== 'all' ? filteredRoleList : roleList;
@@ -30,8 +39,7 @@ const RolesClient = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-  }, [roleListDynamic]);
+  useEffect(() => {}, [roleListDynamic]);
 
   useEffect(() => {}, [filteredRoleList]);
 
@@ -137,8 +145,7 @@ const RolesClient = () => {
                 ))}
               </>
             </div>
-          )
-          }
+          )}
         </>
       )}
     </main>

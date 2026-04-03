@@ -1,4 +1,4 @@
-import { GameTeamEnum } from "./enums";
+import { GameTeamEnum } from './enums';
 
 export type GameTeamVariantType = 'success' | 'error' | 'primary' | 'accent' | 'secondary';
 

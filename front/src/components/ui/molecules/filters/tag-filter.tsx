@@ -52,7 +52,11 @@ function TagFilter<T extends string>({
         </>
       ) : (
         <>
-          <button type="button" className="cursor-pointer border-0 bg-transparent p-0" onClick={() => setSelected('all')}>
+          <button
+            type="button"
+            className="cursor-pointer border-0 bg-transparent p-0"
+            onClick={() => setSelected('all')}
+          >
             <Tag label={allLabel} size="lg" variant={'secondary'} active={selected === 'all'} lowerCase />
           </button>
           {labels.map((label) => {

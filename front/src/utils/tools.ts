@@ -7,8 +7,10 @@ export const ftpUrl = (isClientSide ? process.env.NEXT_PUBLIC_FTP_URL : process.
 export const mercureUrl =
   (isClientSide ? process.env.NEXT_PUBLIC_MERCURE_URL : process.env.NEXT_PUBLIC_SSR_MERCURE_URL) || '';
 
-export const getImagePath = (path: string) => {
-  const base = (process.env.NEXT_PUBLIC_FTP_BASE_URL ?? '').replace(/\/+$/, '');
+const getImagePath = (path: string) => {
   const normalized = path.replace(/^\/+/, '');
-  return `${base}/${normalized}`;
+
+  return `${ftpUrl}/${normalized}`;
 };
+
+export { getImagePath };
