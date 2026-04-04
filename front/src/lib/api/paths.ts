@@ -7,6 +7,7 @@ export const apiPaths = {
     open: '/game/invitation/open',
     setConfiguration: '/game/configuration',
     roleDispatch: '/game/role-dispatch',
+    launch: '/game/launch',
   },
   player: {
     getCurrent: '/game/player',
