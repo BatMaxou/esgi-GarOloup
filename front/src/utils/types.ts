@@ -57,3 +57,8 @@ export type RoleEntry = {
   role?: Role;
   count?: number;
 };
+
+export type RoleDispatchEntry = {
+  playerId: string;
+  role: GameRoleEnum;
+};

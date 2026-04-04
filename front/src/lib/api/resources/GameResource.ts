@@ -1,7 +1,7 @@
 import { ApiClient, BasicActionResponse } from '@/lib/api/ApiClient';
 import { ApiClientError } from '@/lib/api/ApiClientError';
 import { apiPaths } from '@/lib/api/paths';
-import type { Configuration, Game } from '@/utils/types';
+import type { Configuration, Game, RoleDispatchEntry } from '@/utils/types';
 
 export interface CreateGameResponse {
   joinCode: string;
@@ -32,5 +32,9 @@ export class GameResource {
 
   public async setConfiguration(configuration: Configuration): Promise<BasicActionResponse | ApiClientError> {
     return this.apiClient.patch<BasicActionResponse>(apiPaths.game.setConfiguration, { configuration });
+  }
+
+  public async dispatchRoles(dispatch: RoleDispatchEntry[]): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.patch<BasicActionResponse>(apiPaths.game.roleDispatch, { dispatch });
   }
 }

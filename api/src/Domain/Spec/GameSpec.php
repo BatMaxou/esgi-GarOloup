@@ -103,4 +103,13 @@ class GameSpec
 
         return GameStepEnum::GAME_MASTER_CHOICE === $game->getStep();
     }
+
+    public function canDispatchRoles(AbstractUser $user, Game $game): bool
+    {
+        if ($user !== $game->getGameMaster()?->getLinkedUser()) {
+            return false;
+        }
+
+        return GameStepEnum::DISPATCH === $game->getStep();
+    }
 }

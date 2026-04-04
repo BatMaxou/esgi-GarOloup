@@ -6,7 +6,7 @@ use App\Api\Model\BasicActionOutput;
 use App\Domain\GameEvent\Exception\GameException;
 use App\Domain\GameEvent\GameEventDispatcher;
 use App\Domain\GameEvent\HttpGameExceptionMapper;
-use App\Entity\Event\Game\SetGameMasterEvent;
+use App\Entity\Event\Game\GameRoleDispatchEvent;
 use App\Entity\User\AbstractUser;
 use App\Repository\Game\PlayerRepository;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-class SetGameMasterHandler
+class GameRoleDispatchHandler
 {
     public function __construct(
         private readonly Security $security,
@@ -23,7 +23,7 @@ class SetGameMasterHandler
     ) {
     }
 
-    public function __invoke(SetGameMasterCommand $command): BasicActionOutput
+    public function __invoke(GameRoleDispatchCommand $command): BasicActionOutput
     {
         $currentUser = $this->security->getUser();
         if (!$currentUser instanceof AbstractUser) {
@@ -35,10 +35,10 @@ class SetGameMasterHandler
             throw new AccessDeniedHttpException('You do not have a current player');
         }
 
-        $gameEvent = new SetGameMasterEvent()
+        $gameEvent = new GameRoleDispatchEvent()
             ->setGame($player->getLinkedGame())
             ->setUser($currentUser)
-            ->setTargetPlayerId($command->playerId);
+            ->setDispatch($command->dispatch);
 
         try {
             $this->gameEventDispatcher->dispatch($gameEvent);

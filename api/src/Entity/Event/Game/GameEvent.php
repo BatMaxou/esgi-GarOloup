@@ -17,8 +17,9 @@ use Doctrine\ORM\Mapping\InheritanceType;
 #[DiscriminatorColumn(name: 'discr', type: 'string')]
 #[DiscriminatorMap([
     'close_invitation' => CloseGameInvitationEvent::class,
-    'create_game' => CreateGameEvent::class,
-    'join_game' => JoinGameEvent::class,
+    'create' => CreateGameEvent::class,
+    'role_dispatch' => GameRoleDispatchEvent::class,
+    'join' => JoinGameEvent::class,
     're_open_invitation' => ReOpenGameInvitationEvent::class,
     'set_configuration' => SetGameConfigurationEvent::class,
     'set_game_master' => SetGameMasterEvent::class,

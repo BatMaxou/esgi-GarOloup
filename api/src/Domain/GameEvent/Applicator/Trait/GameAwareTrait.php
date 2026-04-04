@@ -12,7 +12,7 @@ trait GameAwareTrait
     {
         $game = $event->getGame();
         if (!$game) {
-            throw new MissingGameException('Game must be seto at this step');
+            throw new MissingGameException('Game must be set at this step');
         }
 
         return $game;
