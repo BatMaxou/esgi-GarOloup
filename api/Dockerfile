@@ -23,6 +23,10 @@ FROM base AS dev
 # Production image
 FROM base AS prod
 
+ARG JWT_PASSPHRASE
+
+ENV JWT_PASSPHRASE=$JWT_PASSPHRASE
+
 RUN composer install;
 
 RUN php bin/console lexik:jwt:generate-keypair --overwrite --no-interaction;
