@@ -77,4 +77,12 @@ class GameBehavior extends AbstractBehavior
             ],
         ]));
     }
+
+    public function launch(): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/launch', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [],
+        ]));
+    }
 }

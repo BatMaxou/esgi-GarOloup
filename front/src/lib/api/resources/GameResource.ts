@@ -37,4 +37,8 @@ export class GameResource {
   public async dispatchRoles(dispatch: RoleDispatchEntry[]): Promise<BasicActionResponse | ApiClientError> {
     return this.apiClient.patch<BasicActionResponse>(apiPaths.game.roleDispatch, { dispatch });
   }
+
+  public async launch(): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.patch<BasicActionResponse>(apiPaths.game.launch);
+  }
 }

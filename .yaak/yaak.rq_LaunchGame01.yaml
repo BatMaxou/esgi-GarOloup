@@ -1,0 +1,28 @@
+type: http_request
+model: http_request
+id: rq_LaunchGame01
+createdAt: 2026-04-04T10:00:00.000000000
+updatedAt: 2026-04-04T10:00:00.000000000
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_bh6aMuFF23
+authentication:
+  token: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RlhCdVNMZFlzK29xLzVCS0M1MXNpaFZKd05LRGRDWFhHYzdmVlZ1NTlqN2E5MmtlY2taSzdHa1EzcU1sSzBTa0k5Y3lMSA') ]}
+authenticationType: bearer
+body:
+  text: '{}'
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/merge-patch+json
+  id: LaunchGame01H1
+- enabled: true
+  name: ''
+  value: ''
+  id: LaunchGame01H2
+method: PATCH
+name: Launch Game
+sortPriority: 5000.0
+url: ${[ BASE_URL ]}/api/game/launch
+urlParameters: []
