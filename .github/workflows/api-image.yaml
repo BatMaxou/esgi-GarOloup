@@ -32,6 +32,8 @@ jobs:
           dockerfile: ./api/Dockerfile
           image: php
           target: prod
+          build_args: |
+            JWT_PASSPHRASE=${{ secrets.BACK_JWT_PASSPHRASE }}
 
       - name: Build / Push web image
         uses: ./.github/workflows/callables/build-push
