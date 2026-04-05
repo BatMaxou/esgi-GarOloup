@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_Pt6WpAZhjN
 createdAt: 2026-02-27T17:48:42.133521745
-updatedAt: 2026-03-26T22:32:46.494502166
+updatedAt: 2026-04-05T19:42:26.176400850
 workspaceId: wk_uXtATNFQmZ
 folderId: null
 authentication:
@@ -14,6 +14,6 @@ description: ''
 headers: []
 method: GET
 name: Me
-sortPriority: 6000.0
+sortPriority: 7000.0
 url: ${[ BASE_URL ]}/api/me
 urlParameters: []

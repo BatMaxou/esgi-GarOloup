@@ -1,4 +1,7 @@
 api_platform:
+    resource_class_directories:
+        - '%kernel.project_dir%/src/Entity'
+        - '%kernel.project_dir%/src/Api/Model'
     title: Hello API Platform
     version: 1.0.0
     defaults:

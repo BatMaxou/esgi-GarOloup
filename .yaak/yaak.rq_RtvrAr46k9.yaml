@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_RtvrAr46k9
 createdAt: 2026-02-27T17:48:42.134077443
-updatedAt: 2026-03-26T22:32:46.515514036
+updatedAt: 2026-04-05T19:42:26.201543464
 workspaceId: wk_uXtATNFQmZ
 folderId: null
 authentication: {}
@@ -13,6 +13,6 @@ description: ''
 headers: []
 method: OPTIONS
 name: Logout
-sortPriority: 9000.0
+sortPriority: 10000.0
 url: ${[baseUrl]}/api/login
 urlParameters: []

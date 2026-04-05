@@ -28,6 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: GameRepository::class)]
 #[ApiResource(
     mercure: [
+        'private' => true,
         'topics' => [
             '@=iri(object)',
         ],
