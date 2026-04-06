@@ -5,7 +5,9 @@ namespace App\Api\Provider\Mercure;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use App\Api\Model\Mercure\MercureToken;
+use App\Enum\TopicEnum;
 use App\Repository\Game\PlayerRepository;
+use App\Service\Mercure\TopicProvider;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -16,8 +18,10 @@ class MercureTokenProvider implements ProviderInterface
     public function __construct(
         private readonly Security $security,
         private readonly PlayerRepository $playerRepository,
+        private readonly TopicProvider $topicProvider,
         private readonly HubInterface $hub,
-    ) {}
+    ) {
+    }
 
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): MercureToken
     {
@@ -31,13 +35,12 @@ class MercureTokenProvider implements ProviderInterface
             return new MercureToken();
         }
 
-        // put to service
         $player = $this->playerRepository->findCurrentByUser($currentUser);
         $game = $player?->getGame();
 
         $token = $factory->create(subscribe: [
-            \sprintf('http://localhost:8000/api/games/%s', $game->getId() ?? ''),
-            \sprintf('http://localhost:8000/api/players/%s', $player->getId() ?? ''),
+            ...($player ? [(string) $this->topicProvider->provide(TopicEnum::CURRENT_PLAYER, $player)] : []),
+            ...($game ? [(string) $this->topicProvider->provide(TopicEnum::CURRENT_GAME, $game)] : []),
         ], publish: []);
 
         return new MercureToken($token);

@@ -82,7 +82,6 @@ export class ApiClient {
     additionnalHeaders: HeadersInit = {},
     autoRefresh: boolean = true
   ): Promise<T | ApiClientError> {
-console.log('get', this.token);
     return fetch(`${this.baseUrl}${url}`, {
       cache: 'no-store',
       headers: {

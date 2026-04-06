@@ -12,7 +12,7 @@ use App\Api\Provider\Mercure\MercureTokenProvider;
             name: 'api_mercure_token',
             uriTemplate: '/mercure/token',
             provider: MercureTokenProvider::class,
-        )
+        ),
     ],
 )]
 class MercureToken

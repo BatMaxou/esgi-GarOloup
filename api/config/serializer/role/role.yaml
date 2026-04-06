@@ -5,31 +5,37 @@ App\Entity\Role:
                 - role:read
                 - role:list
                 - game:read
+                - me:player:read
         type:
             groups:
                 - role:read
                 - role:list
                 - role:write
                 - game:read
+                - me:player:read
         name:
             groups:
                 - role:read
                 - role:list
                 - role:write
                 - game:read
+                - me:player:read
         description:
             groups:
                 - role:read
                 - role:write
+                - me:player:read
         ability:
             groups:
                 - role:read
                 - role:write
+                - me:player:read
         pictureName:
             groups:
                 - role:read
                 - role:list
                 - role:files:write
+                - me:player:read
         picture:
             groups:
                 - role:files:write
@@ -48,3 +54,4 @@ App\Entity\Role:
                 - role:read
                 - role:list
                 - role:write
+                - me:player:read

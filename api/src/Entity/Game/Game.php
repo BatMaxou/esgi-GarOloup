@@ -21,26 +21,14 @@ use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Enum\Game\GameStepEnum;
 use App\Repository\Game\GameRepository;
+use App\Service\Mercure\Inteface\TopicRelatedObject;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GameRepository::class)]
 #[ApiResource(
-    mercure: [
-        'private' => true,
-        'topics' => [
-            '@=iri(object)',
-        ],
-        'normalization_context' => [
-            'groups' => 'game:read',
-        ],
-    ],
     operations: [
-        new Get(
-            // set security here, currently used to map mercure topic to /games/:id
-            name: 'api_get_game'
-        ),
         new Get(
             name: 'api_current_game',
             uriTemplate: '/game',
@@ -107,7 +95,7 @@ use Doctrine\ORM\Mapping as ORM;
         new Patch(),
     ],
 )]
-class Game
+class Game implements TopicRelatedObject
 {
     use UuidTrait;
     use TimestampableTrait;
@@ -242,5 +230,10 @@ class Game
         }
 
         return $this;
+    }
+
+    public function getTopicIdentifier(): ?string
+    {
+        return $this->getId();
     }
 }

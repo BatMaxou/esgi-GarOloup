@@ -15,7 +15,6 @@ export class MercureClient {
   ) {}
 
   public subscribe<T>(topic: string, onMessage: ({ data }: { data: T }) => void): EventSource | null {
-    console.log('subscribe', this.token);
     if (!this.token) {
       return null;
     }
@@ -31,11 +30,11 @@ export class MercureClient {
   }
 
   public watchGame(id: string, action: (game: Game) => void): EventSource | null {
-    return this.subscribe(`${this.apiClient.baseUrl}${topics.game(id)}`, ({ data }: { data: string }) => action(JSON.parse(data)));
+    return this.subscribe(topics.game(id), ({ data }: { data: string }) => action(JSON.parse(data)));
   }
 
   public watchPlayer(id: string, action: (player: Player) => void): EventSource | null {
-    return this.subscribe(`${this.apiClient.baseUrl}${topics.player(id)}`, ({ data }: { data: string }) => action(JSON.parse(data)));
+    return this.subscribe(topics.player(id), ({ data }: { data: string }) => action(JSON.parse(data)));
   }
 
   public async fetchCredentials(): Promise<void> {
