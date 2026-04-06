@@ -29,8 +29,7 @@ export const MercureClientProvider = ({ children }: Props) => {
     }
 
     if (tokenHasChanged) {
-      mercureClient.fetchCredentials()
-        .then(() => setIsCredentialsInitialized(true))
+      mercureClient.fetchCredentials().then(() => setIsCredentialsInitialized(true));
     }
   }, [mercureClient, tokenHasChanged, isCredentialsInitialized]);
 

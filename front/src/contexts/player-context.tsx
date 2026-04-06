@@ -59,7 +59,6 @@ export const PlayerProvider = ({ children, initialPlayer = null }: Props) => {
       isWatching.current = false;
       eventSource?.close();
     };
-
   }, [mercureClient, player?.id, isCredentialsInitialized]);
 
   return <PlayerContext.Provider value={{ player, setPlayer, desyncPlayer }}>{children}</PlayerContext.Provider>;

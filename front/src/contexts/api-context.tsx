@@ -37,7 +37,7 @@ export const ApiClientProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (tokenHasChanged) {
-      setTokenHasChanged(false);
+      setTokenHasChanged(false); // eslint-disable-line react-hooks/set-state-in-effect
     }
   }, [tokenHasChanged]);
 
@@ -46,7 +46,7 @@ export const ApiClientProvider = ({ children }: Props) => {
     apiClient.refreshToken = data?.user?.refreshToken ?? null;
 
     if (apiClient.token) {
-      setTokenHasChanged(true);
+      setTokenHasChanged(true); // eslint-disable-line react-hooks/set-state-in-effect
     }
   }, [data]);
 

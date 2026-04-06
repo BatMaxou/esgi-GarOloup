@@ -11,7 +11,7 @@ export class MercureClient {
   constructor(
     public baseUrl: string,
     private readonly apiClient: ApiClient,
-    private readonly cookieRegistry: ClientCookieRegistry,
+    private readonly cookieRegistry: ClientCookieRegistry
   ) {}
 
   public subscribe<T>(topic: string, onMessage: ({ data }: { data: T }) => void): EventSource | null {
