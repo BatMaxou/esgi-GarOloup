@@ -1,31 +1,29 @@
 import { credentials } from 'better-auth-credentials-plugin';
 import { User as BetterAuthUser } from 'better-auth/types';
-import { z } from 'zod';
 
 import { User } from '@/utils/types';
 import { getApiClient } from '@/utils/server/clients';
 import { ApiClientError } from '@/lib/api/ApiClientError';
 
-export const credentialsPlugin = credentials({
+import { tempUserCredentialsSchema } from '@/lib/auth/plugins/temp-user-credentials-schema';
+
+export const tempUserCredentialsPlugin = credentials({
   autoSignUp: true,
-  providerId: 'garoloup-api',
-  path: '/sign-in/garoloup',
-  inputSchema: z.object({
-    email: z.string().email(),
-    password: z.string(),
-  }),
+  providerId: 'temp-user-api',
+  path: '/sign-in/temp-user',
+  inputSchema: tempUserCredentialsSchema,
   UserType: {} as BetterAuthUser & User,
   callback: async (ctx, parsed) => {
-    const { email, password } = parsed;
+    const { username } = parsed;
 
     const apiClient = await getApiClient();
 
-    const maybeLoginResponse = await apiClient.login(email, password);
-    if (maybeLoginResponse instanceof ApiClientError) {
-      throw maybeLoginResponse;
+    const maybeTempUserResponse = await apiClient.tempUser.get(username);
+    if (maybeTempUserResponse instanceof ApiClientError) {
+      throw maybeTempUserResponse;
     }
 
-    const { token, refresh_token: refreshToken } = maybeLoginResponse;
+    const { token, refreshToken } = maybeTempUserResponse;
     apiClient.setTokens(token, refreshToken, false);
 
     const maybeMeResponse = await apiClient.me.get();
@@ -34,12 +32,13 @@ export const credentialsPlugin = credentials({
     }
 
     const user = maybeMeResponse;
+    const email = user.email?.trim() || `${username.toLowerCase()}@temp.garoloup`;
 
     return {
       ...user,
+      email,
       token,
       refreshToken,
     };
   },
 });
-// handle temp user here with another credentials plugin ?

@@ -3,8 +3,10 @@
 import { createContext, ReactNode, useCallback, useContext, useEffect } from 'react';
 
 import { ApiClient } from '@/lib/api/ApiClient';
+import type { User } from '@/utils/types';
 import { apiBaseUrl } from '@/utils/tools';
 import { updateUser, useSession } from '@/lib/auth/auth-client';
+import { tempUserUpdateUser, useTempUserSession } from '@/lib/auth/auth-temp-user-client';
 
 type Props = {
   children: ReactNode;
@@ -19,14 +21,22 @@ export const ApiClientContext = createContext<ApiClientContextType | undefined>(
 const apiClient = new ApiClient(apiBaseUrl);
 
 export const ApiClientProvider = ({ children }: Props) => {
-  const { data, refetch } = useSession();
+  const { data: mainSession, refetch: refetchMain } = useSession();
+  const { data: tempSession, refetch: refetchTemp } = useTempUserSession();
 
   const propagateChangeToken = useCallback(
     async (token?: string | null, refreshToken?: string | null) => {
-      await updateUser({ token, refreshToken });
-      await refetch();
+      if (mainSession?.user) {
+        await updateUser({ token, refreshToken });
+        await refetchMain();
+        return;
+      }
+      if (tempSession?.user) {
+        await tempUserUpdateUser({ token, refreshToken } as Parameters<typeof tempUserUpdateUser>[0]);
+        await refetchTemp();
+      }
     },
-    [refetch]
+    [mainSession?.user, refetchMain, refetchTemp, tempSession?.user]
   );
 
   useEffect(() => {
@@ -34,9 +44,10 @@ export const ApiClientProvider = ({ children }: Props) => {
   }, [propagateChangeToken]);
 
   useEffect(() => {
-    apiClient.token = data?.user?.token ?? null;
-    apiClient.refreshToken = data?.user?.refreshToken ?? null;
-  }, [data]);
+    const user = (mainSession?.user ?? tempSession?.user) as User | null | undefined;
+    apiClient.token = user?.token ?? null;
+    apiClient.refreshToken = user?.refreshToken ?? null;
+  }, [mainSession?.user, tempSession?.user]);
 
   return <ApiClientContext.Provider value={{ apiClient }}>{children}</ApiClientContext.Provider>;
 };

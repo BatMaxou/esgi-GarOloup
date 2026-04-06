@@ -11,6 +11,6 @@ export class TempUserResource {
   constructor(private apiClient: ApiClient) {}
 
   public async get(username: string): Promise<GetTempUserResponse | ApiClientError> {
-    return this.apiClient.post<GetTempUserResponse>(apiPaths.tempUser.get(username));
+    return this.apiClient.get<GetTempUserResponse>(apiPaths.tempUser.get(username));
   }
 }

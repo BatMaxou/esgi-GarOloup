@@ -1,9 +1,14 @@
 import { betterAuth } from 'better-auth';
+import { nextCookies } from 'better-auth/next-js';
 
 import { providers } from '@/lib/auth/providers';
-import { plugins } from '@/lib/auth/auth-plugin';
+import { tempUserCredentialsPlugin } from '@/lib/auth/plugins/temp-user-credentials';
 
-export const auth = betterAuth({
+export const tempUserAuth = betterAuth({
+  basePath: '/api/auth/temp-user',
+  advanced: {
+    cookiePrefix: 'better-auth-temp-user',
+  },
   session: {
     expiresIn: 60 * 60 * 24 * 7,
     cookieCache: {
@@ -33,5 +38,5 @@ export const auth = betterAuth({
     },
   },
   ...providers,
-  plugins: [...plugins],
+  plugins: [tempUserCredentialsPlugin, nextCookies()],
 });

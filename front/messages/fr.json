@@ -249,13 +249,16 @@
           "register": {
             "usernameLabel": "Pseudo",
             "usernamePlaceholder": "LoupSolitaire",
+            "usernameRequirements": "Entre 3 et 20 caractères, lettres et chiffres uniquement.",
             "emailLabel": "E-mail",
             "emailPlaceholder": "garoloup@example.com",
             "passwordLabel": "Mot de passe",
             "passwordConfirmationLabel": "Confirmer le mot de passe",
             "submit": "Créer mon compte",
             "passwordMismatch": "Les mots de passes ne correspondent pas",
-            "passwordRequirements": "12 caractères min., une majuscule, une minuscule, un chiffre et un caractère spécial"
+            "passwordRequirements": "12 caractères min., une majuscule, une minuscule, un chiffre et un caractère spécial",
+            "registrationSuccess": "Compte créé avec succès",
+            "errorEmailExists": "Un compte avec cet e-mail existe déjà"
           },
           "forgotPassword": {
             "emailLabel": "E-mail",
@@ -279,13 +282,6 @@
     },
     "pages": {
       "auth": {
-        "login": {
-          "title": "Bon retour parmi nous",
-          "subtitle": "Connectez-vous pour reprendre la chasse",
-          "loginSuccess": "Connexion réussie",
-          "noAccount": "Pas encore de compte ?",
-          "createAccount": "Rejoignez la meute"
-        },
         "register": {
           "title": "Rejoins la meute",
           "subtitle": "Crée un compte pour lancer ou rejoindre des parties",
@@ -299,6 +295,18 @@
         "resetPassword": {
           "title": "Réinitialiser votre mot de passe",
           "subtitle": "Entrez votre nouveau mot de passe"
+        },
+        "login": {
+          "playAsGuest": "Jouer en tant qu'invité",
+          "alreadyHaveAccount": "J'ai déjà un compte",
+          "playAsGuestTitle": "Comment vous appelle-t-on ?",
+          "playAsGuestSubtitle": "Choisissez un pseudo pour rejoindre la partie.",
+          "playAsGuestSubtitlePseudo": "Choisissez un pseudo pour rejoindre la partie.",
+          "loginTitle": "Bon retour parmi nous",
+          "loginSubtitle": "Connectez-vous pour reprendre la chasse",
+          "loginNoAccount": "Pas encore de compte ?",
+          "loginCreateAccount": "Rejoignez la meute",
+          "loginSuccess": "Connexion réussie"
         }
       },
       "roles": {
@@ -315,6 +323,9 @@
     "role": {
       "roleListError": "Erreur lors de la récupération des rôles",
       "gameTeamFiltersError": "Erreur lors de la récupération des filtres de rôles"
+    },
+    "auth": {
+      "errorRegistrationTempUser": "Un problème est survenu. Veuillez réessayer."
     }
   }
 }
