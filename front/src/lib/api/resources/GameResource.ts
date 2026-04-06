@@ -3,6 +3,12 @@ import { ApiClientError } from '@/lib/api/ApiClientError';
 import { apiPaths } from '@/lib/api/paths';
 import type { Configuration, Game, RoleDispatchEntry } from '@/utils/types';
 
+export interface CreateGamePayload {
+  maxPlayers: number;
+  maxTimeForDiscussion: number;
+  public: boolean;
+}
+
 export interface CreateGameResponse {
   joinCode: string;
 }
@@ -14,8 +20,8 @@ export class GameResource {
     return this.apiClient.get<Game>(apiPaths.game.getCurrent);
   }
 
-  public async create(): Promise<CreateGameResponse | ApiClientError> {
-    return this.apiClient.post<CreateGameResponse>(apiPaths.game.create);
+  public async create(payload: CreateGamePayload): Promise<CreateGameResponse | ApiClientError> {
+    return this.apiClient.post<CreateGameResponse>(apiPaths.game.create, payload);
   }
 
   public async join(): Promise<BasicActionResponse | ApiClientError> {

@@ -9,10 +9,14 @@ use App\Tests\Helper\Builder\Game\DispatchBuilder;
 
 class GameBehavior extends AbstractBehavior
 {
-    public function create(): BehaviorResponse
+    public function create(int $maxPlayers = 10, int $maxTimeForDiscussion = 5, bool $public = false): BehaviorResponse
     {
         return new BehaviorResponse($this->client->request('POST', '/api/games', [
-            'json' => [],
+            'json' => [
+                'maxPlayers' => $maxPlayers,
+                'maxTimeForDiscussion' => $maxTimeForDiscussion,
+                'public' => $public,
+            ],
         ]));
     }
 

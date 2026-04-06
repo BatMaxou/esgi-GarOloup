@@ -25,6 +25,8 @@ final class GameFactory extends PersistentObjectFactory
             'joinCode' => self::faker()->text(8),
             'step' => GameStepEnum::NEW,
             'configuration' => ConfigurationFactory::new(),
+            'maxPlayers' => 10,
+            'maxTimeForDiscussion' => 5,
         ];
     }
 

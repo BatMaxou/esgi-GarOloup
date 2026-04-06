@@ -113,6 +113,15 @@ class Game implements TopicRelatedObject
     #[ORM\Column(length: 8)]
     private string $joinCode;
 
+    #[ORM\Column]
+    private int $maxPlayers;
+
+    #[ORM\Column]
+    private int $maxTimeForDiscussion;
+
+    #[ORM\Column]
+    private bool $public = false;
+
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private Configuration $configuration;
@@ -198,6 +207,42 @@ class Game implements TopicRelatedObject
     public function setJoinCode(string $joinCode): static
     {
         $this->joinCode = $joinCode;
+
+        return $this;
+    }
+
+    public function getMaxPlayers(): int
+    {
+        return $this->maxPlayers;
+    }
+
+    public function setMaxPlayers(int $maxPlayers): static
+    {
+        $this->maxPlayers = $maxPlayers;
+
+        return $this;
+    }
+
+    public function getMaxTimeForDiscussion(): int
+    {
+        return $this->maxTimeForDiscussion;
+    }
+
+    public function setMaxTimeForDiscussion(int $maxTimeForDiscussion): static
+    {
+        $this->maxTimeForDiscussion = $maxTimeForDiscussion;
+
+        return $this;
+    }
+
+    public function isPublic(): bool
+    {
+        return $this->public;
+    }
+
+    public function setPublic(bool $public): static
+    {
+        $this->public = $public;
 
         return $this;
     }

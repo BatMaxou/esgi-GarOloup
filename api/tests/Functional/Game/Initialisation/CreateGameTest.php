@@ -73,6 +73,28 @@ class CreateGameTest extends GarOloupApiTestCase
         $this->assertEquals(1, GameFactory::count());
     }
 
+    public function test_user_cant_create_game_with_invalid_max_players(): void
+    {
+        $userBuilder = ThereIs::anUser()->build();
+
+        When::asUser($userBuilder)->game()->create(maxPlayers: -1);
+        $this->assertResponseStatusCodeSame(400);
+
+        When::game()->create(maxPlayers: 3);
+        $this->assertResponseStatusCodeSame(400);
+    }
+
+    public function test_user_cant_create_game_with_invalid_max_time_for_discussion(): void
+    {
+        $userBuilder = ThereIs::anUser()->build();
+
+        When::asUser($userBuilder)->game()->create(maxTimeForDiscussion: -1);
+        $this->assertResponseStatusCodeSame(400);
+
+        When::game()->create(maxTimeForDiscussion: 0);
+        $this->assertResponseStatusCodeSame(400);
+    }
+
     public function test_game_event_dispatched_by_game_creation(): void
     {
         $userBuilder = ThereIs::anUser()->withUsername('SLiipMan')->build();
