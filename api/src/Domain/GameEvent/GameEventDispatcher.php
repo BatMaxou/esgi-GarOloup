@@ -27,7 +27,7 @@ class GameEventDispatcher implements GameEventDispatcherInterface
         );
     }
 
-    public function dispatch(GameEvent $gameEvent, bool $flush = true): Game
+    public function dispatch(GameEvent $gameEvent, bool $flush = false): Game
     {
         $game = null;
         foreach ($this->applicators as $applicator) {

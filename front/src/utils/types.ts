@@ -62,3 +62,7 @@ export type RoleDispatchEntry = {
   playerId: string;
   role: GameRoleEnum;
 };
+
+export type MercureToken = {
+  token?: string;
+};

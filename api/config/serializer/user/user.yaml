@@ -4,6 +4,7 @@ App\Entity\User\AbstractUser:
             groups:
                 - me:read
                 - game:read
+                - me:player:read
         username:
             groups:
                 - me:read

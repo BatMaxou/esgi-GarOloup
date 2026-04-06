@@ -1,0 +1,19 @@
+type: http_request
+model: http_request
+id: rq_mD8jxqQDAa
+createdAt: 2026-04-05T19:42:30.935713637
+updatedAt: 2026-04-05T19:56:07.562505611
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_jmVnpAdh29
+authentication:
+  token: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3R3pJUXhZbmkydjhsQlI4clVxeU1CNmNMc0VlY1lXMlZ3a1BBWi9tWXc2MW5sMGdrYWlUM2M0TWI1MStodm9DRjgySEl6bQ') ]}
+authenticationType: bearer
+body: {}
+bodyType: null
+description: ''
+headers: []
+method: GET
+name: Token
+sortPriority: 10000.0
+url: ${[ BASE_URL ]}/api/mercure/token
+urlParameters: []

@@ -8,6 +8,7 @@ import { TempUserResource } from '@/lib/api/resources/TempUserResource';
 import { PlayerResource } from '@/lib/api/resources/PlayerResource';
 import { RoleResource } from '@/lib/api/resources/RoleResource';
 import { FilterResource } from '@/lib/api/resources/FilterResource';
+import { MercureResource } from '@/lib/api/resources/MercureResource';
 
 type PropagateChangeToken = (token?: string | null, refreshToken?: string | null) => void;
 
@@ -54,6 +55,7 @@ export class ApiClient {
   game: GameResource;
   role: RoleResource;
   filter: FilterResource;
+  mercure: MercureResource;
 
   constructor(
     public baseUrl: string,
@@ -68,6 +70,7 @@ export class ApiClient {
     this.game = new GameResource(this);
     this.role = new RoleResource(this);
     this.filter = new FilterResource(this);
+    this.mercure = new MercureResource(this);
   }
 
   public initPropagateChangeToken(propagateChangeToken: PropagateChangeToken) {
@@ -80,6 +83,7 @@ export class ApiClient {
     autoRefresh: boolean = true
   ): Promise<T | ApiClientError> {
     return fetch(`${this.baseUrl}${url}`, {
+      cache: 'no-store',
       headers: {
         Accept: 'application/json',
         ...additionnalHeaders,

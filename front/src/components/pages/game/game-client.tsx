@@ -32,7 +32,8 @@ const GameClient = () => {
         Page de test de la partie {game.id ?? 'non trouvée'}
       </Typography>
 
-      <Typography>Step: {game.step}</Typography>
+      <Typography tag="p">Step: {game.step}</Typography>
+      <Typography tag="p">Players: {game.players?.length}</Typography>
 
       {player.host && (
         <div>
