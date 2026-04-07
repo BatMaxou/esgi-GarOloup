@@ -2,14 +2,19 @@ type: http_request
 model: http_request
 id: rq_WAXTHkF7vT
 createdAt: 2026-02-27T17:48:42.132568082
-updatedAt: 2026-03-30T19:48:47.162692034
+updatedAt: 2026-04-06T19:55:52.167807695
 workspaceId: wk_uXtATNFQmZ
 folderId: fl_bh6aMuFF23
 authentication:
   token: ${[ TOKEN ]}
 authenticationType: bearer
 body:
-  text: '{}'
+  text: |-
+    {
+      "maxPlayers": 10,
+      "maxTimeForDiscussion": 5,
+      "public": false
+    }
 bodyType: application/json
 description: ''
 headers:

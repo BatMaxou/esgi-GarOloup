@@ -29,7 +29,10 @@ class CreateGameHandler
         }
 
         $gameEvent = new CreateGameEvent()
-            ->setUser($currentUser);
+            ->setUser($currentUser)
+            ->setMaxPlayers($command->maxPlayers)
+            ->setMaxTimeForDiscussion($command->maxTimeForDiscussion)
+            ->setPublic($command->public);
 
         try {
             $game = $this->gameEventDispatcher->dispatch($gameEvent);

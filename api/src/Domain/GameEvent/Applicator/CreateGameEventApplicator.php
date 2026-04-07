@@ -5,6 +5,7 @@ namespace App\Domain\GameEvent\Applicator;
 use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
 use App\Domain\GameEvent\Applicator\Trait\UserAwareTrait;
 use App\Domain\GameEvent\Exception\AlreadyInAnotherGameException;
+use App\Domain\GameEvent\Exception\InvalidConfigurationException;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\GameSpec;
 use App\Entity\Event\Game\CreateGameEvent;
@@ -22,6 +23,7 @@ class CreateGameEventApplicator implements GameEventApplicatorInterface
     public function __construct(
         private readonly GameSpec $gameSpec,
         private readonly EntityManagerInterface $em,
+        private readonly int $minimumPlayers,
     ) {
     }
 
@@ -32,8 +34,17 @@ class CreateGameEventApplicator implements GameEventApplicatorInterface
             throw new AlreadyInAnotherGameException('You are already playing a game');
         }
 
+        $maxPlayers = $gameEvent->getMaxPlayers();
+        $maxTimeForDiscussion = $gameEvent->getMaxTimeForDiscussion();
+        if ($maxPlayers < $this->minimumPlayers || $maxTimeForDiscussion < 1) {
+            throw new InvalidConfigurationException('Invalid game configuration');
+        }
+
         $player = new Player($user);
-        $game = new Game($player);
+        $game = new Game($player)
+            ->setMaxPlayers($maxPlayers)
+            ->setMaxTimeForDiscussion($maxTimeForDiscussion)
+            ->setPublic($gameEvent->isPublic());
 
         $this->em->persist($player);
         $this->em->persist($game);
