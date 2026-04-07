@@ -2,6 +2,7 @@ import Typography from '@/components/ui/atoms/typography';
 import TextInputs from '@/components/ui/mock/ui-components/text-inputs';
 import TextareaInputs from '@/components/ui/mock/ui-components/textarea-inputs';
 import SelectInputs from '@/components/ui/mock/ui-components/select-inputs';
+import NumberInputs from '@/components/ui/mock/ui-components/number-inputs';
 
 const FormUIPage = () => {
   return (
@@ -10,11 +11,11 @@ const FormUIPage = () => {
         Page Form UI
       </Typography>
 
-      <div className="flex flex-row gap-8">
-        <TextInputs />
-        <SelectInputs />
-      </div>
+      <TextInputs />
+      <SelectInputs />
       <TextareaInputs />
+
+      <NumberInputs />
     </main>
   );
 };

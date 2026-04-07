@@ -2,7 +2,7 @@ import { cva } from 'class-variance-authority';
 import cn from 'classnames';
 
 export const buttonCva = cva(
-  'h-fit flex items-center justify-center cursor-pointer rounded-sm border-2 transition-all focus:outline-none',
+  'h-fit flex items-center justify-center cursor-pointer border-2 transition-all focus:outline-none',
   {
     variants: {
       variant: {
@@ -20,6 +20,7 @@ export const buttonCva = cva(
         lg: 'px-8 py-4 gap-4',
         md: 'px-6 py-3 gap-3',
         sm: 'px-4 py-2 gap-2',
+        xs: 'p-1 gap-1',
       },
       full: { true: 'w-full', false: 'w-fit' },
       disabled: { true: 'cursor-not-allowed opacity-50 hover:bg-transparent focus:bg-transparent' },
@@ -32,6 +33,8 @@ export const buttonCva = cva(
       },
     },
     compoundVariants: [
+      { size: 'xs', class: 'rounded-xs' },
+      { size: ['sm', 'md', 'lg'], class: 'rounded-sm' },
       {
         variant: 'primary',
         glass: false,
@@ -134,6 +137,7 @@ export const buttonIconCva = cva('', {
       lg: 'w-8 h-8',
       md: 'w-6 h-6',
       sm: 'w-5 h-5',
+      xs: 'w-4 h-4',
     },
   },
   defaultVariants: {
