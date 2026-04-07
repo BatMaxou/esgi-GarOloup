@@ -1,0 +1,70 @@
+'use client';
+
+import { InputHTMLAttributes, useCallback, useMemo, useState } from 'react';
+import cn from 'classnames';
+
+import Typography from '@/components/ui/atoms/typography';
+import Button from '@/components/ui/molecules/button';
+
+type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> & {
+  unit?: string;
+  defaultValue?: number;
+  onChange?: (value: number) => void;
+  className?: string;
+};
+
+const NumberInput = ({ unit, defaultValue = 1, onChange, className, min, max, ...props }: Props) => {
+  const [value, setValue] = useState<number>(defaultValue);
+  const [parsedMin, parsedMax] = useMemo(
+    () => [min, max].map((value) => (value === undefined || typeof value === 'number' ? value : parseInt(value))),
+    [min, max]
+  );
+
+  const handleChange = useCallback(
+    (callable: (value: number) => number) => {
+      const newValue = callable(value);
+      if ((parsedMin !== undefined && newValue < parsedMin) || (parsedMax !== undefined && newValue > parsedMax)) {
+        return;
+      }
+
+      setValue(newValue);
+      onChange?.(newValue);
+    },
+    [value, onChange, parsedMin, parsedMax]
+  );
+
+  return (
+    <div className={cn('flex flex-row items-center justify-between gap-2', className)}>
+      <input type="number" defaultValue={defaultValue} value={value} className="hidden" readOnly {...props} />
+
+      <Button
+        variant="neutral"
+        size="xs"
+        className="aspect-square"
+        glass
+        onClick={() => handleChange((value) => value - 1)}
+        leftIcon="minus"
+      />
+      <div className="flex items-baseline gap-1">
+        <Typography variant="controlled" textColor="light" bold>
+          {value}
+        </Typography>
+        {unit && (
+          <Typography variant="controlled" textColor="neutral-300">
+            {unit}
+          </Typography>
+        )}
+      </div>
+      <Button
+        variant="neutral"
+        size="xs"
+        className=""
+        glass
+        onClick={() => handleChange((value) => value + 1)}
+        rightIcon="plus"
+      />
+    </div>
+  );
+};
+
+export default NumberInput;
