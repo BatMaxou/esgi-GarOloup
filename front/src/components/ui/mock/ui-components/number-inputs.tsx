@@ -12,7 +12,7 @@ const NumberInputs = () => {
       </Typography>
 
       <GlassPanel className="flex flex-col gap-6 p-8 w-fit">
-        <ul className="flex gap-6">
+        <ul className="flex flex-wrap gap-6">
           <li>
             <NumberInput name="number-input" onChange={(value) => console.log(value)} className="min-w-24" />
           </li>
@@ -20,7 +20,7 @@ const NumberInputs = () => {
             <NumberInput name="number-input-with-unit" unit="min" onChange={console.log} className="min-w-36" />
           </li>
         </ul>
-        <ul className="flex gap-6">
+        <ul className="flex flex-wrap gap-6">
           <li>
             <NumberInput
               name="number-input-with-min"

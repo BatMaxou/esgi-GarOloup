@@ -3,6 +3,7 @@ import TextInputs from '@/components/ui/mock/ui-components/text-inputs';
 import TextareaInputs from '@/components/ui/mock/ui-components/textarea-inputs';
 import SelectInputs from '@/components/ui/mock/ui-components/select-inputs';
 import NumberInputs from '@/components/ui/mock/ui-components/number-inputs';
+import SwitchInputs from '@/components/ui/mock/ui-components/switch-inputs';
 
 const FormUIPage = () => {
   return (
@@ -16,6 +17,7 @@ const FormUIPage = () => {
       <TextareaInputs />
 
       <NumberInputs />
+      <SwitchInputs />
     </main>
   );
 };
