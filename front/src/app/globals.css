@@ -57,8 +57,8 @@
   --radius-lg: 100px;
   --radius-md: 32px;
   --radius-sm: 16px;
-  --radius-xs: 8px;
-  --radius-xxs: 6px;
+  --radius-xs: 12px;
+  --radius-xxs: 8px;
 
   --background-gradient: 180deg, var(--theme-background-gradient-start) 90%, var(--theme-background-gradient-end) 100%;
   --primary-gradient: 90deg, var(--color-secondary) 0%, var(--color-primary) 100%;
@@ -111,6 +111,37 @@
 
 @utility divider-vertical-* {
   background: linear-gradient(0deg, transparent, oklch(from --value(--color-*) l c h / 0.6), transparent);
+}
+
+@utility list-follow-anchor {
+  isolation: isolate;
+
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: anchor(top);
+    right: anchor(right);
+    bottom: anchor(bottom);
+    left: anchor(left);
+    transition: 0.2s;
+
+    position-anchor: --hovered-list-item;
+  }
+
+  &:hover > .item-follow-anchor-active:not(:hover) {
+    anchor-name: unset;
+  }
+}
+
+@utility item-follow-anchor-active {
+  anchor-name: --hovered-list-item;
+}
+
+@utility item-follow-anchor {
+  &:hover {
+    anchor-name: --hovered-list-item;
+  }
 }
 
 @utility scrollbar {
