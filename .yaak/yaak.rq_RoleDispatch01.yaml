@@ -1,0 +1,40 @@
+type: http_request
+model: http_request
+id: rq_RoleDispatch01
+createdAt: 2026-04-03T12:00:00
+updatedAt: 2026-04-03T12:00:00
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_bh6aMuFF23
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body:
+  text: |-
+    {
+      "dispatch": [
+        {
+          "playerId": "player-uuid-1",
+          "role": "villager"
+        },
+        {
+          "playerId": "player-uuid-2",
+          "role": "werewolf"
+        }
+      ]
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/merge-patch+json
+  id: dR4kM8pLo9
+- enabled: true
+  name: ''
+  value: ''
+  id: tW2vN5xYf7
+method: PATCH
+name: Dispatch Roles
+sortPriority: 4500.0
+url: ${[ BASE_URL ]}/api/game/role-dispatch
+urlParameters: []

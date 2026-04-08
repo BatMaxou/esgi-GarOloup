@@ -11,7 +11,7 @@ enum GameStepEnum: string
     case DISPATCH = 'dispatch';
     case READY = 'ready';
 
-    case PRESETS = 'presets';
+    case SETUP = 'setup';
 
     case NIGHT = 'night';
     case DAY = 'day';

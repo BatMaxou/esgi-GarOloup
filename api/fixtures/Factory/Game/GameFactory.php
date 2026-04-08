@@ -25,6 +25,8 @@ final class GameFactory extends PersistentObjectFactory
             'joinCode' => self::faker()->text(8),
             'step' => GameStepEnum::NEW,
             'configuration' => ConfigurationFactory::new(),
+            'maxPlayers' => 10,
+            'maxTimeForDiscussion' => 5,
         ];
     }
 
@@ -33,7 +35,7 @@ final class GameFactory extends PersistentObjectFactory
     {
         return $this->afterInstantiate(function (Game $game): void {
             $host = $game->getHost();
-            if (!$game->getPlayers()->contains($host)) {
+            if (!$game->getPlayers()->contains($host) && $game->getGameMaster() !== $host) {
                 $game->addPlayer($host);
             }
         });

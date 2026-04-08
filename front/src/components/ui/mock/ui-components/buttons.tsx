@@ -66,6 +66,9 @@ const Buttons = () => {
             <li>
               <Button variant="gradient" size="sm" label="Small" />
             </li>
+            <li>
+              <Button variant="gradient" size="xs" label="XS" />
+            </li>
           </ul>
         </GlassPanel>
         <GlassPanel className="flex-col items-center p-8 gap-6">
@@ -91,6 +94,14 @@ const Buttons = () => {
             </li>
             <li>
               <Button variant="gradient" size="sm" rightIcon="garoloup" label="Small Left Icon" />
+            </li>
+          </ul>
+          <ul className="flex flex-wrap items-center gap-6">
+            <li>
+              <Button variant="gradient" size="xs" leftIcon="garoloup" label="XS Left Icon" />
+            </li>
+            <li>
+              <Button variant="gradient" size="xs" rightIcon="garoloup" label="XS Left Icon" />
             </li>
           </ul>
         </GlassPanel>

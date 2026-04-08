@@ -3,25 +3,35 @@ App\Entity\Game\Player:
         id:
             groups:
                 - me:read
+                - me:player:read
                 - game:read
         user:
             groups:
                 - me:read
+                - me:player:read
                 - game:read
         tempUser:
             groups:
                 - me:read
+                - me:player:read
                 - game:read
         dead:
             groups:
                 - me:read
+                - me:player:read
                 - game:read
         game:
             groups:
                 - me:read
+                - me:player:read
         host:
             groups:
                 - me:read
+                - me:player:read
         gameMaster:
             groups:
                 - me:read
+                - me:player:read
+        role:
+            groups:
+                - me:player:read

@@ -3,7 +3,7 @@ model: environment
 id: ev_LsvJ3ihrMk
 workspaceId: wk_uXtATNFQmZ
 createdAt: 2026-02-27T17:48:42.134815608
-updatedAt: 2026-04-01T09:26:13.022509542
+updatedAt: 2026-04-05T19:44:28.961666430
 name: Global Variables
 public: true
 base: true
@@ -12,7 +12,7 @@ parentId: null
 variables:
 - enabled: true
   name: BASE_URL
-  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RXFGZGcwck1YK1J2WXZRTElNUTlNWW90K012QXZNYzlmR3Z4Qko2WlVvazJDdW11UEpxNTRuekVkbUJReHlhMUtsa21kc3hNbXpBS3hWUnp3Rg') ]}
+  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3SEF1eFM5R3dyaEJSd25oWG1hS2kzRGplZmdOQkR5TWhlN0JVTk81anpmRWtlQTg0L0d2UmpnamdXckxVWDhvbEdKMmVxN1p5cEFiM1RIQTBNMQ') ]}
   id: nf9VxCE3yc
 - enabled: true
   name: JOIN_CODE

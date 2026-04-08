@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, ReactNode, useCallback, useContext, useEffect } from 'react';
+import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react';
 
 import { ApiClient } from '@/lib/api/ApiClient';
 import type { User } from '@/utils/types';
@@ -14,6 +14,7 @@ type Props = {
 
 type ApiClientContextType = {
   apiClient: ApiClient;
+  tokenHasChanged: boolean;
 };
 
 export const ApiClientContext = createContext<ApiClientContextType | undefined>(undefined);
@@ -23,6 +24,7 @@ const apiClient = new ApiClient(apiBaseUrl);
 export const ApiClientProvider = ({ children }: Props) => {
   const { data: mainSession, refetch: refetchMain } = useSession();
   const { data: tempSession, refetch: refetchTemp } = useTempUserSession();
+  const [tokenHasChanged, setTokenHasChanged] = useState(false);
 
   const propagateChangeToken = useCallback(
     async (token?: string | null, refreshToken?: string | null) => {
@@ -44,12 +46,23 @@ export const ApiClientProvider = ({ children }: Props) => {
   }, [propagateChangeToken]);
 
   useEffect(() => {
+    if (tokenHasChanged) {
+      setTokenHasChanged(false); // eslint-disable-line react-hooks/set-state-in-effect
+    }
+  }, [tokenHasChanged]);
+  
+  useEffect(() => {
     const user = (mainSession?.user ?? tempSession?.user) as User | null | undefined;
     apiClient.token = user?.token ?? null;
     apiClient.refreshToken = user?.refreshToken ?? null;
+    
+    if (apiClient.token) {
+      setTokenHasChanged(true); // eslint-disable-line react-hooks/set-state-in-effect
+    }
+
   }, [mainSession?.user, tempSession?.user]);
 
-  return <ApiClientContext.Provider value={{ apiClient }}>{children}</ApiClientContext.Provider>;
+  return <ApiClientContext.Provider value={{ apiClient, tokenHasChanged }}>{children}</ApiClientContext.Provider>;
 };
 
 export const useApiClient = () => {

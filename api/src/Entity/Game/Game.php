@@ -11,7 +11,9 @@ use App\Api\Model\Game\CreateGameOutput;
 use App\Api\Provider\Game\CurrentGameProvider;
 use App\Domain\Command\Game\Initialisation\CloseGameInvitationCommand;
 use App\Domain\Command\Game\Initialisation\CreateGameCommand;
+use App\Domain\Command\Game\Initialisation\GameRoleDispatchCommand;
 use App\Domain\Command\Game\Initialisation\JoinGameCommand;
+use App\Domain\Command\Game\Initialisation\LaunchGameCommand;
 use App\Domain\Command\Game\Initialisation\ReOpenGameInvitationCommand;
 use App\Domain\Command\Game\Initialisation\SetGameConfigurationCommand;
 use App\Domain\Command\Game\Initialisation\SetGameMasterCommand;
@@ -19,25 +21,14 @@ use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Enum\Game\GameStepEnum;
 use App\Repository\Game\GameRepository;
+use App\Service\Mercure\Inteface\TopicRelatedObject;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GameRepository::class)]
 #[ApiResource(
-    mercure: [
-        'topics' => [
-            '@=iri(object)',
-        ],
-        'normalization_context' => [
-            'groups' => 'game:read',
-        ],
-    ],
     operations: [
-        new Get(
-            // set security here, currently used to map mercure topic to /games/:id
-            name: 'api_get_game'
-        ),
         new Get(
             name: 'api_current_game',
             uriTemplate: '/game',
@@ -87,10 +78,24 @@ use Doctrine\ORM\Mapping as ORM;
             input: SetGameMasterCommand::class,
             output: BasicActionOutput::class,
         ),
+        new Patch(
+            name: 'api_game_role_dispatch',
+            uriTemplate: '/game/role-dispatch',
+            messenger: 'input',
+            input: GameRoleDispatchCommand::class,
+            output: BasicActionOutput::class,
+        ),
+        new Patch(
+            name: 'api_game_launch',
+            uriTemplate: '/game/launch',
+            messenger: 'input',
+            input: LaunchGameCommand::class,
+            output: BasicActionOutput::class,
+        ),
         new Patch(),
     ],
 )]
-class Game
+class Game implements TopicRelatedObject
 {
     use UuidTrait;
     use TimestampableTrait;
@@ -107,6 +112,15 @@ class Game
 
     #[ORM\Column(length: 8)]
     private string $joinCode;
+
+    #[ORM\Column]
+    private int $maxPlayers;
+
+    #[ORM\Column]
+    private int $maxTimeForDiscussion;
+
+    #[ORM\Column]
+    private bool $public = false;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
@@ -197,6 +211,42 @@ class Game
         return $this;
     }
 
+    public function getMaxPlayers(): int
+    {
+        return $this->maxPlayers;
+    }
+
+    public function setMaxPlayers(int $maxPlayers): static
+    {
+        $this->maxPlayers = $maxPlayers;
+
+        return $this;
+    }
+
+    public function getMaxTimeForDiscussion(): int
+    {
+        return $this->maxTimeForDiscussion;
+    }
+
+    public function setMaxTimeForDiscussion(int $maxTimeForDiscussion): static
+    {
+        $this->maxTimeForDiscussion = $maxTimeForDiscussion;
+
+        return $this;
+    }
+
+    public function isPublic(): bool
+    {
+        return $this->public;
+    }
+
+    public function setPublic(bool $public): static
+    {
+        $this->public = $public;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Player>
      */
@@ -225,5 +275,10 @@ class Game
         }
 
         return $this;
+    }
+
+    public function getTopicIdentifier(): ?string
+    {
+        return $this->getId();
     }
 }

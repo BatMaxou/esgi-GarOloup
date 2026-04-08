@@ -1,4 +1,4 @@
 export const topics = {
-  game: (id: string) => `/games/${id}`,
-  player: (id: string) => `/players/${id}`,
+  game: (id: string) => `garoloup-game-${id}`,
+  player: (id: string) => `garoloup-player-${id}`,
 };

@@ -12,32 +12,24 @@ use App\Entity\User\AbstractUser;
 use App\Entity\User\TempUser;
 use App\Entity\User\User;
 use App\Repository\Game\PlayerRepository;
+use App\Service\Mercure\Inteface\TopicRelatedObject;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ApiResource(
-    mercure: [
-        'topics' => [
-            '@=iri(object)',
-        ],
-    ],
     operations: [
-        new Get(
-            // set security here, currently used to map mercure topic to /players/:id
-            name: 'api_get_player'
-        ),
         new Get(
             name: 'api_current_player',
             uriTemplate: '/game/player',
             provider: CurrentPlayerProvider::class,
             normalizationContext: [
-                'groups' => 'me:read',
+                'groups' => 'me:player:read',
             ],
         ),
     ],
 )]
 #[ORM\Entity(repositoryClass: PlayerRepository::class)]
-class Player
+class Player implements TopicRelatedObject
 {
     use UuidTrait;
     use TimestampableTrait;
@@ -80,6 +72,11 @@ class Player
         }
 
         return $user;
+    }
+
+    public function getLinkedGame(): ?Game
+    {
+        return $this->game ?? $this->managedGame;
     }
 
     public function getUser(): ?User
@@ -162,5 +159,10 @@ class Player
         $this->role = $role;
 
         return $this;
+    }
+
+    public function getTopicIdentifier(): ?string
+    {
+        return $this->getId();
     }
 }

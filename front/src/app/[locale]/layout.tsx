@@ -23,14 +23,13 @@ const Providers = ({ children }: ProvidersProps) => {
     <>
       <NextIntlClientProvider>
         <ThemeProvider>
-          <ToastContainer toastStyle={{ backgroundColor: 'var(--color-secondary)', color: 'white' }} />
-          <ApiClientProvider>
-            <MercureClientProvider>
-              <AuthProvider>
+          <AuthProvider>
+            <ApiClientProvider>
+              <MercureClientProvider>
                 <RoleProvider>{children}</RoleProvider>
-              </AuthProvider>
-            </MercureClientProvider>
-          </ApiClientProvider>
+              </MercureClientProvider>
+            </ApiClientProvider>
+          </AuthProvider>
         </ThemeProvider>
       </NextIntlClientProvider>
     </>
@@ -47,6 +46,7 @@ const RootLayout = async ({ children }: Props) => {
           className="opacity-90 dark:opacity-60 !fixed inset-0 object-cover object-center -z-1"
           fill
         />
+        <ToastContainer toastStyle={{ backgroundColor: 'var(--color-secondary)', color: 'white' }} />
         <Providers>{children}</Providers>
       </body>
     </html>

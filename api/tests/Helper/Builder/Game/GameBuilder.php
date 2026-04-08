@@ -15,6 +15,9 @@ class GameBuilder extends AbstractBuilder
     /** @var PlayerBuilder[] */
     public array $players = [];
     public ?string $joinCode = null;
+    public ?int $maxPlayers = null;
+    public ?int $maxTimeForDiscussion = null;
+    public ?bool $public = null;
     public ?GameStepEnum $step = null;
     public ?bool $finished = null;
     public ?\DateTimeInterface $createdAt = null;
@@ -27,6 +30,9 @@ class GameBuilder extends AbstractBuilder
             ...($this->joinCode ? ['joinCode' => $this->joinCode] : []),
             ...($this->step ? ['step' => $this->step] : []),
             ...($this->createdAt ? ['createdAt' => $this->createdAt] : []),
+            ...($this->maxPlayers ? ['maxPlayers' => $this->maxPlayers] : []),
+            ...($this->maxTimeForDiscussion ? ['maxTimeForDiscussion' => $this->maxTimeForDiscussion] : []),
+            ...($this->public ? ['public' => $this->public] : []),
             'players' => array_map(fn (PlayerBuilder $player) => $player->getEntity(), $this->players),
         ]);
     }
@@ -55,6 +61,20 @@ class GameBuilder extends AbstractBuilder
     public function withJoinCode(string $joinCode): static
     {
         $this->joinCode = $joinCode;
+
+        return $this;
+    }
+
+    public function withMaxPlayers(int $maxPlayers): static
+    {
+        $this->maxPlayers = $maxPlayers;
+
+        return $this;
+    }
+
+    public function withMaxTimeForDiscussion(int $maxTimeForDiscussion): static
+    {
+        $this->maxTimeForDiscussion = $maxTimeForDiscussion;
 
         return $this;
     }
@@ -100,6 +120,13 @@ class GameBuilder extends AbstractBuilder
     public function createdAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function public(): static
+    {
+        $this->public = true;
 
         return $this;
     }

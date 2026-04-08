@@ -28,7 +28,11 @@ class CreateGameHandler
             throw new AccessDeniedHttpException('You are not logged in');
         }
 
-        $gameEvent = new CreateGameEvent()->setUser($currentUser);
+        $gameEvent = new CreateGameEvent()
+            ->setUser($currentUser)
+            ->setMaxPlayers($command->maxPlayers)
+            ->setMaxTimeForDiscussion($command->maxTimeForDiscussion)
+            ->setPublic($command->public);
 
         try {
             $game = $this->gameEventDispatcher->dispatch($gameEvent);

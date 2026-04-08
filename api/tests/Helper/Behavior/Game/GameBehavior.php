@@ -5,13 +5,18 @@ namespace App\Tests\Helper\Behavior\Game;
 use App\Tests\Helper\Behavior\AbstractBehavior;
 use App\Tests\Helper\Behavior\BehaviorResponse;
 use App\Tests\Helper\Builder\Game\CompositionBuilder;
+use App\Tests\Helper\Builder\Game\DispatchBuilder;
 
 class GameBehavior extends AbstractBehavior
 {
-    public function create(): BehaviorResponse
+    public function create(int $maxPlayers = 10, int $maxTimeForDiscussion = 5, bool $public = false): BehaviorResponse
     {
         return new BehaviorResponse($this->client->request('POST', '/api/games', [
-            'json' => [],
+            'json' => [
+                'maxPlayers' => $maxPlayers,
+                'maxTimeForDiscussion' => $maxTimeForDiscussion,
+                'public' => $public,
+            ],
         ]));
     }
 
@@ -64,6 +69,24 @@ class GameBehavior extends AbstractBehavior
                 'withGameMaster' => $withGameMaster,
                 'withRandomDispatch' => $withRandomDispatch,
             ],
+        ]));
+    }
+
+    public function dispatchRoles(DispatchBuilder $dispatch): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/role-dispatch', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [
+                'dispatch' => $dispatch->toInput(),
+            ],
+        ]));
+    }
+
+    public function launch(): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/launch', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [],
         ]));
     }
 }

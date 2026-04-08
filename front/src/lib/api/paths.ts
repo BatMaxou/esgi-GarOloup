@@ -6,6 +6,8 @@ export const apiPaths = {
     close: '/game/invitation/close',
     open: '/game/invitation/open',
     setConfiguration: '/game/configuration',
+    roleDispatch: '/game/role-dispatch',
+    launch: '/game/launch',
   },
   player: {
     getCurrent: '/game/player',
@@ -29,5 +31,8 @@ export const apiPaths = {
   },
   filter: {
     gameTeam: '/filters/game_teams',
+  },
+  mercure: {
+    credentials: '/mercure/token',
   },
 };

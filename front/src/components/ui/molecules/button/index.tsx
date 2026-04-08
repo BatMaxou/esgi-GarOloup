@@ -65,9 +65,16 @@ const Button = ({ label, textVariant, leftIcon, rightIcon, className, ...props }
           <Icon name={leftIcon} className={buttonIconCva({ size: props.size })} />
         </Typography>
       )}
-      <Typography variant={textVariant || 'button'} textColor="controlled" bold center>
-        {label}
-      </Typography>
+      {label && (
+        <Typography
+          variant={textVariant || props.size === 'xs' ? 'body-xs' : 'button'}
+          textColor="controlled"
+          bold
+          center
+        >
+          {label}
+        </Typography>
+      )}
       {rightIcon && (
         <Typography variant={textVariant || 'button'} textColor="controlled">
           <Icon name={rightIcon} className={buttonIconCva({ size: props.size })} />

@@ -32,6 +32,13 @@ jobs:
           dockerfile: ./front/Dockerfile
           image: node
           target: prod
+          build_args: |
+            NEXT_PUBLIC_URL=${{ secrets.FRONT_URL }}
+            NEXT_PUBLIC_API_BASE_URL=${{ secrets.FRONT_API_BASE_URL }}
+            NEXT_PUBLIC_SSR_API_BASE_URL=${{ secrets.FRONT_SSR_API_BASE_URL }}
+            NEXT_PUBLIC_FTP_BASE_URL=${{ secrets.FRONT_FTP_BASE_URL }}
+            NEXT_PUBLIC_MERCURE_URL=${{ secrets.FRONT_MERCURE_URL }}
+            NEXT_PUBLIC_SSR_MERCURE_URL=${{ secrets.FRONT_SSR_MERCURE_URL }}
 
   deploy-image:
     name: Deploy front image
