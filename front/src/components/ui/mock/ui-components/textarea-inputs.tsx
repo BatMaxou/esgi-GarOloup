@@ -10,7 +10,7 @@ const TextareaInputs = () => {
       </Typography>
 
       <GlassPanel className="p-8 w-fit">
-        <ul className="flex flex-row gap-6">
+        <ul className="flex flex-wrap gap-6">
           <li>
             <TextareaInput sizing="sm" name="textarea-sm" rows={3} placeholder="Texte court…" />
           </li>

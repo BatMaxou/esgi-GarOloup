@@ -35,7 +35,7 @@ const NumberInput = ({ unit, defaultValue = 1, onChange, className, min, max, ..
 
   return (
     <div className={cn('flex flex-row items-center justify-between gap-2', className)}>
-      <input type="number" defaultValue={defaultValue} value={value} className="hidden" readOnly {...props} />
+      <input type="number" value={value} className="hidden" readOnly {...props} />
 
       <Button
         variant="neutral"
