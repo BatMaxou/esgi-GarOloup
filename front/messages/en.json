@@ -249,13 +249,16 @@
           "register": {
             "usernameLabel": "Username",
             "usernamePlaceholder": "LoneWolf",
+            "usernameRequirements": "Between 3 and 20 characters, letters and numbers only.",
             "emailLabel": "Email",
             "emailPlaceholder": "garoloup@example.com",
             "passwordLabel": "Password",
             "passwordConfirmationLabel": "Confirm password",
             "submit": "Create account",
             "passwordMismatch": "Passwords doesn't match",
-            "passwordRequirements": "12 characters min., one uppercase letter, one lowercase letter, one number and one special character"
+            "passwordRequirements": "12 characters min., one uppercase letter, one lowercase letter, one number and one special character",
+            "registrationSuccess": "Account created successfully",
+            "errorEmailExists": "An account with this email already exists"
           },
           "forgotPassword": {
             "emailLabel": "Email",
@@ -278,13 +281,6 @@
     },
     "pages": {
       "auth": {
-        "login": {
-          "title": "Welcome back",
-          "subtitle": "Sign in to get back to the hunt",
-          "loginSuccess": "Login successful",
-          "noAccount": "No account yet?",
-          "createAccount": "Join the pack"
-        },
         "register": {
           "title": "Join the pack",
           "subtitle": "Create an account to start or join games",
@@ -298,6 +294,17 @@
         "resetPassword": {
           "title": "Reset your password",
           "subtitle": "Enter your new password"
+        },
+        "login": {
+          "playAsGuest": "Play as guest",
+          "alreadyHaveAccount": "Already have an account",
+          "playAsGuestTitle": "What's your name?",
+          "playAsGuestSubtitle": "Choose a nickname to join the game.",
+          "loginTitle": "Welcome back",
+          "loginSubtitle": "Sign in to get back to the hunt",
+          "loginNoAccount": "No account yet?",
+          "loginCreateAccount": "Join the pack",
+          "loginSuccess": "Login successful"
         }
       },
       "roles": {
@@ -314,6 +321,9 @@
     "role": {
       "roleListError": "Error retrieving role list",
       "gameTeamFiltersError": "Error retrieving game team filters"
+    },
+    "auth": {
+      "errorRegistrationTempUser": "An error occurred. Please try again."
     }
   }
 }

@@ -7,6 +7,8 @@ export type User = {
   username?: string;
   email?: string;
   roles?: RoleEnum[];
+  token?: string | null;
+  refreshToken?: string | null;
 };
 
 export type TempUser = {

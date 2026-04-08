@@ -7,9 +7,11 @@ import { useTranslations } from 'next-intl';
 import Button from '@/components/ui/molecules/button';
 import TextInput from '@/components/ui/molecules/text-input';
 import { useAuth } from '@/contexts/auth-context';
+import { toast } from 'react-toastify';
 
 type Props = {
   className?: string;
+  onSuccess?: () => void;
 };
 
 type LoginFormValues = {
@@ -17,7 +19,7 @@ type LoginFormValues = {
   password: string;
 };
 
-const LoginForm = ({ className }: Props) => {
+const LoginForm = ({ className, onSuccess }: Props) => {
   const { login } = useAuth();
   const t = useTranslations('components.common.form.auth.login');
 
@@ -26,8 +28,13 @@ const LoginForm = ({ className }: Props) => {
       email: '',
       password: '',
     },
-    onSubmit: (values: LoginFormValues) => {
-      login(values.email, values.password);
+    onSubmit: async (values: LoginFormValues) => {
+      const response = await login(values.email, values.password);
+      if (!response) {
+        toast.error(t('loginError'));
+        return;
+      }
+      onSuccess?.();
     },
   });
 

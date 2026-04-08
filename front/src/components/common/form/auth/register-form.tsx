@@ -9,6 +9,9 @@ import TextInput from '@/components/ui/molecules/text-input';
 import { toast } from 'react-toastify';
 import { useApiClient } from '@/contexts/api-context';
 import Typography from '@/components/ui/atoms/typography';
+import { useRouter } from '@/i18n/navigation';
+import { paths } from '@/utils/paths';
+import { ApiClientError } from '@/lib/api/ApiClientError';
 
 type Props = {
   className?: string;
@@ -24,6 +27,7 @@ type SigninFormValues = {
 const SigninForm = ({ className }: Props) => {
   const t = useTranslations('components.common.form.auth.register');
   const { apiClient } = useApiClient();
+  const router = useRouter();
   const { handleSubmit, handleChange } = useFormik({
     initialValues: {
       username: '',
@@ -36,8 +40,21 @@ const SigninForm = ({ className }: Props) => {
         toast.error(t('passwordMismatch'));
         return;
       }
-      await apiClient.user.register({ email: values.email, username: values.username, password: values.password });
-      return;
+      const response = await apiClient.user.register({
+        email: values.email,
+        username: values.username,
+        password: values.password,
+      });
+      if (!(response instanceof ApiClientError)) {
+        toast.success(t('registrationSuccess'));
+        router.push(paths.login);
+        return;
+      } else {
+        if (response.code === 409) {
+          toast.error(t('errorEmailExists'));
+          return;
+        }
+      }
     },
   });
 
