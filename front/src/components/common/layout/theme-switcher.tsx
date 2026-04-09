@@ -10,7 +10,7 @@ const ThemeSwitcher = () => {
   return (
     <SwitchInput
       variant="day-night"
-      size="md"
+      size="lg"
       checked={theme === ThemeEnum.DARK}
       checkedIcon="moon"
       uncheckedIcon="sun"
