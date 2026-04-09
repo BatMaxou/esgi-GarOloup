@@ -30,10 +30,12 @@ const Tabs = ({ currentTab, tabs, align = 'left', translate = false }: Props) =>
   return (
     <div className={tabsCva({ align })}>
       <GlassPanel className="w-fit p-1">
-        <nav>
-          <ul
-            className={cn('flex flex-wrap list-follow-anchor', 'after:bg-linear-(--primary-gradient) after:rounded-xs')}
-          >
+        {/*
+          NOTE: put ::after styling to the parent, to ensure compatibitlity with browsers that don't support anchor positioning 
+          @see globals.css utilitities declarations
+        */}
+        <nav className="*:after:bg-linear-(--primary-gradient) *:after:rounded-xs">
+          <ul className="flex flex-wrap list-follow-anchor">
             {tabs.map((tab) => (
               <li
                 key={tab.label}
