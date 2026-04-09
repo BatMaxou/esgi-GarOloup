@@ -66,10 +66,7 @@ const OTPInput = ({
     [inputMode, length, onChange, onComplete]
   );
 
-  const digits = useMemo(
-    () => Array.from({ length }, (_, i) => value?.[i] ?? ''),
-    [value, length]
-  );
+  const digits = useMemo(() => Array.from({ length }, (_, i) => value?.[i] ?? ''), [value, length]);
 
   const status = disabled ? 'disabled' : error ? 'error' : success ? 'success' : 'default';
 
@@ -155,10 +152,7 @@ const OTPInput = ({
           </Typography>
         </label>
       )}
-      <div
-        className={cn('flex flex-row items-center gap-2 sm:gap-3', groupClassName)}
-        role="group"
-      >
+      <div className={cn('flex flex-row items-center gap-2 sm:gap-3', groupClassName)} role="group">
         {name && <input type="hidden" name={name} value={value ?? ''} readOnly aria-hidden tabIndex={-1} />}
         {digits.map((digit, index) => (
           <input

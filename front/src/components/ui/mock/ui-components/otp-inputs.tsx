@@ -28,14 +28,7 @@ const OTPInputs = () => {
               />
             </li>
             <li>
-              <OTPInput
-                length={6}
-                label="État erreur"
-                error
-                value="12"
-                name="otp-error"
-                aria-label="OTP en erreur"
-              />
+              <OTPInput length={6} label="État erreur" error value="12" name="otp-error" aria-label="OTP en erreur" />
             </li>
             <li>
               <OTPInput
