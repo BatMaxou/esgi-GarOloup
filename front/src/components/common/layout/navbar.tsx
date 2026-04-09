@@ -40,7 +40,7 @@ const Navbar = () => {
 
   const handleJoinGame = () => {
     if (user) {
-      // router.push(paths.playGame);
+      router.push(paths.lobby);
       return;
     } else {
       router.push(paths.login);
