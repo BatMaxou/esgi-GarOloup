@@ -116,31 +116,69 @@
 @utility list-follow-anchor {
   isolation: isolate;
 
-  &::after {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    top: anchor(top);
-    right: anchor(right);
-    bottom: anchor(bottom);
-    left: anchor(left);
-    transition: 0.2s;
+  @supports (anchor-name: --a) {
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: anchor(top);
+      right: anchor(right);
+      bottom: anchor(bottom);
+      left: anchor(left);
+      transition: 0.2s;
 
-    position-anchor: --hovered-list-item;
+      position-anchor: --hovered-list-item;
+    }
+
+    &:hover > .item-follow-anchor-active:not(:hover) {
+      anchor-name: unset;
+    }
   }
 
-  &:hover > .item-follow-anchor-active:not(:hover) {
-    anchor-name: unset;
+  @supports not (anchor-name: --a) {
+    &:hover > .item-follow-anchor-active:not(:hover) {
+      &::after {
+        display: none;
+      }
+    }
   }
 }
 
 @utility item-follow-anchor-active {
-  anchor-name: --hovered-list-item;
+  @supports (anchor-name: --a) {
+    anchor-name: --hovered-list-item;
+  }
+
+  @supports not (anchor-name: --a) {
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      transition: 0.2s;
+      inset: 0;
+    }
+  }
 }
 
 @utility item-follow-anchor {
-  &:hover {
-    anchor-name: --hovered-list-item;
+  @supports (anchor-name: --a) {
+    &:hover {
+      anchor-name: --hovered-list-item;
+    }
+  }
+
+  @supports not (anchor-name: --a) {
+    position: relative;
+
+    &:hover {
+      &::after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        transition: 0.2s;
+        inset: 0;
+      }
+    }
   }
 }
 
