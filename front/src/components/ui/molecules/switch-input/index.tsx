@@ -4,13 +4,12 @@ import { useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 import { motion } from 'motion/react';
 
+import { switchTrackCva, switchThumbCva, switchIconCva } from './cva';
 import Icon from '@/components/ui/atoms/icon';
 import { IconName } from '@/components/ui/atoms/icon/config';
-
-import { switchTrackCva, switchThumbCva, switchIconCva } from './cva';
 import { VariantProps } from 'class-variance-authority';
-import Typography from '../../atoms/typography';
-import { typographyCva } from '../../atoms/typography/cva';
+import Typography from '@/components/ui/atoms/typography';
+import { typographyCva } from '@/components/ui/atoms/typography/cva';
 
 type Props = VariantProps<typeof switchTrackCva> & {
   defaultChecked?: boolean;

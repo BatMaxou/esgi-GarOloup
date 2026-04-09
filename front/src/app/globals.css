@@ -57,8 +57,8 @@
   --radius-lg: 100px;
   --radius-md: 32px;
   --radius-sm: 16px;
-  --radius-xs: 8px;
-  --radius-xxs: 6px;
+  --radius-xs: 12px;
+  --radius-xxs: 8px;
 
   --background-gradient: 180deg, var(--theme-background-gradient-start) 90%, var(--theme-background-gradient-end) 100%;
   --primary-gradient: 90deg, var(--color-secondary) 0%, var(--color-primary) 100%;
@@ -111,6 +111,75 @@
 
 @utility divider-vertical-* {
   background: linear-gradient(0deg, transparent, oklch(from --value(--color-*) l c h / 0.6), transparent);
+}
+
+@utility list-follow-anchor {
+  isolation: isolate;
+
+  @supports (anchor-name: --a) {
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: anchor(top);
+      right: anchor(right);
+      bottom: anchor(bottom);
+      left: anchor(left);
+      transition: 0.2s;
+
+      position-anchor: --hovered-list-item;
+    }
+
+    &:hover > .item-follow-anchor-active:not(:hover) {
+      anchor-name: unset;
+    }
+  }
+
+  @supports not (anchor-name: --a) {
+    &:hover > .item-follow-anchor-active:not(:hover) {
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+@utility item-follow-anchor-active {
+  @supports (anchor-name: --a) {
+    anchor-name: --hovered-list-item;
+  }
+
+  @supports not (anchor-name: --a) {
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      transition: 0.2s;
+      inset: 0;
+    }
+  }
+}
+
+@utility item-follow-anchor {
+  @supports (anchor-name: --a) {
+    &:hover {
+      anchor-name: --hovered-list-item;
+    }
+  }
+
+  @supports not (anchor-name: --a) {
+    position: relative;
+
+    &:hover {
+      &::after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        transition: 0.2s;
+        inset: 0;
+      }
+    }
+  }
 }
 
 @utility scrollbar {

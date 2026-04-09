@@ -6,12 +6,13 @@ import Dividers from '@/components/ui/mock/ui-components/dividers';
 import Gradients from '@/components/ui/mock/ui-components/gradients';
 import Modals from '@/components/ui/mock/ui-components/modals';
 import ProgressBars from '@/components/ui/mock/ui-components/progress-bars';
+import Tabs from '@/components/ui/mock/ui-components/tabs';
 import Tags from '@/components/ui/mock/ui-components/tags';
 import Typographies from '@/components/ui/mock/ui-components/typographies';
 
 const UiPage = () => {
   return (
-    <main className="p-8">
+    <main className="p-8 overflow-x-hidden">
       <Typography tag="h1" variant="heading-2" bold center className="block">
         Page UI
       </Typography>
@@ -25,6 +26,7 @@ const UiPage = () => {
       <Tags />
       <Modals />
       <Cards />
+      <Tabs />
     </main>
   );
 };

@@ -20,8 +20,8 @@ export const switchTrackCva = cva(
       },
       size: {
         lg: 'w-16 h-8 p-1',
-        md: 'w-13 h-7 p-1',
-        sm: 'w-11 h-6 p-0.5',
+        md: 'w-14 h-7 p-0.75',
+        sm: 'w-12 h-6 p-0.5',
       },
       disabled: {
         true: 'cursor-not-allowed opacity-50',
