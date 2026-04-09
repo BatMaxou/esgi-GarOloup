@@ -38,7 +38,14 @@ const Hero = () => {
         </Typography>
         <ul className="w-full flex flex-col items-center justify-center gap-4 sm:gap-8 sm:flex-row">
           <li className="w-full sm:w-fit">
-            <Button variant="accent" onClick={handleJoinGame} size="lg" popup label={t('actions.join')} className="w-full sm:w-fit" />
+            <Button
+              variant="accent"
+              onClick={handleJoinGame}
+              size="lg"
+              popup
+              label={t('actions.join')}
+              className="w-full sm:w-fit"
+            />
           </li>
           <li className="w-full sm:w-fit">
             <Button

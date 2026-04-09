@@ -14,9 +14,10 @@ export const proxy = (request: NextRequest) => {
   const { pathname } = request.nextUrl;
 
   if (isProtected(pathname)) {
-    const sessionCookie = getSessionCookie(request);
+    const mainSession = getSessionCookie(request);
+    const tempSession = getSessionCookie(request, { cookiePrefix: 'better-auth-temp-user' });
 
-    if (!sessionCookie) {
+    if (!mainSession && !tempSession) {
       return NextResponse.redirect(new URL(paths.login, request.url));
     }
   }
