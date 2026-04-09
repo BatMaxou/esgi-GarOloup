@@ -39,7 +39,7 @@ const Providers = ({ children }: ProvidersProps) => {
 const RootLayout = async ({ children }: Props) => {
   return (
     <html lang="fr">
-      <body className="bg-linear-(--background-gradient) bg-no-repeat text-foreground min-h-screen scrollbar transition-colors relative">
+      <body className="bg-linear-(--background-gradient) bg-no-repeat text-foreground min-h-dvh scrollbar transition-colors relative">
         <Image
           src="/images/night-camp-background.png"
           alt="Background"
