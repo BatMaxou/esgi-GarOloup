@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
-import { notFound } from 'next/navigation';
+import { getLocale } from 'next-intl/server';
+import { redirect } from '@/i18n/navigation';
 
 import { getSession } from '@/utils/server/clients';
+import { paths } from '@/utils/paths';
 
 type Props = {
   children: ReactNode;
@@ -9,10 +11,10 @@ type Props = {
 
 const LoggedLayout = async ({ children }: Props) => {
   const session = await getSession();
-  console.log('session', session);
+  const locale = await getLocale();
 
   if (!session?.user?.token) {
-    return <>{children}</>;
+    redirect({ href: paths.home, locale });
   }
 
   return <>{children}</>;
