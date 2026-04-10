@@ -1,6 +1,11 @@
 export const apiPaths = {
   game: {
     getCurrent: '/game',
+    getPublics: (page: number = 1, itemsPerPage?: number) => {
+      const params = new URLSearchParams({ page: String(page) });
+      if (itemsPerPage !== undefined) params.set('itemsPerPage', String(itemsPerPage));
+      return `/games/public?${params.toString()}`;
+    },
     create: '/games',
     join: '/game/join',
     close: '/game/invitation/close',

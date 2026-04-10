@@ -4,11 +4,13 @@ namespace App\Entity\Game;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Api\Model\BasicActionOutput;
 use App\Api\Model\Game\CreateGameOutput;
 use App\Api\Provider\Game\CurrentGameProvider;
+use App\Api\Provider\Game\CurrentPublicGameProvider;
 use App\Domain\Command\Game\Initialisation\CloseGameInvitationCommand;
 use App\Domain\Command\Game\Initialisation\CreateGameCommand;
 use App\Domain\Command\Game\Initialisation\GameRoleDispatchCommand;
@@ -33,6 +35,14 @@ use Doctrine\ORM\Mapping as ORM;
             name: 'api_current_game',
             uriTemplate: '/game',
             provider: CurrentGameProvider::class,
+            normalizationContext: [
+                'groups' => 'game:read',
+            ],
+        ),
+        new GetCollection(
+            name: 'api_current_public_game',
+            uriTemplate: '/games/public',
+            provider: CurrentPublicGameProvider::class,
             normalizationContext: [
                 'groups' => 'game:read',
             ],
