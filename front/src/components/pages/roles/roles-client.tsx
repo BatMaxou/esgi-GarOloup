@@ -14,6 +14,7 @@ import { GameTeamEnum } from '@/utils/enums';
 import { Role } from '@/utils/types';
 import { TagFilter } from '@/components/ui/molecules/filters';
 import { gameTeamVariant } from '@/utils/variants';
+import Image from 'next/image';
 
 const RolesClient = () => {
   const troles = useTranslations('roles');
@@ -110,11 +111,23 @@ const RolesClient = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <>
                 {roleListDynamic.map((role) => (
-                  <Card key={role.id} className="" type="role" variant={role.teams?.[0] || 'village'} fullfilled>
-                    <div
-                      className="pb-4 flex flex-col items-start justify-between bg-cover bg-center aspect-square rounded-t-sm"
-                      style={role.picture ? { backgroundImage: `url("${getImagePath(role.picture)}")` } : undefined}
-                    >
+                  <Card
+                    key={role.id}
+                    className="isolate overflow-hidden"
+                    type="role"
+                    variant={role.teams?.[0] || 'village'}
+                    fullfilled
+                  >
+                    <div className="pb-4 flex flex-col items-start justify-between aspect-square rounded-t-sm relative">
+                      {role.picture && (
+                        <Image
+                          src={getImagePath(role.picture)}
+                          alt={role.name || ''}
+                          fill
+                          unoptimized
+                          className="-z-1"
+                        />
+                      )}
                       <div className="p-4 pb-6 bg-linear-to-b from-black/50 to-transparent w-full rounded-sm">
                         <Tag
                           label={role.teams && role.teams.length > 0 ? troles(`${role.teams[0].toLowerCase()}`) : ''}
@@ -122,7 +135,7 @@ const RolesClient = () => {
                         />
                       </div>
                       <div className="px-4">
-                        <Typography variant="subtitle" bold>
+                        <Typography variant="subtitle" bold className="text-glow-dark">
                           {role.name}
                         </Typography>
                       </div>
@@ -130,12 +143,16 @@ const RolesClient = () => {
                     <Divider variant="secondary" className="w-full" />
                     <div className="flex items-center justify-between px-4 py-2">
                       <div className="flex items-center justify-start gap-2">
-                        <Typography tag="p" variant="body-xs">
-                          min <b>{role.minPlayers}</b>
-                        </Typography>
-                        <Typography tag="p" variant="body-xs">
-                          max <b>{role.maxPerGame}</b>/{t('game')}
-                        </Typography>
+                        {role.minPlayers && (
+                          <Typography tag="p" variant="body-xs">
+                            min <b>{role.minPlayers}</b>
+                          </Typography>
+                        )}
+                        {role.maxPerGame && (
+                          <Typography tag="p" variant="body-xs">
+                            max <b>{role.maxPerGame}</b>/{t('game')}
+                          </Typography>
+                        )}
                       </div>
                       <div className="flex items-center justify-end">
                         <Button variant="text" size="sm" label="Voir" />
