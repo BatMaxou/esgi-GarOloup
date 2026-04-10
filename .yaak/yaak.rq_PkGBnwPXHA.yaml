@@ -1,0 +1,27 @@
+type: http_request
+model: http_request
+id: rq_PkGBnwPXHA
+createdAt: 2026-04-10T16:10:00
+updatedAt: 2026-04-10T14:51:18.094840295
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_bh6aMuFF23
+authentication: {}
+authenticationType: none
+body:
+  text: '{}'
+bodyType: null
+description: ''
+headers:
+- enabled: true
+  name: Accept
+  value: application/ld+json
+  id: MU6ytrps6N
+- enabled: true
+  name: ''
+  value: ''
+  id: 6D7rkqCBeJ
+method: GET
+name: Get Public Games
+sortPriority: -1.0
+url: ${[ BASE_URL ]}/api/games/public
+urlParameters: []

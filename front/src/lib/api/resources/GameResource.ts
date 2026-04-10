@@ -24,6 +24,10 @@ export class GameResource {
     return this.apiClient.get<Game>(apiPaths.game.getCurrent);
   }
 
+  public async getPublics(page: number = 1, itemsPerPage?: number) {
+    return this.apiClient.getCollection<Game>(apiPaths.game.getPublics(page, itemsPerPage));
+  }
+
   public async create(payload: CreateGamePayload): Promise<CreateGameResponse | ApiClientError> {
     return this.apiClient.post<CreateGameResponse>(apiPaths.game.create, payload);
   }
