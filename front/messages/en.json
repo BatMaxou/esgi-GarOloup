@@ -276,6 +276,31 @@
             "tokenError": "The link is no longer valid",
             "passwordUpdatedError": "Error during password update"
           }
+        },
+        "lobby": {
+          "joinGame": {
+            "codeLabel": "Game code",
+            "codeAriaLabel": "Six-digit game code",
+            "submit": "Join",
+            "alreadyPlayingJoinCurrentGame": "You are joining the current game",
+            "joinGameError": "Game not found",
+            "joinGameSuccess": "You have joined the game"
+          },
+          "createGame": {
+            "sectionTitle": "Game settings",
+            "maxPlayersLabel": "Number of players",
+            "maxPlayersHint": "Minimum 6, maximum 20",
+            "maxTimeForDiscussionLabel": "Debate duration",
+            "maxTimeForDiscussionHint": "Discussion time per day",
+            "publicLabelPublic": "Public game",
+            "publicLabelPrivate": "Private game",
+            "publicHintPublic": "Access possible by all",
+            "publicHintPrivate": "Access by invitation/code only",
+            "publicAria": "Public game",
+            "submit": "Create game",
+            "createGameSuccess": "Game created successfully",
+            "createGameError": "Error creating game"
+          }
         }
       }
     },
@@ -306,6 +331,11 @@
           "loginCreateAccount": "Join the pack",
           "loginSuccess": "Login successful"
         }
+      },
+      "lobby": {
+        "public": "Public",
+        "join": "Join",
+        "create": "Create"
       },
       "roles": {
         "eyebrow": "Bestiary",

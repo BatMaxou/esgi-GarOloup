@@ -7,14 +7,16 @@ import { apiBaseUrl } from '@/utils/tools';
 import { ApiClient } from '@/lib/api/ApiClient';
 import { tempUserAuth } from '@/lib/auth/temp-user/server';
 
-export const getSession = async (): Promise<ReturnType<typeof auth.api.getSession> | ReturnType<typeof tempUserAuth.api.getSession>> => {
+export const getSession = async (): Promise<
+  ReturnType<typeof auth.api.getSession> | ReturnType<typeof tempUserAuth.api.getSession>
+> => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
   const tempUserSession = await tempUserAuth.api.getSession({
     headers: await headers(),
   });
-  return session ?? tempUserSession
+  return session ?? tempUserSession;
 };
 
 export const getApiClient = async (): Promise<ApiClient> => {

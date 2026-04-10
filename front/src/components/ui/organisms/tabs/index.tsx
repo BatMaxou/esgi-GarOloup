@@ -34,14 +34,17 @@ const Tabs = ({ currentTab, tabs, align = 'left', translate = false }: Props) =>
           NOTE: put ::after styling to the parent, to ensure compatibitlity with browsers that don't support anchor positioning 
           @see globals.css utilitities declarations
         */}
-        <nav className="[&_*]:after:bg-linear-(--primary-gradient) [&_*]:after:rounded-xs">
-          <ul className="flex flex-wrap justify-center list-follow-anchor">
+        <nav className="[&_*]::after:bg-linear-(--primary-gradient) [&_*]::after:rounded-xs">
+          <ul className="flex flex-wrap justify-center list-follow-anchor gap-4">
             {tabs.map((tab) => (
               <li
                 key={tab.label}
-                className={cn('px-6 py-3 cursor-pointer transition-colors item-follow-anchor', {
-                  ['item-follow-anchor-active']: current === tab.label,
-                })}
+                className={cn(
+                  `px-6 py-3 cursor-pointer item-follow-anchor rounded-sm font-bold transition-all duration-600 ${current === tab.label ? 'text-white bg-linear-(--primary-gradient)' : 'text-neutral-500 bg-none'}`,
+                  {
+                    ['item-follow-anchor-active']: current === tab.label,
+                  }
+                )}
                 onClick={() => setCurrent(tab.label)}
               >
                 <Typography variant="button" textColor="controlled">
@@ -58,9 +61,9 @@ const Tabs = ({ currentTab, tabs, align = 'left', translate = false }: Props) =>
             current === tab.label && (
               <motion.div
                 key={tab.label}
-                initial={{ opacity: 0, scale: 0, backdropFilter: 'blur(0px)' }}
-                animate={{ opacity: 1, scale: 1, backdropFilter: 'blur(4px)' }}
-                exit={{ opacity: 0, scale: 0, backdropFilter: 'blur(0px)' }}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
                 transition={{ duration: 0.2 }}
               >
                 {tab.component}

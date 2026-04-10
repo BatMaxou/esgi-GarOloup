@@ -1,14 +1,15 @@
 import { cva } from 'class-variance-authority';
 
-const roleShell = [
+const roleShellBase = [
   'group/role',
   'before:pointer-events-none before:absolute before:inset-0 before:rounded-sm before:opacity-0',
   'before:transition-opacity before:duration-[250ms]',
-  'hover:border-primary/35 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:before:opacity-100',
 ].join(' ');
 
-const defaultFeatured =
-  '!border-accent/30 bg-[rgba(236,167,44,0.06)] hover:border-accent/50 hover:shadow-lg hover:shadow-black/25';
+const roleShellHover = 'hover:border-primary/35 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:before:opacity-100';
+
+const defaultAccentBase = '!border-accent/30 bg-accent/5';
+const defaultAccentHover = 'hover:border-accent/50 hover:shadow-lg hover:shadow-black/25';
 
 export const cardCva = cva(
   [
@@ -18,6 +19,10 @@ export const cardCva = cva(
   ].join(' '),
   {
     variants: {
+      hoverable: {
+        true: '',
+        false: '',
+      },
       fullfilled: {
         true: 'p-0',
         false: 'px-5 py-6',
@@ -32,7 +37,7 @@ export const cardCva = cva(
       },
       type: {
         default: '',
-        role: roleShell,
+        role: roleShellBase,
       },
       roleVariant: {
         none: '',
@@ -50,27 +55,52 @@ export const cardCva = cva(
     },
     compoundVariants: [
       {
+        type: 'role',
+        hoverable: true,
+        class: roleShellHover,
+      },
+      {
         type: 'default',
         emphasis: 'base',
+        hoverable: true,
         class: 'hover:border-primary/30 hover:shadow-lg hover:shadow-black/25',
       },
       {
         type: 'default',
         emphasis: 'accent',
-        class: defaultFeatured,
+        class: defaultAccentBase,
+      },
+      {
+        type: 'default',
+        emphasis: 'accent',
+        hoverable: true,
+        class: defaultAccentHover,
       },
       {
         type: 'default',
         emphasis: 'success',
-        class: '!border-success/15 hover:!border-success/40 hover:shadow-lg hover:shadow-black/25',
+        class: '!border-success/15',
+      },
+      {
+        type: 'default',
+        emphasis: 'success',
+        hoverable: true,
+        class: 'hover:!border-success/40 hover:shadow-lg hover:shadow-black/25',
       },
       {
         type: 'default',
         emphasis: 'error',
-        class: '!border-error/20 hover:!border-error/45 hover:shadow-lg hover:shadow-black/25',
+        class: '!border-error/20',
+      },
+      {
+        type: 'default',
+        emphasis: 'error',
+        hoverable: true,
+        class: 'hover:!border-error/45 hover:shadow-lg hover:shadow-black/25',
       },
     ],
     defaultVariants: {
+      hoverable: true,
       orientation: 'vertical',
       liftOnHover: true,
       type: 'default',

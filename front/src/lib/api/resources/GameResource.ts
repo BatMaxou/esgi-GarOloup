@@ -13,6 +13,10 @@ export interface CreateGameResponse {
   joinCode: string;
 }
 
+export interface JoinGamePayload {
+  joinCode: string;
+}
+
 export class GameResource {
   constructor(private apiClient: ApiClient) {}
 
@@ -24,8 +28,8 @@ export class GameResource {
     return this.apiClient.post<CreateGameResponse>(apiPaths.game.create, payload);
   }
 
-  public async join(): Promise<BasicActionResponse | ApiClientError> {
-    return this.apiClient.post<BasicActionResponse>(apiPaths.game.join);
+  public async join(payload: JoinGamePayload): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.post<BasicActionResponse>(apiPaths.game.join, payload);
   }
 
   public async close(): Promise<BasicActionResponse | ApiClientError> {

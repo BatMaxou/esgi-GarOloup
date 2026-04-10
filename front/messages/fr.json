@@ -277,6 +277,31 @@
             "passwordUpdatedError": "Erreur lors de la réinitialisation du mot de passe",
             "passwordUpdated": "Mot de passe réinitialisé !"
           }
+        },
+        "lobby": {
+          "joinGame": {
+            "codeLabel": "Code de la partie",
+            "codeAriaLabel": "Code à six chiffres de la partie",
+            "submit": "Valider",
+            "alreadyPlayingJoinCurrentGame": "Vous rejoignez la partie en cours",
+            "joinGameError": "Partie non trouvée",
+            "joinGameSuccess": "Vous avez rejoint la partie"
+          },
+          "createGame": {
+            "sectionTitle": "Paramètres de la partie",
+            "maxPlayersLabel": "Nombre de joueurs",
+            "maxPlayersHint": "Minimum 6, maximum 20",
+            "maxTimeForDiscussionLabel": "Durée du débat",
+            "maxTimeForDiscussionHint": "Temps de discussion par jour",
+            "publicLabelPublic": "Partie publique",
+            "publicLabelPrivate": "Partie privée",
+            "publicHintPublic": "Accès possible par tous",
+            "publicHintPrivate": "Accès par invitation/code uniquement",
+            "publicAria": "Partie publique",
+            "submit": "Créer la partie",
+            "createGameSuccess": "Partie créée avec succès",
+            "createGameError": "Erreur lors de la création de la partie"
+          }
         }
       }
     },
@@ -308,6 +333,11 @@
           "loginCreateAccount": "Rejoignez la meute",
           "loginSuccess": "Connexion réussie"
         }
+      },
+      "lobby": {
+        "public": "Publiques",
+        "join": "Rejoindre",
+        "create": "Créer"
       },
       "roles": {
         "eyebrow": "Bestiaire",

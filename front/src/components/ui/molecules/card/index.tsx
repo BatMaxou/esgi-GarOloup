@@ -14,6 +14,7 @@ type BaseProps = {
   children: ReactNode;
   className?: string;
   orientation?: CardOrientation;
+  hoverable?: boolean;
   liftOnHover?: boolean;
   fullfilled?: boolean;
   imagePath?: string;
@@ -33,7 +34,15 @@ type RoleCardProps = BaseProps & {
 type Props = DefaultCardProps | RoleCardProps;
 
 const Card = (props: Props) => {
-  const { children, className, orientation = 'vertical', liftOnHover = true, fullfilled = false, imagePath } = props;
+  const {
+    children,
+    className,
+    orientation = 'vertical',
+    hoverable = true,
+    liftOnHover = true,
+    fullfilled = false,
+    imagePath,
+  } = props;
   const isRole = props.type === 'role';
   const type = isRole ? 'role' : 'default';
   const roleVariant = isRole ? props.variant : 'none';
@@ -49,7 +58,16 @@ const Card = (props: Props) => {
 
   return (
     <div
-      className={` ${cardCva({ orientation, liftOnHover, type, roleVariant, emphasis, fullfilled, className })} ${imagePath ? `bg-[url(${getImagePath(imagePath)})] bg-cover bg-center` : ''}`}
+      className={` ${cardCva({
+        orientation,
+        hoverable,
+        liftOnHover: hoverable && liftOnHover,
+        type,
+        roleVariant,
+        emphasis,
+        fullfilled,
+        className,
+      })} ${imagePath ? `bg-[url(${getImagePath(imagePath)})] bg-cover bg-center` : ''}`}
     >
       {children}
     </div>
