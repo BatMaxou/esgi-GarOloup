@@ -9,6 +9,8 @@ import { MercureClientProvider } from '@/contexts/mercure-context';
 import { AuthProvider } from '@/contexts/auth-context';
 import { ThemeProvider } from '@/contexts/theme-context';
 import { RoleProvider } from '@/contexts/role-context';
+import { GameProvider } from '@/contexts/game-context';
+import { PlayerProvider } from '@/contexts/player-context';
 
 type ProvidersProps = {
   children: ReactNode;
@@ -26,7 +28,11 @@ const Providers = ({ children }: ProvidersProps) => {
           <AuthProvider>
             <ApiClientProvider>
               <MercureClientProvider>
-                <RoleProvider>{children}</RoleProvider>
+                <RoleProvider>
+                  <PlayerProvider>
+                    <GameProvider>{children}</GameProvider>
+                  </PlayerProvider>
+                </RoleProvider>
               </MercureClientProvider>
             </ApiClientProvider>
           </AuthProvider>

@@ -23,6 +23,7 @@ export type Game = {
   joinCode?: string;
   players?: Player[];
   host?: Player;
+  gameMaster?: Player;
 };
 
 export type Player = {

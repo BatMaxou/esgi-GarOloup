@@ -20,13 +20,13 @@ type BaseProps = {
 
 type DefaultCardProps = BaseProps & {
   type?: 'default';
-  variant?: 'none' | 'accent' | 'success' | 'error';
+  variant?: 'none' | 'accent' | 'success' | 'error' | 'gradient';
   fullfilled?: boolean;
 };
 
 type RoleCardProps = BaseProps & {
   type: 'role';
-  variant: RoleCardVariant;
+  variant?: RoleCardVariant;
 };
 
 type Props = DefaultCardProps | RoleCardProps;
@@ -34,7 +34,7 @@ type Props = DefaultCardProps | RoleCardProps;
 const Card = ({
   children,
   type = 'default',
-  variant,
+  variant = 'none',
   className,
   orientation = 'vertical',
   liftOnHover = true,
@@ -51,6 +51,8 @@ const Card = ({
         ? 'success'
         : variant === 'error'
           ? 'error'
+          : variant === 'gradient'
+            ? 'gradient'
           : 'base'
     : 'base';
 

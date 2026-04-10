@@ -51,6 +51,7 @@ export const cardCva = cva(
         accent: '',
         success: '',
         error: '',
+        gradient: 'bg-primary-pastel/20 border-primary/50',
       },
     },
     compoundVariants: [

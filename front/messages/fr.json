@@ -283,7 +283,7 @@
             "codeLabel": "Code de la partie",
             "codeAriaLabel": "Code à six chiffres de la partie",
             "submit": "Valider",
-            "alreadyPlayingJoinCurrentGame": "Vous rejoignez la partie en cours",
+            "alreadyPlayingJoinCurrentGame": "Vous êtes déjà dans une partie",
             "joinGameError": "Partie non trouvée",
             "joinGameSuccess": "Vous avez rejoint la partie"
           },
@@ -302,6 +302,11 @@
             "createGameSuccess": "Partie créée avec succès",
             "createGameError": "Erreur lors de la création de la partie"
           }
+        }
+      },
+      "lobby": {
+        "publicGames": {
+          "title": "Parties publiques"
         }
       }
     },
@@ -347,6 +352,18 @@
         "camp": "Camp",
         "noRolesFoundForThisCamp": "Les rôles de ce camp ne sont pas encore disponibles..."
       }
+    },
+    "ui": {
+      "organisms": {
+        "lists": {
+          "publicGamesList": {
+            "playersLengthConnector": "/ {count} joueur{count, plural, one {} other {s}}",
+            "joinGameSuccess": "Vous avez rejoint la partie",
+            "alreadyPlayingJoinCurrentGame": "Vous êtes déjà dans une partie",
+            "joinGameError": "Erreur lors de la récupération des parties publiques"
+          }
+        }
+      }
     }
   },
   "contexts": {
@@ -356,6 +373,9 @@
     },
     "auth": {
       "errorRegistrationTempUser": "Un problème est survenu. Veuillez réessayer."
+    },
+    "game": {
+      "getPublicGamesError": "Erreur lors de la récupération des parties publiques"
     }
   }
 }

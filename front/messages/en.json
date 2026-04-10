@@ -282,7 +282,7 @@
             "codeLabel": "Game code",
             "codeAriaLabel": "Six-digit game code",
             "submit": "Join",
-            "alreadyPlayingJoinCurrentGame": "You are joining the current game",
+            "alreadyPlayingJoinCurrentGame": "You already are in a game",
             "joinGameError": "Game not found",
             "joinGameSuccess": "You have joined the game"
           },
@@ -301,6 +301,11 @@
             "createGameSuccess": "Game created successfully",
             "createGameError": "Error creating game"
           }
+        }
+      },
+      "lobby": {
+        "publicGames": {
+          "title": "Public games"
         }
       }
     },
@@ -345,6 +350,18 @@
         "camp": "Camp",
         "noRolesFoundForThisCamp": "The roles for this camp are not yet available..."
       }
+    },
+    "ui": {
+      "organisms": {
+        "lists": {
+          "publicGamesList": {
+            "playersLengthConnector": "/ {count} player{count, plural, one {} other {s}}",
+            "joinGameSuccess": "You have joined the game",
+            "alreadyPlayingJoinCurrentGame": "You already are in a game",
+            "joinGameError": "Error retrieving public games"
+          }
+        }
+      }
     }
   },
   "contexts": {
@@ -354,6 +371,9 @@
     },
     "auth": {
       "errorRegistrationTempUser": "An error occurred. Please try again."
+    },
+    "game": {
+      "getPublicGamesError": "Error retrieving public games"
     }
   }
 }
