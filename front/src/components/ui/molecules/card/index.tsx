@@ -4,7 +4,6 @@ import type { ReactNode } from 'react';
 import type { VariantProps } from 'class-variance-authority';
 
 import { cardCva } from './cva';
-import { getImagePath } from '@/utils/getImagePath';
 
 type CardType = NonNullable<VariantProps<typeof cardCva>['type']>;
 type CardOrientation = NonNullable<VariantProps<typeof cardCva>['orientation']>;
@@ -16,7 +15,6 @@ type BaseProps = {
   orientation?: CardOrientation;
   liftOnHover?: boolean;
   fullfilled?: boolean;
-  imagePath?: string;
 };
 
 type DefaultCardProps = BaseProps & {
@@ -32,25 +30,29 @@ type RoleCardProps = BaseProps & {
 
 type Props = DefaultCardProps | RoleCardProps;
 
-const Card = (props: Props) => {
-  const { children, className, orientation = 'vertical', liftOnHover = true, fullfilled = false, imagePath } = props;
-  const isRole = props.type === 'role';
-  const type = isRole ? 'role' : 'default';
-  const roleVariant = isRole ? props.variant : 'none';
+const Card = ({
+  children,
+  type = 'default',
+  variant,
+  className,
+  orientation = 'vertical',
+  liftOnHover = true,
+  fullfilled = false,
+}: Props) => {
+  const isRole = type === 'role';
+  const roleVariant = isRole ? (variant as RoleCardVariant) : 'none';
   const emphasis = !isRole
-    ? props.variant === 'accent'
+    ? variant === 'accent'
       ? 'accent'
-      : props.variant === 'success'
+      : variant === 'success'
         ? 'success'
-        : props.variant === 'error'
+        : variant === 'error'
           ? 'error'
           : 'base'
     : 'base';
 
   return (
-    <div
-      className={` ${cardCva({ orientation, liftOnHover, type, roleVariant, emphasis, fullfilled, className })} ${imagePath ? `bg-[url(${getImagePath(imagePath)})] bg-cover bg-center` : ''}`}
-    >
+    <div className={`${cardCva({ orientation, liftOnHover, type, roleVariant, emphasis, fullfilled, className })}`}>
       {children}
     </div>
   );
