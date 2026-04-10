@@ -34,6 +34,18 @@ class GameBehavior extends AbstractBehavior
         return new BehaviorResponse($this->client->request('GET', '/api/game'));
     }
 
+    public function getPublicGames(int $page = 1, ?int $itemsPerPage = null): BehaviorResponse
+    {
+        $query = ['page' => $page];
+        if (null !== $itemsPerPage) {
+            $query['itemsPerPage'] = $itemsPerPage;
+        }
+
+        return new BehaviorResponse($this->client->request('GET', '/api/games/public', [
+            'query' => $query,
+        ]));
+    }
+
     public function closeInvitation(): BehaviorResponse
     {
         return new BehaviorResponse($this->client->request('PATCH', '/api/game/invitation/close', [

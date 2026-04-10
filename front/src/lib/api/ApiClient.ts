@@ -33,12 +33,13 @@ export interface BasicActionResponse {
 export interface CollectionResponse<T> {
   member: T[];
   totalItems: number;
-  view: {
+  view?: {
     '@id': string;
     '@type': string;
     first: string;
     last: string;
-    next: string;
+    next?: string;
+    previous?: string;
   };
 }
 
@@ -95,6 +96,30 @@ export class ApiClient {
       .catch((error: ApiClientError) => {
         if (autoRefresh) {
           return this.refreshAndRetryOn401(error, () => this.get(url, additionnalHeaders));
+        }
+
+        return error;
+      });
+  }
+
+  public async getCollection<T>(
+    url: string,
+    additionnalHeaders: HeadersInit = {},
+    autoRefresh: boolean = true
+  ): Promise<CollectionResponse<T> | ApiClientError> {
+    return fetch(`${this.baseUrl}${url}`, {
+      cache: 'no-store',
+      headers: {
+        Accept: 'application/ld+json',
+        ...additionnalHeaders,
+        ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
+      },
+    })
+      .then(handleApiError)
+      .then((response) => response.json())
+      .catch((error: ApiClientError) => {
+        if (autoRefresh) {
+          return this.refreshAndRetryOn401(error, () => this.getCollection(url, additionnalHeaders));
         }
 
         return error;
