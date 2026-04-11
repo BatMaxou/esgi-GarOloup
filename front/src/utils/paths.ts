@@ -1,6 +1,6 @@
 import { pathnames } from '@/i18n/pathnames';
 
-export const paths: Record<string, keyof typeof pathnames> = {
+export const paths = {
   home: '/',
   game: '/game',
   ui: '/ui',
@@ -12,4 +12,4 @@ export const paths: Record<string, keyof typeof pathnames> = {
   resetPassword: '/reset-password',
   test: '/test',
   roles: '/roles',
-};
+} satisfies Record<string, keyof typeof pathnames>;

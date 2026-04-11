@@ -17,11 +17,18 @@ type RoleContextType = {
   roleList: Role[];
   getAllRoles: () => void;
   roleListLoading: boolean;
+  getRole: (params: GetRoleBySlugParams) => void;
+  roleLoading: boolean;
+  role: Role | null;
   filteredRoleList: Role[];
   setFilteredRoleList: (filteredRoleList: Role[]) => void;
   gameTeamFilters: GameTeamEnum[];
   gameTeamFiltersLoading: boolean;
   getAllGameTeamFilters: () => void;
+};
+
+type GetRoleBySlugParams = {
+  slug: string;
 };
 
 export const RoleContext = createContext<RoleContextType | undefined>(undefined);
@@ -32,6 +39,8 @@ export const RoleProvider = ({ children }: Props) => {
   const [roleList, setRoleList] = useState<Role[]>([]);
   const [roleListLoading, setRoleListLoading] = useState<boolean>(true);
   const [filteredRoleList, setFilteredRoleList] = useState<Role[]>([]);
+  const [role, setRole] = useState<Role | null>(null);
+  const [roleLoading, setRoleLoading] = useState<boolean>(true);
   const [gameTeamFilters, setGameTeamFilters] = useState<GameTeamEnum[]>([]);
   const [gameTeamFiltersLoading, setGameTeamFiltersLoading] = useState<boolean>(true);
 
@@ -61,12 +70,40 @@ export const RoleProvider = ({ children }: Props) => {
     setGameTeamFiltersLoading(false);
   };
 
+  const getRole = async (params: GetRoleBySlugParams) => {
+    setRoleLoading(true);
+
+    let list = roleList;
+    if (list.length === 0) {
+      const fetched = await apiClient.role.getAll();
+      if (fetched instanceof ApiClientError) {
+        toast.error(t('roleListError'));
+        setRoleLoading(false);
+        return;
+      }
+      setRoleList(fetched);
+      list = fetched;
+    }
+
+    const found = list.find((role) => role.type?.toLowerCase() === params.slug.toLowerCase());
+    if (!found) {
+      toast.error(t('roleNotFound'));
+      setRoleLoading(false);
+      return;
+    }
+
+    setRole(found);
+    setRoleLoading(false);
+  };
   return (
     <RoleContext.Provider
       value={{
         roleList,
         getAllRoles,
         roleListLoading,
+        getRole,
+        roleLoading,
+        role,
         filteredRoleList,
         setFilteredRoleList,
         gameTeamFilters,

@@ -313,13 +313,15 @@
         "subtitle": "Every role has its objectives, powers, and alliances. Learn to know them—or to fear them.",
         "game": "game",
         "camp": "Camp",
-        "noRolesFoundForThisCamp": "The roles for this camp are not yet available..."
+        "noRolesFoundForThisCamp": "The roles for this camp are not yet available...",
+        "seeRole": "See"
       }
     }
   },
   "contexts": {
     "role": {
       "roleListError": "Error retrieving role list",
+      "roleNotFound": "Role not found.",
       "gameTeamFiltersError": "Error retrieving game team filters"
     },
     "auth": {

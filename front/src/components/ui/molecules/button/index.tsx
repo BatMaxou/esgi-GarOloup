@@ -14,11 +14,13 @@ import Icon from '@/components/ui/atoms/icon';
 
 type ButtonType = 'button' | 'submit';
 
+type StaticPathname = Exclude<keyof typeof pathnames, `${string}[${string}]${string}`>;
+
 type Props = VariantProps<typeof buttonCva> & {
   label?: string;
   className?: string;
   asLink?: boolean;
-  href?: keyof typeof pathnames;
+  href?: StaticPathname;
   type?: ButtonType;
   textVariant?: VariantProps<typeof typographyCva>['variant'];
   leftIcon?: IconName;

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import TextSkeleton from '@/components/ui/atoms/skeleton';
 import Typography from '@/components/ui/atoms/typography';
 import Card from '@/components/ui/molecules/card';
@@ -10,15 +10,18 @@ import Tag from '@/components/ui/molecules/tag';
 import Divider from '@/components/ui/atoms/divider';
 import Button from '@/components/ui/molecules/button';
 import { getImagePath } from '@/utils/getImagePath';
-import { GameTeamEnum } from '@/utils/enums';
+import { GameRoleEnum, GameTeamEnum } from '@/utils/enums';
 import { Role } from '@/utils/types';
 import { TagFilter } from '@/components/ui/molecules/filters';
 import { gameTeamVariant } from '@/utils/variants';
+import { roleTypeToSlug, type RoleSlugLocale } from '@/utils/roleSlug';
+import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 
 const RolesClient = () => {
   const troles = useTranslations('roles');
   const t = useTranslations('components.pages.roles');
+  const locale = useLocale() as RoleSlugLocale;
   const {
     roleList,
     roleListLoading,
@@ -155,7 +158,16 @@ const RolesClient = () => {
                         )}
                       </div>
                       <div className="flex items-center justify-end">
-                        <Button variant="text" size="sm" label="Voir" />
+                        {role.type && (
+                          <Link
+                            href={{
+                              pathname: '/roles/[slug]',
+                              params: { slug: roleTypeToSlug(role.type as GameRoleEnum, locale) },
+                            }}
+                          >
+                            <Button variant="text" size="sm" label={t('seeRole')} />
+                          </Link>
+                        )}
                       </div>
                     </div>
                   </Card>
