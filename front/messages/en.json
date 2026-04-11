@@ -356,9 +356,23 @@
         "lists": {
           "publicGamesList": {
             "playersLengthConnector": "/ {count} player{count, plural, one {} other {s}}",
+            "joinButton": "Join",
             "joinGameSuccess": "You have joined the game",
             "alreadyPlayingJoinCurrentGame": "You already are in a game",
-            "joinGameError": "Error retrieving public games"
+            "joinGameError": "Error retrieving public games",
+            "filterLabel": "Filter",
+            "filterPlaceholder": "Game code…",
+            "emptyList": "No public games at the moment.",
+            "noMatchingFilter": "No games match this filter.",
+            "discussionMinutes": "{minutes} min.",
+            "gameMasterYes": "Game master assigned",
+            "column": {
+              "joinCode": "Code",
+              "players": "Players",
+              "gameMaster": "G.M.",
+              "discussion": "Debate",
+              "actions": "Action"
+            }
           }
         }
       }

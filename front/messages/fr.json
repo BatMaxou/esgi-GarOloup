@@ -358,9 +358,23 @@
         "lists": {
           "publicGamesList": {
             "playersLengthConnector": "/ {count} joueur{count, plural, one {} other {s}}",
+            "joinButton": "Rejoindre",
             "joinGameSuccess": "Vous avez rejoint la partie",
             "alreadyPlayingJoinCurrentGame": "Vous êtes déjà dans une partie",
-            "joinGameError": "Erreur lors de la récupération des parties publiques"
+            "joinGameError": "Erreur lors de la récupération des parties publiques",
+            "filterLabel": "Filtrer",
+            "filterPlaceholder": "Code de la partie…",
+            "emptyList": "Aucune partie publique pour le moment.",
+            "noMatchingFilter": "Aucune partie ne correspond à ce filtre.",
+            "discussionMinutes": "{minutes} min.",
+            "gameMasterYes": "Maître du jeu assigné",
+            "column": {
+              "joinCode": "Code",
+              "players": "Joueurs",
+              "gameMaster": "M.J.",
+              "discussion": "Débat",
+              "actions": "Action"
+            }
           }
         }
       }

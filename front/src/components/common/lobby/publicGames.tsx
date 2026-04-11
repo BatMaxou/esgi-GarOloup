@@ -17,7 +17,7 @@ const PublicGames = () => {
 
   return (
     <Card className="p-10 w-full" orientation="vertical" hoverable={false}>
-    <Typography variant="body-sm" textColor="neutral-500" bold uppercase tag="span">{ t('title') }</Typography>
+    <Typography variant="body-sm" textColor="neutral-500" bold uppercase tag="span" className='mb-4'>{ t('title') }</Typography>
       {publicGamesLoading
         ?
           <div className='flex justify-center items-center h-full my-20 mx-38'>
