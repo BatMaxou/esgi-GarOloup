@@ -8,6 +8,7 @@ import { TempUserResource } from '@/lib/api/resources/TempUserResource';
 import { PlayerResource } from '@/lib/api/resources/PlayerResource';
 import { RoleResource } from '@/lib/api/resources/RoleResource';
 import { FilterResource } from '@/lib/api/resources/FilterResource';
+import { HomepageResource } from '@/lib/api/resources/HomepageResource';
 import { MercureResource } from '@/lib/api/resources/MercureResource';
 
 type PropagateChangeToken = (token?: string | null, refreshToken?: string | null) => void;
@@ -56,6 +57,7 @@ export class ApiClient {
   game: GameResource;
   role: RoleResource;
   filter: FilterResource;
+  homepage: HomepageResource;
   mercure: MercureResource;
 
   constructor(
@@ -71,6 +73,7 @@ export class ApiClient {
     this.game = new GameResource(this);
     this.role = new RoleResource(this);
     this.filter = new FilterResource(this);
+    this.homepage = new HomepageResource(this);
     this.mercure = new MercureResource(this);
   }
 

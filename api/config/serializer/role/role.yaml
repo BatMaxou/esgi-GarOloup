@@ -6,6 +6,7 @@ App\Entity\Role:
                 - role:list
                 - game:read
                 - me:player:read
+                - homepage:read
         type:
             groups:
                 - role:read
@@ -13,6 +14,7 @@ App\Entity\Role:
                 - role:write
                 - game:read
                 - me:player:read
+                - homepage:read
         name:
             groups:
                 - role:read
@@ -20,6 +22,7 @@ App\Entity\Role:
                 - role:write
                 - game:read
                 - me:player:read
+                - homepage:read
         description:
             groups:
                 - role:read
@@ -36,6 +39,7 @@ App\Entity\Role:
                 - role:list
                 - role:files:write
                 - me:player:read
+                - homepage:read
         picture:
             groups:
                 - role:files:write
@@ -44,14 +48,17 @@ App\Entity\Role:
                 - role:read
                 - role:list
                 - role:write
+                - homepage:read
         maxPerGame:
             groups:
                 - role:read
                 - role:list
                 - role:write
+                - homepage:read
         teams:
             groups:
                 - role:read
                 - role:list
                 - role:write
                 - me:player:read
+                - homepage:read

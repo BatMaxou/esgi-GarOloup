@@ -32,7 +32,7 @@ security:
                 check_path: /api/token/refresh
 
         player:
-            pattern: ^/api/(temp_user|me|game)
+            pattern: ^/api/(temp_user|me|game|homepage)
             provider: player_provider
             stateless: true
             entry_point: jwt
@@ -58,7 +58,8 @@ security:
         - { path: ^/api/public, roles: PUBLIC_ACCESS }
         - { path: ^/api/roles, methods: GET, roles: PUBLIC_ACCESS }
         - { path: ^/api/filters, methods: GET, roles: PUBLIC_ACCESS }
-        - { path: ^/api/games/public, roles: PUBLIC_ACCESS }
+        - { path: ^/api/games/public, methods: GET, roles: PUBLIC_ACCESS }
+        - { path: ^/api/homepage, methods: GET, roles: PUBLIC_ACCESS }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
