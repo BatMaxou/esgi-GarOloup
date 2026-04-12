@@ -277,6 +277,36 @@
             "passwordUpdatedError": "Erreur lors de la réinitialisation du mot de passe",
             "passwordUpdated": "Mot de passe réinitialisé !"
           }
+        },
+        "lobby": {
+          "joinGame": {
+            "codeLabel": "Code de la partie",
+            "codeAriaLabel": "Code à six chiffres de la partie",
+            "submit": "Valider",
+            "alreadyPlayingJoinCurrentGame": "Vous êtes déjà dans une partie",
+            "joinGameError": "Partie non trouvée",
+            "joinGameSuccess": "Vous avez rejoint la partie"
+          },
+          "createGame": {
+            "sectionTitle": "Paramètres de la partie",
+            "maxPlayersLabel": "Nombre de joueurs",
+            "maxPlayersHint": "Minimum 6, maximum 20",
+            "maxTimeForDiscussionLabel": "Durée du débat",
+            "maxTimeForDiscussionHint": "Temps de discussion par jour",
+            "publicLabelPublic": "Partie publique",
+            "publicLabelPrivate": "Partie privée",
+            "publicHintPublic": "Accès possible par tous",
+            "publicHintPrivate": "Accès par invitation/code uniquement",
+            "publicAria": "Partie publique",
+            "submit": "Créer la partie",
+            "createGameSuccess": "Partie créée avec succès",
+            "createGameError": "Erreur lors de la création de la partie"
+          }
+        }
+      },
+      "lobby": {
+        "publicGames": {
+          "title": "Parties publiques"
         }
       }
     },
@@ -309,6 +339,11 @@
           "loginSuccess": "Connexion réussie"
         }
       },
+      "lobby": {
+        "public": "Publiques",
+        "join": "Rejoindre",
+        "create": "Créer"
+      },
       "roles": {
         "eyebrow": "Bestiaire",
         "title": "Les rôles",
@@ -316,6 +351,32 @@
         "game": "partie",
         "camp": "Camp",
         "noRolesFoundForThisCamp": "Les rôles de ce camp ne sont pas encore disponibles..."
+      }
+    },
+    "ui": {
+      "organisms": {
+        "lists": {
+          "publicGamesList": {
+            "playersLengthConnector": "/ {count} joueur{count, plural, one {} other {s}}",
+            "joinButton": "Rejoindre",
+            "joinGameSuccess": "Vous avez rejoint la partie",
+            "alreadyPlayingJoinCurrentGame": "Vous êtes déjà dans une partie",
+            "joinGameError": "Erreur lors de la récupération des parties publiques",
+            "filterLabel": "Filtrer",
+            "filterPlaceholder": "Code de la partie…",
+            "emptyList": "Aucune partie publique pour le moment.",
+            "noMatchingFilter": "Aucune partie ne correspond à ce filtre.",
+            "discussionMinutes": "{minutes} min.",
+            "gameMasterYes": "Maître du jeu assigné",
+            "column": {
+              "joinCode": "Code",
+              "players": "Joueurs",
+              "gameMaster": "M.J.",
+              "discussion": "Débat",
+              "actions": "Action"
+            }
+          }
+        }
       }
     }
   },
@@ -326,6 +387,9 @@
     },
     "auth": {
       "errorRegistrationTempUser": "Un problème est survenu. Veuillez réessayer."
+    },
+    "game": {
+      "getPublicGamesError": "Erreur lors de la récupération des parties publiques"
     }
   }
 }

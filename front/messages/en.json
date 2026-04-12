@@ -276,6 +276,36 @@
             "tokenError": "The link is no longer valid",
             "passwordUpdatedError": "Error during password update"
           }
+        },
+        "lobby": {
+          "joinGame": {
+            "codeLabel": "Game code",
+            "codeAriaLabel": "Six-digit game code",
+            "submit": "Join",
+            "alreadyPlayingJoinCurrentGame": "You already are in a game",
+            "joinGameError": "Game not found",
+            "joinGameSuccess": "You have joined the game"
+          },
+          "createGame": {
+            "sectionTitle": "Game settings",
+            "maxPlayersLabel": "Number of players",
+            "maxPlayersHint": "Minimum 6, maximum 20",
+            "maxTimeForDiscussionLabel": "Debate duration",
+            "maxTimeForDiscussionHint": "Discussion time per day",
+            "publicLabelPublic": "Public game",
+            "publicLabelPrivate": "Private game",
+            "publicHintPublic": "Access possible by all",
+            "publicHintPrivate": "Access by invitation/code only",
+            "publicAria": "Public game",
+            "submit": "Create game",
+            "createGameSuccess": "Game created successfully",
+            "createGameError": "Error creating game"
+          }
+        }
+      },
+      "lobby": {
+        "publicGames": {
+          "title": "Public games"
         }
       }
     },
@@ -307,6 +337,11 @@
           "loginSuccess": "Login successful"
         }
       },
+      "lobby": {
+        "public": "Public",
+        "join": "Join",
+        "create": "Create"
+      },
       "roles": {
         "eyebrow": "Bestiary",
         "title": "The roles",
@@ -314,6 +349,32 @@
         "game": "game",
         "camp": "Camp",
         "noRolesFoundForThisCamp": "The roles for this camp are not yet available..."
+      }
+    },
+    "ui": {
+      "organisms": {
+        "lists": {
+          "publicGamesList": {
+            "playersLengthConnector": "/ {count} player{count, plural, one {} other {s}}",
+            "joinButton": "Join",
+            "joinGameSuccess": "You have joined the game",
+            "alreadyPlayingJoinCurrentGame": "You already are in a game",
+            "joinGameError": "Error retrieving public games",
+            "filterLabel": "Filter",
+            "filterPlaceholder": "Game code…",
+            "emptyList": "No public games at the moment.",
+            "noMatchingFilter": "No games match this filter.",
+            "discussionMinutes": "{minutes} min.",
+            "gameMasterYes": "Game master assigned",
+            "column": {
+              "joinCode": "Code",
+              "players": "Players",
+              "gameMaster": "G.M.",
+              "discussion": "Debate",
+              "actions": "Action"
+            }
+          }
+        }
       }
     }
   },
@@ -324,6 +385,9 @@
     },
     "auth": {
       "errorRegistrationTempUser": "An error occurred. Please try again."
+    },
+    "game": {
+      "getPublicGamesError": "Error retrieving public games"
     }
   }
 }

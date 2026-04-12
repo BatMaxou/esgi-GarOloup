@@ -18,3 +18,12 @@ App\Entity\Game\Game:
         configuration:
             groups:
                 - game:read
+        maxPlayers:
+            groups:
+                - game:read
+        maxTimeForDiscussion:
+            groups:
+                - game:read
+        public:
+            groups:
+                - game:read

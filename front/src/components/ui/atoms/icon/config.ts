@@ -3,6 +3,8 @@ import { MoonStar, Sun, LucideIcon, Github, X, Plus, Minus } from 'lucide-react'
 
 import Garoloup from '@/assets/icons/garoloup.svg';
 import Discord from '@/assets/icons/discord.svg';
+import Crown from '@/assets/icons/crown.svg';
+import Timer from '@/assets/icons/timer.svg';
 
 export type IconName = keyof typeof raw & string;
 export type IconType = LucideIcon | ComponentType<SVGProps<SVGSVGElement>>;
@@ -17,6 +19,8 @@ const raw = {
   discord: Discord,
   plus: Plus,
   minus: Minus,
+  crown: Crown,
+  timer: Timer,
 };
 
 export const icons: Icons = raw;

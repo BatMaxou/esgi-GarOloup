@@ -38,6 +38,7 @@ const NumberInput = ({ unit, defaultValue = 1, onChange, className, min, max, ..
       <input type="number" value={value} className="hidden" readOnly {...props} />
 
       <Button
+        type="button"
         variant="neutral"
         size="xs"
         className="aspect-square"
@@ -56,6 +57,7 @@ const NumberInput = ({ unit, defaultValue = 1, onChange, className, min, max, ..
         )}
       </div>
       <Button
+        type="button"
         variant="neutral"
         size="xs"
         className=""
