@@ -37,6 +37,7 @@ export const apiPaths = {
   filter: {
     gameTeam: '/filters/game_teams',
   },
+  homepage: '/homepage',
   mercure: {
     credentials: '/mercure/token',
   },

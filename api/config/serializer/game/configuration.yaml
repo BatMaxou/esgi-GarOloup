@@ -3,6 +3,7 @@ App\Entity\Game\Configuration:
         composition:
             groups:
                 - game:read
+                - homepage:read
         withGameMaster:
             groups:
                 - game:read

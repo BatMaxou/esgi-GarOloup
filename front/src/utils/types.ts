@@ -72,3 +72,10 @@ export type RoleDispatchEntry = {
 export type MercureToken = {
   token?: string;
 };
+
+// ------------------ Model ------------------
+
+export type Homepage = {
+  lastRoles: Role[];
+  lastPublicGames: Game[];
+};

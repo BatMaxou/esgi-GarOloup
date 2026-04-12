@@ -1,0 +1,8 @@
+App\Api\Model\Homepage:
+    attributes:
+        lastRoles:
+            groups:
+                - homepage:read
+        lastPublicGames:
+            groups:
+                - homepage:read

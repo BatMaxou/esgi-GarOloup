@@ -6,6 +6,7 @@ use ApiPlatform\Symfony\Bundle\Test\Client;
 use App\Fixtures\Factory\User\UserFactory;
 use App\Tests\Helper\Behavior\Filter\FilterBehavior;
 use App\Tests\Helper\Behavior\Game\GameBehavior;
+use App\Tests\Helper\Behavior\HomepageBehavior;
 use App\Tests\Helper\Behavior\Player\PlayerBehavior;
 use App\Tests\Helper\Behavior\RoleBehavior;
 use App\Tests\Helper\Behavior\Security\AuthBehavior;
@@ -47,6 +48,11 @@ final class When
     public static function tempUser(): TempUserBehavior
     {
         return new TempUserBehavior(self::$client);
+    }
+
+    public static function homepage(): HomepageBehavior
+    {
+        return new HomepageBehavior(self::$client);
     }
 
     public static function game(): GameBehavior
