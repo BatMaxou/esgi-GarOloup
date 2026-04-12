@@ -58,8 +58,7 @@ const PublicGamesList = ({ publicGames }: Props) => {
         id: 'joinCode',
         header: t('column.joinCode'),
         sortable: true,
-        compareAscending: (left, right) =>
-          compareStringsAsc(left.joinCode ?? '', right.joinCode ?? ''),
+        compareAscending: (left, right) => compareStringsAsc(left.joinCode ?? '', right.joinCode ?? ''),
         getFilterText: (game) => game.joinCode ?? '',
         cell: (game) => (
           <Typography tag="span" variant="subtitle" bold textColor="accent" className="text-glow-accent">
@@ -79,8 +78,7 @@ const PublicGamesList = ({ publicGames }: Props) => {
           }
           return compareNumbersAsc(left.maxPlayers ?? 0, right.maxPlayers ?? 0);
         },
-        getFilterText: (game) =>
-          `${game.players?.length ?? 0}/${game.maxPlayers ?? 0}`,
+        getFilterText: (game) => `${game.players?.length ?? 0}/${game.maxPlayers ?? 0}`,
         cell: (game) => (
           <Typography tag="span" variant="body-sm">
             {game.players?.length ?? 0} {t('playersLengthConnector', { count: game.maxPlayers ?? 0 })}
@@ -92,8 +90,7 @@ const PublicGamesList = ({ publicGames }: Props) => {
         header: t('column.gameMaster'),
         sortable: true,
         thClassName: 'whitespace-nowrap',
-        compareAscending: (left, right) =>
-          compareNumbersAsc(left.gameMaster ? 1 : 0, right.gameMaster ? 1 : 0),
+        compareAscending: (left, right) => compareNumbersAsc(left.gameMaster ? 1 : 0, right.gameMaster ? 1 : 0),
         getFilterText: (game) => (game.gameMaster ? t('gameMasterYes') : ''),
         cell: (game) => (
           <span className="inline-flex items-center gap-2">

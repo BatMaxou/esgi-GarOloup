@@ -54,7 +54,16 @@ const CreateGameForm = () => {
       </Typography>
 
       <div className="flex flex-col gap-4">
-        <div>
+        <div className="flex flex-row items-start justify-between gap-4">
+          <div className="min-w-0 flex-1">
+            <Typography variant="body-sm" textColor="neutral-500" bold uppercase tag="span" className="block">
+              {t('maxPlayersLabel')}
+            </Typography>
+            <Typography variant="body-sm" textColor="neutral-500" className="mt-1 block">
+              {t('maxPlayersHint')}
+            </Typography>
+          </div>
+
           <NumberInput
             name="maxPlayers"
             defaultValue={6}
@@ -64,9 +73,6 @@ const CreateGameForm = () => {
             value={values.maxPlayers}
             onChange={(value) => handleChange({ target: { name: 'maxPlayers', value } })}
           />
-          <Typography variant="body-xs" textColor="neutral-500" className="mt-1 block">
-            {t('maxPlayersHint')}
-          </Typography>
         </div>
         <Divider variant="primary" />
         <div className="flex flex-row items-start justify-between gap-4">

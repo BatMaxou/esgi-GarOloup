@@ -127,8 +127,7 @@ export default function DataTable<Row>({
 }: DataTableProps<Row>) {
   const firstSortableId = columns.find((c) => c.sortable && c.compareAscending)?.id ?? '';
   const resolvedDefaultSortId =
-    defaultSortColumnId &&
-    columns.some((c) => c.id === defaultSortColumnId && c.sortable && c.compareAscending)
+    defaultSortColumnId && columns.some((c) => c.id === defaultSortColumnId && c.sortable && c.compareAscending)
       ? defaultSortColumnId
       : firstSortableId;
 
@@ -232,10 +231,7 @@ export default function DataTable<Row>({
               </tr>
             ) : (
               displayedRows.map((row) => (
-                <tr
-                  key={getRowId(row)}
-                  className="border-b border-primary/10 last:border-b-0 hover:bg-primary/5"
-                >
+                <tr key={getRowId(row)} className="border-b border-primary/10 last:border-b-0 hover:bg-primary/5">
                   {columns.map((column) => (
                     <td key={column.id} className={cn('px-4 py-3 align-middle', column.tdClassName)}>
                       {column.cell(row)}

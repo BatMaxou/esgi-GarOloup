@@ -13,19 +13,21 @@ const PublicGames = () => {
   const t = useTranslations('components.common.lobby.publicGames');
   useEffect(() => {
     getPublicGames(1, 8);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Card className="p-10 w-full" orientation="vertical" hoverable={false}>
-    <Typography variant="body-sm" textColor="neutral-500" bold uppercase tag="span" className='mb-4'>{ t('title') }</Typography>
-      {publicGamesLoading
-        ?
-          <div className='flex justify-center items-center h-full my-20 mx-38'>
-            <Loader className='animate-spin' size={48} />
-          </div>
-        :
+      <Typography variant="body-sm" textColor="neutral-500" bold uppercase tag="span" className="mb-4">
+        {t('title')}
+      </Typography>
+      {publicGamesLoading ? (
+        <div className="flex justify-center items-center h-full my-20 mx-38">
+          <Loader className="animate-spin" size={48} />
+        </div>
+      ) : (
         <PublicGamesList publicGames={publicGames} />
-      }
+      )}
     </Card>
   );
 };

@@ -53,11 +53,13 @@ const Card = ({
           ? 'error'
           : variant === 'gradient'
             ? 'gradient'
-          : 'base'
+            : 'base'
     : 'base';
 
   return (
-    <div className={`${cardCva({ orientation, liftOnHover: hoverable && liftOnHover, type, roleVariant, emphasis, fullfilled, className })}`}>
+    <div
+      className={`${cardCva({ orientation, liftOnHover: hoverable && liftOnHover, type, roleVariant, emphasis, fullfilled, className })}`}
+    >
       {children}
     </div>
   );

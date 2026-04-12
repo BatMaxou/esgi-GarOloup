@@ -28,9 +28,8 @@ const JoinGameForm = ({ className }: Props) => {
   const t = useTranslations('components.common.form.lobby.joinGame');
   const { apiClient } = useApiClient();
   const router = useRouter();
-  const [code, setCode] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { handleSubmit, handleChange } = useFormik({
+  const { values, handleSubmit, handleChange } = useFormik({
     initialValues: {
       code: '',
     },
@@ -55,7 +54,7 @@ const JoinGameForm = ({ className }: Props) => {
     },
   });
 
-  const isComplete = (code?.length ?? 0) === CODE_LENGTH;
+  const isComplete = values.code.length === CODE_LENGTH;
 
   return (
     <form onSubmit={handleSubmit} className={cn('flex flex-col gap-4 p-8', className)}>
@@ -64,11 +63,8 @@ const JoinGameForm = ({ className }: Props) => {
         label={t('codeLabel')}
         name="code"
         inputMode="text"
-        value={code}
-        onChange={(code) => {
-          handleChange({ target: { name: 'code', value: code } });
-          setCode(code);
-        }}
+        defaultValue=""
+        onChange={(code) => handleChange({ target: { name: 'code', value: code } })}
         aria-label={t('codeAriaLabel')}
       />
       <Divider variant="primary" />

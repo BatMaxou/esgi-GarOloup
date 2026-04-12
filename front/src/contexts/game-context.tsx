@@ -72,7 +72,7 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
       eventSource?.close();
     };
   }, [mercureClient, game?.id, isCredentialsInitialized]);
-  
+
   const getPublicGames = async (page: number = 1, itemsPerPage?: number) => {
     setPublicGamesLoading(true);
     const response = await apiClient.game.getPublics(page, itemsPerPage);
@@ -85,7 +85,11 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
     setPublicGamesLoading(false);
   };
 
-  return <GameContext.Provider value={{ game, setGame, leaveGame, publicGames, publicGamesLoading, getPublicGames }}>{children}</GameContext.Provider>;
+  return (
+    <GameContext.Provider value={{ game, setGame, leaveGame, publicGames, publicGamesLoading, getPublicGames }}>
+      {children}
+    </GameContext.Provider>
+  );
 };
 
 export const useGame = () => {
