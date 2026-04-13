@@ -2,9 +2,9 @@ type: http_request
 model: http_request
 id: rq_WAXTHkF7vT
 createdAt: 2026-02-27T17:48:42.132568082
-updatedAt: 2026-04-06T19:55:52.167807695
+updatedAt: 2026-04-14T12:43:50.662548769
 workspaceId: wk_uXtATNFQmZ
-folderId: fl_bh6aMuFF23
+folderId: fl_4gDiWsWEgc
 authentication:
   token: ${[ TOKEN ]}
 authenticationType: bearer
@@ -28,6 +28,6 @@ headers:
   id: 0TkCedAc45
 method: POST
 name: Create Game
-sortPriority: 1000.0
+sortPriority: 0.0
 url: ${[ BASE_URL ]}/api/games
 urlParameters: []

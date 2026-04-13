@@ -1,0 +1,8 @@
+App\Entity\Game\Role\GameRole:
+    attributes:
+        role:
+            groups:
+                - me:player:read
+        type:
+            groups:
+                - me:player:read

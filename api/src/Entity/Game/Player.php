@@ -74,6 +74,11 @@ class Player implements TopicRelatedObject
         return $user;
     }
 
+    public function getUsername(): string
+    {
+        return $this->getLinkedUser()->getUsername();
+    }
+
     public function getLinkedGame(): ?Game
     {
         return $this->game ?? $this->managedGame;

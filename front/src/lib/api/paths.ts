@@ -41,4 +41,7 @@ export const apiPaths = {
   mercure: {
     credentials: '/mercure/token',
   },
+  werewolf: {
+    team: '/game/werewolf-team',
+  },
 };

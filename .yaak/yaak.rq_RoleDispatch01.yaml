@@ -2,9 +2,9 @@ type: http_request
 model: http_request
 id: rq_RoleDispatch01
 createdAt: 2026-04-03T12:00:00
-updatedAt: 2026-04-03T12:00:00
+updatedAt: 2026-04-14T12:40:02.304167156
 workspaceId: wk_uXtATNFQmZ
-folderId: fl_bh6aMuFF23
+folderId: fl_4gDiWsWEgc
 authentication:
   token: ${[ TOKEN ]}
 authenticationType: bearer
@@ -35,6 +35,6 @@ headers:
   id: tW2vN5xYf7
 method: PATCH
 name: Dispatch Roles
-sortPriority: 4500.0
+sortPriority: 6000.0
 url: ${[ BASE_URL ]}/api/game/role-dispatch
 urlParameters: []

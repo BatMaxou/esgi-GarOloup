@@ -7,4 +7,5 @@ App\Enum\Game\GameTeamEnum:
                 - role:list
                 - role:write
                 - homepage:read
+                - me:player:read
 

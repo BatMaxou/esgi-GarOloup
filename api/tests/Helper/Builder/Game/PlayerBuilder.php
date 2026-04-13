@@ -3,8 +3,10 @@
 namespace App\Tests\Helper\Builder\Game;
 
 use App\Entity\Game\Player;
+use App\Entity\Game\Role\GameRole;
 use App\Fixtures\Factory\Game\PlayerFactory;
 use App\Tests\Helper\Builder\AbstractBuilder;
+use App\Tests\Helper\Builder\Game\Role\GameRoleBuilder;
 use App\Tests\Helper\Builder\User\TempUserBuilder;
 use App\Tests\Helper\Builder\User\UserBuilder;
 
@@ -15,6 +17,8 @@ class PlayerBuilder extends AbstractBuilder
     public ?TempUserBuilder $tempUser = null;
     public ?bool $dead = null;
     public ?GameBuilder $game = null;
+    /** @var GameRoleBuilder<covariant GameRole>|null */
+    public ?GameRoleBuilder $role = null;
     public ?\DateTimeInterface $createdAt = null;
 
     protected function doBuild(): object
@@ -24,6 +28,7 @@ class PlayerBuilder extends AbstractBuilder
             ...($this->tempUser ? ['tempUser' => $this->tempUser->getEntity(), 'user' => null] : []),
             ...($this->dead ? ['dead' => $this->dead] : []),
             ...($this->game ? ['game' => $this->game->getEntity()] : []),
+            ...($this->role ? ['role' => $this->role->getEntity()] : []),
             ...($this->createdAt ? ['createdAt' => $this->createdAt] : []),
         ]);
     }
@@ -52,6 +57,14 @@ class PlayerBuilder extends AbstractBuilder
     public function withGame(GameBuilder $gameBuilder): static
     {
         $this->game = $gameBuilder;
+
+        return $this;
+    }
+
+    /** @param GameRoleBuilder<covariant GameRole> $gameRoleBuilder */
+    public function withRole(GameRoleBuilder $gameRoleBuilder): static
+    {
+        $this->role = $gameRoleBuilder;
 
         return $this;
     }

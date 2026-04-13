@@ -10,6 +10,7 @@ import { RoleResource } from '@/lib/api/resources/RoleResource';
 import { FilterResource } from '@/lib/api/resources/FilterResource';
 import { HomepageResource } from '@/lib/api/resources/HomepageResource';
 import { MercureResource } from '@/lib/api/resources/MercureResource';
+import { WerewolfResource } from '@/lib/api/resources/WerewolfResource';
 
 type PropagateChangeToken = (token?: string | null, refreshToken?: string | null) => void;
 
@@ -59,6 +60,7 @@ export class ApiClient {
   filter: FilterResource;
   homepage: HomepageResource;
   mercure: MercureResource;
+  werewolf: WerewolfResource;
 
   constructor(
     public baseUrl: string,
@@ -75,6 +77,7 @@ export class ApiClient {
     this.filter = new FilterResource(this);
     this.homepage = new HomepageResource(this);
     this.mercure = new MercureResource(this);
+    this.werewolf = new WerewolfResource(this);
   }
 
   public initPropagateChangeToken(propagateChangeToken: PropagateChangeToken) {

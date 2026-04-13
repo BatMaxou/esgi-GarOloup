@@ -101,4 +101,9 @@ class GameBehavior extends AbstractBehavior
             'json' => [],
         ]));
     }
+
+    public function getWerewolfTeam(): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('GET', '/api/game/werewolf-team'));
+    }
 }

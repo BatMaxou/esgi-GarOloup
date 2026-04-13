@@ -2,9 +2,9 @@ type: http_request
 model: http_request
 id: rq_wswPJ6kdZb
 createdAt: 2026-03-30T12:00:00
-updatedAt: 2026-03-31T16:44:49.623978132
+updatedAt: 2026-04-14T12:44:47.747111851
 workspaceId: wk_uXtATNFQmZ
-folderId: fl_bh6aMuFF23
+folderId: fl_4gDiWsWEgc
 authentication:
   token: ${[ TOKEN ]}
 authenticationType: bearer
@@ -23,7 +23,7 @@ body:
           }
         ]
       },
-      "withGameMaster": true,
+      "withGameMaster": false,
       "withRandomDispatch": true
     }
 bodyType: application/json
@@ -39,6 +39,6 @@ headers:
   id: qW9vN2xYe4
 method: PATCH
 name: Set Configuration
-sortPriority: 3500.0
+sortPriority: 4000.0
 url: ${[ BASE_URL ]}/api/game/configuration
 urlParameters: []

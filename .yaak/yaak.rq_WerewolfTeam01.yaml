@@ -1,0 +1,24 @@
+type: http_request
+model: http_request
+id: rq_WerewolfTeam01
+createdAt: 2026-04-14T12:00:00
+updatedAt: 2026-04-14T12:42:42.145928753
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_3whxhCpuFe
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body:
+  text: ''
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: ''
+  value: ''
+  id: WerewolfTeam01H1
+method: GET
+name: Get Werewolf Team
+sortPriority: 0.0
+url: ${[ BASE_URL ]}/api/game/werewolf-team
+urlParameters: []

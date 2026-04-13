@@ -35,6 +35,7 @@ export type Player = {
   dead?: boolean;
   game?: Game;
   host?: boolean;
+  username?: string;
 };
 
 export type Role = {
@@ -78,4 +79,9 @@ export type MercureToken = {
 export type Homepage = {
   lastRoles: Role[];
   lastPublicGames: Game[];
+};
+
+export type WerewolfTeam = {
+  gameId: string;
+  members: Pick<Player, 'id' | 'username'>[];
 };
