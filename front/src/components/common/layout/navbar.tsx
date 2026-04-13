@@ -52,6 +52,9 @@ const Navbar = () => {
 
       <ul className="flex items-center gap-4 text-glow-primary">
         <li>
+          <Button asLink variant="text" label={t('roles')} href={paths.roles} />
+        </li>
+        <li>
           <Button asLink variant="text" label={t('mockLinks.ui')} href={paths.ui} />
         </li>
         <li>

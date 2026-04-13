@@ -187,6 +187,7 @@
         "navbar": {
           "logoutSuccess": "Déconnexion réussie",
           "logoAlt": "GarOloup",
+          "roles": "Rôles",
           "mockLinks": {
             "ui": "UI",
             "icons": "Icônes",
@@ -350,7 +351,24 @@
         "subtitle": "Chaque rôle a ses objectifs, ses pouvoirs, ses alliances. Apprenez à les connaître — ou à les craindre.",
         "game": "partie",
         "camp": "Camp",
-        "noRolesFoundForThisCamp": "Les rôles de ce camp ne sont pas encore disponibles..."
+        "noRolesFoundForThisCamp": "Les rôles de ce camp ne sont pas encore disponibles...",
+        "seeRole": "Voir"
+      },
+      "roleDetail": {
+        "previousRole": "Précédent",
+        "nextRole": "Suivant",
+        "loading": "Chargement…",
+        "notFound": "Rôle introuvable.",
+        "breadcrumbBestiary": "Bestiaire",
+        "roleEyebrow": "Rôle — {camp}",
+        "description": "Description",
+        "ability": "Pouvoir",
+        "compatibleCamps": "Camps compatibles",
+        "backToRoles": "Retour aux rôles",
+        "playWithRole": "Jouer avec ce rôle",
+        "sameCampRoles": "Rôles du même camp",
+        "minPlayers": "Min. joueurs",
+        "maxPerGame": "Max / partie"
       }
     },
     "ui": {
@@ -383,6 +401,7 @@
   "contexts": {
     "role": {
       "roleListError": "Erreur lors de la récupération des rôles",
+      "roleNotFound": "Rôle introuvable.",
       "gameTeamFiltersError": "Erreur lors de la récupération des filtres de rôles"
     },
     "auth": {

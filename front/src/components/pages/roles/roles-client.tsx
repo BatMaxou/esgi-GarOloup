@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import TextSkeleton from '@/components/ui/atoms/skeleton';
 import Typography from '@/components/ui/atoms/typography';
 import Card from '@/components/ui/molecules/card';
@@ -15,10 +15,13 @@ import { Role } from '@/utils/types';
 import { TagFilter } from '@/components/ui/molecules/filters';
 import { gameTeamVariant } from '@/utils/variants';
 import Image from 'next/image';
+import { paths } from '@/utils/paths';
+import { roleTypeToSlug, type RoleSlugLocale } from '@/utils/roleSlug';
 
 const RolesClient = () => {
   const troles = useTranslations('roles');
   const t = useTranslations('components.pages.roles');
+  const locale = useLocale() as RoleSlugLocale;
   const {
     roleList,
     roleListLoading,
@@ -155,7 +158,20 @@ const RolesClient = () => {
                         )}
                       </div>
                       <div className="flex items-center justify-end">
-                        <Button variant="text" size="sm" label="Voir" />
+                        {(role.type || role.id) && (
+                          <Button
+                            variant="text"
+                            size="sm"
+                            label={t('seeRole')}
+                            asLink
+                            href={{
+                              pathname: paths.roleDetails,
+                              params: {
+                                roleRef: role.type ? roleTypeToSlug(role.type, locale) : role.id,
+                              },
+                            }}
+                          />
+                        )}
                       </div>
                     </div>
                   </Card>

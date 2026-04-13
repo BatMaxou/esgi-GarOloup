@@ -187,6 +187,7 @@
         "navbar": {
           "logoutSuccess": "Logout successful",
           "logoAlt": "GarOloup",
+          "roles": "Roles",
           "mockLinks": {
             "ui": "UI",
             "icons": "Icons",
@@ -348,7 +349,24 @@
         "subtitle": "Every role has its objectives, powers, and alliances. Learn to know them—or to fear them.",
         "game": "game",
         "camp": "Camp",
-        "noRolesFoundForThisCamp": "The roles for this camp are not yet available..."
+        "noRolesFoundForThisCamp": "The roles for this camp are not yet available...",
+        "seeRole": "See"
+      },
+      "roleDetail": {
+        "previousRole": "Previous",
+        "nextRole": "Next",
+        "loading": "Loading…",
+        "notFound": "Role not found.",
+        "breadcrumbBestiary": "Bestiary",
+        "roleEyebrow": "Role — {camp}",
+        "description": "Description",
+        "ability": "Ability",
+        "compatibleCamps": "Compatible teams",
+        "backToRoles": "Back to roles",
+        "playWithRole": "Play with this role",
+        "sameCampRoles": "Roles from the same team",
+        "minPlayers": "Min. players",
+        "maxPerGame": "Max / game"
       }
     },
     "ui": {
@@ -381,6 +399,7 @@
   "contexts": {
     "role": {
       "roleListError": "Error retrieving role list",
+      "roleNotFound": "Role not found.",
       "gameTeamFiltersError": "Error retrieving game team filters"
     },
     "auth": {

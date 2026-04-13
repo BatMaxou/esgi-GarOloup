@@ -28,6 +28,10 @@ export const pathnames = {
     fr: '/roles',
     en: '/roles',
   },
+  '/roles/[roleRef]': {
+    fr: '/roles/[roleRef]',
+    en: '/roles/[roleRef]',
+  },
   '/lobby': {
     fr: '/lobby',
     en: '/lobby',

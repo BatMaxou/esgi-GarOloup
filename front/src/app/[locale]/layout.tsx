@@ -8,7 +8,6 @@ import { ApiClientProvider } from '@/contexts/api-context';
 import { MercureClientProvider } from '@/contexts/mercure-context';
 import { AuthProvider } from '@/contexts/auth-context';
 import { ThemeProvider } from '@/contexts/theme-context';
-import { RoleProvider } from '@/contexts/role-context';
 import { GameProvider } from '@/contexts/game-context';
 import { PlayerProvider } from '@/contexts/player-context';
 
@@ -28,11 +27,9 @@ const Providers = ({ children }: ProvidersProps) => {
           <AuthProvider>
             <ApiClientProvider>
               <MercureClientProvider>
-                <RoleProvider>
-                  <PlayerProvider>
-                    <GameProvider>{children}</GameProvider>
-                  </PlayerProvider>
-                </RoleProvider>
+                <PlayerProvider>
+                  <GameProvider>{children}</GameProvider>
+                </PlayerProvider>
               </MercureClientProvider>
             </ApiClientProvider>
           </AuthProvider>
