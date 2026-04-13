@@ -12,4 +12,5 @@ export const paths = {
   resetPassword: '/reset-password',
   test: '/test',
   roles: '/roles',
+  roleDetails: '/roles/[roleRef]',
 } satisfies Record<string, keyof typeof pathnames>;

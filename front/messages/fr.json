@@ -187,6 +187,7 @@
         "navbar": {
           "logoutSuccess": "Déconnexion réussie",
           "logoAlt": "GarOloup",
+          "roles": "Rôles",
           "mockLinks": {
             "ui": "UI",
             "icons": "Icônes",
@@ -317,6 +318,22 @@
         "camp": "Camp",
         "noRolesFoundForThisCamp": "Les rôles de ce camp ne sont pas encore disponibles...",
         "seeRole": "Voir"
+      },
+      "roleDetail": {
+        "previousRole": "Précédent",
+        "nextRole": "Suivant",
+        "loading": "Chargement…",
+        "notFound": "Rôle introuvable.",
+        "breadcrumbBestiary": "Bestiaire",
+        "roleEyebrow": "Rôle — {camp}",
+        "description": "Description",
+        "ability": "Pouvoir",
+        "compatibleCamps": "Camps compatibles",
+        "backToRoles": "Retour aux rôles",
+        "playWithRole": "Jouer avec ce rôle",
+        "sameCampRoles": "Rôles du même camp",
+        "minPlayers": "Min. joueurs",
+        "maxPerGame": "Max / partie"
       }
     }
   },

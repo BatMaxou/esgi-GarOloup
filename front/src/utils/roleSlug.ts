@@ -14,9 +14,9 @@ export const ROLE_SLUG_BY_LOCALE: Record<GameRoleEnum, Record<RoleSlugLocale, st
 /**
  * Associe n'importe quel slug (toutes langues confondues) à son `GameRoleEnum`
  */
-const SLUG_TO_ROLE_TYPE: Readonly<Record<string, GameRoleEnum>> = Object.entries(
-  ROLE_SLUG_BY_LOCALE
-).reduce<Record<string, GameRoleEnum>>((acc, [roleType, slugsByLocale]) => {
+const SLUG_TO_ROLE_TYPE: Readonly<Record<string, GameRoleEnum>> = Object.entries(ROLE_SLUG_BY_LOCALE).reduce<
+  Record<string, GameRoleEnum>
+>((acc, [roleType, slugsByLocale]) => {
   Object.values(slugsByLocale).forEach((slug) => {
     acc[slug] = roleType as GameRoleEnum;
   });

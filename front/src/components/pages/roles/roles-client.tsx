@@ -10,13 +10,13 @@ import Tag from '@/components/ui/molecules/tag';
 import Divider from '@/components/ui/atoms/divider';
 import Button from '@/components/ui/molecules/button';
 import { getImagePath } from '@/utils/getImagePath';
-import { GameRoleEnum, GameTeamEnum } from '@/utils/enums';
+import { GameTeamEnum } from '@/utils/enums';
 import { Role } from '@/utils/types';
 import { TagFilter } from '@/components/ui/molecules/filters';
 import { gameTeamVariant } from '@/utils/variants';
-import { roleTypeToSlug, type RoleSlugLocale } from '@/utils/roleSlug';
-import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
+import { paths } from '@/utils/paths';
+import { roleTypeToSlug, type RoleSlugLocale } from '@/utils/roleSlug';
 
 const RolesClient = () => {
   const troles = useTranslations('roles');
@@ -158,15 +158,19 @@ const RolesClient = () => {
                         )}
                       </div>
                       <div className="flex items-center justify-end">
-                        {role.type && (
-                          <Link
+                        {(role.type || role.id) && (
+                          <Button
+                            variant="text"
+                            size="sm"
+                            label={t('seeRole')}
+                            asLink
                             href={{
-                              pathname: '/roles/[slug]',
-                              params: { slug: roleTypeToSlug(role.type as GameRoleEnum, locale) },
+                              pathname: paths.roleDetails,
+                              params: {
+                                roleRef: role.type ? roleTypeToSlug(role.type, locale) : role.id,
+                              },
                             }}
-                          >
-                            <Button variant="text" size="sm" label={t('seeRole')} />
-                          </Link>
+                          />
                         )}
                       </div>
                     </div>

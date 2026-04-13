@@ -28,9 +28,9 @@ export const pathnames = {
     fr: '/roles',
     en: '/roles',
   },
-  '/roles/[slug]': {
-    fr: '/roles/[slug]',
-    en: '/roles/[slug]',
+  '/roles/[roleRef]': {
+    fr: '/roles/[roleRef]',
+    en: '/roles/[roleRef]',
   },
   '/quick-login': {
     fr: '/connexion-rapide',

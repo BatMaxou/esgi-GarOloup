@@ -187,6 +187,7 @@
         "navbar": {
           "logoutSuccess": "Logout successful",
           "logoAlt": "GarOloup",
+          "roles": "Roles",
           "mockLinks": {
             "ui": "UI",
             "icons": "Icons",
@@ -315,6 +316,22 @@
         "camp": "Camp",
         "noRolesFoundForThisCamp": "The roles for this camp are not yet available...",
         "seeRole": "See"
+      },
+      "roleDetail": {
+        "previousRole": "Previous",
+        "nextRole": "Next",
+        "loading": "Loading…",
+        "notFound": "Role not found.",
+        "breadcrumbBestiary": "Bestiary",
+        "roleEyebrow": "Role — {camp}",
+        "description": "Description",
+        "ability": "Ability",
+        "compatibleCamps": "Compatible teams",
+        "backToRoles": "Back to roles",
+        "playWithRole": "Play with this role",
+        "sameCampRoles": "Roles from the same team",
+        "minPlayers": "Min. players",
+        "maxPerGame": "Max / game"
       }
     }
   },
