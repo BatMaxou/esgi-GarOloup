@@ -3,3 +3,4 @@ App\Entity\Game\Composition:
         roles:
             groups:
                 - game:read
+                - homepage:read

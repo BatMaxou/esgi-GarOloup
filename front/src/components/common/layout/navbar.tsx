@@ -5,14 +5,17 @@ import { useTranslations } from 'next-intl';
 import { cva } from 'class-variance-authority';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { toast } from 'react-toastify';
 
-const ThemeSwitcher = dynamic(() => import('@/components/common/layout/theme-switcher'), { ssr: false });
-
-import { paths } from '@/utils/paths';
 import Button from '@/components/ui/molecules/button';
 import { useAuth } from '@/contexts/auth-context';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
+import { paths } from '@/utils/paths';
+
+const ThemeSwitcher = dynamic(() => import('@/components/common/layout/theme-switcher'), { ssr: false });
+const NavbarAuthActions = dynamic(() => import('@/components/common/layout/navbar-auth-actions'), {
+  ssr: false,
+  loading: () => <span className="flex min-h-8 min-w-22 shrink-0" aria-hidden />,
+});
 
 const navbarCva = cva(
   'border-b border-primary px-4 py-2 flex items-center justify-between fixed top-0 left-0 right-0 backdrop-blur-sm z-24',
@@ -29,18 +32,13 @@ const navbarCva = cva(
 const Navbar = () => {
   const pathname = usePathname();
   const isSticky = useMemo(() => pathname !== paths.home, [pathname]);
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const router = useRouter();
   const t = useTranslations('components.common.layout.navbar');
 
-  const handleLogout = async () => {
-    await logout();
-    toast.success(t('logoutSuccess'));
-  };
-
   const handleJoinGame = () => {
     if (user) {
-      // router.push(paths.playGame);
+      router.push(paths.lobby);
       return;
     } else {
       router.push(paths.login);
@@ -71,12 +69,8 @@ const Navbar = () => {
         <li>
           <Button variant="accent" size="sm" label={t('playNow')} onClick={handleJoinGame} />
         </li>
-        <li>
-          {user ? (
-            <Button variant="error" size="sm" glass label={t('logout')} onClick={handleLogout} />
-          ) : (
-            <Button asLink variant="secondary" size="sm" label={t('login')} href={paths.login} />
-          )}
+        <li className="flex min-h-8 min-w-22 items-center justify-end">
+          <NavbarAuthActions />
         </li>
         <li>
           <ThemeSwitcher />

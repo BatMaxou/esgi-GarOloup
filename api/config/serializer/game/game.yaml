@@ -5,6 +5,7 @@ App\Entity\Game\Game:
                 - me:read
                 - me:player:read
                 - game:read
+                - homepage:read
         step:
             groups:
                 - me:read
@@ -12,9 +13,22 @@ App\Entity\Game\Game:
         joinCode:
             groups:
                 - game:read
+                - homepage:read
         players:
             groups:
                 - game:read
+                - homepage:read
         configuration:
+            groups:
+                - game:read
+        maxPlayers:
+            groups:
+                - game:read
+                - homepage:read
+        maxTimeForDiscussion:
+            groups:
+                - game:read
+                - homepage:read
+        public:
             groups:
                 - game:read

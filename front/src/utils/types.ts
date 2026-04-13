@@ -23,6 +23,10 @@ export type Game = {
   joinCode?: string;
   players?: Player[];
   host?: Player;
+  gameMaster?: Player;
+  maxPlayers?: number;
+  maxTimeForDiscussion?: number;
+  public?: boolean;
 };
 
 export type Player = {
@@ -67,4 +71,11 @@ export type RoleDispatchEntry = {
 
 export type MercureToken = {
   token?: string;
+};
+
+// ------------------ Model ------------------
+
+export type Homepage = {
+  lastRoles: Role[];
+  lastPublicGames: Game[];
 };

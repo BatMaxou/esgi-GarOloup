@@ -32,8 +32,8 @@ export const pathnames = {
     fr: '/roles/[roleRef]',
     en: '/roles/[roleRef]',
   },
-  '/quick-login': {
-    fr: '/connexion-rapide',
-    en: '/quick-login',
+  '/lobby': {
+    fr: '/lobby',
+    en: '/lobby',
   },
 };

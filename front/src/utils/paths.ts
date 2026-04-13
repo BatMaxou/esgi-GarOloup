@@ -1,6 +1,15 @@
 import { pathnames } from '@/i18n/pathnames';
 
-export const paths = {
+export const loggedAreaPaths = { lobby: '/lobby' } as object;
+
+export function isLoggedAreaPath(pathname: string): boolean {
+  const normalized = (pathname.replace(/\/$/, '') || '/') as `/${string}` | '/';
+  return Object.values(loggedAreaPaths).some(
+    (pathname) => normalized === pathname || normalized.startsWith(`${pathname}/`)
+  );
+}
+
+export const paths: Record<string, keyof typeof pathnames> = {
   home: '/',
   game: '/game',
   ui: '/ui',
@@ -13,4 +22,5 @@ export const paths = {
   test: '/test',
   roles: '/roles',
   roleDetails: '/roles/[roleRef]',
+  ...loggedAreaPaths,
 } satisfies Record<string, keyof typeof pathnames>;

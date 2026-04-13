@@ -8,6 +8,8 @@ import { ApiClientProvider } from '@/contexts/api-context';
 import { MercureClientProvider } from '@/contexts/mercure-context';
 import { AuthProvider } from '@/contexts/auth-context';
 import { ThemeProvider } from '@/contexts/theme-context';
+import { GameProvider } from '@/contexts/game-context';
+import { PlayerProvider } from '@/contexts/player-context';
 
 type ProvidersProps = {
   children: ReactNode;
@@ -24,7 +26,11 @@ const Providers = ({ children }: ProvidersProps) => {
         <ThemeProvider>
           <AuthProvider>
             <ApiClientProvider>
-              <MercureClientProvider>{children}</MercureClientProvider>
+              <MercureClientProvider>
+                <PlayerProvider>
+                  <GameProvider>{children}</GameProvider>
+                </PlayerProvider>
+              </MercureClientProvider>
             </ApiClientProvider>
           </AuthProvider>
         </ThemeProvider>

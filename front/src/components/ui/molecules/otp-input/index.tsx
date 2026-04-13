@@ -3,8 +3,10 @@
 import {
   useCallback,
   useEffect,
+  useId,
   useMemo,
   useRef,
+  useState,
   type ChangeEvent,
   type ClipboardEvent,
   type KeyboardEvent,
@@ -14,11 +16,14 @@ import cn from 'classnames';
 
 import { otpDigitCva } from './cva';
 import Typography from '@/components/ui/atoms/typography';
-import { uuidv4 } from 'zod';
+
+function sanitizeOtp(raw: string, mode: 'numeric' | 'text', maxLen: number) {
+  const cleaned = mode === 'numeric' ? raw.replace(/\D/g, '') : raw.replace(/\s/g, '');
+  return cleaned.slice(0, maxLen);
+}
 
 type Props = VariantProps<typeof otpDigitCva> & {
   length?: number;
-  value: string | null;
   defaultValue?: string;
   onChange?: (otp: string) => void;
   onComplete?: (otp: string) => void;
@@ -36,7 +41,7 @@ type Props = VariantProps<typeof otpDigitCva> & {
 
 const OTPInput = ({
   length = 6,
-  value = null,
+  defaultValue = '',
   onChange,
   onComplete,
   label,
@@ -51,13 +56,15 @@ const OTPInput = ({
   autoFocus,
   sizing,
 }: Props) => {
-  const uuid = uuidv4();
-  const groupId = idProp ?? `otp-${uuid}`;
+  const reactId = useId();
+  const groupId = idProp ?? `otp-${reactId.replace(/:/g, '')}`;
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
+  const [otp, setOtpState] = useState(() => sanitizeOtp(defaultValue, inputMode, length));
+
   const setOtp = useCallback(
     (raw: string) => {
-      const cleaned = inputMode === 'numeric' ? raw.replace(/\D/g, '') : raw.replace(/\s/g, '');
-      const next = cleaned.slice(0, length);
+      const next = sanitizeOtp(raw, inputMode, length);
+      setOtpState(next);
       onChange?.(next);
       if (next.length === length) {
         onComplete?.(next);
@@ -66,7 +73,7 @@ const OTPInput = ({
     [inputMode, length, onChange, onComplete]
   );
 
-  const digits = useMemo(() => Array.from({ length }, (_, i) => value?.[i] ?? ''), [value, length]);
+  const digits = useMemo(() => Array.from({ length }, (_, i) => otp[i] ?? ''), [otp, length]);
 
   const status = disabled ? 'disabled' : error ? 'error' : success ? 'success' : 'default';
 
@@ -82,7 +89,7 @@ const OTPInput = ({
   const handleChange = (index: number, e: ChangeEvent<HTMLInputElement>) => {
     if (disabled) return;
 
-    const current = value ?? '';
+    const current = otp;
     const targetValue = e.target.value;
 
     // Champ vidé (effacement) : on retire le caractère à cette position sans toucher au reste.
@@ -111,7 +118,7 @@ const OTPInput = ({
 
   const handleKeyDown = (index: number, e: KeyboardEvent<HTMLInputElement>) => {
     if (disabled) return;
-    if (e.key === 'Backspace' && !value?.[index] && index > 0) {
+    if (e.key === 'Backspace' && !otp[index] && index > 0) {
       e.preventDefault();
       focusInput(index - 1);
     }
@@ -153,7 +160,7 @@ const OTPInput = ({
         </label>
       )}
       <div className={cn('flex flex-row items-center gap-2 sm:gap-3', groupClassName)} role="group">
-        {name && <input type="hidden" name={name} value={value ?? ''} readOnly aria-hidden tabIndex={-1} />}
+        {name && <input type="hidden" name={name} value={otp} readOnly aria-hidden tabIndex={-1} />}
         {digits.map((digit, index) => (
           <input
             key={`${groupId}-${index}`}

@@ -8,6 +8,9 @@ import { useAuth } from '@/contexts/auth-context';
 import { ApiClientError } from '@/lib/api/ApiClientError';
 import { useMercureClient } from '@/contexts/mercure-context';
 import { usePlayer } from '@/contexts/player-context';
+import { CollectionResponse } from '@/lib/api/ApiClient';
+import { toast } from 'react-toastify';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   children: ReactNode;
@@ -18,14 +21,20 @@ type GameContextType = {
   game: Game | null;
   setGame: (game: Game | null) => void;
   leaveGame: () => void;
+  publicGames: CollectionResponse<Game> | null;
+  publicGamesLoading: boolean;
+  getPublicGames: (page: number, itemsPerPage?: number) => void;
 };
 
 export const GameContext = createContext<GameContextType | undefined>(undefined);
 
 export const GameProvider = ({ children, initialGame = null }: Props) => {
   const [game, setGame] = useState<Game | null>(initialGame);
+  const [publicGamesLoading, setPublicGamesLoading] = useState<boolean>(false);
+  const [publicGames, setPublicGames] = useState<CollectionResponse<Game> | null>(null);
   const isWatching = useRef<boolean>(false);
   const { apiClient } = useApiClient();
+  const t = useTranslations('contexts.game');
   const { mercureClient, isCredentialsInitialized } = useMercureClient();
   const { user } = useAuth();
   const { desyncPlayer } = usePlayer();
@@ -64,7 +73,23 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
     };
   }, [mercureClient, game?.id, isCredentialsInitialized]);
 
-  return <GameContext.Provider value={{ game, setGame, leaveGame }}>{children}</GameContext.Provider>;
+  const getPublicGames = async (page: number = 1, itemsPerPage?: number) => {
+    setPublicGamesLoading(true);
+    const response = await apiClient.game.getPublics(page, itemsPerPage);
+    if (response instanceof ApiClientError) {
+      setPublicGamesLoading(false);
+      toast.error(t('getPublicGamesError'));
+      return;
+    }
+    setPublicGames(response as CollectionResponse<Game>);
+    setPublicGamesLoading(false);
+  };
+
+  return (
+    <GameContext.Provider value={{ game, setGame, leaveGame, publicGames, publicGamesLoading, getPublicGames }}>
+      {children}
+    </GameContext.Provider>
+  );
 };
 
 export const useGame = () => {

@@ -16,13 +16,14 @@ type BaseProps = {
   children: ReactNode;
   className?: string;
   orientation?: CardOrientation;
+  hoverable?: boolean;
   liftOnHover?: boolean;
   fullfilled?: boolean;
 };
 
 type DefaultCardProps = BaseProps & {
   type?: 'default';
-  variant?: 'none' | 'accent' | 'success' | 'error';
+  variant?: 'none' | 'accent' | 'success' | 'error' | 'gradient';
   fullfilled?: boolean;
   href?: LinkHref;
 };
@@ -38,15 +39,17 @@ type Props = DefaultCardProps | RoleCardProps;
 const Card = ({
   children,
   type = 'default',
-  variant,
+  variant = 'none',
   className,
   orientation = 'vertical',
   liftOnHover = true,
+  hoverable = true,
   fullfilled = false,
   href,
 }: Props) => {
   const isRole = type === 'role';
   const roleVariant = isRole ? (variant as RoleCardVariant) : 'none';
+
   const emphasis = !isRole
     ? variant === 'accent'
       ? 'accent'
@@ -54,21 +57,23 @@ const Card = ({
         ? 'success'
         : variant === 'error'
           ? 'error'
-          : 'base'
+          : variant === 'gradient'
+            ? 'gradient'
+            : 'base'
     : 'base';
 
   return href ? (
     <Link
       href={href}
       className={cn(
-        cardCva({ orientation, liftOnHover, type, roleVariant, emphasis, fullfilled, className }),
+        cardCva({ orientation, liftOnHover: hoverable && liftOnHover, type, roleVariant, emphasis, fullfilled, className }),
         href ? 'cursor-pointer' : ''
       )}
     >
       {children}
     </Link>
   ) : (
-    <div className={`${cardCva({ orientation, liftOnHover, type, roleVariant, emphasis, fullfilled, className })}`}>
+    <div className={`${cardCva({ orientation, liftOnHover: hoverable && liftOnHover, type, roleVariant, emphasis, fullfilled, className })}`}>
       {children}
     </div>
   );

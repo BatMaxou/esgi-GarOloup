@@ -3,9 +3,11 @@
 import { createContext, ReactNode, useCallback, useContext, useMemo } from 'react';
 
 import type { User } from '@/utils/types';
+import { usePathname, useRouter } from '@/i18n/navigation';
 import { signIn, signOut, useSession } from '@/lib/auth/auth-client';
 import { tempUserSignIn, tempUserSignOut, useTempUserSession } from '@/lib/auth/auth-temp-user-client';
 import { ApiClientError } from '@/lib/api/ApiClientError';
+import { isLoggedAreaPath, paths } from '@/utils/paths';
 
 type Props = {
   children: ReactNode;
@@ -23,6 +25,8 @@ type AuthContextType = {
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: Props) => {
+  const pathname = usePathname();
+  const router = useRouter();
   const { data: mainSession, refetch: refetchMain } = useSession();
   const { data: tempSession, refetch: refetchTemp } = useTempUserSession();
 
@@ -44,9 +48,13 @@ export const AuthProvider = ({ children }: Props) => {
   );
 
   const logout = useCallback(async () => {
+    const shouldLeaveLoggedArea = isLoggedAreaPath(pathname);
     await signOut();
     await tempUserSignOut();
-  }, []);
+    if (shouldLeaveLoggedArea) {
+      router.push(paths.home);
+    }
+  }, [pathname, router]);
 
   const getTempUser = useCallback(
     async (username: string) => {
