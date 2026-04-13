@@ -9,3 +9,12 @@ export const tabsCva = cva('flex flex-col gap-5', {
     },
   },
 });
+
+export const itemCva = cva('px-6 py-3 cursor-pointer transition-all item-follow-anchor hover:opacity-100', {
+  variants: {
+    active: {
+      true: 'item-follow-anchor-active',
+      false: 'opacity-70',
+    },
+  },
+});
