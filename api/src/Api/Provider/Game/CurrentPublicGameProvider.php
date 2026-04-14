@@ -6,7 +6,7 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\Pagination\TraversablePaginator;
 use ApiPlatform\State\ProviderInterface;
 use App\Entity\Game\Game;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
 use App\Repository\Game\GameRepository;
 
 /** @implements ProviderInterface<Game> */
@@ -44,7 +44,7 @@ class CurrentPublicGameProvider implements ProviderInterface
         }
 
         $offset = ($page - 1) * $itemsPerPage;
-        $criterias = ['public' => true, 'step' => GameStepEnum::NEW];
+        $criterias = ['public' => true, 'initialisationStep' => GameInitialisationStepEnum::NEW];
         $orderBy = ['createdAt' => 'DESC'];
 
         $games = $this->gameRepository->findBy($criterias, $orderBy, $itemsPerPage, $offset);

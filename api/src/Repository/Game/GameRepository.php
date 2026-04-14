@@ -3,7 +3,7 @@
 namespace App\Repository\Game;
 
 use App\Entity\Game\Game;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -22,9 +22,9 @@ class GameRepository extends ServiceEntityRepository
         /** @var Game|null */
         return $this->createQueryBuilder('g')
             ->andWhere('g.joinCode = :joinCode')
-            ->andWhere('g.step = :step')
+            ->andWhere('g.initialisationStep = :step')
             ->setParameter('joinCode', $joinCode)
-            ->setParameter('step', GameStepEnum::NEW)
+            ->setParameter('step', GameInitialisationStepEnum::NEW)
             ->getQuery()
             ->getOneOrNullResult()
         ;

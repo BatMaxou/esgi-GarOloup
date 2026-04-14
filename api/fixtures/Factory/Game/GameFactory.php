@@ -3,7 +3,7 @@
 namespace App\Fixtures\Factory\Game;
 
 use App\Entity\Game\Game;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
@@ -23,7 +23,7 @@ final class GameFactory extends PersistentObjectFactory
         return [
             'host' => PlayerFactory::new(),
             'joinCode' => self::faker()->text(8),
-            'step' => GameStepEnum::NEW,
+            'initialisationStep' => GameInitialisationStepEnum::NEW,
             'configuration' => ConfigurationFactory::new(),
             'maxPlayers' => 10,
             'maxTimeForDiscussion' => 5,

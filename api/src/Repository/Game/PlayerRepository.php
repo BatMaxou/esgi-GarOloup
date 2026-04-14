@@ -6,8 +6,9 @@ use App\Entity\Game\Game;
 use App\Entity\Game\Player;
 use App\Entity\User\TempUser;
 use App\Entity\User\User;
+use App\Enum\Game\GameInitialisationStepEnum;
 use App\Enum\Game\GameRoleEnum;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameRuntimeStepEnum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -54,24 +55,35 @@ class PlayerRepository extends ServiceEntityRepository
             ->add('p.tempUser = :uuid')
         ;
 
-        $gameConditions = $queryBuilder->expr()->orX()
+        $notFinishedGame = $queryBuilder->expr()->andX()
             ->add('g.id IS NOT NULL')
-            ->add('mg.id IS NOT NULL')
+            ->add($queryBuilder->expr()->orX()
+                ->add('g.initialisationStep != :initialisationStep')
+                ->add('g.runtimeStep IS NULL')
+                ->add('g.runtimeStep != :runtimeStep'))
         ;
 
-        $stepConditions = $queryBuilder->expr()->orX()
-            ->add('g.step != :gameStep')
-            ->add('mg.step != :gameStep')
+        $notFinishedManagedGame = $queryBuilder->expr()->andX()
+            ->add('mg.id IS NOT NULL')
+            ->add($queryBuilder->expr()->orX()
+                ->add('mg.initialisationStep != :initialisationStep')
+                ->add('mg.runtimeStep IS NULL')
+                ->add('mg.runtimeStep != :runtimeStep'))
+        ;
+
+        $gameNotFinished = $queryBuilder->expr()->orX()
+            ->add($notFinishedGame)
+            ->add($notFinishedManagedGame)
         ;
 
         /** @var Player|null */
         return $queryBuilder
             ->where($userConditions)
-            ->andWhere($gameConditions)
-            ->andWhere($stepConditions)
+            ->andWhere($gameNotFinished)
             ->orderBy('p.createdAt', 'DESC')
             ->setParameter('uuid', $user->getId(), 'uuid')
-            ->setParameter('gameStep', GameStepEnum::FINISH)
+            ->setParameter('initialisationStep', GameInitialisationStepEnum::FINISH)
+            ->setParameter('runtimeStep', GameRuntimeStepEnum::FINISH)
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();

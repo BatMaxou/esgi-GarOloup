@@ -6,7 +6,7 @@ use App\Entity\Game\Game;
 use App\Entity\Game\Role\WerewolfRole;
 use App\Entity\User\AbstractUser;
 use App\Entity\User\TempUser;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
 use App\Repository\Game\PlayerRepository;
 
 class GameSpec
@@ -75,7 +75,7 @@ class GameSpec
             return false;
         }
 
-        return GameStepEnum::NEW === $game->getStep();
+        return GameInitialisationStepEnum::NEW === $game->getInitialisationStep();
     }
 
     public function canReOpenGameInvitation(AbstractUser $user, Game $game): bool
@@ -84,7 +84,7 @@ class GameSpec
             return false;
         }
 
-        return GameStepEnum::CONFIGURATION === $game->getStep();
+        return GameInitialisationStepEnum::CONFIGURATION === $game->getInitialisationStep();
     }
 
     public function canSetConfiguration(AbstractUser $user, Game $game): bool
@@ -93,7 +93,7 @@ class GameSpec
             return false;
         }
 
-        return GameStepEnum::CONFIGURATION === $game->getStep();
+        return GameInitialisationStepEnum::CONFIGURATION === $game->getInitialisationStep();
     }
 
     public function canSetGameMaster(AbstractUser $user, Game $game): bool
@@ -102,7 +102,7 @@ class GameSpec
             return false;
         }
 
-        return GameStepEnum::GAME_MASTER_CHOICE === $game->getStep();
+        return GameInitialisationStepEnum::GAME_MASTER_CHOICE === $game->getInitialisationStep();
     }
 
     public function canLaunchGame(AbstractUser $user, Game $game): bool
@@ -111,7 +111,7 @@ class GameSpec
             return false;
         }
 
-        return GameStepEnum::READY === $game->getStep();
+        return GameInitialisationStepEnum::FINISH === $game->getInitialisationStep();
     }
 
     public function canDispatchRoles(AbstractUser $user, Game $game): bool
@@ -120,19 +120,12 @@ class GameSpec
             return false;
         }
 
-        return GameStepEnum::DISPATCH === $game->getStep();
+        return GameInitialisationStepEnum::DISPATCH === $game->getInitialisationStep();
     }
 
     public function canSeeWerewolfTeam(AbstractUser $user, Game $game): bool
     {
-        $allowedSteps = [
-            GameStepEnum::SETUP,
-            GameStepEnum::NIGHT,
-            GameStepEnum::DAY,
-            GameStepEnum::VOTE,
-        ];
-
-        if (!\in_array($game->getStep(), $allowedSteps, true)) {
+        if (null === $game->getRuntimeStep()) {
             return false;
         }
 

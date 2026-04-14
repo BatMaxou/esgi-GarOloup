@@ -10,7 +10,7 @@ use App\Domain\Spec\GameSpec;
 use App\Entity\Event\Game\CloseGameInvitationEvent;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Game\Game;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
 
 /** @implements GameEventApplicatorInterface<CloseGameInvitationEvent> */
 class CloseGameInvitationEventApplicator implements GameEventApplicatorInterface
@@ -32,7 +32,7 @@ class CloseGameInvitationEventApplicator implements GameEventApplicatorInterface
             throw new UnauthorizedGameActionException('You can not close this game invitation');
         }
 
-        return $game->setStep(GameStepEnum::CONFIGURATION);
+        return $game->setInitialisationStep(GameInitialisationStepEnum::CONFIGURATION);
     }
 
     public function supports(GameEvent $gameEvent): bool

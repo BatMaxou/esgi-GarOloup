@@ -3,7 +3,7 @@
 namespace App\Tests\Functional\Game\Initialisation;
 
 use App\Entity\Event\Game\SetGameMasterEvent;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\Trait\GameEventAwareTrait;
@@ -28,7 +28,7 @@ class SetGameMasterTest extends GarOloupApiTestCase
         $gameBuilder = ThereIs::aGame()
             ->withHost($hostPlayerBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::GAME_MASTER_CHOICE)
+            ->withInitialisationStep(GameInitialisationStepEnum::GAME_MASTER_CHOICE)
             ->build()
         ;
         $targetPlayerBuilder = ThereIs::aPlayer()->withUser($targetUserBuilder)->withGame($gameBuilder)->build();
@@ -45,7 +45,7 @@ class SetGameMasterTest extends GarOloupApiTestCase
         $hostBuilder = ThereIs::aTempUser()->build();
         $hostPlayerBuilder = ThereIs::aPlayer()->withTempUser($hostBuilder)->build();
         $targetUserBuilder = ThereIs::anUser()->build();
-        $gameBuilder = ThereIs::aGame()->withHost($hostPlayerBuilder)->withStep(GameStepEnum::GAME_MASTER_CHOICE)->build();
+        $gameBuilder = ThereIs::aGame()->withHost($hostPlayerBuilder)->withInitialisationStep(GameInitialisationStepEnum::GAME_MASTER_CHOICE)->build();
         $targetPlayerBuilder = ThereIs::aPlayer()->withUser($targetUserBuilder)->withGame($gameBuilder)->build();
 
         $response = When::asTempUser($hostBuilder)->game()->setGameMaster($targetPlayerBuilder->getEntity()->getId());
@@ -74,7 +74,7 @@ class SetGameMasterTest extends GarOloupApiTestCase
     public function test_non_host_player_cant_set_game_master(): void
     {
         $userBuilder = ThereIs::anUser()->build();
-        $gameBuilder = ThereIs::aGame()->withStep(GameStepEnum::GAME_MASTER_CHOICE)->build();
+        $gameBuilder = ThereIs::aGame()->withInitialisationStep(GameInitialisationStepEnum::GAME_MASTER_CHOICE)->build();
         ThereIs::aPlayer()->withUser($userBuilder)->withGame($gameBuilder)->build();
 
         When::asUser($userBuilder)->game()->setGameMaster('random-guy-id');
@@ -86,7 +86,7 @@ class SetGameMasterTest extends GarOloupApiTestCase
         $userBuilder = ThereIs::anUser()->build();
         $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
         $targetUserBuilder = ThereIs::anUser()->build();
-        $gameBuilder = ThereIs::aGame()->withHost($hostBuilder)->withStep(GameStepEnum::CONFIGURATION)->build();
+        $gameBuilder = ThereIs::aGame()->withHost($hostBuilder)->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)->build();
         $targetPlayerBuilder = ThereIs::aPlayer()->withUser($targetUserBuilder)->withGame($gameBuilder)->build();
 
         When::asUser($userBuilder)->game()->setGameMaster($targetPlayerBuilder->getEntity()->getId());
@@ -97,7 +97,7 @@ class SetGameMasterTest extends GarOloupApiTestCase
     {
         $userBuilder = ThereIs::anUser()->build();
         $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
-        ThereIs::aGame()->withHost($hostBuilder)->withStep(GameStepEnum::GAME_MASTER_CHOICE)->build();
+        ThereIs::aGame()->withHost($hostBuilder)->withInitialisationStep(GameInitialisationStepEnum::GAME_MASTER_CHOICE)->build();
 
         When::asUser($userBuilder)->game()->setGameMaster('omg-i-dont-exist');
         $this->assertResponseStatusCodeSame(404);
@@ -107,7 +107,7 @@ class SetGameMasterTest extends GarOloupApiTestCase
     {
         $userBuilder = ThereIs::anUser()->build();
         $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
-        ThereIs::aGame()->withHost($hostBuilder)->withStep(GameStepEnum::GAME_MASTER_CHOICE)->build();
+        ThereIs::aGame()->withHost($hostBuilder)->withInitialisationStep(GameInitialisationStepEnum::GAME_MASTER_CHOICE)->build();
 
         $otherPlayerBuilder = ThereIs::aPlayer()->build();
         ThereIs::aGame()->build();
@@ -129,7 +129,7 @@ class SetGameMasterTest extends GarOloupApiTestCase
             ->withHost($hostPlayerBuilder)
             ->withPlayer($targetPlayerBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::GAME_MASTER_CHOICE)
+            ->withInitialisationStep(GameInitialisationStepEnum::GAME_MASTER_CHOICE)
             ->build();
         ThereIs::aConfiguration()
             ->forGame($gameBuilder)
@@ -146,7 +146,7 @@ class SetGameMasterTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(200);
 
         $game = $gameBuilder->getEntity();
-        $this->assertEquals(GameStepEnum::READY, $game->getStep());
+        $this->assertEquals(GameInitialisationStepEnum::FINISH, $game->getInitialisationStep());
         foreach ($game->getPlayers() as $player) {
             $this->assertNotNull($player->getRole());
         }
@@ -161,7 +161,7 @@ class SetGameMasterTest extends GarOloupApiTestCase
         $gameBuilder = ThereIs::aGame()
             ->withHost($hostPlayerBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::GAME_MASTER_CHOICE)
+            ->withInitialisationStep(GameInitialisationStepEnum::GAME_MASTER_CHOICE)
             ->build();
         ThereIs::aConfiguration()
             ->forGame($gameBuilder)
@@ -182,7 +182,7 @@ class SetGameMasterTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(200);
 
         $game = $gameBuilder->getEntity();
-        $this->assertEquals(GameStepEnum::DISPATCH, $game->getStep());
+        $this->assertEquals(GameInitialisationStepEnum::DISPATCH, $game->getInitialisationStep());
         foreach ($game->getPlayers() as $player) {
             $this->assertNull($player->getRole());
         }
@@ -193,7 +193,7 @@ class SetGameMasterTest extends GarOloupApiTestCase
         $userBuilder = ThereIs::anUser()->withUsername('SLiipMan')->build();
         $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
         $targetUserBuilder = ThereIs::anUser()->build();
-        $gameBuilder = ThereIs::aGame()->withHost($hostBuilder)->withStep(GameStepEnum::GAME_MASTER_CHOICE)->build();
+        $gameBuilder = ThereIs::aGame()->withHost($hostBuilder)->withInitialisationStep(GameInitialisationStepEnum::GAME_MASTER_CHOICE)->build();
         $targetPlayerBuilder = ThereIs::aPlayer()->withUser($targetUserBuilder)->withGame($gameBuilder)->build();
 
         When::asUser($userBuilder)->game()->setGameMaster($targetPlayerBuilder->getEntity()->getId());

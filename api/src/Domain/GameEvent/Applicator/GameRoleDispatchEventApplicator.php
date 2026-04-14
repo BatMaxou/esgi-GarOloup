@@ -14,7 +14,7 @@ use App\Entity\Event\Game\GameRoleDispatchEvent;
 use App\Entity\Game\Game;
 use App\Entity\Game\Player;
 use App\Entity\Role;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
 use App\Repository\Game\PlayerRepository;
 use App\Repository\RoleRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -82,7 +82,7 @@ class GameRoleDispatchEventApplicator implements GameEventApplicatorInterface
             throw new InvalidRoleDispatchException('All roles from the composition must be dispatched');
         }
 
-        $game->setStep(GameStepEnum::READY);
+        $game->setInitialisationStep(GameInitialisationStepEnum::FINISH);
 
         return $game;
     }

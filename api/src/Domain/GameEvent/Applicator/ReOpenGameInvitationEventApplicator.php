@@ -10,7 +10,7 @@ use App\Domain\Spec\GameSpec;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\ReOpenGameInvitationEvent;
 use App\Entity\Game\Game;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
 
 /** @implements GameEventApplicatorInterface<ReOpenGameInvitationEvent> */
 class ReOpenGameInvitationEventApplicator implements GameEventApplicatorInterface
@@ -32,7 +32,7 @@ class ReOpenGameInvitationEventApplicator implements GameEventApplicatorInterfac
             throw new UnauthorizedGameActionException('You can not open invitation for this game');
         }
 
-        return $game->setStep(GameStepEnum::NEW);
+        return $game->setInitialisationStep(GameInitialisationStepEnum::NEW);
     }
 
     public function supports(GameEvent $gameEvent): bool
