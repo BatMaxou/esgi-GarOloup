@@ -7,6 +7,7 @@ use App\Fixtures\Factory\User\UserFactory;
 use App\Tests\Helper\Behavior\Filter\FilterBehavior;
 use App\Tests\Helper\Behavior\Game\GameBehavior;
 use App\Tests\Helper\Behavior\HomepageBehavior;
+use App\Tests\Helper\Behavior\Mercure\MercureBehavior;
 use App\Tests\Helper\Behavior\Player\PlayerBehavior;
 use App\Tests\Helper\Behavior\RoleBehavior;
 use App\Tests\Helper\Behavior\Security\AuthBehavior;
@@ -73,6 +74,11 @@ final class When
     public static function filter(): FilterBehavior
     {
         return new FilterBehavior(self::$client);
+    }
+
+    public static function mercure(): MercureBehavior
+    {
+        return new MercureBehavior(self::$client);
     }
 
     public static function asUser(UserBuilder $userBuilder): static

@@ -8,6 +8,11 @@ use Symfony\Component\Mercure\Update;
 
 class MockHub implements HubInterface
 {
+    public function __construct(
+        private TokenFactoryInterface $tokenFactory,
+    ) {
+    }
+
     public function getPublicUrl(): string
     {
         return 'http://mercure/dummy';
@@ -15,7 +20,7 @@ class MockHub implements HubInterface
 
     public function getFactory(): ?TokenFactoryInterface
     {
-        return null;
+        return $this->tokenFactory;
     }
 
     public function publish(Update $update): string
