@@ -1,6 +1,8 @@
 services:
     mercure.hub.default:
         class: App\Tests\Mock\Mercure\MockHub
+        arguments:
+            - '@.lazy.mercure.hub.default.jwt.factory'
 
     App\Domain\GameEvent\GameEventCollector:
         class: App\Tests\Mock\GameEvent\MockGameEventCollector
