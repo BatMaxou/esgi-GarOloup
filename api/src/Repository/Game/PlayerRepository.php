@@ -2,9 +2,11 @@
 
 namespace App\Repository\Game;
 
+use App\Entity\Game\Game;
 use App\Entity\Game\Player;
 use App\Entity\User\TempUser;
 use App\Entity\User\User;
+use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameStepEnum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -73,5 +75,20 @@ class PlayerRepository extends ServiceEntityRepository
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    /** @return Player[] */
+    public function findWerewolvesByGame(Game $game): array
+    {
+        /** @var Player[] */
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.role', 'r')
+            ->where('p.game = :game')
+            ->andWhere('r.type = :werewolfType')
+            ->setParameter('game', $game->getId(), 'uuid')
+            ->setParameter('werewolfType', GameRoleEnum::WEREWOLF)
+            ->orderBy('p.createdAt', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 }

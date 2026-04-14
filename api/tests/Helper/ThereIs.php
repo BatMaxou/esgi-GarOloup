@@ -8,6 +8,7 @@ use App\Tests\Helper\Builder\Game\ConfigurationBuilder;
 use App\Tests\Helper\Builder\Game\DispatchBuilder;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
+use App\Tests\Helper\Builder\Game\Role\GameRoleBuilderBag;
 use App\Tests\Helper\Builder\Role\RoleBuilder;
 use App\Tests\Helper\Builder\Role\RoleBuilderBag;
 use App\Tests\Helper\Builder\Security\RefreshTokenBuilder;
@@ -70,6 +71,11 @@ final class ThereIs
     public static function aRoleBag(): RoleBuilderBag
     {
         return new RoleBuilderBag(static::aRole());
+    }
+
+    public static function aGameRoleBag(RoleBuilderBag $roleBag): GameRoleBuilderBag
+    {
+        return new GameRoleBuilderBag($roleBag);
     }
 
     public static function anUploadFile(): UploadFileBuilder

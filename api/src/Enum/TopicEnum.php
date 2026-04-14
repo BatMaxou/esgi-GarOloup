@@ -6,5 +6,6 @@ enum TopicEnum: string
 {
     case CURRENT_GAME = 'garoloup-game-{id}';
     case CURRENT_PLAYER = 'garoloup-player-{id}';
+    case WEREWOLF_TEAM = 'garoloup-werewolf-team-{id}';
     case UNKNOWN = 'garoloup-unknown';
 }

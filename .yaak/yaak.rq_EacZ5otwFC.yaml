@@ -2,9 +2,9 @@ type: http_request
 model: http_request
 id: rq_EacZ5otwFC
 createdAt: 2026-02-27T22:27:37.596897221
-updatedAt: 2026-03-04T08:46:29.745884304
+updatedAt: 2026-04-14T12:40:02.260901220
 workspaceId: wk_uXtATNFQmZ
-folderId: fl_bh6aMuFF23
+folderId: fl_4gDiWsWEgc
 authentication:
   token: ${[ TOKEN ]}
 authenticationType: bearer
@@ -26,6 +26,6 @@ headers:
   id: 0TkCedAc45
 method: POST
 name: Join Game
-sortPriority: 2000.0
+sortPriority: 1000.0
 url: ${[ BASE_URL ]}/api/game/join
 urlParameters: []

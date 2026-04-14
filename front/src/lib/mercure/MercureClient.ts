@@ -1,6 +1,6 @@
 import { ApiClient } from '@/lib/api/ApiClient';
 import { ClientCookieRegistry } from '@/lib/cookie/ClientCookieRegistry';
-import { Game, Player } from '@/utils/types';
+import { Game, Player, WerewolfTeam } from '@/utils/types';
 import { topics } from './topics';
 import { ApiClientError } from '../api/ApiClientError';
 
@@ -35,6 +35,10 @@ export class MercureClient {
 
   public watchPlayer(id: string, action: (player: Player) => void): EventSource | null {
     return this.subscribe(topics.player(id), ({ data }: { data: string }) => action(JSON.parse(data)));
+  }
+
+  public watchWerewolfTeam(id: string, action: (team: WerewolfTeam) => void): EventSource | null {
+    return this.subscribe(topics.werewolfTeam(id), ({ data }: { data: string }) => action(JSON.parse(data)));
   }
 
   public async fetchCredentials(): Promise<void> {

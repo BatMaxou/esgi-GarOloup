@@ -2,9 +2,9 @@ type: http_request
 model: http_request
 id: rq_kT7mWx3nP2
 createdAt: 2026-03-23T12:00:00
-updatedAt: 2026-03-25T17:32:09.076402978
+updatedAt: 2026-04-14T12:40:02.296296504
 workspaceId: wk_uXtATNFQmZ
-folderId: fl_bh6aMuFF23
+folderId: fl_4gDiWsWEgc
 authentication:
   token: ${[ TOKEN ]}
 authenticationType: bearer
@@ -26,6 +26,6 @@ headers:
   id: wN8vQ3xYd5
 method: PATCH
 name: Set Game Master
-sortPriority: 4000.0
+sortPriority: 5000.0
 url: ${[ BASE_URL ]}/api/game/game-master
 urlParameters: []

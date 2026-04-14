@@ -2,9 +2,9 @@ type: http_request
 model: http_request
 id: rq_gTDsoeeSQP
 createdAt: 2026-03-03T15:35:32.955479211
-updatedAt: 2026-04-06T10:23:54.557236406
+updatedAt: 2026-04-14T12:40:02.269368211
 workspaceId: wk_uXtATNFQmZ
-folderId: fl_bh6aMuFF23
+folderId: fl_4gDiWsWEgc
 authentication:
   token: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RlhCdVNMZFlzK29xLzVCS0M1MXNpaFZKd05LRGRDWFhHYzdmVlZ1NTlqN2E5MmtlY2taSzdHa1EzcU1sSzBTa0k5Y3lMSA') ]}
 authenticationType: bearer
@@ -23,6 +23,6 @@ headers:
   id: CVxRI3YD2A
 method: PATCH
 name: Close Invitation
-sortPriority: 3000.0
+sortPriority: 2000.0
 url: ${[ BASE_URL ]}/api/game/invitation/close
 urlParameters: []

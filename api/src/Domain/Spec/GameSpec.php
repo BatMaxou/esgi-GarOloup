@@ -3,6 +3,7 @@
 namespace App\Domain\Spec;
 
 use App\Entity\Game\Game;
+use App\Entity\Game\Role\WerewolfRole;
 use App\Entity\User\AbstractUser;
 use App\Entity\User\TempUser;
 use App\Enum\Game\GameStepEnum;
@@ -120,5 +121,27 @@ class GameSpec
         }
 
         return GameStepEnum::DISPATCH === $game->getStep();
+    }
+
+    public function canSeeWerewolfTeam(AbstractUser $user, Game $game): bool
+    {
+        $allowedSteps = [
+            GameStepEnum::SETUP,
+            GameStepEnum::NIGHT,
+            GameStepEnum::DAY,
+            GameStepEnum::VOTE,
+        ];
+
+        if (!\in_array($game->getStep(), $allowedSteps, true)) {
+            return false;
+        }
+
+        foreach ($game->getPlayers() as $player) {
+            if ($player->getLinkedUser() === $user) {
+                return $player->getRole() instanceof WerewolfRole;
+            }
+        }
+
+        return false;
     }
 }

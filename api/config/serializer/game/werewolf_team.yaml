@@ -1,0 +1,8 @@
+App\Api\Model\Game\WerewolfTeam:
+    attributes:
+        gameId:
+            groups:
+                - werewolf-team:read
+        members:
+            groups:
+                - werewolf-team:read
