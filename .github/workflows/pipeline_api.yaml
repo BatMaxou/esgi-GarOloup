@@ -11,8 +11,12 @@ on:
     paths:
       - 'api/**'
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
-  pipeline-api:
+  linters:
+    name: API linters
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -29,5 +33,76 @@ jobs:
       - name: Linter
         run: make php-lint
 
-      - name: Tests
-        run: make pretests && make tests
+  tests:
+    name: API tests && coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: linters
+
+    # Permissions for the GITHUB_TOKEN
+    permissions:
+      contents: read
+      pull-requests: write
+      statuses: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Docker up
+        run: make up php
+
+      - name: Vendor
+        run: make vendor
+
+      - name: Tests with coverage
+        run: make pretests && make tests-coverage-ci
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage.xml
+          retention-days: 7
+
+      - name: Extract coverage percentage
+        # Allow access to the output into the next steps
+        id: coverage
+        run: |
+          TOTAL=$(grep -oP '(?<!covered)statements="\K[0-9]+' coverage.xml | tail -1)
+          COVERED=$(grep -oP 'coveredstatements="\K[0-9]+' coverage.xml | tail -1)
+          PERCENT=$(awk "BEGIN {printf \"%.1f\", (${TOTAL:-0} > 0) ? ${COVERED:-0}/${TOTAL:-1}*100 : 0}")
+          COLOR=$(awk "BEGIN {percentage=${PERCENT}; print (percentage>=80) ? \"brightgreen\" : (percentage>=50) ? \"yellow\" : \"red\"}")
+          echo "percent=${PERCENT}" >> "$GITHUB_OUTPUT"
+          echo "color=${COLOR}" >> "$GITHUB_OUTPUT"
+
+      - name: Coverage comment on pull request
+        if: github.event_name == 'pull_request'
+        uses: slavcodev/coverage-monitor-action@1.10.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          coverage_path: coverage.xml
+          threshold_alert: 50
+          threshold_warning: 80
+
+      - name: Update coverage badge (develop)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+        uses: schneegans/dynamic-badges-action@v1.8.0
+        with:
+          label: Coverage (develop)
+          message: ${{ steps.coverage.outputs.percent }}%
+          color: ${{ steps.coverage.outputs.color }}
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: ${{ vars.API_TESTS_COVERAGE_GIST_ID_DEVELOP }}
+          filename: garoloup_api_tests_coverage_develop.json
+
+      - name: Update coverage badge (main)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: schneegans/dynamic-badges-action@v1.8.0
+        with:
+          label: Coverage (main)
+          message: ${{ steps.coverage.outputs.percent }}%
+          color: ${{ steps.coverage.outputs.color }}
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: ${{ vars.API_TESTS_COVERAGE_GIST_ID_MAIN }}
+          filename: garoloup_api_tests_coverage_main.json

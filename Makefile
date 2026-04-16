@@ -135,7 +135,12 @@ test-filter:
 
 tests-coverage:
 	@${php} bin/phpunit --coverage-html var/coverage
-.PHONY: test-coverage
+.PHONY: tests-coverage
+
+tests-coverage-ci:
+	@${php} bin/phpunit --coverage-clover /tmp/coverage.xml
+	@docker compose cp php:/tmp/coverage.xml coverage.xml
+.PHONY: tests-coverage-ci
 
 # --- PROD DEPLOYMENT COMMANDS ---
 
