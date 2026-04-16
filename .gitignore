@@ -36,5 +36,6 @@
 /.DS_Store/
 /.vscode/
 /.php-cs-fixer.cache
+/coverage.xml
 ###< Extra ###
 

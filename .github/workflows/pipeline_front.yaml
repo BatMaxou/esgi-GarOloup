@@ -12,7 +12,8 @@ on:
       - 'front/**'
 
 jobs:
-  pipeline-front:
+  linters:
+    name: Front linters
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
