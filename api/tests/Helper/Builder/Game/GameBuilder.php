@@ -3,7 +3,8 @@
 namespace App\Tests\Helper\Builder\Game;
 
 use App\Entity\Game\Game;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
+use App\Enum\Game\GameRuntimeStepEnum;
 use App\Fixtures\Factory\Game\GameFactory;
 use App\Tests\Helper\Builder\AbstractBuilder;
 
@@ -18,7 +19,8 @@ class GameBuilder extends AbstractBuilder
     public ?int $maxPlayers = null;
     public ?int $maxTimeForDiscussion = null;
     public ?bool $public = null;
-    public ?GameStepEnum $step = null;
+    public ?GameInitialisationStepEnum $initialisationStep = null;
+    public ?GameRuntimeStepEnum $runtimeStep = null;
     public ?bool $finished = null;
     public ?\DateTimeInterface $createdAt = null;
 
@@ -28,7 +30,8 @@ class GameBuilder extends AbstractBuilder
             ...($this->host ? ['host' => $this->host->getEntity()] : []),
             ...($this->gameMaster ? ['gameMaster' => $this->gameMaster->getEntity()] : []),
             ...($this->joinCode ? ['joinCode' => $this->joinCode] : []),
-            ...($this->step ? ['step' => $this->step] : []),
+            ...($this->initialisationStep ? ['initialisationStep' => $this->initialisationStep] : []),
+            ...($this->runtimeStep ? ['runtimeStep' => $this->runtimeStep] : []),
             ...($this->createdAt ? ['createdAt' => $this->createdAt] : []),
             ...($this->maxPlayers ? ['maxPlayers' => $this->maxPlayers] : []),
             ...($this->maxTimeForDiscussion ? ['maxTimeForDiscussion' => $this->maxTimeForDiscussion] : []),
@@ -79,9 +82,24 @@ class GameBuilder extends AbstractBuilder
         return $this;
     }
 
-    public function withStep(GameStepEnum $step): static
+    public function withInitialisationStep(GameInitialisationStepEnum $initialisationStep): static
     {
-        $this->step = $step;
+        $this->initialisationStep = $initialisationStep;
+
+        if (GameInitialisationStepEnum::FINISH === $this->initialisationStep) {
+            $this->withRuntimeStep(GameRuntimeStepEnum::SETUP);
+        }
+
+        return $this;
+    }
+
+    public function withRuntimeStep(GameRuntimeStepEnum $runtimeStep): static
+    {
+        if (GameInitialisationStepEnum::FINISH !== $this->initialisationStep) {
+            $this->withInitialisationStep(GameInitialisationStepEnum::FINISH);
+        }
+
+        $this->runtimeStep = $runtimeStep;
 
         return $this;
     }
@@ -105,14 +123,15 @@ class GameBuilder extends AbstractBuilder
 
     public function closed(): static
     {
-        $this->withStep(GameStepEnum::CONFIGURATION);
+        $this->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION);
 
         return $this;
     }
 
     public function finished(): static
     {
-        $this->withStep(GameStepEnum::FINISH);
+        $this->withInitialisationStep(GameInitialisationStepEnum::FINISH);
+        $this->withRuntimeStep(GameRuntimeStepEnum::FINISH);
 
         return $this;
     }

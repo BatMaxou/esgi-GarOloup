@@ -12,7 +12,7 @@ use App\Entity\Event\Game\SetGameConfigurationEvent;
 use App\Entity\Event\Game\SetGameMasterEvent;
 use App\Entity\Game\Game;
 use App\Entity\Game\Player;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
 use Doctrine\ORM\EntityManagerInterface;
 
 /** @implements GameEventApplicatorInterface<SetGameConfigurationEvent> */
@@ -53,7 +53,7 @@ class RandomGameRoleDispatchApplicator implements GameEventApplicatorInterface
             }
         }
 
-        return $game->setStep(GameStepEnum::READY);
+        return $game->setInitialisationStep(GameInitialisationStepEnum::FINISH);
     }
 
     public function supports(GameEvent $gameEvent): bool
@@ -62,7 +62,7 @@ class RandomGameRoleDispatchApplicator implements GameEventApplicatorInterface
         if (
             !$game
             || (!$gameEvent instanceof SetGameConfigurationEvent && !$gameEvent instanceof SetGameMasterEvent)
-            || GameStepEnum::DISPATCH !== $game->getStep()
+            || GameInitialisationStepEnum::DISPATCH !== $game->getInitialisationStep()
             || !$game->getConfiguration()->isWithRandomDispatch()
         ) {
             return false;

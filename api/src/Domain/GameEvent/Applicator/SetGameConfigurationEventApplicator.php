@@ -14,7 +14,7 @@ use App\Entity\Event\Game\SetGameConfigurationEvent;
 use App\Entity\Game\Composition;
 use App\Entity\Game\Game;
 use App\Entity\Game\RoleEntry;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
 use App\Repository\RoleRepository;
 
 /** @implements GameEventApplicatorInterface<SetGameConfigurationEvent> */
@@ -71,10 +71,10 @@ class SetGameConfigurationEventApplicator implements GameEventApplicatorInterfac
 
         // TODO: Move to GameSpec generic method
         $nextStep = $gameEvent->isWithGameMaster()
-            ? GameStepEnum::GAME_MASTER_CHOICE
-            : GameStepEnum::DISPATCH;
+            ? GameInitialisationStepEnum::GAME_MASTER_CHOICE
+            : GameInitialisationStepEnum::DISPATCH;
 
-        $game->setStep($nextStep);
+        $game->setInitialisationStep($nextStep);
 
         return $game;
     }

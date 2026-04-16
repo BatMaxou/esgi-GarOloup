@@ -6,7 +6,15 @@ App\Entity\Game\Game:
                 - me:player:read
                 - game:read
                 - homepage:read
-        step:
+        initialisationStep:
+            groups:
+                - me:read
+                - game:read
+        runtimeStep:
+            groups:
+                - me:read
+                - game:read
+        globalStep:
             groups:
                 - me:read
                 - game:read

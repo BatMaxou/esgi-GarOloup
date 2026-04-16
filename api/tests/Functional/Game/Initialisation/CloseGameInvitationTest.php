@@ -3,7 +3,7 @@
 namespace App\Tests\Functional\Game\Initialisation;
 
 use App\Entity\Event\Game\CloseGameInvitationEvent;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\Trait\GameEventAwareTrait;
@@ -33,7 +33,7 @@ class CloseGameInvitationTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(200);
 
         $this->assertTrue($response->get('[success]'));
-        $this->assertEquals(GameStepEnum::CONFIGURATION, $gameBuilder->getEntity()->getStep());
+        $this->assertEquals(GameInitialisationStepEnum::CONFIGURATION, $gameBuilder->getEntity()->getInitialisationStep());
     }
 
     public function test_user_without_player_cant_close_game_invitation(): void
@@ -69,7 +69,7 @@ class CloseGameInvitationTest extends GarOloupApiTestCase
         $gameBuilder = ThereIs::aGame()
             ->withHost($hostBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(3, true))
-            ->withStep(GameStepEnum::CONFIGURATION)->build()
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)->build()
         ;
 
         When::asUser($userBuilder)->game()->closeInvitation();

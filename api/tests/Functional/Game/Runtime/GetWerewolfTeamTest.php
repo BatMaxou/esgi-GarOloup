@@ -2,7 +2,8 @@
 
 namespace App\Tests\Functional\Game\Runtime;
 
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
+use App\Enum\Game\GameRuntimeStepEnum;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\When;
@@ -10,23 +11,22 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 class GetWerewolfTeamTest extends GarOloupApiTestCase
 {
-    /** @return iterable<array{0: GameStepEnum}> */
+    /** @return iterable<array{0: GameInitialisationStepEnum}> */
     public static function initializationStepsProvider(): iterable
     {
-        yield [GameStepEnum::NEW];
-        yield [GameStepEnum::CONFIGURATION];
-        yield [GameStepEnum::GAME_MASTER_CHOICE];
-        yield [GameStepEnum::DISPATCH];
-        yield [GameStepEnum::READY];
+        yield [GameInitialisationStepEnum::NEW];
+        yield [GameInitialisationStepEnum::CONFIGURATION];
+        yield [GameInitialisationStepEnum::GAME_MASTER_CHOICE];
+        yield [GameInitialisationStepEnum::DISPATCH];
     }
 
-    /** @return iterable<array{0: GameStepEnum}> */
+    /** @return iterable<array{0: GameRuntimeStepEnum}> */
     public static function activeStepsProvider(): iterable
     {
-        yield [GameStepEnum::SETUP];
-        yield [GameStepEnum::NIGHT];
-        yield [GameStepEnum::DAY];
-        yield [GameStepEnum::VOTE];
+        yield [GameRuntimeStepEnum::SETUP];
+        yield [GameRuntimeStepEnum::NIGHT];
+        yield [GameRuntimeStepEnum::DAY];
+        yield [GameRuntimeStepEnum::VOTE];
     }
 
     public function test_anonymous_cannot_access_werewolf_team(): void
@@ -49,7 +49,7 @@ class GetWerewolfTeamTest extends GarOloupApiTestCase
         $roleBagBuilder = ThereIs::aRoleBag()->build();
         $gameRoleBagBuilder = ThereIs::aGameRoleBag($roleBagBuilder)->build();
 
-        $gameBuilder = ThereIs::aGame()->withStep(GameStepEnum::NIGHT)->build();
+        $gameBuilder = ThereIs::aGame()->withRuntimeStep(GameRuntimeStepEnum::NIGHT)->build();
         ThereIs::aPlayer()
             ->withUser($userBuilder)
             ->withRole($gameRoleBagBuilder->getVillager())
@@ -62,13 +62,13 @@ class GetWerewolfTeamTest extends GarOloupApiTestCase
     }
 
     #[DataProvider('initializationStepsProvider')]
-    public function test_werewolf_cannot_access_werewolf_team_during_initialization(GameStepEnum $step): void
+    public function test_werewolf_cannot_access_werewolf_team_during_initialization(GameInitialisationStepEnum $step): void
     {
         $userBuilder = ThereIs::anUser()->build();
         $roleBagBuilder = ThereIs::aRoleBag()->build();
         $gameRoleBagBuilder = ThereIs::aGameRoleBag($roleBagBuilder)->build();
 
-        $gameBuilder = ThereIs::aGame()->withStep($step)->build();
+        $gameBuilder = ThereIs::aGame()->withInitialisationStep($step)->build();
         ThereIs::aPlayer()
             ->withUser($userBuilder)
             ->withRole($gameRoleBagBuilder->getWerewolf())
@@ -81,13 +81,13 @@ class GetWerewolfTeamTest extends GarOloupApiTestCase
     }
 
     #[DataProvider('activeStepsProvider')]
-    public function test_werewolf_can_access_werewolf_team_during_active_steps(GameStepEnum $step): void
+    public function test_werewolf_can_access_werewolf_team_during_active_steps(GameRuntimeStepEnum $step): void
     {
         $userBuilder = ThereIs::anUser()->build();
         $roleBagBuilder = ThereIs::aRoleBag()->build();
         $gameRoleBagBuilder = ThereIs::aGameRoleBag($roleBagBuilder)->build();
 
-        $gameBuilder = ThereIs::aGame()->withStep($step)->build();
+        $gameBuilder = ThereIs::aGame()->withRuntimeStep($step)->build();
         $playerBuilder = ThereIs::aPlayer()
             ->withUser($userBuilder)
             ->withRole($gameRoleBagBuilder->getWerewolf())
@@ -103,7 +103,7 @@ class GetWerewolfTeamTest extends GarOloupApiTestCase
     {
         $callerUserBuilder = ThereIs::anUser()->build();
 
-        $gameBuilder = ThereIs::aGame()->withStep(GameStepEnum::NIGHT)->build();
+        $gameBuilder = ThereIs::aGame()->withRuntimeStep(GameRuntimeStepEnum::NIGHT)->build();
         $roleBagBuilder = ThereIs::aRoleBag()->build();
         $gameRoleBagBuilder = ThereIs::aGameRoleBag($roleBagBuilder)->build();
 

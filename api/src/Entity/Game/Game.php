@@ -21,7 +21,9 @@ use App\Domain\Command\Game\Initialisation\SetGameConfigurationCommand;
 use App\Domain\Command\Game\Initialisation\SetGameMasterCommand;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameGlobalStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
+use App\Enum\Game\GameRuntimeStepEnum;
 use App\Repository\Game\GameRepository;
 use App\Service\Mercure\Inteface\TopicRelatedObject;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -110,8 +112,11 @@ class Game implements TopicRelatedObject
     use UuidTrait;
     use TimestampableTrait;
 
-    #[ORM\Column(enumType: GameStepEnum::class)]
-    private GameStepEnum $step;
+    #[ORM\Column(enumType: GameInitialisationStepEnum::class)]
+    private GameInitialisationStepEnum $initialisationStep;
+
+    #[ORM\Column(enumType: GameRuntimeStepEnum::class, nullable: true)]
+    private ?GameRuntimeStepEnum $runtimeStep = null;
 
     #[ORM\OneToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -143,7 +148,7 @@ class Game implements TopicRelatedObject
     public function __construct(
         Player $host,
     ) {
-        $this->step = GameStepEnum::NEW;
+        $this->initialisationStep = GameInitialisationStepEnum::NEW;
         $this->host = $host;
 
         $uuid = $this->generateUuid();
@@ -168,16 +173,47 @@ class Game implements TopicRelatedObject
         return $this;
     }
 
-    public function getStep(): GameStepEnum
+    public function getInitialisationStep(): GameInitialisationStepEnum
     {
-        return $this->step;
+        return $this->initialisationStep;
     }
 
-    public function setStep(GameStepEnum $step): static
+    public function setInitialisationStep(GameInitialisationStepEnum $initialisationStep): static
     {
-        $this->step = $step;
+        $this->initialisationStep = $initialisationStep;
 
         return $this;
+    }
+
+    public function getRuntimeStep(): ?GameRuntimeStepEnum
+    {
+        return $this->runtimeStep;
+    }
+
+    public function setRuntimeStep(?GameRuntimeStepEnum $runtimeStep): static
+    {
+        $this->runtimeStep = $runtimeStep;
+
+        return $this;
+    }
+
+    public function getGlobalStep(): GameGlobalStepEnum
+    {
+        if (
+            null !== $this->runtimeStep
+            && GameRuntimeStepEnum::FINISH !== $this->runtimeStep
+        ) {
+            return GameGlobalStepEnum::RUNNING;
+        }
+
+        if (
+            GameInitialisationStepEnum::FINISH === $this->initialisationStep
+            && GameRuntimeStepEnum::FINISH === $this->runtimeStep
+        ) {
+            return GameGlobalStepEnum::FINISH;
+        }
+
+        return GameGlobalStepEnum::NEW;
     }
 
     public function getHost(): Player

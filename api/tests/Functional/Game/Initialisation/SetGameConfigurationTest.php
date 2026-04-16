@@ -3,7 +3,7 @@
 namespace App\Tests\Functional\Game\Initialisation;
 
 use App\Entity\Event\Game\SetGameConfigurationEvent;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\Trait\GameEventAwareTrait;
@@ -22,7 +22,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         $gameBuilder = ThereIs::aGame()
             ->withHost($hostBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::CONFIGURATION)
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition()
@@ -34,7 +34,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(200);
 
         $this->assertTrue($response->get('[success]'));
-        $this->assertEquals(GameStepEnum::READY, $gameBuilder->getEntity()->getStep());
+        $this->assertEquals(GameInitialisationStepEnum::FINISH, $gameBuilder->getEntity()->getInitialisationStep());
         $this->assertNotNull($gameBuilder->getEntity()->getConfiguration()->getComposition());
     }
 
@@ -47,7 +47,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         $gameBuilder = ThereIs::aGame()
             ->withHost($hostBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::CONFIGURATION)
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition()
@@ -59,7 +59,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(200);
 
         $this->assertTrue($response->get('[success]'));
-        $this->assertEquals(GameStepEnum::GAME_MASTER_CHOICE, $gameBuilder->getEntity()->getStep());
+        $this->assertEquals(GameInitialisationStepEnum::GAME_MASTER_CHOICE, $gameBuilder->getEntity()->getInitialisationStep());
         $this->assertNotNull($gameBuilder->getEntity()->getConfiguration()->getComposition());
     }
 
@@ -86,7 +86,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         ThereIs::aGame()
             ->withHost($hostBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::CONFIGURATION)
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition()
@@ -109,7 +109,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         ThereIs::aGame()
             ->withHost($hostPlayerBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::CONFIGURATION)
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition()
@@ -134,7 +134,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
             ->withHost($hostPlayerBuilder)
             ->withPlayer($playerBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(4, true))
-            ->withStep(GameStepEnum::CONFIGURATION)
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition()
@@ -155,7 +155,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         ThereIs::aGame()
             ->withHost($hostBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::CONFIGURATION)
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition();
@@ -173,7 +173,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         ThereIs::aGame()
             ->withHost($hostBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::CONFIGURATION)
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition()
@@ -194,7 +194,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         ThereIs::aGame()
             ->withHost($hostBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::CONFIGURATION)
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition()
@@ -216,7 +216,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         ThereIs::aGame()
             ->withHost($hostBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::CONFIGURATION)
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition()->withRole($roleBuiler, 6);
@@ -235,7 +235,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         ThereIs::aGame()
             ->withHost($hostBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::CONFIGURATION)
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition()->withRole($roleBuiler, 6);
@@ -253,7 +253,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         ThereIs::aGame()
             ->withHost($hostBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(7, true))
-            ->withStep(GameStepEnum::CONFIGURATION)
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition()
@@ -275,7 +275,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         ThereIs::aGame()
             ->withHost($hostBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(7, true))
-            ->withStep(GameStepEnum::GAME_MASTER_CHOICE)
+            ->withInitialisationStep(GameInitialisationStepEnum::GAME_MASTER_CHOICE)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition()
@@ -296,7 +296,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         $gameBuilder = ThereIs::aGame()
             ->withHost($hostBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::CONFIGURATION)
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition()
@@ -308,7 +308,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(200);
 
         $game = $gameBuilder->getEntity();
-        $this->assertEquals(GameStepEnum::READY, $game->getStep());
+        $this->assertEquals(GameInitialisationStepEnum::FINISH, $game->getInitialisationStep());
         foreach ($game->getPlayers() as $player) {
             $this->assertNotNull($player->getRole());
         }
@@ -323,7 +323,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         $gameBuilder = ThereIs::aGame()
             ->withHost($hostBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::CONFIGURATION)
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition()
@@ -335,7 +335,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(200);
 
         $game = $gameBuilder->getEntity();
-        $this->assertEquals(GameStepEnum::GAME_MASTER_CHOICE, $game->getStep());
+        $this->assertEquals(GameInitialisationStepEnum::GAME_MASTER_CHOICE, $game->getInitialisationStep());
         foreach ($game->getPlayers() as $player) {
             $this->assertNull($player->getRole());
         }
@@ -350,7 +350,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         $gameBuilder = ThereIs::aGame()
             ->withHost($hostBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::CONFIGURATION)
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition()
@@ -362,7 +362,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(200);
 
         $game = $gameBuilder->getEntity();
-        $this->assertEquals(GameStepEnum::GAME_MASTER_CHOICE, $game->getStep());
+        $this->assertEquals(GameInitialisationStepEnum::GAME_MASTER_CHOICE, $game->getInitialisationStep());
         foreach ($game->getPlayers() as $player) {
             $this->assertNull($player->getRole());
         }
@@ -377,7 +377,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
         $gameBuilder = ThereIs::aGame()
             ->withHost($hostBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::CONFIGURATION)
+            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
             ->build();
 
         $compositionBuilder = ThereIs::aComposition()

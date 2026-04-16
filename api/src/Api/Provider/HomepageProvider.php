@@ -5,7 +5,7 @@ namespace App\Api\Provider;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use App\Api\Model\Homepage;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
 use App\Repository\Game\GameRepository;
 use App\Repository\RoleRepository;
 
@@ -21,7 +21,7 @@ class HomepageProvider implements ProviderInterface
     /** @param array<string, mixed> $context */
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): Homepage
     {
-        $gameCriterias = ['public' => true, 'step' => GameStepEnum::NEW];
+        $gameCriterias = ['public' => true, 'initialisationStep' => GameInitialisationStepEnum::NEW];
         $gameOrderBy = ['createdAt' => 'DESC'];
         $games = $this->gameRepository->findBy($gameCriterias, $gameOrderBy);
 

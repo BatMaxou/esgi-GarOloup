@@ -3,8 +3,8 @@
 namespace App\Tests\Functional\Game\Initialisation;
 
 use App\Entity\Event\Game\GameRoleDispatchEvent;
+use App\Enum\Game\GameInitialisationStepEnum;
 use App\Enum\Game\GameRoleEnum;
-use App\Enum\Game\GameStepEnum;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\Trait\GameEventAwareTrait;
@@ -25,7 +25,7 @@ class GameRoleDispatchTest extends GarOloupApiTestCase
             ->withHost($hostPlayerBuilder)
             ->withGameMaster($hostPlayerBuilder)
             ->withPlayers($playerBuilders)
-            ->withStep(GameStepEnum::DISPATCH)
+            ->withInitialisationStep(GameInitialisationStepEnum::DISPATCH)
             ->build()
         ;
         ThereIs::aConfiguration()
@@ -56,7 +56,7 @@ class GameRoleDispatchTest extends GarOloupApiTestCase
         $this->assertTrue($response->get('[success]'));
 
         $game = $gameBuilder->getEntity();
-        $this->assertEquals(GameStepEnum::READY, $game->getStep());
+        $this->assertEquals(GameInitialisationStepEnum::FINISH, $game->getInitialisationStep());
         $this->assertEquals(GameRoleEnum::VILLAGER, $playerBuilders[0]->getEntity()->getRole()?->getType());
         $this->assertEquals(GameRoleEnum::VILLAGER, $playerBuilders[1]->getEntity()->getRole()?->getType());
         $this->assertEquals(GameRoleEnum::VILLAGER, $playerBuilders[2]->getEntity()->getRole()?->getType());
@@ -107,7 +107,7 @@ class GameRoleDispatchTest extends GarOloupApiTestCase
             ->withGameMaster($hostPlayerBuilder)
             ->withPlayer($playerBuilder)
             ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withStep(GameStepEnum::DISPATCH)
+            ->withInitialisationStep(GameInitialisationStepEnum::DISPATCH)
             ->build()
         ;
         ThereIs::aConfiguration()
@@ -148,7 +148,7 @@ class GameRoleDispatchTest extends GarOloupApiTestCase
             ->withHost($hostPlayerBuilder)
             ->withGameMaster($hostPlayerBuilder)
             ->withPlayers($playerBuilders)
-            ->withStep(GameStepEnum::READY)
+            ->withInitialisationStep(GameInitialisationStepEnum::FINISH)
             ->build()
         ;
         ThereIs::aConfiguration()
@@ -188,7 +188,7 @@ class GameRoleDispatchTest extends GarOloupApiTestCase
             ->withHost($hostPlayerBuilder)
             ->withGameMaster($hostPlayerBuilder)
             ->withPlayers($playerBuilders)
-            ->withStep(GameStepEnum::DISPATCH)
+            ->withInitialisationStep(GameInitialisationStepEnum::DISPATCH)
             ->build()
         ;
         ThereIs::aConfiguration()
@@ -230,7 +230,7 @@ class GameRoleDispatchTest extends GarOloupApiTestCase
             ->withHost($hostPlayerBuilder)
             ->withGameMaster($hostPlayerBuilder)
             ->withPlayers($playerBuilders)
-            ->withStep(GameStepEnum::DISPATCH)
+            ->withInitialisationStep(GameInitialisationStepEnum::DISPATCH)
             ->build()
         ;
         ThereIs::aConfiguration()
@@ -269,7 +269,7 @@ class GameRoleDispatchTest extends GarOloupApiTestCase
         $gameBuilder = ThereIs::aGame()
             ->withHost($hostPlayerBuilder)
             ->withPlayers($playerBuilders)
-            ->withStep(GameStepEnum::DISPATCH)
+            ->withInitialisationStep(GameInitialisationStepEnum::DISPATCH)
             ->build()
         ;
         ThereIs::aConfiguration()
@@ -309,7 +309,7 @@ class GameRoleDispatchTest extends GarOloupApiTestCase
             ->withHost($hostPlayerBuilder)
             ->withGameMaster($hostPlayerBuilder)
             ->withPlayers($playerBuilders)
-            ->withStep(GameStepEnum::DISPATCH)
+            ->withInitialisationStep(GameInitialisationStepEnum::DISPATCH)
             ->build()
         ;
         ThereIs::aConfiguration()

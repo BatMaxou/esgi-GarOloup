@@ -10,7 +10,7 @@ use App\Domain\Spec\GameSpec;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\LaunchGameEvent;
 use App\Entity\Game\Game;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameRuntimeStepEnum;
 
 /** @implements GameEventApplicatorInterface<LaunchGameEvent> */
 class LaunchGameEventApplicator implements GameEventApplicatorInterface
@@ -32,7 +32,7 @@ class LaunchGameEventApplicator implements GameEventApplicatorInterface
             throw new UnauthorizedGameActionException('You can not launch this game');
         }
 
-        return $game->setStep(GameStepEnum::SETUP);
+        return $game->setRuntimeStep(GameRuntimeStepEnum::SETUP);
     }
 
     public function supports(GameEvent $gameEvent): bool

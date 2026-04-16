@@ -11,7 +11,7 @@ use App\Domain\Spec\GameSpec;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\SetGameMasterEvent;
 use App\Entity\Game\Game;
-use App\Enum\Game\GameStepEnum;
+use App\Enum\Game\GameInitialisationStepEnum;
 use App\Repository\Game\PlayerRepository;
 
 /** @implements GameEventApplicatorInterface<SetGameMasterEvent> */
@@ -47,7 +47,7 @@ class SetGameMasterEventApplicator implements GameEventApplicatorInterface
 
         $game->setGameMaster($targetPlayer);
 
-        return $game->setStep(GameStepEnum::DISPATCH);
+        return $game->setInitialisationStep(GameInitialisationStepEnum::DISPATCH);
     }
 
     public function supports(GameEvent $gameEvent): bool
