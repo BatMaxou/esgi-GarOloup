@@ -1,11 +1,11 @@
-name: API Docker image
+name: Autoscaler Docker image
 
 on:
   push:
     branches:
       - develop
     paths:
-      - 'api/**'
+      - 'infra/autoscale/**'
   pull_request:
 
 env:
@@ -14,7 +14,7 @@ env:
 
 jobs:
   build-push-image:
-    name: Build and push api image
+    name: Build and push autoscaler image
     runs-on: ubuntu-latest
 
     steps:
@@ -26,25 +26,15 @@ jobs:
         with:
           token: ${{ secrets.IMAGE_TOKEN }}
 
-      - name: Build / Push php image
+      - name: Build / Push autoscaler image
         uses: ./.github/workflows/callables/build-push
         with:
-          context: ./api
-          dockerfile: ./api/Dockerfile
-          image: php
-          target: prod
-          build_args: |
-            JWT_PASSPHRASE=${{ secrets.BACK_JWT_PASSPHRASE }}
-
-      - name: Build / Push web image
-        uses: ./.github/workflows/callables/build-push
-        with:
-          context: ./api
-          dockerfile: ./api/.devops/nginx/Dockerfile
-          image: web
+          context: ./infra/autoscale
+          dockerfile: ./infra/autoscale/Dockerfile
+          image: autoscaler
 
   deploy-image:
-    name: Deploy api image
+    name: Deploy autoscaler image
     runs-on: ubuntu-latest
     needs: build-push-image
 
@@ -52,12 +42,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Deploy images
+      - name: Deploy scaling stack
         uses: ./.github/workflows/callables/deployment
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           host: ${{ secrets.PROD_HOST }}
           user: ${{ secrets.PROD_USER }}
           path: ${{ secrets.PROD_PATH }}
-          images: 'php web'
-
+          target: deploy-scaling

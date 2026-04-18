@@ -7,9 +7,9 @@ on:
       - main
     paths:
       - 'front/**'
-  pull_request:
-    paths:
-      - 'front/**'
+  # pull_request:
+  #   paths:
+  #     - 'front/**'
 
 jobs:
   linters:

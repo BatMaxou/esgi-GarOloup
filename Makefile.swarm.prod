@@ -1,0 +1,22 @@
+STACK_NAME = garoloup
+STACK_FILE = compose.stack.prod.yaml
+
+SCALING_STACK_NAME = garoloup-scaling
+SCALING_STACK_FILE = compose.scaling.prod.yaml
+
+%:
+	@:
+
+deploy:
+	@docker stack deploy -c $(STACK_FILE) --with-registry-auth $(STACK_NAME)
+	@echo "Waiting for php replicas to converge..."
+	@until [ "$$(docker service ls --filter name=$(STACK_NAME)_php --format '{{.Replicas}}')" = "2/2" ]; do sleep 2; done
+	@docker system prune -f
+.PHONY: deploy
+
+deploy-scaling:
+	@docker stack deploy -c $(SCALING_STACK_FILE) --with-registry-auth $(SCALING_STACK_NAME)
+	@echo "Waiting for scaling stack to converge..."
+	@until [ "$$(docker service ls --filter name=$(SCALING_STACK_NAME)_autoscaler --format '{{.Replicas}}')" = "1/1" ]; do sleep 2; done
+	@docker system prune -f
+.PHONY: deploy

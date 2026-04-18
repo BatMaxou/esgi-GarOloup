@@ -31,3 +31,12 @@ RUN composer install;
 
 RUN php bin/console lexik:jwt:generate-keypair --overwrite --no-interaction;
 RUN php bin/console cache:clear;
+
+# Permettre d'ecrire dans les logs
+RUN chown -R www-data:www-data /srv/var
+
+COPY ./.devops/php/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["php-fpm"]
