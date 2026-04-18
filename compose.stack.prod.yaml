@@ -1,0 +1,146 @@
+services:
+  php:
+    image: ghcr.io/batmaxou/garoloup-php:latest
+    environment:
+      APP_ENV: dev
+      MAILER_DSN: smtp://mailbox:1025
+      MERCURE_URL: http://mercure/.well-known/mercure
+      MERCURE_PUBLIC_URL: https://mon-domaine.fr/.well-known/mercure
+      CORS_ALLOW_ORIGIN: '^https://mon-domaine\.fr$$'
+      FRONT_RESET_URL: https://mon-domaine.fr/reset-password
+      PUBLIC_UPLOADS_PATH: /uploads
+      SSR_PUBLIC_UPLOADS_PATH: /public/uploads
+    secrets:
+      - garoloup_app_secret
+      - garoloup_db_password
+      - garoloup_mercure_jwt
+    networks:
+      - api
+      - mercure
+    deploy:
+      replicas: 2
+      update_config:
+        order: start-first
+        failure_action: rollback
+      resources:
+        limits:
+          cpus: '0.5'
+      labels:
+        - swarm.autoscale=true
+
+  web:
+    image: ghcr.io/batmaxou/garoloup-web:latest
+    ports:
+      - "10111:80"
+    networks:
+      - api
+      - front_ssr
+    deploy:
+      replicas: 2
+      update_config:
+        order: start-first
+        failure_action: rollback
+      resources:
+        limits:
+          cpus: '0.5'
+      labels:
+        - swarm.autoscale=true
+
+  node:
+    image: ghcr.io/batmaxou/garoloup-node:latest
+    environment:
+      BETTER_AUTH_URL: https://mon-domaine.fr
+      HOSTNAME: '0.0.0.0'
+    secrets:
+      - garoloup_better_auth_secret
+    ports:
+      - "10112:3000"
+    networks:
+      - front_ssr
+    deploy:
+      replicas: 3
+      update_config:
+        order: start-first
+        failure_action: rollback
+      resources:
+        limits:
+          cpus: '0.5'
+      labels:
+        - swarm.autoscale=true
+
+  mercure:
+    image: ghcr.io/batmaxou/garoloup-mercure:latest
+    environment:
+      SERVER_NAME: ':80'
+      MERCURE_EXTRA_DIRECTIVES: |
+        anonymous
+    secrets:
+      - garoloup_mercure_jwt
+    volumes:
+      - mercure_data:/data
+      - mercure_config:/config
+    ports:
+      - "10113:80"
+    networks:
+      - mercure
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.type == database
+
+  db:
+    image: mariadb:11.8
+    environment:
+      MARIADB_DATABASE: garoloup
+      MARIADB_USER: garoloup
+      MARIADB_PASSWORD_FILE: /run/secrets/garoloup_db_password
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/garoloup_db_root_password
+    secrets:
+      - garoloup_db_root_password
+      - garoloup_db_password
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - api
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.type == database
+
+  mailbox:
+    image: mailhog/mailhog
+    networks:
+      - api
+    ports:
+      - "10114:8025"
+    environment:
+      MH_UI_WEB_PATH: catcher
+    deploy:
+      replicas: 1
+
+volumes:
+  db_data:
+  mercure_data:
+  mercure_config:
+
+networks:
+  api:
+    driver: overlay
+  mercure:
+    driver: overlay
+  front_ssr:
+    driver: overlay
+
+secrets:
+  garoloup_app_secret:
+    external: true
+  garoloup_db_root_password:
+    external: true
+  garoloup_db_password:
+    external: true
+  garoloup_mercure_jwt:
+    external: true
+  garoloup_better_auth_secret:
+    external: true
