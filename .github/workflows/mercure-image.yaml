@@ -1,0 +1,33 @@
+name: Mercure Docker image
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - 'infra/mercure/**'
+
+env:
+  REGISTRY: ghcr.io
+  PROJECT_NAME: garoloup
+
+jobs:
+  build-push-image:
+    name: Build and push mercure image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Registry
+        uses: ./.github/workflows/callables/registry
+        with:
+          token: ${{ secrets.IMAGE_TOKEN }}
+
+      - name: Build / Push mercure image
+        uses: ./.github/workflows/callables/build-push
+        with:
+          context: ./infra/mercure
+          dockerfile: ./infra/mercure/Dockerfile
+          image: mercure

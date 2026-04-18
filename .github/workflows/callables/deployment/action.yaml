@@ -22,6 +22,11 @@ inputs:
     type: string
     required: false
     default: ''
+  target:
+    description: 'Make target to invoke'
+    type: string
+    required: false
+    default: 'deploy'
 
 runs:
   using: composite
@@ -37,4 +42,4 @@ runs:
     - name: Deploy to server
       shell: bash
       run: |
-        ssh ${{ inputs.user }}@${{ inputs.host }} 'cd ${{ inputs.path }} && make deploy ${{ inputs.images }}'
+        ssh ${{ inputs.user }}@${{ inputs.host }} 'cd ${{ inputs.path }} && make ${{ inputs.target }} ${{ inputs.images }}'

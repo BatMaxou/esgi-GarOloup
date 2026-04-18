@@ -1,0 +1,51 @@
+name: Autoscaler Docker image
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - 'infra/autoscale/**'
+
+env:
+  REGISTRY: ghcr.io
+  PROJECT_NAME: garoloup
+
+jobs:
+  build-push-image:
+    name: Build and push autoscaler image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Registry
+        uses: ./.github/workflows/callables/registry
+        with:
+          token: ${{ secrets.IMAGE_TOKEN }}
+
+      - name: Build / Push autoscaler image
+        uses: ./.github/workflows/callables/build-push
+        with:
+          context: ./infra/autoscale
+          dockerfile: ./infra/autoscale/Dockerfile
+          image: autoscaler
+
+  deploy-image:
+    name: Deploy autoscaler image
+    runs-on: ubuntu-latest
+    needs: build-push-image
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Deploy scaling stack
+        uses: ./.github/workflows/callables/deployment
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.PROD_HOST }}
+          user: ${{ secrets.PROD_USER }}
+          path: ${{ secrets.PROD_PATH }}
+          target: deploy-scaling

@@ -1,0 +1,72 @@
+services:
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    deploy:
+      mode: global
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - monitoring
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - prometheus_data:/prometheus
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+    command:
+      - "--storage.tsdb.retention.time=2d"
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "10115:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    networks:
+      - monitoring
+
+  autoscaler:
+    image: ghcr.io/batmaxou/garoloup-autoscaler:latest
+    environment:
+      - PROMETHEUS_URL=http://prometheus:9090
+      - CPU_UP_THRESHOLD=0.40
+      - CPU_DOWN_THRESHOLD=0.10
+      - MIN_REPLICAS=2
+      - MAX_REPLICAS=3
+      - CHECK_INTERVAL=10
+      - SCALE_COOLDOWN=30
+      - RATE_WINDOW=30s
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: any
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    driver: overlay
+
+volumes:
+  prometheus_data:
+  grafana_data:
