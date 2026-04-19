@@ -12,49 +12,49 @@ env:
   PROJECT_NAME: garoloup
 
 jobs:
-  build-push-image:
-    name: Build and push front image
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
-      - name: Setup Registry
-        uses: ./.github/workflows/callables/registry
-        with:
-          token: ${{ secrets.IMAGE_TOKEN }}
-
-      - name: Build / Push front image
-        uses: ./.github/workflows/callables/build-push
-        with:
-          context: ./front
-          dockerfile: ./front/Dockerfile
-          image: node
-          target: prod
-          build_args: |
-            NEXT_PUBLIC_URL=${{ secrets.FRONT_URL }}
-            NEXT_PUBLIC_API_BASE_URL=${{ secrets.FRONT_API_BASE_URL }}
-            NEXT_PUBLIC_SSR_API_BASE_URL=${{ secrets.FRONT_SSR_API_BASE_URL }}
-            NEXT_PUBLIC_FTP_BASE_URL=${{ secrets.FRONT_FTP_BASE_URL }}
-            NEXT_PUBLIC_MERCURE_URL=${{ secrets.FRONT_MERCURE_URL }}
-            NEXT_PUBLIC_SSR_MERCURE_URL=${{ secrets.FRONT_SSR_MERCURE_URL }}
-
-  deploy-image:
-    name: Deploy front image
-    runs-on: ubuntu-latest
-    needs: build-push-image
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
-      - name: Deploy images
-        uses: ./.github/workflows/callables/deployment
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          host: ${{ secrets.PROD_HOST }}
-          user: ${{ secrets.PROD_USER }}
-          path: ${{ secrets.PROD_PATH }}
-          images: 'node'
-
+  # build-push-image:
+  #   name: Build and push front image
+  #   runs-on: ubuntu-latest
+  #
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v6
+  #
+  #     - name: Setup Registry
+  #       uses: ./.github/workflows/callables/registry
+  #       with:
+  #         token: ${{ secrets.IMAGE_TOKEN }}
+  #
+  #     - name: Build / Push front image
+  #       uses: ./.github/workflows/callables/build-push
+  #       with:
+  #         context: ./front
+  #         dockerfile: ./front/Dockerfile
+  #         image: node
+  #         target: prod
+  #         build_args: |
+  #           NEXT_PUBLIC_URL=${{ secrets.FRONT_URL }}
+  #           NEXT_PUBLIC_API_BASE_URL=${{ secrets.FRONT_API_BASE_URL }}
+  #           NEXT_PUBLIC_SSR_API_BASE_URL=${{ secrets.FRONT_SSR_API_BASE_URL }}
+  #           NEXT_PUBLIC_FTP_BASE_URL=${{ secrets.FRONT_FTP_BASE_URL }}
+  #           NEXT_PUBLIC_MERCURE_URL=${{ secrets.FRONT_MERCURE_URL }}
+  #           NEXT_PUBLIC_SSR_MERCURE_URL=${{ secrets.FRONT_SSR_MERCURE_URL }}
+  #
+  # deploy-image:
+  #   name: Deploy front image
+  #   runs-on: ubuntu-latest
+  #   needs: build-push-image
+  #
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v6
+  #
+  #     - name: Deploy images
+  #       uses: ./.github/workflows/callables/deployment
+  #       with:
+  #         key: ${{ secrets.SSH_PRIVATE_KEY }}
+  #         host: ${{ secrets.PROD_HOST }}
+  #         user: ${{ secrets.PROD_USER }}
+  #         path: ${{ secrets.PROD_PATH }}
+  #         images: 'node'
+  #
