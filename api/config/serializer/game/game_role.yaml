@@ -6,3 +6,9 @@ App\Entity\Game\Role\GameRole:
         type:
             groups:
                 - me:player:read
+
+App\Entity\Game\Role\VillagerRole:
+    attributes:
+        friendId:
+            groups:
+                - me:player:read

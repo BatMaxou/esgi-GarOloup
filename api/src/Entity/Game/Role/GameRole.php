@@ -30,6 +30,14 @@ abstract class GameRole
     #[ORM\Column(enumType: GameRoleEnum::class)]
     protected GameRoleEnum $type;
 
+    #[ORM\Column]
+    protected bool $isSetup;
+
+    public function __construct()
+    {
+        $this->isSetup = !$this->needSetup();
+    }
+
     public function getRole(): ?Role
     {
         return $this->role;
@@ -53,4 +61,18 @@ abstract class GameRole
 
         return $this;
     }
+
+    public function isSetup(): bool
+    {
+        return $this->isSetup;
+    }
+
+    public function setSetup(bool $isSetup): static
+    {
+        $this->isSetup = $isSetup;
+
+        return $this;
+    }
+
+    abstract protected function needSetup(): bool;
 }

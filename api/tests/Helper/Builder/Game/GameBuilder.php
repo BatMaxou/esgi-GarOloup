@@ -86,10 +86,6 @@ class GameBuilder extends AbstractBuilder
     {
         $this->initialisationStep = $initialisationStep;
 
-        if (GameInitialisationStepEnum::FINISH === $this->initialisationStep) {
-            $this->withRuntimeStep(GameRuntimeStepEnum::SETUP);
-        }
-
         return $this;
     }
 

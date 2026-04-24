@@ -43,6 +43,9 @@ class Player implements TopicRelatedObject
     #[ORM\Column]
     private bool $dead = false;
 
+    #[ORM\Column]
+    private int $afkCount = 0;
+
     #[ORM\OneToOne(mappedBy: 'gameMaster')]
     private ?Game $managedGame = null;
 
@@ -116,6 +119,25 @@ class Player implements TopicRelatedObject
     public function setDead(bool $isDead): static
     {
         $this->dead = $isDead;
+
+        return $this;
+    }
+
+    public function getAfkCount(): int
+    {
+        return $this->afkCount;
+    }
+
+    public function setAfkCount(int $afkCount): static
+    {
+        $this->afkCount = $afkCount;
+
+        return $this;
+    }
+
+    public function incrementAfkCount(): static
+    {
+        ++$this->afkCount;
 
         return $this;
     }

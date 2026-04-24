@@ -40,3 +40,6 @@ App\Entity\Game\Game:
         public:
             groups:
                 - game:read
+        stepEndAt:
+            groups:
+                - game:read

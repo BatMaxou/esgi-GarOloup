@@ -20,6 +20,7 @@ class LaunchGameEventApplicator implements GameEventApplicatorInterface
 
     public function __construct(
         private readonly GameSpec $gameSpec,
+        private readonly int $setupDuration,
     ) {
     }
 
@@ -32,7 +33,10 @@ class LaunchGameEventApplicator implements GameEventApplicatorInterface
             throw new UnauthorizedGameActionException('You can not launch this game');
         }
 
-        return $game->setRuntimeStep(GameRuntimeStepEnum::SETUP);
+        $game->setRuntimeStep(GameRuntimeStepEnum::SETUP);
+        $game->setStepEndAt(new \DateTimeImmutable(\sprintf('+%d seconds', $this->setupDuration)));
+
+        return $game;
     }
 
     public function supports(GameEvent $gameEvent): bool

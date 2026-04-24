@@ -3,10 +3,13 @@
 namespace App\Domain\Spec;
 
 use App\Entity\Game\Game;
+use App\Entity\Game\Player;
+use App\Entity\Game\Role\VillagerRole;
 use App\Entity\Game\Role\WerewolfRole;
 use App\Entity\User\AbstractUser;
 use App\Entity\User\TempUser;
 use App\Enum\Game\GameInitialisationStepEnum;
+use App\Enum\Game\GameRuntimeStepEnum;
 use App\Repository\Game\PlayerRepository;
 
 class GameSpec
@@ -111,7 +114,7 @@ class GameSpec
             return false;
         }
 
-        return GameInitialisationStepEnum::FINISH === $game->getInitialisationStep();
+        return GameInitialisationStepEnum::FINISH === $game->getInitialisationStep() && !$game->getRuntimeStep();
     }
 
     public function canDispatchRoles(AbstractUser $user, Game $game): bool
@@ -123,18 +126,39 @@ class GameSpec
         return GameInitialisationStepEnum::DISPATCH === $game->getInitialisationStep();
     }
 
-    public function canSeeWerewolfTeam(AbstractUser $user, Game $game): bool
+    public function canSeeWerewolfTeam(Player $player, Game $game): bool
     {
-        if (null === $game->getRuntimeStep()) {
-            return false;
-        }
+        return $game->getRuntimeStep() && $player->getRole() instanceof WerewolfRole;
+    }
 
+    public function areAllRolesSetup(Game $game): bool
+    {
         foreach ($game->getPlayers() as $player) {
-            if ($player->getLinkedUser() === $user) {
-                return $player->getRole() instanceof WerewolfRole;
+            if (!$player->getRole()?->isSetup()) {
+                return false;
             }
         }
 
-        return false;
+        return true;
+    }
+
+    public function canChooseFriend(Player $player, Game $game, string $targetPlayerId): bool
+    {
+        if (
+            GameRuntimeStepEnum::SETUP !== $game->getRuntimeStep()
+            || $game->getStepEndAt() < new \DateTimeImmutable()
+            || $player->getId()?->toString() === $targetPlayerId
+        ) {
+            return false;
+        }
+
+        $targetExists = false;
+        foreach ($game->getPlayers() as $player) {
+            if ($player->getId()?->toString() === $targetPlayerId) {
+                $targetExists = true;
+            }
+        }
+
+        return $targetExists && $player->getRole() instanceof VillagerRole;
     }
 }
