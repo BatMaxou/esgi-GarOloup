@@ -341,7 +341,11 @@
       "lobby": {
         "public": "Public",
         "join": "Join",
-        "create": "Create"
+        "create": "Create",
+        "inGameTitle": "Game in progress",
+        "inGameDescription": "You are already in a game. You can return to it or stay in the lobby to set up another one.",
+        "inGameJoinCode": "Join code: {code}",
+        "resumeGame": "Resume game"
       },
       "roles": {
         "eyebrow": "Bestiary",

@@ -3,13 +3,13 @@
 import Typography from '@/components/ui/atoms/typography';
 import Card from '@/components/ui/molecules/card';
 import PublicGamesList from '@/components/ui/organisms/lists/publicGamesList';
-import { useGame } from '@/contexts/game-context';
+import { usePublicGames } from '@/contexts/public-games-context';
 import { Loader } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 
 const PublicGames = () => {
-  const { publicGames, getPublicGames, publicGamesLoading } = useGame();
+  const { publicGames, getPublicGames, publicGamesLoading } = usePublicGames();
   const t = useTranslations('components.common.lobby.publicGames');
   useEffect(() => {
     getPublicGames(1, 8);
