@@ -343,7 +343,11 @@
       "lobby": {
         "public": "Publiques",
         "join": "Rejoindre",
-        "create": "Créer"
+        "create": "Créer",
+        "inGameTitle": "Partie en cours",
+        "inGameDescription": "Vous participez déjà à une partie. Vous pouvez la rejoindre ou rester dans le lobby pour en préparer une autre.",
+        "inGameJoinCode": "Code d’accès : {code}",
+        "resumeGame": "Reprendre la partie"
       },
       "roles": {
         "eyebrow": "Bestiaire",

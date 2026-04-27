@@ -39,3 +39,7 @@
 /coverage.xml
 ###< Extra ###
 
+
+###> Mockups ###
+/.claude/*
+###< Mockups ###
