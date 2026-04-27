@@ -19,6 +19,8 @@ use App\Domain\Command\Game\Initialisation\LaunchGameCommand;
 use App\Domain\Command\Game\Initialisation\ReOpenGameInvitationCommand;
 use App\Domain\Command\Game\Initialisation\SetGameConfigurationCommand;
 use App\Domain\Command\Game\Initialisation\SetGameMasterCommand;
+use App\Domain\Command\Game\Runtime\TimeUpCommand;
+use App\Domain\Command\Game\Runtime\VillagerSetupCommand;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Enum\Game\GameGlobalStepEnum;
@@ -104,6 +106,20 @@ use Doctrine\ORM\Mapping as ORM;
             input: LaunchGameCommand::class,
             output: BasicActionOutput::class,
         ),
+        new Post(
+            name: 'api_game_villager_setup',
+            uriTemplate: '/game/setup/villager',
+            messenger: 'input',
+            input: VillagerSetupCommand::class,
+            output: BasicActionOutput::class,
+        ),
+        new Post(
+            name: 'api_game_time_up',
+            uriTemplate: '/game/time-up',
+            messenger: 'input',
+            input: TimeUpCommand::class,
+            output: BasicActionOutput::class,
+        ),
         new Patch(),
     ],
 )]
@@ -117,6 +133,9 @@ class Game implements TopicRelatedObject
 
     #[ORM\Column(enumType: GameRuntimeStepEnum::class, nullable: true)]
     private ?GameRuntimeStepEnum $runtimeStep = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $stepEndAt = null;
 
     #[ORM\OneToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -193,6 +212,18 @@ class Game implements TopicRelatedObject
     public function setRuntimeStep(?GameRuntimeStepEnum $runtimeStep): static
     {
         $this->runtimeStep = $runtimeStep;
+
+        return $this;
+    }
+
+    public function getStepEndAt(): ?\DateTimeImmutable
+    {
+        return $this->stepEndAt;
+    }
+
+    public function setStepEndAt(?\DateTimeImmutable $stepEndAt): static
+    {
+        $this->stepEndAt = $stepEndAt;
 
         return $this;
     }

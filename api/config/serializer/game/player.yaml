@@ -40,3 +40,6 @@ App\Entity\Game\Player:
             groups:
                 - me:player:read
                 - werewolf-team:read
+        afkCount:
+            groups:
+                - me:player:read

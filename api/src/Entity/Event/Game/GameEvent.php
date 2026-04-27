@@ -24,6 +24,8 @@ use Doctrine\ORM\Mapping\InheritanceType;
     'set_configuration' => SetGameConfigurationEvent::class,
     'launch' => LaunchGameEvent::class,
     'set_game_master' => SetGameMasterEvent::class,
+    'time_up' => TimeUpGameEvent::class,
+    'villager_setup' => VillagerSetupEvent::class,
 ])]
 abstract class GameEvent
 {

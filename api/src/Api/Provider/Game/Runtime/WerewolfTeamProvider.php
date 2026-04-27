@@ -38,7 +38,7 @@ class WerewolfTeamProvider implements ProviderInterface
             return null;
         }
 
-        if (!$this->gameSpec->canSeeWerewolfTeam($user, $game)) {
+        if (!$this->gameSpec->canSeeWerewolfTeam($player, $game)) {
             throw new AccessDeniedHttpException();
         }
 

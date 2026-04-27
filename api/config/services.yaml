@@ -15,6 +15,8 @@ services:
             string $publicUploadsPath: '%env(string:PUBLIC_UPLOADS_PATH)%'
             string $ssrPublicUploadsPath: '%env(string:SSR_PUBLIC_UPLOADS_PATH)%'
             int $minimumPlayers: '%env(int:MINIMUM_PLAYERS)%'
+            int $setupDuration: '%env(int:APP_SETUP_DURATION)%'
+            int $afkThreshold: '%env(int:APP_AFK_THRESHOLD)%'
 
     _instanceof:
         App\Domain\GameEvent\Interface\GameEventApplicatorInterface:

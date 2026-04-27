@@ -10,6 +10,12 @@ class WerewolfRole extends GameRole
 {
     public function __construct()
     {
+        parent::__construct();
         $this->type = GameRoleEnum::WEREWOLF;
+    }
+
+    protected function needSetup(): bool
+    {
+        return false;
     }
 }
