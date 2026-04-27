@@ -35,7 +35,15 @@ const LobbyClient = () => {
                 </Typography>
               )}
             </div>
-            <Button variant="neutral" size="sm" label={t('resumeGame')} asLink href={paths.game} glass className="shrink-0" />
+            <Button
+              variant="neutral"
+              size="sm"
+              label={t('resumeGame')}
+              asLink
+              href={paths.game}
+              glass
+              className="shrink-0"
+            />
           </div>
         </Card>
       )}
