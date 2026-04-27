@@ -48,11 +48,23 @@ export class GameResource {
     return this.apiClient.patch<BasicActionResponse>(apiPaths.game.setConfiguration, { configuration });
   }
 
+  public async setGameMaster(playerId: string): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.patch<BasicActionResponse>(apiPaths.game.setGameMaster, { playerId });
+  }
+
   public async dispatchRoles(dispatch: RoleDispatchEntry[]): Promise<BasicActionResponse | ApiClientError> {
     return this.apiClient.patch<BasicActionResponse>(apiPaths.game.roleDispatch, { dispatch });
   }
 
   public async launch(): Promise<BasicActionResponse | ApiClientError> {
     return this.apiClient.patch<BasicActionResponse>(apiPaths.game.launch);
+  }
+
+  public async villagerSetup(targetPlayerId: string): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.post<BasicActionResponse>(apiPaths.game.villagerSetup, { targetPlayerId });
+  }
+
+  public async timeUp(): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.post<BasicActionResponse>(apiPaths.game.timeUp);
   }
 }

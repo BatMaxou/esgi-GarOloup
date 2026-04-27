@@ -11,8 +11,11 @@ export const apiPaths = {
     close: '/game/invitation/close',
     open: '/game/invitation/open',
     setConfiguration: '/game/configuration',
+    setGameMaster: '/game/game-master',
     roleDispatch: '/game/role-dispatch',
     launch: '/game/launch',
+    villagerSetup: '/game/setup/villager',
+    timeUp: '/game/time-up',
   },
   player: {
     getCurrent: '/game/player',
