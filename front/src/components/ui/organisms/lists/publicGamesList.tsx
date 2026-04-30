@@ -18,6 +18,7 @@ import Typography from '@/components/ui/atoms/typography';
 import { paths } from '@/utils/paths';
 import { Game } from '@/utils/types';
 import { useRouter } from '@/i18n/navigation';
+import ClickAndCopy from '../click-and-copy';
 
 type Props = {
   publicGames: CollectionResponse<Game> | null;
@@ -61,9 +62,11 @@ const PublicGamesList = ({ publicGames }: Props) => {
         compareAscending: (left, right) => compareStringsAsc(left.joinCode ?? '', right.joinCode ?? ''),
         getFilterText: (game) => game.joinCode ?? '',
         cell: (game) => (
-          <Typography tag="span" variant="subtitle" bold textColor="accent" className="text-glow-accent">
-            {game.joinCode ?? ''}
-          </Typography>
+          <ClickAndCopy valueToCopy={game.joinCode ?? ''} iconClassName="text-accent text-glow-accent">
+            <Typography tag="span" variant="subtitle" bold textColor="accent" className="text-glow-accent">
+              {game.joinCode ?? ''}
+            </Typography>
+          </ClickAndCopy>
         ),
       },
       {
