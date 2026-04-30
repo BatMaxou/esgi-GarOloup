@@ -4,7 +4,6 @@ import { redirect } from '@/i18n/navigation';
 
 import { getApiClient, getSession } from '@/utils/server/clients';
 import { paths } from '@/utils/paths';
-import { notFound } from 'next/navigation';
 import { ApiClientError } from '@/lib/api/ApiClientError';
 import { PlayerProvider } from '@/contexts/player-context';
 
@@ -22,10 +21,9 @@ const LoggedLayout = async ({ children }: Props) => {
   }
 
   const maybePlayer = await apiClient.player.getCurrent();
-  if (maybePlayer instanceof ApiClientError) {
-    return notFound();
-  }
-  return <PlayerProvider initialPlayer={maybePlayer}>{children}</PlayerProvider>;
+  const initialPlayer = maybePlayer instanceof ApiClientError ? null : maybePlayer;
+
+  return <PlayerProvider initialPlayer={initialPlayer}>{children}</PlayerProvider>;
 };
 
 export default LoggedLayout;

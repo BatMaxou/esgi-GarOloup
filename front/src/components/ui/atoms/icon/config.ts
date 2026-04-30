@@ -1,10 +1,11 @@
 import { ComponentType, SVGProps } from 'react';
-import { MoonStar, Sun, LucideIcon, Github, X, Plus, Minus } from 'lucide-react';
+import { MoonStar, Sun, LucideIcon, Github, X, Plus, Minus, Check } from 'lucide-react';
 
 import Garoloup from '@/assets/icons/garoloup.svg';
 import Discord from '@/assets/icons/discord.svg';
 import Crown from '@/assets/icons/crown.svg';
 import Timer from '@/assets/icons/timer.svg';
+import Copy from '@/assets/icons/copy.svg';
 
 export type IconName = keyof typeof raw & string;
 export type IconType = LucideIcon | ComponentType<SVGProps<SVGSVGElement>>;
@@ -21,6 +22,8 @@ const raw = {
   minus: Minus,
   crown: Crown,
   timer: Timer,
+  copy: Copy,
+  check: Check,
 };
 
 export const icons: Icons = raw;
