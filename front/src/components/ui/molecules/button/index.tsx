@@ -10,6 +10,7 @@ import { typographyCva } from '@/components/ui/atoms/typography/cva';
 import { Link } from '@/i18n/navigation';
 import { IconName } from '@/components/ui/atoms/icon/config';
 import Icon from '@/components/ui/atoms/icon';
+import { Loader } from 'lucide-react';
 
 type ButtonType = 'button' | 'submit';
 
@@ -20,6 +21,7 @@ type Props = VariantProps<typeof buttonCva> & {
   className?: string;
   asLink?: boolean;
   href?: LinkHref;
+  loading?: boolean;
   type?: ButtonType;
   textVariant?: VariantProps<typeof typographyCva>['variant'];
   leftIcon?: IconName;
@@ -58,28 +60,34 @@ const Wrapper = ({
   );
 };
 
-const Button = ({ label, textVariant, leftIcon, rightIcon, className, ...props }: Props) => {
+const Button = ({ label, textVariant, leftIcon, rightIcon, className, loading, ...props }: Props) => {
   return (
     <Wrapper className={cn('flex', className)} {...props}>
-      {leftIcon && (
-        <Typography variant={textVariant || 'button'} textColor="controlled">
-          <Icon name={leftIcon} className={buttonIconCva({ size: props.size })} />
-        </Typography>
-      )}
-      {label && (
-        <Typography
-          variant={textVariant || props.size === 'xs' ? 'body-xs' : 'button'}
-          textColor="controlled"
-          bold
-          center
-        >
-          {label}
-        </Typography>
-      )}
-      {rightIcon && (
-        <Typography variant={textVariant || 'button'} textColor="controlled">
-          <Icon name={rightIcon} className={buttonIconCva({ size: props.size })} />
-        </Typography>
+      {loading ? (
+        <Loader className="animate-spin" />
+      ) : (
+        <>
+          {leftIcon && (
+            <Typography variant={textVariant || 'button'} textColor="controlled">
+              <Icon name={leftIcon} className={buttonIconCva({ size: props.size })} />
+            </Typography>
+          )}
+          {label && (
+            <Typography
+              variant={textVariant || props.size === 'xs' ? 'body-xs' : 'button'}
+              textColor="controlled"
+              bold
+              center
+            >
+              {label}
+            </Typography>
+          )}
+          {rightIcon && (
+            <Typography variant={textVariant || 'button'} textColor="controlled">
+              <Icon name={rightIcon} className={buttonIconCva({ size: props.size })} />
+            </Typography>
+          )}
+        </>
       )}
     </Wrapper>
   );

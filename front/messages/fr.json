@@ -409,7 +409,9 @@
       "gameTeamFiltersError": "Erreur lors de la récupération des filtres de rôles"
     },
     "auth": {
-      "errorRegistrationTempUser": "Un problème est survenu. Veuillez réessayer."
+      "errorRegistrationTempUser": "Un problème est survenu. Veuillez réessayer.",
+      "invalidCredentials": "Identifiants invalides",
+      "loginError": "Erreur lors de la connexion"
     },
     "game": {
       "getPublicGamesError": "Erreur lors de la récupération des parties publiques"

@@ -7,7 +7,6 @@ import { useTranslations } from 'next-intl';
 import Button from '@/components/ui/molecules/button';
 import TextInput from '@/components/ui/molecules/text-input';
 import { useAuth } from '@/contexts/auth-context';
-import { toast } from 'react-toastify';
 
 type Props = {
   className?: string;
@@ -20,7 +19,7 @@ type LoginFormValues = {
 };
 
 const LoginForm = ({ className, onSuccess }: Props) => {
-  const { login } = useAuth();
+  const { login, isLoginLoading } = useAuth();
   const t = useTranslations('components.common.form.auth.login');
 
   const { handleSubmit, handleChange } = useFormik({
@@ -30,11 +29,9 @@ const LoginForm = ({ className, onSuccess }: Props) => {
     },
     onSubmit: async (values: LoginFormValues) => {
       const response = await login(values.email, values.password);
-      if (!response) {
-        toast.error(t('loginError'));
-        return;
+      if (response) {
+        onSuccess?.();
       }
-      onSuccess?.();
     },
   });
 
@@ -56,7 +53,7 @@ const LoginForm = ({ className, onSuccess }: Props) => {
         className="text-neutral-500 self-end"
         href="/forgot-password"
       />
-      <Button variant="accent" label={t('submit')} type="submit" full />
+      <Button variant="accent" label={t('submit')} loading={isLoginLoading} type="submit" full />
     </form>
   );
 };
