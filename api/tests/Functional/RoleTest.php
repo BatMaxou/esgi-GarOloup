@@ -84,7 +84,7 @@ class RoleTest extends GarOloupApiTestCase
         $response = When::asTempUser($tempUserBuilder)->role()->update($roleBuilder->getEntity()->getId(), [
             'name' => '***g ***',
         ]);
-        $this->assertResponseStatusCodeSame(401);
+        $this->assertResponseStatusCodeSame(403);
     }
 
     public function test_temp_user_cant_update_role_files(): void
@@ -99,7 +99,7 @@ class RoleTest extends GarOloupApiTestCase
         $response = When::asTempUser($tempUserBuilder)->role()->updateFiles($roleBuilder->getEntity()->getId(), [
             'picture' => $pictureBuilder->getEntity(),
         ]);
-        $this->assertResponseStatusCodeSame(401);
+        $this->assertResponseStatusCodeSame(403);
     }
 
     public function test_anonymous_cant_update_role(): void
