@@ -407,7 +407,9 @@
       "gameTeamFiltersError": "Error retrieving game team filters"
     },
     "auth": {
-      "errorRegistrationTempUser": "An error occurred. Please try again."
+      "errorRegistrationTempUser": "An error occurred. Please try again.",
+      "invalidCredentials": "Invalid credentials",
+      "loginError": "Error logging in"
     },
     "game": {
       "getPublicGamesError": "Error retrieving public games"
