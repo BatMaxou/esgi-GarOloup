@@ -32,7 +32,7 @@ security:
                 check_path: /api/token/refresh
 
         player:
-            pattern: ^/api/(temp_user|me|game|homepage)
+            pattern: ^/api/(temp_user|me|game|homepage|roles|filters)
             provider: player_provider
             stateless: true
             entry_point: jwt
