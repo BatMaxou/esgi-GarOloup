@@ -24,6 +24,7 @@ type GameContextType = {
   publicGames: CollectionResponse<Game> | null;
   publicGamesLoading: boolean;
   getPublicGames: (page: number, itemsPerPage?: number) => void;
+  launchGame: () => void;
 };
 
 export const GameContext = createContext<GameContextType | undefined>(undefined);
@@ -85,8 +86,18 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
     setPublicGamesLoading(false);
   };
 
+  const launchGame = async() => {
+    const response = await apiClient.game.launch();
+    if (response instanceof ApiClientError) {
+      toast.error(t('launchGameError'));
+      return;
+    }
+    toast.success(t('launchGameSuccess'));
+    return;
+  };
+
   return (
-    <GameContext.Provider value={{ game, setGame, leaveGame, publicGames, publicGamesLoading, getPublicGames }}>
+    <GameContext.Provider value={{ game, setGame, leaveGame, publicGames, publicGamesLoading, getPublicGames, launchGame }}>
       {children}
     </GameContext.Provider>
   );

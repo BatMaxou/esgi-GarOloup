@@ -414,7 +414,9 @@
       "loginError": "Erreur lors de la connexion"
     },
     "game": {
-      "getPublicGamesError": "Erreur lors de la récupération des parties publiques"
+      "getPublicGamesError": "Erreur lors de la récupération des parties publiques",
+      "launchGameError": "Erreur lors de la lancement de la partie",
+      "launchGameSuccess": "Partie lancée"
     }
   }
 }
