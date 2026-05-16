@@ -65,14 +65,14 @@ const ClickAndCopy = ({
       )}
       {children}
       {iconPosition === 'right' && (
-      <motion.div
-        layout
-        className={`transition-[padding] duration-300`}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        animate={{ opacity: 1 }}
-      >
-        <Icon name={copied ? 'check' : 'copy'} className={cn('h-4 w-4', iconClassName)} />
+        <motion.div
+          layout
+          className={`transition-[padding] duration-300`}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          animate={{ opacity: 1 }}
+        >
+          <Icon name={copied ? 'check' : 'copy'} className={cn('h-4 w-4', iconClassName)} />
         </motion.div>
       )}
     </div>

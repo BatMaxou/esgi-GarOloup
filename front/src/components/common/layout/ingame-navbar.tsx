@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { cva } from 'class-variance-authority';
 
-import { Link, usePathname} from '@/i18n/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
 import { paths } from '@/utils/paths';
 import Typography from '@/components/ui/atoms/typography';
 import { useGame } from '@/contexts/game-context';

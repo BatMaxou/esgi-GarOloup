@@ -86,7 +86,7 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
     setPublicGamesLoading(false);
   };
 
-  const launchGame = async() => {
+  const launchGame = async () => {
     const response = await apiClient.game.launch();
     if (response instanceof ApiClientError) {
       toast.error(t('launchGameError'));
@@ -97,7 +97,9 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
   };
 
   return (
-    <GameContext.Provider value={{ game, setGame, leaveGame, publicGames, publicGamesLoading, getPublicGames, launchGame }}>
+    <GameContext.Provider
+      value={{ game, setGame, leaveGame, publicGames, publicGamesLoading, getPublicGames, launchGame }}
+    >
       {children}
     </GameContext.Provider>
   );
