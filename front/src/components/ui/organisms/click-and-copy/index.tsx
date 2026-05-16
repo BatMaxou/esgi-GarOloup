@@ -12,10 +12,12 @@ const ClickAndCopy = ({
   children,
   valueToCopy,
   iconClassName,
+  iconPosition = 'right',
 }: {
   children: ReactNode;
   valueToCopy: string | number;
   iconClassName?: string;
+  iconPosition?: 'left' | 'right';
 }) => {
   const [copied, setCopied] = useState(false);
   const resetCopiedRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -50,16 +52,29 @@ const ClickAndCopy = ({
         }
       }}
     >
+      {iconPosition === 'left' && (
+        <motion.div
+          layout
+          className={`transition-[padding] duration-300`}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          animate={{ opacity: 1 }}
+        >
+          <Icon name={copied ? 'check' : 'copy'} className={cn('h-4 w-4', iconClassName)} />
+        </motion.div>
+      )}
       {children}
-      <motion.div
-        layout
-        className={`transition-[padding] duration-300`}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        animate={{ opacity: 1 }}
-      >
-        <Icon name={copied ? 'check' : 'copy'} className={cn('h-4 w-4', iconClassName)} />
-      </motion.div>
+      {iconPosition === 'right' && (
+        <motion.div
+          layout
+          className={`transition-[padding] duration-300`}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          animate={{ opacity: 1 }}
+        >
+          <Icon name={copied ? 'check' : 'copy'} className={cn('h-4 w-4', iconClassName)} />
+        </motion.div>
+      )}
     </div>
   );
 };

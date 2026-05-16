@@ -412,7 +412,9 @@
       "loginError": "Error logging in"
     },
     "game": {
-      "getPublicGamesError": "Error retrieving public games"
+      "getPublicGamesError": "Error retrieving public games",
+      "launchGameError": "Error launching game",
+      "launchGameSuccess": "Game launched"
     }
   }
 }

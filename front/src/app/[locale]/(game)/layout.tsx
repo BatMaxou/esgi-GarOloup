@@ -5,6 +5,7 @@ import { PlayerProvider } from '@/contexts/player-context';
 import { GameProvider } from '@/contexts/game-context';
 import { getApiClient, getSession } from '@/utils/server/clients';
 import { ApiClientError } from '@/lib/api/ApiClientError';
+import IngameNavbar from '@/components/common/layout/ingame-navbar';
 
 type Props = {
   children: ReactNode;
@@ -31,7 +32,10 @@ const GameLayout = async ({ children }: Props) => {
 
   return (
     <PlayerProvider initialPlayer={maybePlayer}>
-      <GameProvider initialGame={maybeGame}>{children}</GameProvider>
+      <GameProvider initialGame={maybeGame}>
+        <IngameNavbar />
+        {children}
+      </GameProvider>
     </PlayerProvider>
   );
 };
