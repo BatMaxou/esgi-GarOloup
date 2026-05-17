@@ -20,8 +20,8 @@ class GameEventDispatcher implements GameEventDispatcherInterface
         private readonly EntityManagerInterface $em,
         iterable $applicators
     ) {
-        $this->applicators = iterator_to_array($applicators);
-        usort(
+        $this->applicators = \iterator_to_array($applicators);
+        \usort(
             $this->applicators,
             fn (GameEventApplicatorInterface $a, GameEventApplicatorInterface $b) => $a::getPriority() <=> $b::getPriority()
         );
@@ -30,10 +30,10 @@ class GameEventDispatcher implements GameEventDispatcherInterface
     public function dispatch(GameEvent $gameEvent, bool $flush = false): Game
     {
         $game = null;
-        foreach ($this->applicators as $applicator) {
-            if ($applicator->supports($gameEvent)) {
-                $game = $applicator->apply($gameEvent);
-            }
+
+        $applicators = \array_filter($this->applicators, fn (GameEventApplicatorInterface $applicator) => $applicator->supports($gameEvent));
+        foreach ($applicators as $applicator) {
+            $game = $applicator->apply($gameEvent);
         }
 
         if (!$game) {

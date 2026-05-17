@@ -1,0 +1,31 @@
+type: http_request
+model: http_request
+id: rq_qgb2NaAPHq
+createdAt: 2026-05-16T18:43:31.768089068
+updatedAt: 2026-05-16T18:43:44.102848946
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_AnBZa5VmeS
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body: {}
+bodyType: null
+description: ''
+headers:
+- enabled: false
+  name: Content-Type
+  value: application/merge-patch+json
+  id: null
+method: GET
+name: Get Temp User 3
+sortPriority: 0.002
+url: ${[ BASE_URL ]}/api/temp_user
+urlParameters:
+- enabled: true
+  name: username
+  value: ${[ USERNAME ]}
+  id: 8Fx4dVyGR9
+- enabled: true
+  name: ''
+  value: ''
+  id: 7IzBrcyahg

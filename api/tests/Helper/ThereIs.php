@@ -15,6 +15,7 @@ use App\Tests\Helper\Builder\Security\RefreshTokenBuilder;
 use App\Tests\Helper\Builder\User\AdminBuilder;
 use App\Tests\Helper\Builder\User\TempUserBuilder;
 use App\Tests\Helper\Builder\User\UserBuilder;
+use Zenstruck\Foundry\Story;
 
 final class ThereIs
 {
@@ -81,5 +82,17 @@ final class ThereIs
     public static function anUploadFile(): UploadFileBuilder
     {
         return new UploadFileBuilder();
+    }
+
+    /**
+     * @template T of Story
+     *
+     * @param class-string<T> $storyClass
+     *
+     * @return T
+     */
+    public static function aStory(string $storyClass): Story
+    {
+        return $storyClass::load();
     }
 }

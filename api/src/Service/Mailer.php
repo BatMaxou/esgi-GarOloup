@@ -42,7 +42,7 @@ class Mailer
             ->to($to)
             ->from('garoloup.game@gmail.com')
             ->subject($subject)
-            ->htmlTemplate(sprintf('email/%s.html.twig', $type->value))
+            ->htmlTemplate(\sprintf('email/%s.html.twig', $type->value))
             ->context($context);
 
         $this->mailer->send($template);

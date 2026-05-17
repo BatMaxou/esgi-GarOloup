@@ -11,7 +11,7 @@ trait GameEventAwareTrait
 
     protected function initGameEventCollector(): void
     {
-        assert($this instanceof GarOloupApiTestCase, 'This trait can only be used in a GarOloupApiTestCase.');
+        \assert($this instanceof GarOloupApiTestCase, 'This trait can only be used in a GarOloupApiTestCase.');
 
         $this->gameEventCollector = $this->getService(MockGameEventCollector::class);
     }

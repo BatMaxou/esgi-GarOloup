@@ -24,8 +24,8 @@ final class MultipartDecoder implements DecoderInterface
         }
 
         /** @phpstan-ignore-next-line */
-        return array_map(static function (string $element) {
-            return json_decode($element, true, flags: \JSON_THROW_ON_ERROR);
+        return \array_map(static function (string $element) {
+            return \json_decode($element, true, flags: \JSON_THROW_ON_ERROR);
         }, $request->request->all()) + $request->files->all();
     }
 

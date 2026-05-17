@@ -26,6 +26,7 @@ use Doctrine\ORM\Mapping\InheritanceType;
     'set_game_master' => SetGameMasterEvent::class,
     'time_up' => TimeUpGameEvent::class,
     'villager_setup' => VillagerSetupEvent::class,
+    'werewolf_vote' => WerewolfVoteEvent::class,
 ])]
 abstract class GameEvent
 {

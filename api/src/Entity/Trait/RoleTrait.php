@@ -36,7 +36,7 @@ trait RoleTrait
 
     public function addRole(RoleEnum $role): static
     {
-        if (!in_array($role->value, $this->roles, true)) {
+        if (!\in_array($role->value, $this->roles, true)) {
             $this->roles[] = $role->value;
         }
 
@@ -45,8 +45,8 @@ trait RoleTrait
 
     public function removeRole(RoleEnum $role): static
     {
-        if (in_array($role->value, $this->roles, true)) {
-            $this->roles = array_diff($this->roles, [$role->value]);
+        if (\in_array($role->value, $this->roles, true)) {
+            $this->roles = \array_diff($this->roles, [$role->value]);
         }
 
         return $this;
@@ -54,6 +54,6 @@ trait RoleTrait
 
     public function hasRole(RoleEnum $role): bool
     {
-        return in_array($role->value, $this->roles, true);
+        return \in_array($role->value, $this->roles, true);
     }
 }

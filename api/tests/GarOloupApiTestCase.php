@@ -4,6 +4,7 @@ namespace App\Tests;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Tests\Helper\When;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -35,6 +36,11 @@ abstract class GarOloupApiTestCase extends ApiTestCase
         }
 
         return $service;
+    }
+
+    protected function getEntityManager(): EntityManagerInterface
+    {
+        return $this->getService(EntityManagerInterface::class);
     }
 
     protected function getMockedAssetPath(string $assetPath): string

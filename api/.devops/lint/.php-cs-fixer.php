@@ -9,12 +9,14 @@ $finder = PhpCsFixer\Finder::create()
 ;
 
 return (new PhpCsFixer\Config())
+    ->setRiskyAllowed(true)
     ->setRules([
         '@Symfony' => true,
         '@PHP84Migration' => true,
         'php_unit_method_casing' => ['case' => 'snake_case'],
         'phpdoc_var_without_name' => false,
         'phpdoc_to_comment' => false,
+        'native_function_invocation' => ['include' => ['@all'], 'scope' => 'namespaced', 'strict' => true],
     ])
     ->setFinder($finder)
 ;
