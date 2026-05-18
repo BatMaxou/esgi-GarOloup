@@ -2,9 +2,9 @@ type: http_request
 model: http_request
 id: rq_aqJxWJ7BXQ
 createdAt: 2026-04-24T12:52:52.379260421
-updatedAt: 2026-04-24T14:07:48.479199426
+updatedAt: 2026-05-16T16:23:17.264510398
 workspaceId: wk_uXtATNFQmZ
-folderId: fl_3whxhCpuFe
+folderId: fl_oB6ercZYdf
 authentication:
   token: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RlhCdVNMZFlzK29xLzVCS0M1MXNpaFZKd05LRGRDWFhHYzdmVlZ1NTlqN2E5MmtlY2taSzdHa1EzcU1sSzBTa0k5Y3lMSA') ]}
 authenticationType: bearer
@@ -18,14 +18,14 @@ description: ''
 headers:
 - enabled: true
   name: Content-Type
-  value: application/json
+  value: application/merge-patch+json
   id: 4kWiNAWAgz
 - enabled: true
   name: ''
   value: ''
   id: 97ABI4J9n0
-method: POST
+method: PATCH
 name: Villager Setup
-sortPriority: 1000.0
+sortPriority: 0.0
 url: ${[ BASE_URL ]}/api/game/setup/villager
 urlParameters: []

@@ -20,6 +20,7 @@ class GameRoleSpec
         return (match ($type) {
             GameRoleEnum::VILLAGER => new VillagerRole(),
             GameRoleEnum::WEREWOLF => new WerewolfRole(),
-        })->setRole($role);
+            default => null,
+        })?->setRole($role);
     }
 }

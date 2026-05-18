@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_z8MkUc9hr9
 createdAt: 2026-04-27T10:33:41.442107938
-updatedAt: 2026-04-27T10:35:35.574228743
+updatedAt: 2026-05-16T16:22:41.269370761
 workspaceId: wk_uXtATNFQmZ
 folderId: fl_3whxhCpuFe
 authentication:
@@ -17,14 +17,14 @@ description: ''
 headers:
 - enabled: true
   name: Content-Type
-  value: application/json
+  value: application/merge-patch+json
   id: 4kWiNAWAgz
 - enabled: true
   name: ''
   value: ''
   id: 97ABI4J9n0
-method: POST
+method: PATCH
 name: Time Up
-sortPriority: 1000.001
+sortPriority: 3000.0
 url: ${[ BASE_URL ]}/api/game/time-up
 urlParameters: []

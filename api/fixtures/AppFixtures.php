@@ -2,6 +2,7 @@
 
 namespace App\Fixtures;
 
+use App\Fixtures\Story\ClassicGame\ClassicGameNight1WerewolfTurnStory;
 use App\Tests\Helper\ThereIs;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -14,6 +15,6 @@ class AppFixtures extends Fixture
         ThereIs::anUser()->withEmail('test@garoloup.com')->withUsername('Test')->build();
         ThereIs::anUser()->build(10);
 
-        ThereIs::aRoleBag()->buildAll();
+        ThereIs::aStory(ClassicGameNight1WerewolfTurnStory::class);
     }
 }

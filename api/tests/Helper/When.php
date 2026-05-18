@@ -93,7 +93,7 @@ final class When
         }
 
         $token = $response->get('[token]');
-        if (!is_string($token)) {
+        if (!\is_string($token)) {
             throw new \RuntimeException('Token not found.');
         }
 
@@ -114,7 +114,7 @@ final class When
         }
 
         $token = $response->get('[token]');
-        if (!is_string($token)) {
+        if (!\is_string($token)) {
             throw new \RuntimeException('Token not found.');
         }
 

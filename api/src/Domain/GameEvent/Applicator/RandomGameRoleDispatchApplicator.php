@@ -8,8 +8,8 @@ use App\Domain\GameEvent\Exception\GameRoleNotFoundException;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\GameRoleSpec;
 use App\Entity\Event\Game\GameEvent;
+use App\Entity\Event\Game\LaunchGameEvent;
 use App\Entity\Event\Game\SetGameConfigurationEvent;
-use App\Entity\Event\Game\SetGameMasterEvent;
 use App\Entity\Game\Game;
 use App\Entity\Game\Player;
 use App\Enum\Game\GameInitialisationStepEnum;
@@ -61,7 +61,7 @@ class RandomGameRoleDispatchApplicator implements GameEventApplicatorInterface
         $game = $gameEvent->getGame();
         if (
             !$game
-            || (!$gameEvent instanceof SetGameConfigurationEvent && !$gameEvent instanceof SetGameMasterEvent)
+            || !$gameEvent instanceof LaunchGameEvent
             || GameInitialisationStepEnum::DISPATCH !== $game->getInitialisationStep()
             || !$game->getConfiguration()->isWithRandomDispatch()
         ) {
@@ -73,6 +73,6 @@ class RandomGameRoleDispatchApplicator implements GameEventApplicatorInterface
 
     public static function getPriority(): int
     {
-        return static::POST_APPLY_PRIORITY;
+        return static::PRE_APPLY_PRIORITY;
     }
 }

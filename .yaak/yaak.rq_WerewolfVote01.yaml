@@ -1,0 +1,31 @@
+type: http_request
+model: http_request
+id: rq_WerewolfVote01
+createdAt: 2026-05-12T20:00:00
+updatedAt: 2026-05-16T20:07:00.728064891
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_NXkyutKYCb
+authentication:
+  token: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RlhCdVNMZFlzK29xLzVCS0M1MXNpaFZKd05LRGRDWFhHYzdmVlZ1NTlqN2E5MmtlY2taSzdHa1EzcU1sSzBTa0k5Y3lMSA') ]}
+authenticationType: bearer
+body:
+  text: |-
+    {
+      "targetPlayerId": "019e3256-2875-7613-a803-c1c398d00105"
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/merge-patch+json
+  id: WerewolfVote01H1
+- enabled: true
+  name: ''
+  value: ''
+  id: WerewolfVote01H2
+method: PATCH
+name: Werewolf Vote
+sortPriority: 1000.0
+url: ${[ BASE_URL ]}/api/game/night/werewolf
+urlParameters: []

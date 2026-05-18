@@ -9,7 +9,7 @@ require __DIR__.'/../vendor/autoload.php';
 new Dotenv()->bootEnv(__DIR__.'/../.env');
 
 $env = $_SERVER['APP_ENV'];
-if (!\is_string($env)) {
+if (!is_string($env)) {
     throw new LogicException('Environment variable APP_ENV is not a string.');
 }
 

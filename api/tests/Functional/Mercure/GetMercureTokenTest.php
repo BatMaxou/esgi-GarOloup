@@ -11,7 +11,7 @@ class GetMercureTokenTest extends GarOloupApiTestCase
     /** @return array<mixed> */
     private function getTopics(string $jwt): array
     {
-        $payload = json_decode(base64_decode(explode('.', $jwt)[1]), true);
+        $payload = \json_decode(\base64_decode(\explode('.', $jwt)[1]), true);
         $this->assertIsArray($payload);
         $this->assertArrayHasKey('mercure', $payload);
         $this->assertIsArray($payload['mercure']);

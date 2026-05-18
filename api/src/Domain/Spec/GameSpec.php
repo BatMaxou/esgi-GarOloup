@@ -9,6 +9,7 @@ use App\Entity\Game\Role\WerewolfRole;
 use App\Entity\User\AbstractUser;
 use App\Entity\User\TempUser;
 use App\Enum\Game\GameInitialisationStepEnum;
+use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Repository\Game\PlayerRepository;
 
@@ -101,7 +102,7 @@ class GameSpec
 
     public function canSetGameMaster(AbstractUser $user, Game $game): bool
     {
-        if ($user !== $game->getHost()->getLinkedUser()) {
+        if ($user !== $game->getHost()->getLinkedUser() || !$game->getConfiguration()->isWithGameMaster()) {
             return false;
         }
 
@@ -160,5 +161,39 @@ class GameSpec
         }
 
         return $targetExists && $player->getRole() instanceof VillagerRole;
+    }
+
+    public function canWerewolfVote(Player $voter, Game $game, Player $targetPlayer): bool
+    {
+        if (GameRuntimeStepEnum::NIGHT !== $game->getRuntimeStep()) {
+            return false;
+        }
+
+        if ($game->getStepEndAt() < new \DateTimeImmutable()) {
+            return false;
+        }
+
+        $workflow = $game->getWorkflow();
+        if (null === $workflow || !\in_array(GameRoleEnum::WEREWOLF, $workflow->getCurrentTurn(), true)) {
+            return false;
+        }
+
+        if (!$voter->getRole() instanceof WerewolfRole || $voter->isDead()) {
+            return false;
+        }
+
+        if ($voter->getId()?->toString() === $targetPlayer->getId()?->toString()) {
+            return false;
+        }
+
+        if ($targetPlayer->isDead()) {
+            return false;
+        }
+
+        if ($targetPlayer->getRole() instanceof WerewolfRole) {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -25,7 +25,7 @@ final class RoleNormalizer implements NormalizerInterface, NormalizerAwareInterf
         $context[self::ALREADY_CALLED] = true;
         $normalized = $this->normalizer->normalize($object, $format, $context);
 
-        if (!is_array($normalized)) {
+        if (!\is_array($normalized)) {
             throw new \LogicException(\sprintf('Normalized data should be an array for %s', Role::class));
         }
 

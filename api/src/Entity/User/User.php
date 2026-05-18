@@ -134,7 +134,7 @@ class User extends AbstractUser implements PasswordAuthenticatedUserInterface
     {
         $data = (array) $this;
         if ($this->password) {
-            $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+            $data["\0".self::class."\0password"] = \hash('crc32c', $this->password);
         }
 
         return $data;

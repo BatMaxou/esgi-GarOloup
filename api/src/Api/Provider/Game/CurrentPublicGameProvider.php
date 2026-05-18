@@ -21,25 +21,25 @@ class CurrentPublicGameProvider implements ProviderInterface
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): TraversablePaginator
     {
         $filters = $context['filters'] ?? [];
-        if (!is_array($filters)) {
+        if (!\is_array($filters)) {
             throw new \InvalidArgumentException('The filters must be an array.');
         }
 
         $page = $filters['page'] ?? 1;
-        if (is_string($page)) {
+        if (\is_string($page)) {
             $page = (int) $page;
         }
 
-        if (!is_int($page) || $page < 1) {
+        if (!\is_int($page) || $page < 1) {
             throw new \InvalidArgumentException('The page must be a positive integer.');
         }
 
         $itemsPerPage = $filters['itemsPerPage'] ?? $operation->getPaginationItemsPerPage() ?? 10;
-        if (is_string($itemsPerPage)) {
+        if (\is_string($itemsPerPage)) {
             $itemsPerPage = (int) $itemsPerPage;
         }
 
-        if (!is_int($itemsPerPage) || $itemsPerPage < 1) {
+        if (!\is_int($itemsPerPage) || $itemsPerPage < 1) {
             throw new \InvalidArgumentException('The itemsPerPage must be a positive integer.');
         }
 

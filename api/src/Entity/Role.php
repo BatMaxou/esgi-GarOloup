@@ -209,7 +209,7 @@ class Role
 
     public function removeTeam(GameTeamEnum $team): static
     {
-        $this->teams = array_filter($this->teams, static fn (GameTeamEnum $teamToRemove) => $teamToRemove !== $team);
+        $this->teams = \array_filter($this->teams, static fn (GameTeamEnum $teamToRemove) => $teamToRemove !== $team);
 
         return $this;
     }

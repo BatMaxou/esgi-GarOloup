@@ -61,10 +61,10 @@ export class GameResource {
   }
 
   public async villagerSetup(targetPlayerId: string): Promise<BasicActionResponse | ApiClientError> {
-    return this.apiClient.post<BasicActionResponse>(apiPaths.game.villagerSetup, { targetPlayerId });
+    return this.apiClient.patch<BasicActionResponse>(apiPaths.game.villagerSetup, { targetPlayerId });
   }
 
   public async timeUp(): Promise<BasicActionResponse | ApiClientError> {
-    return this.apiClient.post<BasicActionResponse>(apiPaths.game.timeUp);
+    return this.apiClient.patch<BasicActionResponse>(apiPaths.game.timeUp);
   }
 }

@@ -10,6 +10,7 @@ use App\Domain\GameEvent\Exception\PlayerNotFoundException;
 use App\Domain\GameEvent\Exception\UnauthorizedGameActionException;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\GameSpec;
+use App\Domain\Workflow\NightOrchestrator;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Event\Game\VillagerSetupEvent;
@@ -30,6 +31,7 @@ class VillagerSetupEventApplicator implements GameEventApplicatorInterface
     public function __construct(
         private readonly GameSpec $gameSpec,
         private readonly PlayerRepository $playerRepository,
+        private readonly NightOrchestrator $nightOrchestrator,
         private readonly int $afkThreshold,
     ) {
     }
@@ -63,8 +65,9 @@ class VillagerSetupEventApplicator implements GameEventApplicatorInterface
         $role->setFriendId($targetPlayerId);
         $role->setSetup(true);
 
+        // bouger ca dans un applicator a priorité faible
         if ($this->gameSpec->areAllRolesSetup($game)) {
-            $game->setRuntimeStep(GameRuntimeStepEnum::NIGHT);
+            $this->nightOrchestrator->startNight($game);
         }
 
         return $game;
@@ -84,7 +87,10 @@ class VillagerSetupEventApplicator implements GameEventApplicatorInterface
             }
         }
 
-        $game->setRuntimeStep(GameRuntimeStepEnum::NIGHT);
+        // same
+        if ($this->gameSpec->areAllRolesSetup($game)) {
+            $this->nightOrchestrator->startNight($game);
+        }
 
         return $game;
     }

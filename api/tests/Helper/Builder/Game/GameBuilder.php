@@ -36,7 +36,7 @@ class GameBuilder extends AbstractBuilder
             ...($this->maxPlayers ? ['maxPlayers' => $this->maxPlayers] : []),
             ...($this->maxTimeForDiscussion ? ['maxTimeForDiscussion' => $this->maxTimeForDiscussion] : []),
             ...($this->public ? ['public' => $this->public] : []),
-            'players' => array_map(fn (PlayerBuilder $player) => $player->getEntity(), $this->players),
+            'players' => \array_map(fn (PlayerBuilder $player) => $player->getEntity(), $this->players),
         ]);
     }
 

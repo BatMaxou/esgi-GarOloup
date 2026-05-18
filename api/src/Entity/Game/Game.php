@@ -21,6 +21,7 @@ use App\Domain\Command\Game\Initialisation\SetGameConfigurationCommand;
 use App\Domain\Command\Game\Initialisation\SetGameMasterCommand;
 use App\Domain\Command\Game\Runtime\TimeUpCommand;
 use App\Domain\Command\Game\Runtime\VillagerSetupCommand;
+use App\Domain\Command\Game\Runtime\WerewolfVoteCommand;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Enum\Game\GameGlobalStepEnum;
@@ -106,14 +107,21 @@ use Doctrine\ORM\Mapping as ORM;
             input: LaunchGameCommand::class,
             output: BasicActionOutput::class,
         ),
-        new Post(
+        new Patch(
             name: 'api_game_villager_setup',
             uriTemplate: '/game/setup/villager',
             messenger: 'input',
             input: VillagerSetupCommand::class,
             output: BasicActionOutput::class,
         ),
-        new Post(
+        new Patch(
+            name: 'api_game_werewolf_vote',
+            uriTemplate: '/game/night/werewolf',
+            messenger: 'input',
+            input: WerewolfVoteCommand::class,
+            output: BasicActionOutput::class,
+        ),
+        new Patch(
             name: 'api_game_time_up',
             uriTemplate: '/game/time-up',
             messenger: 'input',
@@ -164,6 +172,14 @@ class Game implements TopicRelatedObject
     #[ORM\OneToMany(targetEntity: Player::class, mappedBy: 'game')]
     private Collection $players;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Workflow $workflow = null;
+
+    /** @var Collection<int, Night> */
+    #[ORM\OneToMany(targetEntity: Night::class, mappedBy: 'game', cascade: ['persist', 'remove'])]
+    private Collection $nights;
+
     public function __construct(
         Player $host,
     ) {
@@ -172,12 +188,13 @@ class Game implements TopicRelatedObject
 
         $uuid = $this->generateUuid();
         $this->id = $uuid;
-        $this->joinCode = substr($uuid->toBase32(), -8);
+        $this->joinCode = \substr($uuid->toBase32(), -8);
 
         $this->players = new ArrayCollection();
         $this->addPlayer($host);
 
         $this->configuration = new Configuration();
+        $this->nights = new ArrayCollection();
     }
 
     public function getConfiguration(): Configuration
@@ -349,6 +366,35 @@ class Game implements TopicRelatedObject
             if ($player->getGame() === $this) {
                 $player->setGame(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getWorkflow(): ?Workflow
+    {
+        return $this->workflow;
+    }
+
+    public function setWorkflow(?Workflow $workflow): static
+    {
+        $this->workflow = $workflow;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Night>
+     */
+    public function getNights(): Collection
+    {
+        return $this->nights;
+    }
+
+    public function addNight(Night $night): static
+    {
+        if (!$this->nights->contains($night)) {
+            $this->nights->add($night);
         }
 
         return $this;

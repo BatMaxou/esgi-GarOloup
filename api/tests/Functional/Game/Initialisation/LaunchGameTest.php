@@ -69,7 +69,7 @@ class LaunchGameTest extends GarOloupApiTestCase
         $hostPlayerBuilder = ThereIs::aPlayer()->withUser($hostBuilder)->build();
         ThereIs::aGame()
             ->withHost($hostPlayerBuilder)
-            ->withInitialisationStep(GameInitialisationStepEnum::DISPATCH)
+            ->withInitialisationStep(GameInitialisationStepEnum::GAME_MASTER_CHOICE)
             ->build()
         ;
 
