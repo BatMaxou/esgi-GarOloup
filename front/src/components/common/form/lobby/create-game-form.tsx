@@ -28,7 +28,6 @@ const CreateGameForm = () => {
       public: false,
     },
     onSubmit: async (values: CreateGameFormValues) => {
-      console.log(values);
       const response = await apiClient.game.create(values);
       if (!(response instanceof ApiClientError)) {
         toast.success(t('createGameSuccess'));

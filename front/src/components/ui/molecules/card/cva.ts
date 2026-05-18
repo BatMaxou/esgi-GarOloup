@@ -1,5 +1,7 @@
 import { cva } from 'class-variance-authority';
 
+import { headerCardEmphasisClasses } from '@/components/common/layout/header-surface';
+
 const roleShellBase = [
   'group/role',
   'before:pointer-events-none before:absolute before:inset-0 before:rounded-sm before:opacity-0',
@@ -10,6 +12,10 @@ const roleShellHover = 'hover:border-primary/35 hover:shadow-[0_12px_40px_rgba(0
 
 const defaultAccentBase = '!border-accent/30 bg-accent/5';
 const defaultAccentHover = 'hover:border-accent/50 hover:shadow-lg hover:shadow-black/25';
+
+const playerCurrentBase = '!bg-secondary/20 !border-primary/20 !backdrop-blur-none shadow-none';
+const playerDefaultBase = '!border-transparent !bg-transparent !backdrop-blur-none shadow-none';
+const playerHover = 'hover:!border-primary/20 hover:!bg-primary/10';
 
 export const cardCva = cva(
   [
@@ -52,6 +58,12 @@ export const cardCva = cva(
         success: '',
         error: '',
         gradient: 'bg-primary-pastel/20 border-primary/50',
+        likeHeader: headerCardEmphasisClasses,
+        player: '',
+      },
+      playerHighlight: {
+        current: '',
+        default: '',
       },
     },
     compoundVariants: [
@@ -99,6 +111,24 @@ export const cardCva = cva(
         hoverable: true,
         class: 'hover:!border-error/45 hover:shadow-lg hover:shadow-black/25',
       },
+      {
+        type: 'default',
+        emphasis: 'player',
+        playerHighlight: 'current',
+        class: playerCurrentBase,
+      },
+      {
+        type: 'default',
+        emphasis: 'player',
+        playerHighlight: 'default',
+        class: playerDefaultBase,
+      },
+      {
+        type: 'default',
+        emphasis: 'player',
+        hoverable: true,
+        class: playerHover,
+      },
     ],
     defaultVariants: {
       hoverable: true,
@@ -107,6 +137,7 @@ export const cardCva = cva(
       type: 'default',
       roleVariant: 'none',
       emphasis: 'base',
+      playerHighlight: 'default',
     },
   }
 );

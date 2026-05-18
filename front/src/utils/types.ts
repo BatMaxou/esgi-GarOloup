@@ -32,6 +32,7 @@ export type Game = {
 export type Player = {
   id: string;
   user?: User;
+  tempUser?: TempUser;
   dead?: boolean;
   game?: Game;
   host?: boolean;

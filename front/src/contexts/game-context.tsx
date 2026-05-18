@@ -66,7 +66,19 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
     }
 
     isWatching.current = true;
-    const eventSource = mercureClient.watchGame(game.id, setGame);
+    const eventSource = mercureClient.watchGame(game.id, (incoming) => {
+      setGame((previous) => {
+        if (!previous) {
+          return incoming;
+        }
+
+        return {
+          ...previous,
+          ...incoming,
+          players: incoming.players ?? previous.players,
+        };
+      });
+    });
 
     return () => {
       isWatching.current = false;

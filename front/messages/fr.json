@@ -8,6 +8,11 @@
   },
   "components": {
     "common": {
+      "game": {
+        "ingame-players-sidebar": {
+          "players": "Joueurs"
+        }
+      },
       "home": {
         "hero": {
           "description": "Stratégie, bluff et trahison… Survivrez-vous à la nuit ?",
