@@ -33,8 +33,10 @@ const GameLayout = async ({ children }: Props) => {
   return (
     <PlayerProvider initialPlayer={maybePlayer}>
       <GameProvider initialGame={maybeGame}>
-        <IngameNavbar />
-        {children}
+        <div className="grid h-dvh grid-rows-[auto_1fr] overflow-hidden">
+          <IngameNavbar />
+          <div className="min-h-0 overflow-hidden">{children}</div>
+        </div>
       </GameProvider>
     </PlayerProvider>
   );

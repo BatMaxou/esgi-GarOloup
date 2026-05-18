@@ -4,7 +4,7 @@ import ClickAndCopy from '@/components/ui/organisms/click-and-copy';
 
 const GameJoinCode = ({ joinCode }: { joinCode: string }) => {
   return (
-    <Card variant={'accent'} className="px-6! py-2!" liftOnHover={false}>
+    <Card variant={'accent'} className="px-4! py-2!" liftOnHover={false}>
       <Typography tag="p" variant="body-xs" bold uppercase center textColor="accent" className="text-glow-accent">
         Code :
       </Typography>

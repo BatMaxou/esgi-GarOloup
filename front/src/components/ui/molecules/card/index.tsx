@@ -19,11 +19,12 @@ type BaseProps = {
   hoverable?: boolean;
   liftOnHover?: boolean;
   fullfilled?: boolean;
+  isCurrentPlayer?: boolean;
 };
 
 type DefaultCardProps = BaseProps & {
   type?: 'default';
-  variant?: 'none' | 'accent' | 'success' | 'error' | 'gradient';
+  variant?: 'none' | 'accent' | 'success' | 'error' | 'gradient' | 'likeHeader' | 'player';
   fullfilled?: boolean;
   href?: LinkHref;
 };
@@ -45,6 +46,7 @@ const Card = ({
   liftOnHover = true,
   hoverable = true,
   fullfilled = false,
+  isCurrentPlayer = false,
   href,
 }: Props) => {
   const isRole = type === 'role';
@@ -59,8 +61,14 @@ const Card = ({
           ? 'error'
           : variant === 'gradient'
             ? 'gradient'
-            : 'base'
+            : variant === 'likeHeader'
+              ? 'likeHeader'
+              : variant === 'player'
+                ? 'player'
+                : 'base'
     : 'base';
+
+  const playerHighlight = emphasis === 'player' ? (isCurrentPlayer ? 'current' : 'default') : 'default';
 
   return href ? (
     <Link
@@ -72,6 +80,7 @@ const Card = ({
           type,
           roleVariant,
           emphasis,
+          playerHighlight,
           fullfilled,
           className,
         }),
@@ -82,7 +91,18 @@ const Card = ({
     </Link>
   ) : (
     <div
-      className={`${cardCva({ orientation, liftOnHover: hoverable && liftOnHover, type, roleVariant, emphasis, fullfilled, className })}`}
+      className={cn(
+        cardCva({
+          orientation,
+          liftOnHover: hoverable && liftOnHover,
+          type,
+          roleVariant,
+          emphasis,
+          playerHighlight,
+          fullfilled,
+        }),
+        className
+      )}
     >
       {children}
     </div>
