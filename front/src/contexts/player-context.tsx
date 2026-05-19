@@ -25,7 +25,7 @@ export const PlayerProvider = ({ children, initialPlayer = null }: Props) => {
   const [player, setPlayer] = useState<Player | null>(initialPlayer);
   const isWatching = useRef<boolean>(false);
   const { apiClient } = useApiClient();
-  const { mercureClient, isCredentialsInitialized } = useMercureClient();
+  const { mercureClient, isCredentialsInitialized, requestMercureTokenRefresh } = useMercureClient();
   const { user } = useAuth();
 
   const desyncPlayer = useCallback(() => {
@@ -46,6 +46,14 @@ export const PlayerProvider = ({ children, initialPlayer = null }: Props) => {
       });
     }
   }, [apiClient, user, player]);
+
+  useEffect(() => {
+    if (!player?.id) {
+      return;
+    }
+
+    requestMercureTokenRefresh();
+  }, [player?.id, requestMercureTokenRefresh]);
 
   useEffect(() => {
     if (!player?.id || !mercureClient || isWatching.current || !isCredentialsInitialized) {

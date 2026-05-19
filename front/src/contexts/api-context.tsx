@@ -53,10 +53,13 @@ export const ApiClientProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const user = (mainSession?.user ?? tempSession?.user) as User | null | undefined;
-    apiClient.token = user?.token ?? null;
+    const token = user?.token ?? null;
+    const tokenChanged = apiClient.token !== token;
+
+    apiClient.token = token;
     apiClient.refreshToken = user?.refreshToken ?? null;
 
-    if (apiClient.token) {
+    if (token && tokenChanged) {
       setTokenHasChanged(true); // eslint-disable-line react-hooks/set-state-in-effect
     }
   }, [mainSession?.user, tempSession?.user]);
