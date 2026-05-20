@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react';
 
 import { mercureUrl } from '@/utils/tools';
 import { MercureClient } from '@/lib/mercure/MercureClient';
@@ -14,6 +14,7 @@ type Props = {
 type MercureClientContextType = {
   mercureClient: MercureClient;
   isCredentialsInitialized: boolean;
+  requestMercureTokenRefresh: () => void;
 };
 
 export const MercureClientContext = createContext<MercureClientContextType | undefined>(undefined);
@@ -23,18 +24,24 @@ export const MercureClientProvider = ({ children }: Props) => {
   const { apiClient, tokenHasChanged } = useApiClient();
   const [mercureClient] = useState(new MercureClient(mercureUrl, apiClient, new ClientCookieRegistry()));
 
+  const requestMercureTokenRefresh = useCallback(() => {
+    setIsCredentialsInitialized(false);
+  }, []);
+
   useEffect(() => {
     if (isCredentialsInitialized) {
       return;
     }
 
-    if (tokenHasChanged) {
-      mercureClient.fetchCredentials().then(() => setIsCredentialsInitialized(true));
+    if (!apiClient.token) {
+      return;
     }
-  }, [mercureClient, tokenHasChanged, isCredentialsInitialized]);
+
+    mercureClient.fetchCredentials().then(() => setIsCredentialsInitialized(true));
+  }, [mercureClient, apiClient, tokenHasChanged, isCredentialsInitialized]);
 
   return (
-    <MercureClientContext.Provider value={{ mercureClient, isCredentialsInitialized }}>
+    <MercureClientContext.Provider value={{ mercureClient, isCredentialsInitialized, requestMercureTokenRefresh }}>
       {children}
     </MercureClientContext.Provider>
   );
