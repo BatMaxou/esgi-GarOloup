@@ -92,16 +92,7 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
             }
         }
 
-        $victimId = $this->resolveVictim($game);
-        if (null !== $victimId) {
-            $night = $this->getCurrentNight($game);
-            $murder = new MurderAction($night, GameRoleEnum::WEREWOLF, $victimId);
-            $night->addAction($murder);
-        }
-
-        $this->nightOrchestrator->advance($game);
-
-        return $game;
+        return $this->closeWerewolfVote($game);
     }
 
     protected function supportsRandomization(GameEvent $gameEvent): bool
@@ -163,6 +154,18 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
         }
 
         return $victimId;
+    }
+
+    private function closeWerewolfVote(Game $game): Game
+    {
+        $victimId = $this->resolveVictim($game);
+        if (null !== $victimId) {
+            $night = $this->getCurrentNight($game);
+            $murder = new MurderAction($night, GameRoleEnum::WEREWOLF, $victimId);
+            $night->addAction($murder);
+        }
+
+        return $this->nightOrchestrator->advance($game);
     }
 
     private function resolveVictim(Game $game): ?string

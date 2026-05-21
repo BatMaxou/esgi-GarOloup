@@ -32,7 +32,7 @@ class JoinGameEventApplicator implements GameEventApplicatorInterface
         $user = $this->ensureUser($gameEvent);
         $game = $this->ensureGame($gameEvent);
 
-        if (!$this->gameSpec->canJoin($user)) {
+        if (!$this->gameSpec->canJoin($user, $game)) {
             throw new AlreadyInAnotherGameException('You are already playing a game');
         }
 

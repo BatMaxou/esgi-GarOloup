@@ -2,6 +2,8 @@
 
 namespace App\Tests\Helper;
 
+use App\Domain\Workflow\NightWorkflowComposer;
+use App\Fixtures\Story\GaroloupStory;
 use App\Tests\Helper\Builder\File\UploadFileBuilder;
 use App\Tests\Helper\Builder\Game\CompositionBuilder;
 use App\Tests\Helper\Builder\Game\ConfigurationBuilder;
@@ -12,10 +14,11 @@ use App\Tests\Helper\Builder\Game\Role\GameRoleBuilderBag;
 use App\Tests\Helper\Builder\Role\RoleBuilder;
 use App\Tests\Helper\Builder\Role\RoleBuilderBag;
 use App\Tests\Helper\Builder\Security\RefreshTokenBuilder;
+use App\Tests\Helper\Builder\Story\StoryBuilder;
 use App\Tests\Helper\Builder\User\AdminBuilder;
 use App\Tests\Helper\Builder\User\TempUserBuilder;
 use App\Tests\Helper\Builder\User\UserBuilder;
-use Zenstruck\Foundry\Story;
+use App\Tests\Helper\Builder\Workflow\WorkflowBuilder;
 
 final class ThereIs
 {
@@ -84,15 +87,20 @@ final class ThereIs
         return new UploadFileBuilder();
     }
 
+    public static function aWorkflow(NightWorkflowComposer $nightWorkflowComposer): WorkflowBuilder
+    {
+        return new WorkflowBuilder($nightWorkflowComposer);
+    }
+
     /**
-     * @template T of Story
+     * @template T of GaroloupStory
      *
      * @param class-string<T> $storyClass
      *
-     * @return T
+     * @return StoryBuilder<T>
      */
-    public static function aStory(string $storyClass): Story
+    public static function aStory(string $storyClass): StoryBuilder
     {
-        return $storyClass::load();
+        return new StoryBuilder($storyClass);
     }
 }

@@ -12,11 +12,13 @@ use App\Enum\Game\GameInitialisationStepEnum;
 use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Repository\Game\PlayerRepository;
+use Symfony\Component\Clock\ClockInterface;
 
 class GameSpec
 {
     public function __construct(
         private readonly PlayerRepository $playerRepository,
+        private readonly ClockInterface $clock,
         private readonly int $minimumPlayers,
     ) {
     }
@@ -37,7 +39,7 @@ class GameSpec
         return true;
     }
 
-    public function canJoin(AbstractUser $user): bool
+    public function canJoin(AbstractUser $user, Game $game): bool
     {
         $players = $this->playerRepository->findByUser($user);
         if (0 === \count($players)) {
@@ -50,7 +52,7 @@ class GameSpec
             }
         }
 
-        return true;
+        return $game->getMaxPlayers() > $game->getPlayers()->count();
     }
 
     public function isUsernameAvailable(TempUser $user, Game $game): bool
@@ -147,7 +149,7 @@ class GameSpec
     {
         if (
             GameRuntimeStepEnum::SETUP !== $game->getRuntimeStep()
-            || $game->getStepEndAt() < new \DateTimeImmutable()
+            || $game->getStepEndAt() < $this->clock->now()
             || $player->getId()?->toString() === $targetPlayerId
         ) {
             return false;
@@ -169,7 +171,7 @@ class GameSpec
             return false;
         }
 
-        if ($game->getStepEndAt() < new \DateTimeImmutable()) {
+        if ($game->getStepEndAt() < $this->clock->now()) {
             return false;
         }
 

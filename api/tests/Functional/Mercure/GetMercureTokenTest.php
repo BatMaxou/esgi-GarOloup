@@ -2,7 +2,9 @@
 
 namespace App\Tests\Functional\Mercure;
 
+use App\Fixtures\Story\Role\GameRoleInitializedStory;
 use App\Tests\GarOloupApiTestCase;
+use App\Tests\Helper\Builder\Game\Role\GameRoleBuilderBag;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\When;
 
@@ -64,8 +66,10 @@ class GetMercureTokenTest extends GarOloupApiTestCase
 
     public function test_villager_gets_only_villager_topics(): void
     {
-        $roleBagBuilder = ThereIs::aRoleBag()->build();
-        $gameRoleBagBuilder = ThereIs::aGameRoleBag($roleBagBuilder)->build();
+        $gameRoleBagBuilder = ThereIs::aStory(GameRoleInitializedStory::class)
+            ->execute()
+            ->get(GameRoleInitializedStory::GAME_ROLE_BAG);
+        $this->assertInstanceOf(GameRoleBuilderBag::class, $gameRoleBagBuilder);
 
         $userBuilder = ThereIs::anUser()->build();
         $gameBuilder = ThereIs::aGame()->build();
@@ -89,8 +93,10 @@ class GetMercureTokenTest extends GarOloupApiTestCase
 
     public function test_werewolf_gets_only_werewolf_topics(): void
     {
-        $roleBagBuilder = ThereIs::aRoleBag()->build();
-        $gameRoleBagBuilder = ThereIs::aGameRoleBag($roleBagBuilder)->build();
+        $gameRoleBagBuilder = ThereIs::aStory(GameRoleInitializedStory::class)
+            ->execute()
+            ->get(GameRoleInitializedStory::GAME_ROLE_BAG);
+        $this->assertInstanceOf(GameRoleBuilderBag::class, $gameRoleBagBuilder);
 
         $userBuilder = ThereIs::anUser()->build();
         $gameBuilder = ThereIs::aGame()->build();

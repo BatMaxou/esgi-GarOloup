@@ -2,18 +2,18 @@
 
 namespace App\Fixtures\Factory\Game;
 
-use App\Entity\Game\Configuration;
+use App\Entity\Game\Workflow;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends PersistentObjectFactory<Configuration>
+ * @extends PersistentObjectFactory<Workflow>
  */
-final class ConfigurationFactory extends PersistentObjectFactory
+final class WorkflowFactory extends PersistentObjectFactory
 {
     #[\Override]
     public static function class(): string
     {
-        return Configuration::class;
+        return Workflow::class;
     }
 
     #[\Override]

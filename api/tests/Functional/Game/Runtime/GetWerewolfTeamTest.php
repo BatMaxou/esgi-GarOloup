@@ -2,31 +2,33 @@
 
 namespace App\Tests\Functional\Game\Runtime;
 
-use App\Enum\Game\GameInitialisationStepEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
+use App\Fixtures\Story\ClassicGame\ClassicGameDispatchedStory;
+use App\Fixtures\Story\ClassicGame\ClassicGameLaunchedStory;
+use App\Fixtures\Story\ClassicGame\ClassicGameSetupedStory;
 use App\Tests\GarOloupApiTestCase;
+use App\Tests\Helper\Builder\Game\PlayerBuilder;
+use App\Tests\Helper\Builder\User\TempUserBuilder;
+use App\Tests\Helper\Builder\User\UserBuilder;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\When;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 class GetWerewolfTeamTest extends GarOloupApiTestCase
 {
-    /** @return iterable<array{0: GameInitialisationStepEnum}> */
+    /** @return iterable<array{0: class-string<ClassicGameDispatchedStory>}> */
     public static function initializationStepsProvider(): iterable
     {
-        yield [GameInitialisationStepEnum::NEW];
-        yield [GameInitialisationStepEnum::CONFIGURATION];
-        yield [GameInitialisationStepEnum::GAME_MASTER_CHOICE];
-        yield [GameInitialisationStepEnum::DISPATCH];
+        yield [ClassicGameDispatchedStory::class];
+        // to complete
     }
 
-    /** @return iterable<array{0: GameRuntimeStepEnum}> */
+    /** @return iterable<array{0: class-string<ClassicGameDispatchedStory>}> */
     public static function activeStepsProvider(): iterable
     {
-        yield [GameRuntimeStepEnum::SETUP];
-        yield [GameRuntimeStepEnum::NIGHT];
-        yield [GameRuntimeStepEnum::DAY];
-        yield [GameRuntimeStepEnum::VOTE];
+        yield [ClassicGameLaunchedStory::class];
+        yield [ClassicGameSetupedStory::class];
+        // to complete
     }
 
     public function test_anonymous_cannot_access_werewolf_team(): void
@@ -45,57 +47,41 @@ class GetWerewolfTeamTest extends GarOloupApiTestCase
 
     public function test_villager_cannot_access_werewolf_team(): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-        $roleBagBuilder = ThereIs::aRoleBag()->build();
-        $gameRoleBagBuilder = ThereIs::aGameRoleBag($roleBagBuilder)->build();
+        $story = ThereIs::aStory(ClassicGameLaunchedStory::class)->execute();
+        $villagerPlayerBuilder = $story->get(ClassicGameLaunchedStory::VILLAGER_1);
+        $this->assertInstanceOf(PlayerBuilder::class, $villagerPlayerBuilder);
+        $villagerUserBuilder = $villagerPlayerBuilder->user;
+        $this->assertInstanceOf(UserBuilder::class, $villagerUserBuilder);
 
-        $gameBuilder = ThereIs::aGame()->withRuntimeStep(GameRuntimeStepEnum::NIGHT)->build();
-        ThereIs::aPlayer()
-            ->withUser($userBuilder)
-            ->withRole($gameRoleBagBuilder->getVillager())
-            ->withGame($gameBuilder)
-            ->build()
-        ;
-
-        When::asUser($userBuilder)->game()->getWerewolfTeam();
+        When::asUser($villagerUserBuilder)->game()->getWerewolfTeam();
         $this->assertResponseStatusCodeSame(403);
     }
 
+    /** @param class-string<ClassicGameDispatchedStory> $storyClass */
     #[DataProvider('initializationStepsProvider')]
-    public function test_werewolf_cannot_access_werewolf_team_during_initialization(GameInitialisationStepEnum $step): void
+    public function test_werewolf_cannot_access_werewolf_team_during_initialization(string $storyClass): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-        $roleBagBuilder = ThereIs::aRoleBag()->build();
-        $gameRoleBagBuilder = ThereIs::aGameRoleBag($roleBagBuilder)->build();
+        $story = ThereIs::aStory($storyClass)->execute();
+        $werewolfPlayerBuilder = $story->get(ClassicGameDispatchedStory::WEREWOLF_1);
+        $this->assertInstanceOf(PlayerBuilder::class, $werewolfPlayerBuilder);
+        $werewolfUserBuilder = $werewolfPlayerBuilder->tempUser;
+        $this->assertInstanceOf(TempUserBuilder::class, $werewolfUserBuilder);
 
-        $gameBuilder = ThereIs::aGame()->withInitialisationStep($step)->build();
-        ThereIs::aPlayer()
-            ->withUser($userBuilder)
-            ->withRole($gameRoleBagBuilder->getWerewolf())
-            ->withGame($gameBuilder)
-            ->build()
-        ;
-
-        When::asUser($userBuilder)->game()->getWerewolfTeam();
+        When::asTempUser($werewolfUserBuilder)->game()->getWerewolfTeam();
         $this->assertResponseStatusCodeSame(403);
     }
 
+    /** @param class-string<ClassicGameDispatchedStory> $storyClass */
     #[DataProvider('activeStepsProvider')]
-    public function test_werewolf_can_access_werewolf_team_during_active_steps(GameRuntimeStepEnum $step): void
+    public function test_werewolf_can_access_werewolf_team_during_active_steps(string $storyClass): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-        $roleBagBuilder = ThereIs::aRoleBag()->build();
-        $gameRoleBagBuilder = ThereIs::aGameRoleBag($roleBagBuilder)->build();
+        $story = ThereIs::aStory($storyClass)->execute();
+        $werewolfPlayerBuilder = $story->get(ClassicGameDispatchedStory::WEREWOLF_1);
+        $this->assertInstanceOf(PlayerBuilder::class, $werewolfPlayerBuilder);
+        $werewolfUserBuilder = $werewolfPlayerBuilder->tempUser;
+        $this->assertInstanceOf(TempUserBuilder::class, $werewolfUserBuilder);
 
-        $gameBuilder = ThereIs::aGame()->withRuntimeStep($step)->build();
-        $playerBuilder = ThereIs::aPlayer()
-            ->withUser($userBuilder)
-            ->withRole($gameRoleBagBuilder->getWerewolf())
-            ->withGame($gameBuilder)
-            ->build()
-        ;
-
-        $response = When::asUser($userBuilder)->game()->getWerewolfTeam();
+        $response = When::asTempUser($werewolfUserBuilder)->game()->getWerewolfTeam();
         $this->assertResponseStatusCodeSame(200);
     }
 
