@@ -4,7 +4,11 @@ namespace App\Tests\Functional\Game\Initialisation;
 
 use App\Entity\Event\Game\SetGameConfigurationEvent;
 use App\Enum\Game\GameInitialisationStepEnum;
+use App\Fixtures\Story\ClassicGame\ClassicGameClosedStory;
 use App\Tests\GarOloupApiTestCase;
+use App\Tests\Helper\Builder\Game\GameBuilder;
+use App\Tests\Helper\Builder\User\TempUserBuilder;
+use App\Tests\Helper\Builder\User\UserBuilder;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\Trait\GameEventAwareTrait;
 use App\Tests\Helper\When;
@@ -15,16 +19,13 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_host_can_set_game_configuration(): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        $userBuilder = $story->get(ClassicGameClosedStory::HOST);
+        $this->assertInstanceOf(UserBuilder::class, $userBuilder);
+        $gameBuilder = $story->get(ClassicGameClosedStory::GAME);
+        $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
         $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
-        $gameBuilder = ThereIs::aGame()
-            ->withHost($hostBuilder)
-            ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
-            ->build();
-
         $compositionBuilder = ThereIs::aComposition()
             ->withRole($roleBagBuilder->getVillager(), 4)
             ->withRole($roleBagBuilder->getWerewolf(), 2)
@@ -40,16 +41,13 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_host_can_set_game_configuration_with_game_master(): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        $userBuilder = $story->get(ClassicGameClosedStory::HOST);
+        $this->assertInstanceOf(UserBuilder::class, $userBuilder);
+        $gameBuilder = $story->get(ClassicGameClosedStory::GAME);
+        $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
         $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
-        $gameBuilder = ThereIs::aGame()
-            ->withHost($hostBuilder)
-            ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
-            ->build();
-
         $compositionBuilder = ThereIs::aComposition()
             ->withRole($roleBagBuilder->getVillager(), 4)
             ->withRole($roleBagBuilder->getWerewolf(), 2)
@@ -79,16 +77,9 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_anonymous_cant_set_game_configuration(): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
 
         $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
-        ThereIs::aGame()
-            ->withHost($hostBuilder)
-            ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
-            ->build();
-
         $compositionBuilder = ThereIs::aComposition()
             ->withRole($roleBagBuilder->getVillager(), 4)
             ->withRole($roleBagBuilder->getWerewolf(), 2)
@@ -100,43 +91,26 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_user_cant_set_game_configuration(): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-
-        $hostBuilder = ThereIs::anUser()->build();
-        $hostPlayerBuilder = ThereIs::aPlayer()->withUser($hostBuilder)->build();
+        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        $tempUserBuilder = $story->get(ClassicGameClosedStory::TEMP_USER_1);
+        $this->assertInstanceOf(TempUserBuilder::class, $tempUserBuilder);
 
         $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
-        ThereIs::aGame()
-            ->withHost($hostPlayerBuilder)
-            ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
-            ->build();
-
         $compositionBuilder = ThereIs::aComposition()
             ->withRole($roleBagBuilder->getVillager(), 4)
             ->withRole($roleBagBuilder->getWerewolf(), 2)
         ;
 
-        When::asUser($userBuilder)->game()->setConfiguration($compositionBuilder);
+        When::asTempUser($tempUserBuilder)->game()->setConfiguration($compositionBuilder);
         $this->assertResponseStatusCodeSame(403);
     }
 
     public function test_random_player_cant_set_game_configuration(): void
     {
         $userBuilder = ThereIs::anUser()->build();
-        $playerBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
-
-        $hostBuilder = ThereIs::anUser()->build();
-        $hostPlayerBuilder = ThereIs::aPlayer()->withUser($hostBuilder)->build();
+        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
 
         $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
-        ThereIs::aGame()
-            ->withHost($hostPlayerBuilder)
-            ->withPlayer($playerBuilder)
-            ->withPlayers(ThereIs::aPlayer()->build(4, true))
-            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
-            ->build();
-
         $compositionBuilder = ThereIs::aComposition()
             ->withRole($roleBagBuilder->getVillager(), 4)
             ->withRole($roleBagBuilder->getWerewolf(), 2)
@@ -148,15 +122,9 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_host_cant_set_game_configuration_without_configuration(): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
-
-        ThereIs::aRoleBag()->buildAll();
-        ThereIs::aGame()
-            ->withHost($hostBuilder)
-            ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
-            ->build();
+        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        $userBuilder = $story->get(ClassicGameClosedStory::HOST);
+        $this->assertInstanceOf(UserBuilder::class, $userBuilder);
 
         $compositionBuilder = ThereIs::aComposition();
 
@@ -166,16 +134,11 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_host_cant_set_game_configuration_with_unmatching_composition_roles_number(): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        $userBuilder = $story->get(ClassicGameClosedStory::HOST);
+        $this->assertInstanceOf(UserBuilder::class, $userBuilder);
 
         $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
-        ThereIs::aGame()
-            ->withHost($hostBuilder)
-            ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
-            ->build();
-
         $compositionBuilder = ThereIs::aComposition()
             ->withRole($roleBagBuilder->getVillager(), 2)
             ->withRole($roleBagBuilder->getWerewolf(), 2)
@@ -187,16 +150,11 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_host_cant_set_game_configuration_with_negative_role_number(): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        $userBuilder = $story->get(ClassicGameClosedStory::HOST);
+        $this->assertInstanceOf(UserBuilder::class, $userBuilder);
 
         $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
-        ThereIs::aGame()
-            ->withHost($hostBuilder)
-            ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
-            ->build();
-
         $compositionBuilder = ThereIs::aComposition()
             ->withRole($roleBagBuilder->getVillager(), -4)
             ->withRole($roleBagBuilder->getWerewolf(), 2)
@@ -208,17 +166,11 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_host_cant_set_game_configuration_with_invalid_max_per_game(): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        $userBuilder = $story->get(ClassicGameClosedStory::HOST);
+        $this->assertInstanceOf(UserBuilder::class, $userBuilder);
 
         $roleBuiler = ThereIs::aRole()->villager()->withMaxPerGame(2)->build();
-
-        ThereIs::aGame()
-            ->withHost($hostBuilder)
-            ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
-            ->build();
-
         $compositionBuilder = ThereIs::aComposition()->withRole($roleBuiler, 6);
 
         When::asUser($userBuilder)->game()->setConfiguration($compositionBuilder);
@@ -227,17 +179,11 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_host_cant_set_game_configuration_with_invalid_min_players(): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        $userBuilder = $story->get(ClassicGameClosedStory::HOST);
+        $this->assertInstanceOf(UserBuilder::class, $userBuilder);
 
         $roleBuiler = ThereIs::aRole()->villager()->withMinPlayers(8)->build();
-
-        ThereIs::aGame()
-            ->withHost($hostBuilder)
-            ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
-            ->build();
-
         $compositionBuilder = ThereIs::aComposition()->withRole($roleBuiler, 6);
 
         When::asUser($userBuilder)->game()->setConfiguration($compositionBuilder);
@@ -246,20 +192,15 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_host_cant_set_game_configuration_with_role_given_more_than_once(): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        $userBuilder = $story->get(ClassicGameClosedStory::HOST);
+        $this->assertInstanceOf(UserBuilder::class, $userBuilder);
 
         $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
-        ThereIs::aGame()
-            ->withHost($hostBuilder)
-            ->withPlayers(ThereIs::aPlayer()->build(7, true))
-            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
-            ->build();
-
         $compositionBuilder = ThereIs::aComposition()
-            ->withRole($roleBagBuilder->getVillager(), 4)
+            ->withRole($roleBagBuilder->getVillager(), 3)
             ->withRole($roleBagBuilder->getWerewolf(), 2)
-            ->withRole($roleBagBuilder->getVillager(), 2)
+            ->withRole($roleBagBuilder->getVillager(), 1)
         ;
 
         When::asUser($userBuilder)->game()->setConfiguration($compositionBuilder);
@@ -268,16 +209,17 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_host_cant_set_game_configuration_if_game_has_already_pass_configuration_step(): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+        $storyBuilder = ThereIs::aStory(ClassicGameClosedStory::class);
+        $story = $storyBuilder->getEntity();
+        $userBuilder = $story->get(ClassicGameClosedStory::HOST);
+        $this->assertInstanceOf(UserBuilder::class, $userBuilder);
+        $gameBuilder = $story->get(ClassicGameClosedStory::GAME);
+        $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
+
+        $gameBuilder->withInitialisationStep(GameInitialisationStepEnum::GAME_MASTER_CHOICE);
+        $storyBuilder->execute();
 
         $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
-        ThereIs::aGame()
-            ->withHost($hostBuilder)
-            ->withPlayers(ThereIs::aPlayer()->build(7, true))
-            ->withInitialisationStep(GameInitialisationStepEnum::GAME_MASTER_CHOICE)
-            ->build();
-
         $compositionBuilder = ThereIs::aComposition()
             ->withRole($roleBagBuilder->getVillager(), 4)
             ->withRole($roleBagBuilder->getWerewolf(), 2)
@@ -289,16 +231,13 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_configuration_with_game_master_and_random_dispatch_does_not_triggers_random_game_role_dispatch(): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        $userBuilder = $story->get(ClassicGameClosedStory::HOST);
+        $this->assertInstanceOf(UserBuilder::class, $userBuilder);
+        $gameBuilder = $story->get(ClassicGameClosedStory::GAME);
+        $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
         $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
-        $gameBuilder = ThereIs::aGame()
-            ->withHost($hostBuilder)
-            ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
-            ->build();
-
         $compositionBuilder = ThereIs::aComposition()
             ->withRole($roleBagBuilder->getVillager(), 4)
             ->withRole($roleBagBuilder->getWerewolf(), 2)
@@ -316,16 +255,13 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_configuration_with_game_master_and_without_random_dispatch_does_not_trigger_random_game_role_dispatch(): void
     {
-        $userBuilder = ThereIs::anUser()->build();
-        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        $userBuilder = $story->get(ClassicGameClosedStory::HOST);
+        $this->assertInstanceOf(UserBuilder::class, $userBuilder);
+        $gameBuilder = $story->get(ClassicGameClosedStory::GAME);
+        $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
         $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
-        $gameBuilder = ThereIs::aGame()
-            ->withHost($hostBuilder)
-            ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
-            ->build();
-
         $compositionBuilder = ThereIs::aComposition()
             ->withRole($roleBagBuilder->getVillager(), 4)
             ->withRole($roleBagBuilder->getWerewolf(), 2)
@@ -343,16 +279,13 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_game_event_dispatched_by_set_game_configuration(): void
     {
-        $userBuilder = ThereIs::anUser()->withUsername('SLiipMan')->build();
-        $hostBuilder = ThereIs::aPlayer()->withUser($userBuilder)->build();
+        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        $userBuilder = $story->get(ClassicGameClosedStory::HOST);
+        $this->assertInstanceOf(UserBuilder::class, $userBuilder);
+        $gameBuilder = $story->get(ClassicGameClosedStory::GAME);
+        $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
         $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
-        $gameBuilder = ThereIs::aGame()
-            ->withHost($hostBuilder)
-            ->withPlayers(ThereIs::aPlayer()->build(5, true))
-            ->withInitialisationStep(GameInitialisationStepEnum::CONFIGURATION)
-            ->build();
-
         $compositionBuilder = ThereIs::aComposition()
             ->withRole($roleBagBuilder->getVillager(), 4)
             ->withRole($roleBagBuilder->getWerewolf(), 2)

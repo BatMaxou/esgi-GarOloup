@@ -16,6 +16,7 @@ use App\Service\Mercure\TopicCollector;
 use App\Service\Mercure\TopicProvider;
 use App\Service\Mercure\TopicPublisher;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -31,6 +32,7 @@ class TimeUpHandler
         private readonly TopicProvider $topicProvider,
         private readonly TopicPublisher $topicPublisher,
         private readonly GameEventRepository $gameEventRepository,
+        private readonly ClockInterface $clock,
     ) {
     }
 
@@ -55,7 +57,7 @@ class TimeUpHandler
             return new BasicActionOutput(true);
         }
 
-        if ($game->getStepEndAt() > new \DateTimeImmutable()) {
+        if ($game->getStepEndAt() > $this->clock->now()) {
             throw new ConflictHttpException('The step timer has not expired yet');
         }
 

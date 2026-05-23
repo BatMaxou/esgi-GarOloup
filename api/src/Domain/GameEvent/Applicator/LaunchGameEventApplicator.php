@@ -7,11 +7,12 @@ use App\Domain\GameEvent\Applicator\Trait\UserAwareTrait;
 use App\Domain\GameEvent\Exception\UnauthorizedGameActionException;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\GameSpec;
-use App\Domain\Workflow\WorkflowBuilder;
+use App\Domain\Workflow\NightWorkflowComposer;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\LaunchGameEvent;
 use App\Entity\Game\Game;
 use App\Enum\Game\GameRuntimeStepEnum;
+use Symfony\Component\Clock\ClockInterface;
 
 /** @implements GameEventApplicatorInterface<LaunchGameEvent> */
 class LaunchGameEventApplicator implements GameEventApplicatorInterface
@@ -21,7 +22,8 @@ class LaunchGameEventApplicator implements GameEventApplicatorInterface
 
     public function __construct(
         private readonly GameSpec $gameSpec,
-        private readonly WorkflowBuilder $workflowBuilder,
+        private readonly NightWorkflowComposer $nightWorkflowComposer,
+        private readonly ClockInterface $clock,
         private readonly int $setupDuration,
     ) {
     }
@@ -36,9 +38,9 @@ class LaunchGameEventApplicator implements GameEventApplicatorInterface
         }
 
         $game->setRuntimeStep(GameRuntimeStepEnum::SETUP);
-        $game->setStepEndAt(new \DateTimeImmutable(\sprintf('+%d seconds', $this->setupDuration)));
+        $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $this->setupDuration)));
 
-        $this->workflowBuilder->buildFor($game);
+        $game->setWorkflow($this->nightWorkflowComposer->for($game));
 
         return $game;
     }

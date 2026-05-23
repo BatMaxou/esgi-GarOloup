@@ -13,3 +13,11 @@ services:
 
     App\Domain\GameEvent\GameEventPersister:
         class: App\Tests\Mock\GameEvent\MockGameEventPersister
+
+    clock:
+        class: Symfony\Component\Clock\Clock
+        arguments:
+            $timezone: !service
+                class: DateTimeZone
+                arguments:
+                    $timezone: 'Europe/Paris'

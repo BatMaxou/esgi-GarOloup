@@ -6,9 +6,9 @@ use App\Entity\Game\Game;
 use App\Entity\Game\RoleEntry;
 use App\Entity\Game\Workflow;
 
-class WorkflowBuilder
+class NightWorkflowComposer
 {
-    public function buildFor(Game $game): void
+    public function for(Game $game): Workflow
     {
         $entries = $game->getConfiguration()->getComposition()?->getRoles()->toArray() ?? [];
 
@@ -33,6 +33,6 @@ class WorkflowBuilder
             $workflow->addStep(...$group);
         }
 
-        $game->setWorkflow($workflow);
+        return $workflow;
     }
 }

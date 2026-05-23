@@ -31,6 +31,10 @@ class RoleBuilderBag
         }
 
         foreach ($this->builders as $builder) {
+            if (null !== $builder->tryGetEntity()) {
+                continue;
+            }
+
             $builder->build();
         }
 
