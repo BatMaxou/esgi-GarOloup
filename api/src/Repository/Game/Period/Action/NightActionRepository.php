@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository\Game\NightAction;
+namespace App\Repository\Game\Period\Action;
 
-use App\Entity\Game\NightAction\NightAction;
+use App\Entity\Game\Period\Action\NightAction;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

@@ -2,6 +2,7 @@
 
 namespace App\Fixtures\Story\ClassicGame;
 
+use App\Domain\Workflow\DayWorkflowComposer;
 use App\Domain\Workflow\NightOrchestrator;
 use App\Domain\Workflow\NightWorkflowComposer;
 use App\Tests\Helper\Builder\Game\GameBuilder;
@@ -13,10 +14,11 @@ class ClassicGameSetupedStory extends ClassicGameLaunchedStory
 {
     public function __construct(
         NightWorkflowComposer $nightWorkflowComposer,
+        DayWorkflowComposer $dayWorkflowComposer,
         protected readonly EntityManagerInterface $em,
         protected readonly NightOrchestrator $nightOrchestrator,
     ) {
-        parent::__construct($nightWorkflowComposer);
+        parent::__construct($nightWorkflowComposer, $dayWorkflowComposer);
     }
 
     public function execute(): void
@@ -38,7 +40,7 @@ class ClassicGameSetupedStory extends ClassicGameLaunchedStory
 
         $gameBuilder = $this->getState(self::GAME);
         \assert($gameBuilder instanceof GameBuilder);
-        $this->nightOrchestrator->startNight($gameBuilder->getEntity());
+        $this->nightOrchestrator->start($gameBuilder->getEntity());
 
         $this->em->flush();
     }

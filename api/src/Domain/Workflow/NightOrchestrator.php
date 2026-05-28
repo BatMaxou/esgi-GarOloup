@@ -3,22 +3,24 @@
 namespace App\Domain\Workflow;
 
 use App\Domain\Workflow\Interface\NightResettableInterface;
+use App\Domain\Workflow\Interface\PeriodOrchestratorInterface;
 use App\Entity\Game\Game;
-use App\Entity\Game\Night;
+use App\Entity\Game\Period\Night;
 use App\Enum\Game\GameRuntimeStepEnum;
 use Symfony\Component\Clock\ClockInterface;
 
-class NightOrchestrator
+class NightOrchestrator implements PeriodOrchestratorInterface
 {
     public function __construct(
         private readonly ClockInterface $clock,
+        private readonly DayOrchestrator $dayOrchestrator,
         private readonly int $nightStepDuration,
     ) {
     }
 
-    public function startNight(Game $game): Night
+    public function start(Game $game): Night
     {
-        $workflow = $game->getWorkflow() ?? throw new \LogicException('Workflow missing');
+        $workflow = $game->getNightWorkflow() ?? throw new \LogicException('Workflow missing');
 
         $night = new Night($game, $game->getNights()->count() + 1);
         $game->addNight($night);
@@ -43,11 +45,11 @@ class NightOrchestrator
 
     public function advance(Game $game): Game
     {
-        $workflow = $game->getWorkflow() ?? throw new \LogicException('Workflow missing');
+        $workflow = $game->getNightWorkflow() ?? throw new \LogicException('Workflow missing');
         $workflow->nextStep();
 
         if ($workflow->isCompleted()) {
-            $night = $this->findCurrentNight($game) ?? throw new \LogicException('No active night to resolve');
+            $night = $game->getCurrentNight() ?? throw new \LogicException('No active night to resolve');
             $this->resolve($game, $night);
 
             return $game;
@@ -65,20 +67,8 @@ class NightOrchestrator
         }
 
         $night->setResolved(true);
-        $game->setRuntimeStep(GameRuntimeStepEnum::DAY);
-        $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $game->getMaxTimeForDiscussion())));
+        $this->dayOrchestrator->start($game);
 
         return $game;
-    }
-
-    private function findCurrentNight(Game $game): ?Night
-    {
-        foreach ($game->getNights() as $night) {
-            if (!$night->isResolved()) {
-                return $night;
-            }
-        }
-
-        return null;
     }
 }

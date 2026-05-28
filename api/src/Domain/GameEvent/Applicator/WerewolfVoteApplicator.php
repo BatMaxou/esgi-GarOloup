@@ -15,8 +15,7 @@ use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Event\Game\WerewolfVoteEvent;
 use App\Entity\Game\Game;
-use App\Entity\Game\Night;
-use App\Entity\Game\NightAction\MurderAction;
+use App\Entity\Game\Period\Action\NightAction\MurderAction;
 use App\Entity\Game\Player;
 use App\Entity\Game\Role\WerewolfRole;
 use App\Enum\Game\GameRoleEnum;
@@ -106,7 +105,7 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
             return false;
         }
 
-        $workflow = $game->getWorkflow();
+        $workflow = $game->getNightWorkflow();
 
         return null !== $workflow && \in_array(GameRoleEnum::WEREWOLF, $workflow->getCurrentTurn(), true);
     }
@@ -160,7 +159,7 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
     {
         $victimId = $this->resolveVictim($game);
         if (null !== $victimId) {
-            $night = $this->getCurrentNight($game);
+            $night = $game->getCurrentNight() ?? throw new \LogicException('No active night to register the murder');
             $murder = new MurderAction($night, GameRoleEnum::WEREWOLF, $victimId);
             $night->addAction($murder);
         }
@@ -193,16 +192,5 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
         $topTargets = \array_keys(\array_filter($tally, fn (int $count) => $count === $maxVotes));
 
         return $topTargets[\array_rand($topTargets)];
-    }
-
-    private function getCurrentNight(Game $game): Night
-    {
-        foreach ($game->getNights() as $night) {
-            if (!$night->isResolved()) {
-                return $night;
-            }
-        }
-
-        throw new \LogicException('No active night to register the murder');
     }
 }

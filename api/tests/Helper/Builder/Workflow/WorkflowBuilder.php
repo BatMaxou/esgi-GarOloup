@@ -2,6 +2,7 @@
 
 namespace App\Tests\Helper\Builder\Workflow;
 
+use App\Domain\Workflow\DayWorkflowComposer;
 use App\Domain\Workflow\NightWorkflowComposer;
 use App\Entity\Game\Workflow;
 use App\Fixtures\Factory\Game\WorkflowFactory;
@@ -14,15 +15,32 @@ use function Zenstruck\Foundry\Persistence\save;
 class WorkflowBuilder extends AbstractBuilder
 {
     public ?GameBuilder $game = null;
+    public ?bool $dayWorkflow = null;
+    public ?bool $nightWorkflow = null;
 
     public function __construct(
         private readonly NightWorkflowComposer $nightWorkflowComposer,
+        private readonly DayWorkflowComposer $dayWorkflowComposer,
     ) {
     }
 
     public function forGame(GameBuilder $game): static
     {
         $this->game = $game;
+
+        return $this;
+    }
+
+    public function day(): static
+    {
+        $this->dayWorkflow = true;
+
+        return $this;
+    }
+
+    public function night(): static
+    {
+        $this->nightWorkflow = true;
 
         return $this;
     }
@@ -34,8 +52,20 @@ class WorkflowBuilder extends AbstractBuilder
         }
 
         $game = $this->game->getEntity();
-        $workflow = $this->nightWorkflowComposer->for($game);
-        $game->setWorkflow($workflow);
+        $workflow = null;
+        if ($this->dayWorkflow) {
+            $workflow = $this->dayWorkflowComposer->for($game);
+            $game->setDayWorkflow($workflow);
+        }
+
+        if ($this->nightWorkflow) {
+            $workflow = $this->nightWorkflowComposer->for($game);
+            $game->setNightWorkflow($workflow);
+        }
+
+        if (!$workflow) {
+            throw new \RuntimeException('No workflow type found');
+        }
 
         return save($workflow);
     }

@@ -7,7 +7,7 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class Version20260517221546 extends AbstractMigration
+final class Version20260528130922 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,7 +21,9 @@ final class Version20260517221546 extends AbstractMigration
         $this->addSql('CREATE TABLE composition (id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE configuration (with_game_master TINYINT NOT NULL, with_random_dispatch TINYINT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, composition_id BINARY(16) DEFAULT NULL, UNIQUE INDEX UNIQ_A5E2A5D787A2E12 (composition_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE create_game_event (max_players INT NOT NULL, max_time_for_discussion INT NOT NULL, public TINYINT NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
-        $this->addSql('CREATE TABLE game (initialisation_step VARCHAR(255) NOT NULL, runtime_step VARCHAR(255) DEFAULT NULL, step_end_at DATETIME DEFAULT NULL, join_code VARCHAR(8) NOT NULL, max_players INT NOT NULL, max_time_for_discussion INT NOT NULL, public TINYINT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, host_id BINARY(16) NOT NULL, game_master_id BINARY(16) DEFAULT NULL, configuration_id BINARY(16) NOT NULL, workflow_id BINARY(16) DEFAULT NULL, UNIQUE INDEX UNIQ_232B318C1FB8D185 (host_id), UNIQUE INDEX UNIQ_232B318CC1151A13 (game_master_id), UNIQUE INDEX UNIQ_232B318C73F32DD8 (configuration_id), UNIQUE INDEX UNIQ_232B318C2C7C2CBA (workflow_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE day (number INT NOT NULL, resolved TINYINT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, game_id BINARY(16) NOT NULL, INDEX IDX_E5A02990E48FD905 (game_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE day_action (id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, role_source VARCHAR(255) DEFAULT NULL, team_source VARCHAR(255) DEFAULT NULL, day_id BINARY(16) NOT NULL, discr VARCHAR(255) NOT NULL, INDEX IDX_E012674F9C24126 (day_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE game (initialisation_step VARCHAR(255) NOT NULL, runtime_step VARCHAR(255) DEFAULT NULL, step_end_at DATETIME DEFAULT NULL, join_code VARCHAR(8) NOT NULL, max_players INT NOT NULL, max_time_for_discussion INT NOT NULL, public TINYINT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, host_id BINARY(16) NOT NULL, game_master_id BINARY(16) DEFAULT NULL, configuration_id BINARY(16) NOT NULL, night_workflow_id BINARY(16) DEFAULT NULL, day_workflow_id BINARY(16) DEFAULT NULL, UNIQUE INDEX UNIQ_232B318C1FB8D185 (host_id), UNIQUE INDEX UNIQ_232B318CC1151A13 (game_master_id), UNIQUE INDEX UNIQ_232B318C73F32DD8 (configuration_id), UNIQUE INDEX UNIQ_232B318CAF648A3 (night_workflow_id), UNIQUE INDEX UNIQ_232B318C3A36637F (day_workflow_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE game_event (game_id VARCHAR(255) NOT NULL, player_username VARCHAR(255) NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, discr VARCHAR(255) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE game_role (type VARCHAR(255) NOT NULL, is_setup TINYINT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, role_id BINARY(16) DEFAULT NULL, discr VARCHAR(255) NOT NULL, INDEX IDX_BC7CE646D60322AC (role_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE game_role_dispatch_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
@@ -29,7 +31,7 @@ final class Version20260517221546 extends AbstractMigration
         $this->addSql('CREATE TABLE launch_game_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE murder_action (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE night (number INT NOT NULL, resolved TINYINT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, game_id BINARY(16) NOT NULL, INDEX IDX_11DA0F97E48FD905 (game_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
-        $this->addSql('CREATE TABLE night_action (source VARCHAR(255) NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, night_id BINARY(16) NOT NULL, discr VARCHAR(255) NOT NULL, INDEX IDX_4E26C6747F834C51 (night_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE night_action (id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, role_source VARCHAR(255) DEFAULT NULL, team_source VARCHAR(255) DEFAULT NULL, night_id BINARY(16) NOT NULL, discr VARCHAR(255) NOT NULL, INDEX IDX_4E26C6747F834C51 (night_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE player (dead TINYINT NOT NULL, afk_count INT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, user_id BINARY(16) DEFAULT NULL, temp_user_id BINARY(16) DEFAULT NULL, game_id BINARY(16) DEFAULT NULL, role_id BINARY(16) DEFAULT NULL, INDEX IDX_98197A65A76ED395 (user_id), INDEX IDX_98197A651FA4E70A (temp_user_id), INDEX IDX_98197A65E48FD905 (game_id), INDEX IDX_98197A65D60322AC (role_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE re_open_game_invitation_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE refresh_token (refresh_token VARCHAR(128) NOT NULL, username VARCHAR(255) NOT NULL, valid DATETIME NOT NULL, id INT AUTO_INCREMENT NOT NULL, UNIQUE INDEX UNIQ_C74F2195C74F2195 (refresh_token), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
@@ -49,10 +51,13 @@ final class Version20260517221546 extends AbstractMigration
         $this->addSql('ALTER TABLE close_game_invitation_event ADD CONSTRAINT FK_9E6235E7BF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE configuration ADD CONSTRAINT FK_A5E2A5D787A2E12 FOREIGN KEY (composition_id) REFERENCES composition (id)');
         $this->addSql('ALTER TABLE create_game_event ADD CONSTRAINT FK_1AD0C1CCBF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE day ADD CONSTRAINT FK_E5A02990E48FD905 FOREIGN KEY (game_id) REFERENCES game (id)');
+        $this->addSql('ALTER TABLE day_action ADD CONSTRAINT FK_E012674F9C24126 FOREIGN KEY (day_id) REFERENCES day (id)');
         $this->addSql('ALTER TABLE game ADD CONSTRAINT FK_232B318C1FB8D185 FOREIGN KEY (host_id) REFERENCES player (id)');
         $this->addSql('ALTER TABLE game ADD CONSTRAINT FK_232B318CC1151A13 FOREIGN KEY (game_master_id) REFERENCES player (id)');
         $this->addSql('ALTER TABLE game ADD CONSTRAINT FK_232B318C73F32DD8 FOREIGN KEY (configuration_id) REFERENCES configuration (id)');
-        $this->addSql('ALTER TABLE game ADD CONSTRAINT FK_232B318C2C7C2CBA FOREIGN KEY (workflow_id) REFERENCES workflow (id)');
+        $this->addSql('ALTER TABLE game ADD CONSTRAINT FK_232B318CAF648A3 FOREIGN KEY (night_workflow_id) REFERENCES workflow (id)');
+        $this->addSql('ALTER TABLE game ADD CONSTRAINT FK_232B318C3A36637F FOREIGN KEY (day_workflow_id) REFERENCES workflow (id)');
         $this->addSql('ALTER TABLE game_role ADD CONSTRAINT FK_BC7CE646D60322AC FOREIGN KEY (role_id) REFERENCES role (id)');
         $this->addSql('ALTER TABLE game_role_dispatch_event ADD CONSTRAINT FK_87E7BF06BF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE join_game_event ADD CONSTRAINT FK_61FF5DD1BF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
@@ -82,10 +87,13 @@ final class Version20260517221546 extends AbstractMigration
         $this->addSql('ALTER TABLE close_game_invitation_event DROP FOREIGN KEY FK_9E6235E7BF396750');
         $this->addSql('ALTER TABLE configuration DROP FOREIGN KEY FK_A5E2A5D787A2E12');
         $this->addSql('ALTER TABLE create_game_event DROP FOREIGN KEY FK_1AD0C1CCBF396750');
+        $this->addSql('ALTER TABLE day DROP FOREIGN KEY FK_E5A02990E48FD905');
+        $this->addSql('ALTER TABLE day_action DROP FOREIGN KEY FK_E012674F9C24126');
         $this->addSql('ALTER TABLE game DROP FOREIGN KEY FK_232B318C1FB8D185');
         $this->addSql('ALTER TABLE game DROP FOREIGN KEY FK_232B318CC1151A13');
         $this->addSql('ALTER TABLE game DROP FOREIGN KEY FK_232B318C73F32DD8');
-        $this->addSql('ALTER TABLE game DROP FOREIGN KEY FK_232B318C2C7C2CBA');
+        $this->addSql('ALTER TABLE game DROP FOREIGN KEY FK_232B318CAF648A3');
+        $this->addSql('ALTER TABLE game DROP FOREIGN KEY FK_232B318C3A36637F');
         $this->addSql('ALTER TABLE game_role DROP FOREIGN KEY FK_BC7CE646D60322AC');
         $this->addSql('ALTER TABLE game_role_dispatch_event DROP FOREIGN KEY FK_87E7BF06BF396750');
         $this->addSql('ALTER TABLE join_game_event DROP FOREIGN KEY FK_61FF5DD1BF396750');
@@ -112,6 +120,8 @@ final class Version20260517221546 extends AbstractMigration
         $this->addSql('DROP TABLE composition');
         $this->addSql('DROP TABLE configuration');
         $this->addSql('DROP TABLE create_game_event');
+        $this->addSql('DROP TABLE day');
+        $this->addSql('DROP TABLE day_action');
         $this->addSql('DROP TABLE game');
         $this->addSql('DROP TABLE game_event');
         $this->addSql('DROP TABLE game_role');

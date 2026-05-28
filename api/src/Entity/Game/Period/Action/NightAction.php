@@ -1,13 +1,18 @@
 <?php
 
-namespace App\Entity\Game\NightAction;
+namespace App\Entity\Game\Period\Action;
 
 use App\Entity\Game\Game;
-use App\Entity\Game\Night;
+use App\Entity\Game\Period\Action\NightAction\MurderAction;
+use App\Entity\Game\Period\Action\Trait\SourceActionTrait;
+use App\Entity\Game\Period\Interface\PeriodAction;
+use App\Entity\Game\Period\Interface\PeriodInterface;
+use App\Entity\Game\Period\Night;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Enum\Game\GameRoleEnum;
-use App\Repository\Game\NightAction\NightActionRepository;
+use App\Enum\Game\GameTeamEnum;
+use App\Repository\Game\Period\Action\NightActionRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
@@ -19,22 +24,20 @@ use Doctrine\ORM\Mapping\InheritanceType;
 #[DiscriminatorMap([
     'murder' => MurderAction::class,
 ])]
-abstract class NightAction
+abstract class NightAction implements PeriodAction
 {
     use UuidTrait;
     use TimestampableTrait;
+    use SourceActionTrait;
 
     #[ORM\ManyToOne(inversedBy: 'actions')]
     #[ORM\JoinColumn(nullable: false)]
     protected Night $night;
 
-    #[ORM\Column(enumType: GameRoleEnum::class)]
-    protected GameRoleEnum $source;
-
-    public function __construct(Night $night, GameRoleEnum $source)
+    public function __construct(Night $night, GameRoleEnum|GameTeamEnum $source)
     {
         $this->night = $night;
-        $this->source = $source;
+        $this->setSource($source);
     }
 
     public function getNight(): Night
@@ -42,10 +45,8 @@ abstract class NightAction
         return $this->night;
     }
 
-    public function getSource(): GameRoleEnum
-    {
-        return $this->source;
-    }
-
-    abstract public function apply(Night $night, Game $game): void;
+    /**
+     * @param Night $period
+     */
+    abstract public function apply(PeriodInterface $period, Game $game): void;
 }
