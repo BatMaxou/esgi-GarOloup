@@ -13,7 +13,8 @@
           "players": "Players"
         },
         "new-game-display": {
-          "players": "Players"
+          "players": "Players",
+          "openInvitation": "Reopen invitations"
         }
       },
       "home": {

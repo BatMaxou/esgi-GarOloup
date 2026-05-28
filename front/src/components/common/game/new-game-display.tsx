@@ -89,7 +89,7 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
               <Button
                 variant="text"
                 className="text-neutral-400 hover:text-neutral-200"
-                label="Open Invitation"
+                label={t('openInvitation')}
                 onClick={openInvitation}
               />
             </div>
@@ -107,7 +107,7 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
       default:
         return null;
     }
-  }, [initialisationStep, openInvitation, closeInvitation, game]);
+  }, [initialisationStep, openInvitation, closeInvitation, game, t]);
 
   return (
     <div className="flex flex-col items-center justify-center gap-8 h-full w-full bg-background/80">
