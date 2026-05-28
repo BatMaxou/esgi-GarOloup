@@ -175,7 +175,7 @@ class GameSpec
             return false;
         }
 
-        $workflow = $game->getWorkflow();
+        $workflow = $game->getNightWorkflow();
         if (null === $workflow || !\in_array(GameRoleEnum::WEREWOLF, $workflow->getCurrentTurn(), true)) {
             return false;
         }

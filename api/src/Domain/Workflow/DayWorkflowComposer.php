@@ -4,10 +4,10 @@ namespace App\Domain\Workflow;
 
 use App\Enum\Game\GameRoleEnum;
 
-class NightWorkflowComposer extends AbstractWorkflowComposer
+class DayWorkflowComposer extends AbstractWorkflowComposer
 {
     public function getPriority(?GameRoleEnum $role): ?int
     {
-        return $role?->getNightPriority();
+        return $role?->getDayPriority();
     }
 }

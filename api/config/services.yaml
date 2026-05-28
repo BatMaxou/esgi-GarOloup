@@ -17,6 +17,7 @@ services:
             int $minimumPlayers: '%env(int:MINIMUM_PLAYERS)%'
             int $setupDuration: '%env(int:SETUP_DURATION)%'
             int $nightStepDuration: '%env(int:NIGHT_STEP_DURATION)%'
+            int $voteDuration: '%env(int:VOTE_DURATION)%'
             int $afkThreshold: '%env(int:AFK_THRESHOLD)%'
 
     _instanceof:

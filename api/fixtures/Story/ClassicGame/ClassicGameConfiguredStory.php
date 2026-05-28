@@ -2,7 +2,6 @@
 
 namespace App\Fixtures\Story\ClassicGame;
 
-use App\Domain\Workflow\NightWorkflowComposer;
 use App\Enum\Game\GameInitialisationStepEnum;
 use App\Fixtures\Story\Role\RoleInitializedStory;
 use App\Tests\Helper\Builder\Game\CompositionBuilder;
@@ -16,11 +15,6 @@ class ClassicGameConfiguredStory extends ClassicGameClosedStory
     public const ROLE_BAG = 'role_bag';
     public const COMPOSITION = 'composition';
     public const CONFIGURATION = 'configuration';
-
-    public function __construct(
-        protected readonly NightWorkflowComposer $nightWorkflowComposer,
-    ) {
-    }
 
     public function build(): void
     {

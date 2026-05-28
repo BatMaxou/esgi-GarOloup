@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Entity\Game;
+namespace App\Entity\Game\Period;
 
-use App\Entity\Game\NightAction\NightAction;
+use App\Entity\Game\Game;
+use App\Entity\Game\Period\Action\NightAction;
+use App\Entity\Game\Period\Interface\PeriodInterface;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
-use App\Repository\Game\NightRepository;
+use App\Repository\Game\Period\NightRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NightRepository::class)]
-class Night
+class Night implements PeriodInterface
 {
     use UuidTrait;
     use TimestampableTrait;

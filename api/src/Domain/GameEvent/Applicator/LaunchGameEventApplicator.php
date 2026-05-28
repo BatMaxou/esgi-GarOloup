@@ -40,7 +40,7 @@ class LaunchGameEventApplicator implements GameEventApplicatorInterface
         $game->setRuntimeStep(GameRuntimeStepEnum::SETUP);
         $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $this->setupDuration)));
 
-        $game->setWorkflow($this->nightWorkflowComposer->for($game));
+        $game->setNightWorkflow($this->nightWorkflowComposer->for($game));
 
         return $game;
     }

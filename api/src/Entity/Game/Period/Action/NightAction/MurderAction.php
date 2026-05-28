@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Entity\Game\NightAction;
+namespace App\Entity\Game\Period\Action\NightAction;
 
 use App\Entity\Game\Game;
-use App\Entity\Game\Night;
-use App\Repository\Game\NightAction\MurderActionRepository;
+use App\Entity\Game\Period\Action\NightAction;
+use App\Entity\Game\Period\Interface\PeriodInterface;
+use App\Entity\Game\Period\Night;
+use App\Enum\Game\GameRoleEnum;
+use App\Repository\Game\Period\Action\NightAction\MurderActionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MurderActionRepository::class)]
@@ -13,7 +16,7 @@ class MurderAction extends NightAction
     #[ORM\Column(length: 36)]
     private string $targetPlayerId;
 
-    public function __construct(Night $night, \App\Enum\Game\GameRoleEnum $source, string $targetPlayerId)
+    public function __construct(Night $night, GameRoleEnum $source, string $targetPlayerId)
     {
         parent::__construct($night, $source);
         $this->targetPlayerId = $targetPlayerId;
@@ -24,7 +27,7 @@ class MurderAction extends NightAction
         return $this->targetPlayerId;
     }
 
-    public function apply(Night $night, Game $game): void
+    public function apply(PeriodInterface $period, Game $game): void
     {
         foreach ($game->getPlayers() as $player) {
             if ((string) $player->getId() === $this->targetPlayerId) {

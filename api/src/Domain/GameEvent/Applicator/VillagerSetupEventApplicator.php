@@ -67,7 +67,7 @@ class VillagerSetupEventApplicator implements GameEventApplicatorInterface
 
         // bouger ca dans un applicator a priorité faible
         if ($this->gameSpec->areAllRolesSetup($game)) {
-            $this->nightOrchestrator->startNight($game);
+            $this->nightOrchestrator->start($game);
         }
 
         return $game;
@@ -89,7 +89,7 @@ class VillagerSetupEventApplicator implements GameEventApplicatorInterface
 
         // same
         if ($this->gameSpec->areAllRolesSetup($game)) {
-            $this->nightOrchestrator->startNight($game);
+            $this->nightOrchestrator->start($game);
         }
 
         return $game;

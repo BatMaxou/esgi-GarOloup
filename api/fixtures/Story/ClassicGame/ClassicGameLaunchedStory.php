@@ -2,6 +2,8 @@
 
 namespace App\Fixtures\Story\ClassicGame;
 
+use App\Domain\Workflow\DayWorkflowComposer;
+use App\Domain\Workflow\NightWorkflowComposer;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Workflow\WorkflowBuilder;
@@ -11,6 +13,12 @@ class ClassicGameLaunchedStory extends ClassicGameDispatchedStory
 {
     public const WORKFLOW = 'workflow';
 
+    public function __construct(
+        protected readonly NightWorkflowComposer $nightWorkflowComposer,
+        protected readonly DayWorkflowComposer $dayWorkflowComposer,
+    ) {
+    }
+
     public function build(): void
     {
         parent::build();
@@ -18,7 +26,9 @@ class ClassicGameLaunchedStory extends ClassicGameDispatchedStory
         $gameBuilder = $this->getState(self::GAME);
         \assert($gameBuilder instanceof GameBuilder);
 
-        $workflowBuilder = ThereIs::aWorkflow($this->nightWorkflowComposer)->forGame($gameBuilder);
+        $workflowBuilder = ThereIs::aWorkflow($this->nightWorkflowComposer, $this->dayWorkflowComposer)
+            ->forGame($gameBuilder)
+            ->night();
         $this->addState(self::WORKFLOW, $workflowBuilder);
 
         $gameBuilder->withRuntimeStep(GameRuntimeStepEnum::SETUP);

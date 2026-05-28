@@ -8,6 +8,7 @@ use App\Fixtures\Story\ClassicGame\ClassicGameConfiguredWithGameMasterStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameDispatchedStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameFilledStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameLaunchedStory;
+use App\Fixtures\Story\ClassicGame\ClassicGameNight1WerewolfVotedStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameSetupedStory;
 use App\Fixtures\Story\Game\GameCreatedStory;
 use App\Tests\Helper\ThereIs;
@@ -29,6 +30,7 @@ class AppFixtures extends Fixture
         ThereIs::aStory(ClassicGameDispatchedStory::class)->execute();
         ThereIs::aStory(ClassicGameLaunchedStory::class)->execute();
         ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
+        ThereIs::aStory(ClassicGameNight1WerewolfVotedStory::class)->execute();
 
         ThereIs::aStory(ClassicGameConfiguredWithGameMasterStory::class)->execute();
     }

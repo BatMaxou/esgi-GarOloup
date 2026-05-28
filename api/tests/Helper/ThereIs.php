@@ -2,6 +2,7 @@
 
 namespace App\Tests\Helper;
 
+use App\Domain\Workflow\DayWorkflowComposer;
 use App\Domain\Workflow\NightWorkflowComposer;
 use App\Fixtures\Story\GaroloupStory;
 use App\Tests\Helper\Builder\File\UploadFileBuilder;
@@ -87,9 +88,9 @@ final class ThereIs
         return new UploadFileBuilder();
     }
 
-    public static function aWorkflow(NightWorkflowComposer $nightWorkflowComposer): WorkflowBuilder
+    public static function aWorkflow(NightWorkflowComposer $nightWorkflowComposer, DayWorkflowComposer $dayWorkflowComposer): WorkflowBuilder
     {
-        return new WorkflowBuilder($nightWorkflowComposer);
+        return new WorkflowBuilder($nightWorkflowComposer, $dayWorkflowComposer);
     }
 
     /**

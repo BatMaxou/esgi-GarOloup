@@ -22,6 +22,8 @@ use App\Domain\Command\Game\Initialisation\SetGameMasterCommand;
 use App\Domain\Command\Game\Runtime\TimeUpCommand;
 use App\Domain\Command\Game\Runtime\VillagerSetupCommand;
 use App\Domain\Command\Game\Runtime\WerewolfVoteCommand;
+use App\Entity\Game\Period\Day;
+use App\Entity\Game\Period\Night;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Enum\Game\GameGlobalStepEnum;
@@ -128,7 +130,6 @@ use Doctrine\ORM\Mapping as ORM;
             input: TimeUpCommand::class,
             output: BasicActionOutput::class,
         ),
-        new Patch(),
     ],
 )]
 class Game implements TopicRelatedObject
@@ -174,11 +175,19 @@ class Game implements TopicRelatedObject
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: true)]
-    private ?Workflow $workflow = null;
+    private ?Workflow $nightWorkflow = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Workflow $dayWorkflow = null;
 
     /** @var Collection<int, Night> */
     #[ORM\OneToMany(targetEntity: Night::class, mappedBy: 'game', cascade: ['persist', 'remove'])]
     private Collection $nights;
+
+    /** @var Collection<int, Day> */
+    #[ORM\OneToMany(targetEntity: Day::class, mappedBy: 'game', cascade: ['persist', 'remove'])]
+    private Collection $days;
 
     public function __construct(
         Player $host,
@@ -195,6 +204,7 @@ class Game implements TopicRelatedObject
 
         $this->configuration = new Configuration();
         $this->nights = new ArrayCollection();
+        $this->days = new ArrayCollection();
     }
 
     public function getConfiguration(): Configuration
@@ -371,14 +381,26 @@ class Game implements TopicRelatedObject
         return $this;
     }
 
-    public function getWorkflow(): ?Workflow
+    public function getNightWorkflow(): ?Workflow
     {
-        return $this->workflow;
+        return $this->nightWorkflow;
     }
 
-    public function setWorkflow(?Workflow $workflow): static
+    public function setNightWorkflow(?Workflow $nightWorkflow): static
     {
-        $this->workflow = $workflow;
+        $this->nightWorkflow = $nightWorkflow;
+
+        return $this;
+    }
+
+    public function getDayWorkflow(): ?Workflow
+    {
+        return $this->dayWorkflow;
+    }
+
+    public function setDayWorkflow(?Workflow $dayWorkflow): static
+    {
+        $this->dayWorkflow = $dayWorkflow;
 
         return $this;
     }
@@ -398,6 +420,45 @@ class Game implements TopicRelatedObject
         }
 
         return $this;
+    }
+
+    public function getCurrentNight(): ?Night
+    {
+        foreach ($this->nights as $night) {
+            if (!$night->isResolved()) {
+                return $night;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @return Collection<int, Day>
+     */
+    public function getDays(): Collection
+    {
+        return $this->days;
+    }
+
+    public function addDay(Day $day): static
+    {
+        if (!$this->days->contains($day)) {
+            $this->days->add($day);
+        }
+
+        return $this;
+    }
+
+    public function getCurrentDay(): ?Day
+    {
+        foreach ($this->days as $day) {
+            if (!$day->isResolved()) {
+                return $day;
+            }
+        }
+
+        return null;
     }
 
     public function getTopicIdentifier(): ?string
