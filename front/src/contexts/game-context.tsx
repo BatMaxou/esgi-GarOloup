@@ -2,15 +2,16 @@
 
 import { createContext, ReactNode, useCallback, useContext, useEffect, useRef, useState } from 'react';
 
-import type { Game } from '@/utils/types';
-import { useApiClient } from '@/contexts/api-context';
-import { useAuth } from '@/contexts/auth-context';
-import { ApiClientError } from '@/lib/api/ApiClientError';
-import { useMercureClient } from '@/contexts/mercure-context';
-import { usePlayer } from '@/contexts/player-context';
-import { CollectionResponse } from '@/lib/api/ApiClient';
 import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
+import { useApiClient } from '@/contexts/api-context';
+import { useAuth } from '@/contexts/auth-context';
+import { useMercureClient } from '@/contexts/mercure-context';
+import { usePlayer } from '@/contexts/player-context';
+import { ApiClientError } from '@/lib/api/ApiClientError';
+import { CollectionResponse } from '@/lib/api/ApiClient';
+import { GameConfigurationPayload } from '@/lib/api/resources/GameResource';
+import type { Game } from '@/utils/types';
 
 type Props = {
   children: ReactNode;
@@ -24,6 +25,9 @@ type GameContextType = {
   publicGames: CollectionResponse<Game> | null;
   publicGamesLoading: boolean;
   getPublicGames: (page: number, itemsPerPage?: number) => void;
+  openInvitation: () => void;
+  closeInvitation: () => void;
+  setConfiguration: (configuration: GameConfigurationPayload) => void;
   launchGame: () => void;
 };
 
@@ -66,19 +70,7 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
     }
 
     isWatching.current = true;
-    const eventSource = mercureClient.watchGame(game.id, (incoming) => {
-      setGame((previous) => {
-        if (!previous) {
-          return incoming;
-        }
-
-        return {
-          ...previous,
-          ...incoming,
-          players: incoming.players ?? previous.players,
-        };
-      });
-    });
+    const eventSource = mercureClient.watchGame(game.id, setGame);
 
     return () => {
       isWatching.current = false;
@@ -98,6 +90,33 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
     setPublicGamesLoading(false);
   };
 
+  const openInvitation = async () => {
+    const response = await apiClient.game.open();
+    if (response instanceof ApiClientError) {
+      toast.error(t('openInvitationError'));
+      return;
+    }
+    toast.success(t('openInvitationSuccess'));
+  };
+
+  const closeInvitation = async () => {
+    const response = await apiClient.game.close();
+    if (response instanceof ApiClientError) {
+      toast.error(t('closeInvitationError'));
+      return;
+    }
+    toast.success(t('closeInvitationSuccess'));
+  };
+
+  const setConfiguration = async (configuration: GameConfigurationPayload) => {
+    const response = await apiClient.game.setConfiguration(configuration);
+    if (response instanceof ApiClientError) {
+      toast.error(t('setConfigurationError'));
+      return;
+    }
+    toast.success(t('setConfigurationSuccess'));
+  };
+
   const launchGame = async () => {
     const response = await apiClient.game.launch();
     if (response instanceof ApiClientError) {
@@ -105,12 +124,22 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
       return;
     }
     toast.success(t('launchGameSuccess'));
-    return;
   };
 
   return (
     <GameContext.Provider
-      value={{ game, setGame, leaveGame, publicGames, publicGamesLoading, getPublicGames, launchGame }}
+      value={{
+        game,
+        setGame,
+        leaveGame,
+        publicGames,
+        publicGamesLoading,
+        getPublicGames,
+        launchGame,
+        openInvitation,
+        closeInvitation,
+        setConfiguration,
+      }}
     >
       {children}
     </GameContext.Provider>

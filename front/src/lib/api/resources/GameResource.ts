@@ -1,7 +1,8 @@
 import { ApiClient, BasicActionResponse } from '@/lib/api/ApiClient';
 import { ApiClientError } from '@/lib/api/ApiClientError';
 import { apiPaths } from '@/lib/api/paths';
-import type { Configuration, Game, RoleDispatchEntry } from '@/utils/types';
+import { GameRoleEnum } from '@/utils/enums';
+import type { Game, RoleDispatchEntry } from '@/utils/types';
 
 export interface CreateGamePayload {
   maxPlayers: number;
@@ -15,6 +16,14 @@ export interface CreateGameResponse {
 
 export interface JoinGamePayload {
   joinCode: string;
+}
+
+export interface GameConfigurationPayload {
+  composition: {
+    roles: { role: GameRoleEnum; count: number }[];
+  };
+  withGameMaster: boolean;
+  withRandomDispatch: boolean;
 }
 
 export class GameResource {
@@ -44,8 +53,10 @@ export class GameResource {
     return this.apiClient.patch<BasicActionResponse>(apiPaths.game.open);
   }
 
-  public async setConfiguration(configuration: Configuration): Promise<BasicActionResponse | ApiClientError> {
-    return this.apiClient.patch<BasicActionResponse>(apiPaths.game.setConfiguration, { configuration });
+  public async setConfiguration(
+    configuration: GameConfigurationPayload
+  ): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.patch<BasicActionResponse>(apiPaths.game.setConfiguration, { ...configuration });
   }
 
   public async setGameMaster(playerId: string): Promise<BasicActionResponse | ApiClientError> {

@@ -1,4 +1,11 @@
-import { GameRoleEnum, GameStepEnum, GameTeamEnum, RoleEnum } from './enums';
+import {
+  GameGlobalStepEnum,
+  GameInitialisationStepEnum,
+  GameRoleEnum,
+  GameRuntimeStepEnum,
+  GameTeamEnum,
+  RoleEnum,
+} from './enums';
 
 // ------------------ Entity ------------------
 
@@ -19,7 +26,9 @@ export type TempUser = {
 
 export type Game = {
   id: string;
-  step?: GameStepEnum;
+  globalStep?: GameGlobalStepEnum;
+  initialisationStep?: GameInitialisationStepEnum;
+  runtimeStep?: GameRuntimeStepEnum;
   joinCode?: string;
   players?: Player[];
   host?: Player;
@@ -27,6 +36,7 @@ export type Game = {
   maxPlayers?: number;
   maxTimeForDiscussion?: number;
   public?: boolean;
+  configuration?: Configuration;
 };
 
 export type Player = {
@@ -51,6 +61,11 @@ export type Role = {
   teams?: GameTeamEnum[];
 };
 
+export type RolePlayable = Role & {
+  type: GameRoleEnum;
+  name: string;
+};
+
 export type Configuration = {
   composition?: Composition;
   withGameMaster?: boolean;
@@ -62,7 +77,7 @@ export type Composition = {
 };
 
 export type RoleEntry = {
-  role?: Role;
+  role?: GameRoleEnum;
   count?: number;
 };
 

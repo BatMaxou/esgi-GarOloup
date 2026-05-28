@@ -11,6 +11,10 @@
       "game": {
         "ingame-players-sidebar": {
           "players": "Joueurs"
+        },
+        "new-game-display": {
+          "players": "Joueurs",
+          "openInvitation": "Rouvrir les invitations"
         }
       },
       "home": {
@@ -308,6 +312,19 @@
             "createGameSuccess": "Partie créée avec succès",
             "createGameError": "Erreur lors de la création de la partie"
           }
+        },
+        "game": {
+          "gameConfig": {
+            "sectionTitle": "Configuration de la partie",
+            "sectionSubtitle": "Composition, maître du jeu et mode de distribution",
+            "withGameMasterTitle": "Maître du jeu",
+            "withGameMasterLabel": "Un joueur endosse le rôle de narrateur",
+            "withGameMasterAria": "Activer le maître du jeu",
+            "withRandomDispatchTitle": "Attribution aléatoire",
+            "withRandomDispatchLabel": "Les rôles sont tirés au sort au lancement",
+            "withRandomDispatchAria": "Activer l'attribution aléatoire des rôles",
+            "submit": "Valider la configuration"
+          }
         }
       },
       "lobby": {
@@ -420,6 +437,8 @@
     },
     "game": {
       "getPublicGamesError": "Erreur lors de la récupération des parties publiques",
+      "setConfigurationError": "Erreur lors de la configuration de la partie",
+      "setConfigurationSuccess": "Configuration de la partie enregistrée",
       "launchGameError": "Erreur lors de la lancement de la partie",
       "launchGameSuccess": "Partie lancée"
     }

@@ -10,10 +10,22 @@ type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> & {
   unit?: string;
   defaultValue?: number;
   onChange?: (value: number) => void;
+  onIncrement?: (value: number) => void;
+  onDecrement?: (value: number) => void;
   className?: string;
 };
 
-const NumberInput = ({ unit, defaultValue = 1, onChange, className, min, max, ...props }: Props) => {
+const NumberInput = ({
+  unit,
+  defaultValue = 1,
+  onChange,
+  onIncrement,
+  onDecrement,
+  className,
+  min,
+  max,
+  ...props
+}: Props) => {
   const [value, setValue] = useState<number>(defaultValue);
   const [parsedMin, parsedMax] = useMemo(
     () => [min, max].map((value) => (value === undefined || typeof value === 'number' ? value : parseInt(value))),
@@ -21,8 +33,7 @@ const NumberInput = ({ unit, defaultValue = 1, onChange, className, min, max, ..
   );
 
   const handleChange = useCallback(
-    (callable: (value: number) => number) => {
-      const newValue = callable(value);
+    (newValue: number) => {
       if ((parsedMin !== undefined && newValue < parsedMin) || (parsedMax !== undefined && newValue > parsedMax)) {
         return;
       }
@@ -30,8 +41,18 @@ const NumberInput = ({ unit, defaultValue = 1, onChange, className, min, max, ..
       setValue(newValue);
       onChange?.(newValue);
     },
-    [value, onChange, parsedMin, parsedMax]
+    [onChange, parsedMin, parsedMax]
   );
+
+  const handleIncrement = useCallback(() => {
+    handleChange(value + 1);
+    onIncrement?.(value + 1);
+  }, [handleChange, onIncrement, value]);
+
+  const handleDecrement = useCallback(() => {
+    handleChange(value - 1);
+    onDecrement?.(value - 1);
+  }, [handleChange, onDecrement, value]);
 
   return (
     <div className={cn('flex flex-row items-center justify-between gap-2', className)}>
@@ -43,7 +64,7 @@ const NumberInput = ({ unit, defaultValue = 1, onChange, className, min, max, ..
         size="xs"
         className="aspect-square"
         glass
-        onClick={() => handleChange((value) => value - 1)}
+        onClick={handleDecrement}
         leftIcon="minus"
       />
       <div className="flex items-baseline gap-1">
@@ -56,15 +77,7 @@ const NumberInput = ({ unit, defaultValue = 1, onChange, className, min, max, ..
           </Typography>
         )}
       </div>
-      <Button
-        type="button"
-        variant="neutral"
-        size="xs"
-        className=""
-        glass
-        onClick={() => handleChange((value) => value + 1)}
-        rightIcon="plus"
-      />
+      <Button type="button" variant="neutral" size="xs" className="" glass onClick={handleIncrement} rightIcon="plus" />
     </div>
   );
 };
