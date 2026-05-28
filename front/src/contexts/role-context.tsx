@@ -1,12 +1,12 @@
 'use client';
 
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
 
 import { useApiClient } from '@/contexts/api-context';
 import { ApiClientError } from '@/lib/api/ApiClientError';
-import { Role } from '@/utils/types';
+import { Role, RolePlayable } from '@/utils/types';
 import { GameTeamEnum } from '@/utils/enums';
 import { slugToRoleType } from '@/utils/roleSlug';
 
@@ -16,6 +16,7 @@ type Props = {
 
 type RoleContextType = {
   roleList: Role[];
+  playableRoleList: RolePlayable[];
   getAllRoles: () => void;
   roleListLoading: boolean;
   getRole: (params: GetRoleParams) => void;
@@ -32,6 +33,8 @@ type GetRoleParams = {
   ref: string;
 };
 
+const isRolePlayable = (role: Role): role is RolePlayable => Boolean(role.type && role.name);
+
 export const RoleContext = createContext<RoleContextType | undefined>(undefined);
 
 export const RoleProvider = ({ children }: Props) => {
@@ -39,6 +42,8 @@ export const RoleProvider = ({ children }: Props) => {
   const t = useTranslations('contexts.role');
   const [roleList, setRoleList] = useState<Role[]>([]);
   const [roleListLoading, setRoleListLoading] = useState<boolean>(true);
+
+  const playableRoleList = useMemo(() => roleList.filter(isRolePlayable), [roleList]);
   const [filteredRoleList, setFilteredRoleList] = useState<Role[]>([]);
   const [hydratedRoleList, setHydratedRoleList] = useState<Role[]>([]);
   const [role, setRole] = useState<Role | null>(null);
@@ -48,18 +53,16 @@ export const RoleProvider = ({ children }: Props) => {
 
   const getAllRoles = async () => {
     setRoleListLoading(true);
-    let roleList = [] as Role[];
     await apiClient.role.getAll().then((roles) => {
       if (roles instanceof ApiClientError) {
         toast.error(t('roleListError'));
         setRoleListLoading(false);
-        return roleList;
+        return;
       }
-      setRoleList(roles);
+      setRoleList(roles as Role[]);
       setRoleListLoading(false);
-      roleList = roles;
     });
-    return roleList;
+    return;
   };
 
   const getAllGameTeamFilters = async () => {
@@ -141,6 +144,7 @@ export const RoleProvider = ({ children }: Props) => {
     <RoleContext.Provider
       value={{
         roleList,
+        playableRoleList,
         getAllRoles,
         roleListLoading,
         getRole,

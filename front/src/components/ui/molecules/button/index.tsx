@@ -54,7 +54,12 @@ const Wrapper = ({
   }
 
   return (
-    <button className={classes} onClick={onClick ? onClick : undefined} {...props}>
+    <button
+      className={classes}
+      onClick={onClick && !disabled ? onClick : undefined}
+      disabled={disabled ?? undefined}
+      {...props}
+    >
       {children}
     </button>
   );

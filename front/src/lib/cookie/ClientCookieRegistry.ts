@@ -19,7 +19,7 @@ export class ClientCookieRegistry {
       return;
     }
 
-    document.cookie = `${name}=${encodeURIComponent(value)}; path=${path || '/'}; SameSite=Strict; Secure; ${expire ? `expires=${expire.toUTCString()};` : ''}`;
+    document.cookie = `${name}=${encodeURIComponent(value)}; path=${path || '/'}; SameSite=Strict; ${expire ? `expires=${expire.toUTCString()};` : ''}`;
   }
 
   async eraseCookie(name: string) {

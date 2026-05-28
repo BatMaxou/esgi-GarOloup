@@ -11,6 +11,9 @@
       "game": {
         "ingame-players-sidebar": {
           "players": "Players"
+        },
+        "new-game-display": {
+          "players": "Players"
         }
       },
       "home": {
@@ -307,6 +310,19 @@
             "createGameSuccess": "Game created successfully",
             "createGameError": "Error creating game"
           }
+        },
+        "game": {
+          "gameConfig": {
+            "sectionTitle": "Game setup",
+            "sectionSubtitle": "Composition, game master and role assignment mode",
+            "withGameMasterTitle": "Game master",
+            "withGameMasterLabel": "One player acts as the narrator",
+            "withGameMasterAria": "Enable game master",
+            "withRandomDispatchTitle": "Random assignment",
+            "withRandomDispatchLabel": "Roles are drawn randomly when the game starts",
+            "withRandomDispatchAria": "Enable random role assignment",
+            "submit": "Save configuration"
+          }
         }
       },
       "lobby": {
@@ -418,6 +434,8 @@
     },
     "game": {
       "getPublicGamesError": "Error retrieving public games",
+      "setConfigurationError": "Error while saving game configuration",
+      "setConfigurationSuccess": "Game configuration saved",
       "launchGameError": "Error launching game",
       "launchGameSuccess": "Game launched"
     }

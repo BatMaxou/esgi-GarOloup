@@ -4,13 +4,26 @@ export enum RoleEnum {
   ADMIN = 'ROLE_ADMIN',
 }
 
-export enum GameStepEnum {
+export enum GameGlobalStepEnum {
+  NEW = 'new',
+  RUNNING = 'running',
+  FINISH = 'finish',
+}
+
+export enum GameInitialisationStepEnum {
   NEW = 'new',
   CONFIGURATION = 'configuration',
+  GAME_MASTER_CHOICE = 'game_master_choice',
   DISPATCH = 'dispatch',
-  DAY = 'day',
+  FINISH = 'finish',
+}
+
+export enum GameRuntimeStepEnum {
+  SETUP = 'setup',
   NIGHT = 'night',
-  FINISHED = 'finished',
+  DAY = 'day',
+  VOTE = 'vote',
+  FINISH = 'finish',
 }
 
 export enum ThemeEnum {

@@ -31,7 +31,7 @@ const PlayerSidebarItem = ({ player }: Props) => {
 
         {isDead && (
           <Typography tag="p" variant="body-sm" textColor="primary" bold>
-            <Icon name="skull" className="w-4 h-4" color="white" />
+            <Icon name="skull" className="w-4 h-4 color-white" />
           </Typography>
         )}
       </div>

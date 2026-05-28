@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { PlayerProvider } from '@/contexts/player-context';
 import { GameProvider } from '@/contexts/game-context';
+import { RoleProvider } from '@/contexts/role-context';
 import { getApiClient, getSession } from '@/utils/server/clients';
 import { ApiClientError } from '@/lib/api/ApiClientError';
 import IngameNavbar from '@/components/common/layout/ingame-navbar';
@@ -31,14 +32,16 @@ const GameLayout = async ({ children }: Props) => {
   }
 
   return (
-    <PlayerProvider initialPlayer={maybePlayer}>
-      <GameProvider initialGame={maybeGame}>
-        <div className="grid h-dvh grid-rows-[auto_1fr] overflow-hidden">
-          <IngameNavbar />
-          <div className="min-h-0 overflow-hidden">{children}</div>
-        </div>
-      </GameProvider>
-    </PlayerProvider>
+    <RoleProvider>
+      <PlayerProvider initialPlayer={maybePlayer}>
+        <GameProvider initialGame={maybeGame}>
+          <div className="grid h-dvh grid-rows-[auto_1fr] overflow-hidden">
+            <IngameNavbar />
+            <div className="min-h-0 overflow-hidden">{children}</div>
+          </div>
+        </GameProvider>
+      </PlayerProvider>
+    </RoleProvider>
   );
 };
 

@@ -1,3 +1,5 @@
+'use client';
+
 import Typography from '@/components/ui/atoms/typography';
 import Card from '@/components/ui/molecules/card';
 import ClickAndCopy from '@/components/ui/organisms/click-and-copy';
