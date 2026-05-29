@@ -5,7 +5,7 @@ namespace App\Tests\Functional\Game\Initialisation;
 use App\Entity\Event\Game\SetGameMasterEvent;
 use App\Enum\Game\GameInitialisationStepEnum;
 use App\Fixtures\Story\ClassicGame\ClassicGameClosedStory;
-use App\Fixtures\Story\ClassicGame\ClassicGameConfiguredWithGameMasterStory;
+use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameConfiguredWithGameMasterStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
@@ -32,7 +32,7 @@ class SetGameMasterTest extends GarOloupApiTestCase
         $this->assertInstanceOf(UserBuilder::class, $userBuilder);
         $gameBuilder = $story->get(ClassicGameConfiguredWithGameMasterStory::GAME);
         $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
-        $targetPlayerBuilder = $story->get(ClassicGameConfiguredWithGameMasterStory::PLAYER_1);
+        $targetPlayerBuilder = $story->get(ClassicGameConfiguredWithGameMasterStory::PLAYER_7);
         $this->assertInstanceOf(PlayerBuilder::class, $targetPlayerBuilder);
 
         $response = When::asUser($userBuilder)->game()->setGameMaster($targetPlayerBuilder->getEntity()->getId());

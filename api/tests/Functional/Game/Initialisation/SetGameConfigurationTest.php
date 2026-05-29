@@ -5,6 +5,7 @@ namespace App\Tests\Functional\Game\Initialisation;
 use App\Entity\Event\Game\SetGameConfigurationEvent;
 use App\Enum\Game\GameInitialisationStepEnum;
 use App\Fixtures\Story\ClassicGame\ClassicGameClosedStory;
+use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameClosedWithGameMasterStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\User\TempUserBuilder;
@@ -41,7 +42,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_host_can_set_game_configuration_with_game_master(): void
     {
-        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        $story = ThereIs::aStory(ClassicGameClosedWithGameMasterStory::class)->execute();
         $userBuilder = $story->get(ClassicGameClosedStory::HOST);
         $this->assertInstanceOf(UserBuilder::class, $userBuilder);
         $gameBuilder = $story->get(ClassicGameClosedStory::GAME);
@@ -231,7 +232,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_configuration_with_game_master_and_random_dispatch_does_not_triggers_random_game_role_dispatch(): void
     {
-        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        $story = ThereIs::aStory(ClassicGameClosedWithGameMasterStory::class)->execute();
         $userBuilder = $story->get(ClassicGameClosedStory::HOST);
         $this->assertInstanceOf(UserBuilder::class, $userBuilder);
         $gameBuilder = $story->get(ClassicGameClosedStory::GAME);
@@ -255,7 +256,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
 
     public function test_configuration_with_game_master_and_without_random_dispatch_does_not_trigger_random_game_role_dispatch(): void
     {
-        $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        $story = ThereIs::aStory(ClassicGameClosedWithGameMasterStory::class)->execute();
         $userBuilder = $story->get(ClassicGameClosedStory::HOST);
         $this->assertInstanceOf(UserBuilder::class, $userBuilder);
         $gameBuilder = $story->get(ClassicGameClosedStory::GAME);

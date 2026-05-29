@@ -34,6 +34,10 @@ class Configuration
     {
         $this->game = $game;
 
+        if (null !== $game && $game->getConfiguration() !== $this) {
+            $game->setConfiguration($this);
+        }
+
         return $this;
     }
 
