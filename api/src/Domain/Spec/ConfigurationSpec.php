@@ -19,7 +19,7 @@ class ConfigurationSpec
             return false;
         }
 
-        $playerNumber = $game->getPlayers()->count();
+        $playerNumber = $game->getPlayers()->count() - ($configuration->isWithGameMaster() ? 1 : 0);
         if (
             $playerNumber < $this->minimumPlayers
             || (
