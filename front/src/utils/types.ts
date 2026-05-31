@@ -37,6 +37,10 @@ export type Game = {
   maxTimeForDiscussion?: number;
   public?: boolean;
   configuration?: Configuration;
+  stepEndAt?: string;
+  nights?: Night[];
+  days?: Day[];
+  votes?: Vote[];
 };
 
 export type Player = {
@@ -47,6 +51,41 @@ export type Player = {
   game?: Game;
   host?: boolean;
   username?: string;
+};
+
+export type NightAction = {
+  source?: GameRoleEnum | GameTeamEnum;
+};
+
+export type MurderAction = NightAction & {
+  targetPlayerId?: string;
+};
+
+export type DayAction = {
+  source?: GameRoleEnum | GameTeamEnum;
+};
+
+export type Night = {
+  number?: number;
+  resolved?: boolean;
+  actions?: (NightAction | MurderAction)[];
+};
+
+export type Day = {
+  number?: number;
+  resolved?: boolean;
+  actions?: DayAction[];
+};
+
+export type Vote = {
+  number?: number;
+  resolved?: boolean;
+  ballots?: Ballot[];
+};
+
+export type Ballot = {
+  player?: Player;
+  target?: Player;
 };
 
 export type Role = {
