@@ -21,7 +21,6 @@ services:
 
   mercure:
     image: dunglas/mercure
-    restart: unless-stopped
     environment:
       # Uncomment the following line to disable HTTPS,
       SERVER_NAME: ':80'

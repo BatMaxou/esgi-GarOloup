@@ -15,6 +15,7 @@ export const apiPaths = {
     roleDispatch: '/game/role-dispatch',
     launch: '/game/launch',
     villagerSetup: '/game/setup/villager',
+    vote: '/game/vote',
     timeUp: '/game/time-up',
   },
   player: {
@@ -46,5 +47,6 @@ export const apiPaths = {
   },
   werewolf: {
     team: '/game/werewolf-team',
+    vote: '/game/night/werewolf',
   },
 };
