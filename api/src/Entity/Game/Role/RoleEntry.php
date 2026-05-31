@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Entity\Game;
+namespace App\Entity\Game\Role;
 
+use App\Entity\Game\Composition;
 use App\Entity\Role;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;

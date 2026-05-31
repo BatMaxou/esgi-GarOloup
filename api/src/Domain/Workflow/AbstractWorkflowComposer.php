@@ -3,7 +3,7 @@
 namespace App\Domain\Workflow;
 
 use App\Entity\Game\Game;
-use App\Entity\Game\RoleEntry;
+use App\Entity\Game\Role\RoleEntry;
 use App\Entity\Game\Workflow;
 use App\Enum\Game\GameRoleEnum;
 

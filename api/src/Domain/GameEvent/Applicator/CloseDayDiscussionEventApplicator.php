@@ -23,9 +23,8 @@ class CloseDayDiscussionEventApplicator implements GameEventApplicatorInterface
     public function apply(GameEvent $gameEvent): Game
     {
         $game = $this->ensureGame($gameEvent);
-        $day = $game->getCurrentDay() ?? throw new \LogicException('No active day to resolve');
 
-        return $this->dayOrchestrator->resolve($game, $day);
+        return $this->dayOrchestrator->resolve($game);
     }
 
     public function supports(GameEvent $gameEvent): bool

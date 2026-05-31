@@ -10,7 +10,6 @@ use App\Fixtures\Story\ClassicGame\ClassicGameClosedStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameConfiguredStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\GameBuilder;
-use App\Tests\Helper\Builder\User\TempUserBuilder;
 use App\Tests\Helper\Builder\User\UserBuilder;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\Trait\GameEventAwareTrait;
@@ -83,10 +82,10 @@ class LaunchGameTest extends GarOloupApiTestCase
     public function test_random_player_cant_launch_game(): void
     {
         $story = ThereIs::aStory(ClassicGameConfiguredStory::class)->execute();
-        $tempUserBuilder = $story->get(ClassicGameConfiguredStory::TEMP_USER_1);
-        $this->assertInstanceOf(TempUserBuilder::class, $tempUserBuilder);
+        $userBuilder = $story->get(ClassicGameConfiguredStory::USER_1);
+        $this->assertInstanceOf(UserBuilder::class, $userBuilder);
 
-        When::asTempUser($tempUserBuilder)->game()->launch();
+        When::asUser($userBuilder)->game()->launch();
         $this->assertResponseStatusCodeSame(403);
     }
 

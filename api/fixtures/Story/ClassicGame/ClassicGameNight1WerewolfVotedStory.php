@@ -18,7 +18,7 @@ class ClassicGameNight1WerewolfVotedStory extends ClassicGameSetupedStory
         \assert($gameBuilder instanceof GameBuilder);
         $game = $gameBuilder->getEntity();
 
-        $villagerPlayerBuilder = $this->getState(self::VILLAGER_1);
+        $villagerPlayerBuilder = $this->getState(self::VILLAGER_2);
         \assert($villagerPlayerBuilder instanceof PlayerBuilder);
         $villagerPlayerId = $villagerPlayerBuilder->getEntity()->getId();
         \assert(null !== $villagerPlayerId);

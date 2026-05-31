@@ -13,7 +13,7 @@ use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\SetGameConfigurationEvent;
 use App\Entity\Game\Composition;
 use App\Entity\Game\Game;
-use App\Entity\Game\RoleEntry;
+use App\Entity\Game\Role\RoleEntry;
 use App\Enum\Game\GameInitialisationStepEnum;
 use App\Repository\RoleRepository;
 

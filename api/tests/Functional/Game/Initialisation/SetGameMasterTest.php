@@ -9,7 +9,6 @@ use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameConfiguredWithGameMaste
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
-use App\Tests\Helper\Builder\User\TempUserBuilder;
 use App\Tests\Helper\Builder\User\UserBuilder;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\Trait\GameEventAwareTrait;
@@ -62,10 +61,10 @@ class SetGameMasterTest extends GarOloupApiTestCase
     public function test_non_host_player_cant_set_game_master(): void
     {
         $story = ThereIs::aStory(ClassicGameConfiguredWithGameMasterStory::class)->execute();
-        $tempUserBuilder = $story->get(ClassicGameConfiguredWithGameMasterStory::TEMP_USER_1);
-        $this->assertInstanceOf(TempUserBuilder::class, $tempUserBuilder);
+        $userBuilder = $story->get(ClassicGameConfiguredWithGameMasterStory::USER_1);
+        $this->assertInstanceOf(UserBuilder::class, $userBuilder);
 
-        When::asTempUser($tempUserBuilder)->game()->setGameMaster('random-guy-id');
+        When::asUser($userBuilder)->game()->setGameMaster('random-guy-id');
         $this->assertResponseStatusCodeSame(403);
     }
 

@@ -43,3 +43,12 @@ App\Entity\Game\Game:
         stepEndAt:
             groups:
                 - game:read
+        nights:
+            groups:
+                - game:read
+        days:
+            groups:
+                - game:read
+        votes:
+            groups:
+                - game:read

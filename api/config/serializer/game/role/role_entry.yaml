@@ -1,4 +1,4 @@
-App\Entity\Game\RoleEntry:
+App\Entity\Game\Role\RoleEntry:
     attributes:
         count:
             groups:

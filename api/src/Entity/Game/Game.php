@@ -21,9 +21,11 @@ use App\Domain\Command\Game\Initialisation\SetGameConfigurationCommand;
 use App\Domain\Command\Game\Initialisation\SetGameMasterCommand;
 use App\Domain\Command\Game\Runtime\TimeUpCommand;
 use App\Domain\Command\Game\Runtime\VillagerSetupCommand;
+use App\Domain\Command\Game\Runtime\VoteCommand;
 use App\Domain\Command\Game\Runtime\WerewolfVoteCommand;
 use App\Entity\Game\Period\Day;
 use App\Entity\Game\Period\Night;
+use App\Entity\Game\Period\Vote;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Enum\Game\GameGlobalStepEnum;
@@ -124,6 +126,13 @@ use Doctrine\ORM\Mapping as ORM;
             output: BasicActionOutput::class,
         ),
         new Patch(
+            name: 'api_game_vote',
+            uriTemplate: '/game/vote',
+            messenger: 'input',
+            input: VoteCommand::class,
+            output: BasicActionOutput::class,
+        ),
+        new Patch(
             name: 'api_game_time_up',
             uriTemplate: '/game/time-up',
             messenger: 'input',
@@ -189,6 +198,10 @@ class Game implements TopicRelatedObject
     #[ORM\OneToMany(targetEntity: Day::class, mappedBy: 'game', cascade: ['persist', 'remove'])]
     private Collection $days;
 
+    /** @var Collection<int, Vote> */
+    #[ORM\OneToMany(targetEntity: Vote::class, mappedBy: 'game', cascade: ['persist', 'remove'])]
+    private Collection $votes;
+
     public function __construct(
         Player $host,
     ) {
@@ -205,6 +218,7 @@ class Game implements TopicRelatedObject
         $this->configuration = new Configuration();
         $this->nights = new ArrayCollection();
         $this->days = new ArrayCollection();
+        $this->votes = new ArrayCollection();
     }
 
     public function getConfiguration(): Configuration
@@ -461,8 +475,41 @@ class Game implements TopicRelatedObject
         return null;
     }
 
+    /**
+     * @return Collection<int, Vote>
+     */
+    public function getVotes(): Collection
+    {
+        return $this->votes;
+    }
+
+    public function addVote(Vote $vote): static
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes->add($vote);
+        }
+
+        return $this;
+    }
+
+    public function getCurrentVote(): ?Vote
+    {
+        foreach ($this->votes as $vote) {
+            if (!$vote->isResolved()) {
+                return $vote;
+            }
+        }
+
+        return null;
+    }
+
     public function getTopicIdentifier(): ?string
     {
         return $this->getId();
+    }
+
+    public function countDeadPlayers(): int
+    {
+        return \count(\array_filter($this->players->toArray(), fn (Player $player) => $player->isDead()));
     }
 }

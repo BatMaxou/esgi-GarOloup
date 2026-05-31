@@ -2,6 +2,7 @@
 
 namespace App\Entity\Game;
 
+use App\Entity\Game\Role\RoleEntry;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Repository\Game\CompositionRepository;

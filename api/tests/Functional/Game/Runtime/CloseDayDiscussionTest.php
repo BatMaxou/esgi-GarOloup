@@ -8,7 +8,7 @@ use App\Fixtures\Story\ClassicGame\ClassicGameNight1WerewolfVotedStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
-use App\Tests\Helper\Builder\User\TempUserBuilder;
+use App\Tests\Helper\Builder\User\UserBuilder;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\Trait\GameEventAwareTrait;
 use App\Tests\Helper\When;
@@ -26,8 +26,8 @@ class CloseDayDiscussionTest extends GarOloupApiTestCase
         $story = ThereIs::aStory(ClassicGameNight1WerewolfVotedStory::class)->execute();
         $villagerPlayerBuilder = $story->get(ClassicGameNight1WerewolfVotedStory::VILLAGER_2);
         $this->assertInstanceOf(PlayerBuilder::class, $villagerPlayerBuilder);
-        $villagerUserBuilder = $villagerPlayerBuilder->tempUser;
-        $this->assertInstanceOf(TempUserBuilder::class, $villagerUserBuilder);
+        $villagerUserBuilder = $villagerPlayerBuilder->user;
+        $this->assertInstanceOf(UserBuilder::class, $villagerUserBuilder);
         $gameBuilder = $story->get(ClassicGameNight1WerewolfVotedStory::GAME);
         $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
@@ -36,7 +36,7 @@ class CloseDayDiscussionTest extends GarOloupApiTestCase
 
         $clock->sleep($game->getMaxTimeForDiscussion());
 
-        When::asTempUser($villagerUserBuilder)->game()->timeUp();
+        When::asUser($villagerUserBuilder)->game()->timeUp();
         $this->assertResponseStatusCodeSame(200);
 
         $this->assertEquals(GameRuntimeStepEnum::VOTE, $game->getRuntimeStep());
@@ -58,14 +58,14 @@ class CloseDayDiscussionTest extends GarOloupApiTestCase
         $story = ThereIs::aStory(ClassicGameNight1WerewolfVotedStory::class)->execute();
         $villagerPlayerBuilder = $story->get(ClassicGameNight1WerewolfVotedStory::VILLAGER_2);
         $this->assertInstanceOf(PlayerBuilder::class, $villagerPlayerBuilder);
-        $villagerUserBuilder = $villagerPlayerBuilder->tempUser;
-        $this->assertInstanceOf(TempUserBuilder::class, $villagerUserBuilder);
+        $villagerUserBuilder = $villagerPlayerBuilder->user;
+        $this->assertInstanceOf(UserBuilder::class, $villagerUserBuilder);
         $gameBuilder = $story->get(ClassicGameNight1WerewolfVotedStory::GAME);
         $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
         $clock->sleep($gameBuilder->getEntity()->getMaxTimeForDiscussion() - 1);
 
-        When::asTempUser($villagerUserBuilder)->game()->timeUp();
+        When::asUser($villagerUserBuilder)->game()->timeUp();
         $this->assertResponseStatusCodeSame(409);
 
         $this->assertEquals(GameRuntimeStepEnum::DAY, $gameBuilder->getEntity()->getRuntimeStep());
@@ -78,15 +78,15 @@ class CloseDayDiscussionTest extends GarOloupApiTestCase
         $story = ThereIs::aStory(ClassicGameNight1WerewolfVotedStory::class)->execute();
         $villagerPlayerBuilder = $story->get(ClassicGameNight1WerewolfVotedStory::VILLAGER_2);
         $this->assertInstanceOf(PlayerBuilder::class, $villagerPlayerBuilder);
-        $villagerUserBuilder = $villagerPlayerBuilder->tempUser;
-        $this->assertInstanceOf(TempUserBuilder::class, $villagerUserBuilder);
+        $villagerUserBuilder = $villagerPlayerBuilder->user;
+        $this->assertInstanceOf(UserBuilder::class, $villagerUserBuilder);
         $gameBuilder = $story->get(ClassicGameNight1WerewolfVotedStory::GAME);
         $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
         $game = $gameBuilder->getEntity();
         $clock->sleep($game->getMaxTimeForDiscussion() + 1);
 
-        When::asTempUser($villagerUserBuilder)->game()->timeUp();
+        When::asUser($villagerUserBuilder)->game()->timeUp();
         $this->assertResponseStatusCodeSame(200);
 
         $this->assertCollected(TimeUpGameEvent::class, $villagerUserBuilder->username, $game->getId());
