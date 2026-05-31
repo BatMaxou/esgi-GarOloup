@@ -1,0 +1,8 @@
+App\Entity\Game\Period\Vote\Ballot:
+    attributes:
+        player:
+            groups:
+                - game:read
+        target:
+            groups:
+                - game:read

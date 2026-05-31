@@ -3,18 +3,18 @@
 namespace App\Fixtures\Story\ClassicGame;
 
 use App\Fixtures\Story\Game\GameCreatedStory;
+use App\Tests\Helper\Builder\AbstractBuilder;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
-use App\Tests\Helper\Builder\User\TempUserBuilder;
 use App\Tests\Helper\ThereIs;
 
 class ClassicGameFilledStory extends GameCreatedStory
 {
-    public const TEMP_USER_1 = 'temp_user_1';
-    public const TEMP_USER_2 = 'temp_user_2';
-    public const TEMP_USER_3 = 'temp_user_3';
-    public const TEMP_USER_4 = 'temp_user_4';
-    public const TEMP_USER_5 = 'temp_user_5';
+    public const USER_1 = 'user_1';
+    public const USER_2 = 'user_2';
+    public const USER_3 = 'user_3';
+    public const USER_4 = 'user_4';
+    public const USER_5 = 'user_5';
 
     public const PLAYER_1 = 'player_1';
     public const PLAYER_2 = 'player_2';
@@ -37,50 +37,60 @@ class ClassicGameFilledStory extends GameCreatedStory
         \assert($hostPlayerBuilder instanceof PlayerBuilder);
         $this->addState(self::PLAYER_6, $hostPlayerBuilder);
 
-        $temp1Builder = ThereIs::aTempUser()->withUsername(\sprintf('%sslipman-temp-1', $this->getPrefix()));
-        $temp1PlayerBuilder = ThereIs::aPlayer()->withTempUser($temp1Builder);
-        $this->addState(self::TEMP_USER_1, $temp1Builder, self::TEMP_USERS_POOL);
-        $this->addState(self::PLAYER_1, $temp1PlayerBuilder, self::TEMP_PLAYERS_POOL);
-        $this->addToPool(self::PLAYERS_POOL, $temp1PlayerBuilder);
+        $user1Builder = ThereIs::anUser()
+            ->withUsername(\sprintf('%sslipman-1', $this->getPrefix()))
+            ->withEmail(\sprintf('%sslipman-1@garoloup.com', $this->getPrefix()));
+        $player1Builder = ThereIs::aPlayer()->withUser($user1Builder);
+        $this->addState(self::USER_1, $user1Builder, self::TEMP_USERS_POOL);
+        $this->addState(self::PLAYER_1, $player1Builder, self::TEMP_PLAYERS_POOL);
+        $this->addToPool(self::PLAYERS_POOL, $player1Builder);
 
-        $temp2Builder = ThereIs::aTempUser()->withUsername(\sprintf('%sslipgirl-temp-2', $this->getPrefix()));
-        $temp2PlayerBuilder = ThereIs::aPlayer()->withTempUser($temp2Builder);
-        $this->addState(self::TEMP_USER_2, $temp2Builder, self::TEMP_USERS_POOL);
-        $this->addState(self::PLAYER_2, $temp2PlayerBuilder, self::TEMP_PLAYERS_POOL);
-        $this->addToPool(self::PLAYERS_POOL, $temp2PlayerBuilder);
+        $user2Builder = ThereIs::anUser()
+            ->withUsername(\sprintf('%sslipgirl-2', $this->getPrefix()))
+            ->withEmail(\sprintf('%sslipgirl-2@garoloup.com', $this->getPrefix()));
+        $player2Builder = ThereIs::aPlayer()->withUser($user2Builder);
+        $this->addState(self::USER_2, $user2Builder, self::TEMP_USERS_POOL);
+        $this->addState(self::PLAYER_2, $player2Builder, self::TEMP_PLAYERS_POOL);
+        $this->addToPool(self::PLAYERS_POOL, $player2Builder);
 
-        $temp3Builder = ThereIs::aTempUser()->withUsername(\sprintf('%sslipman-temp-3', $this->getPrefix()));
-        $temp3PlayerBuilder = ThereIs::aPlayer()->withTempUser($temp3Builder);
-        $this->addState(self::TEMP_USER_3, $temp3Builder, self::TEMP_USERS_POOL);
-        $this->addState(self::PLAYER_3, $temp3PlayerBuilder, self::TEMP_PLAYERS_POOL);
-        $this->addToPool(self::PLAYERS_POOL, $temp3PlayerBuilder);
+        $user3Builder = ThereIs::anUser()
+            ->withUsername(\sprintf('%sslipman-3', $this->getPrefix()))
+            ->withEmail(\sprintf('%sslipman-3@garoloup.com', $this->getPrefix()));
+        $player3Builder = ThereIs::aPlayer()->withUser($user3Builder);
+        $this->addState(self::USER_3, $user3Builder, self::TEMP_USERS_POOL);
+        $this->addState(self::PLAYER_3, $player3Builder, self::TEMP_PLAYERS_POOL);
+        $this->addToPool(self::PLAYERS_POOL, $player3Builder);
 
-        $temp4Builder = ThereIs::aTempUser()->withUsername(\sprintf('%sslipgirl-temp-4', $this->getPrefix()));
-        $temp4PlayerBuilder = ThereIs::aPlayer()->withTempUser($temp4Builder);
-        $this->addState(self::TEMP_USER_4, $temp4Builder, self::TEMP_USERS_POOL);
-        $this->addState(self::PLAYER_4, $temp4PlayerBuilder, self::TEMP_PLAYERS_POOL);
-        $this->addToPool(self::PLAYERS_POOL, $temp4PlayerBuilder);
+        $user4Builder = ThereIs::anUser()
+            ->withUsername(\sprintf('%sslipgirl-4', $this->getPrefix()))
+            ->withEmail(\sprintf('%sslipgirl-4@garoloup.com', $this->getPrefix()));
+        $player4Builder = ThereIs::aPlayer()->withUser($user4Builder);
+        $this->addState(self::USER_4, $user4Builder, self::TEMP_USERS_POOL);
+        $this->addState(self::PLAYER_4, $player4Builder, self::TEMP_PLAYERS_POOL);
+        $this->addToPool(self::PLAYERS_POOL, $player4Builder);
 
-        $temp5Builder = ThereIs::aTempUser()->withUsername(\sprintf('%sslipman-temp-5', $this->getPrefix()));
-        $temp5PlayerBuilder = ThereIs::aPlayer()->withTempUser($temp5Builder);
-        $this->addState(self::TEMP_USER_5, $temp5Builder, self::TEMP_USERS_POOL);
-        $this->addState(self::PLAYER_5, $temp5PlayerBuilder, self::TEMP_PLAYERS_POOL);
-        $this->addToPool(self::PLAYERS_POOL, $temp5PlayerBuilder);
+        $user5Builder = ThereIs::anUser()
+            ->withUsername(\sprintf('%sslipman-5', $this->getPrefix()))
+            ->withEmail(\sprintf('%sslipman-5@garoloup.com', $this->getPrefix()));
+        $player5Builder = ThereIs::aPlayer()->withUser($user5Builder);
+        $this->addState(self::USER_5, $user5Builder, self::TEMP_USERS_POOL);
+        $this->addState(self::PLAYER_5, $player5Builder, self::TEMP_PLAYERS_POOL);
+        $this->addToPool(self::PLAYERS_POOL, $player5Builder);
 
         $gameBuilder->withPlayers([
-            $temp1PlayerBuilder,
-            $temp2PlayerBuilder,
-            $temp3PlayerBuilder,
-            $temp4PlayerBuilder,
-            $temp5PlayerBuilder,
+            $player1Builder,
+            $player2Builder,
+            $player3Builder,
+            $player4Builder,
+            $player5Builder,
         ]);
     }
 
     public function execute(): void
     {
-        foreach ($this->getPool(self::TEMP_USERS_POOL) as $tempUserBuilder) {
-            \assert($tempUserBuilder instanceof TempUserBuilder);
-            $tempUserBuilder->build();
+        foreach ($this->getPool(self::TEMP_USERS_POOL) as $userBuilder) {
+            \assert($userBuilder instanceof AbstractBuilder);
+            $userBuilder->build();
         }
 
         foreach ($this->getPool(self::TEMP_PLAYERS_POOL) as $tempPlayerBuilder) {

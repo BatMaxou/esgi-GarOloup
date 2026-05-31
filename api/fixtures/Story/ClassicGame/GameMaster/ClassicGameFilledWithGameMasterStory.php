@@ -8,9 +8,9 @@ use App\Tests\Helper\ThereIs;
 
 class ClassicGameFilledWithGameMasterStory extends ClassicGameFilledStory
 {
-    public const TEMP_USER_6 = 'temp_user_5';
+    public const USER_6 = 'user_6';
 
-    public const PLAYER_7 = 'player_6';
+    public const PLAYER_7 = 'player_7';
 
     public function build(): void
     {
@@ -19,13 +19,15 @@ class ClassicGameFilledWithGameMasterStory extends ClassicGameFilledStory
         $gameBuilder = $this->getState(self::GAME);
         \assert($gameBuilder instanceof GameBuilder);
 
-        $temp6Builder = ThereIs::aTempUser()->withUsername(\sprintf('%sgame-master', $this->getPrefix()));
-        $temp6PlayerBuilder = ThereIs::aPlayer()->withTempUser($temp6Builder);
-        $this->addState(self::TEMP_USER_6, $temp6Builder, self::TEMP_USERS_POOL);
-        $this->addState(self::PLAYER_7, $temp6PlayerBuilder, self::TEMP_PLAYERS_POOL);
-        $this->addToPool(self::PLAYERS_POOL, $temp6PlayerBuilder);
+        $user6Builder = ThereIs::anUser()
+            ->withUsername(\sprintf('%sgame-master', $this->getPrefix()))
+            ->withEmail(\sprintf('%sgame-master@garoloup.com', $this->getPrefix()));
+        $player6Builder = ThereIs::aPlayer()->withUser($user6Builder);
+        $this->addState(self::USER_6, $user6Builder, self::TEMP_USERS_POOL);
+        $this->addState(self::PLAYER_7, $player6Builder, self::TEMP_PLAYERS_POOL);
+        $this->addToPool(self::PLAYERS_POOL, $player6Builder);
 
-        $gameBuilder->withPlayer($temp6PlayerBuilder);
+        $gameBuilder->withPlayer($player6Builder);
     }
 
     public function getPrefix(): string

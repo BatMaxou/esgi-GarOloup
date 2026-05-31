@@ -12,7 +12,7 @@ class DayOrchestrator implements PeriodOrchestratorInterface
 {
     public function __construct(
         private readonly ClockInterface $clock,
-        private readonly int $voteDuration,
+        private readonly VoteResolver $voteResolver,
     ) {
     }
 
@@ -33,8 +33,7 @@ class DayOrchestrator implements PeriodOrchestratorInterface
         $workflow->nextStep();
 
         if ($workflow->isCompleted()) {
-            $day = $game->getCurrentDay() ?? throw new \LogicException('No active night to resolve');
-            $this->resolve($game, $day);
+            $this->resolve($game);
 
             return $game;
         }
@@ -44,18 +43,16 @@ class DayOrchestrator implements PeriodOrchestratorInterface
         return $game;
     }
 
-    public function resolve(Game $game, Day $day): Game
+    public function resolve(Game $game): Game
     {
+        $day = $game->getCurrentDay() ?? throw new \LogicException('No active day to resolve');
         foreach ($day->getActions() as $action) {
             $action->apply($day, $game);
         }
 
         $day->setResolved(true);
 
-        // service pour gérer le vote ?
-        $game
-            ->setRuntimeStep(GameRuntimeStepEnum::VOTE)
-            ->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $this->voteDuration)));
+        $this->voteResolver->start($game);
 
         return $game;
     }

@@ -2,7 +2,7 @@
 
 namespace App\Repository\Game;
 
-use App\Entity\Game\RoleEntry;
+use App\Entity\Game\Role\RoleEntry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

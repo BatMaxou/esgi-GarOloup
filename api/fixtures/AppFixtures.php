@@ -4,6 +4,7 @@ namespace App\Fixtures;
 
 use App\Fixtures\Story\ClassicGame\ClassicGameClosedStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameConfiguredStory;
+use App\Fixtures\Story\ClassicGame\ClassicGameDay1FinishedStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameDispatchedStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameFilledStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameLaunchedStory;
@@ -33,6 +34,7 @@ class AppFixtures extends Fixture
         ThereIs::aStory(ClassicGameLaunchedStory::class)->execute();
         ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
         ThereIs::aStory(ClassicGameNight1WerewolfVotedStory::class)->execute();
+        ThereIs::aStory(ClassicGameDay1FinishedStory::class)->execute();
 
         ThereIs::aStory(ClassicGameFilledWithGameMasterStory::class)->execute();
         ThereIs::aStory(ClassicGameClosedWithGameMasterStory::class)->execute();

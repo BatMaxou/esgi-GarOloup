@@ -1,0 +1,14 @@
+App\Entity\Game\Period\Vote:
+    attributes:
+        id:
+            groups:
+                - game:read
+        number:
+            groups:
+                - game:read
+        resolved:
+            groups:
+                - game:read
+        ballots:
+            groups:
+                - game:read

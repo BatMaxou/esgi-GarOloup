@@ -8,7 +8,6 @@ use App\Fixtures\Story\ClassicGame\ClassicGameLaunchedStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameSetupedStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
-use App\Tests\Helper\Builder\User\TempUserBuilder;
 use App\Tests\Helper\Builder\User\UserBuilder;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\When;
@@ -64,10 +63,10 @@ class GetWerewolfTeamTest extends GarOloupApiTestCase
         $story = ThereIs::aStory($storyClass)->execute();
         $werewolfPlayerBuilder = $story->get(ClassicGameDispatchedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $werewolfPlayerBuilder);
-        $werewolfUserBuilder = $werewolfPlayerBuilder->tempUser;
-        $this->assertInstanceOf(TempUserBuilder::class, $werewolfUserBuilder);
+        $werewolfUserBuilder = $werewolfPlayerBuilder->user;
+        $this->assertInstanceOf(UserBuilder::class, $werewolfUserBuilder);
 
-        When::asTempUser($werewolfUserBuilder)->game()->getWerewolfTeam();
+        When::asUser($werewolfUserBuilder)->game()->getWerewolfTeam();
         $this->assertResponseStatusCodeSame(403);
     }
 
@@ -78,10 +77,10 @@ class GetWerewolfTeamTest extends GarOloupApiTestCase
         $story = ThereIs::aStory($storyClass)->execute();
         $werewolfPlayerBuilder = $story->get(ClassicGameDispatchedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $werewolfPlayerBuilder);
-        $werewolfUserBuilder = $werewolfPlayerBuilder->tempUser;
-        $this->assertInstanceOf(TempUserBuilder::class, $werewolfUserBuilder);
+        $werewolfUserBuilder = $werewolfPlayerBuilder->user;
+        $this->assertInstanceOf(UserBuilder::class, $werewolfUserBuilder);
 
-        $response = When::asTempUser($werewolfUserBuilder)->game()->getWerewolfTeam();
+        $response = When::asUser($werewolfUserBuilder)->game()->getWerewolfTeam();
         $this->assertResponseStatusCodeSame(200);
     }
 

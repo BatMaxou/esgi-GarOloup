@@ -8,7 +8,6 @@ use App\Fixtures\Story\ClassicGame\ClassicGameClosedStory;
 use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameClosedWithGameMasterStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\GameBuilder;
-use App\Tests\Helper\Builder\User\TempUserBuilder;
 use App\Tests\Helper\Builder\User\UserBuilder;
 use App\Tests\Helper\ThereIs;
 use App\Tests\Helper\Trait\GameEventAwareTrait;
@@ -93,8 +92,8 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
     public function test_user_cant_set_game_configuration(): void
     {
         $story = ThereIs::aStory(ClassicGameClosedStory::class)->execute();
-        $tempUserBuilder = $story->get(ClassicGameClosedStory::TEMP_USER_1);
-        $this->assertInstanceOf(TempUserBuilder::class, $tempUserBuilder);
+        $userBuilder = $story->get(ClassicGameClosedStory::USER_1);
+        $this->assertInstanceOf(UserBuilder::class, $userBuilder);
 
         $roleBagBuilder = ThereIs::aRoleBag()->buildAll();
         $compositionBuilder = ThereIs::aComposition()
@@ -102,7 +101,7 @@ class SetGameConfigurationTest extends GarOloupApiTestCase
             ->withRole($roleBagBuilder->getWerewolf(), 2)
         ;
 
-        When::asTempUser($tempUserBuilder)->game()->setConfiguration($compositionBuilder);
+        When::asUser($userBuilder)->game()->setConfiguration($compositionBuilder);
         $this->assertResponseStatusCodeSame(403);
     }
 

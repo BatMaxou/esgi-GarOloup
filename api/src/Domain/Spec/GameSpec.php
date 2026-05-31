@@ -198,4 +198,29 @@ class GameSpec
 
         return true;
     }
+
+    public function canVote(Player $voter, Game $game, Player $target): bool
+    {
+        if (GameRuntimeStepEnum::VOTE !== $game->getRuntimeStep()) {
+            return false;
+        }
+
+        if ($game->getStepEndAt() < $this->clock->now()) {
+            return false;
+        }
+
+        if ($voter->isDead()) {
+            return false;
+        }
+
+        if ($voter->getId()?->toString() === $target->getId()?->toString()) {
+            return false;
+        }
+
+        if ($target->isDead()) {
+            return false;
+        }
+
+        return true;
+    }
 }

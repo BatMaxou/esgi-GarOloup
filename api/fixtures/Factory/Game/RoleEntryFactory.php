@@ -2,7 +2,7 @@
 
 namespace App\Fixtures\Factory\Game;
 
-use App\Entity\Game\RoleEntry;
+use App\Entity\Game\Role\RoleEntry;
 use App\Fixtures\Factory\RoleFactory;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 

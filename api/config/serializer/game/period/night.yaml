@@ -1,0 +1,14 @@
+App\Entity\Game\Period\Night:
+    attributes:
+        id:
+            groups:
+                - game:read
+        number:
+            groups:
+                - game:read
+        resolved:
+            groups:
+                - game:read
+        actions:
+            groups:
+                - game:read

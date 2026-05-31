@@ -37,7 +37,7 @@ class NightOrchestrator implements PeriodOrchestratorInterface
         $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $this->nightStepDuration)));
 
         if ($workflow->isCompleted()) {
-            $this->resolve($game, $night);
+            $this->resolve($game);
         }
 
         return $night;
@@ -49,8 +49,7 @@ class NightOrchestrator implements PeriodOrchestratorInterface
         $workflow->nextStep();
 
         if ($workflow->isCompleted()) {
-            $night = $game->getCurrentNight() ?? throw new \LogicException('No active night to resolve');
-            $this->resolve($game, $night);
+            $this->resolve($game);
 
             return $game;
         }
@@ -60,8 +59,9 @@ class NightOrchestrator implements PeriodOrchestratorInterface
         return $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $this->nightStepDuration)));
     }
 
-    private function resolve(Game $game, Night $night): Game
+    private function resolve(Game $game): Game
     {
+        $night = $game->getCurrentNight() ?? throw new \LogicException('No active night to resolve');
         foreach ($night->getActions() as $action) {
             $action->apply($night, $game);
         }
