@@ -17,6 +17,7 @@ use App\Domain\Command\Game\Initialisation\GameRoleDispatchCommand;
 use App\Domain\Command\Game\Initialisation\JoinGameCommand;
 use App\Domain\Command\Game\Initialisation\LaunchGameCommand;
 use App\Domain\Command\Game\Initialisation\ReOpenGameInvitationCommand;
+use App\Domain\Command\Game\Initialisation\ResetConfigurationCommand;
 use App\Domain\Command\Game\Initialisation\ResetRoleDispatchCommand;
 use App\Domain\Command\Game\Initialisation\SetGameConfigurationCommand;
 use App\Domain\Command\Game\Initialisation\SetGameMasterCommand;
@@ -89,6 +90,13 @@ use Doctrine\ORM\Mapping as ORM;
             uriTemplate: '/game/configuration',
             messenger: 'input',
             input: SetGameConfigurationCommand::class,
+            output: BasicActionOutput::class,
+        ),
+        new Patch(
+            name: 'api_game_reset_configuration',
+            uriTemplate: '/game/configuration/reset',
+            messenger: 'input',
+            input: ResetConfigurationCommand::class,
             output: BasicActionOutput::class,
         ),
         new Patch(

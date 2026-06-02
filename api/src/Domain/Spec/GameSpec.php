@@ -102,6 +102,20 @@ class GameSpec
         return GameInitialisationStepEnum::CONFIGURATION === $game->getInitialisationStep();
     }
 
+    public function canResetConfiguration(AbstractUser $user, Game $game): bool
+    {
+        if ($user !== $game->getHost()->getLinkedUser() || null !== $game->getGameMaster()) {
+            return false;
+        }
+
+        $step = $game->getInitialisationStep();
+
+        return (
+            GameInitialisationStepEnum::DISPATCH === $step
+            || GameInitialisationStepEnum::GAME_MASTER_CHOICE === $step
+        ) && !$game->getRuntimeStep();
+    }
+
     public function canSetGameMaster(AbstractUser $user, Game $game): bool
     {
         if ($user !== $game->getHost()->getLinkedUser() || !$game->getConfiguration()->isWithGameMaster()) {
