@@ -116,6 +116,15 @@ class GameSpec
         ) && !$game->getRuntimeStep();
     }
 
+    public function canResetGameMaster(AbstractUser $user, Game $game): bool
+    {
+        if ($user !== $game->getHost()->getLinkedUser() || null === $game->getGameMaster()) {
+            return false;
+        }
+
+        return GameInitialisationStepEnum::DISPATCH === $game->getInitialisationStep() && !$game->getRuntimeStep();
+    }
+
     public function canSetGameMaster(AbstractUser $user, Game $game): bool
     {
         if ($user !== $game->getHost()->getLinkedUser() || !$game->getConfiguration()->isWithGameMaster()) {
@@ -233,6 +242,10 @@ class GameSpec
         }
 
         if ($game->getStepEndAt() < $this->clock->now()) {
+            return false;
+        }
+
+        if ($voter->getGame() !== $game) {
             return false;
         }
 

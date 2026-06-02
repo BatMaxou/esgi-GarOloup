@@ -7,7 +7,7 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class Version20260602220801 extends AbstractMigration
+final class Version20260602225157 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -37,6 +37,7 @@ final class Version20260602220801 extends AbstractMigration
         $this->addSql('CREATE TABLE re_open_game_invitation_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE refresh_token (refresh_token VARCHAR(128) NOT NULL, username VARCHAR(255) NOT NULL, valid DATETIME NOT NULL, id INT AUTO_INCREMENT NOT NULL, UNIQUE INDEX UNIQ_C74F2195C74F2195 (refresh_token), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE reset_configuration_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE reset_game_master_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE reset_role_dispatch_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE role (type VARCHAR(255) DEFAULT NULL, name VARCHAR(64) NOT NULL, description LONGTEXT NOT NULL, ability LONGTEXT DEFAULT NULL, picture_name VARCHAR(255) DEFAULT NULL, min_players INT DEFAULT NULL, max_per_game INT DEFAULT NULL, teams LONGTEXT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, UNIQUE INDEX UNIQ_57698A6A8CDE5729 (type), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE role_entry (count INT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, composition_id BINARY(16) NOT NULL, role_id BINARY(16) NOT NULL, INDEX IDX_DCFD755F87A2E12 (composition_id), INDEX IDX_DCFD755FD60322AC (role_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
@@ -79,6 +80,7 @@ final class Version20260602220801 extends AbstractMigration
         $this->addSql('ALTER TABLE player ADD CONSTRAINT FK_98197A65D60322AC FOREIGN KEY (role_id) REFERENCES game_role (id)');
         $this->addSql('ALTER TABLE re_open_game_invitation_event ADD CONSTRAINT FK_8337E0E5BF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE reset_configuration_event ADD CONSTRAINT FK_8F46C942BF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE reset_game_master_event ADD CONSTRAINT FK_1C4D7DC8BF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE reset_role_dispatch_event ADD CONSTRAINT FK_56398167BF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE role_entry ADD CONSTRAINT FK_DCFD755F87A2E12 FOREIGN KEY (composition_id) REFERENCES composition (id)');
         $this->addSql('ALTER TABLE role_entry ADD CONSTRAINT FK_DCFD755FD60322AC FOREIGN KEY (role_id) REFERENCES role (id)');
@@ -122,6 +124,7 @@ final class Version20260602220801 extends AbstractMigration
         $this->addSql('ALTER TABLE player DROP FOREIGN KEY FK_98197A65D60322AC');
         $this->addSql('ALTER TABLE re_open_game_invitation_event DROP FOREIGN KEY FK_8337E0E5BF396750');
         $this->addSql('ALTER TABLE reset_configuration_event DROP FOREIGN KEY FK_8F46C942BF396750');
+        $this->addSql('ALTER TABLE reset_game_master_event DROP FOREIGN KEY FK_1C4D7DC8BF396750');
         $this->addSql('ALTER TABLE reset_role_dispatch_event DROP FOREIGN KEY FK_56398167BF396750');
         $this->addSql('ALTER TABLE role_entry DROP FOREIGN KEY FK_DCFD755F87A2E12');
         $this->addSql('ALTER TABLE role_entry DROP FOREIGN KEY FK_DCFD755FD60322AC');
@@ -155,6 +158,7 @@ final class Version20260602220801 extends AbstractMigration
         $this->addSql('DROP TABLE re_open_game_invitation_event');
         $this->addSql('DROP TABLE refresh_token');
         $this->addSql('DROP TABLE reset_configuration_event');
+        $this->addSql('DROP TABLE reset_game_master_event');
         $this->addSql('DROP TABLE reset_role_dispatch_event');
         $this->addSql('DROP TABLE role');
         $this->addSql('DROP TABLE role_entry');

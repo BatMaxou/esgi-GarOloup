@@ -22,6 +22,7 @@ use Doctrine\ORM\Mapping\InheritanceType;
     'join' => JoinGameEvent::class,
     're_open_invitation' => ReOpenGameInvitationEvent::class,
     'reset_configuration' => ResetConfigurationEvent::class,
+    'reset_game_master' => ResetGameMasterEvent::class,
     'reset_role_dispatch' => ResetRoleDispatchEvent::class,
     'set_configuration' => SetGameConfigurationEvent::class,
     'launch' => LaunchGameEvent::class,
