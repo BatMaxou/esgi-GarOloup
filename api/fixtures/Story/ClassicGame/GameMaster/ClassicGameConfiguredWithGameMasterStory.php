@@ -37,7 +37,8 @@ class ClassicGameConfiguredWithGameMasterStory extends ClassicGameClosedWithGame
         $configurationBuilder = ThereIs::aConfiguration()
             ->forGame($gameBuilder)
             ->withComposition($compositionBuilder)
-            ->withGameMaster();
+            ->withGameMaster()
+            ->withoutRandomDispatch();
         $this->addState(self::CONFIGURATION, $configurationBuilder);
 
         $gameBuilder->withInitialisationStep(GameInitialisationStepEnum::GAME_MASTER_CHOICE);

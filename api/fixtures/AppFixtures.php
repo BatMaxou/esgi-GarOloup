@@ -12,7 +12,14 @@ use App\Fixtures\Story\ClassicGame\ClassicGameNight1WerewolfVotedStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameSetupedStory;
 use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameClosedWithGameMasterStory;
 use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameConfiguredWithGameMasterStory;
+use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameDispatchedWithGameMasterStory;
 use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameFilledWithGameMasterStory;
+use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameLaunchedWithGameMasterStory;
+use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameWithGameMasterSettedStory;
+use App\Fixtures\Story\ClassicGame\GameMaster\RandomDispatch\ClassicGameConfiguredWithGameMasterAndRandomDispatchStory;
+use App\Fixtures\Story\ClassicGame\GameMaster\RandomDispatch\ClassicGameDispatchedWithGameMasterAndRandomDispatchStory;
+use App\Fixtures\Story\ClassicGame\GameMaster\RandomDispatch\ClassicGameLaunchedWithGameMasterAndRandomDispatchStory;
+use App\Fixtures\Story\ClassicGame\GameMaster\RandomDispatch\ClassicGameWithGameMasterSettedAndRandomDispatchStory;
 use App\Fixtures\Story\Game\GameCreatedStory;
 use App\Tests\Helper\ThereIs;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -39,5 +46,13 @@ class AppFixtures extends Fixture
         ThereIs::aStory(ClassicGameFilledWithGameMasterStory::class)->execute();
         ThereIs::aStory(ClassicGameClosedWithGameMasterStory::class)->execute();
         ThereIs::aStory(ClassicGameConfiguredWithGameMasterStory::class)->execute();
+        ThereIs::aStory(ClassicGameWithGameMasterSettedStory::class)->execute();
+        ThereIs::aStory(ClassicGameDispatchedWithGameMasterStory::class)->execute();
+        ThereIs::aStory(ClassicGameLaunchedWithGameMasterStory::class)->execute();
+
+        ThereIs::aStory(ClassicGameConfiguredWithGameMasterAndRandomDispatchStory::class)->execute();
+        ThereIs::aStory(ClassicGameWithGameMasterSettedAndRandomDispatchStory::class)->execute();
+        ThereIs::aStory(ClassicGameDispatchedWithGameMasterAndRandomDispatchStory::class)->execute();
+        ThereIs::aStory(ClassicGameLaunchedWithGameMasterAndRandomDispatchStory::class)->execute();
     }
 }

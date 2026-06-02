@@ -129,6 +129,19 @@ class GameSpec
         return GameInitialisationStepEnum::DISPATCH === $game->getInitialisationStep();
     }
 
+    public function canResetRoleDispatch(AbstractUser $user, Game $game): bool
+    {
+        if ($user !== $game->getGameMaster()?->getLinkedUser()) {
+            return false;
+        }
+
+        if ($game->getConfiguration()->isWithRandomDispatch()) {
+            return false;
+        }
+
+        return GameInitialisationStepEnum::FINISH === $game->getInitialisationStep() && !$game->getRuntimeStep();
+    }
+
     public function canSeeWerewolfTeam(Player $player, Game $game): bool
     {
         return $game->getRuntimeStep() && $player->getRole() instanceof WerewolfRole;

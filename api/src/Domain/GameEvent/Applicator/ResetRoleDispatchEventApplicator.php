@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Domain\GameEvent\Applicator;
+
+use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
+use App\Domain\GameEvent\Applicator\Trait\UserAwareTrait;
+use App\Domain\GameEvent\Exception\UnauthorizedGameActionException;
+use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
+use App\Domain\Spec\GameSpec;
+use App\Entity\Event\Game\GameEvent;
+use App\Entity\Event\Game\ResetRoleDispatchEvent;
+use App\Entity\Game\Game;
+use App\Enum\Game\GameInitialisationStepEnum;
+use Doctrine\ORM\EntityManagerInterface;
+
+/** @implements GameEventApplicatorInterface<ResetRoleDispatchEvent> */
+class ResetRoleDispatchEventApplicator implements GameEventApplicatorInterface
+{
+    use GameAwareTrait;
+    use UserAwareTrait;
+
+    public function __construct(
+        private readonly GameSpec $gameSpec,
+        private readonly EntityManagerInterface $em,
+    ) {
+    }
+
+    public function apply(GameEvent $gameEvent): Game
+    {
+        $user = $this->ensureUser($gameEvent);
+        $game = $this->ensureGame($gameEvent);
+
+        if (!$this->gameSpec->canResetRoleDispatch($user, $game)) {
+            throw new UnauthorizedGameActionException('You can not reset the role dispatch for this game');
+        }
+
+        foreach ($game->getPlayers() as $player) {
+            $role = $player->getRole();
+            if (null === $role) {
+                continue;
+            }
+
+            $player->setRole(null);
+            $this->em->remove($role);
+        }
+
+        return $game->setInitialisationStep(GameInitialisationStepEnum::DISPATCH);
+    }
+
+    public function supports(GameEvent $gameEvent): bool
+    {
+        return $gameEvent instanceof ResetRoleDispatchEvent;
+    }
+
+    public static function getPriority(): int
+    {
+        return static::DEFAULT_PRIORITY;
+    }
+}
