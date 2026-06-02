@@ -1,0 +1,28 @@
+type: http_request
+model: http_request
+id: rq_ResetConfiguration01
+createdAt: 2026-06-03T12:00:00
+updatedAt: 2026-06-03T12:00:00
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_4gDiWsWEgc
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body:
+  text: '{}'
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/merge-patch+json
+  id: ResetConfiguration01H1
+- enabled: true
+  name: ''
+  value: ''
+  id: ResetConfiguration01H2
+method: PATCH
+name: Reset Configuration
+sortPriority: 4500.0
+url: ${[ BASE_URL ]}/api/game/configuration/reset
+urlParameters: []

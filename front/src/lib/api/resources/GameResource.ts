@@ -59,12 +59,24 @@ export class GameResource {
     return this.apiClient.patch<BasicActionResponse>(apiPaths.game.setConfiguration, { ...configuration });
   }
 
+  public async resetConfiguration(): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.patch<BasicActionResponse>(apiPaths.game.resetConfiguration);
+  }
+
   public async setGameMaster(playerId: string): Promise<BasicActionResponse | ApiClientError> {
     return this.apiClient.patch<BasicActionResponse>(apiPaths.game.setGameMaster, { playerId });
   }
 
+  public async resetGameMaster(): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.patch<BasicActionResponse>(apiPaths.game.resetGameMaster);
+  }
+
   public async dispatchRoles(dispatch: RoleDispatchEntry[]): Promise<BasicActionResponse | ApiClientError> {
     return this.apiClient.patch<BasicActionResponse>(apiPaths.game.roleDispatch, { dispatch });
+  }
+
+  public async resetRoleDispatch(): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.patch<BasicActionResponse>(apiPaths.game.resetRoleDispatch);
   }
 
   public async launch(): Promise<BasicActionResponse | ApiClientError> {

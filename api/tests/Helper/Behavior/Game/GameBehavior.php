@@ -94,6 +94,30 @@ class GameBehavior extends AbstractBehavior
         ]));
     }
 
+    public function resetConfiguration(): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/configuration/reset', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [],
+        ]));
+    }
+
+    public function resetGameMaster(): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/game-master/reset', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [],
+        ]));
+    }
+
+    public function resetRoleDispatch(): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/role-dispatch/reset', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [],
+        ]));
+    }
+
     public function launch(): BehaviorResponse
     {
         return new BehaviorResponse($this->client->request('PATCH', '/api/game/launch', [

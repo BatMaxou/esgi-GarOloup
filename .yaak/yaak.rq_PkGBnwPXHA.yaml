@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_PkGBnwPXHA
 createdAt: 2026-04-10T16:10:00
-updatedAt: 2026-04-10T14:51:18.094840295
+updatedAt: 2026-06-02T20:20:07.320471864
 workspaceId: wk_uXtATNFQmZ
 folderId: fl_bh6aMuFF23
 authentication: {}
@@ -22,6 +22,6 @@ headers:
   id: 6D7rkqCBeJ
 method: GET
 name: Get Public Games
-sortPriority: -1.0
+sortPriority: 2000.0
 url: ${[ BASE_URL ]}/api/games/public
 urlParameters: []

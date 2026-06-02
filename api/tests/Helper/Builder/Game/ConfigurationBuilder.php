@@ -51,4 +51,11 @@ class ConfigurationBuilder extends AbstractBuilder
 
         return $this;
     }
+
+    public function withRandomDispatch(): static
+    {
+        $this->withRandomDispatch = true;
+
+        return $this;
+    }
 }

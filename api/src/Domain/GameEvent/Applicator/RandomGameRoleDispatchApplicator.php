@@ -59,16 +59,12 @@ class RandomGameRoleDispatchApplicator implements GameEventApplicatorInterface
     public function supports(GameEvent $gameEvent): bool
     {
         $game = $gameEvent->getGame();
-        if (
-            !$game
-            || !$gameEvent instanceof LaunchGameEvent
-            || GameInitialisationStepEnum::DISPATCH !== $game->getInitialisationStep()
-            || !$game->getConfiguration()->isWithRandomDispatch()
-        ) {
-            return false;
-        }
 
-        return true;
+        return $game
+            && $gameEvent instanceof LaunchGameEvent
+            && GameInitialisationStepEnum::DISPATCH === $game->getInitialisationStep()
+            && $game->getConfiguration()->isWithRandomDispatch()
+        ;
     }
 
     public static function getPriority(): int

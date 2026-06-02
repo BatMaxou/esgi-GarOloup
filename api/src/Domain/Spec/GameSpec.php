@@ -102,6 +102,29 @@ class GameSpec
         return GameInitialisationStepEnum::CONFIGURATION === $game->getInitialisationStep();
     }
 
+    public function canResetConfiguration(AbstractUser $user, Game $game): bool
+    {
+        if ($user !== $game->getHost()->getLinkedUser() || null !== $game->getGameMaster()) {
+            return false;
+        }
+
+        $step = $game->getInitialisationStep();
+
+        return (
+            GameInitialisationStepEnum::DISPATCH === $step
+            || GameInitialisationStepEnum::GAME_MASTER_CHOICE === $step
+        ) && !$game->getRuntimeStep();
+    }
+
+    public function canResetGameMaster(AbstractUser $user, Game $game): bool
+    {
+        if ($user !== $game->getHost()->getLinkedUser() || null === $game->getGameMaster()) {
+            return false;
+        }
+
+        return GameInitialisationStepEnum::DISPATCH === $game->getInitialisationStep() && !$game->getRuntimeStep();
+    }
+
     public function canSetGameMaster(AbstractUser $user, Game $game): bool
     {
         if ($user !== $game->getHost()->getLinkedUser() || !$game->getConfiguration()->isWithGameMaster()) {
@@ -127,6 +150,19 @@ class GameSpec
         }
 
         return GameInitialisationStepEnum::DISPATCH === $game->getInitialisationStep();
+    }
+
+    public function canResetRoleDispatch(AbstractUser $user, Game $game): bool
+    {
+        if ($user !== $game->getGameMaster()?->getLinkedUser()) {
+            return false;
+        }
+
+        if ($game->getConfiguration()->isWithRandomDispatch()) {
+            return false;
+        }
+
+        return GameInitialisationStepEnum::FINISH === $game->getInitialisationStep() && !$game->getRuntimeStep();
     }
 
     public function canSeeWerewolfTeam(Player $player, Game $game): bool
@@ -206,6 +242,10 @@ class GameSpec
         }
 
         if ($game->getStepEndAt() < $this->clock->now()) {
+            return false;
+        }
+
+        if ($voter->getGame() !== $game) {
             return false;
         }
 

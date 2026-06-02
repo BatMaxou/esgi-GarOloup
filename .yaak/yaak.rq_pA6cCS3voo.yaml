@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_pA6cCS3voo
 createdAt: 2026-03-02T13:07:53.273226957
-updatedAt: 2026-04-05T10:14:59.432783491
+updatedAt: 2026-06-02T20:20:07.327174489
 workspaceId: wk_uXtATNFQmZ
 folderId: fl_bh6aMuFF23
 authentication:
@@ -19,6 +19,6 @@ headers:
   id: 0TkCedAc45
 method: GET
 name: Get Current Game
-sortPriority: 0.0
+sortPriority: 3000.0
 url: ${[ BASE_URL ]}/api/game
 urlParameters: []
