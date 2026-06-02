@@ -31,6 +31,7 @@ use App\Entity\Trait\UuidTrait;
 use App\Enum\Game\GameGlobalStepEnum;
 use App\Enum\Game\GameInitialisationStepEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
+use App\Enum\Game\GameTeamEnum;
 use App\Repository\Game\GameRepository;
 use App\Service\Mercure\Inteface\TopicRelatedObject;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -154,6 +155,9 @@ class Game implements TopicRelatedObject
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $stepEndAt = null;
+
+    #[ORM\Column(enumType: GameTeamEnum::class, nullable: true)]
+    private ?GameTeamEnum $winningTeam = null;
 
     #[ORM\OneToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -506,6 +510,18 @@ class Game implements TopicRelatedObject
     public function getTopicIdentifier(): ?string
     {
         return $this->getId();
+    }
+
+    public function getWinningTeam(): ?GameTeamEnum
+    {
+        return $this->winningTeam;
+    }
+
+    public function setWinningTeam(?GameTeamEnum $winningTeam): static
+    {
+        $this->winningTeam = $winningTeam;
+
+        return $this;
     }
 
     public function countDeadPlayers(): int

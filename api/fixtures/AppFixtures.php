@@ -5,11 +5,14 @@ namespace App\Fixtures;
 use App\Fixtures\Story\ClassicGame\ClassicGameClosedStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameConfiguredStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameDay1FinishedStory;
+use App\Fixtures\Story\ClassicGame\ClassicGameDay2FinishedStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameDispatchedStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameFilledStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameLaunchedStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameNight1WerewolfVotedStory;
+use App\Fixtures\Story\ClassicGame\ClassicGameNight2WerewolfVotedStory;
 use App\Fixtures\Story\ClassicGame\ClassicGameSetupedStory;
+use App\Fixtures\Story\ClassicGame\ClassicGameVote1ResolvedStory;
 use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameClosedWithGameMasterStory;
 use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameConfiguredWithGameMasterStory;
 use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameFilledWithGameMasterStory;
@@ -35,6 +38,9 @@ class AppFixtures extends Fixture
         ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
         ThereIs::aStory(ClassicGameNight1WerewolfVotedStory::class)->execute();
         ThereIs::aStory(ClassicGameDay1FinishedStory::class)->execute();
+        ThereIs::aStory(ClassicGameVote1ResolvedStory::class)->execute();
+        ThereIs::aStory(ClassicGameNight2WerewolfVotedStory::class)->execute();
+        ThereIs::aStory(ClassicGameDay2FinishedStory::class)->execute();
 
         ThereIs::aStory(ClassicGameFilledWithGameMasterStory::class)->execute();
         ThereIs::aStory(ClassicGameClosedWithGameMasterStory::class)->execute();

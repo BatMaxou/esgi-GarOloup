@@ -40,4 +40,18 @@ enum GameRoleEnum: string
             self::DICTATOR => 1,
         };
     }
+
+    public function getTeam(): GameTeamEnum
+    {
+        return match ($this) {
+            self::WEREWOLF => GameTeamEnum::WEREWOLF,
+            self::VILLAGER,
+            self::SEER,
+            self::WITCH,
+            self::HUNTER,
+            self::LOOKALIKE,
+            self::THIEF,
+            self::DICTATOR => GameTeamEnum::VILLAGE,
+        };
+    }
 }

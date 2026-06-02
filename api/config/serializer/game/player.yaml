@@ -36,6 +36,9 @@ App\Entity\Game\Player:
         role:
             groups:
                 - me:player:read
+        team:
+            groups:
+                - me:player:read
         username:
             groups:
                 - me:player:read

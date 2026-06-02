@@ -11,6 +11,7 @@ use App\Entity\Trait\UuidTrait;
 use App\Entity\User\AbstractUser;
 use App\Entity\User\TempUser;
 use App\Entity\User\User;
+use App\Enum\Game\GameTeamEnum;
 use App\Repository\Game\PlayerRepository;
 use App\Service\Mercure\Inteface\TopicRelatedObject;
 use Doctrine\ORM\Mapping as ORM;
@@ -54,6 +55,9 @@ class Player implements TopicRelatedObject
 
     #[ORM\ManyToOne]
     private ?GameRole $role = null;
+
+    #[ORM\Column(enumType: GameTeamEnum::class, nullable: true)]
+    private ?GameTeamEnum $team = null;
 
     public function __construct(
         ?UserInterface $user = null,
@@ -184,6 +188,19 @@ class Player implements TopicRelatedObject
     public function setRole(?GameRole $role): static
     {
         $this->role = $role;
+        $this->team = $role?->getType()?->getTeam();
+
+        return $this;
+    }
+
+    public function getTeam(): ?GameTeamEnum
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?GameTeamEnum $team): static
+    {
+        $this->team = $team;
 
         return $this;
     }

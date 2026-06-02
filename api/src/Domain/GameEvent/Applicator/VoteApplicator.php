@@ -9,6 +9,7 @@ use App\Domain\GameEvent\Exception\PlayerNotFoundException;
 use App\Domain\GameEvent\Exception\UnauthorizedGameActionException;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\GameSpec;
+use App\Domain\Workflow\GameFinisher;
 use App\Domain\Workflow\NightOrchestrator;
 use App\Domain\Workflow\VoteResolver;
 use App\Entity\Event\Game\GameEvent;
@@ -35,6 +36,7 @@ class VoteApplicator implements GameEventApplicatorInterface
         private readonly PlayerRepository $playerRepository,
         private readonly VoteResolver $voteResolver,
         private readonly NightOrchestrator $nightOrchestrator,
+        private readonly GameFinisher $gameFinisher,
     ) {
     }
 
@@ -92,6 +94,11 @@ class VoteApplicator implements GameEventApplicatorInterface
         $game = $this->ensureGame($gameEvent);
 
         $this->voteResolver->resolve($game);
+
+        if ($this->gameFinisher->tryFinish($game)) {
+            return $game;
+        }
+
         $this->nightOrchestrator->start($game);
 
         return $game;

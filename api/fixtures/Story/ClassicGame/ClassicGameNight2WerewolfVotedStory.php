@@ -8,7 +8,7 @@ use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
 use App\Tests\Helper\ThereIs;
 
-class ClassicGameNight1WerewolfVotedStory extends ClassicGameSetupedStory
+class ClassicGameNight2WerewolfVotedStory extends ClassicGameVote1ResolvedStory
 {
     public function execute(): void
     {
@@ -18,15 +18,19 @@ class ClassicGameNight1WerewolfVotedStory extends ClassicGameSetupedStory
         \assert($gameBuilder instanceof GameBuilder);
         $game = $gameBuilder->getEntity();
 
-        $villagerPlayerBuilder = $this->getState(self::VILLAGER_2);
+        $villagerPlayerBuilder = $this->getState(self::VILLAGER_3);
         \assert($villagerPlayerBuilder instanceof PlayerBuilder);
-        $villagerPlayerId = $villagerPlayerBuilder->getEntity()->getId();
-        \assert(null !== $villagerPlayerId);
-        $targetPlayerId = $villagerPlayerId->toString();
+        $targetPlayerId = $villagerPlayerBuilder->getEntity()->getId()?->toString()
+            ?? throw new \LogicException('Target player id should not be null');
 
         foreach ($this->getPool(self::WEREWOLVES_POOL) as $werewolfPlayerBuilder) {
             \assert($werewolfPlayerBuilder instanceof PlayerBuilder);
-            $werewolfRole = $werewolfPlayerBuilder->getEntity()->getRole();
+            $werewolfPlayer = $werewolfPlayerBuilder->getEntity();
+            if ($werewolfPlayer->isDead()) {
+                continue;
+            }
+
+            $werewolfRole = $werewolfPlayer->getRole();
             \assert($werewolfRole instanceof WerewolfRole);
             $werewolfRole->setTargetPlayerId($targetPlayerId);
         }
@@ -44,6 +48,6 @@ class ClassicGameNight1WerewolfVotedStory extends ClassicGameSetupedStory
 
     public function getPrefix(): string
     {
-        return 'classic-game-night-1-werewolf-voted-';
+        return 'classic-game-night-2-werewolf-voted-';
     }
 }
