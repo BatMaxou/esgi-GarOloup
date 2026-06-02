@@ -15,18 +15,19 @@ class ConfigurationSpec
     {
         $configuration = $game->getConfiguration();
         $composition = $configuration->getComposition();
-        if (null === $composition || $composition->isEmpty()) {
+        if (
+            null === $composition
+            || $composition->isEmpty()
+            || (
+                !$configuration->isWithRandomDispatch()
+                && !$configuration->isWithGameMaster()
+            )
+        ) {
             return false;
         }
 
         $playerNumber = $game->getPlayers()->count() - ($configuration->isWithGameMaster() ? 1 : 0);
-        if (
-            $playerNumber < $this->minimumPlayers
-            || (
-                $configuration->isWithGameMaster()
-                && $playerNumber < $this->minimumPlayers + 1
-            )
-        ) {
+        if ($playerNumber < $this->minimumPlayers) {
             return false;
         }
 
