@@ -39,16 +39,15 @@ const GameConfigForm = ({ onTooMuchPlayers }: { onTooMuchPlayers: (payload: TooM
   const { game, setConfiguration } = useGame();
   const { getAllRoles, playableRoleList, roleListLoading } = useRole();
   const playerCount = game?.players?.length ?? 0;
-  const isPlayersInGameEqualsToMinPlayersToLaunchGame = playerCount > minPlayersToLaunchGame;
-  console.log(playerCount,
-minPlayersToLaunchGame)
+  const isThereMorePlayersThanMinRequested = playerCount > minPlayersToLaunchGame;
+
   const { values, handleSubmit, handleChange, setFieldValue } = useFormik<GameConfigFormValues>({
     initialValues: {
       composition: {
         roles: [],
       },
       withGameMaster: false,
-      withRandomDispatch: isPlayersInGameEqualsToMinPlayersToLaunchGame || game?.public ? true : false,
+      withRandomDispatch: game?.public ? true : isThereMorePlayersThanMinRequested && !game?.public ? false : true,
     },
     onSubmit: (formValues) => {
       if (formValues.withGameMaster && hasTooManyRolesWithGameMaster(formValues.composition.roles, playerCount)) {
@@ -121,7 +120,7 @@ minPlayersToLaunchGame)
             {t('sectionTitle')}
           </Typography>
           <Typography variant="body" textColor="secondary" className="text-center">
-            {isPlayersInGameEqualsToMinPlayersToLaunchGame ? t('sectionSubtitleWithMinPlayers') : t('sectionSubtitleWithoutMinPlayers')}
+            {!isThereMorePlayersThanMinRequested || game?.public ? t('sectionSubtitleWithMinPlayers') : t('sectionSubtitleWithoutMinPlayers')}
           </Typography>
         </div>
 
@@ -138,7 +137,7 @@ minPlayersToLaunchGame)
           ))}
         </div>
 
-          {isPlayersInGameEqualsToMinPlayersToLaunchGame && !game?.public && (
+          {isThereMorePlayersThanMinRequested && !game?.public && (
             <>
               <Divider variant="primary" />
 
