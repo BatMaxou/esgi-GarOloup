@@ -123,6 +123,7 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
               />
             </div> */}
             <Card className="w-full px-20! py-10!" orientation="vertical" hoverable={false}>
+              <></>
               {/* <GameMasterChoiceForm /> */}
             </Card>
           </>

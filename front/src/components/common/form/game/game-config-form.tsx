@@ -78,7 +78,6 @@ const GameConfigForm = ({ onTooMuchPlayers }: { onTooMuchPlayers: (payload: TooM
     },
   });
 
-
   useEffect(() => {
     if (playableRoleList.length === 0) {
       getAllRoles();
@@ -120,7 +119,9 @@ const GameConfigForm = ({ onTooMuchPlayers }: { onTooMuchPlayers: (payload: TooM
             {t('sectionTitle')}
           </Typography>
           <Typography variant="body" textColor="secondary" className="text-center">
-            {!isThereMorePlayersThanMinRequested || game?.public ? t('sectionSubtitleWithMinPlayers') : t('sectionSubtitleWithoutMinPlayers')}
+            {!isThereMorePlayersThanMinRequested || game?.public
+              ? t('sectionSubtitleWithMinPlayers')
+              : t('sectionSubtitleWithoutMinPlayers')}
           </Typography>
         </div>
 
@@ -137,68 +138,68 @@ const GameConfigForm = ({ onTooMuchPlayers }: { onTooMuchPlayers: (payload: TooM
           ))}
         </div>
 
-          {isThereMorePlayersThanMinRequested && !game?.public && (
-            <>
-              <Divider variant="primary" />
+        {isThereMorePlayersThanMinRequested && !game?.public && (
+          <>
+            <Divider variant="primary" />
 
-              <div className="flex flex-row items-start justify-between gap-4">
-                <div className="min-w-0 flex-1">
-                  <Typography variant="body-sm" textColor="neutral-500" bold uppercase tag="span" className="block">
-                    {t('withGameMasterTitle')}
-                  </Typography>
-                  <Typography variant="body-sm" textColor="neutral-500" className="mt-1 block">
-                    {t('withGameMasterLabel')}
-                  </Typography>
-                </div>
-                <SwitchInput
-                  variant="gradient"
-                  checked={values.withGameMaster}
-                  className="shrink-0"
-                  onChange={() => {
-                    const withGameMaster = !values.withGameMaster;
-                    handleChange({ target: { name: 'withGameMaster', value: withGameMaster } });
-                    if (withGameMaster && hasTooManyRolesWithGameMaster(values.composition.roles, playerCount)) {
-                      onTooMuchPlayers({
-                        currentRoles: values.composition.roles,
-                        playableRoleList,
-                        onCompositionChange: handleCompositionChange,
-                      });
-                    }
-                  }}
-                  aria-label={t('withGameMasterAria')}
-                />
+            <div className="flex flex-row items-start justify-between gap-4">
+              <div className="min-w-0 flex-1">
+                <Typography variant="body-sm" textColor="neutral-500" bold uppercase tag="span" className="block">
+                  {t('withGameMasterTitle')}
+                </Typography>
+                <Typography variant="body-sm" textColor="neutral-500" className="mt-1 block">
+                  {t('withGameMasterLabel')}
+                </Typography>
               </div>
+              <SwitchInput
+                variant="gradient"
+                checked={values.withGameMaster}
+                className="shrink-0"
+                onChange={() => {
+                  const withGameMaster = !values.withGameMaster;
+                  handleChange({ target: { name: 'withGameMaster', value: withGameMaster } });
+                  if (withGameMaster && hasTooManyRolesWithGameMaster(values.composition.roles, playerCount)) {
+                    onTooMuchPlayers({
+                      currentRoles: values.composition.roles,
+                      playableRoleList,
+                      onCompositionChange: handleCompositionChange,
+                    });
+                  }
+                }}
+                aria-label={t('withGameMasterAria')}
+              />
+            </div>
 
-              <div
-                className="grid transition-[grid-template-rows] duration-300 ease-out"
-                style={{ gridTemplateRows: values.withGameMaster ? '1fr' : '0fr' }}
-              >
-                <div className="flex min-h-0 flex-col gap-6 overflow-hidden">
-                  <Divider variant="primary" />
+            <div
+              className="grid transition-[grid-template-rows] duration-300 ease-out"
+              style={{ gridTemplateRows: values.withGameMaster ? '1fr' : '0fr' }}
+            >
+              <div className="flex min-h-0 flex-col gap-6 overflow-hidden">
+                <Divider variant="primary" />
 
-                  <div className="flex flex-row items-start justify-between gap-4">
-                    <div className="min-w-0 flex-1">
-                      <Typography variant="body-sm" textColor="neutral-500" bold uppercase tag="span" className="block">
-                        {t('withRandomDispatchTitle')}
-                      </Typography>
-                      <Typography variant="body-sm" textColor="neutral-500" className="mt-1 block">
-                        {t('withRandomDispatchLabel')}
-                      </Typography>
-                    </div>
-                    <SwitchInput
-                      variant="gradient"
-                      checked={values.withRandomDispatch}
-                      className="shrink-0"
-                      onChange={() =>
-                        handleChange({ target: { name: 'withRandomDispatch', value: !values.withRandomDispatch } })
-                      }
-                      aria-label={t('withRandomDispatchAria')}
-                    />
+                <div className="flex flex-row items-start justify-between gap-4">
+                  <div className="min-w-0 flex-1">
+                    <Typography variant="body-sm" textColor="neutral-500" bold uppercase tag="span" className="block">
+                      {t('withRandomDispatchTitle')}
+                    </Typography>
+                    <Typography variant="body-sm" textColor="neutral-500" className="mt-1 block">
+                      {t('withRandomDispatchLabel')}
+                    </Typography>
                   </div>
+                  <SwitchInput
+                    variant="gradient"
+                    checked={values.withRandomDispatch}
+                    className="shrink-0"
+                    onChange={() =>
+                      handleChange({ target: { name: 'withRandomDispatch', value: !values.withRandomDispatch } })
+                    }
+                    aria-label={t('withRandomDispatchAria')}
+                  />
                 </div>
               </div>
-            </>
-          )}
+            </div>
+          </>
+        )}
         <Button type="submit" variant="accent" label={t('submit')} full disabled={!isCompositionComplete} />
       </form>
     </>

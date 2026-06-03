@@ -16,7 +16,7 @@ export const incrementRoleInComposition = (
   playerCount: number,
   thereIsGameMaster: boolean
 ): RoleEntry[] | null => {
-  if (thereIsGameMaster ? getTotalRolesCount(roles) >= (playerCount - 1) : getTotalRolesCount(roles) >= playerCount) {
+  if (thereIsGameMaster ? getTotalRolesCount(roles) >= playerCount - 1 : getTotalRolesCount(roles) >= playerCount) {
     return null;
   }
 
@@ -58,7 +58,9 @@ const RoleCardCounter = ({ role, compositionRoles, playerCount, thereIsGameMaste
   const count = compositionRoles.find((thisRole: RoleEntry) => thisRole.role === role.type)?.count ?? 0;
   const totalRolesCount = getTotalRolesCount(compositionRoles);
   const remainingSlots = playerCount - totalRolesCount;
-  const maxCount = thereIsGameMaster ? Math.min(role.maxPerGame ?? playerCount, (count + remainingSlots - 1)) : Math.min(role.maxPerGame ?? playerCount, count + remainingSlots);
+  const maxCount = thereIsGameMaster
+    ? Math.min(role.maxPerGame ?? playerCount, count + remainingSlots - 1)
+    : Math.min(role.maxPerGame ?? playerCount, count + remainingSlots);
 
   const handleIncrement = () => {
     const nextRoles = incrementRoleInComposition(compositionRoles, role.type, playerCount, thereIsGameMaster);

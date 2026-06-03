@@ -73,7 +73,7 @@ const Card = ({
   const playerHighlight = emphasis === 'player' ? (isCurrentPlayer ? 'current' : 'default') : 'default';
 
   const handleClick = () => {
-    if(onClick) {
+    if (onClick) {
       onClick();
     }
   };

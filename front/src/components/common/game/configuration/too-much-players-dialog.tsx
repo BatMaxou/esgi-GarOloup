@@ -1,14 +1,14 @@
-import { useState } from "react";
-import Image from "next/image";
-import Typography from "@/components/ui/atoms/typography";
-import Card, { RoleCardVariant } from "@/components/ui/molecules/card";
-import Dialog from "@/components/ui/molecules/dialog";
-import { GameTeamEnum } from "@/utils/enums";
-import { getImagePath } from "@/utils/getImagePath";
-import { RoleEntry, RolePlayable } from "@/utils/types";
-import classNames from "classnames";
-import { decrementRoleInComposition } from "./RoleCardCounter";
-import Button from "@/components/ui/molecules/button";
+import { useState } from 'react';
+import Image from 'next/image';
+import Typography from '@/components/ui/atoms/typography';
+import Card, { RoleCardVariant } from '@/components/ui/molecules/card';
+import Dialog from '@/components/ui/molecules/dialog';
+import { GameTeamEnum } from '@/utils/enums';
+import { getImagePath } from '@/utils/getImagePath';
+import { RoleEntry, RolePlayable } from '@/utils/types';
+import classNames from 'classnames';
+import { decrementRoleInComposition } from './RoleCardCounter';
+import Button from '@/components/ui/molecules/button';
 
 type TooMuchPlayersDialogProps = {
   open: boolean;
@@ -18,13 +18,18 @@ type TooMuchPlayersDialogProps = {
   onCompositionChange: (roles: RoleEntry[]) => void;
 };
 
-const TooMuchPlayersDialog = ({ open, setOpen, playableRoleList, currentRoles, onCompositionChange }: TooMuchPlayersDialogProps) => {
-
+const TooMuchPlayersDialog = ({
+  open,
+  setOpen,
+  playableRoleList,
+  currentRoles,
+  onCompositionChange,
+}: TooMuchPlayersDialogProps) => {
   const [selectedRoleToSubstract, setSelectedRoleToSubstract] = useState<RolePlayable>();
   const configuredRoleTypes = new Set(currentRoles.map((entry) => entry.role));
   const currentPlayableRoles = playableRoleList.filter((role) => configuredRoleTypes.has(role.type));
   const handleSelectRole = (role: RolePlayable) => {
-    if(!role) {
+    if (!role) {
       return;
     }
     setSelectedRoleToSubstract(role);
@@ -54,11 +59,20 @@ const TooMuchPlayersDialog = ({ open, setOpen, playableRoleList, currentRoles, o
       title="Nombre de joueurs maximum atteint"
       description="Vous devez retirer un rôle pour confirmer la configuration de votre partie."
     >
-      <Typography variant="body-sm" bold textColor="light">Le maître du jeu comptant comme un rôle à part entière, vous devez choisir quel rôle se voit être réduit.</Typography>
+      <Typography variant="body-sm" bold textColor="light">
+        Le maître du jeu comptant comme un rôle à part entière, vous devez choisir quel rôle se voit être réduit.
+      </Typography>
 
       <div className="flex flex-row justify-start items-start gap-4">
         {currentPlayableRoles.map((role: RolePlayable) => (
-          <div key={role.id} className={classNames(selectedRoleToSubstract?.type === role.type ? 'border-2 border-primary rounded-sm' : 'border-2 border-transparent')}>
+          <div
+            key={role.id}
+            className={classNames(
+              selectedRoleToSubstract?.type === role.type
+                ? 'border-2 border-primary rounded-sm'
+                : 'border-2 border-transparent'
+            )}
+          >
             <Card
               type="role"
               variant={(role.teams?.[0] ?? GameTeamEnum.VILLAGE) as RoleCardVariant}
@@ -71,7 +85,13 @@ const TooMuchPlayersDialog = ({ open, setOpen, playableRoleList, currentRoles, o
             >
               <div className="relative aspect-3/4 min-h-48 w-36">
                 {role.picture ? (
-                  <Image src={getImagePath(role.picture)} alt={role.name ?? ''} fill unoptimized className="object-cover" />
+                  <Image
+                    src={getImagePath(role.picture)}
+                    alt={role.name ?? ''}
+                    fill
+                    unoptimized
+                    className="object-cover"
+                  />
                 ) : (
                   <div className="absolute inset-0 bg-dark/60" />
                 )}
@@ -81,11 +101,11 @@ const TooMuchPlayersDialog = ({ open, setOpen, playableRoleList, currentRoles, o
                   </Typography>
                 </div>
               </div>
-              </Card>
-            </div>
+            </Card>
+          </div>
         ))}
       </div>
-      <Button variant="primary" onClick={ () => handleDecrementAndClose()} label="Retirer le rôle" />
+      <Button variant="primary" onClick={() => handleDecrementAndClose()} label="Retirer le rôle" />
     </Dialog>
   );
 };
