@@ -1,7 +1,7 @@
 import { cva } from 'class-variance-authority';
 
 export const switchTrackCva = cva(
-  'relative inline-flex items-center rounded-full border cursor-pointer transition-all focus-within:outline-none',
+  'relative inline-block rounded-full border cursor-pointer transition-colors focus-within:outline-none',
   {
     variants: {
       variant: {
@@ -15,8 +15,8 @@ export const switchTrackCva = cva(
         'day-night': '',
       },
       checked: {
-        true: 'justify-end',
-        false: 'justify-start',
+        true: '',
+        false: '',
       },
       size: {
         lg: 'w-16 h-8 p-1',
@@ -58,7 +58,7 @@ export const switchTrackCva = cva(
   }
 );
 
-export const switchThumbCva = cva('relative rounded-full shrink-0', {
+export const switchThumbCva = cva('rounded-full shrink-0', {
   variants: {
     variant: {
       primary: '',

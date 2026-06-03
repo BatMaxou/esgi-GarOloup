@@ -8,3 +8,4 @@ export const ftpSsrUrl = process.env.NEXT_PUBLIC_SSR_FTP_BASE_URL || '';
 export const ftpUrl = (isClientSide ? ftpClientUrl : ftpSsrUrl) || '';
 export const mercureUrl =
   (isClientSide ? process.env.NEXT_PUBLIC_MERCURE_URL : process.env.NEXT_PUBLIC_SSR_MERCURE_URL) || '';
+export const minPlayersToLaunchGame: number = parseInt(process.env.NEXT_PUBLIC_MINIMUM_PLAYERS || '5', 10);

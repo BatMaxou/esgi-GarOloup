@@ -20,6 +20,7 @@ type BaseProps = {
   liftOnHover?: boolean;
   fullfilled?: boolean;
   isCurrentPlayer?: boolean;
+  onClick?: () => void;
 };
 
 type DefaultCardProps = BaseProps & {
@@ -47,6 +48,7 @@ const Card = ({
   hoverable = true,
   fullfilled = false,
   isCurrentPlayer = false,
+  onClick,
   href,
 }: Props) => {
   const isRole = type === 'role';
@@ -70,9 +72,16 @@ const Card = ({
 
   const playerHighlight = emphasis === 'player' ? (isCurrentPlayer ? 'current' : 'default') : 'default';
 
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return href ? (
     <Link
       href={href}
+      onClick={handleClick}
       className={cn(
         cardCva({
           orientation,
@@ -91,6 +100,7 @@ const Card = ({
     </Link>
   ) : (
     <div
+      onClick={handleClick}
       className={cn(
         cardCva({
           orientation,
