@@ -14,7 +14,15 @@
         },
         "new-game-display": {
           "players": "Joueurs",
-          "openInvitation": "Rouvrir les invitations"
+          "openInvitation": "Rouvrir les invitations",
+          "waitingForPlayers": "En attente de joueurs",
+          "hostConfiguring": "L'hôte configure la partie",
+          "hostChoosingGameMaster": "L'hôte choisit le maître de jeu",
+          "gameMasterDispatching": "Le maître de jeu distribue les rôles",
+          "launchingGame": "Lancement de la partie",
+          "loading": "Chargement en cours...",
+          "canStart": "Vous pouvez commencer !",
+          "configureGame": "Configurer la partie"
         }
       },
       "home": {
@@ -316,7 +324,8 @@
         "game": {
           "gameConfig": {
             "sectionTitle": "Configuration de la partie",
-            "sectionSubtitle": "Composition, maître du jeu et mode de distribution",
+            "sectionSubtitleWithMinPlayers": "Composition des rôles",
+            "sectionSubtitleWithoutMinPlayers": "Composition, maître du jeu et mode de distribution",
             "withGameMasterTitle": "Maître du jeu",
             "withGameMasterLabel": "Un joueur endosse le rôle de narrateur",
             "withGameMasterAria": "Activer le maître du jeu",

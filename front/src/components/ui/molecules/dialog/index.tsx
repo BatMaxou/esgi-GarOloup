@@ -16,10 +16,11 @@ type Props = {
   title?: ReactNode;
   description?: ReactNode;
   size?: PanelSize;
+  isClosable?: boolean;
   className?: string;
 };
 
-const Dialog = ({ open, setOpen, title, description, size, className, children }: Props) => {
+const Dialog = ({ open, setOpen, title, description, size, isClosable = true, className, children }: Props) => {
   const titleId = useId();
   const descriptionId = useId();
 
@@ -61,13 +62,15 @@ const Dialog = ({ open, setOpen, title, description, size, className, children }
                 <span id={titleId}>{title}</span>
               </Typography>
             ) : null}
-            <Button
-              variant="text"
-              label="Fermer"
-              type="button"
-              onClick={() => setOpen(false)}
-              className="absolute right-0 top-0 shrink-0"
-            />
+            {isClosable && (
+              <Button
+                variant="text"
+                label="Fermer"
+                type="button"
+                onClick={() => setOpen(false)}
+                className="absolute right-0 top-0 shrink-0"
+              />
+            )}
           </div>
           {description != null && description !== '' && (
             <p id={descriptionId} className="mb-4 text-[0.875rem] leading-5.5 text-neutral-500">

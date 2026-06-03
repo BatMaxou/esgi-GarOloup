@@ -1,20 +1,27 @@
 'use client';
 
-import { useCallback } from 'react';
-import Typography from '@/components/ui/atoms/typography';
-import Icon from '@/components/ui/atoms/icon';
-import { GameInitialisationStepEnum } from '@/utils/enums';
-import { Game } from '@/utils/types';
+import { useCallback, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import Button from '@/components/ui/molecules/button';
-import { useGame } from '@/contexts/game-context';
-import GameConfigForm from '../form/game/game-config-form';
-import Card from '@/components/ui/molecules/card';
 import { ArrowLeftIcon } from 'lucide-react';
+import Button from '@/components/ui/molecules/button';
+import Icon from '@/components/ui/atoms/icon';
+import Typography from '@/components/ui/atoms/typography';
+import Card from '@/components/ui/molecules/card';
+import { useGame } from '@/contexts/game-context';
+import { GameInitialisationStepEnum } from '@/utils/enums';
+import { Game, RoleEntry, RolePlayable } from '@/utils/types';
+import TooMuchPlayersDialog from './configuration/too-much-players-dialog';
+import GameConfigForm from '../form/game/game-config-form';
+import { minPlayersToLaunchGame } from '@/utils/tools';
 
 const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
   const { openInvitation, closeInvitation } = useGame();
-
+  const [openTooMuchPlayersDialog, setOpenTooMuchPlayersDialog] = useState(false);
+  const [tooMuchPlayersDialogData, setTooMuchPlayersDialogData] = useState<{
+    currentRoles: RoleEntry[];
+    playableRoleList: RolePlayable[];
+    onCompositionChange: (roles: RoleEntry[]) => void;
+  } | null>(null);
   const initialisationStep = game?.initialisationStep;
   // const gameConfiguration = game?.configuration ?? {};
   const t = useTranslations('components.common.game.new-game-display');
@@ -25,7 +32,7 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
         return (
           <>
             <Typography variant="subtitle" className="animate-pulse">
-              En attente de joueurs
+              {t('waitingForPlayers')}
             </Typography>
             <Typography variant="body" className="animate-pulse">
               {game?.players?.length ?? 0} / {game?.maxPlayers ?? 0} {t('players')}
@@ -35,31 +42,31 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
       case GameInitialisationStepEnum.CONFIGURATION:
         return (
           <Typography variant="subtitle" className="animate-pulse">
-            L&apos;hôte configure la partie
+            {t('hostConfiguring')}
           </Typography>
         );
       case GameInitialisationStepEnum.GAME_MASTER_CHOICE:
         return (
           <Typography variant="subtitle" className="animate-pulse">
-            L&apos;hôte choisit le maître de jeu
+            {t('hostChoosingGameMaster')}
           </Typography>
         );
       case GameInitialisationStepEnum.DISPATCH:
         return (
           <Typography variant="subtitle" className="animate-pulse">
-            Le maître de jeu distribue les rôles
+            {t('gameMasterDispatching')}
           </Typography>
         );
       case GameInitialisationStepEnum.FINISH:
         return (
           <Typography variant="subtitle" className="animate-pulse">
-            Lancement de la partie
+            {t('launchingGame')}
           </Typography>
         );
       default:
         return (
           <Typography variant="subtitle" className="animate-pulse">
-            Chargement en cours...
+            {t('loading')}
           </Typography>
         );
     }
@@ -70,12 +77,12 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
       case GameInitialisationStepEnum.NEW:
         return (
           <>
-            {game.players?.length !== game.maxPlayers ? (
-              <Typography variant="body">Vous pouvez commencer !</Typography>
+            {(game.players?.length || 0) >= minPlayersToLaunchGame ? (
+              <Typography variant="body">{t('canStart')}</Typography>
             ) : null}
             <Button
               variant="gradient"
-              label="Configurer la partie"
+              label={t('configureGame')}
               // disabled={game.players?.length !== game.maxPlayers}
               onClick={closeInvitation}
             />
@@ -84,7 +91,7 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
       case GameInitialisationStepEnum.CONFIGURATION:
         return (
           <>
-            <div className="flex flex-row items-center justify-between gap-2">
+            <div className="flex flex-row items-center justify-start w-full gap-2">
               <ArrowLeftIcon className="w-4 h-4 mb-1 text-neutral-400" />
               <Button
                 variant="text"
@@ -94,12 +101,32 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
               />
             </div>
             <Card className="w-full px-20! py-10!" orientation="vertical" hoverable={false}>
-              <GameConfigForm />
+              <GameConfigForm
+                onTooMuchPlayers={(payload) => {
+                  setTooMuchPlayersDialogData(payload);
+                  setOpenTooMuchPlayersDialog(true);
+                }}
+              />
             </Card>
           </>
         );
       case GameInitialisationStepEnum.GAME_MASTER_CHOICE:
-        return null;
+        return (
+          <>
+            {/* <div className="flex flex-row items-center justify-start w-full gap-2">
+              <ArrowLeftIcon className="w-4 h-4 mb-1 text-neutral-400" />
+              <Button
+                variant="text"
+                className="text-neutral-400 hover:text-neutral-200"
+                label={t('goBackToConfiguration')}
+                onClick={goBackToConfiguration}
+              />
+            </div> */}
+            <Card className="w-full px-20! py-10!" orientation="vertical" hoverable={false}>
+              {/* <GameMasterChoiceForm /> */}
+            </Card>
+          </>
+        );
       case GameInitialisationStepEnum.DISPATCH:
         return null;
       case GameInitialisationStepEnum.FINISH:
@@ -120,6 +147,13 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
           : null}
       </div>
       <div className="flex flex-col items-center justify-center gap-2">{isHost && renderHostActions()}</div>
+      <TooMuchPlayersDialog
+        open={openTooMuchPlayersDialog}
+        setOpen={setOpenTooMuchPlayersDialog}
+        playableRoleList={tooMuchPlayersDialogData?.playableRoleList ?? []}
+        currentRoles={tooMuchPlayersDialogData?.currentRoles ?? []}
+        onCompositionChange={tooMuchPlayersDialogData?.onCompositionChange ?? (() => {})}
+      />
     </div>
   );
 };

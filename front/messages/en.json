@@ -14,7 +14,15 @@
         },
         "new-game-display": {
           "players": "Players",
-          "openInvitation": "Reopen invitations"
+          "openInvitation": "Reopen invitations",
+          "waitingForPlayers": "Waiting for players",
+          "hostConfiguring": "The host is configuring the game",
+          "hostChoosingGameMaster": "The host is choosing the game master",
+          "gameMasterDispatching": "The game master is assigning roles",
+          "launchingGame": "Launching the game",
+          "loading": "Loading...",
+          "canStart": "You can start!",
+          "configureGame": "Set up the game"
         }
       },
       "home": {
@@ -315,7 +323,8 @@
         "game": {
           "gameConfig": {
             "sectionTitle": "Game setup",
-            "sectionSubtitle": "Composition, game master and role assignment mode",
+            "sectionSubtitleWithMinPlayers": "Role composition",
+            "sectionSubtitleWithoutMinPlayers": "Role composition, game master and random dispatch",
             "withGameMasterTitle": "Game master",
             "withGameMasterLabel": "One player acts as the narrator",
             "withGameMasterAria": "Enable game master",
