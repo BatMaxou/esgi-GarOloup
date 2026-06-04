@@ -66,6 +66,6 @@ class GameHostNormalizer implements NormalizerInterface, NormalizerAwareInterfac
             return null;
         }
 
-        return ['id' => $gameMaster->getId()];
+        return ['id' => $gameMaster->getId(), 'username' => $gameMaster->getUsername()];
     }
 }

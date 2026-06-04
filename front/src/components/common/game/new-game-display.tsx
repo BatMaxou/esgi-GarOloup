@@ -13,9 +13,10 @@ import { Game, RoleEntry, RolePlayable } from '@/utils/types';
 import TooMuchPlayersDialog from './configuration/too-much-players-dialog';
 import GameConfigForm from '../form/game/game-config-form';
 import { minPlayersToLaunchGame } from '@/utils/tools';
+import GameMasterChoiceForm from '../form/game/game-master-choice-form';
 
 const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
-  const { openInvitation, closeInvitation } = useGame();
+  const { openInvitation, closeInvitation, resetConfiguration } = useGame();
   const [openTooMuchPlayersDialog, setOpenTooMuchPlayersDialog] = useState(false);
   const [tooMuchPlayersDialogData, setTooMuchPlayersDialogData] = useState<{
     currentRoles: RoleEntry[];
@@ -81,9 +82,9 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
               <Typography variant="body">{t('canStart')}</Typography>
             ) : null}
             <Button
-              variant="gradient"
+              variant="accent"
               label={t('configureGame')}
-              // disabled={game.players?.length !== game.maxPlayers}
+              disabled={(game.players?.length || 0) < minPlayersToLaunchGame}
               onClick={closeInvitation}
             />
           </>
@@ -113,18 +114,17 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
       case GameInitialisationStepEnum.GAME_MASTER_CHOICE:
         return (
           <>
-            {/* <div className="flex flex-row items-center justify-start w-full gap-2">
+            <div className="flex flex-row items-center justify-start w-full gap-2">
               <ArrowLeftIcon className="w-4 h-4 mb-1 text-neutral-400" />
               <Button
                 variant="text"
                 className="text-neutral-400 hover:text-neutral-200"
                 label={t('goBackToConfiguration')}
-                onClick={goBackToConfiguration}
+                onClick={() => resetConfiguration()}
               />
-            </div> */}
+            </div>
             <Card className="w-full px-20! py-10!" orientation="vertical" hoverable={false}>
-              <></>
-              {/* <GameMasterChoiceForm /> */}
+              <GameMasterChoiceForm />
             </Card>
           </>
         );
@@ -135,7 +135,7 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
       default:
         return null;
     }
-  }, [initialisationStep, openInvitation, closeInvitation, game, t]);
+  }, [initialisationStep, openInvitation, closeInvitation, game, t, resetConfiguration]);
 
   return (
     <div className="flex flex-col items-center justify-center gap-8 h-full w-full bg-background/80">

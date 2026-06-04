@@ -22,7 +22,8 @@
           "launchingGame": "Launching the game",
           "loading": "Loading...",
           "canStart": "You can start!",
-          "configureGame": "Set up the game"
+          "configureGame": "Set up the game",
+          "goBackToConfiguration": "Back to configuration"
         }
       },
       "home": {
@@ -332,6 +333,11 @@
             "withRandomDispatchLabel": "Roles are drawn randomly when the game starts",
             "withRandomDispatchAria": "Enable random role assignment",
             "submit": "Save configuration"
+          },
+          "gameMasterChoice": {
+            "sectionTitle": "Game master choice",
+            "sectionSubtitle": "Choose the player who will control the game",
+            "submit": "Submit choice"
           }
         }
       },
@@ -446,6 +452,10 @@
       "getPublicGamesError": "Error retrieving public games",
       "setConfigurationError": "Error while saving game configuration",
       "setConfigurationSuccess": "Game configuration saved",
+      "resetConfigurationError": "Error while resetting game configuration",
+      "resetGameMasterError": "Error while resetting the game master",
+      "setGameMasterError": "Error while setting the game master",
+      "setGameMasterSuccess": "Game master set",
       "launchGameError": "Error launching game",
       "launchGameSuccess": "Game launched"
     }
