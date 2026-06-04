@@ -37,7 +37,6 @@ const GameClient = () => {
 
   const isHost = player?.id === game?.host?.id;
 
-
   return (
     <main className="flex h-full min-h-0 w-full flex-row justify-between items-start">
       <IngamePlayersSidebar players={playersList || []} />

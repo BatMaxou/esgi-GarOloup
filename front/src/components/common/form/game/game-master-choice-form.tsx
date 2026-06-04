@@ -1,18 +1,18 @@
-import Typography from "@/components/ui/atoms/typography";
-import Button from "@/components/ui/molecules/button";
-import Card from "@/components/ui/molecules/card";
-import { useGame } from "@/contexts/game-context";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
+import Typography from '@/components/ui/atoms/typography';
+import Button from '@/components/ui/molecules/button';
+import Card from '@/components/ui/molecules/card';
+import { useGame } from '@/contexts/game-context';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 
 const GameMasterChoiceForm = () => {
-
   const { game, setGameMaster } = useGame();
   const t = useTranslations('components.common.form.game.gameMasterChoice');
-  const playerList = game?.players?.map((player) => ({
-    id: player.id,
-    name: player.user?.username ?? '',
-  })) ?? [];
+  const playerList =
+    game?.players?.map((player) => ({
+      id: player.id,
+      name: player.user?.username ?? '',
+    })) ?? [];
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
 
   const handleSelectPlayer = (playerId: string) => {
@@ -24,7 +24,8 @@ const GameMasterChoiceForm = () => {
   };
 
   return (
-    <form className="flex flex-col gap-6"
+    <form
+      className="flex flex-col gap-6"
       method="post"
       onSubmit={(e) => {
         e.preventDefault();
