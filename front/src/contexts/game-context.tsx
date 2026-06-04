@@ -28,6 +28,9 @@ type GameContextType = {
   openInvitation: () => void;
   closeInvitation: () => void;
   setConfiguration: (configuration: GameConfigurationPayload) => void;
+  resetConfiguration: () => void;
+  setGameMaster: (playerId: string) => void;
+  resetGameMaster: () => void;
   launchGame: () => void;
 };
 
@@ -117,6 +120,31 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
     toast.success(t('setConfigurationSuccess'));
   };
 
+  const resetConfiguration = async () => {
+    const response = await apiClient.game.resetConfiguration();
+    if (response instanceof ApiClientError) {
+      toast.error(t('resetConfigurationError'));
+      return;
+    }
+  };
+
+  const setGameMaster = async (playerId: string) => {
+    const response = await apiClient.game.setGameMaster(playerId);
+    if (response instanceof ApiClientError) {
+      toast.error(t('setGameMasterError'));
+      return;
+    }
+    toast.success(t('setGameMasterSuccess'));
+  };
+
+  const resetGameMaster = async () => {
+    const response = await apiClient.game.resetGameMaster();
+    if (response instanceof ApiClientError) {
+      toast.error(t('resetGameMasterError'));
+      return;
+    }
+  };
+
   const launchGame = async () => {
     const response = await apiClient.game.launch();
     if (response instanceof ApiClientError) {
@@ -139,6 +167,9 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
         openInvitation,
         closeInvitation,
         setConfiguration,
+        resetConfiguration,
+        setGameMaster,
+        resetGameMaster,
       }}
     >
       {children}

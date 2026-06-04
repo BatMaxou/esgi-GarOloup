@@ -5,6 +5,7 @@ import type { Player } from '@/utils/types';
 import Typography from '@/components/ui/atoms/typography';
 import Card from '@/components/ui/molecules/card';
 import Icon from '../../atoms/icon';
+import { useGame } from '@/contexts/game-context';
 
 type Props = {
   player: Player;
@@ -12,6 +13,8 @@ type Props = {
 
 const PlayerSidebarItem = ({ player }: Props) => {
   const { player: currentPlayer } = usePlayer();
+  const { game } = useGame();
+  const isGameMaster = game?.gameMaster?.id === player.id;
 
   const linkedUser = player.user ?? player.tempUser;
   if (!linkedUser) {
@@ -28,6 +31,12 @@ const PlayerSidebarItem = ({ player }: Props) => {
         <Typography tag="p" variant="body-sm" textColor="primary" bold>
           {isCurrentPlayer ? `Toi (${userName})` : userName}
         </Typography>
+
+        {isGameMaster && (
+          <Typography tag="p" variant="body-sm" textColor="accent" bold>
+            <Icon name="crown" className="w-4 h-4 color-accent" />
+          </Typography>
+        )}
 
         {isDead && (
           <Typography tag="p" variant="body-sm" textColor="primary" bold>
