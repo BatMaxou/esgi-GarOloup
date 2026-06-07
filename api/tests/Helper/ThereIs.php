@@ -10,6 +10,8 @@ use App\Tests\Helper\Builder\Game\CompositionBuilder;
 use App\Tests\Helper\Builder\Game\ConfigurationBuilder;
 use App\Tests\Helper\Builder\Game\DispatchBuilder;
 use App\Tests\Helper\Builder\Game\GameBuilder;
+use App\Tests\Helper\Builder\Game\Period\Action\NightAction\MurderActionBuilder;
+use App\Tests\Helper\Builder\Game\Period\Vote\BallotBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
 use App\Tests\Helper\Builder\Game\Role\GameRoleBuilderBag;
 use App\Tests\Helper\Builder\Role\RoleBuilder;
@@ -46,6 +48,16 @@ final class ThereIs
     public static function aPlayer(): PlayerBuilder
     {
         return new PlayerBuilder();
+    }
+
+    public static function aBallot(): BallotBuilder
+    {
+        return new BallotBuilder();
+    }
+
+    public static function aMurderAction(): MurderActionBuilder
+    {
+        return new MurderActionBuilder();
     }
 
     public static function aGame(): GameBuilder

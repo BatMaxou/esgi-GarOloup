@@ -8,15 +8,12 @@ App\Entity\Game\Game:
                 - homepage:read
         initialisationStep:
             groups:
-                - me:read
                 - game:read
         runtimeStep:
             groups:
-                - me:read
                 - game:read
         globalStep:
             groups:
-                - me:read
                 - game:read
         joinCode:
             groups:
@@ -41,6 +38,9 @@ App\Entity\Game\Game:
             groups:
                 - game:read
         stepEndAt:
+            groups:
+                - game:read
+        winningTeam:
             groups:
                 - game:read
         nights:

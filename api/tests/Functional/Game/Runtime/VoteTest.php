@@ -270,7 +270,9 @@ class VoteTest extends GarOloupApiTestCase
             $tiedTarget1PlayerBuilder->getEntity()->isDead(),
             $tiedTarget2PlayerBuilder->getEntity()->isDead(),
         );
-        $this->assertSame(GameRuntimeStepEnum::NIGHT, $gameBuilder->getEntity()->getRuntimeStep());
+        $game = $gameBuilder->getEntity();
+        $expectedStep = null === $game->getWinningTeam() ? GameRuntimeStepEnum::NIGHT : GameRuntimeStepEnum::FINISH;
+        $this->assertSame($expectedStep, $game->getRuntimeStep());
     }
 
     public function test_no_ballot_eliminates_a_random_player_on_time_up(): void
@@ -294,7 +296,8 @@ class VoteTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(200);
 
         $this->assertSame($deadBefore + 1, $game->countDeadPlayers());
-        $this->assertSame(GameRuntimeStepEnum::NIGHT, $game->getRuntimeStep());
+        $expectedStep = null === $game->getWinningTeam() ? GameRuntimeStepEnum::NIGHT : GameRuntimeStepEnum::FINISH;
+        $this->assertSame($expectedStep, $game->getRuntimeStep());
     }
 
     public function test_game_event_dispatched_by_vote(): void

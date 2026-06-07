@@ -23,6 +23,8 @@ services:
     _instanceof:
         App\Domain\GameEvent\Interface\GameEventApplicatorInterface:
             tags: ['game_event.applicator']
+        App\Domain\WinCondition\Interface\WinConditionCheckerInterface:
+            tags: ['win_condition.checker']
 
     App\Fixtures\:
         resource: '../fixtures'
@@ -40,4 +42,8 @@ services:
     App\Domain\GameEvent\GameEventDispatcher:
         arguments:
             $applicators: !tagged_iterator game_event.applicator
+
+    App\Domain\WinCondition\WinDetector:
+        arguments:
+            $checkers: !tagged_iterator win_condition.checker
 
