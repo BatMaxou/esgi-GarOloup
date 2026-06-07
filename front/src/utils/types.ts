@@ -43,6 +43,15 @@ export type Game = {
   votes?: Vote[];
 };
 
+export type PlayerRole = {
+  role?: Role;
+  type?: GameRoleEnum;
+  friendId?: string;
+  lastObservedPlayerId?: string;
+  lastObservedRole?: GameRoleEnum;
+  observedRoles?: Record<string, GameRoleEnum>;
+};
+
 export type Player = {
   id: string;
   user?: User;
@@ -51,6 +60,8 @@ export type Player = {
   game?: Game;
   host?: boolean;
   username?: string;
+  role?: PlayerRole;
+  team?: GameTeamEnum;
 };
 
 export type NightAction = {

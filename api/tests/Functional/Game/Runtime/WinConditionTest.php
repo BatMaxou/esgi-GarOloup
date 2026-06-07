@@ -26,10 +26,10 @@ class WinConditionTest extends GarOloupApiTestCase
         $this->assertInstanceOf(PlayerBuilder::class, $villager1PlayerBuilder);
         $villager1UserBuilder = $villager1PlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $villager1UserBuilder);
-        $villager4PlayerBuilder = $story->get(ClassicGameDay2FinishedStory::VILLAGER_4);
-        $this->assertInstanceOf(PlayerBuilder::class, $villager4PlayerBuilder);
-        $villager4UserBuilder = $villager4PlayerBuilder->user;
-        $this->assertInstanceOf(UserBuilder::class, $villager4UserBuilder);
+        $seerPlayerBuilder = $story->get(ClassicGameDay2FinishedStory::SEER);
+        $this->assertInstanceOf(PlayerBuilder::class, $seerPlayerBuilder);
+        $seerUserBuilder = $seerPlayerBuilder->user;
+        $this->assertInstanceOf(UserBuilder::class, $seerUserBuilder);
         $werewolfPlayerBuilder = $story->get(ClassicGameDay2FinishedStory::WEREWOLF_2);
         $this->assertInstanceOf(PlayerBuilder::class, $werewolfPlayerBuilder);
         $werewolfPlayerId = $werewolfPlayerBuilder->getEntity()->getId();
@@ -40,7 +40,7 @@ class WinConditionTest extends GarOloupApiTestCase
         When::asUser($villager1UserBuilder)->game()->vote($werewolfPlayerId->toString());
         $this->assertResponseStatusCodeSame(200);
 
-        When::asUser($villager4UserBuilder)->game()->vote($werewolfPlayerId->toString());
+        When::asUser($seerUserBuilder)->game()->vote($werewolfPlayerId->toString());
         $this->assertResponseStatusCodeSame(200);
 
         $clock->sleep(60);
@@ -65,19 +65,19 @@ class WinConditionTest extends GarOloupApiTestCase
         $this->assertInstanceOf(UserBuilder::class, $villager1UserBuilder);
         $villager1PlayerId = $villager1PlayerBuilder->getEntity()->getId();
         $this->assertNotNull($villager1PlayerId);
-        $villager4PlayerBuilder = $story->get(ClassicGameDay2FinishedStory::VILLAGER_4);
-        $this->assertInstanceOf(PlayerBuilder::class, $villager4PlayerBuilder);
-        $villager4UserBuilder = $villager4PlayerBuilder->user;
-        $this->assertInstanceOf(UserBuilder::class, $villager4UserBuilder);
-        $villager4PlayerId = $villager4PlayerBuilder->getEntity()->getId();
-        $this->assertNotNull($villager4PlayerId);
+        $seerPlayerBuilder = $story->get(ClassicGameDay2FinishedStory::SEER);
+        $this->assertInstanceOf(PlayerBuilder::class, $seerPlayerBuilder);
+        $seerUserBuilder = $seerPlayerBuilder->user;
+        $this->assertInstanceOf(UserBuilder::class, $seerUserBuilder);
+        $seerPlayerId = $seerPlayerBuilder->getEntity()->getId();
+        $this->assertNotNull($seerPlayerId);
         $gameBuilder = $story->get(ClassicGameDay2FinishedStory::GAME);
         $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
-        When::asUser($villager1UserBuilder)->game()->vote($villager4PlayerId->toString());
+        When::asUser($villager1UserBuilder)->game()->vote($seerPlayerId->toString());
         $this->assertResponseStatusCodeSame(200);
 
-        When::asUser($villager4UserBuilder)->game()->vote($villager1PlayerId->toString());
+        When::asUser($seerUserBuilder)->game()->vote($villager1PlayerId->toString());
         $this->assertResponseStatusCodeSame(200);
 
         $clock->sleep(60);

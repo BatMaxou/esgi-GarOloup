@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping\InheritanceType;
 #[DiscriminatorMap([
     GameRoleEnum::VILLAGER->value => VillagerRole::class,
     GameRoleEnum::WEREWOLF->value => WerewolfRole::class,
+    GameRoleEnum::SEER->value => SeerRole::class,
 ])]
 abstract class GameRole
 {

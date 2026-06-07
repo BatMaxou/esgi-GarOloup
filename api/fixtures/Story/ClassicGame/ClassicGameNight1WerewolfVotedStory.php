@@ -8,7 +8,7 @@ use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
 use App\Tests\Helper\ThereIs;
 
-class ClassicGameNight1WerewolfVotedStory extends ClassicGameSetupedStory
+class ClassicGameNight1WerewolfVotedStory extends ClassicGameNight1SeerRevealedStory
 {
     public function execute(): void
     {

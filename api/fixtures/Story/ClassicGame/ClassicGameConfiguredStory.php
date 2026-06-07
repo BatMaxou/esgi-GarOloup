@@ -30,7 +30,8 @@ class ClassicGameConfiguredStory extends ClassicGameClosedStory
         \assert($gameBuilder instanceof GameBuilder);
 
         $compositionBuilder = ThereIs::aComposition()
-            ->withRole($roleBagBuilder->getVillager(), 4)
+            ->withRole($roleBagBuilder->getVillager(), 3)
+            ->withRole($roleBagBuilder->getSeer(), 1)
             ->withRole($roleBagBuilder->getWerewolf(), 2);
         $this->addState(self::COMPOSITION, $compositionBuilder);
 

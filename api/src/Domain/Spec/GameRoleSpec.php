@@ -3,6 +3,7 @@
 namespace App\Domain\Spec;
 
 use App\Entity\Game\Role\GameRole;
+use App\Entity\Game\Role\SeerRole;
 use App\Entity\Game\Role\VillagerRole;
 use App\Entity\Game\Role\WerewolfRole;
 use App\Entity\Role;
@@ -20,6 +21,7 @@ class GameRoleSpec
         return (match ($type) {
             GameRoleEnum::VILLAGER => new VillagerRole(),
             GameRoleEnum::WEREWOLF => new WerewolfRole(),
+            GameRoleEnum::SEER => new SeerRole(),
             default => null,
         })?->setRole($role);
     }
