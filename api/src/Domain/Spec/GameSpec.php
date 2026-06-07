@@ -84,6 +84,21 @@ class GameSpec
         return GameInitialisationStepEnum::NEW === $game->getInitialisationStep();
     }
 
+    public function canLeave(AbstractUser $user, Game $game): bool
+    {
+        if (GameInitialisationStepEnum::NEW !== $game->getInitialisationStep()) {
+            return false;
+        }
+
+        foreach ($game->getPlayers() as $player) {
+            if ($player->getLinkedUser() === $user) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function canReOpenGameInvitation(AbstractUser $user, Game $game): bool
     {
         if ($user !== $game->getHost()->getLinkedUser()) {

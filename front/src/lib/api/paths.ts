@@ -23,6 +23,7 @@ export const apiPaths = {
   },
   player: {
     getCurrent: '/game/player',
+    leave: '/game/player',
   },
   tempUser: {
     get: (username: string) => `/temp_user?username=${username}`,

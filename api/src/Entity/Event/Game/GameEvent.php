@@ -20,6 +20,7 @@ use Doctrine\ORM\Mapping\InheritanceType;
     'create' => CreateGameEvent::class,
     'role_dispatch' => GameRoleDispatchEvent::class,
     'join' => JoinGameEvent::class,
+    'leave' => LeaveGameEvent::class,
     're_open_invitation' => ReOpenGameInvitationEvent::class,
     'reset_configuration' => ResetConfigurationEvent::class,
     'reset_game_master' => ResetGameMasterEvent::class,
