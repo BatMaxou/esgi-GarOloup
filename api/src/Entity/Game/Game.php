@@ -183,7 +183,7 @@ class Game implements TopicRelatedObject
     #[ORM\Column(enumType: GameTeamEnum::class, nullable: true)]
     private ?GameTeamEnum $winningTeam = null;
 
-    #[ORM\OneToOne]
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private Player $host;
 

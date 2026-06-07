@@ -11,4 +11,11 @@ class PlayerBehavior extends AbstractBehavior
     {
         return new BehaviorResponse($this->client->request('GET', '/api/game/player'));
     }
+
+    public function leave(): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('DELETE', '/api/game/player', [
+            'json' => [],
+        ]));
+    }
 }

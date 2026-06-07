@@ -3,7 +3,9 @@
 namespace App\Entity\Game;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
+use App\Api\Processor\Game\LeaveGameProcessor;
 use App\Api\Provider\Player\CurrentPlayerProvider;
 use App\Entity\Game\Role\GameRole;
 use App\Entity\Trait\TimestampableTrait;
@@ -26,6 +28,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
             normalizationContext: [
                 'groups' => 'me:player:read',
             ],
+        ),
+        new Delete(
+            name: 'api_game_leave',
+            uriTemplate: '/game/player',
+            read: false,
+            processor: LeaveGameProcessor::class,
         ),
     ],
 )]
