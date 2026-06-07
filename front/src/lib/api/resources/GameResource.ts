@@ -83,10 +83,6 @@ export class GameResource {
     return this.apiClient.patch<BasicActionResponse>(apiPaths.game.launch);
   }
 
-  public async villagerSetup(targetPlayerId: string): Promise<BasicActionResponse | ApiClientError> {
-    return this.apiClient.patch<BasicActionResponse>(apiPaths.game.villagerSetup, { targetPlayerId });
-  }
-
   public async vote(targetPlayerId: string): Promise<BasicActionResponse | ApiClientError> {
     return this.apiClient.patch<BasicActionResponse>(apiPaths.game.vote, { targetPlayerId });
   }

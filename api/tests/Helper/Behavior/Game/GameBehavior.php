@@ -128,12 +128,22 @@ class GameBehavior extends AbstractBehavior
 
     public function getWerewolfTeam(): BehaviorResponse
     {
-        return new BehaviorResponse($this->client->request('GET', '/api/game/werewolf-team'));
+        return new BehaviorResponse($this->client->request('GET', '/api/game/werewolf/team'));
     }
 
     public function werewolfVote(?string $targetPlayerId): BehaviorResponse
     {
-        return new BehaviorResponse($this->client->request('PATCH', '/api/game/night/werewolf', [
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/werewolf/vote', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [
+                'targetPlayerId' => $targetPlayerId,
+            ],
+        ]));
+    }
+
+    public function seerReveal(?string $targetPlayerId): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/seer/reveal', [
             'headers' => $this->getPatchHeaders(),
             'json' => [
                 'targetPlayerId' => $targetPlayerId,

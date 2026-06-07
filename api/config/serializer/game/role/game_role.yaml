@@ -12,3 +12,15 @@ App\Entity\Game\Role\VillagerRole:
         friendId:
             groups:
                 - me:player:read
+
+App\Entity\Game\Role\SeerRole:
+    attributes:
+        lastObservedPlayerId:
+            groups:
+                - me:player:read
+        lastObservedRole:
+            groups:
+                - me:player:read
+        observedRoles:
+            groups:
+                - me:player:read

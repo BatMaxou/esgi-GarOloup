@@ -55,6 +55,17 @@ class RoleBuilder extends AbstractBuilder
             ->withTeam(GameTeamEnum::WEREWOLF);
     }
 
+    public function seer(): static
+    {
+        $this->type = GameRoleEnum::SEER;
+
+        return $this->withName('Voyante')
+            ->withDescription('Description de la Voyante')
+            ->withAbility('Observer le rôle d\'un joueur chaque nuit')
+            ->withTeam(GameTeamEnum::VILLAGE)
+            ->withMaxPerGame(1);
+    }
+
     public function withName(string $name): static
     {
         $this->name = $name;

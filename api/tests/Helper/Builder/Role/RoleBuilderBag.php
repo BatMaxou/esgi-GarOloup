@@ -19,6 +19,7 @@ class RoleBuilderBag
         $this->builders = [
             GameRoleEnum::VILLAGER->value => (clone $this->builder)->villager(),
             GameRoleEnum::WEREWOLF->value => (clone $this->builder)->werewolf(),
+            GameRoleEnum::SEER->value => (clone $this->builder)->seer(),
         ];
 
         return $this;
@@ -49,6 +50,11 @@ class RoleBuilderBag
     public function getWerewolf(): RoleBuilder
     {
         return $this->get(GameRoleEnum::WEREWOLF);
+    }
+
+    public function getSeer(): RoleBuilder
+    {
+        return $this->get(GameRoleEnum::SEER);
     }
 
     private function get(GameRoleEnum $role): RoleBuilder

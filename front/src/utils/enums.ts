@@ -55,6 +55,7 @@ export enum IdeaCategoryEnum {
 export enum GameRoleEnum {
   VILLAGER = 'villager',
   WEREWOLF = 'werewolf',
+  SEER = 'seer',
 }
 
 export enum GameTeamEnum {

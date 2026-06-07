@@ -17,9 +17,14 @@ export const apiPaths = {
     roleDispatch: '/game/role-dispatch',
     resetRoleDispatch: '/game/role-dispatch/reset',
     launch: '/game/launch',
-    villagerSetup: '/game/setup/villager',
     vote: '/game/vote',
     timeUp: '/game/time-up',
+  },
+  villager: {
+    setup: '/game/villager/setup',
+  },
+  seer: {
+    reveal: '/game/seer/reveal',
   },
   player: {
     getCurrent: '/game/player',
@@ -50,7 +55,7 @@ export const apiPaths = {
     credentials: '/mercure/token',
   },
   werewolf: {
-    team: '/game/werewolf-team',
-    vote: '/game/night/werewolf',
+    team: '/game/werewolf/team',
+    vote: '/game/werewolf/vote',
   },
 };

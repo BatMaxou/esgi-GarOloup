@@ -2,11 +2,26 @@
 
 namespace App\Entity\Game\Role;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Patch;
+use App\Api\Model\BasicActionOutput;
+use App\Domain\Command\Game\Runtime\WerewolfVoteCommand;
 use App\Domain\Workflow\Interface\NightResettableInterface;
 use App\Enum\Game\GameRoleEnum;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
+#[ApiResource(
+    operations: [
+        new Patch(
+            name: 'api_game_werewolf_vote',
+            uriTemplate: '/game/werewolf/vote',
+            messenger: 'input',
+            input: WerewolfVoteCommand::class,
+            output: BasicActionOutput::class,
+        ),
+    ],
+)]
 class WerewolfRole extends GameRole implements NightResettableInterface
 {
     #[ORM\Column(length: 36, nullable: true)]

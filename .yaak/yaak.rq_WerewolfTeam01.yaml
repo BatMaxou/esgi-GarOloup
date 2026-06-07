@@ -20,5 +20,5 @@ headers:
 method: GET
 name: Get Werewolf Team
 sortPriority: 0.0
-url: ${[ BASE_URL ]}/api/game/werewolf-team
+url: ${[ BASE_URL ]}/api/game/werewolf/team
 urlParameters: []

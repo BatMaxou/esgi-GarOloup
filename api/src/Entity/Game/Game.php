@@ -23,9 +23,7 @@ use App\Domain\Command\Game\Initialisation\ResetRoleDispatchCommand;
 use App\Domain\Command\Game\Initialisation\SetGameConfigurationCommand;
 use App\Domain\Command\Game\Initialisation\SetGameMasterCommand;
 use App\Domain\Command\Game\Runtime\TimeUpCommand;
-use App\Domain\Command\Game\Runtime\VillagerSetupCommand;
 use App\Domain\Command\Game\Runtime\VoteCommand;
-use App\Domain\Command\Game\Runtime\WerewolfVoteCommand;
 use App\Entity\Game\Period\Day;
 use App\Entity\Game\Period\Night;
 use App\Entity\Game\Period\Vote;
@@ -134,20 +132,6 @@ use Doctrine\ORM\Mapping as ORM;
             uriTemplate: '/game/launch',
             messenger: 'input',
             input: LaunchGameCommand::class,
-            output: BasicActionOutput::class,
-        ),
-        new Patch(
-            name: 'api_game_villager_setup',
-            uriTemplate: '/game/setup/villager',
-            messenger: 'input',
-            input: VillagerSetupCommand::class,
-            output: BasicActionOutput::class,
-        ),
-        new Patch(
-            name: 'api_game_werewolf_vote',
-            uriTemplate: '/game/night/werewolf',
-            messenger: 'input',
-            input: WerewolfVoteCommand::class,
             output: BasicActionOutput::class,
         ),
         new Patch(

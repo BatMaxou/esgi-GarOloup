@@ -7,7 +7,7 @@ use App\Entity\Game\Role\WerewolfRole;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Fixtures\Factory\Game\PlayerFactory;
 use App\Fixtures\Story\ClassicGame\ClassicGameLaunchedStory;
-use App\Fixtures\Story\ClassicGame\ClassicGameSetupedStory;
+use App\Fixtures\Story\ClassicGame\ClassicGameNight1SeerRevealedStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
@@ -24,12 +24,12 @@ class WerewolfVoteTest extends GarOloupApiTestCase
 
     public function test_werewolf_can_vote(): void
     {
-        $story = ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
-        $werewolfPlayerBuilder = $story->get(ClassicGameSetupedStory::WEREWOLF_1);
+        $story = ThereIs::aStory(ClassicGameNight1SeerRevealedStory::class)->execute();
+        $werewolfPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $werewolfPlayerBuilder);
         $werewolfUserBuilder = $werewolfPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $werewolfUserBuilder);
-        $villagerPlayerBuilder = $story->get(ClassicGameSetupedStory::VILLAGER_1);
+        $villagerPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::VILLAGER_1);
         $this->assertInstanceOf(PlayerBuilder::class, $villagerPlayerBuilder);
         $villagerPlayerId = $villagerPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($villagerPlayerId);
@@ -40,8 +40,8 @@ class WerewolfVoteTest extends GarOloupApiTestCase
 
     public function test_anonymous_cannot_vote_on_werewolf_vote(): void
     {
-        $story = ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
-        $villagerPlayerBuilder = $story->get(ClassicGameSetupedStory::VILLAGER_1);
+        $story = ThereIs::aStory(ClassicGameNight1SeerRevealedStory::class)->execute();
+        $villagerPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::VILLAGER_1);
         $this->assertInstanceOf(PlayerBuilder::class, $villagerPlayerBuilder);
         $villagerPlayerId = $villagerPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($villagerPlayerId);
@@ -52,8 +52,8 @@ class WerewolfVoteTest extends GarOloupApiTestCase
 
     public function test_werewolf_cannot_vote_not_valid_uuid(): void
     {
-        $story = ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
-        $werewolfPlayerBuilder = $story->get(ClassicGameSetupedStory::WEREWOLF_1);
+        $story = ThereIs::aStory(ClassicGameNight1SeerRevealedStory::class)->execute();
+        $werewolfPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $werewolfPlayerBuilder);
         $werewolfUserBuilder = $werewolfPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $werewolfUserBuilder);
@@ -64,8 +64,8 @@ class WerewolfVoteTest extends GarOloupApiTestCase
 
     public function test_werewolf_cannot_vote_unknown_player(): void
     {
-        $story = ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
-        $werewolfPlayerBuilder = $story->get(ClassicGameSetupedStory::WEREWOLF_1);
+        $story = ThereIs::aStory(ClassicGameNight1SeerRevealedStory::class)->execute();
+        $werewolfPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $werewolfPlayerBuilder);
         $werewolfUserBuilder = $werewolfPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $werewolfUserBuilder);
@@ -98,16 +98,16 @@ class WerewolfVoteTest extends GarOloupApiTestCase
     {
         $clock = static::mockTime();
 
-        $story = ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
-        $werewolfPlayerBuilder = $story->get(ClassicGameSetupedStory::WEREWOLF_1);
+        $story = ThereIs::aStory(ClassicGameNight1SeerRevealedStory::class)->execute();
+        $werewolfPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $werewolfPlayerBuilder);
         $werewolfUserBuilder = $werewolfPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $werewolfUserBuilder);
-        $villagerPlayerBuilder = $story->get(ClassicGameSetupedStory::VILLAGER_1);
+        $villagerPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::VILLAGER_1);
         $this->assertInstanceOf(PlayerBuilder::class, $villagerPlayerBuilder);
         $villagerPlayerId = $villagerPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($villagerPlayerId);
-        $gameBuilder = $story->get(ClassicGameSetupedStory::GAME);
+        $gameBuilder = $story->get(ClassicGameNight1SeerRevealedStory::GAME);
         $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
         $clock->sleep(60);
@@ -118,12 +118,12 @@ class WerewolfVoteTest extends GarOloupApiTestCase
 
     public function test_villager_cannot_vote_on_werewolf_vote(): void
     {
-        $story = ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
-        $villagerPlayerBuilder = $story->get(ClassicGameSetupedStory::VILLAGER_2);
+        $story = ThereIs::aStory(ClassicGameNight1SeerRevealedStory::class)->execute();
+        $villagerPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::VILLAGER_2);
         $this->assertInstanceOf(PlayerBuilder::class, $villagerPlayerBuilder);
         $villagerUserBuilder = $villagerPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $villagerUserBuilder);
-        $targetPlayerBuilder = $story->get(ClassicGameSetupedStory::VILLAGER_1);
+        $targetPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::VILLAGER_1);
         $this->assertInstanceOf(PlayerBuilder::class, $villagerPlayerBuilder);
         $targetPlayerId = $villagerPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($targetPlayerId);
@@ -134,8 +134,8 @@ class WerewolfVoteTest extends GarOloupApiTestCase
 
     public function test_werewolf_cannot_vote_on_self(): void
     {
-        $story = ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
-        $werewolfPlayerBuilder = $story->get(ClassicGameSetupedStory::WEREWOLF_1);
+        $story = ThereIs::aStory(ClassicGameNight1SeerRevealedStory::class)->execute();
+        $werewolfPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $werewolfPlayerBuilder);
         $werewolfUserBuilder = $werewolfPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $werewolfUserBuilder);
@@ -148,12 +148,12 @@ class WerewolfVoteTest extends GarOloupApiTestCase
 
     public function test_werewolf_cannot_vote_on_other_werewolf(): void
     {
-        $story = ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
-        $werewolfPlayerBuilder = $story->get(ClassicGameSetupedStory::WEREWOLF_1);
+        $story = ThereIs::aStory(ClassicGameNight1SeerRevealedStory::class)->execute();
+        $werewolfPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $werewolfPlayerBuilder);
         $werewolfUserBuilder = $werewolfPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $werewolfUserBuilder);
-        $werewolf2PlayerBuilder = $story->get(ClassicGameSetupedStory::WEREWOLF_2);
+        $werewolf2PlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::WEREWOLF_2);
         $this->assertInstanceOf(PlayerBuilder::class, $werewolf2PlayerBuilder);
         $werewolf2PlayerId = $werewolfPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($werewolf2PlayerId);
@@ -166,20 +166,20 @@ class WerewolfVoteTest extends GarOloupApiTestCase
     {
         $clock = static::mockTime();
 
-        $story = ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
-        $werewolfPlayerBuilder = $story->get(ClassicGameSetupedStory::WEREWOLF_1);
+        $story = ThereIs::aStory(ClassicGameNight1SeerRevealedStory::class)->execute();
+        $werewolfPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $werewolfPlayerBuilder);
         $werewolfUserBuilder = $werewolfPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $werewolfUserBuilder);
-        $werewolf2PlayerBuilder = $story->get(ClassicGameSetupedStory::WEREWOLF_2);
+        $werewolf2PlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::WEREWOLF_2);
         $this->assertInstanceOf(PlayerBuilder::class, $werewolf2PlayerBuilder);
         $werewolf2UserBuilder = $werewolf2PlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $werewolf2UserBuilder);
-        $villagerPlayerBuilder = $story->get(ClassicGameSetupedStory::VILLAGER_2);
+        $villagerPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::VILLAGER_2);
         $this->assertInstanceOf(PlayerBuilder::class, $villagerPlayerBuilder);
         $villagerPlayerId = $villagerPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($villagerPlayerId);
-        $gameBuilder = $story->get(ClassicGameSetupedStory::GAME);
+        $gameBuilder = $story->get(ClassicGameNight1SeerRevealedStory::GAME);
         $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
         When::asUser($werewolfUserBuilder)->game()->werewolfVote($villagerPlayerId->toString());
@@ -201,20 +201,20 @@ class WerewolfVoteTest extends GarOloupApiTestCase
     {
         $clock = static::mockTime();
 
-        $story = ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
-        $werewolfPlayerBuilder = $story->get(ClassicGameSetupedStory::WEREWOLF_1);
+        $story = ThereIs::aStory(ClassicGameNight1SeerRevealedStory::class)->execute();
+        $werewolfPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $werewolfPlayerBuilder);
         $werewolfUserBuilder = $werewolfPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $werewolfUserBuilder);
-        $werewolf2PlayerBuilder = $story->get(ClassicGameSetupedStory::WEREWOLF_2);
+        $werewolf2PlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::WEREWOLF_2);
         $this->assertInstanceOf(PlayerBuilder::class, $werewolf2PlayerBuilder);
         $werewolf2UserBuilder = $werewolf2PlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $werewolf2UserBuilder);
-        $villagerPlayerBuilder = $story->get(ClassicGameSetupedStory::VILLAGER_2);
+        $villagerPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::VILLAGER_2);
         $this->assertInstanceOf(PlayerBuilder::class, $villagerPlayerBuilder);
         $villagerPlayerId = $villagerPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($villagerPlayerId);
-        $gameBuilder = $story->get(ClassicGameSetupedStory::GAME);
+        $gameBuilder = $story->get(ClassicGameNight1SeerRevealedStory::GAME);
         $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
         When::asUser($werewolfUserBuilder)->game()->werewolfVote($villagerPlayerId->toString());
@@ -239,16 +239,16 @@ class WerewolfVoteTest extends GarOloupApiTestCase
 
     public function test_game_event_dispatched_by_werewolf_vote(): void
     {
-        $story = ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
-        $werewolfPlayerBuilder = $story->get(ClassicGameSetupedStory::WEREWOLF_1);
+        $story = ThereIs::aStory(ClassicGameNight1SeerRevealedStory::class)->execute();
+        $werewolfPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $werewolfPlayerBuilder);
         $werewolfUserBuilder = $werewolfPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $werewolfUserBuilder);
-        $villagerPlayerBuilder = $story->get(ClassicGameSetupedStory::VILLAGER_1);
+        $villagerPlayerBuilder = $story->get(ClassicGameNight1SeerRevealedStory::VILLAGER_1);
         $this->assertInstanceOf(PlayerBuilder::class, $villagerPlayerBuilder);
         $villagerPlayerId = $villagerPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($villagerPlayerId);
-        $gameBuilder = $story->get(ClassicGameSetupedStory::GAME);
+        $gameBuilder = $story->get(ClassicGameNight1SeerRevealedStory::GAME);
         $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
         When::asUser($werewolfUserBuilder)->game()->werewolfVote($villagerPlayerId->toString());

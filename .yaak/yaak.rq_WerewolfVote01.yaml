@@ -27,5 +27,5 @@ headers:
 method: PATCH
 name: Werewolf Vote
 sortPriority: 1000.0
-url: ${[ BASE_URL ]}/api/game/night/werewolf
+url: ${[ BASE_URL ]}/api/game/werewolf/vote
 urlParameters: []

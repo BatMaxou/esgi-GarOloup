@@ -9,6 +9,7 @@ export type RoleSlugLocale = 'fr' | 'en';
 export const ROLE_SLUG_BY_LOCALE: Record<GameRoleEnum, Record<RoleSlugLocale, string>> = {
   [GameRoleEnum.VILLAGER]: { fr: 'villageois', en: 'villager' },
   [GameRoleEnum.WEREWOLF]: { fr: 'loup-garou', en: 'werewolf' },
+  [GameRoleEnum.SEER]: { fr: 'voyante', en: 'seer' },
 };
 
 /**

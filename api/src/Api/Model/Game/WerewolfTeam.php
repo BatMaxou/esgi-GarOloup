@@ -11,7 +11,7 @@ use App\Entity\Game\Player;
     operations: [
         new Get(
             name: 'api_current_werewolf_team',
-            uriTemplate: '/game/werewolf-team',
+            uriTemplate: '/game/werewolf/team',
             provider: WerewolfTeamProvider::class,
             normalizationContext: ['groups' => 'werewolf-team:read'],
         ),

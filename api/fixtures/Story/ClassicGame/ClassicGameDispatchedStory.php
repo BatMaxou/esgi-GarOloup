@@ -7,6 +7,7 @@ use App\Fixtures\Story\Role\GameRoleInitializedStory;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
 use App\Tests\Helper\Builder\Game\Role\GameRoleBuilderBag;
+use App\Tests\Helper\Builder\Game\Role\SeerRoleBuilder;
 use App\Tests\Helper\Builder\Game\Role\VillagerRoleBuilder;
 use App\Tests\Helper\Builder\Game\Role\WerewolfRoleBuilder;
 use App\Tests\Helper\ThereIs;
@@ -16,7 +17,8 @@ class ClassicGameDispatchedStory extends ClassicGameConfiguredStory
     public const VILLAGER_1 = 'villager_1';
     public const VILLAGER_2 = 'villager_2';
     public const VILLAGER_3 = 'villager_3';
-    public const VILLAGER_4 = 'villager_4';
+
+    public const SEER = 'seer';
 
     public const WEREWOLF_1 = 'werewolf_1';
     public const WEREWOLF_2 = 'werewolf_2';
@@ -41,7 +43,7 @@ class ClassicGameDispatchedStory extends ClassicGameConfiguredStory
             [self::WEREWOLF_1, $gameRoleBagBuilder->getWerewolf()],
             [self::VILLAGER_2, $gameRoleBagBuilder->getVillager()],
             [self::VILLAGER_3, $gameRoleBagBuilder->getVillager()],
-            [self::VILLAGER_4, $gameRoleBagBuilder->getVillager()],
+            [self::SEER, $gameRoleBagBuilder->getSeer()],
             [self::WEREWOLF_2, $gameRoleBagBuilder->getWerewolf()],
         ];
 
@@ -54,7 +56,9 @@ class ClassicGameDispatchedStory extends ClassicGameConfiguredStory
             $pool = match (true) {
                 $gameRoleBuilder instanceof VillagerRoleBuilder => self::VILLAGERS_POOL,
                 $gameRoleBuilder instanceof WerewolfRoleBuilder => self::WEREWOLVES_POOL,
+                $gameRoleBuilder instanceof SeerRoleBuilder => null,
             };
+
             $this->addState($stateName, $playerBuilder, $pool);
         }
 
