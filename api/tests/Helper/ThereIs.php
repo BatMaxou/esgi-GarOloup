@@ -11,6 +11,7 @@ use App\Tests\Helper\Builder\Game\ConfigurationBuilder;
 use App\Tests\Helper\Builder\Game\DispatchBuilder;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\Period\Action\NightAction\MurderActionBuilder;
+use App\Tests\Helper\Builder\Game\Period\Action\NightAction\SaveActionBuilder;
 use App\Tests\Helper\Builder\Game\Period\Vote\BallotBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
 use App\Tests\Helper\Builder\Game\Role\GameRoleBuilderBag;
@@ -58,6 +59,11 @@ final class ThereIs
     public static function aMurderAction(): MurderActionBuilder
     {
         return new MurderActionBuilder();
+    }
+
+    public static function aSaveAction(): SaveActionBuilder
+    {
+        return new SaveActionBuilder();
     }
 
     public static function aGame(): GameBuilder

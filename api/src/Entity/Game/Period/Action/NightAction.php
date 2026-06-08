@@ -4,6 +4,7 @@ namespace App\Entity\Game\Period\Action;
 
 use App\Entity\Game\Game;
 use App\Entity\Game\Period\Action\NightAction\MurderAction;
+use App\Entity\Game\Period\Action\NightAction\SaveAction;
 use App\Entity\Game\Period\Action\Trait\SourceActionTrait;
 use App\Entity\Game\Period\Interface\PeriodAction;
 use App\Entity\Game\Period\Interface\PeriodInterface;
@@ -23,6 +24,7 @@ use Doctrine\ORM\Mapping\InheritanceType;
 #[DiscriminatorColumn(name: 'discr', type: 'string')]
 #[DiscriminatorMap([
     'murder' => MurderAction::class,
+    'save' => SaveAction::class,
 ])]
 abstract class NightAction implements PeriodAction
 {

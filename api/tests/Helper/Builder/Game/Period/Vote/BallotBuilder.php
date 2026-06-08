@@ -23,11 +23,11 @@ class BallotBuilder extends AbstractBuilder
 
         $vote = $game->getEntity()->getCurrentVote() ?? throw new \LogicException('Game has no active vote');
 
-        $ballot = BallotFactory::new([
+        $ballot = BallotFactory::createOne([
             'vote' => $vote,
             'player' => $player->getEntity(),
             'target' => $target->getEntity(),
-        ])->withoutPersisting()->create();
+        ]);
 
         $vote->addBallot($ballot);
 

@@ -43,13 +43,26 @@ export type Game = {
   votes?: Vote[];
 };
 
-export type PlayerRole = {
+export type GameRole = {
   role?: Role;
   type?: GameRoleEnum;
+};
+
+export type VillagerRole = GameRole & {
   friendId?: string;
+};
+
+export type SeerRole = GameRole & {
   lastObservedPlayerId?: string;
   lastObservedRole?: GameRoleEnum;
   observedRoles?: Record<string, GameRoleEnum>;
+};
+
+export type WerewolfRole = GameRole;
+
+export type WitchRole = GameRole & {
+  healPotionAvailable?: boolean;
+  poisonPotionAvailable?: boolean;
 };
 
 export type Player = {
@@ -60,7 +73,7 @@ export type Player = {
   game?: Game;
   host?: boolean;
   username?: string;
-  role?: PlayerRole;
+  role?: GameRole;
   team?: GameTeamEnum;
 };
 

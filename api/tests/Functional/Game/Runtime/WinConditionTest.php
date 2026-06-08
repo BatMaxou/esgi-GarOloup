@@ -5,6 +5,7 @@ namespace App\Tests\Functional\Game\Runtime;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Enum\Game\GameTeamEnum;
 use App\Fixtures\Story\ClassicGame\ClassicGameDay2FinishedStory;
+use App\Fixtures\Story\ClassicWitchGame\ClassicWitchGameNight3WerewolfVotedStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
@@ -87,6 +88,36 @@ class WinConditionTest extends GarOloupApiTestCase
 
         $game = $gameBuilder->getEntity();
         $this->assertSame(GameTeamEnum::WEREWOLF, $game->getWinningTeam());
+        $this->assertSame(GameRuntimeStepEnum::FINISH, $game->getRuntimeStep());
+    }
+
+    public function test_village_wins_when_the_witch_poisons_the_last_werewolf(): void
+    {
+        $clock = static::mockTime();
+
+        $story = ThereIs::aStory(ClassicWitchGameNight3WerewolfVotedStory::class)->execute();
+        $witchPlayerBuilder = $story->get(ClassicWitchGameNight3WerewolfVotedStory::WITCH);
+        $this->assertInstanceOf(PlayerBuilder::class, $witchPlayerBuilder);
+        $witchUserBuilder = $witchPlayerBuilder->user;
+        $this->assertInstanceOf(UserBuilder::class, $witchUserBuilder);
+        $lastWerewolfPlayerBuilder = $story->get(ClassicWitchGameNight3WerewolfVotedStory::WEREWOLF_3);
+        $this->assertInstanceOf(PlayerBuilder::class, $lastWerewolfPlayerBuilder);
+        $lastWerewolfPlayerId = $lastWerewolfPlayerBuilder->getEntity()->getId();
+        $this->assertNotNull($lastWerewolfPlayerId);
+        $gameBuilder = $story->get(ClassicWitchGameNight3WerewolfVotedStory::GAME);
+        $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
+
+        When::asUser($witchUserBuilder)->game()->witchPoison($lastWerewolfPlayerId->toString());
+        $this->assertResponseStatusCodeSame(200);
+
+        $clock->sleep(60);
+
+        When::asUser($witchUserBuilder)->game()->timeUp();
+        $this->assertResponseStatusCodeSame(200);
+
+        $game = $gameBuilder->getEntity();
+        $this->assertTrue($lastWerewolfPlayerBuilder->getEntity()->isDead());
+        $this->assertSame(GameTeamEnum::VILLAGE, $game->getWinningTeam());
         $this->assertSame(GameRuntimeStepEnum::FINISH, $game->getRuntimeStep());
     }
 }

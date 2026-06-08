@@ -66,6 +66,17 @@ class RoleBuilder extends AbstractBuilder
             ->withMaxPerGame(1);
     }
 
+    public function witch(): static
+    {
+        $this->type = GameRoleEnum::WITCH;
+
+        return $this->withName('Sorcière')
+            ->withDescription('Description de la Sorcière')
+            ->withAbility('Soigner ou empoisonner un joueur la nuit')
+            ->withTeam(GameTeamEnum::VILLAGE)
+            ->withMaxPerGame(1);
+    }
+
     public function withName(string $name): static
     {
         $this->name = $name;

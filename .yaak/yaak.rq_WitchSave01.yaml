@@ -1,0 +1,31 @@
+type: http_request
+model: http_request
+id: rq_WitchSave01
+createdAt: 2026-06-08T20:30:00
+updatedAt: 2026-06-08T20:30:00
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_Witch1a2b3c
+authentication:
+  token: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RlhCdVNMZFlzK29xLzVCS0M1MXNpaFZKd05LRGRDWFhHYzdmVlZ1NTlqN2E5MmtlY2taSzdHa1EzcU1sSzBTa0k5Y3lMSA') ]}
+authenticationType: bearer
+body:
+  text: |-
+    {
+      "targetPlayerId": "019ea35b-6290-7c8a-b940-820c3d531d00"
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/merge-patch+json
+  id: WitchSave01H1
+- enabled: true
+  name: ''
+  value: ''
+  id: WitchSave01H2
+method: PATCH
+name: Witch Save
+sortPriority: 1000.0
+url: ${[ BASE_URL ]}/api/game/witch/save
+urlParameters: []

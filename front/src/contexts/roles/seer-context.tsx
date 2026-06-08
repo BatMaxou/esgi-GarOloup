@@ -3,6 +3,7 @@
 import { createContext, ReactNode, useCallback, useContext } from 'react';
 
 import { GameRoleEnum } from '@/utils/enums';
+import { GameRole, SeerRole } from '@/utils/types';
 import { BasicActionResponse } from '@/lib/api/ApiClient';
 import { ApiClientError } from '@/lib/api/ApiClientError';
 import { useApiClient } from '@/contexts/api-context';
@@ -19,15 +20,20 @@ type SeerContextType = {
   reveal: (targetPlayerId: string) => Promise<BasicActionResponse | ApiClientError>;
 };
 
+const isSeerRole = (role?: GameRole): role is SeerRole => role?.type === GameRoleEnum.SEER;
+
 export const SeerContext = createContext<SeerContextType | undefined>(undefined);
 
 export const SeerProvider = ({ children }: Props) => {
   const { apiClient } = useApiClient();
   const { player } = usePlayer();
 
-  const lastObservedPlayerId = player?.role?.lastObservedPlayerId ?? null;
-  const lastObservedRole = player?.role?.lastObservedRole ?? null;
-  const observedRoles = player?.role?.observedRoles ?? {};
+  const playerRole = player?.role;
+  const role = isSeerRole(playerRole) ? playerRole : undefined;
+
+  const lastObservedPlayerId = role?.lastObservedPlayerId ?? null;
+  const lastObservedRole = role?.lastObservedRole ?? null;
+  const observedRoles = role?.observedRoles ?? {};
 
   const reveal = useCallback((targetPlayerId: string) => apiClient.seer.reveal(targetPlayerId), [apiClient]);
 

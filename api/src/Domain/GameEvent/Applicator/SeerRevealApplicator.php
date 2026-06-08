@@ -8,7 +8,7 @@ use App\Domain\GameEvent\Applicator\Trait\UserAwareTrait;
 use App\Domain\GameEvent\Exception\PlayerNotFoundException;
 use App\Domain\GameEvent\Exception\UnauthorizedGameActionException;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
-use App\Domain\Spec\GameSpec;
+use App\Domain\Spec\Role\SeerSpec;
 use App\Domain\Workflow\NightOrchestrator;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\SeerRevealEvent;
@@ -29,7 +29,7 @@ class SeerRevealApplicator implements GameEventApplicatorInterface
     use RandomizationAwareTrait;
 
     public function __construct(
-        private readonly GameSpec $gameSpec,
+        private readonly SeerSpec $seerSpec,
         private readonly PlayerRepository $playerRepository,
         private readonly NightOrchestrator $nightOrchestrator,
     ) {
@@ -60,7 +60,7 @@ class SeerRevealApplicator implements GameEventApplicatorInterface
             throw new PlayerNotFoundException('Target player not found');
         }
 
-        if (!$this->gameSpec->canSeerReveal($player, $game, $targetPlayer)) {
+        if (!$this->seerSpec->canReveal($player, $game, $targetPlayer)) {
             throw new UnauthorizedGameActionException('You can not reveal');
         }
 

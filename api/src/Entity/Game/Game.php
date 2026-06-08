@@ -413,7 +413,6 @@ class Game implements TopicRelatedObject
     public function removePlayer(Player $player): static
     {
         if ($this->players->removeElement($player)) {
-            // set the owning side to null (unless already changed)
             if ($player->getGame() === $this) {
                 $player->setGame(null);
             }

@@ -9,7 +9,7 @@ use App\Domain\GameEvent\Applicator\Trait\UserAwareTrait;
 use App\Domain\GameEvent\Exception\PlayerNotFoundException;
 use App\Domain\GameEvent\Exception\UnauthorizedGameActionException;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
-use App\Domain\Spec\GameSpec;
+use App\Domain\Spec\Role\WerewolfSpec;
 use App\Domain\Workflow\NightOrchestrator;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\TimeUpGameEvent;
@@ -33,7 +33,7 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
     use RandomizationAwareTrait;
 
     public function __construct(
-        private readonly GameSpec $gameSpec,
+        private readonly WerewolfSpec $werewolfSpec,
         private readonly PlayerRepository $playerRepository,
         private readonly NightOrchestrator $nightOrchestrator,
         private readonly int $afkThreshold,
@@ -65,7 +65,7 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
             throw new PlayerNotFoundException('Target player not found');
         }
 
-        if (!$this->gameSpec->canWerewolfVote($player, $game, $targetPlayer)) {
+        if (!$this->werewolfSpec->canVote($player, $game, $targetPlayer)) {
             throw new UnauthorizedGameActionException('You can not vote');
         }
 
