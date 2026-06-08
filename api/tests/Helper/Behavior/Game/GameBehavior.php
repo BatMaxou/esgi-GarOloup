@@ -161,6 +161,26 @@ class GameBehavior extends AbstractBehavior
         ]));
     }
 
+    public function witchSave(?string $targetPlayerId): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/witch/save', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [
+                'targetPlayerId' => $targetPlayerId,
+            ],
+        ]));
+    }
+
+    public function witchPoison(?string $targetPlayerId): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/witch/poison', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [
+                'targetPlayerId' => $targetPlayerId,
+            ],
+        ]));
+    }
+
     public function timeUp(): BehaviorResponse
     {
         return new BehaviorResponse($this->client->request('PATCH', '/api/game/time-up', [

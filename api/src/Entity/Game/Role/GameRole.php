@@ -19,6 +19,7 @@ use Doctrine\ORM\Mapping\InheritanceType;
     GameRoleEnum::VILLAGER->value => VillagerRole::class,
     GameRoleEnum::WEREWOLF->value => WerewolfRole::class,
     GameRoleEnum::SEER->value => SeerRole::class,
+    GameRoleEnum::WITCH->value => WitchRole::class,
 ])]
 abstract class GameRole
 {

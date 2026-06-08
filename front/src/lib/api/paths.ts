@@ -26,6 +26,10 @@ export const apiPaths = {
   seer: {
     reveal: '/game/seer/reveal',
   },
+  witch: {
+    save: '/game/witch/save',
+    poison: '/game/witch/poison',
+  },
   player: {
     getCurrent: '/game/player',
     leave: '/game/player',

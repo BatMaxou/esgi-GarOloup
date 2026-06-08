@@ -24,3 +24,12 @@ App\Entity\Game\Role\SeerRole:
         observedRoles:
             groups:
                 - me:player:read
+
+App\Entity\Game\Role\WitchRole:
+    attributes:
+        healPotionAvailable:
+            groups:
+                - me:player:read
+        poisonPotionAvailable:
+            groups:
+                - me:player:read

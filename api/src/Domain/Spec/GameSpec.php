@@ -4,13 +4,9 @@ namespace App\Domain\Spec;
 
 use App\Entity\Game\Game;
 use App\Entity\Game\Player;
-use App\Entity\Game\Role\SeerRole;
-use App\Entity\Game\Role\VillagerRole;
-use App\Entity\Game\Role\WerewolfRole;
 use App\Entity\User\AbstractUser;
 use App\Entity\User\TempUser;
 use App\Enum\Game\GameInitialisationStepEnum;
-use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Repository\Game\PlayerRepository;
 use Symfony\Component\Clock\ClockInterface;
@@ -181,106 +177,12 @@ class GameSpec
         return GameInitialisationStepEnum::FINISH === $game->getInitialisationStep() && !$game->getRuntimeStep();
     }
 
-    public function canSeeWerewolfTeam(Player $player, Game $game): bool
-    {
-        return $game->getRuntimeStep() && $player->getRole() instanceof WerewolfRole;
-    }
-
     public function areAllRolesSetup(Game $game): bool
     {
         foreach ($game->getPlayers() as $player) {
             if (!$player->getRole()?->isSetup()) {
                 return false;
             }
-        }
-
-        return true;
-    }
-
-    public function canChooseFriend(Player $player, Game $game, string $targetPlayerId): bool
-    {
-        if (
-            GameRuntimeStepEnum::SETUP !== $game->getRuntimeStep()
-            || $game->getStepEndAt() < $this->clock->now()
-            || $player->getId()?->toString() === $targetPlayerId
-        ) {
-            return false;
-        }
-
-        $targetExists = false;
-        foreach ($game->getPlayers() as $player) {
-            if ($player->getId()?->toString() === $targetPlayerId) {
-                $targetExists = true;
-            }
-        }
-
-        return $targetExists && $player->getRole() instanceof VillagerRole;
-    }
-
-    public function canWerewolfVote(Player $voter, Game $game, Player $targetPlayer): bool
-    {
-        if (GameRuntimeStepEnum::NIGHT !== $game->getRuntimeStep()) {
-            return false;
-        }
-
-        if ($game->getStepEndAt() < $this->clock->now()) {
-            return false;
-        }
-
-        $workflow = $game->getNightWorkflow();
-        if (null === $workflow || !\in_array(GameRoleEnum::WEREWOLF, $workflow->getCurrentTurn(), true)) {
-            return false;
-        }
-
-        if (!$voter->getRole() instanceof WerewolfRole || $voter->isDead()) {
-            return false;
-        }
-
-        if ($voter->getId()?->toString() === $targetPlayer->getId()?->toString()) {
-            return false;
-        }
-
-        if ($targetPlayer->isDead()) {
-            return false;
-        }
-
-        if ($targetPlayer->getRole() instanceof WerewolfRole) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public function canSeerReveal(Player $seer, Game $game, Player $target): bool
-    {
-        if (GameRuntimeStepEnum::NIGHT !== $game->getRuntimeStep()) {
-            return false;
-        }
-
-        if ($game->getStepEndAt() < $this->clock->now()) {
-            return false;
-        }
-
-        $workflow = $game->getNightWorkflow();
-        if (null === $workflow || !\in_array(GameRoleEnum::SEER, $workflow->getCurrentTurn(), true)) {
-            return false;
-        }
-
-        $role = $seer->getRole();
-        if (!$role instanceof SeerRole || $seer->isDead()) {
-            return false;
-        }
-
-        if (null !== $role->getLastObservedPlayerId()) {
-            return false;
-        }
-
-        if ($seer->getId()?->toString() === $target->getId()?->toString()) {
-            return false;
-        }
-
-        if ($target->getGame() !== $game || $target->isDead()) {
-            return false;
         }
 
         return true;

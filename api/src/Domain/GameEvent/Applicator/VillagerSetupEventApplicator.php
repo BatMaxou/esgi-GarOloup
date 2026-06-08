@@ -10,6 +10,7 @@ use App\Domain\GameEvent\Exception\PlayerNotFoundException;
 use App\Domain\GameEvent\Exception\UnauthorizedGameActionException;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\GameSpec;
+use App\Domain\Spec\Role\VillagerSpec;
 use App\Domain\Workflow\NightOrchestrator;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\TimeUpGameEvent;
@@ -30,6 +31,7 @@ class VillagerSetupEventApplicator implements GameEventApplicatorInterface
 
     public function __construct(
         private readonly GameSpec $gameSpec,
+        private readonly VillagerSpec $villagerSpec,
         private readonly PlayerRepository $playerRepository,
         private readonly NightOrchestrator $nightOrchestrator,
         private readonly int $afkThreshold,
@@ -53,7 +55,7 @@ class VillagerSetupEventApplicator implements GameEventApplicatorInterface
             throw new PlayerNotFoundException('Current player not found');
         }
 
-        if (!$this->gameSpec->canChooseFriend($player, $game, $targetPlayerId)) {
+        if (!$this->villagerSpec->canChooseFriend($player, $game, $targetPlayerId)) {
             throw new UnauthorizedGameActionException('You can not choose a friend');
         }
 

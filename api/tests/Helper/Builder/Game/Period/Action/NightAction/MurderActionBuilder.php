@@ -25,11 +25,11 @@ class MurderActionBuilder extends AbstractBuilder
         $targetId = $target->getEntity()->getId()?->toString()
             ?? throw new \LogicException('Target player id should not be null');
 
-        $action = MurderActionFactory::new([
+        $action = MurderActionFactory::createOne([
             'night' => $night,
             'source' => $this->source,
             'targetPlayerId' => $targetId,
-        ])->withoutPersisting()->create();
+        ]);
 
         $night->addAction($action);
 

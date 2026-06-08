@@ -5,7 +5,7 @@ namespace App\Api\Provider\Game\Runtime;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use App\Api\Model\Game\WerewolfTeam;
-use App\Domain\Spec\GameSpec;
+use App\Domain\Spec\Role\WerewolfSpec;
 use App\Entity\User\AbstractUser;
 use App\Repository\Game\PlayerRepository;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -17,7 +17,7 @@ class WerewolfTeamProvider implements ProviderInterface
     public function __construct(
         private readonly Security $security,
         private readonly PlayerRepository $playerRepository,
-        private readonly GameSpec $gameSpec,
+        private readonly WerewolfSpec $werewolfSpec,
     ) {
     }
 
@@ -38,7 +38,7 @@ class WerewolfTeamProvider implements ProviderInterface
             return null;
         }
 
-        if (!$this->gameSpec->canSeeWerewolfTeam($player, $game)) {
+        if (!$this->werewolfSpec->canSeeTeam($player, $game)) {
             throw new AccessDeniedHttpException();
         }
 

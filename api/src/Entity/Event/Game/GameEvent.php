@@ -33,6 +33,8 @@ use Doctrine\ORM\Mapping\InheritanceType;
     'villager_setup' => VillagerSetupEvent::class,
     'vote' => VoteEvent::class,
     'werewolf_vote' => WerewolfVoteEvent::class,
+    'witch_save' => WitchSaveEvent::class,
+    'witch_poison' => WitchPoisonEvent::class,
 ])]
 abstract class GameEvent
 {
