@@ -11,7 +11,7 @@ use App\Entity\Game\Game;
 use App\Enum\Game\GameRuntimeStepEnum;
 
 /** @implements GameEventApplicatorInterface<TimeUpGameEvent> */
-class CloseDayDiscussionEventApplicator implements GameEventApplicatorInterface
+class DayAdvanceApplicator implements GameEventApplicatorInterface
 {
     use GameAwareTrait;
 
@@ -20,25 +20,21 @@ class CloseDayDiscussionEventApplicator implements GameEventApplicatorInterface
     ) {
     }
 
+    public static function getPriority(): int
+    {
+        return static::LAST_APPLY_PRIORITY;
+    }
+
     public function apply(GameEvent $gameEvent): Game
     {
         $game = $this->ensureGame($gameEvent);
 
-        return $this->dayOrchestrator->resolve($game);
+        return $this->dayOrchestrator->advance($game);
     }
 
     public function supports(GameEvent $gameEvent): bool
     {
-        $game = $gameEvent->getGame();
-
         return $gameEvent instanceof TimeUpGameEvent
-            && $game
-            && GameRuntimeStepEnum::DAY === $game->getRuntimeStep()
-        ;
-    }
-
-    public static function getPriority(): int
-    {
-        return static::DEFAULT_PRIORITY;
+            && GameRuntimeStepEnum::DAY === $gameEvent->getGame()?->getRuntimeStep();
     }
 }

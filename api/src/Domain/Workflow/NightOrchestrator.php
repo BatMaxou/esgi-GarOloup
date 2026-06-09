@@ -33,7 +33,7 @@ class NightOrchestrator implements PeriodOrchestratorInterface
             }
         }
 
-        $workflow->resetForNight();
+        $workflow->reset();
         $game->setRuntimeStep(GameRuntimeStepEnum::NIGHT);
         $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $this->nightStepDuration)));
 

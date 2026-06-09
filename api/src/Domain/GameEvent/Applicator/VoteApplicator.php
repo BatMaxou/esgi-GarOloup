@@ -3,40 +3,29 @@
 namespace App\Domain\GameEvent\Applicator;
 
 use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
-use App\Domain\GameEvent\Applicator\Trait\RandomizationAwareTrait;
 use App\Domain\GameEvent\Applicator\Trait\UserAwareTrait;
 use App\Domain\GameEvent\Exception\PlayerNotFoundException;
 use App\Domain\GameEvent\Exception\UnauthorizedGameActionException;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\GameSpec;
-use App\Domain\Workflow\GameFinisher;
-use App\Domain\Workflow\NightOrchestrator;
-use App\Domain\Workflow\VoteResolver;
 use App\Entity\Event\Game\GameEvent;
-use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Event\Game\VoteEvent;
 use App\Entity\Game\Game;
 use App\Entity\Game\Period\Vote\Ballot;
-use App\Enum\Game\GameRuntimeStepEnum;
 use App\Repository\Game\PlayerRepository;
 use Symfony\Component\Uid\Uuid;
 
 /**
- * @implements GameEventApplicatorInterface<VoteEvent|TimeUpGameEvent>
+ * @implements GameEventApplicatorInterface<VoteEvent>
  */
 class VoteApplicator implements GameEventApplicatorInterface
 {
     use GameAwareTrait;
     use UserAwareTrait;
-    /** @use RandomizationAwareTrait<VoteEvent, TimeUpGameEvent> */
-    use RandomizationAwareTrait;
 
     public function __construct(
         private readonly GameSpec $gameSpec,
         private readonly PlayerRepository $playerRepository,
-        private readonly VoteResolver $voteResolver,
-        private readonly NightOrchestrator $nightOrchestrator,
-        private readonly GameFinisher $gameFinisher,
     ) {
     }
 
@@ -45,7 +34,7 @@ class VoteApplicator implements GameEventApplicatorInterface
         return self::DEFAULT_PRIORITY;
     }
 
-    protected function applyAction(GameEvent $gameEvent): Game
+    public function apply(GameEvent $gameEvent): Game
     {
         $user = $this->ensureUser($gameEvent);
         $game = $this->ensureGame($gameEvent);
@@ -89,31 +78,7 @@ class VoteApplicator implements GameEventApplicatorInterface
         return $game;
     }
 
-    protected function randomizeAction(GameEvent $gameEvent): Game
-    {
-        $game = $this->ensureGame($gameEvent);
-
-        $this->voteResolver->resolve($game);
-
-        if ($this->gameFinisher->tryFinish($game)) {
-            return $game;
-        }
-
-        $this->nightOrchestrator->start($game);
-
-        return $game;
-    }
-
-    protected function supportsRandomization(GameEvent $gameEvent): bool
-    {
-        $game = $gameEvent->getGame();
-
-        return $gameEvent instanceof TimeUpGameEvent
-            && null !== $game
-            && GameRuntimeStepEnum::VOTE === $game->getRuntimeStep();
-    }
-
-    protected function supportsAction(GameEvent $gameEvent): bool
+    public function supports(GameEvent $gameEvent): bool
     {
         return $gameEvent instanceof VoteEvent;
     }

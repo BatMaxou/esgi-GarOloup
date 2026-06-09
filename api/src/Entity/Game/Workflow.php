@@ -100,7 +100,7 @@ class Workflow
         return $this;
     }
 
-    public function resetForNight(): static
+    public function reset(): static
     {
         $this->current = 0;
         $this->completed = empty($this->steps);

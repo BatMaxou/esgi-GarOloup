@@ -7,6 +7,7 @@ use App\Domain\GameEvent\Applicator\Trait\UserAwareTrait;
 use App\Domain\GameEvent\Exception\UnauthorizedGameActionException;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\GameSpec;
+use App\Domain\Workflow\DayWorkflowComposer;
 use App\Domain\Workflow\NightWorkflowComposer;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\LaunchGameEvent;
@@ -23,6 +24,7 @@ class LaunchGameEventApplicator implements GameEventApplicatorInterface
     public function __construct(
         private readonly GameSpec $gameSpec,
         private readonly NightWorkflowComposer $nightWorkflowComposer,
+        private readonly DayWorkflowComposer $dayWorkflowComposer,
         private readonly ClockInterface $clock,
         private readonly int $setupDuration,
     ) {
@@ -41,6 +43,7 @@ class LaunchGameEventApplicator implements GameEventApplicatorInterface
         $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $this->setupDuration)));
 
         $game->setNightWorkflow($this->nightWorkflowComposer->for($game));
+        $game->setDayWorkflow($this->dayWorkflowComposer->for($game));
 
         return $game;
     }

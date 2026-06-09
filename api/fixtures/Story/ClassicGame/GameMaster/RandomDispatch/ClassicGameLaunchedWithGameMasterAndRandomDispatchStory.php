@@ -11,7 +11,8 @@ use App\Tests\Helper\ThereIs;
 
 class ClassicGameLaunchedWithGameMasterAndRandomDispatchStory extends ClassicGameDispatchedWithGameMasterAndRandomDispatchStory
 {
-    public const WORKFLOW = 'workflow';
+    public const NIGHT_WORKFLOW = 'night-workflow';
+    public const DAY_WORKFLOW = 'day-workflow';
 
     public function __construct(
         protected readonly NightWorkflowComposer $nightWorkflowComposer,
@@ -26,10 +27,15 @@ class ClassicGameLaunchedWithGameMasterAndRandomDispatchStory extends ClassicGam
         $gameBuilder = $this->getState(self::GAME);
         \assert($gameBuilder instanceof GameBuilder);
 
-        $workflowBuilder = ThereIs::aWorkflow($this->nightWorkflowComposer, $this->dayWorkflowComposer)
+        $nightWorkflowBuilder = ThereIs::aWorkflow($this->nightWorkflowComposer, $this->dayWorkflowComposer)
             ->forGame($gameBuilder)
             ->night();
-        $this->addState(self::WORKFLOW, $workflowBuilder);
+        $this->addState(self::NIGHT_WORKFLOW, $nightWorkflowBuilder);
+
+        $dayWorkflowBuilder = ThereIs::aWorkflow($this->nightWorkflowComposer, $this->dayWorkflowComposer)
+            ->forGame($gameBuilder)
+            ->day();
+        $this->addState(self::DAY_WORKFLOW, $dayWorkflowBuilder);
 
         $gameBuilder->withRuntimeStep(GameRuntimeStepEnum::SETUP);
     }
@@ -38,9 +44,13 @@ class ClassicGameLaunchedWithGameMasterAndRandomDispatchStory extends ClassicGam
     {
         parent::execute();
 
-        $workflowBuilder = $this->getState(self::WORKFLOW);
-        \assert($workflowBuilder instanceof WorkflowBuilder);
-        $workflowBuilder->build();
+        $nightWorkflowBuilder = $this->getState(self::NIGHT_WORKFLOW);
+        \assert($nightWorkflowBuilder instanceof WorkflowBuilder);
+        $nightWorkflowBuilder->build();
+
+        $dayWorkflowBuilder = $this->getState(self::DAY_WORKFLOW);
+        \assert($dayWorkflowBuilder instanceof WorkflowBuilder);
+        $dayWorkflowBuilder->build();
     }
 
     public function getPrefix(): string

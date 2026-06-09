@@ -19,9 +19,12 @@ class DayOrchestrator implements PeriodOrchestratorInterface
 
     public function start(Game $game): Day
     {
+        $workflow = $game->getDayWorkflow() ?? throw new \LogicException('Workflow missing');
+
         $day = new Day($game, $game->getDays()->count() + 1);
         $game->addDay($day);
 
+        $workflow->reset();
         $game->setRuntimeStep(GameRuntimeStepEnum::DAY);
         $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $game->getMaxTimeForDiscussion())));
 

@@ -10,7 +10,6 @@ use App\Domain\GameEvent\Exception\PlayerNotFoundException;
 use App\Domain\GameEvent\Exception\UnauthorizedGameActionException;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\Role\WerewolfSpec;
-use App\Domain\Workflow\NightOrchestrator;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Event\Game\WerewolfVoteEvent;
@@ -35,7 +34,6 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
     public function __construct(
         private readonly WerewolfSpec $werewolfSpec,
         private readonly PlayerRepository $playerRepository,
-        private readonly NightOrchestrator $nightOrchestrator,
         private readonly int $afkThreshold,
     ) {
     }
@@ -164,7 +162,7 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
             $night->addAction($murder);
         }
 
-        return $this->nightOrchestrator->advance($game);
+        return $game;
     }
 
     private function resolveVictim(Game $game): ?string
