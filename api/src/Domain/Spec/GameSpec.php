@@ -118,7 +118,6 @@ class GameSpec
 
     public function canResetGameMaster(AbstractUser $user, Game $game): bool
     {
-
         if (
             ($user !== $game->getHost()->getLinkedUser() && $user !== $game->getGameMaster()?->getLinkedUser())
             || null === $game->getGameMaster()

@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { useGame } from '@/contexts/game-context';
 import Typography from '@/components/ui/atoms/typography';
