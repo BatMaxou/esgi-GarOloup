@@ -429,6 +429,8 @@ class Game implements TopicRelatedObject
             if ($player->getGame() === $this) {
                 $player->setGame(null);
             }
+            // Flat indexes for this array
+            $this->players = new ArrayCollection($this->players->getValues());
         }
 
         return $this;

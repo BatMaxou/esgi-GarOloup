@@ -1,10 +1,12 @@
 'use client';
 
-import { Game } from '@/utils/types';
 import { GameGlobalStepEnum } from '@/utils/enums';
 import NewGameDisplay from './new-game-display';
+import { useGame } from '@/contexts/game-context';
 
-const RunningGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
+const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameMaster: boolean }) => {
+
+  const { game } = useGame();
   if (!game) {
     return null;
   }
@@ -12,7 +14,7 @@ const RunningGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) =
   const globalStep = game.globalStep;
 
   if (globalStep === GameGlobalStepEnum.NEW) {
-    return <NewGameDisplay game={game} isHost={isHost} />;
+    return <NewGameDisplay game={game} isHost={isHost} isGameMaster={isGameMaster} />;
   }
 
   if (globalStep === GameGlobalStepEnum.RUNNING) {

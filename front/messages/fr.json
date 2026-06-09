@@ -23,7 +23,14 @@
           "loading": "Chargement en cours...",
           "canStart": "Vous pouvez commencer !",
           "configureGame": "Configurer la partie",
-          "goBackToConfiguration": "Retour à la configuration"
+          "goBackToConfiguration": "Retour à la configuration",
+          "goBackToGameMasterChoice": "Retour au choix du maître du jeu",
+          "goBackToDispatch": "Retour à la distribution des rôles",
+          "summaryGameMaster": "Maître du jeu : {username}",
+          "summaryPlayersCount": "Joueurs : {count}",
+          "summaryTitle": "Récapitulatif",
+          "summarySubtitle": "Configuration de la partie avant lancement",
+          "launchGameButton": "Lancer la partie"
         }
       },
       "home": {
@@ -339,6 +346,11 @@
             "sectionTitle": "Choix du maître du jeu",
             "sectionSubtitle": "Choisissez le joueur qui aura le contrôle de la partie",
             "submit": "Valider le choix"
+          },
+          "gameRoleDispatch": {
+            "sectionTitle": "Distribution des rôles",
+            "sectionSubtitle": "Attribuez un rôle à chaque joueur",
+            "submit": "Valider la distribution"
           }
         }
       },

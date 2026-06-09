@@ -11,7 +11,7 @@ import { usePlayer } from '@/contexts/player-context';
 import { ApiClientError } from '@/lib/api/ApiClientError';
 import { CollectionResponse } from '@/lib/api/ApiClient';
 import { GameConfigurationPayload } from '@/lib/api/resources/GameResource';
-import type { Game } from '@/utils/types';
+import type { Game, RoleDispatchEntry } from '@/utils/types';
 
 type Props = {
   children: ReactNode;
@@ -31,6 +31,8 @@ type GameContextType = {
   resetConfiguration: () => void;
   setGameMaster: (playerId: string) => void;
   resetGameMaster: () => void;
+  dispatchRoles: (payload: RoleDispatchEntry[]) => void;
+  resetRoleDispatch: () => void;
   launchGame: () => void;
 };
 
@@ -144,6 +146,22 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
       return;
     }
   };
+  
+  const dispatchRoles = async (payload: RoleDispatchEntry[]) => {
+    const response = await apiClient.game.dispatchRoles(payload);
+    if (response instanceof ApiClientError) {
+      toast.error(t('dispatchRolesError'));
+      return;
+    }
+  };
+
+  const resetRoleDispatch = async () => {
+    const response = await apiClient.game.resetRoleDispatch();
+    if (response instanceof ApiClientError) {
+      toast.error(t('resetRoleDispatchError'));
+      return;
+    }
+  };
 
   const launchGame = async () => {
     const response = await apiClient.game.launch();
@@ -163,13 +181,15 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
         publicGames,
         publicGamesLoading,
         getPublicGames,
-        launchGame,
         openInvitation,
         closeInvitation,
         setConfiguration,
         resetConfiguration,
         setGameMaster,
         resetGameMaster,
+        dispatchRoles,
+        resetRoleDispatch,
+        launchGame,
       }}
     >
       {children}
