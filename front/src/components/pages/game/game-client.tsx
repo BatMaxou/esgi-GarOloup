@@ -37,7 +37,9 @@ const GameClient = () => {
       return normalizedPlayers;
     }
 
-    const playersWithoutGameMaster = normalizedPlayers.filter((currentPlayer) => currentPlayer.id !== normalizedGameMaster.id);
+    const playersWithoutGameMaster = normalizedPlayers.filter(
+      (currentPlayer) => currentPlayer.id !== normalizedGameMaster.id
+    );
     return [normalizedGameMaster, ...playersWithoutGameMaster];
   }, [game]);
 

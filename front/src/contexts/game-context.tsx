@@ -146,7 +146,7 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
       return;
     }
   };
-  
+
   const dispatchRoles = async (payload: RoleDispatchEntry[]) => {
     const response = await apiClient.game.dispatchRoles(payload);
     if (response instanceof ApiClientError) {

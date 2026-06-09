@@ -118,7 +118,6 @@ const GameRoleDispatchForm = () => {
     }
 
     return (roleUsageCount[roleType] ?? 0) < limit;
-    
   };
 
   // Génération des options possibles pour un joueur
@@ -131,11 +130,11 @@ const GameRoleDispatchForm = () => {
       }));
 
   const isDispatchComplete = playerList.every((player) => Boolean(values.dispatch[player.id]));
-  
+
   if (roleListLoading) {
     return <Loader />;
   }
-  
+
   return (
     <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
       <Typography variant="subtitle" bold textColor="light" className="text-center">
@@ -157,10 +156,7 @@ const GameRoleDispatchForm = () => {
                   name={`dispatch.${player.id}`}
                   value={values.dispatch[player.id] ?? ''}
                   onChange={(event) => setFieldValue(`dispatch.${player.id}`, event.target.value)}
-                  options={[
-                    { label: '-', value: '' },
-                    ...getAllowedOptionsForPlayer(player.id),
-                  ]}
+                  options={[{ label: '-', value: '' }, ...getAllowedOptionsForPlayer(player.id)]}
                 />
                 <Button
                   variant="text"

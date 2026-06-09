@@ -197,9 +197,18 @@ const NewGameDisplay = ({ game, isHost, isGameMaster }: { game: Game; isHost: bo
             </div>
             <PreLaunchGameDisplay />
           </>
-        )
+        );
     }
-  }, [initialisationStep, t, game, openInvitation, closeInvitation, resetConfiguration, resetGameMaster, handlePreviousStep]);
+  }, [
+    initialisationStep,
+    t,
+    game,
+    openInvitation,
+    closeInvitation,
+    resetConfiguration,
+    resetGameMaster,
+    handlePreviousStep,
+  ]);
 
   return (
     <div className="flex flex-col items-center justify-center gap-8 h-full w-full bg-background/80">
@@ -210,7 +219,9 @@ const NewGameDisplay = ({ game, isHost, isGameMaster }: { game: Game; isHost: bo
         {shouldRenderPlayerInitialisationStep ? renderPlayerInitialisationStep() : null}
       </div>
       {/* A peaufiner avec une fonction pour retourner les actions en fonction de l'hote et du GM */}
-      <div className="flex flex-col items-center justify-center gap-2">{shouldRenderHostActions ? renderHostActions() : null}</div>
+      <div className="flex flex-col items-center justify-center gap-2">
+        {shouldRenderHostActions ? renderHostActions() : null}
+      </div>
       <TooMuchPlayersDialog
         open={openTooMuchPlayersDialog}
         setOpen={setOpenTooMuchPlayersDialog}

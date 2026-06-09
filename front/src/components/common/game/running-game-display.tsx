@@ -5,7 +5,6 @@ import NewGameDisplay from './new-game-display';
 import { useGame } from '@/contexts/game-context';
 
 const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameMaster: boolean }) => {
-
   const { game } = useGame();
   if (!game) {
     return null;
