@@ -23,7 +23,14 @@
           "loading": "Loading...",
           "canStart": "You can start!",
           "configureGame": "Set up the game",
-          "goBackToConfiguration": "Back to configuration"
+          "goBackToConfiguration": "Back to configuration",
+          "goBackToGameMasterChoice": "Back to game master choice",
+          "goBackToDispatch": "Back to dispatch",
+          "summaryGameMaster": "Game master: {username}",
+          "summaryPlayersCount": "Players: {count}",
+          "summaryTitle": "Summary",
+          "summarySubtitle": "Game setup before launch",
+          "launchGameButton": "Launch game"
         }
       },
       "home": {
@@ -338,6 +345,11 @@
             "sectionTitle": "Game master choice",
             "sectionSubtitle": "Choose the player who will control the game",
             "submit": "Submit choice"
+          },
+          "gameRoleDispatch": {
+            "sectionTitle": "Role distribution",
+            "sectionSubtitle": "Assign a role to each player",
+            "submit": "Validate dispatch"
           }
         }
       },

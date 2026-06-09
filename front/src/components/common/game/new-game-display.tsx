@@ -14,9 +14,11 @@ import TooMuchPlayersDialog from './configuration/too-much-players-dialog';
 import GameConfigForm from '../form/game/game-config-form';
 import { minPlayersToLaunchGame } from '@/utils/tools';
 import GameMasterChoiceForm from '../form/game/game-master-choice-form';
+import GameRoleDispatchForm from '../form/game/game-role-dispatch-form';
+import PreLaunchGameDisplay from './configuration/pre-launch-game-display';
 
-const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
-  const { openInvitation, closeInvitation, resetConfiguration } = useGame();
+const NewGameDisplay = ({ game, isHost, isGameMaster }: { game: Game; isHost: boolean; isGameMaster: boolean }) => {
+  const { openInvitation, closeInvitation, resetConfiguration, resetGameMaster, resetRoleDispatch } = useGame();
   const [openTooMuchPlayersDialog, setOpenTooMuchPlayersDialog] = useState(false);
   const [tooMuchPlayersDialogData, setTooMuchPlayersDialogData] = useState<{
     currentRoles: RoleEntry[];
@@ -27,7 +29,48 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
   // const gameConfiguration = game?.configuration ?? {};
   const t = useTranslations('components.common.game.new-game-display');
 
-  const renderInitialisationStep = useCallback(() => {
+  const handlePreviousStep = useCallback(() => {
+    switch (true) {
+      case !game.configuration?.withRandomDispatch && game.configuration?.withGameMaster:
+        return (
+          <Button
+            variant="text"
+            className="text-neutral-400 hover:text-neutral-200"
+            label={t('goBackToDispatch')}
+            onClick={() => resetRoleDispatch()}
+          />
+        );
+      case game.configuration?.withRandomDispatch && game.configuration?.withGameMaster:
+        return (
+          <Button
+            variant="text"
+            className="text-neutral-400 hover:text-neutral-200"
+            label={t('goBackToGameMasterChoice')}
+            onClick={() => resetGameMaster()}
+          />
+        );
+      case game.configuration?.withRandomDispatch && !game.configuration?.withGameMaster:
+        return (
+          <Button
+            variant="text"
+            className="text-neutral-400 hover:text-neutral-200"
+            label={t('goBackToConfiguration')}
+            onClick={() => resetConfiguration()}
+          />
+        );
+      default:
+        return null;
+    }
+  }, [game.configuration, t, resetRoleDispatch, resetGameMaster, resetConfiguration]);
+
+  const isDispatchStep = initialisationStep === GameInitialisationStepEnum.DISPATCH;
+  const gameMasterIsNotHost = Boolean(game?.gameMaster?.id && game?.host?.id && game.gameMaster.id !== game.host.id);
+  const isGameMasterDispatch = isGameMaster && isDispatchStep;
+  const showPlayerStepForHost = isHost && isDispatchStep && gameMasterIsNotHost;
+  const shouldRenderPlayerInitialisationStep = (!isHost && !isGameMasterDispatch) || showPlayerStepForHost;
+  const shouldRenderHostActions = (isHost && !showPlayerStepForHost) || (isGameMaster && isDispatchStep);
+
+  const renderPlayerInitialisationStep = useCallback(() => {
     switch (initialisationStep) {
       case GameInitialisationStepEnum.NEW:
         return (
@@ -74,8 +117,8 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
   }, [initialisationStep, game, t]);
 
   const renderHostActions = useCallback(() => {
-    switch (initialisationStep) {
-      case GameInitialisationStepEnum.NEW:
+    switch (true) {
+      case initialisationStep === GameInitialisationStepEnum.NEW:
         return (
           <>
             {(game.players?.length || 0) >= minPlayersToLaunchGame ? (
@@ -89,7 +132,7 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
             />
           </>
         );
-      case GameInitialisationStepEnum.CONFIGURATION:
+      case initialisationStep === GameInitialisationStepEnum.CONFIGURATION:
         return (
           <>
             <div className="flex flex-row items-center justify-start w-full gap-2">
@@ -111,7 +154,7 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
             </Card>
           </>
         );
-      case GameInitialisationStepEnum.GAME_MASTER_CHOICE:
+      case initialisationStep === GameInitialisationStepEnum.GAME_MASTER_CHOICE:
         return (
           <>
             <div className="flex flex-row items-center justify-start w-full gap-2">
@@ -128,26 +171,57 @@ const NewGameDisplay = ({ game, isHost }: { game: Game; isHost: boolean }) => {
             </Card>
           </>
         );
-      case GameInitialisationStepEnum.DISPATCH:
-        return null;
-      case GameInitialisationStepEnum.FINISH:
-        return null;
+      case initialisationStep === GameInitialisationStepEnum.DISPATCH && !game.configuration?.withRandomDispatch:
+        return (
+          <>
+            <div className="flex flex-row items-center justify-start w-full gap-2">
+              <ArrowLeftIcon className="w-4 h-4 mb-1 text-neutral-400" />
+              <Button
+                variant="text"
+                className="text-neutral-400 hover:text-neutral-200"
+                label={t('goBackToGameMasterChoice')}
+                onClick={() => resetGameMaster()}
+              />
+            </div>
+            <Card className="w-full px-20! py-10!" orientation="vertical" hoverable={false}>
+              <GameRoleDispatchForm />
+            </Card>
+          </>
+        );
       default:
-        return null;
+        return (
+          <>
+            <div className="flex flex-row items-center justify-start w-full gap-2">
+              <ArrowLeftIcon className="w-4 h-4 mb-1 text-neutral-400" />
+              {handlePreviousStep()}
+            </div>
+            <PreLaunchGameDisplay />
+          </>
+        );
     }
-  }, [initialisationStep, openInvitation, closeInvitation, game, t, resetConfiguration]);
+  }, [
+    initialisationStep,
+    t,
+    game,
+    openInvitation,
+    closeInvitation,
+    resetConfiguration,
+    resetGameMaster,
+    handlePreviousStep,
+  ]);
 
   return (
     <div className="flex flex-col items-center justify-center gap-8 h-full w-full bg-background/80">
-      {(isHost && initialisationStep === GameInitialisationStepEnum.NEW) || !isHost ? (
+      {shouldRenderPlayerInitialisationStep || (isHost && initialisationStep === GameInitialisationStepEnum.NEW) ? (
         <Icon name="garoloup" className="animate-pulse w-20 h-20" />
       ) : null}
       <div className="flex flex-col items-center justify-center gap-2">
-        {(isHost && initialisationStep === GameInitialisationStepEnum.NEW) || !isHost
-          ? renderInitialisationStep()
-          : null}
+        {shouldRenderPlayerInitialisationStep ? renderPlayerInitialisationStep() : null}
       </div>
-      <div className="flex flex-col items-center justify-center gap-2">{isHost && renderHostActions()}</div>
+      {/* A peaufiner avec une fonction pour retourner les actions en fonction de l'hote et du GM */}
+      <div className="flex flex-col items-center justify-center gap-2">
+        {shouldRenderHostActions ? renderHostActions() : null}
+      </div>
       <TooMuchPlayersDialog
         open={openTooMuchPlayersDialog}
         setOpen={setOpenTooMuchPlayersDialog}
