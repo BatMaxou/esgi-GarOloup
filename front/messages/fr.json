@@ -31,6 +31,14 @@
           "summaryTitle": "Récapitulatif",
           "summarySubtitle": "Configuration de la partie avant lancement",
           "launchGameButton": "Lancer la partie"
+        },
+        "gameStepIndicator": {
+          "setup": "Nouvelle partie",
+          "night": "Nuit",
+          "day": "Jour",
+          "vote": "Vote",
+          "round": "Tour",
+          "ended": "Terminée"
         }
       },
       "home": {
