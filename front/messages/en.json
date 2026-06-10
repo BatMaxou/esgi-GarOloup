@@ -31,6 +31,14 @@
           "summaryTitle": "Summary",
           "summarySubtitle": "Game setup before launch",
           "launchGameButton": "Launch game"
+        },
+        "gameStepIndicator": {
+          "setup": "New game",
+          "night": "Night",
+          "day": "Day",
+          "vote": "Vote",
+          "round": "Round",
+          "ended": "Ended"
         }
       },
       "home": {
