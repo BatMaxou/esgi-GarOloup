@@ -43,3 +43,7 @@
 ###> Mockups ###
 /.claude/*
 ###< Mockups ###
+
+###> Local tests ###
+/front/src/orchestrator-example/*
+###< Local tests ###
