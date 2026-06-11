@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\GameEvent\Applicator;
+namespace App\Domain\GameEvent\Applicator\Runtime\Role\Witch;
 
 use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
 use App\Domain\GameEvent\Applicator\Trait\UserAwareTrait;

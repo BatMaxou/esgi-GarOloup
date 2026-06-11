@@ -1,40 +1,45 @@
 <?php
 
-namespace App\Domain\GameEvent\Applicator;
+namespace App\Domain\GameEvent\Applicator\Runtime\Workflow;
 
 use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
-use App\Domain\Workflow\DayOrchestrator;
+use App\Domain\Workflow\GameFinisher;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Game\Game;
 use App\Enum\Game\GameRuntimeStepEnum;
 
 /** @implements GameEventApplicatorInterface<TimeUpGameEvent> */
-class DayAdvanceApplicator implements GameEventApplicatorInterface
+class TryFinishApplicator implements GameEventApplicatorInterface
 {
     use GameAwareTrait;
 
     public function __construct(
-        private readonly DayOrchestrator $dayOrchestrator,
+        private readonly GameFinisher $gameFinisher,
     ) {
     }
 
     public static function getPriority(): int
     {
-        return static::LAST_APPLY_PRIORITY;
+        return static::TRY_FINISH_PRIORITY;
     }
 
     public function apply(GameEvent $gameEvent): Game
     {
         $game = $this->ensureGame($gameEvent);
 
-        return $this->dayOrchestrator->advance($game);
+        $this->gameFinisher->tryFinish($game);
+
+        return $game;
     }
 
     public function supports(GameEvent $gameEvent): bool
     {
         return $gameEvent instanceof TimeUpGameEvent
-            && GameRuntimeStepEnum::DAY === $gameEvent->getGame()?->getRuntimeStep();
+            && \in_array(
+                $gameEvent->getGame()?->getRuntimeStep(),
+                [GameRuntimeStepEnum::NIGHT, GameRuntimeStepEnum::DAY, GameRuntimeStepEnum::VOTE],
+            );
     }
 }

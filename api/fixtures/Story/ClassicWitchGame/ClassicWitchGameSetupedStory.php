@@ -2,9 +2,11 @@
 
 namespace App\Fixtures\Story\ClassicWitchGame;
 
+use App\Domain\Workflow\DayOrchestrator;
 use App\Domain\Workflow\DayWorkflowComposer;
 use App\Domain\Workflow\NightOrchestrator;
 use App\Domain\Workflow\NightWorkflowComposer;
+use App\Domain\Workflow\VoteResolver;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
 use App\Tests\Helper\Builder\Game\Role\VillagerRoleBuilder;
@@ -17,6 +19,8 @@ class ClassicWitchGameSetupedStory extends ClassicWitchGameLaunchedStory
         DayWorkflowComposer $dayWorkflowComposer,
         protected readonly EntityManagerInterface $em,
         protected readonly NightOrchestrator $nightOrchestrator,
+        protected readonly DayOrchestrator $dayOrchestrator,
+        protected readonly VoteResolver $voteResolver,
     ) {
         parent::__construct($nightWorkflowComposer, $dayWorkflowComposer);
     }

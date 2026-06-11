@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\GameEvent\Applicator;
+namespace App\Domain\GameEvent\Applicator\Runtime\Role\Werewolf;
 
 use App\Domain\GameEvent\Applicator\Trait\AfkAwareTrait;
 use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
