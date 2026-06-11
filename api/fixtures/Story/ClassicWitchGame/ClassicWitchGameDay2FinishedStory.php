@@ -15,6 +15,7 @@ class ClassicWitchGameDay2FinishedStory extends ClassicWitchGameNight2WitchPasse
         $game = $gameBuilder->getEntity();
 
         $this->dayOrchestrator->resolve($game);
+        $this->voteResolver->start($game);
 
         $this->em->flush();
     }

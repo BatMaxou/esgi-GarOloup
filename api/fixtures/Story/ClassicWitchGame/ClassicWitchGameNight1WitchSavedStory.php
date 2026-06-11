@@ -35,6 +35,7 @@ class ClassicWitchGameNight1WitchSavedStory extends ClassicWitchGameNight1Werewo
         $witchRole->useHealPotion();
 
         $this->nightOrchestrator->advance($game);
+        $this->dayOrchestrator->start($game);
 
         $this->em->flush();
     }

@@ -1,35 +1,37 @@
 <?php
 
-namespace App\Domain\GameEvent\Applicator;
+namespace App\Domain\GameEvent\Applicator\Runtime\Workflow;
 
 use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
 use App\Domain\GameEvent\Applicator\Trait\UserAwareTrait;
 use App\Domain\GameEvent\Exception\PlayerNotFoundException;
 use App\Domain\GameEvent\Exception\UnauthorizedGameActionException;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
-use App\Domain\Spec\Role\SeerSpec;
+use App\Domain\Spec\GameSpec;
 use App\Entity\Event\Game\GameEvent;
-use App\Entity\Event\Game\SeerRevealEvent;
+use App\Entity\Event\Game\VoteEvent;
 use App\Entity\Game\Game;
-use App\Entity\Game\Role\SeerRole;
+use App\Entity\Game\Period\Vote\Ballot;
 use App\Repository\Game\PlayerRepository;
 use Symfony\Component\Uid\Uuid;
 
-/** @implements GameEventApplicatorInterface<SeerRevealEvent> */
-class SeerRevealApplicator implements GameEventApplicatorInterface
+/**
+ * @implements GameEventApplicatorInterface<VoteEvent>
+ */
+class VoteApplicator implements GameEventApplicatorInterface
 {
     use GameAwareTrait;
     use UserAwareTrait;
 
     public function __construct(
-        private readonly SeerSpec $seerSpec,
+        private readonly GameSpec $gameSpec,
         private readonly PlayerRepository $playerRepository,
     ) {
     }
 
     public static function getPriority(): int
     {
-        return static::DEFAULT_PRIORITY;
+        return self::DEFAULT_PRIORITY;
     }
 
     public function apply(GameEvent $gameEvent): Game
@@ -37,8 +39,8 @@ class SeerRevealApplicator implements GameEventApplicatorInterface
         $user = $this->ensureUser($gameEvent);
         $game = $this->ensureGame($gameEvent);
 
-        $player = $this->playerRepository->findCurrentByUser($user);
-        if (null === $player) {
+        $voter = $this->playerRepository->findCurrentByUser($user);
+        if (null === $voter) {
             throw new PlayerNotFoundException('Current player not found');
         }
 
@@ -47,27 +49,37 @@ class SeerRevealApplicator implements GameEventApplicatorInterface
             throw new PlayerNotFoundException('Target player not found');
         }
 
-        $targetPlayer = $this->playerRepository->find($targetPlayerId);
-        if (null === $targetPlayer || $game !== $targetPlayer->getGame()) {
+        $target = $this->playerRepository->find($targetPlayerId);
+        if (null === $target || $game !== $target->getGame()) {
             throw new PlayerNotFoundException('Target player not found');
         }
 
-        if (!$this->seerSpec->canReveal($player, $game, $targetPlayer)) {
-            throw new UnauthorizedGameActionException('You can not reveal');
+        if (!$this->gameSpec->canVote($voter, $game, $target)) {
+            throw new UnauthorizedGameActionException('You can not vote');
         }
 
-        $role = $player->getRole();
-        if (!$role instanceof SeerRole) {
-            throw new \LogicException(\sprintf('Role must be verified as a %s here', SeerRole::class));
+        $vote = $game->getCurrentVote();
+        if (null === $vote) {
+            throw new UnauthorizedGameActionException('No active vote');
         }
 
-        $role->observe($targetPlayer);
+        $alreadyVoted = false;
+        foreach ($vote->getBallots() as $ballot) {
+            if ($ballot->getPlayer() === $voter) {
+                $ballot->setTarget($target);
+                $alreadyVoted = true;
+            }
+        }
+
+        if (!$alreadyVoted) {
+            $vote->addBallot(new Ballot($vote, $voter, $target));
+        }
 
         return $game;
     }
 
     public function supports(GameEvent $gameEvent): bool
     {
-        return $gameEvent instanceof SeerRevealEvent;
+        return $gameEvent instanceof VoteEvent;
     }
 }

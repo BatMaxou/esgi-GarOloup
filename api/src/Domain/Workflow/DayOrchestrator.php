@@ -12,8 +12,6 @@ class DayOrchestrator implements PeriodOrchestratorInterface
 {
     public function __construct(
         private readonly ClockInterface $clock,
-        private readonly VoteResolver $voteResolver,
-        private readonly GameFinisher $gameFinisher,
     ) {
     }
 
@@ -37,9 +35,7 @@ class DayOrchestrator implements PeriodOrchestratorInterface
         $workflow->nextStep();
 
         if ($workflow->isCompleted()) {
-            $this->resolve($game);
-
-            return $game;
+            return $this->resolve($game);
         }
 
         $workflow->setCurrentTurn($workflow->getStepAt($workflow->getCurrent()));
@@ -55,12 +51,6 @@ class DayOrchestrator implements PeriodOrchestratorInterface
         }
 
         $day->setResolved(true);
-
-        if ($this->gameFinisher->tryFinish($game)) {
-            return $game;
-        }
-
-        $this->voteResolver->start($game);
 
         return $game;
     }

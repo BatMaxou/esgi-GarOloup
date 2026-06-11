@@ -13,8 +13,6 @@ class NightOrchestrator implements PeriodOrchestratorInterface
 {
     public function __construct(
         private readonly ClockInterface $clock,
-        private readonly DayOrchestrator $dayOrchestrator,
-        private readonly GameFinisher $gameFinisher,
         private readonly int $nightStepDuration,
     ) {
     }
@@ -50,9 +48,7 @@ class NightOrchestrator implements PeriodOrchestratorInterface
         $workflow->nextStep();
 
         if ($workflow->isCompleted()) {
-            $this->resolve($game);
-
-            return $game;
+            return $this->resolve($game);
         }
 
         $workflow->setCurrentTurn($workflow->getStepAt($workflow->getCurrent()));
@@ -68,12 +64,6 @@ class NightOrchestrator implements PeriodOrchestratorInterface
         }
 
         $night->setResolved(true);
-
-        if ($this->gameFinisher->tryFinish($game)) {
-            return $game;
-        }
-
-        $this->dayOrchestrator->start($game);
 
         return $game;
     }

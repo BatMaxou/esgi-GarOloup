@@ -16,8 +16,10 @@ class ClassicWitchGameNight2WitchPassedStory extends ClassicWitchGameNight2Werew
 
         $gameBuilder = $this->getState(self::GAME);
         \assert($gameBuilder instanceof GameBuilder);
+        $game = $gameBuilder->getEntity();
 
-        $this->nightOrchestrator->advance($gameBuilder->getEntity());
+        $this->nightOrchestrator->advance($game);
+        $this->dayOrchestrator->start($game);
 
         $this->em->flush();
     }

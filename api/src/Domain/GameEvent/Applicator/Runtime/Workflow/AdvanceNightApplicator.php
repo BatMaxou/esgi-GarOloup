@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\GameEvent\Applicator;
+namespace App\Domain\GameEvent\Applicator\Runtime\Workflow;
 
 use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
@@ -11,7 +11,7 @@ use App\Entity\Game\Game;
 use App\Enum\Game\GameRuntimeStepEnum;
 
 /** @implements GameEventApplicatorInterface<TimeUpGameEvent> */
-class NightAdvanceApplicator implements GameEventApplicatorInterface
+class AdvanceNightApplicator implements GameEventApplicatorInterface
 {
     use GameAwareTrait;
 
@@ -22,7 +22,7 @@ class NightAdvanceApplicator implements GameEventApplicatorInterface
 
     public static function getPriority(): int
     {
-        return static::LAST_APPLY_PRIORITY;
+        return static::WORKFLOW_ADVANCE_PRIORITY;
     }
 
     public function apply(GameEvent $gameEvent): Game

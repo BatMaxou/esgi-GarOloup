@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\GameEvent\Applicator;
+namespace App\Domain\GameEvent\Applicator\Initialisation;
 
 use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
 use App\Domain\GameEvent\Applicator\Trait\UserAwareTrait;
@@ -69,6 +69,6 @@ class RandomGameRoleDispatchApplicator implements GameEventApplicatorInterface
 
     public static function getPriority(): int
     {
-        return static::PRE_APPLY_PRIORITY;
+        return static::FIRST_APPLY_PRIORITY;
     }
 }

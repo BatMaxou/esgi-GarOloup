@@ -39,6 +39,7 @@ class ClassicWitchGameNight3WitchPoisonedStory extends ClassicWitchGameNight3Wer
         $witchRole->usePoisonPotion();
 
         $this->nightOrchestrator->advance($game);
+        $this->dayOrchestrator->start($game);
 
         $this->em->flush();
     }

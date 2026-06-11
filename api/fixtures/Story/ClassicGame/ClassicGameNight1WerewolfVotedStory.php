@@ -38,6 +38,7 @@ class ClassicGameNight1WerewolfVotedStory extends ClassicGameNight1SeerRevealedS
             ->build();
 
         $this->nightOrchestrator->advance($game);
+        $this->dayOrchestrator->start($game);
 
         $this->em->flush();
     }

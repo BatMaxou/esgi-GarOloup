@@ -15,6 +15,7 @@ class ClassicGameDay2FinishedStory extends ClassicGameNight2WerewolfVotedStory
         $game = $gameBuilder->getEntity();
 
         $this->dayOrchestrator->resolve($game);
+        $this->voteResolver->start($game);
 
         $this->em->flush();
     }
