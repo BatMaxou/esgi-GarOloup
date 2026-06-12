@@ -24,7 +24,8 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
   if (globalStep === GameGlobalStepEnum.RUNNING) {
     if (runningStep === GameRuntimeStepEnum.NIGHT) {
       switch (true) {
-        case player?.role?.type === GameRoleEnum.WEREWOLF && game.nightWorkflow?.currentTurn?.werewolf === GameRoleEnum.WEREWOLF:
+        case player?.role?.type === GameRoleEnum.WEREWOLF &&
+          game.nightWorkflow?.currentTurn?.werewolf === GameRoleEnum.WEREWOLF:
           return <WerewolfActions />;
         default:
           return null;
