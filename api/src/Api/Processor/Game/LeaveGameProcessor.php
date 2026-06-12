@@ -55,6 +55,8 @@ final class LeaveGameProcessor implements ProcessorInterface
             if ($game->getPlayers()->isEmpty()) {
                 $this->em->remove($game);
                 $this->em->flush();
+
+                return;
             }
 
             $this->handleTopicUpdates($game);
