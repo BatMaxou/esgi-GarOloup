@@ -204,13 +204,7 @@ const GameConfigForm = ({ onTooMuchPlayers }: { onTooMuchPlayers: (payload: TooM
                   </div>
                 </div>
               </div>
-              <Button
-                type={'button'}
-                variant="accent"
-                label={t('nextStep')}
-                full
-                onClick={() => setCurrentStep(2)}
-              />
+              <Button type={'button'} variant="accent" label={t('nextStep')} full onClick={() => setCurrentStep(2)} />
             </motion.div>
           ) : (
             <motion.div
@@ -221,7 +215,9 @@ const GameConfigForm = ({ onTooMuchPlayers }: { onTooMuchPlayers: (payload: TooM
               exit={{ opacity: 0, x: 16 }}
               transition={{ duration: 0.2 }}
             >
-              <div className={`grid grid-cols-3 gap-4 max-h-128 overflow-y-scroll ${playableRoleList.length > 6 ? 'scrollbar pr-2' : ''}`}>
+              <div
+                className={`grid grid-cols-3 gap-4 max-h-128 overflow-y-scroll ${playableRoleList.length > 6 ? 'scrollbar pr-2' : ''}`}
+              >
                 {playableRoleList.map((role) => (
                   <RoleCardCounter
                     key={role.id}
@@ -234,19 +230,19 @@ const GameConfigForm = ({ onTooMuchPlayers }: { onTooMuchPlayers: (payload: TooM
                 ))}
               </div>
               <div className="flex gap-3">
-            <div className="w-1/3">
-              <Button type="button" variant="secondary" label={t('previousStep')} full onClick={() => setCurrentStep(1)} />
-            </div>
-            <div className={currentStep === 2 ? 'w-2/3' : 'w-full'}>
-          <Button
-            type={'submit'}
-            variant="accent"
-            label={t('submit')}
-            full
-            disabled={!isCompositionComplete}
-          />
-          </div>
-        </div>
+                <div className="w-1/3">
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    label={t('previousStep')}
+                    full
+                    onClick={() => setCurrentStep(1)}
+                  />
+                </div>
+                <div className={currentStep === 2 ? 'w-2/3' : 'w-full'}>
+                  <Button type={'submit'} variant="accent" label={t('submit')} full disabled={!isCompositionComplete} />
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
