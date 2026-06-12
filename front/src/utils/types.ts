@@ -39,8 +39,18 @@ export type Game = {
   configuration?: Configuration;
   stepEndAt?: string;
   nights?: Night[];
+  nightWorkflow?: Workflow;
   days?: Day[];
+  dayWorkflow?: Workflow;
   votes?: Vote[];
+};
+
+export type Workflow = {
+  id: string;
+  steps?: GameRoleEnum[][];
+  current?: number;
+  currentTurn?: Record<GameRoleEnum, GameRoleEnum>;
+  completed?: boolean;
 };
 
 export type GameRole = {

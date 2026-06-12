@@ -53,8 +53,8 @@ App\Entity\Game\Game:
             groups:
                 - game:read
         nightWorkflow:
-                    groups:
-                        - game:read
+            groups:
+                - game:read
         dayWorkflow:
-                    groups:
-                        - game:read
+            groups:
+                - game:read

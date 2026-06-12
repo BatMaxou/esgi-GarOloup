@@ -9,7 +9,7 @@ import { usePlayer } from '@/contexts/player-context';
 const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameMaster: boolean }) => {
   const { game } = useGame();
   const { player } = usePlayer();
-  console.log(player);
+
   if (!game) {
     return null;
   }
@@ -23,8 +23,8 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
 
   if (globalStep === GameGlobalStepEnum.RUNNING) {
     if (runningStep === GameRuntimeStepEnum.NIGHT) {
-      switch (player?.role?.type) {
-        case GameRoleEnum.WEREWOLF:
+      switch (true) {
+        case player?.role?.type === GameRoleEnum.WEREWOLF && game.nightWorkflow?.currentTurn?.werewolf === GameRoleEnum.WEREWOLF:
           return <WerewolfActions />;
         default:
           return null;

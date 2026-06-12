@@ -1,0 +1,5 @@
+App\Entity\Game\Workflow:
+    attributes:
+        currentTurn:
+            groups:
+                - game:read
