@@ -12,7 +12,11 @@ type Props = LucideProps & {
 const Icon = ({ name, title = '', ...props }: Props) => {
   const IconComponent = icons[name];
 
-  return <span title={title}>{IconComponent && <IconComponent {...props} />}</span>;
+  return (
+    <span title={title} className="w-fit h-fit">
+      {IconComponent && <IconComponent {...props} />}
+    </span>
+  );
 };
 
 export default Icon;

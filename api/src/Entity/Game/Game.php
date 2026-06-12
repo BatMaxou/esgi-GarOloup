@@ -231,6 +231,8 @@ class Game implements TopicRelatedObject
         $this->nights = new ArrayCollection();
         $this->days = new ArrayCollection();
         $this->votes = new ArrayCollection();
+        $this->nightWorkflow = new Workflow();
+        $this->dayWorkflow = new Workflow();
     }
 
     public function getConfiguration(): Configuration

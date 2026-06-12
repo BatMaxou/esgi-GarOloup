@@ -7,6 +7,8 @@ import { useApiClient } from '@/contexts/api-context';
 import { useAuth } from '@/contexts/auth-context';
 import { ApiClientError } from '@/lib/api/ApiClientError';
 import { useMercureClient } from '@/contexts/mercure-context';
+import { toast } from 'react-toastify';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   children: ReactNode;
@@ -14,6 +16,7 @@ type Props = {
 
 type WerewolfContextType = {
   team: WerewolfTeam | null;
+  vote: (targetPlayerId: string) => Promise<void>;
 };
 
 export const WereWolfContext = createContext<WerewolfContextType | undefined>(undefined);
@@ -24,7 +27,7 @@ export const WereWolfProvider = ({ children }: Props) => {
   const { apiClient } = useApiClient();
   const { mercureClient, isCredentialsInitialized } = useMercureClient();
   const { user } = useAuth();
-
+  const t = useTranslations('contexts.roles.werewolf');
   useEffect(() => {
     if (team) {
       return;
@@ -53,7 +56,15 @@ export const WereWolfProvider = ({ children }: Props) => {
     };
   }, [mercureClient, team?.gameId, isCredentialsInitialized]);
 
-  return <WereWolfContext.Provider value={{ team }}>{children}</WereWolfContext.Provider>;
+  const vote = async (targetPlayerId: string) => {
+    const response = await apiClient.werewolf.vote(targetPlayerId);
+    if (response instanceof ApiClientError) {
+      toast.error(t('werewolfVoteError'));
+      return;
+    }
+  };
+
+  return <WereWolfContext.Provider value={{ team, vote }}>{children}</WereWolfContext.Provider>;
 };
 
 export const useWerewolf = () => {

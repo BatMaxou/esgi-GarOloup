@@ -341,12 +341,16 @@
             "sectionTitle": "Game setup",
             "sectionSubtitleWithMinPlayers": "Role composition",
             "sectionSubtitleWithoutMinPlayers": "Role composition, game master and random dispatch",
+            "stepSettingsSubtitle": "Game master and dispatch mode",
+            "stepRolesSubtitle": "Role composition",
             "withGameMasterTitle": "Game master",
             "withGameMasterLabel": "One player acts as the narrator",
             "withGameMasterAria": "Enable game master",
             "withRandomDispatchTitle": "Random assignment",
             "withRandomDispatchLabel": "Roles are drawn randomly when the game starts",
             "withRandomDispatchAria": "Enable random role assignment",
+            "previousStep": "Back",
+            "nextStep": "Continue",
             "submit": "Save configuration"
           },
           "gameMasterChoice": {
@@ -478,6 +482,11 @@
       "setGameMasterSuccess": "Game master set",
       "launchGameError": "Error launching game",
       "launchGameSuccess": "Game launched"
+    },
+    "roles": {
+      "werewolf": {
+        "voteError": "Error while voting"
+      }
     }
   }
 }

@@ -7,6 +7,7 @@ import Crown from '@/assets/icons/crown.svg';
 import Timer from '@/assets/icons/timer.svg';
 import Copy from '@/assets/icons/copy.svg';
 import Skull from '@/assets/icons/skull.svg';
+import Werewolf from '@/assets/icons/werewolf.svg';
 
 export type IconName = keyof typeof raw & string;
 export type IconType = LucideIcon | ComponentType<SVGProps<SVGSVGElement>>;
@@ -26,6 +27,7 @@ const raw = {
   copy: Copy,
   check: Check,
   skull: Skull,
+  werewolf: Werewolf,
 };
 
 export const icons: Icons = raw;

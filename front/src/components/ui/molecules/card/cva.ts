@@ -10,11 +10,11 @@ const roleShellBase = [
 
 const roleShellHover = 'hover:border-primary/35 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:before:opacity-100';
 
-const defaultAccentBase = '!border-accent/30 bg-accent/5';
+const defaultAccentBase = 'border-accent/30 bg-accent/5';
 const defaultAccentHover = 'hover:border-accent/50 hover:shadow-lg hover:shadow-black/25';
 
-const playerCurrentBase = '!bg-secondary/20 !border-primary/20 !backdrop-blur-none shadow-none';
-const playerDefaultBase = '!border-transparent !bg-transparent !backdrop-blur-none shadow-none';
+const playerCurrentBase = '!bg-secondary/20 border-primary/20 !backdrop-blur-none shadow-none';
+const playerDefaultBase = 'border-transparent !bg-transparent !backdrop-blur-none shadow-none';
 const playerHover = 'hover:!border-primary/20 hover:!bg-primary/10';
 
 export const cardCva = cva(
