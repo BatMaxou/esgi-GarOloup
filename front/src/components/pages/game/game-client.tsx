@@ -4,6 +4,8 @@ import IngamePlayersSidebar from '@/components/common/game/ingame-players-sideba
 import RunningGameDisplay from '@/components/common/game/running-game-display';
 import { useGame } from '@/contexts/game-context';
 import { usePlayer } from '@/contexts/player-context';
+import { WereWolfProvider } from '@/contexts/roles/werewolf-context';
+import { GameRoleEnum } from '@/utils/enums';
 import type { Player } from '@/utils/types';
 import { useMemo } from 'react';
 
@@ -42,18 +44,30 @@ const GameClient = () => {
     );
     return [normalizedGameMaster, ...playersWithoutGameMaster];
   }, [game]);
+  const isHost = player?.id === game?.host?.id;
+  const isGameMaster = player?.id === game?.gameMaster?.id;
+
+  const renderGameDisplay = useMemo(() => {
+    switch (true) {
+      case player?.role?.type === GameRoleEnum.WEREWOLF:
+        return (
+          <WereWolfProvider>
+            <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />
+          </WereWolfProvider>
+        );
+      default:
+        return <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />;
+    }
+  }, [isGameMaster, isHost, player?.role?.type]);
 
   if (!game || !player) {
     return <>Loading...</>;
   }
 
-  const isHost = player?.id === game?.host?.id;
-  const isGameMaster = player?.id === game?.gameMaster?.id;
-
   return (
     <main className="flex h-full min-h-0 w-full flex-row justify-between items-start">
       <IngamePlayersSidebar players={playersList || []} />
-      <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />
+      <div className="px-8 py-8">{renderGameDisplay}</div>
       <IngamePlayersSidebar players={playersList || []} />
     </main>
   );

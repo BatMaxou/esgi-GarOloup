@@ -39,6 +39,16 @@
           "vote": "Vote",
           "round": "Tour",
           "ended": "Terminée"
+        },
+        "nightActions": {
+          "werewolfActions": {
+            "werewolf": "Loup-Garou",
+            "werewolfCamp": "Camp des Loups",
+            "roundDescription": "Les loups ouvrent les yeux et désignent une victime ensemble. Choisissez votre cible pour cette nuit.",
+            "actionLabel": "Désigner une victime",
+            "focused": "Ciblé",
+            "submit": "Tuer la victime"
+          }
         }
       },
       "home": {
@@ -342,12 +352,16 @@
             "sectionTitle": "Configuration de la partie",
             "sectionSubtitleWithMinPlayers": "Composition des rôles",
             "sectionSubtitleWithoutMinPlayers": "Composition, maître du jeu et mode de distribution",
+            "stepSettingsSubtitle": "Maître du jeu et mode de distribution",
+            "stepRolesSubtitle": "Composition des rôles",
             "withGameMasterTitle": "Maître du jeu",
             "withGameMasterLabel": "Un joueur endosse le rôle de narrateur",
             "withGameMasterAria": "Activer le maître du jeu",
             "withRandomDispatchTitle": "Attribution aléatoire",
             "withRandomDispatchLabel": "Les rôles sont tirés au sort au lancement",
             "withRandomDispatchAria": "Activer l'attribution aléatoire des rôles",
+            "previousStep": "Retour",
+            "nextStep": "Continuer",
             "submit": "Valider la configuration"
           },
           "gameMasterChoice": {
@@ -480,6 +494,11 @@
       "setGameMasterSuccess": "Maître du jeu désigné",
       "launchGameError": "Erreur lors de la lancement de la partie",
       "launchGameSuccess": "Partie lancée"
+    },
+    "roles": {
+      "werewolf": {
+        "voteError": "Erreur lors du vote"
+      }
     }
   }
 }

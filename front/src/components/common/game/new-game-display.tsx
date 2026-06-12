@@ -211,7 +211,7 @@ const NewGameDisplay = ({ game, isHost, isGameMaster }: { game: Game; isHost: bo
   ]);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-8 h-full w-full bg-background/80">
+    <div className="flex flex-col items-center justify-center gap-8 h-full w-full">
       {shouldRenderPlayerInitialisationStep || (isHost && initialisationStep === GameInitialisationStepEnum.NEW) ? (
         <Icon name="garoloup" className="animate-pulse w-20 h-20" />
       ) : null}

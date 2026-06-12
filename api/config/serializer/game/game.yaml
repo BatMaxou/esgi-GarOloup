@@ -52,3 +52,9 @@ App\Entity\Game\Game:
         votes:
             groups:
                 - game:read
+        nightWorkflow:
+                    groups:
+                        - game:read
+        dayWorkflow:
+                    groups:
+                        - game:read
