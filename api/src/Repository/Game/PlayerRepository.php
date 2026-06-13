@@ -7,8 +7,8 @@ use App\Entity\Game\Player;
 use App\Entity\User\TempUser;
 use App\Entity\User\User;
 use App\Enum\Game\GameInitialisationStepEnum;
-use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
+use App\Enum\Game\GameTeamEnum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -94,11 +94,10 @@ class PlayerRepository extends ServiceEntityRepository
     {
         /** @var Player[] */
         return $this->createQueryBuilder('p')
-            ->innerJoin('p.role', 'r')
             ->where('p.game = :game')
-            ->andWhere('r.type = :werewolfType')
+            ->andWhere('p.team = :team')
             ->setParameter('game', $game->getId(), 'uuid')
-            ->setParameter('werewolfType', GameRoleEnum::WEREWOLF)
+            ->setParameter('team', GameTeamEnum::WEREWOLF)
             ->orderBy('p.createdAt', 'ASC')
             ->getQuery()
             ->getResult();

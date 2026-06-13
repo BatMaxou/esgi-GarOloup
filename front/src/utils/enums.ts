@@ -57,6 +57,7 @@ export enum GameRoleEnum {
   WEREWOLF = 'werewolf',
   SEER = 'seer',
   WITCH = 'witch',
+  WILD_CHILD = 'wild_child',
 }
 
 export enum GameTeamEnum {

@@ -1,0 +1,13 @@
+type: folder
+model: folder
+id: fl_WildChild1
+createdAt: 2026-06-13T12:00:00
+updatedAt: 2026-06-13T12:00:00
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_3whxhCpuFe
+authentication: {}
+authenticationType: null
+description: ''
+headers: []
+name: Wild Child
+sortPriority: 3000.0

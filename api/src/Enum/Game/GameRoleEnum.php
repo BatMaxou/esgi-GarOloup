@@ -12,13 +12,15 @@ enum GameRoleEnum: string
     case LOOKALIKE = 'lookalike';
     case THIEF = 'thief';
     case DICTATOR = 'dictator';
+    case WILD_CHILD = 'wild_child';
 
     public function getNightPriority(): ?int
     {
         return match ($this) {
             self::VILLAGER,
             self::HUNTER,
-            self::DICTATOR => null,
+            self::DICTATOR,
+            self::WILD_CHILD => null,
             self::THIEF => 1,
             self::LOOKALIKE => 2,
             self::SEER => 3,
@@ -36,7 +38,8 @@ enum GameRoleEnum: string
             self::LOOKALIKE,
             self::SEER,
             self::WEREWOLF,
-            self::WITCH => null,
+            self::WITCH,
+            self::WILD_CHILD => null,
             self::DICTATOR => 1,
         };
     }
@@ -51,7 +54,8 @@ enum GameRoleEnum: string
             self::HUNTER,
             self::LOOKALIKE,
             self::THIEF,
-            self::DICTATOR => GameTeamEnum::VILLAGE,
+            self::DICTATOR,
+            self::WILD_CHILD => GameTeamEnum::VILLAGE,
         };
     }
 }

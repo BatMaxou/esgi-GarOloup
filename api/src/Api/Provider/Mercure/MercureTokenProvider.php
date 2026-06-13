@@ -5,7 +5,7 @@ namespace App\Api\Provider\Mercure;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use App\Api\Model\Mercure\MercureToken;
-use App\Entity\Game\Role\WerewolfRole;
+use App\Enum\Game\GameTeamEnum;
 use App\Enum\TopicEnum;
 use App\Repository\Game\PlayerRepository;
 use App\Service\Mercure\TopicProvider;
@@ -39,7 +39,7 @@ class MercureTokenProvider implements ProviderInterface
         $player = $this->playerRepository->findCurrentByUser($currentUser);
         $game = $player?->getGame();
 
-        $isWerewolf = $player?->getRole() instanceof WerewolfRole;
+        $isWerewolf = GameTeamEnum::WEREWOLF === $player?->getTeam();
 
         $token = $factory->create(subscribe: [
             ...($player ? [(string) $this->topicProvider->provide(TopicEnum::CURRENT_PLAYER, $player)] : []),

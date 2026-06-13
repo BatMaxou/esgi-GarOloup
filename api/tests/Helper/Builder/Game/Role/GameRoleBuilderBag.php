@@ -23,6 +23,7 @@ class GameRoleBuilderBag
             GameRoleEnum::WEREWOLF->value => fn () => new WerewolfRoleBuilder($this->roleBuilderBag),
             GameRoleEnum::SEER->value => fn () => new SeerRoleBuilder($this->roleBuilderBag),
             GameRoleEnum::WITCH->value => fn () => new WitchRoleBuilder($this->roleBuilderBag),
+            GameRoleEnum::WILD_CHILD->value => fn () => new WildChildRoleBuilder($this->roleBuilderBag),
         ];
 
         return $this;
@@ -46,6 +47,11 @@ class GameRoleBuilderBag
     public function getWitch(): WitchRoleBuilder
     {
         return $this->get(GameRoleEnum::WITCH, WitchRoleBuilder::class);
+    }
+
+    public function getWildChild(): WildChildRoleBuilder
+    {
+        return $this->get(GameRoleEnum::WILD_CHILD, WildChildRoleBuilder::class);
     }
 
     /**

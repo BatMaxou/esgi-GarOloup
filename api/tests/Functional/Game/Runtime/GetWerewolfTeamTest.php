@@ -3,9 +3,9 @@
 namespace App\Tests\Functional\Game\Runtime;
 
 use App\Enum\Game\GameRuntimeStepEnum;
-use App\Fixtures\Story\ClassicGame\ClassicGameDispatchedStory;
-use App\Fixtures\Story\ClassicGame\ClassicGameLaunchedStory;
-use App\Fixtures\Story\ClassicGame\ClassicGameSetupedStory;
+use App\Fixtures\Story\ClassicGame\Initialisation\ClassicGameDispatchedStory;
+use App\Fixtures\Story\ClassicGame\Initialisation\ClassicGameLaunchedStory;
+use App\Fixtures\Story\ClassicGame\Runtime\Setup\ClassicGameSetupedStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
 use App\Tests\Helper\Builder\User\UserBuilder;

@@ -4,8 +4,8 @@ namespace App\Tests\Functional\Game\Runtime;
 
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Enum\Game\GameTeamEnum;
-use App\Fixtures\Story\ClassicGame\ClassicGameDay2FinishedStory;
-use App\Fixtures\Story\ClassicWitchGame\ClassicWitchGameNight3WerewolfVotedStory;
+use App\Fixtures\Story\ClassicGame\Runtime\Day\ClassicGameDay2FinishedStory;
+use App\Fixtures\Story\ComplexGame\Runtime\Night\Werewolf\ComplexGameNight3WerewolfVotedStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
@@ -95,16 +95,16 @@ class WinConditionTest extends GarOloupApiTestCase
     {
         $clock = static::mockTime();
 
-        $story = ThereIs::aStory(ClassicWitchGameNight3WerewolfVotedStory::class)->execute();
-        $witchPlayerBuilder = $story->get(ClassicWitchGameNight3WerewolfVotedStory::WITCH);
+        $story = ThereIs::aStory(ComplexGameNight3WerewolfVotedStory::class)->execute();
+        $witchPlayerBuilder = $story->get(ComplexGameNight3WerewolfVotedStory::WITCH);
         $this->assertInstanceOf(PlayerBuilder::class, $witchPlayerBuilder);
         $witchUserBuilder = $witchPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $witchUserBuilder);
-        $lastWerewolfPlayerBuilder = $story->get(ClassicWitchGameNight3WerewolfVotedStory::WEREWOLF_3);
+        $lastWerewolfPlayerBuilder = $story->get(ComplexGameNight3WerewolfVotedStory::WEREWOLF_3);
         $this->assertInstanceOf(PlayerBuilder::class, $lastWerewolfPlayerBuilder);
         $lastWerewolfPlayerId = $lastWerewolfPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($lastWerewolfPlayerId);
-        $gameBuilder = $story->get(ClassicWitchGameNight3WerewolfVotedStory::GAME);
+        $gameBuilder = $story->get(ComplexGameNight3WerewolfVotedStory::GAME);
         $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
         When::asUser($witchUserBuilder)->game()->witchPoison($lastWerewolfPlayerId->toString());

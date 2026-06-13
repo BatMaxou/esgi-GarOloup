@@ -22,7 +22,7 @@ use Doctrine\ORM\Mapping as ORM;
         ),
     ],
 )]
-class WerewolfRole extends GameRole implements NightResettableInterface
+class WerewolfRole extends GameRole implements NightResettableInterface, WerewolfVoterInterface
 {
     #[ORM\Column(length: 36, nullable: true)]
     private ?string $targetPlayerId = null;

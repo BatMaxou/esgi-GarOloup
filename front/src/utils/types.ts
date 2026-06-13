@@ -75,6 +75,11 @@ export type WitchRole = GameRole & {
   poisonPotionAvailable?: boolean;
 };
 
+export type WildChildRole = GameRole & {
+  modelPlayerId?: string;
+  transformed?: boolean;
+};
+
 export type Player = {
   id: string;
   user?: User;
