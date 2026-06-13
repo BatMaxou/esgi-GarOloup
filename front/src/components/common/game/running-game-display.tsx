@@ -32,9 +32,11 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
         case player?.role?.type === GameRoleEnum.WITCH && game.nightWorkflow?.currentTurn?.witch === GameRoleEnum.WITCH:
           return <WitchActions />;
         case player?.role?.type === GameRoleEnum.SEER && game.nightWorkflow?.currentTurn?.seer === GameRoleEnum.SEER:
-          return <Typography tag="p" variant="body" className="text-primary/60">
-            {"je suis la seer"}
-          </Typography>;
+          return (
+            <Typography tag="p" variant="body" className="text-primary/60">
+              {'je suis la seer'}
+            </Typography>
+          );
         default:
           return null;
       }
