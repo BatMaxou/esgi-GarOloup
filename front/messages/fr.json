@@ -67,11 +67,11 @@
             "healTagDisabled": "Déjà utilisée"
           },
           "seerActions": {
-            "seer":"Voyante",
+            "seer": "Voyante",
             "seerCamp": "Camp des Villageois",
             "roundDescription": "Choisissez un joueur pour voir son rôle secret. Cette information n'est connue que de vous.",
-            "revealChoiceTitle": "Inspecter un joueur", 
-            "revealTarget": "Inspecter", 
+            "revealChoiceTitle": "Inspecter un joueur",
+            "revealTarget": "Inspecter",
             "submitChoice": "Confirmer"
           }
         }

@@ -30,21 +30,21 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
           game.nightWorkflow?.currentTurn?.werewolf === GameRoleEnum.WEREWOLF:
           return (
             <>
-              <UserTurnAnimation animateOnce/>
+              <UserTurnAnimation animateOnce />
               <WerewolfActions />
             </>
           );
         case player?.role?.type === GameRoleEnum.WITCH && game.nightWorkflow?.currentTurn?.witch === GameRoleEnum.WITCH:
           return (
             <>
-              <UserTurnAnimation animateOnce/>
+              <UserTurnAnimation animateOnce />
               <WitchActions />
             </>
           );
         case player?.role?.type === GameRoleEnum.SEER && game.nightWorkflow?.currentTurn?.seer === GameRoleEnum.SEER:
           return (
             <>
-              <UserTurnAnimation animateOnce/>
+              <UserTurnAnimation animateOnce />
               <SeerActions />
             </>
           );
