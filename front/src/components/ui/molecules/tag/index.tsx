@@ -17,9 +17,9 @@ type Props = VariantProps<typeof tagCva> & {
   rightIcon?: IconName;
 };
 
-const Tag = ({ label, lowerCase, className, variant, size, active, leftIcon, rightIcon }: Props) => {
+const Tag = ({ label, lowerCase, className, variant, size, active, disabled, leftIcon, rightIcon }: Props) => {
   return (
-    <span className={tagCva({ variant, size, active, className })}>
+    <span className={tagCva({ variant, size, active, disabled, className })}>
       {leftIcon && (
         <Typography variant="tag" textColor="controlled">
           <Icon name={leftIcon} className={tagIconCva({ size })} />

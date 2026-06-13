@@ -5,6 +5,7 @@ import RunningGameDisplay from '@/components/common/game/running-game-display';
 import { useGame } from '@/contexts/game-context';
 import { usePlayer } from '@/contexts/player-context';
 import { WereWolfProvider } from '@/contexts/roles/werewolf-context';
+import { WitchProvider } from '@/contexts/roles/witch-context';
 import { GameRoleEnum } from '@/utils/enums';
 import type { Player } from '@/utils/types';
 import { useMemo } from 'react';
@@ -54,6 +55,12 @@ const GameClient = () => {
           <WereWolfProvider>
             <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />
           </WereWolfProvider>
+        );
+      case player?.role?.type === GameRoleEnum.WITCH:
+        return (
+          <WitchProvider>
+            <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />
+          </WitchProvider>
         );
       default:
         return <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />;

@@ -48,6 +48,23 @@
             "actionLabel": "Désigner une victime",
             "focused": "Ciblé",
             "submit": "Tuer la victime"
+          },
+          "witchActions": {
+            "witch": "Sorcière",
+            "witchCamp": "Camp des Villageois",
+            "roundDescription": "La sorcière peut sauver une victime ou en tuer une autre. Choisissez votre cible pour cette nuit.",
+            "saveTitle": "Sauver une victime",
+            "saveDescription": "La sorcière peut sauver une victime de la nuit.",
+            "poisonTitle": "Tuer une victime",
+            "poisonDescription": "La sorcière peut tuer une victime de la nuit.",
+            "submitChoice": "Valider votre choix",
+            "submitTarget": "Tuer la cible",
+            "poisonChoiceTitle": "Choisissez la victime à empoisonner",
+            "poisonTarget": "Empoisonner",
+            "poisonTag": "1 utilisation restante",
+            "poisonTagDisabled": "Déjà utilisée",
+            "healTag": "1 utilisation restante",
+            "healTagDisabled": "Déjà utilisée"
           }
         }
       },

@@ -18,6 +18,10 @@ export const tagCva = cva('h-fit w-fit flex items-center justify-center rounded-
       true: '',
       false: '',
     },
+    disabled: {
+      true: 'opacity-50 pointer-events-none',
+      false: '',
+    },
   },
   compoundVariants: [
     { variant: 'primary', active: false, class: 'bg-primary-pastel/20' },
@@ -37,6 +41,7 @@ export const tagCva = cva('h-fit w-fit flex items-center justify-center rounded-
     variant: 'neutral',
     size: 'md',
     active: false,
+    disabled: false,
   },
 });
 
