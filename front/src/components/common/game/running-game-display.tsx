@@ -6,8 +6,8 @@ import { useGame } from '@/contexts/game-context';
 import WerewolfActions from './night-actions/werewolf-actions';
 import { usePlayer } from '@/contexts/player-context';
 import WitchActions from './night-actions/witch-actions';
-import Typography from '@/components/ui/atoms/typography';
-
+import SeerActions from './night-actions/seer-actions';
+import { UserTurnAnimation } from './animations/user-turn-animation';
 const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameMaster: boolean }) => {
   const { game } = useGame();
   const { player } = usePlayer();
@@ -28,14 +28,25 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
       switch (true) {
         case player?.role?.type === GameRoleEnum.WEREWOLF &&
           game.nightWorkflow?.currentTurn?.werewolf === GameRoleEnum.WEREWOLF:
-          return <WerewolfActions />;
+          return (
+            <>
+              <UserTurnAnimation animateOnce />
+              <WerewolfActions />
+            </>
+          );
         case player?.role?.type === GameRoleEnum.WITCH && game.nightWorkflow?.currentTurn?.witch === GameRoleEnum.WITCH:
-          return <WitchActions />;
+          return (
+            <>
+              <UserTurnAnimation animateOnce />
+              <WitchActions />
+            </>
+          );
         case player?.role?.type === GameRoleEnum.SEER && game.nightWorkflow?.currentTurn?.seer === GameRoleEnum.SEER:
           return (
-            <Typography tag="p" variant="body" className="text-primary/60">
-              {'je suis la seer'}
-            </Typography>
+            <>
+              <UserTurnAnimation animateOnce />
+              <SeerActions />
+            </>
           );
         default:
           return null;

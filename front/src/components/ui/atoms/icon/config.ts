@@ -11,6 +11,7 @@ import Werewolf from '@/assets/icons/werewolf.svg';
 import Poison from '@/assets/icons/poison.svg';
 import Witch from '@/assets/icons/witch.svg';
 import Heal from '@/assets/icons/heal.svg';
+import Seer from '@/assets/icons/seer.svg';
 
 export type IconName = keyof typeof raw & string;
 export type IconType = LucideIcon | ComponentType<SVGProps<SVGSVGElement>>;
@@ -34,6 +35,7 @@ const raw = {
   poison: Poison,
   witch: Witch,
   heal: Heal,
+  seer: Seer,
 };
 
 export const icons: Icons = raw;
