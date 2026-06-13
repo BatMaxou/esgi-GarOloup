@@ -39,6 +39,33 @@
           "vote": "Vote",
           "round": "Round",
           "ended": "Ended"
+        },
+        "nightActions": {
+          "werewolfActions": {
+            "werewolf": "Werewolf",
+            "werewolfCamp": "Werewolf team",
+            "roundDescription": "The werewolves open their eyes and choose a victim together. Choose your target for tonight.",
+            "actionLabel": "Choose a victim",
+            "focused": "Focused",
+            "submit": "Kill the victim"
+          },
+          "witchActions": {
+            "witch": "Witch",
+            "witchCamp": "Villager team",
+            "roundDescription": "The witch can save a victim or kill another. Choose your target for tonight.",
+            "saveTitle": "Save a victim",
+            "saveDescription": "The witch can save a victim from the night.",
+            "poisonTitle": "Kill a victim",
+            "poisonDescription": "The witch can kill a victim from the night.",
+            "submitChoice": "Validate your choice",
+            "submitTarget": "Kill the target",
+            "poisonChoiceTitle": "Choose the victim to poison",
+            "poisonTarget": "Poison",
+            "poisonTag": "1 remaining use",
+            "poisonTagDisabled": "Already used",
+            "healTag": "1 remaining use",
+            "healTagDisabled": "Already used"
+          }
         }
       },
       "home": {
