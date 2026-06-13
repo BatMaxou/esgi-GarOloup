@@ -17,6 +17,7 @@ use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Event\Game\VillagerSetupEvent;
 use App\Entity\Game\Game;
 use App\Entity\Game\Role\VillagerRole;
+use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Repository\Game\PlayerRepository;
 
@@ -104,6 +105,7 @@ class VillagerSetupEventApplicator implements GameEventApplicatorInterface
         return $gameEvent instanceof TimeUpGameEvent
             && $game
             && GameRuntimeStepEnum::SETUP === $game->getRuntimeStep()
+            && $game->getPlayer(GameRoleEnum::VILLAGER)
         ;
     }
 

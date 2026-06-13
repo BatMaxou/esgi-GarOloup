@@ -18,6 +18,7 @@ use App\Entity\Event\Game\WildChildSetupEvent;
 use App\Entity\Game\Game;
 use App\Entity\Game\Player;
 use App\Entity\Game\Role\WildChildRole;
+use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Repository\Game\PlayerRepository;
 
@@ -102,6 +103,7 @@ class WildChildSetupEventApplicator implements GameEventApplicatorInterface
         return $gameEvent instanceof TimeUpGameEvent
             && $game
             && GameRuntimeStepEnum::SETUP === $game->getRuntimeStep()
+            && $game->getPlayer(GameRoleEnum::WILD_CHILD)
         ;
     }
 
