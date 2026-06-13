@@ -1,0 +1,31 @@
+type: http_request
+model: http_request
+id: rq_WildChild1
+createdAt: 2026-06-13T12:00:00
+updatedAt: 2026-06-13T12:00:00
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_WildChild1
+authentication:
+  token: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RlhCdVNMZFlzK29xLzVCS0M1MXNpaFZKd05LRGRDWFhHYzdmVlZ1NTlqN2E5MmtlY2taSzdHa1EzcU1sSzBTa0k5Y3lMSA') ]}
+authenticationType: bearer
+body:
+  text: |-
+    {
+      "targetPlayerId": "019dbfcf-8de5-7395-b085-b6b07869d0aa"
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/merge-patch+json
+  id: 4kWiNAWAgz
+- enabled: true
+  name: ''
+  value: ''
+  id: 97ABI4J9n0
+method: PATCH
+name: Wild Child Setup
+sortPriority: 0.0
+url: ${[ BASE_URL ]}/api/game/wild-child/setup
+urlParameters: []

@@ -33,3 +33,12 @@ App\Entity\Game\Role\WitchRole:
         poisonPotionAvailable:
             groups:
                 - me:player:read
+
+App\Entity\Game\Role\WildChildRole:
+    attributes:
+        modelPlayerId:
+            groups:
+                - me:player:read
+        transformed:
+            groups:
+                - me:player:read

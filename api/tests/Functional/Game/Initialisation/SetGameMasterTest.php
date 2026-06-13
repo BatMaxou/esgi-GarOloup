@@ -4,8 +4,8 @@ namespace App\Tests\Functional\Game\Initialisation;
 
 use App\Entity\Event\Game\SetGameMasterEvent;
 use App\Enum\Game\GameInitialisationStepEnum;
-use App\Fixtures\Story\ClassicGame\ClassicGameClosedStory;
-use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameConfiguredWithGameMasterStory;
+use App\Fixtures\Story\ClassicGame\Initialisation\ClassicGameClosedStory;
+use App\Fixtures\Story\ClassicGame\Initialisation\GameMaster\ClassicGameConfiguredWithGameMasterStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;

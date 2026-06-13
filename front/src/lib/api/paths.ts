@@ -30,6 +30,9 @@ export const apiPaths = {
     save: '/game/witch/save',
     poison: '/game/witch/poison',
   },
+  wildChild: {
+    setup: '/game/wild-child/setup',
+  },
   player: {
     getCurrent: '/game/player',
     leave: '/game/player',

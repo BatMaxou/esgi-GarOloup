@@ -181,6 +181,16 @@ class GameBehavior extends AbstractBehavior
         ]));
     }
 
+    public function wildChildSetup(?string $targetPlayerId): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/wild-child/setup', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [
+                'targetPlayerId' => $targetPlayerId,
+            ],
+        ]));
+    }
+
     public function timeUp(): BehaviorResponse
     {
         return new BehaviorResponse($this->client->request('PATCH', '/api/game/time-up', [

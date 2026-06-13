@@ -4,8 +4,8 @@ namespace App\Tests\Functional\Game\Runtime;
 
 use App\Entity\Event\Game\VoteEvent;
 use App\Enum\Game\GameRuntimeStepEnum;
-use App\Fixtures\Story\ClassicGame\ClassicGameDay1FinishedStory;
-use App\Fixtures\Story\ClassicGame\ClassicGameSetupedStory;
+use App\Fixtures\Story\ClassicGame\Runtime\Day\ClassicGameDay1FinishedStory;
+use App\Fixtures\Story\ClassicGame\Runtime\Setup\ClassicGameSetupedStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;

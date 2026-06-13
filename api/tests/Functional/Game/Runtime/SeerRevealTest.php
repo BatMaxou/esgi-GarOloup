@@ -5,7 +5,7 @@ namespace App\Tests\Functional\Game\Runtime;
 use App\Entity\Event\Game\SeerRevealEvent;
 use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
-use App\Fixtures\Story\ClassicGame\ClassicGameSetupedStory;
+use App\Fixtures\Story\ClassicGame\Runtime\Setup\ClassicGameSetupedStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;

@@ -77,6 +77,17 @@ class RoleBuilder extends AbstractBuilder
             ->withMaxPerGame(1);
     }
 
+    public function wildChild(): static
+    {
+        $this->type = GameRoleEnum::WILD_CHILD;
+
+        return $this->withName('Enfant sauvage')
+            ->withDescription('Description de l\'Enfant sauvage')
+            ->withAbility('Choisir un modèle ; devient Loup-garou si son modèle meurt')
+            ->withTeam(GameTeamEnum::VILLAGE)
+            ->withMaxPerGame(1);
+    }
+
     public function withName(string $name): static
     {
         $this->name = $name;

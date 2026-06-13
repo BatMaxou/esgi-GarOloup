@@ -14,6 +14,7 @@ import { WerewolfResource } from '@/lib/api/resources/WerewolfResource';
 import { VillagerResource } from '@/lib/api/resources/VillagerResource';
 import { SeerResource } from '@/lib/api/resources/SeerResource';
 import { WitchResource } from '@/lib/api/resources/WitchResource';
+import { WildChildResource } from '@/lib/api/resources/WildChildResource';
 
 type PropagateChangeToken = (token?: string | null, refreshToken?: string | null) => void;
 
@@ -67,6 +68,7 @@ export class ApiClient {
   villager: VillagerResource;
   seer: SeerResource;
   witch: WitchResource;
+  wildChild: WildChildResource;
 
   constructor(
     public baseUrl: string,
@@ -87,6 +89,7 @@ export class ApiClient {
     this.villager = new VillagerResource(this);
     this.seer = new SeerResource(this);
     this.witch = new WitchResource(this);
+    this.wildChild = new WildChildResource(this);
   }
 
   public initPropagateChangeToken(propagateChangeToken: PropagateChangeToken) {

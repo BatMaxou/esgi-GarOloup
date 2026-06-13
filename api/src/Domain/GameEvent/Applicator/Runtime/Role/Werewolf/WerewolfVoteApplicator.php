@@ -16,9 +16,10 @@ use App\Entity\Event\Game\WerewolfVoteEvent;
 use App\Entity\Game\Game;
 use App\Entity\Game\Period\Action\NightAction\MurderAction;
 use App\Entity\Game\Player;
-use App\Entity\Game\Role\WerewolfRole;
+use App\Entity\Game\Role\WerewolfVoterInterface;
 use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
+use App\Enum\Game\GameTeamEnum;
 use App\Repository\Game\PlayerRepository;
 use Symfony\Component\Uid\Uuid;
 
@@ -68,8 +69,8 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
         }
 
         $role = $player->getRole();
-        if (!$role instanceof WerewolfRole) {
-            throw new \LogicException(\sprintf('Role must be verified as a %s here', WerewolfRole::class));
+        if (!$role instanceof WerewolfVoterInterface) {
+            throw new \LogicException(\sprintf('Role must be verified as a %s here', WerewolfVoterInterface::class));
         }
 
         $role->setTargetPlayerId($targetPlayerId);
@@ -83,7 +84,12 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
 
         foreach ($game->getPlayers() as $player) {
             $role = $player->getRole();
-            if ($role instanceof WerewolfRole && !$player->isDead() && null === $role->getTargetPlayerId()) {
+            if (
+                $role instanceof WerewolfVoterInterface
+                && GameTeamEnum::WEREWOLF === $player->getTeam()
+                && !$player->isDead()
+                && null === $role->getTargetPlayerId()
+            ) {
                 $role->setTargetPlayerId($this->getRandomVictimId($game));
                 $this->handleAfkPlayer($player);
             }
@@ -128,7 +134,7 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
             if ($player->isDead()) {
                 continue;
             }
-            if ($player->getRole() instanceof WerewolfRole) {
+            if (GameTeamEnum::WEREWOLF === $player->getTeam()) {
                 continue;
             }
             $candidates[] = $player;
@@ -170,7 +176,7 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
         $tally = [];
         foreach ($game->getPlayers() as $player) {
             $role = $player->getRole();
-            if (!$role instanceof WerewolfRole || $player->isDead()) {
+            if (!$role instanceof WerewolfVoterInterface || $player->isDead() || GameTeamEnum::WEREWOLF !== $player->getTeam()) {
                 continue;
             }
 

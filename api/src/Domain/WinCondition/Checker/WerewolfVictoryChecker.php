@@ -19,9 +19,10 @@ class WerewolfVictoryChecker implements WinConditionCheckerInterface
     public function isMet(Game $game): bool
     {
         $werewolves = $this->countAlive($game, GameTeamEnum::WEREWOLF);
+        $villagers = $this->countAlive($game, GameTeamEnum::VILLAGE);
 
         return $werewolves >= 1
-            && $werewolves >= $this->countAlive($game, GameTeamEnum::VILLAGE)
+            && $werewolves >= $villagers
             && $this->hasNoLoneTeamAlive($game);
     }
 

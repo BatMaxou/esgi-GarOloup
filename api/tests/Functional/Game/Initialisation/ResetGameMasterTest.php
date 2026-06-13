@@ -4,11 +4,11 @@ namespace App\Tests\Functional\Game\Initialisation;
 
 use App\Entity\Event\Game\ResetGameMasterEvent;
 use App\Enum\Game\GameInitialisationStepEnum;
-use App\Fixtures\Story\ClassicGame\ClassicGameConfiguredStory;
-use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameDispatchedWithGameMasterStory;
-use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameLaunchedWithGameMasterStory;
-use App\Fixtures\Story\ClassicGame\GameMaster\ClassicGameWithGameMasterSettedStory;
-use App\Fixtures\Story\ClassicGame\GameMaster\RandomDispatch\ClassicGameWithGameMasterSettedAndRandomDispatchStory;
+use App\Fixtures\Story\ClassicGame\Initialisation\ClassicGameConfiguredStory;
+use App\Fixtures\Story\ClassicGame\Initialisation\GameMaster\ClassicGameDispatchedWithGameMasterStory;
+use App\Fixtures\Story\ClassicGame\Initialisation\GameMaster\ClassicGameLaunchedWithGameMasterStory;
+use App\Fixtures\Story\ClassicGame\Initialisation\GameMaster\ClassicGameWithGameMasterSettedStory;
+use App\Fixtures\Story\ClassicGame\Initialisation\GameMaster\RandomDispatch\ClassicGameWithGameMasterSettedAndRandomDispatchStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;

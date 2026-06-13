@@ -31,6 +31,7 @@ use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Enum\Game\GameGlobalStepEnum;
 use App\Enum\Game\GameInitialisationStepEnum;
+use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Enum\Game\GameTeamEnum;
 use App\Repository\Game\GameRepository;
@@ -398,6 +399,17 @@ class Game implements TopicRelatedObject
     public function getPlayers(): Collection
     {
         return $this->players;
+    }
+
+    public function getPlayer(GameRoleEnum $type): ?Player
+    {
+        foreach ($this->players as $player) {
+            if ($type === $player->getRole()?->getType()) {
+                return $player;
+            }
+        }
+
+        return null;
     }
 
     public function addPlayer(Player $player): static

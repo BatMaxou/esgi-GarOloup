@@ -4,7 +4,7 @@ namespace App\Tests\Functional\Game\Runtime;
 
 use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Enum\Game\GameRuntimeStepEnum;
-use App\Fixtures\Story\ClassicGame\ClassicGameNight1WerewolfVotedStory;
+use App\Fixtures\Story\ClassicGame\Runtime\Night\Werewolf\ClassicGameNight1WerewolfVotedStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;

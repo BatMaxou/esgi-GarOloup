@@ -4,9 +4,9 @@ namespace App\Domain\Spec\Role;
 
 use App\Entity\Game\Game;
 use App\Entity\Game\Player;
-use App\Entity\Game\Role\WerewolfRole;
 use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
+use App\Enum\Game\GameTeamEnum;
 use Symfony\Component\Clock\ClockInterface;
 
 class WerewolfSpec
@@ -18,7 +18,7 @@ class WerewolfSpec
 
     public function canSeeTeam(Player $player, Game $game): bool
     {
-        return $game->getRuntimeStep() && $player->getRole() instanceof WerewolfRole;
+        return $game->getRuntimeStep() && GameTeamEnum::WEREWOLF === $player->getTeam();
     }
 
     public function canVote(Player $voter, Game $game, Player $targetPlayer): bool
@@ -36,7 +36,7 @@ class WerewolfSpec
             return false;
         }
 
-        if (!$voter->getRole() instanceof WerewolfRole || $voter->isDead()) {
+        if (GameTeamEnum::WEREWOLF !== $voter->getTeam() || $voter->isDead()) {
             return false;
         }
 
@@ -45,10 +45,6 @@ class WerewolfSpec
         }
 
         if ($targetPlayer->isDead()) {
-            return false;
-        }
-
-        if ($targetPlayer->getRole() instanceof WerewolfRole) {
             return false;
         }
 

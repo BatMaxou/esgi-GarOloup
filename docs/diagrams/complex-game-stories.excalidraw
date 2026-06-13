@@ -1,0 +1,3417 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {
+      "id": "bNbRWTrbc52X8vnU",
+      "type": "rectangle",
+      "x": 420,
+      "y": 60,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "#a5d8ff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1100334656,
+      "versionNonce": 1136559087,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "TlB28FKMj2iTeM22"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "TlB28FKMj2iTeM22",
+      "type": "text",
+      "x": 428,
+      "y": 68,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1110434047,
+      "versionNonce": 161424017,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Filled\nComplexGameFilledStory\n12 joueurs rejoignent le lobby",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "bNbRWTrbc52X8vnU",
+      "originalText": "Filled\nComplexGameFilledStory\n12 joueurs rejoignent le lobby",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "MZruyVGSK9Wv09g4",
+      "type": "rectangle",
+      "x": 420,
+      "y": 210,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "#a5d8ff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1488751939,
+      "versionNonce": 1326227378,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "g8SEy0nKq0MFsvug"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "g8SEy0nKq0MFsvug",
+      "type": "text",
+      "x": 428,
+      "y": 218,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1861356424,
+      "versionNonce": 123160724,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Closed\nComplexGameClosedStory\nInvitations fermées",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "MZruyVGSK9Wv09g4",
+      "originalText": "Closed\nComplexGameClosedStory\nInvitations fermées",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "mQlSp49tQTHGWdvt",
+      "type": "rectangle",
+      "x": 420,
+      "y": 360,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "#a5d8ff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1869308750,
+      "versionNonce": 565451362,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "27X3AGqBFJyt2tHX"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "27X3AGqBFJyt2tHX",
+      "type": "text",
+      "x": 428,
+      "y": 368,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1681501278,
+      "versionNonce": 1251949504,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Configured\nComplexGameConfiguredStory\n6 villageois · 1 voyante · 3 loups\n1 sorcière · 1 enfant sauvage",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "mQlSp49tQTHGWdvt",
+      "originalText": "Configured\nComplexGameConfiguredStory\n6 villageois · 1 voyante · 3 loups\n1 sorcière · 1 enfant sauvage",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "BFW65aUNdIIJtntZ",
+      "type": "rectangle",
+      "x": 420,
+      "y": 510,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "#a5d8ff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1647275724,
+      "versionNonce": 1208863900,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "VBOtev4tXfhhAV8Z"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "VBOtev4tXfhhAV8Z",
+      "type": "text",
+      "x": 428,
+      "y": 518,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1493050696,
+      "versionNonce": 1786458338,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Dispatched\nComplexGameDispatchedStory\nRôles attribués aux 12 joueurs",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "BFW65aUNdIIJtntZ",
+      "originalText": "Dispatched\nComplexGameDispatchedStory\nRôles attribués aux 12 joueurs",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "ClcUAcYVTPedjXjP",
+      "type": "rectangle",
+      "x": 420,
+      "y": 660,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "#a5d8ff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1674248415,
+      "versionNonce": 1248021801,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "pfJSphbJPT1hnJ6u"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "pfJSphbJPT1hnJ6u",
+      "type": "text",
+      "x": 428,
+      "y": 668,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1058094738,
+      "versionNonce": 1169624098,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Launched\nComplexGameLaunchedStory\nPartie lancée → étape SETUP",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "ClcUAcYVTPedjXjP",
+      "originalText": "Launched\nComplexGameLaunchedStory\nPartie lancée → étape SETUP",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "6Wt037OD158oAiES",
+      "type": "rectangle",
+      "x": 420,
+      "y": 810,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "#e9ecef",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 884587177,
+      "versionNonce": 983948841,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "GatBiZxR1xi9WVkS"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "GatBiZxR1xi9WVkS",
+      "type": "text",
+      "x": 428,
+      "y": 818,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 87535301,
+      "versionNonce": 1824056008,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Setup · Villageois\nComplexGameVillagerSetupedStory\nChaque villageois choisit son ami (hôte)",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "6Wt037OD158oAiES",
+      "originalText": "Setup · Villageois\nComplexGameVillagerSetupedStory\nChaque villageois choisit son ami (hôte)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "iObK3NobatE4JUs3",
+      "type": "rectangle",
+      "x": 420,
+      "y": 960,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "#e9ecef",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 928174540,
+      "versionNonce": 1510086951,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "WzusHxh9PvQEzeKh"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "WzusHxh9PvQEzeKh",
+      "type": "text",
+      "x": 428,
+      "y": 968,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 897186425,
+      "versionNonce": 1323681790,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Setup · Enfant sauvage\nComplexGameSetupedStory\nL'enfant sauvage choisit son modèle\n(hôte par défaut) ; nuit démarrée",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "iObK3NobatE4JUs3",
+      "originalText": "Setup · Enfant sauvage\nComplexGameSetupedStory\nL'enfant sauvage choisit son modèle\n(hôte par défaut) ; nuit démarrée",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "z2rg8flObyxpefrY",
+      "type": "rectangle",
+      "x": 420,
+      "y": 1110,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#3b5bdb",
+      "backgroundColor": "#bac8ff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 502195454,
+      "versionNonce": 856370760,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "y7MnIcVIphJHzfQ9"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "y7MnIcVIphJHzfQ9",
+      "type": "text",
+      "x": 428,
+      "y": 1118,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#3b5bdb",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 668533803,
+      "versionNonce": 315088136,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Nuit 1 · Voyante\nComplexGameNight1SeerRevealedStory\nLa voyante observe un joueur",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "z2rg8flObyxpefrY",
+      "originalText": "Nuit 1 · Voyante\nComplexGameNight1SeerRevealedStory\nLa voyante observe un joueur",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "V6kZmlcAGMW1rQaq",
+      "type": "rectangle",
+      "x": 420,
+      "y": 1260,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#3b5bdb",
+      "backgroundColor": "#bac8ff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 651439910,
+      "versionNonce": 1048621715,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "bwIGrTjyZoj2Iud6"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "bwIGrTjyZoj2Iud6",
+      "type": "text",
+      "x": 428,
+      "y": 1268,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#3b5bdb",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1498906385,
+      "versionNonce": 650415793,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Nuit 1 · Loups\nComplexGameNight1WerewolfVotedStory\nLes loups visent la VOYANTE",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "V6kZmlcAGMW1rQaq",
+      "originalText": "Nuit 1 · Loups\nComplexGameNight1WerewolfVotedStory\nLes loups visent la VOYANTE",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "uxotJOMP6Js0lzsE",
+      "type": "rectangle",
+      "x": 420,
+      "y": 1410,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#6741d9",
+      "backgroundColor": "#d0bfff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1612990718,
+      "versionNonce": 584557397,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "Dm1F4z6lvKZxvFOA"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "Dm1F4z6lvKZxvFOA",
+      "type": "text",
+      "x": 428,
+      "y": 1418,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#6741d9",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 628327903,
+      "versionNonce": 564824830,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Nuit 1 · Sorcière\nComplexGameNight1WitchSavedStory\nLa sorcière SAUVE la voyante (potion soin)",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "uxotJOMP6Js0lzsE",
+      "originalText": "Nuit 1 · Sorcière\nComplexGameNight1WitchSavedStory\nLa sorcière SAUVE la voyante (potion soin)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "YTuY9OvftMvuxNUu",
+      "type": "rectangle",
+      "x": 420,
+      "y": 1560,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#e8590c",
+      "backgroundColor": "#ffec99",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1519781530,
+      "versionNonce": 363092711,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "l6PwZWI1NAgiMKot"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "l6PwZWI1NAgiMKot",
+      "type": "text",
+      "x": 428,
+      "y": 1568,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#e8590c",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 89276019,
+      "versionNonce": 1097806330,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Jour 1\nComplexGameDay1FinishedStory\nDiscussion terminée → vote ouvert",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "YTuY9OvftMvuxNUu",
+      "originalText": "Jour 1\nComplexGameDay1FinishedStory\nDiscussion terminée → vote ouvert",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "kG5bVdwr9lyPkeat",
+      "type": "rectangle",
+      "x": 420,
+      "y": 1710,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#e8590c",
+      "backgroundColor": "#ffd8a8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 87555800,
+      "versionNonce": 887036181,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "4JAQNma1qlG0NXVn"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "4JAQNma1qlG0NXVn",
+      "type": "text",
+      "x": 428,
+      "y": 1718,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#e8590c",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1021570676,
+      "versionNonce": 1665187488,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Vote 1\nComplexGameVote1ResolvedStory\nLe village élimine WEREWOLF_1\n→ loups: 2",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "kG5bVdwr9lyPkeat",
+      "originalText": "Vote 1\nComplexGameVote1ResolvedStory\nLe village élimine WEREWOLF_1\n→ loups: 2",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "zbw2VIfpgzm62JJa",
+      "type": "rectangle",
+      "x": 420,
+      "y": 1860,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#3b5bdb",
+      "backgroundColor": "#bac8ff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 585171913,
+      "versionNonce": 1868578607,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "RgCTWwanNwE7kZBU"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "RgCTWwanNwE7kZBU",
+      "type": "text",
+      "x": 428,
+      "y": 1868,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#3b5bdb",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1281473773,
+      "versionNonce": 571005122,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Nuit 2 · Voyante\nComplexGameNight2SeerRevealedStory",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "zbw2VIfpgzm62JJa",
+      "originalText": "Nuit 2 · Voyante\nComplexGameNight2SeerRevealedStory",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "AMcPIMEcGiN5UX9w",
+      "type": "rectangle",
+      "x": 420,
+      "y": 2010,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#3b5bdb",
+      "backgroundColor": "#bac8ff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 135314683,
+      "versionNonce": 1073263710,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "c3IyshubgYmfy7NP"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "c3IyshubgYmfy7NP",
+      "type": "text",
+      "x": 428,
+      "y": 2018,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#3b5bdb",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 13095291,
+      "versionNonce": 732840556,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Nuit 2 · Loups\nComplexGameNight2WerewolfVotedStory\nLes loups visent VILLAGER_2",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "AMcPIMEcGiN5UX9w",
+      "originalText": "Nuit 2 · Loups\nComplexGameNight2WerewolfVotedStory\nLes loups visent VILLAGER_2",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "ZgbyFPdGWG1bHPB6",
+      "type": "rectangle",
+      "x": 420,
+      "y": 2160,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#6741d9",
+      "backgroundColor": "#d0bfff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 258345981,
+      "versionNonce": 966435348,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "DuZ48XJulpEZd1dL"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "DuZ48XJulpEZd1dL",
+      "type": "text",
+      "x": 428,
+      "y": 2168,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#6741d9",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1305066280,
+      "versionNonce": 127259905,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Nuit 2 · Sorcière\nComplexGameNight2WitchPassedStory\nLa sorcière laisse passer → VILLAGER_2 meurt",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "ZgbyFPdGWG1bHPB6",
+      "originalText": "Nuit 2 · Sorcière\nComplexGameNight2WitchPassedStory\nLa sorcière laisse passer → VILLAGER_2 meurt",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cUz4TkdjUMbKX6i3",
+      "type": "rectangle",
+      "x": 420,
+      "y": 2310,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#e8590c",
+      "backgroundColor": "#ffec99",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1270188891,
+      "versionNonce": 740253663,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "ABAonMG1sRE8R48I"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "ABAonMG1sRE8R48I",
+      "type": "text",
+      "x": 428,
+      "y": 2318,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#e8590c",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 594985976,
+      "versionNonce": 1241716293,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Jour 2\nComplexGameDay2FinishedStory\nVote ouvert",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cUz4TkdjUMbKX6i3",
+      "originalText": "Jour 2\nComplexGameDay2FinishedStory\nVote ouvert",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "DZtbTPob9FBBcz0U",
+      "type": "rectangle",
+      "x": 420,
+      "y": 2460,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#e8590c",
+      "backgroundColor": "#ffd8a8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 854772402,
+      "versionNonce": 1234271484,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "vOPjbSXHFhZhchFk"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "vOPjbSXHFhZhchFk",
+      "type": "text",
+      "x": 428,
+      "y": 2468,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#e8590c",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1386529181,
+      "versionNonce": 1489564853,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Vote 2\nComplexGameVote2ResolvedStory\nLe village élimine WEREWOLF_2\n→ loups: 1",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "DZtbTPob9FBBcz0U",
+      "originalText": "Vote 2\nComplexGameVote2ResolvedStory\nLe village élimine WEREWOLF_2\n→ loups: 1",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "AnZRimVXx8aAxwap",
+      "type": "rectangle",
+      "x": 420,
+      "y": 2610,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#3b5bdb",
+      "backgroundColor": "#bac8ff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1966361350,
+      "versionNonce": 1796602570,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "OJWhKVvn1j8VxUVg"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "OJWhKVvn1j8VxUVg",
+      "type": "text",
+      "x": 428,
+      "y": 2618,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#3b5bdb",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 311009318,
+      "versionNonce": 1279445959,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Nuit 3 · Voyante\nComplexGameNight3SeerRevealedStory",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "AnZRimVXx8aAxwap",
+      "originalText": "Nuit 3 · Voyante\nComplexGameNight3SeerRevealedStory",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "uX7suRuMUCXQeED3",
+      "type": "rectangle",
+      "x": 420,
+      "y": 2760,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "#ffc9c9",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 369209817,
+      "versionNonce": 1490550825,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "BWIDUHRy3Chdy6KB"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "BWIDUHRy3Chdy6KB",
+      "type": "text",
+      "x": 428,
+      "y": 2768,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 521475553,
+      "versionNonce": 1739629096,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Nuit 3 · Loups  ◆ FORK ◆\nComplexGameNight3WerewolfVotedStory\nLes loups visent VILLAGER_3\nDeux suites possibles ↓ et →",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "uX7suRuMUCXQeED3",
+      "originalText": "Nuit 3 · Loups  ◆ FORK ◆\nComplexGameNight3WerewolfVotedStory\nLes loups visent VILLAGER_3\nDeux suites possibles ↓ et →",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "blY4IhYg5gxQT8vV",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 156,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1017264647,
+      "versionNonce": 419061400,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "bNbRWTrbc52X8vnU",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "MZruyVGSK9Wv09g4",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "mkwDk30dt3hP0QVX",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 306,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 50092928,
+      "versionNonce": 928587670,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "MZruyVGSK9Wv09g4",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "mQlSp49tQTHGWdvt",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "6pHxBwSQ0oDoTx15",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 456,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 261672392,
+      "versionNonce": 758896900,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "mQlSp49tQTHGWdvt",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "BFW65aUNdIIJtntZ",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "hCMmUDFkwICpAH1l",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 606,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 153559177,
+      "versionNonce": 188794090,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "BFW65aUNdIIJtntZ",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "ClcUAcYVTPedjXjP",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "0lWZ9M3jtDmKiOxQ",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 756,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1267640477,
+      "versionNonce": 223213778,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "ClcUAcYVTPedjXjP",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "6Wt037OD158oAiES",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "Lt7T0DZds71gVMjK",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 906,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1862714689,
+      "versionNonce": 1410690223,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "6Wt037OD158oAiES",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "iObK3NobatE4JUs3",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "71Xole04S6F9tihx",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 1056,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1257889497,
+      "versionNonce": 846728107,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "iObK3NobatE4JUs3",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "z2rg8flObyxpefrY",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "q4nqihJSifsvWIpn",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 1206,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1415733792,
+      "versionNonce": 1457051605,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "z2rg8flObyxpefrY",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "V6kZmlcAGMW1rQaq",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "reL3ZUtJFYeSTVEb",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 1356,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 297687241,
+      "versionNonce": 636383968,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "V6kZmlcAGMW1rQaq",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "uxotJOMP6Js0lzsE",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "8BmJRG3rFddFjQgz",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 1506,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1039626873,
+      "versionNonce": 1461614364,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "uxotJOMP6Js0lzsE",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "YTuY9OvftMvuxNUu",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "ygPlyspZQISufPzZ",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 1656,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1471852964,
+      "versionNonce": 273819202,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "YTuY9OvftMvuxNUu",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "kG5bVdwr9lyPkeat",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "QiLRrm1estr7755H",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 1806,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1601135560,
+      "versionNonce": 263712961,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "kG5bVdwr9lyPkeat",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "zbw2VIfpgzm62JJa",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "OJgbl7tlvz1r9hDw",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 1956,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 710480259,
+      "versionNonce": 1477263715,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "zbw2VIfpgzm62JJa",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "AMcPIMEcGiN5UX9w",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "g1hm0Yc54V50HwyR",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 2106,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 244246486,
+      "versionNonce": 1168485135,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "AMcPIMEcGiN5UX9w",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "ZgbyFPdGWG1bHPB6",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cgzh6D9bYrulryEu",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 2256,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1147680859,
+      "versionNonce": 404547463,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "ZgbyFPdGWG1bHPB6",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "cUz4TkdjUMbKX6i3",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "P9lQ3KAUgU99ocKZ",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 2406,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 592994641,
+      "versionNonce": 1087244829,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "cUz4TkdjUMbKX6i3",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "DZtbTPob9FBBcz0U",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "NnqBfifYPWs0vCmN",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 2556,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 303920262,
+      "versionNonce": 1997655066,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "DZtbTPob9FBBcz0U",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "AnZRimVXx8aAxwap",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "UTF3beMXG8V1b0b0",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 2706,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 502544506,
+      "versionNonce": 1573184679,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "AnZRimVXx8aAxwap",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "uX7suRuMUCXQeED3",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "TBJ7DLePafbftJn4",
+      "type": "rectangle",
+      "x": 420,
+      "y": 2910,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#6741d9",
+      "backgroundColor": "#d0bfff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 912706060,
+      "versionNonce": 1234423936,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "PSNlPfzdt0TbGpBO"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "PSNlPfzdt0TbGpBO",
+      "type": "text",
+      "x": 428,
+      "y": 2918,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#6741d9",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1070038485,
+      "versionNonce": 527721699,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Nuit 3 · Sorcière\nComplexGameNight3WitchPoisonedStory\nLa sorcière empoisonne WEREWOLF_3",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "TBJ7DLePafbftJn4",
+      "originalText": "Nuit 3 · Sorcière\nComplexGameNight3WitchPoisonedStory\nLa sorcière empoisonne WEREWOLF_3",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "eg5j90zeVZqADTXw",
+      "type": "rectangle",
+      "x": 420,
+      "y": 3060,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#2f9e44",
+      "backgroundColor": "#b2f2bb",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1512449114,
+      "versionNonce": 203917183,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "FkF0wHIs4nDp4PQz"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "FkF0wHIs4nDp4PQz",
+      "type": "text",
+      "x": 428,
+      "y": 3068,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#2f9e44",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 245475657,
+      "versionNonce": 417509327,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "★ VICTOIRE VILLAGE\n0 loup vivant → le village gagne\n(enfant sauvage resté villageois,\nmodèle = hôte vivant)",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "eg5j90zeVZqADTXw",
+      "originalText": "★ VICTOIRE VILLAGE\n0 loup vivant → le village gagne\n(enfant sauvage resté villageois,\nmodèle = hôte vivant)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "uPya9sfRDGB8GDq3",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 2856,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#2f9e44",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1168983697,
+      "versionNonce": 990757355,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "uX7suRuMUCXQeED3",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "TBJ7DLePafbftJn4",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "JSvqcFBis0KKwKQy",
+      "type": "arrow",
+      "x": 600.0,
+      "y": 3006,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#2f9e44",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 937741054,
+      "versionNonce": 1928459250,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "TBJ7DLePafbftJn4",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "eg5j90zeVZqADTXw",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "AlW4rI7NHcZ7enhy",
+      "type": "rectangle",
+      "x": 900,
+      "y": 2910,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "#ffe3e3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1926285785,
+      "versionNonce": 467191311,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "JHIi4o7dEnmp9aJY"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "JHIi4o7dEnmp9aJY",
+      "type": "text",
+      "x": 908,
+      "y": 2918,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 13314545,
+      "versionNonce": 1974077795,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "WerewolfWin · Nuit 3\nComplexGameWerewolfWinNight3Story\nMODÈLE enfant sauvage = WEREWOLF_3\n(override getWildChildModel)",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "AlW4rI7NHcZ7enhy",
+      "originalText": "WerewolfWin · Nuit 3\nComplexGameWerewolfWinNight3Story\nMODÈLE enfant sauvage = WEREWOLF_3\n(override getWildChildModel)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "3On1lo9frpQqWZrF",
+      "type": "rectangle",
+      "x": 900,
+      "y": 3060,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "#ffe3e3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 660429231,
+      "versionNonce": 1203646132,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "TNx7PIMuyClFJsoI"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "TNx7PIMuyClFJsoI",
+      "type": "text",
+      "x": 908,
+      "y": 3068,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 339937961,
+      "versionNonce": 823253524,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "WerewolfWin · Sorcière\nComplexGameWerewolfWinNight3PoisonedStory\nSorcière empoisonne WEREWOLF_3 (=modèle)\n→ enfant sauvage devient LOUP, partie continue\nLoups: 1 · Village: 6",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "3On1lo9frpQqWZrF",
+      "originalText": "WerewolfWin · Sorcière\nComplexGameWerewolfWinNight3PoisonedStory\nSorcière empoisonne WEREWOLF_3 (=modèle)\n→ enfant sauvage devient LOUP, partie continue\nLoups: 1 · Village: 6",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "rjOtUEh8S5ihp3Ls",
+      "type": "rectangle",
+      "x": 900,
+      "y": 3210,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "#ffe3e3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 644936182,
+      "versionNonce": 418867686,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "THSdByztJfSaMcYE"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "THSdByztJfSaMcYE",
+      "type": "text",
+      "x": 908,
+      "y": 3218,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 732528367,
+      "versionNonce": 1838788067,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "WerewolfWin · Vote 3\nComplexGameWerewolfWinVote3Story\nLe village se trompe → élimine VILLAGER_4\nLoups: 1 · Village: 5",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "rjOtUEh8S5ihp3Ls",
+      "originalText": "WerewolfWin · Vote 3\nComplexGameWerewolfWinVote3Story\nLe village se trompe → élimine VILLAGER_4\nLoups: 1 · Village: 5",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "fPgp5AuoMDrO9lGW",
+      "type": "rectangle",
+      "x": 900,
+      "y": 3360,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "#ffe3e3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 53352831,
+      "versionNonce": 1582990811,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "2dm8kFXGyWvwD3bS"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "2dm8kFXGyWvwD3bS",
+      "type": "text",
+      "x": 908,
+      "y": 3368,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1175126162,
+      "versionNonce": 1095490260,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "WerewolfWin · Nuit 4\nComplexGameWerewolfWinNight4Story\nL'enfant-sauvage-loup dévore VILLAGER_5\nLoups: 1 · Village: 4",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "fPgp5AuoMDrO9lGW",
+      "originalText": "WerewolfWin · Nuit 4\nComplexGameWerewolfWinNight4Story\nL'enfant-sauvage-loup dévore VILLAGER_5\nLoups: 1 · Village: 4",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "ebdGqgzupHKXKUZW",
+      "type": "rectangle",
+      "x": 900,
+      "y": 3510,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "#ffe3e3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1506155966,
+      "versionNonce": 1703014800,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "edcFcMc381Nnz4gj"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "edcFcMc381Nnz4gj",
+      "type": "text",
+      "x": 908,
+      "y": 3518,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1089942300,
+      "versionNonce": 759930368,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "WerewolfWin · Vote 4\nComplexGameWerewolfWinVote4Story\nLe village élimine VILLAGER_6\nLoups: 1 · Village: 3",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "ebdGqgzupHKXKUZW",
+      "originalText": "WerewolfWin · Vote 4\nComplexGameWerewolfWinVote4Story\nLe village élimine VILLAGER_6\nLoups: 1 · Village: 3",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "f8rBPkneZjArRMwk",
+      "type": "rectangle",
+      "x": 900,
+      "y": 3660,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "#ffe3e3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 435477228,
+      "versionNonce": 231677747,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "GIpwYF5JDkTiaSdZ"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "GIpwYF5JDkTiaSdZ",
+      "type": "text",
+      "x": 908,
+      "y": 3668,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1975479961,
+      "versionNonce": 845300844,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "WerewolfWin · Nuit 5\nComplexGameWerewolfWinNight5Story\nL'enfant-sauvage-loup dévore la VOYANTE\nLoups: 1 · Village: 2",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "f8rBPkneZjArRMwk",
+      "originalText": "WerewolfWin · Nuit 5\nComplexGameWerewolfWinNight5Story\nL'enfant-sauvage-loup dévore la VOYANTE\nLoups: 1 · Village: 2",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "hDyOZteXPvQyNJFr",
+      "type": "rectangle",
+      "x": 900,
+      "y": 3810,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "#ffe3e3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1849193160,
+      "versionNonce": 1302211253,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "uOYaRrvSxCTTaCRv"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "uOYaRrvSxCTTaCRv",
+      "type": "text",
+      "x": 908,
+      "y": 3818,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1754911403,
+      "versionNonce": 358239116,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "WerewolfWin · Vote 5\nComplexGameWerewolfWinVote5Story\nBulletins contre la sorcière déposés\n(timeUp du test → résout le vote)",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "hDyOZteXPvQyNJFr",
+      "originalText": "WerewolfWin · Vote 5\nComplexGameWerewolfWinVote5Story\nBulletins contre la sorcière déposés\n(timeUp du test → résout le vote)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "kBJhbB4ehFXMd1am",
+      "type": "rectangle",
+      "x": 900,
+      "y": 3960,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "#ff8787",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1475625708,
+      "versionNonce": 1723707941,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "RXXOBxKL24BO8Jc3"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "RXXOBxKL24BO8Jc3",
+      "type": "text",
+      "x": 908,
+      "y": 3968,
+      "width": 344,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 600915769,
+      "versionNonce": 1565003589,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "★ VICTOIRE LOUPS\nSorcière éliminée → parité 1 loup vs 1 villageois\n→ les loups gagnent",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "kBJhbB4ehFXMd1am",
+      "originalText": "★ VICTOIRE LOUPS\nSorcière éliminée → parité 1 loup vs 1 villageois\n→ les loups gagnent",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "2KLoFtyeSRF9vYvp",
+      "type": "arrow",
+      "x": 780,
+      "y": 2808.0,
+      "width": 120,
+      "height": 150.0,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1427911135,
+      "versionNonce": 1266376907,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          150.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "uX7suRuMUCXQeED3",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "AlW4rI7NHcZ7enhy",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "ZVBs95H9IOdiSixL",
+      "type": "arrow",
+      "x": 1080.0,
+      "y": 3006,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 186972505,
+      "versionNonce": 1327764282,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "AlW4rI7NHcZ7enhy",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "3On1lo9frpQqWZrF",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "fdr63Yautp6F7qBh",
+      "type": "arrow",
+      "x": 1080.0,
+      "y": 3156,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 901019569,
+      "versionNonce": 1754757614,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "3On1lo9frpQqWZrF",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "rjOtUEh8S5ihp3Ls",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "HCqdaluNKr82RZ7o",
+      "type": "arrow",
+      "x": 1080.0,
+      "y": 3306,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1726102622,
+      "versionNonce": 260904730,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "rjOtUEh8S5ihp3Ls",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "fPgp5AuoMDrO9lGW",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "WetMyfkWcMtjYdQB",
+      "type": "arrow",
+      "x": 1080.0,
+      "y": 3456,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 74256266,
+      "versionNonce": 1747721597,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "fPgp5AuoMDrO9lGW",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "ebdGqgzupHKXKUZW",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "A5BiWL3yfvY9omdU",
+      "type": "arrow",
+      "x": 1080.0,
+      "y": 3606,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1110928863,
+      "versionNonce": 1261903151,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "ebdGqgzupHKXKUZW",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "f8rBPkneZjArRMwk",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "hKaSZyopHCF1kEcr",
+      "type": "arrow",
+      "x": 1080.0,
+      "y": 3756,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 988136998,
+      "versionNonce": 1683497948,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "f8rBPkneZjArRMwk",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "hDyOZteXPvQyNJFr",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "RLQntSuq11ilrVVh",
+      "type": "arrow",
+      "x": 1080.0,
+      "y": 3906,
+      "width": 0.0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#c92a2a",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1467596497,
+      "versionNonce": 1894649212,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "hDyOZteXPvQyNJFr",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "kBJhbB4ehFXMd1am",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "6NBAzn5YTmmgMy6j",
+      "type": "text",
+      "x": 420,
+      "y": 0,
+      "width": 760,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 462947904,
+      "versionNonce": 508533254,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 28,
+      "fontFamily": 1,
+      "text": "ComplexGame — déroulé des stories",
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "ComplexGame — déroulé des stories",
+      "lineHeight": 1.25
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
