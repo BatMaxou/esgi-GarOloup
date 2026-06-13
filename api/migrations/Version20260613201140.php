@@ -7,7 +7,7 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class Version20260608202202 extends AbstractMigration
+final class Version20260613201140 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -56,6 +56,8 @@ final class Version20260608202202 extends AbstractMigration
         $this->addSql('CREATE TABLE vote_event (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE werewolf_role (target_player_id VARCHAR(36) DEFAULT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE werewolf_vote_event (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE wild_child_role (model_player_id VARCHAR(36) DEFAULT NULL, transformed TINYINT NOT NULL, target_player_id VARCHAR(36) DEFAULT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE wild_child_setup_event (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE witch_poison_event (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE witch_role (heal_potion_available TINYINT NOT NULL, poison_potion_available TINYINT NOT NULL, acted_this_night TINYINT NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE witch_save_event (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
@@ -104,6 +106,8 @@ final class Version20260608202202 extends AbstractMigration
         $this->addSql('ALTER TABLE vote_event ADD CONSTRAINT FK_6AC7686CBF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE werewolf_role ADD CONSTRAINT FK_2A5ED8F1BF396750 FOREIGN KEY (id) REFERENCES game_role (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE werewolf_vote_event ADD CONSTRAINT FK_6E60295CBF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE wild_child_role ADD CONSTRAINT FK_3D8CFAE6BF396750 FOREIGN KEY (id) REFERENCES game_role (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE wild_child_setup_event ADD CONSTRAINT FK_6E71023BBF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE witch_poison_event ADD CONSTRAINT FK_45C8D07ABF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE witch_role ADD CONSTRAINT FK_BD528821BF396750 FOREIGN KEY (id) REFERENCES game_role (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE witch_save_event ADD CONSTRAINT FK_9A09FCDEBF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
@@ -155,6 +159,8 @@ final class Version20260608202202 extends AbstractMigration
         $this->addSql('ALTER TABLE vote_event DROP FOREIGN KEY FK_6AC7686CBF396750');
         $this->addSql('ALTER TABLE werewolf_role DROP FOREIGN KEY FK_2A5ED8F1BF396750');
         $this->addSql('ALTER TABLE werewolf_vote_event DROP FOREIGN KEY FK_6E60295CBF396750');
+        $this->addSql('ALTER TABLE wild_child_role DROP FOREIGN KEY FK_3D8CFAE6BF396750');
+        $this->addSql('ALTER TABLE wild_child_setup_event DROP FOREIGN KEY FK_6E71023BBF396750');
         $this->addSql('ALTER TABLE witch_poison_event DROP FOREIGN KEY FK_45C8D07ABF396750');
         $this->addSql('ALTER TABLE witch_role DROP FOREIGN KEY FK_BD528821BF396750');
         $this->addSql('ALTER TABLE witch_save_event DROP FOREIGN KEY FK_9A09FCDEBF396750');
@@ -198,6 +204,8 @@ final class Version20260608202202 extends AbstractMigration
         $this->addSql('DROP TABLE vote_event');
         $this->addSql('DROP TABLE werewolf_role');
         $this->addSql('DROP TABLE werewolf_vote_event');
+        $this->addSql('DROP TABLE wild_child_role');
+        $this->addSql('DROP TABLE wild_child_setup_event');
         $this->addSql('DROP TABLE witch_poison_event');
         $this->addSql('DROP TABLE witch_role');
         $this->addSql('DROP TABLE witch_save_event');
