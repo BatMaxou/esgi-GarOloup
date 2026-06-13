@@ -1,5 +1,8 @@
 App\Entity\Game\Period\Action\NightAction:
     attributes:
+        type:
+            groups:
+                - game:read
         source:
             groups:
                 - game:read

@@ -1,5 +1,8 @@
 App\Entity\Game\Period\Action\DayAction:
     attributes:
+        type:
+            groups:
+                - game:read
         source:
             groups:
                 - game:read

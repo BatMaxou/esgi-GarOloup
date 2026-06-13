@@ -6,6 +6,7 @@ use App\Entity\Game\Game;
 use App\Entity\Game\Period\Action\NightAction;
 use App\Entity\Game\Period\Interface\PeriodInterface;
 use App\Entity\Game\Period\Night;
+use App\Enum\Game\GameActionTypeEnum;
 use App\Enum\Game\GameRoleEnum;
 use App\Repository\Game\Period\Action\NightAction\MurderActionRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -36,5 +37,10 @@ class MurderAction extends NightAction
                 return;
             }
         }
+    }
+
+    public function getType(): GameActionTypeEnum
+    {
+        return GameActionTypeEnum::MURDER;
     }
 }

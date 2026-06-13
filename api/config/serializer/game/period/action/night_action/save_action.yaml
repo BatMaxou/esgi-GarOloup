@@ -1,0 +1,5 @@
+App\Entity\Game\Period\Action\NightAction\SaveAction:
+    attributes:
+        targetPlayerId:
+            groups:
+                - game:read
