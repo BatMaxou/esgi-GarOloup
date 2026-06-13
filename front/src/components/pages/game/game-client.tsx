@@ -4,6 +4,7 @@ import IngamePlayersSidebar from '@/components/common/game/ingame-players-sideba
 import RunningGameDisplay from '@/components/common/game/running-game-display';
 import { useGame } from '@/contexts/game-context';
 import { usePlayer } from '@/contexts/player-context';
+import { SeerProvider } from '@/contexts/roles/seer-context';
 import { WereWolfProvider } from '@/contexts/roles/werewolf-context';
 import { WitchProvider } from '@/contexts/roles/witch-context';
 import { GameRoleEnum } from '@/utils/enums';
@@ -61,6 +62,12 @@ const GameClient = () => {
           <WitchProvider>
             <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />
           </WitchProvider>
+        );
+      case player?.role?.type === GameRoleEnum.SEER:
+        return (
+          <SeerProvider>
+            <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />
+          </SeerProvider>
         );
       default:
         return <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />;

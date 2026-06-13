@@ -65,6 +65,14 @@
             "poisonTagDisabled": "Déjà utilisée",
             "healTag": "1 utilisation restante",
             "healTagDisabled": "Déjà utilisée"
+          },
+          "seerActions": {
+            "seer":"Voyante",
+            "seerCamp": "Camp des Villageois",
+            "roundDescription": "Choisissez un joueur pour voir son rôle secret. Cette information n'est connue que de vous.",
+            "revealChoiceTitle": "Inspecter un joueur", 
+            "revealTarget": "Inspecter", 
+            "submitChoice": "Confirmer"
           }
         }
       },
