@@ -162,6 +162,9 @@ class Game implements TopicRelatedObject
     #[ORM\Column(enumType: GameRuntimeStepEnum::class, nullable: true)]
     private ?GameRuntimeStepEnum $runtimeStep = null;
 
+    #[ORM\Column(enumType: GameRuntimeStepEnum::class, nullable: true)]
+    private ?GameRuntimeStepEnum $interruptedRuntimeStep = null;
+
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $stepEndAt = null;
 
@@ -268,6 +271,18 @@ class Game implements TopicRelatedObject
     public function setRuntimeStep(?GameRuntimeStepEnum $runtimeStep): static
     {
         $this->runtimeStep = $runtimeStep;
+
+        return $this;
+    }
+
+    public function getInterruptedRuntimeStep(): ?GameRuntimeStepEnum
+    {
+        return $this->interruptedRuntimeStep;
+    }
+
+    public function setInterruptedRuntimeStep(?GameRuntimeStepEnum $interruptedRuntimeStep): static
+    {
+        $this->interruptedRuntimeStep = $interruptedRuntimeStep;
 
         return $this;
     }

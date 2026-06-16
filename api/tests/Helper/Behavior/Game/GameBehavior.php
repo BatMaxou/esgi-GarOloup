@@ -191,6 +191,16 @@ class GameBehavior extends AbstractBehavior
         ]));
     }
 
+    public function hunterShoot(?string $targetPlayerId): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/hunter/shoot', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [
+                'targetPlayerId' => $targetPlayerId,
+            ],
+        ]));
+    }
+
     public function timeUp(): BehaviorResponse
     {
         return new BehaviorResponse($this->client->request('PATCH', '/api/game/time-up', [

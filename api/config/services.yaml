@@ -18,6 +18,7 @@ services:
             int $setupDuration: '%env(int:SETUP_DURATION)%'
             int $nightStepDuration: '%env(int:NIGHT_STEP_DURATION)%'
             int $voteDuration: '%env(int:VOTE_DURATION)%'
+            int $hunterStepDuration: '%env(int:HUNTER_STEP_DURATION)%'
             int $afkThreshold: '%env(int:AFK_THRESHOLD)%'
 
     _instanceof:
@@ -25,6 +26,8 @@ services:
             tags: ['game_event.applicator']
         App\Domain\WinCondition\Interface\WinConditionCheckerInterface:
             tags: ['win_condition.checker']
+        App\Domain\Interceptor\Interface\InterceptorInterface:
+            tags: ['game.interceptor']
 
     App\Fixtures\:
         resource: '../fixtures'
@@ -46,4 +49,8 @@ services:
     App\Domain\WinCondition\WinDetector:
         arguments:
             $checkers: !tagged_iterator win_condition.checker
+
+    App\Domain\Interceptor\InterceptorHandler:
+        arguments:
+            $interceptors: !tagged_iterator game.interceptor
 

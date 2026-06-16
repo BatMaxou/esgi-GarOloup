@@ -20,7 +20,7 @@ class ComplexGameWerewolfWinVote3Story extends ComplexGameWerewolfWinNight3Poiso
 
         $targetPlayerBuilder = $this->getState(self::VILLAGER_4);
         \assert($targetPlayerBuilder instanceof PlayerBuilder);
-        $this->castVillageMisvote($gameBuilder, $targetPlayerBuilder);
+        $this->villageMisvote($gameBuilder, $targetPlayerBuilder);
 
         $this->voteResolver->resolve($game);
         $this->nightOrchestrator->start($game);

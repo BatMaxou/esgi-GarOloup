@@ -42,3 +42,9 @@ App\Entity\Game\Role\WildChildRole:
         transformed:
             groups:
                 - me:player:read
+
+App\Entity\Game\Role\HunterRole:
+    attributes:
+        hasShot:
+            groups:
+                - me:player:read

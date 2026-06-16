@@ -32,6 +32,8 @@ use App\Fixtures\Story\ComplexGame\Initialisation\ComplexGameFilledStory;
 use App\Fixtures\Story\ComplexGame\Initialisation\ComplexGameLaunchedStory;
 use App\Fixtures\Story\ComplexGame\Runtime\Day\ComplexGameDay1FinishedStory;
 use App\Fixtures\Story\ComplexGame\Runtime\Day\ComplexGameDay2FinishedStory;
+use App\Fixtures\Story\ComplexGame\Runtime\Night\Hunter\ComplexGameNight1HunterInterruptStory;
+use App\Fixtures\Story\ComplexGame\Runtime\Night\Hunter\ComplexGameNight1WerewolfKilledHunterStory;
 use App\Fixtures\Story\ComplexGame\Runtime\Night\Seer\ComplexGameNight1SeerRevealedStory;
 use App\Fixtures\Story\ComplexGame\Runtime\Night\Seer\ComplexGameNight2SeerRevealedStory;
 use App\Fixtures\Story\ComplexGame\Runtime\Night\Seer\ComplexGameNight3SeerRevealedStory;
@@ -43,9 +45,17 @@ use App\Fixtures\Story\ComplexGame\Runtime\Night\Witch\ComplexGameNight2WitchPas
 use App\Fixtures\Story\ComplexGame\Runtime\Night\Witch\ComplexGameNight3WitchPoisonedStory;
 use App\Fixtures\Story\ComplexGame\Runtime\Setup\ComplexGameSetupedStory;
 use App\Fixtures\Story\ComplexGame\Runtime\Setup\ComplexGameVillagerSetupedStory;
+use App\Fixtures\Story\ComplexGame\Runtime\Vote\ComplexGameVote1HunterEliminatedStory;
+use App\Fixtures\Story\ComplexGame\Runtime\Vote\ComplexGameVote1HunterInterruptStory;
 use App\Fixtures\Story\ComplexGame\Runtime\Vote\ComplexGameVote1ResolvedStory;
 use App\Fixtures\Story\ComplexGame\Runtime\Vote\ComplexGameVote2ResolvedStory;
+use App\Fixtures\Story\ComplexGame\Runtime\WerewolfWin\ComplexGameWerewolfWinNight3PoisonedStory;
 use App\Fixtures\Story\ComplexGame\Runtime\WerewolfWin\ComplexGameWerewolfWinNight3Story;
+use App\Fixtures\Story\ComplexGame\Runtime\WerewolfWin\ComplexGameWerewolfWinNight4Story;
+use App\Fixtures\Story\ComplexGame\Runtime\WerewolfWin\ComplexGameWerewolfWinNight5Story;
+use App\Fixtures\Story\ComplexGame\Runtime\WerewolfWin\ComplexGameWerewolfWinVote3Story;
+use App\Fixtures\Story\ComplexGame\Runtime\WerewolfWin\ComplexGameWerewolfWinVote4Story;
+use App\Fixtures\Story\ComplexGame\Runtime\WerewolfWin\ComplexGameWerewolfWinVote5Story;
 use App\Fixtures\Story\Game\GameCreatedStory;
 use App\Tests\Helper\ThereIs;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -76,41 +86,55 @@ class AppFixtures extends Fixture
         ThereIs::aStory(ClassicGameNight2WerewolfVotedStory::class)->execute();
         ThereIs::aStory(ClassicGameDay2FinishedStory::class)->execute();
 
-        // Game Master
-        ThereIs::aStory(ClassicGameFilledWithGameMasterStory::class)->execute();
-        ThereIs::aStory(ClassicGameClosedWithGameMasterStory::class)->execute();
-        ThereIs::aStory(ClassicGameConfiguredWithGameMasterStory::class)->execute();
-        ThereIs::aStory(ClassicGameWithGameMasterSettedStory::class)->execute();
-        ThereIs::aStory(ClassicGameDispatchedWithGameMasterStory::class)->execute();
-        ThereIs::aStory(ClassicGameLaunchedWithGameMasterStory::class)->execute();
-
-        // Random Dispatch
-        ThereIs::aStory(ClassicGameConfiguredWithGameMasterAndRandomDispatchStory::class)->execute();
-        ThereIs::aStory(ClassicGameWithGameMasterSettedAndRandomDispatchStory::class)->execute();
-        ThereIs::aStory(ClassicGameDispatchedWithGameMasterAndRandomDispatchStory::class)->execute();
-        ThereIs::aStory(ClassicGameLaunchedWithGameMasterAndRandomDispatchStory::class)->execute();
-
-        // Complex Game ----------------------------
-        ThereIs::aStory(ComplexGameFilledStory::class)->execute();
-        ThereIs::aStory(ComplexGameClosedStory::class)->execute();
-        ThereIs::aStory(ComplexGameConfiguredStory::class)->execute();
-        ThereIs::aStory(ComplexGameDispatchedStory::class)->execute();
-        ThereIs::aStory(ComplexGameLaunchedStory::class)->execute();
-        ThereIs::aStory(ComplexGameVillagerSetupedStory::class)->execute();
-        ThereIs::aStory(ComplexGameSetupedStory::class)->execute();
-        ThereIs::aStory(ComplexGameNight1SeerRevealedStory::class)->execute();
-        ThereIs::aStory(ComplexGameNight1WerewolfVotedStory::class)->execute();
-        ThereIs::aStory(ComplexGameNight1WitchSavedStory::class)->execute();
-        ThereIs::aStory(ComplexGameDay1FinishedStory::class)->execute();
-        ThereIs::aStory(ComplexGameVote1ResolvedStory::class)->execute();
-        ThereIs::aStory(ComplexGameNight2SeerRevealedStory::class)->execute();
-        ThereIs::aStory(ComplexGameNight2WerewolfVotedStory::class)->execute();
-        ThereIs::aStory(ComplexGameNight2WitchPassedStory::class)->execute();
-        ThereIs::aStory(ComplexGameDay2FinishedStory::class)->execute();
-        ThereIs::aStory(ComplexGameVote2ResolvedStory::class)->execute();
-        ThereIs::aStory(ComplexGameNight3SeerRevealedStory::class)->execute();
-        ThereIs::aStory(ComplexGameNight3WerewolfVotedStory::class)->execute();
-        ThereIs::aStory(ComplexGameNight3WitchPoisonedStory::class)->execute();
-        ThereIs::aStory(ComplexGameWerewolfWinNight3Story::class)->execute();
+        // // Game Master ---------------------------
+        // ThereIs::aStory(ClassicGameFilledWithGameMasterStory::class)->execute();
+        // ThereIs::aStory(ClassicGameClosedWithGameMasterStory::class)->execute();
+        // ThereIs::aStory(ClassicGameConfiguredWithGameMasterStory::class)->execute();
+        // ThereIs::aStory(ClassicGameWithGameMasterSettedStory::class)->execute();
+        // ThereIs::aStory(ClassicGameDispatchedWithGameMasterStory::class)->execute();
+        // ThereIs::aStory(ClassicGameLaunchedWithGameMasterStory::class)->execute();
+        //
+        // // Random Dispatch ---------------------------
+        // ThereIs::aStory(ClassicGameConfiguredWithGameMasterAndRandomDispatchStory::class)->execute();
+        // ThereIs::aStory(ClassicGameWithGameMasterSettedAndRandomDispatchStory::class)->execute();
+        // ThereIs::aStory(ClassicGameDispatchedWithGameMasterAndRandomDispatchStory::class)->execute();
+        // ThereIs::aStory(ClassicGameLaunchedWithGameMasterAndRandomDispatchStory::class)->execute();
+        //
+        // // Complex Game ----------------------------
+        // ThereIs::aStory(ComplexGameFilledStory::class)->execute();
+        // ThereIs::aStory(ComplexGameClosedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameConfiguredStory::class)->execute();
+        // ThereIs::aStory(ComplexGameDispatchedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameLaunchedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameVillagerSetupedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameSetupedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameNight1SeerRevealedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameNight1WerewolfVotedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameNight1WitchSavedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameDay1FinishedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameVote1ResolvedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameNight2SeerRevealedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameNight2WerewolfVotedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameNight2WitchPassedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameDay2FinishedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameVote2ResolvedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameNight3SeerRevealedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameNight3WerewolfVotedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameNight3WitchPoisonedStory::class)->execute();
+        //
+        // // Hunter ----------------------------------
+        // ThereIs::aStory(ComplexGameNight1WerewolfKilledHunterStory::class)->execute();
+        // ThereIs::aStory(ComplexGameNight1HunterInterruptStory::class)->execute();
+        // ThereIs::aStory(ComplexGameVote1HunterEliminatedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameVote1HunterInterruptStory::class)->execute();
+        //
+        // // Werewolf Win ----------------------------
+        // ThereIs::aStory(ComplexGameWerewolfWinNight3Story::class)->execute();
+        // ThereIs::aStory(ComplexGameWerewolfWinNight3PoisonedStory::class)->execute();
+        // ThereIs::aStory(ComplexGameWerewolfWinNight4Story::class)->execute();
+        // ThereIs::aStory(ComplexGameWerewolfWinNight5Story::class)->execute();
+        // ThereIs::aStory(ComplexGameWerewolfWinVote3Story::class)->execute();
+        // ThereIs::aStory(ComplexGameWerewolfWinVote4Story::class)->execute();
+        // ThereIs::aStory(ComplexGameWerewolfWinVote5Story::class)->execute();
     }
 }

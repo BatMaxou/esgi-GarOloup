@@ -45,7 +45,7 @@ class WildChildTransformationTest extends GarOloupApiTestCase
 
         $clock->sleep(60);
 
-        When::asUser($witchUserBuilder)->game()->timeUp();
+        When::game()->timeUp();
         $this->assertResponseStatusCodeSame(200);
 
         $game = $gameBuilder->getEntity();
@@ -82,7 +82,7 @@ class WildChildTransformationTest extends GarOloupApiTestCase
 
         $clock->sleep(60);
 
-        When::asUser($witchUserBuilder)->game()->timeUp();
+        When::game()->timeUp();
         $this->assertResponseStatusCodeSame(200);
 
         $game = $gameBuilder->getEntity();

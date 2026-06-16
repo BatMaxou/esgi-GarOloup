@@ -7,6 +7,7 @@ use App\Fixtures\Story\Role\GameRoleInitializedStory;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
 use App\Tests\Helper\Builder\Game\Role\GameRoleBuilderBag;
+use App\Tests\Helper\Builder\Game\Role\HunterRoleBuilder;
 use App\Tests\Helper\Builder\Game\Role\SeerRoleBuilder;
 use App\Tests\Helper\Builder\Game\Role\VillagerRoleBuilder;
 use App\Tests\Helper\Builder\Game\Role\WerewolfRoleBuilder;
@@ -21,7 +22,8 @@ class ComplexGameDispatchedStory extends ComplexGameConfiguredStory
     public const VILLAGER_3 = 'villager_3';
     public const VILLAGER_4 = 'villager_4';
     public const VILLAGER_5 = 'villager_5';
-    public const VILLAGER_6 = 'villager_6';
+
+    public const HUNTER = 'hunter';
 
     public const SEER = 'seer';
 
@@ -59,7 +61,7 @@ class ComplexGameDispatchedStory extends ComplexGameConfiguredStory
             [self::WEREWOLF_3, $gameRoleBagBuilder->getWerewolf()],
             [self::VILLAGER_4, $gameRoleBagBuilder->getVillager()],
             [self::VILLAGER_5, $gameRoleBagBuilder->getVillager()],
-            [self::VILLAGER_6, $gameRoleBagBuilder->getVillager()],
+            [self::HUNTER, $gameRoleBagBuilder->getHunter()],
             [self::WILD_CHILD, $gameRoleBagBuilder->getWildChild()],
         ];
 
@@ -75,6 +77,7 @@ class ComplexGameDispatchedStory extends ComplexGameConfiguredStory
                 $gameRoleBuilder instanceof SeerRoleBuilder => null,
                 $gameRoleBuilder instanceof WitchRoleBuilder => null,
                 $gameRoleBuilder instanceof WildChildRoleBuilder => null,
+                $gameRoleBuilder instanceof HunterRoleBuilder => null,
             };
 
             $this->addState($stateName, $playerBuilder, $pool);

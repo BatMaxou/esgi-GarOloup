@@ -51,12 +51,11 @@ class ComplexGameWerewolfWinNight3PoisonedStory extends ComplexGameWerewolfWinNi
         $this->em->flush();
     }
 
-    protected function castVillageMisvote(GameBuilder $gameBuilder, PlayerBuilder $target): void
+    protected function villageMisvote(GameBuilder $gameBuilder, PlayerBuilder $target): void
     {
         $targetId = $target->getEntity()->getId()?->toString();
 
-        foreach ($this->getAllPlayerStates() as $stateName) {
-            $voterBuilder = $this->getState($stateName);
+        foreach ($this->getPool(self::PLAYERS_POOL) as $voterBuilder) {
             \assert($voterBuilder instanceof PlayerBuilder);
             $voter = $voterBuilder->getEntity();
             if ($voter->isDead() || $voter->getId()?->toString() === $targetId) {
@@ -71,7 +70,7 @@ class ComplexGameWerewolfWinNight3PoisonedStory extends ComplexGameWerewolfWinNi
         }
     }
 
-    protected function castWerewolfKill(GameBuilder $gameBuilder, PlayerBuilder $victim): void
+    protected function werewolfKill(GameBuilder $gameBuilder, PlayerBuilder $victim): void
     {
         $wildChildPlayerBuilder = $this->getState(self::WILD_CHILD);
         \assert($wildChildPlayerBuilder instanceof PlayerBuilder);
@@ -87,18 +86,6 @@ class ComplexGameWerewolfWinNight3PoisonedStory extends ComplexGameWerewolfWinNi
             ->from(GameRoleEnum::WEREWOLF)
             ->against($victim)
             ->build();
-    }
-
-    /**
-     * @return string[]
-     */
-    protected function getAllPlayerStates(): array
-    {
-        return [
-            self::VILLAGER_1, self::VILLAGER_2, self::VILLAGER_3, self::VILLAGER_4,
-            self::VILLAGER_5, self::VILLAGER_6, self::SEER, self::WEREWOLF_1,
-            self::WEREWOLF_2, self::WEREWOLF_3, self::WITCH, self::WILD_CHILD,
-        ];
     }
 
     public function getPrefix(): string

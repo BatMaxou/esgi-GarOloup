@@ -15,6 +15,7 @@ import { VillagerResource } from '@/lib/api/resources/VillagerResource';
 import { SeerResource } from '@/lib/api/resources/SeerResource';
 import { WitchResource } from '@/lib/api/resources/WitchResource';
 import { WildChildResource } from '@/lib/api/resources/WildChildResource';
+import { HunterResource } from '@/lib/api/resources/HunterResource';
 
 type PropagateChangeToken = (token?: string | null, refreshToken?: string | null) => void;
 
@@ -69,6 +70,7 @@ export class ApiClient {
   seer: SeerResource;
   witch: WitchResource;
   wildChild: WildChildResource;
+  hunter: HunterResource;
 
   constructor(
     public baseUrl: string,
@@ -90,6 +92,7 @@ export class ApiClient {
     this.seer = new SeerResource(this);
     this.witch = new WitchResource(this);
     this.wildChild = new WildChildResource(this);
+    this.hunter = new HunterResource(this);
   }
 
   public initPropagateChangeToken(propagateChangeToken: PropagateChangeToken) {
