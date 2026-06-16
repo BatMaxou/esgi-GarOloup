@@ -12,6 +12,7 @@ export const ROLE_SLUG_BY_LOCALE: Record<GameRoleEnum, Record<RoleSlugLocale, st
   [GameRoleEnum.SEER]: { fr: 'voyante', en: 'seer' },
   [GameRoleEnum.WITCH]: { fr: 'sorciere', en: 'witch' },
   [GameRoleEnum.WILD_CHILD]: { fr: 'enfant-sauvage', en: 'wild-child' },
+  [GameRoleEnum.HUNTER]: { fr: 'chasseur', en: 'hunter' },
 };
 
 /**

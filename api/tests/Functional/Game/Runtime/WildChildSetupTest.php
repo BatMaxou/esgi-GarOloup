@@ -36,7 +36,7 @@ class WildChildSetupTest extends GarOloupApiTestCase
         When::asUser($wildChildUserBuilder)->game()->wildChildSetup($modelPlayerId->toString());
         $this->assertResponseStatusCodeSame(200);
 
-        $response = When::asUser($wildChildUserBuilder)->player()->getCurrent();
+        $response = When::player()->getCurrent();
         $this->assertSame($modelPlayerId->toString(), $response->get('[role][modelPlayerId]'));
         $this->assertFalse($response->get('[role][transformed]'));
     }

@@ -33,6 +33,9 @@ export const apiPaths = {
   wildChild: {
     setup: '/game/wild-child/setup',
   },
+  hunter: {
+    shoot: '/game/hunter/shoot',
+  },
   player: {
     getCurrent: '/game/player',
     leave: '/game/player',

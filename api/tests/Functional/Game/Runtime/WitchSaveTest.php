@@ -35,7 +35,7 @@ class WitchSaveTest extends GarOloupApiTestCase
         When::asUser($witchUserBuilder)->game()->witchSave($victimPlayerId->toString());
         $this->assertResponseStatusCodeSame(200);
 
-        $response = When::asUser($witchUserBuilder)->player()->getCurrent();
+        $response = When::player()->getCurrent();
         $this->assertFalse($response->get('[role][healPotionAvailable]'));
         $this->assertTrue($response->get('[role][poisonPotionAvailable]'));
     }
@@ -127,7 +127,7 @@ class WitchSaveTest extends GarOloupApiTestCase
         When::asUser($witchUserBuilder)->game()->witchSave($victimPlayerId->toString());
         $this->assertResponseStatusCodeSame(200);
 
-        When::asUser($witchUserBuilder)->game()->witchSave($victimPlayerId->toString());
+        When::game()->witchSave($victimPlayerId->toString());
         $this->assertResponseStatusCodeSame(403);
     }
 
@@ -188,7 +188,7 @@ class WitchSaveTest extends GarOloupApiTestCase
 
         $clock->sleep(60);
 
-        When::asUser($witchUserBuilder)->game()->timeUp();
+        When::game()->timeUp();
         $this->assertResponseStatusCodeSame(200);
 
         $this->assertFalse($victimPlayerBuilder->getEntity()->isDead());

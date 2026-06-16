@@ -88,6 +88,17 @@ class RoleBuilder extends AbstractBuilder
             ->withMaxPerGame(1);
     }
 
+    public function hunter(): static
+    {
+        $this->type = GameRoleEnum::HUNTER;
+
+        return $this->withName('Chasseur')
+            ->withDescription('Description du Chasseur')
+            ->withAbility('Tirer sur un joueur à sa mort')
+            ->withTeam(GameTeamEnum::VILLAGE)
+            ->withMaxPerGame(1);
+    }
+
     public function withName(string $name): static
     {
         $this->name = $name;

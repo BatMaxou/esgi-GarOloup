@@ -43,6 +43,9 @@ App\Entity\Game\Game:
         winningTeam:
             groups:
                 - game:read
+        interruptedRuntimeStep:
+            groups:
+                - game:read
         nights:
             groups:
                 - game:read
