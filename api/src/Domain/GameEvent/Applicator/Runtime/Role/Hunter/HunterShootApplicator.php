@@ -40,8 +40,8 @@ class HunterShootApplicator implements GameEventApplicatorInterface
 
         if ($gameEvent instanceof TimeUpGameEvent) {
             foreach ($game->getPlayers() as $player) {
-                $role = $player->getRole();
-                if ($player->isDead() && $role instanceof HunterRole && !$role->hasShot()) {
+                $role = $player->getRoleAs(HunterRole::class);
+                if ($player->isDead() && null !== $role && !$role->hasShot()) {
                     $role->markShot();
 
                     return $game;
@@ -71,8 +71,8 @@ class HunterShootApplicator implements GameEventApplicatorInterface
             throw new UnauthorizedGameActionException('You can not shoot');
         }
 
-        $role = $player->getRole();
-        if (!$role instanceof HunterRole) {
+        $role = $player->getRoleAs(HunterRole::class);
+        if (null === $role) {
             throw new \LogicException(\sprintf('Role must be verified as a %s here', HunterRole::class));
         }
 

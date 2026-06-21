@@ -2,9 +2,9 @@
 
 namespace App\Fixtures\Story\ComplexGame\Runtime\WerewolfWin;
 
-use App\Fixtures\Story\ComplexGame\Runtime\Night\Werewolf\ComplexGameNight3WerewolfVotedStory;
+use App\Fixtures\Story\ComplexGame\Runtime\Night\InfectFather\ComplexGameNight3InfectFatherPassedStory;
 
-class ComplexGameWerewolfWinNight3Story extends ComplexGameNight3WerewolfVotedStory
+class ComplexGameWerewolfWinNight3Story extends ComplexGameNight3InfectFatherPassedStory
 {
     protected function getWildChildModel(): string
     {

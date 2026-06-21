@@ -56,8 +56,8 @@ class SeerRevealApplicator implements GameEventApplicatorInterface
             throw new UnauthorizedGameActionException('You can not reveal');
         }
 
-        $role = $player->getRole();
-        if (!$role instanceof SeerRole) {
+        $role = $player->getRoleAs(SeerRole::class);
+        if (null === $role) {
             throw new \LogicException(\sprintf('Role must be verified as a %s here', SeerRole::class));
         }
 

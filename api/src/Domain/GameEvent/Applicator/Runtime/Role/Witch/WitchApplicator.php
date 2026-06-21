@@ -58,14 +58,14 @@ class WitchApplicator implements GameEventApplicatorInterface
 
         $night = $game->getCurrentNight() ?? throw new \LogicException('No active night to register the witch action');
 
-        $role = $player->getRole();
+        $role = $player->getRoleAs(WitchRole::class);
 
         if ($gameEvent instanceof WitchSaveEvent) {
             if (!$this->witchSpec->canSave($player, $game, $targetPlayer)) {
                 throw new UnauthorizedGameActionException('You can not save');
             }
 
-            if (!$role instanceof WitchRole) {
+            if (null === $role) {
                 throw new \LogicException(\sprintf('Role must be verified as a %s here', WitchRole::class));
             }
 
@@ -79,7 +79,7 @@ class WitchApplicator implements GameEventApplicatorInterface
             throw new UnauthorizedGameActionException('You can not poison');
         }
 
-        if (!$role instanceof WitchRole) {
+        if (null === $role) {
             throw new \LogicException(\sprintf('Role must be verified as a %s here', WitchRole::class));
         }
 

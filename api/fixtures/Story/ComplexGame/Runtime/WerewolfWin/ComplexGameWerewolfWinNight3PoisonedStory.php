@@ -2,7 +2,7 @@
 
 namespace App\Fixtures\Story\ComplexGame\Runtime\WerewolfWin;
 
-use App\Entity\Game\Role\WerewolfVoterInterface;
+use App\Entity\Game\Role\Interface\WerewolfVoterInterface;
 use App\Entity\Game\Role\WildChildRole;
 use App\Entity\Game\Role\WitchRole;
 use App\Enum\Game\GameRoleEnum;

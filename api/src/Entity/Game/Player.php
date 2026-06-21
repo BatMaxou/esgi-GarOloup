@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\Get;
 use App\Api\Processor\Game\LeaveGameProcessor;
 use App\Api\Provider\Player\CurrentPlayerProvider;
 use App\Entity\Game\Role\GameRole;
+use App\Entity\Game\Role\Interface\WrapperRoleInterface;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Entity\User\AbstractUser;
@@ -199,6 +200,26 @@ class Player implements TopicRelatedObject
         $this->team = $role?->getType()?->getTeam();
 
         return $this;
+    }
+
+    /**
+     * @template T of GameRole
+     *
+     * @param class-string<T> $class
+     *
+     * @return T|null
+     */
+    public function getRoleAs(string $class): ?GameRole
+    {
+        if ($this->role instanceof $class) {
+            return $this->role;
+        }
+
+        if ($this->role instanceof WrapperRoleInterface && $this->role->getOriginalRole() instanceof $class) {
+            return $this->role->getOriginalRole();
+        }
+
+        return null;
     }
 
     public function getTeam(): ?GameTeamEnum

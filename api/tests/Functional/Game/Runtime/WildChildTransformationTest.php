@@ -5,7 +5,7 @@ namespace App\Tests\Functional\Game\Runtime;
 use App\Entity\Game\Role\WildChildRole;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Enum\Game\GameTeamEnum;
-use App\Fixtures\Story\ComplexGame\Runtime\Night\Werewolf\ComplexGameNight3WerewolfVotedStory;
+use App\Fixtures\Story\ComplexGame\Runtime\Night\InfectFather\ComplexGameNight3InfectFatherPassedStory;
 use App\Fixtures\Story\ComplexGame\Runtime\WerewolfWin\ComplexGameWerewolfWinNight3Story;
 use App\Fixtures\Story\ComplexGame\Runtime\WerewolfWin\ComplexGameWerewolfWinVote5Story;
 use App\Tests\GarOloupApiTestCase;
@@ -24,20 +24,20 @@ class WildChildTransformationTest extends GarOloupApiTestCase
     {
         $clock = static::mockTime();
 
-        $story = ThereIs::aStory(ComplexGameNight3WerewolfVotedStory::class)->execute();
-        $witchPlayerBuilder = $story->get(ComplexGameNight3WerewolfVotedStory::WITCH);
+        $story = ThereIs::aStory(ComplexGameNight3InfectFatherPassedStory::class)->execute();
+        $witchPlayerBuilder = $story->get(ComplexGameNight3InfectFatherPassedStory::WITCH);
         $this->assertInstanceOf(PlayerBuilder::class, $witchPlayerBuilder);
         $witchUserBuilder = $witchPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $witchUserBuilder);
-        $lastWerewolfPlayerBuilder = $story->get(ComplexGameNight3WerewolfVotedStory::WEREWOLF_3);
+        $lastWerewolfPlayerBuilder = $story->get(ComplexGameNight3InfectFatherPassedStory::WEREWOLF_3);
         $this->assertInstanceOf(PlayerBuilder::class, $lastWerewolfPlayerBuilder);
         $lastWerewolfPlayerId = $lastWerewolfPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($lastWerewolfPlayerId);
-        $modelPlayerBuilder = $story->get(ComplexGameNight3WerewolfVotedStory::VILLAGER_1);
+        $modelPlayerBuilder = $story->get(ComplexGameNight3InfectFatherPassedStory::VILLAGER_1);
         $this->assertInstanceOf(PlayerBuilder::class, $modelPlayerBuilder);
-        $wildChildPlayerBuilder = $story->get(ComplexGameNight3WerewolfVotedStory::WILD_CHILD);
+        $wildChildPlayerBuilder = $story->get(ComplexGameNight3InfectFatherPassedStory::WILD_CHILD);
         $this->assertInstanceOf(PlayerBuilder::class, $wildChildPlayerBuilder);
-        $gameBuilder = $story->get(ComplexGameNight3WerewolfVotedStory::GAME);
+        $gameBuilder = $story->get(ComplexGameNight3InfectFatherPassedStory::GAME);
         $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
         When::asUser($witchUserBuilder)->game()->witchPoison($lastWerewolfPlayerId->toString());
