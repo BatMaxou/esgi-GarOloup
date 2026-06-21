@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\Patch;
 use App\Api\Model\BasicActionOutput;
 use App\Domain\Command\Game\Runtime\WerewolfVoteCommand;
 use App\Domain\Workflow\Interface\NightResettableInterface;
+use App\Entity\Game\Role\Interface\WerewolfVoterInterface;
 use App\Enum\Game\GameRoleEnum;
 use Doctrine\ORM\Mapping as ORM;
 

@@ -4,8 +4,8 @@ namespace App\Tests\Functional\Game\Runtime;
 
 use App\Entity\Event\Game\WitchPoisonEvent;
 use App\Enum\Game\GameRuntimeStepEnum;
+use App\Fixtures\Story\ComplexGame\Runtime\Night\InfectFather\ComplexGameNight1InfectFatherPassedStory;
 use App\Fixtures\Story\ComplexGame\Runtime\Night\Seer\ComplexGameNight1SeerRevealedStory;
-use App\Fixtures\Story\ComplexGame\Runtime\Night\Werewolf\ComplexGameNight1WerewolfVotedStory;
 use App\Tests\GarOloupApiTestCase;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
@@ -22,12 +22,12 @@ class WitchPoisonTest extends GarOloupApiTestCase
 
     public function test_witch_can_poison_a_player(): void
     {
-        $story = ThereIs::aStory(ComplexGameNight1WerewolfVotedStory::class)->execute();
-        $witchPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::WITCH);
+        $story = ThereIs::aStory(ComplexGameNight1InfectFatherPassedStory::class)->execute();
+        $witchPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::WITCH);
         $this->assertInstanceOf(PlayerBuilder::class, $witchPlayerBuilder);
         $witchUserBuilder = $witchPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $witchUserBuilder);
-        $targetPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::WEREWOLF_1);
+        $targetPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $targetPlayerBuilder);
         $targetPlayerId = $targetPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($targetPlayerId);
@@ -42,8 +42,8 @@ class WitchPoisonTest extends GarOloupApiTestCase
 
     public function test_anonymous_cannot_poison(): void
     {
-        $story = ThereIs::aStory(ComplexGameNight1WerewolfVotedStory::class)->execute();
-        $targetPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::WEREWOLF_1);
+        $story = ThereIs::aStory(ComplexGameNight1InfectFatherPassedStory::class)->execute();
+        $targetPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $targetPlayerBuilder);
         $targetPlayerId = $targetPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($targetPlayerId);
@@ -54,12 +54,12 @@ class WitchPoisonTest extends GarOloupApiTestCase
 
     public function test_non_witch_cannot_poison(): void
     {
-        $story = ThereIs::aStory(ComplexGameNight1WerewolfVotedStory::class)->execute();
-        $villagerPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::VILLAGER_1);
+        $story = ThereIs::aStory(ComplexGameNight1InfectFatherPassedStory::class)->execute();
+        $villagerPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::VILLAGER_1);
         $this->assertInstanceOf(PlayerBuilder::class, $villagerPlayerBuilder);
         $villagerUserBuilder = $villagerPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $villagerUserBuilder);
-        $targetPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::WEREWOLF_1);
+        $targetPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $targetPlayerBuilder);
         $targetPlayerId = $targetPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($targetPlayerId);
@@ -70,8 +70,8 @@ class WitchPoisonTest extends GarOloupApiTestCase
 
     public function test_witch_cannot_poison_invalid_uuid(): void
     {
-        $story = ThereIs::aStory(ComplexGameNight1WerewolfVotedStory::class)->execute();
-        $witchPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::WITCH);
+        $story = ThereIs::aStory(ComplexGameNight1InfectFatherPassedStory::class)->execute();
+        $witchPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::WITCH);
         $this->assertInstanceOf(PlayerBuilder::class, $witchPlayerBuilder);
         $witchUserBuilder = $witchPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $witchUserBuilder);
@@ -82,8 +82,8 @@ class WitchPoisonTest extends GarOloupApiTestCase
 
     public function test_witch_cannot_poison_player_from_another_game(): void
     {
-        $story = ThereIs::aStory(ComplexGameNight1WerewolfVotedStory::class)->execute();
-        $witchPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::WITCH);
+        $story = ThereIs::aStory(ComplexGameNight1InfectFatherPassedStory::class)->execute();
+        $witchPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::WITCH);
         $this->assertInstanceOf(PlayerBuilder::class, $witchPlayerBuilder);
         $witchUserBuilder = $witchPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $witchUserBuilder);
@@ -98,8 +98,8 @@ class WitchPoisonTest extends GarOloupApiTestCase
 
     public function test_witch_cannot_poison_self(): void
     {
-        $story = ThereIs::aStory(ComplexGameNight1WerewolfVotedStory::class)->execute();
-        $witchPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::WITCH);
+        $story = ThereIs::aStory(ComplexGameNight1InfectFatherPassedStory::class)->execute();
+        $witchPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::WITCH);
         $this->assertInstanceOf(PlayerBuilder::class, $witchPlayerBuilder);
         $witchUserBuilder = $witchPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $witchUserBuilder);
@@ -130,12 +130,12 @@ class WitchPoisonTest extends GarOloupApiTestCase
     {
         $clock = static::mockTime();
 
-        $story = ThereIs::aStory(ComplexGameNight1WerewolfVotedStory::class)->execute();
-        $witchPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::WITCH);
+        $story = ThereIs::aStory(ComplexGameNight1InfectFatherPassedStory::class)->execute();
+        $witchPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::WITCH);
         $this->assertInstanceOf(PlayerBuilder::class, $witchPlayerBuilder);
         $witchUserBuilder = $witchPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $witchUserBuilder);
-        $targetPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::WEREWOLF_1);
+        $targetPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $targetPlayerBuilder);
         $targetPlayerId = $targetPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($targetPlayerId);
@@ -148,16 +148,16 @@ class WitchPoisonTest extends GarOloupApiTestCase
 
     public function test_witch_cannot_use_both_potions_in_the_same_night(): void
     {
-        $story = ThereIs::aStory(ComplexGameNight1WerewolfVotedStory::class)->execute();
-        $witchPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::WITCH);
+        $story = ThereIs::aStory(ComplexGameNight1InfectFatherPassedStory::class)->execute();
+        $witchPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::WITCH);
         $this->assertInstanceOf(PlayerBuilder::class, $witchPlayerBuilder);
         $witchUserBuilder = $witchPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $witchUserBuilder);
-        $victimPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::SEER);
+        $victimPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::SEER);
         $this->assertInstanceOf(PlayerBuilder::class, $victimPlayerBuilder);
         $victimPlayerId = $victimPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($victimPlayerId);
-        $targetPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::WEREWOLF_1);
+        $targetPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $targetPlayerBuilder);
         $targetPlayerId = $targetPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($targetPlayerId);
@@ -173,16 +173,16 @@ class WitchPoisonTest extends GarOloupApiTestCase
     {
         $clock = static::mockTime();
 
-        $story = ThereIs::aStory(ComplexGameNight1WerewolfVotedStory::class)->execute();
-        $witchPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::WITCH);
+        $story = ThereIs::aStory(ComplexGameNight1InfectFatherPassedStory::class)->execute();
+        $witchPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::WITCH);
         $this->assertInstanceOf(PlayerBuilder::class, $witchPlayerBuilder);
         $witchUserBuilder = $witchPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $witchUserBuilder);
-        $targetPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::WEREWOLF_1);
+        $targetPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $targetPlayerBuilder);
         $targetPlayerId = $targetPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($targetPlayerId);
-        $gameBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::GAME);
+        $gameBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::GAME);
         $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
         When::asUser($witchUserBuilder)->game()->witchPoison($targetPlayerId->toString());
@@ -199,16 +199,16 @@ class WitchPoisonTest extends GarOloupApiTestCase
 
     public function test_game_event_dispatched_by_witch_poison(): void
     {
-        $story = ThereIs::aStory(ComplexGameNight1WerewolfVotedStory::class)->execute();
-        $witchPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::WITCH);
+        $story = ThereIs::aStory(ComplexGameNight1InfectFatherPassedStory::class)->execute();
+        $witchPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::WITCH);
         $this->assertInstanceOf(PlayerBuilder::class, $witchPlayerBuilder);
         $witchUserBuilder = $witchPlayerBuilder->user;
         $this->assertInstanceOf(UserBuilder::class, $witchUserBuilder);
-        $targetPlayerBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::WEREWOLF_1);
+        $targetPlayerBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::WEREWOLF_1);
         $this->assertInstanceOf(PlayerBuilder::class, $targetPlayerBuilder);
         $targetPlayerId = $targetPlayerBuilder->getEntity()->getId();
         $this->assertNotNull($targetPlayerId);
-        $gameBuilder = $story->get(ComplexGameNight1WerewolfVotedStory::GAME);
+        $gameBuilder = $story->get(ComplexGameNight1InfectFatherPassedStory::GAME);
         $this->assertInstanceOf(GameBuilder::class, $gameBuilder);
 
         When::asUser($witchUserBuilder)->game()->witchPoison($targetPlayerId->toString());

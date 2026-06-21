@@ -197,11 +197,11 @@
       "locked": false,
       "fontSize": 14,
       "fontFamily": 1,
-      "text": "Configured\nComplexGameConfiguredStory\n6 villageois · 1 voyante · 3 loups\n1 sorcière · 1 enfant sauvage",
+      "text": "Configured\nComplexGameConfiguredStory\n6 villageois · 1 voyante · 2 loups · 1 infect père\n1 sorcière · 1 enfant sauvage",
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "mQlSp49tQTHGWdvt",
-      "originalText": "Configured\nComplexGameConfiguredStory\n6 villageois · 1 voyante · 3 loups\n1 sorcière · 1 enfant sauvage",
+      "originalText": "Configured\nComplexGameConfiguredStory\n6 villageois · 1 voyante · 2 loups · 1 infect père\n1 sorcière · 1 enfant sauvage",
       "lineHeight": 1.25
     },
     {
@@ -264,11 +264,11 @@
       "locked": false,
       "fontSize": 14,
       "fontFamily": 1,
-      "text": "Dispatched\nComplexGameDispatchedStory\nRôles attribués aux 12 joueurs\n(5 villageois · 1 chasseur · 1 voyante · 3 loups · 1 sorcière · 1 enfant sauvage)",
+      "text": "Dispatched\nComplexGameDispatchedStory\nRôles attribués aux 12 joueurs\n(5 villageois · 1 chasseur · 1 voyante · 2 loups · 1 infect père · 1 sorcière · 1 enfant sauvage)",
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "BFW65aUNdIIJtntZ",
-      "originalText": "Dispatched\nComplexGameDispatchedStory\nRôles attribués aux 12 joueurs\n(5 villageois · 1 chasseur · 1 voyante · 3 loups · 1 sorcière · 1 enfant sauvage)",
+      "originalText": "Dispatched\nComplexGameDispatchedStory\nRôles attribués aux 12 joueurs\n(5 villageois · 1 chasseur · 1 voyante · 2 loups · 1 infect père · 1 sorcière · 1 enfant sauvage)",
       "lineHeight": 1.25
     },
     {
@@ -566,6 +566,10 @@
         {
           "type": "text",
           "id": "bwIGrTjyZoj2Iud6"
+        },
+        {
+          "type": "arrow",
+          "id": "pcZgZMLj7XQ7RMQ0qg"
         }
       ],
       "updated": 1,
@@ -2969,10 +2973,10 @@
     {
       "id": "2KLoFtyeSRF9vYvp",
       "type": "arrow",
-      "x": 780,
-      "y": 2808.0,
-      "width": 120,
-      "height": 150.0,
+      "x": 1080,
+      "y": 2856,
+      "width": 0,
+      "height": 54,
       "angle": 0,
       "strokeColor": "#c92a2a",
       "backgroundColor": "transparent",
@@ -2986,11 +2990,11 @@
       "roundness": {
         "type": 2
       },
-      "seed": 1427911135,
-      "versionNonce": 1266376907,
+      "seed": 1812225607,
+      "versionNonce": 658482413,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1,
+      "updated": 1782060147352,
       "link": null,
       "locked": false,
       "points": [
@@ -2999,13 +3003,13 @@
           0
         ],
         [
-          120,
-          150.0
+          0,
+          54
         ]
       ],
       "lastCommittedPoint": null,
       "startBinding": {
-        "elementId": "uX7suRuMUCXQeED3",
+        "elementId": "Xc5o2UtyQEaqhRvtZB",
         "focus": 0,
         "gap": 4
       },
@@ -3908,6 +3912,364 @@
       },
       "endBinding": {
         "elementId": "UbcKIFwEciRbCExu",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "i330u2mMBKpm93cNei",
+      "type": "rectangle",
+      "x": 900,
+      "y": 1418,
+      "width": 360,
+      "height": 100,
+      "angle": 0,
+      "strokeColor": "#c2255c",
+      "backgroundColor": "#fcc2d7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1941558445,
+      "versionNonce": 573953509,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "RE6QWRCblKIkjW7zHy"
+        },
+        {
+          "type": "arrow",
+          "id": "pcZgZMLj7XQ7RMQ0qg"
+        }
+      ],
+      "updated": 1782059694018,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "RE6QWRCblKIkjW7zHy",
+      "type": "text",
+      "x": 908,
+      "y": 1426,
+      "width": 344,
+      "height": 84,
+      "angle": 0,
+      "strokeColor": "#c2255c",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 905878449,
+      "versionNonce": 1236196981,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1782059694018,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Nuit 1 · Infection  ◆ FORK ◆\nComplexGameNight1InfectedStory\nL'infect père infecte la victime des loups (la voyante)\n→ elle survit, rejoint les loups, garde son pouvoir",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "i330u2mMBKpm93cNei",
+      "originalText": "Nuit 1 · Infection  ◆ FORK ◆\nComplexGameNight1InfectedStory\nL'infect père infecte la victime des loups (la voyante)\n→ elle survit, rejoint les loups, garde son pouvoir",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "pcZgZMLj7XQ7RMQ0qg",
+      "type": "arrow",
+      "x": 780,
+      "y": 1308,
+      "width": 120,
+      "height": 160,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1022201766,
+      "versionNonce": 1488336029,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1782059694018,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          160
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "V6kZmlcAGMW1rQaq",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "i330u2mMBKpm93cNei",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "auaeg5PXN2naMHsoJD",
+      "type": "rectangle",
+      "x": 20,
+      "y": 1260,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#c2255c",
+      "backgroundColor": "#fcc2d7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 573724658,
+      "versionNonce": 474305874,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "9M9hyKY6B1s85uykHi"
+        }
+      ],
+      "updated": 1782060147352,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "9M9hyKY6B1s85uykHi",
+      "type": "text",
+      "x": 28,
+      "y": 1268,
+      "width": 344,
+      "height": 84,
+      "angle": 0,
+      "strokeColor": "#c2255c",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 137373282,
+      "versionNonce": 1509980007,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1782060147352,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Nuit 1 · Infect père passe  ◆ FORK ◆\nComplexGameNight1InfectFatherPassedStory\nL'infect père n'infecte pas → on atteint le tour de la sorcière\n(point de fork des tests sorcière)",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "auaeg5PXN2naMHsoJD",
+      "originalText": "Nuit 1 · Infect père passe  ◆ FORK ◆\nComplexGameNight1InfectFatherPassedStory\nL'infect père n'infecte pas → on atteint le tour de la sorcière\n(point de fork des tests sorcière)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "dsADwl5ybb0VYxZDZ3",
+      "type": "arrow",
+      "x": 420,
+      "y": 1308,
+      "width": 36,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 838776078,
+      "versionNonce": 467315872,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1782060147352,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -36,
+          0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "V6kZmlcAGMW1rQaq",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "auaeg5PXN2naMHsoJD",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "Xc5o2UtyQEaqhRvtZB",
+      "type": "rectangle",
+      "x": 900,
+      "y": 2760,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#c2255c",
+      "backgroundColor": "#fcc2d7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1439712209,
+      "versionNonce": 270576980,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "PRsMMljUkr2eK3KYL2"
+        }
+      ],
+      "updated": 1782060147352,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "PRsMMljUkr2eK3KYL2",
+      "type": "text",
+      "x": 908,
+      "y": 2768,
+      "width": 344,
+      "height": 84,
+      "angle": 0,
+      "strokeColor": "#c2255c",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1986753909,
+      "versionNonce": 1118699885,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1782060147352,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Nuit 3 · Infect père passe  ◆ FORK ◆\nComplexGameNight3InfectFatherPassedStory\nTour sorcière atteint (infect père passe)\n→ base WerewolfWin & tests sorcière nuit 3",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "Xc5o2UtyQEaqhRvtZB",
+      "originalText": "Nuit 3 · Infect père passe  ◆ FORK ◆\nComplexGameNight3InfectFatherPassedStory\nTour sorcière atteint (infect père passe)\n→ base WerewolfWin & tests sorcière nuit 3",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "k28rbldecWfWNIj3Cn",
+      "type": "arrow",
+      "x": 780,
+      "y": 2808,
+      "width": 116,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1443508787,
+      "versionNonce": 1601388813,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1782060147352,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          116,
+          0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "uX7suRuMUCXQeED3",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "Xc5o2UtyQEaqhRvtZB",
         "focus": 0,
         "gap": 4
       },

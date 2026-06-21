@@ -32,7 +32,8 @@ class ComplexGameConfiguredStory extends ComplexGameClosedStory
         $compositionBuilder = ThereIs::aComposition()
             ->withRole($roleBagBuilder->getVillager(), 6)
             ->withRole($roleBagBuilder->getSeer(), 1)
-            ->withRole($roleBagBuilder->getWerewolf(), 3)
+            ->withRole($roleBagBuilder->getWerewolf(), 2)
+            ->withRole($roleBagBuilder->getInfectFather(), 1)
             ->withRole($roleBagBuilder->getWitch(), 1)
             ->withRole($roleBagBuilder->getWildChild(), 1);
         $this->addState(self::COMPOSITION, $compositionBuilder);

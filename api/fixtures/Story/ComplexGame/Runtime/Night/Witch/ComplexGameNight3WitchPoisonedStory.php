@@ -23,6 +23,8 @@ class ComplexGameNight3WitchPoisonedStory extends ComplexGameNight3WerewolfVoted
         \assert($gameBuilder instanceof GameBuilder);
         $game = $gameBuilder->getEntity();
 
+        $this->nightOrchestrator->advance($game);
+
         $witchPlayerBuilder = $this->getState(self::WITCH);
         \assert($witchPlayerBuilder instanceof PlayerBuilder);
         $witchRole = $witchPlayerBuilder->getEntity()->getRole();

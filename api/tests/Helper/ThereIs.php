@@ -10,6 +10,7 @@ use App\Tests\Helper\Builder\Game\CompositionBuilder;
 use App\Tests\Helper\Builder\Game\ConfigurationBuilder;
 use App\Tests\Helper\Builder\Game\DispatchBuilder;
 use App\Tests\Helper\Builder\Game\GameBuilder;
+use App\Tests\Helper\Builder\Game\Period\Action\NightAction\InfectActionBuilder;
 use App\Tests\Helper\Builder\Game\Period\Action\NightAction\MurderActionBuilder;
 use App\Tests\Helper\Builder\Game\Period\Action\NightAction\SaveActionBuilder;
 use App\Tests\Helper\Builder\Game\Period\Vote\BallotBuilder;
@@ -64,6 +65,11 @@ final class ThereIs
     public static function aSaveAction(): SaveActionBuilder
     {
         return new SaveActionBuilder();
+    }
+
+    public static function anInfectAction(): InfectActionBuilder
+    {
+        return new InfectActionBuilder();
     }
 
     public static function aGame(): GameBuilder

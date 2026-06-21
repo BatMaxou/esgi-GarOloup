@@ -46,6 +46,7 @@ class ComplexGameNight1HunterInterruptStory extends ComplexGameNight1WerewolfKil
         $game = $gameBuilder->getEntity();
 
         $this->nightOrchestrator->advance($game);
+        $this->nightOrchestrator->advance($game);
 
         $game->setInterruptedRuntimeStep($game->getRuntimeStep());
         $game->setRuntimeStep(GameRuntimeStepEnum::INTERUPT);

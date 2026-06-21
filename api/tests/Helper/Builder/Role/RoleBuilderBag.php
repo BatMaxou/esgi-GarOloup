@@ -23,6 +23,7 @@ class RoleBuilderBag
             GameRoleEnum::WITCH->value => (clone $this->builder)->witch(),
             GameRoleEnum::WILD_CHILD->value => (clone $this->builder)->wildChild(),
             GameRoleEnum::HUNTER->value => (clone $this->builder)->hunter(),
+            GameRoleEnum::INFECT_FATHER->value => (clone $this->builder)->infectFather(),
         ];
 
         return $this;
@@ -73,6 +74,11 @@ class RoleBuilderBag
     public function getHunter(): RoleBuilder
     {
         return $this->get(GameRoleEnum::HUNTER);
+    }
+
+    public function getInfectFather(): RoleBuilder
+    {
+        return $this->get(GameRoleEnum::INFECT_FATHER);
     }
 
     private function get(GameRoleEnum $role): RoleBuilder
