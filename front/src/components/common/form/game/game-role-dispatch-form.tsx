@@ -48,7 +48,7 @@ const GameRoleDispatchForm = () => {
     () =>
       game?.players?.map((player) => ({
         id: player.id,
-        username: player.user?.username ?? '',
+        username: (player.user?.username || player.tempUser?.username) ?? '',
       })) ?? [],
     [game?.players]
   );

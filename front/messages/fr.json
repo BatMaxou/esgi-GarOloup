@@ -54,7 +54,6 @@
             "witchCamp": "Camp des Villageois",
             "roundDescription": "La sorcière peut sauver une victime ou en tuer une autre. Choisissez votre cible pour cette nuit.",
             "saveTitle": "Sauver une victime",
-            "saveDescription": "La sorcière peut sauver une victime de la nuit.",
             "poisonTitle": "Tuer une victime",
             "poisonDescription": "La sorcière peut tuer une victime de la nuit.",
             "submitChoice": "Valider votre choix",
@@ -64,7 +63,16 @@
             "poisonTag": "1 utilisation restante",
             "poisonTagDisabled": "Déjà utilisée",
             "healTag": "1 utilisation restante",
-            "healTagDisabled": "Déjà utilisée"
+            "healTagDisabled": "Déjà utilisée",
+            "saveDescriptionWithTarget": "Sauver {username} de la mort.",
+            "saveDescriptionWithoutTarget": "Aucun villagois à sauver cette nuit.",
+            "goBackToChoiceStep": "Retour aux choix",
+            "alreadyDead": "Déjà mort",
+            "actionEnded": "Votre action a été enregistrée.",
+            "saveVoteEndedWithTarget": "Vous avez choisi de sauver {username}.",
+            "saveVoteEndedWithoutTarget": "Vous avez choisi de sauver la victime.",
+            "poisonVoteEndedWithTarget": "Vous avez choisi d'empoisonner {username}.",
+            "timeUp": "Terminer le tour"
           },
           "seerActions": {
             "seer": "Voyante",

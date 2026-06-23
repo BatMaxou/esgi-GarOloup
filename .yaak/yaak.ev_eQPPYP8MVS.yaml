@@ -3,7 +3,7 @@ model: environment
 id: ev_eQPPYP8MVS
 workspaceId: wk_uXtATNFQmZ
 createdAt: 2026-02-27T17:51:38.854908222
-updatedAt: 2026-04-05T18:18:33.538488662
+updatedAt: 2026-06-13T01:00:47.336362
 name: Anonymous
 public: true
 base: false
@@ -19,4 +19,4 @@ variables:
   value: ''
   id: Fup0qgFVEQ
 color: var(--notice)
-sortPriority: 4000.0
+sortPriority: 8000.0

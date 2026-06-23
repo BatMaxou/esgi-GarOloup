@@ -3,7 +3,7 @@ model: environment
 id: ev_X4H9LX7vqP
 workspaceId: wk_uXtATNFQmZ
 createdAt: 2026-02-27T17:51:21.318689424
-updatedAt: 2026-04-02T07:22:34.855603142
+updatedAt: 2026-06-15T18:07:50.329503
 name: Temp User
 public: true
 base: false
@@ -20,7 +20,7 @@ variables:
   id: Fup0qgFVEQ
 - enabled: true
   name: USERNAME
-  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RlVOS2ZpTWRTNjRnMzdheGhCMklwdWxrNElqMUc5NEU3YWRZNGFVMFhqR29uREtiVFRUZWhXWjBlUmprM0U4VEk9') ]}
+  value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3R3E4cDc3eER2c0FvRHZSRmhTOFhWTG05SGFLR29Sa3Y4MVY1ZnJuaDRDcjFNV3c5TFYwNkVIVElabk92OU5Td0E9') ]}
   id: NtSzGy5J3N
 color: var(--info)
-sortPriority: 2000.0
+sortPriority: 3000.0
