@@ -19,6 +19,8 @@ class ComplexGameNight1WitchSavedStory extends ComplexGameNight1WerewolfVotedSto
         \assert($gameBuilder instanceof GameBuilder);
         $game = $gameBuilder->getEntity();
 
+        $this->nightOrchestrator->advance($game);
+
         $witchPlayerBuilder = $this->getState(self::WITCH);
         \assert($witchPlayerBuilder instanceof PlayerBuilder);
         $witchRole = $witchPlayerBuilder->getEntity()->getRole();

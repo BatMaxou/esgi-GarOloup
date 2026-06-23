@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Game\Role;
+namespace App\Entity\Game\Role\Interface;
 
 interface WerewolfVoterInterface
 {

@@ -20,6 +20,8 @@ class ComplexGameNight2WitchPassedStory extends ComplexGameNight2WerewolfVotedSt
         $game = $gameBuilder->getEntity();
 
         $this->nightOrchestrator->advance($game);
+
+        $this->nightOrchestrator->advance($game);
         $this->dayOrchestrator->start($game);
 
         $this->em->flush();

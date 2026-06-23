@@ -4,6 +4,7 @@ namespace App\Domain\GameEvent\Applicator\Runtime\Workflow;
 
 use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
+use App\Domain\Interceptor\InterceptorHandler;
 use App\Domain\Workflow\DayOrchestrator;
 use App\Domain\Workflow\NightOrchestrator;
 use App\Domain\Workflow\VoteResolver;
@@ -21,6 +22,7 @@ class StartNextStepApplicator implements GameEventApplicatorInterface
         private readonly DayOrchestrator $dayOrchestrator,
         private readonly VoteResolver $voteResolver,
         private readonly NightOrchestrator $nightOrchestrator,
+        private readonly InterceptorHandler $interceptorHandler,
     ) {
     }
 
@@ -37,11 +39,28 @@ class StartNextStepApplicator implements GameEventApplicatorInterface
         $lastDay = $game->getDays()->last();
         $lastVote = $game->getVotes()->last();
 
-        if (GameRuntimeStepEnum::NIGHT === $game->getRuntimeStep() && $lastNight && $lastNight->isResolved()) {
+        $isNightFinished = GameRuntimeStepEnum::NIGHT === $game->getRuntimeStep() && $lastNight && $lastNight->isResolved();
+        $isDayFinished = GameRuntimeStepEnum::DAY === $game->getRuntimeStep() && $lastDay && $lastDay->isResolved();
+        $isVoteFinished = GameRuntimeStepEnum::VOTE === $game->getRuntimeStep() && $lastVote && $lastVote->isResolved();
+
+        if (GameRuntimeStepEnum::INTERUPT === $game->getRuntimeStep()) {
+            if ($this->interceptorHandler->hasPendingAction($game)) {
+                return $game;
+            }
+
+            $interruptedStep = $game->getInterruptedRuntimeStep();
+            $game->setInterruptedRuntimeStep(null);
+
+            $isNightFinished = GameRuntimeStepEnum::NIGHT === $interruptedStep;
+            $isDayFinished = GameRuntimeStepEnum::DAY === $interruptedStep;
+            $isVoteFinished = GameRuntimeStepEnum::VOTE === $interruptedStep;
+        }
+
+        if ($isNightFinished) {
             $this->dayOrchestrator->start($game);
-        } elseif (GameRuntimeStepEnum::DAY === $game->getRuntimeStep() && $lastDay && $lastDay->isResolved()) {
+        } elseif ($isDayFinished) {
             $this->voteResolver->start($game);
-        } elseif (GameRuntimeStepEnum::VOTE === $game->getRuntimeStep() && $lastVote && $lastVote->isResolved()) {
+        } elseif ($isVoteFinished) {
             $this->nightOrchestrator->start($game);
         }
 
@@ -53,7 +72,7 @@ class StartNextStepApplicator implements GameEventApplicatorInterface
         return $gameEvent instanceof TimeUpGameEvent
             && \in_array(
                 $gameEvent->getGame()?->getRuntimeStep(),
-                [GameRuntimeStepEnum::NIGHT, GameRuntimeStepEnum::DAY, GameRuntimeStepEnum::VOTE],
+                [GameRuntimeStepEnum::NIGHT, GameRuntimeStepEnum::DAY, GameRuntimeStepEnum::VOTE, GameRuntimeStepEnum::INTERUPT],
             );
     }
 }

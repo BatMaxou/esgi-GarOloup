@@ -16,7 +16,7 @@ use App\Entity\Event\Game\WerewolfVoteEvent;
 use App\Entity\Game\Game;
 use App\Entity\Game\Period\Action\NightAction\MurderAction;
 use App\Entity\Game\Player;
-use App\Entity\Game\Role\WerewolfVoterInterface;
+use App\Entity\Game\Role\Interface\WerewolfVoterInterface;
 use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Enum\Game\GameTeamEnum;

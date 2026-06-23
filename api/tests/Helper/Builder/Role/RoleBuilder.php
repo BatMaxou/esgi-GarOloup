@@ -88,6 +88,28 @@ class RoleBuilder extends AbstractBuilder
             ->withMaxPerGame(1);
     }
 
+    public function hunter(): static
+    {
+        $this->type = GameRoleEnum::HUNTER;
+
+        return $this->withName('Chasseur')
+            ->withDescription('Description du Chasseur')
+            ->withAbility('Tirer sur un joueur à sa mort')
+            ->withTeam(GameTeamEnum::VILLAGE)
+            ->withMaxPerGame(1);
+    }
+
+    public function infectFather(): static
+    {
+        $this->type = GameRoleEnum::INFECT_FATHER;
+
+        return $this->withName('Infect Père des Loups')
+            ->withDescription('Description de l\'Infect Père des Loups')
+            ->withAbility('Une fois par partie, infecter la victime du vote des loups : elle survit, rejoint les loups et garde son pouvoir')
+            ->withTeam(GameTeamEnum::WEREWOLF)
+            ->withMaxPerGame(1);
+    }
+
     public function withName(string $name): static
     {
         $this->name = $name;

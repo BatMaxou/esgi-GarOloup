@@ -18,9 +18,9 @@ class ComplexGameWerewolfWinVote4Story extends ComplexGameWerewolfWinNight4Story
         $this->dayOrchestrator->resolve($game);
         $this->voteResolver->start($game);
 
-        $targetPlayerBuilder = $this->getState(self::VILLAGER_6);
+        $targetPlayerBuilder = $this->getState(self::HUNTER);
         \assert($targetPlayerBuilder instanceof PlayerBuilder);
-        $this->castVillageMisvote($gameBuilder, $targetPlayerBuilder);
+        $this->villageMisvote($gameBuilder, $targetPlayerBuilder);
 
         $this->voteResolver->resolve($game);
         $this->nightOrchestrator->start($game);

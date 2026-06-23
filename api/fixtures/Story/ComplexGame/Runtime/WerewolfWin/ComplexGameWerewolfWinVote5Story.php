@@ -20,7 +20,7 @@ class ComplexGameWerewolfWinVote5Story extends ComplexGameWerewolfWinNight5Story
 
         $targetPlayerBuilder = $this->getState(self::WITCH);
         \assert($targetPlayerBuilder instanceof PlayerBuilder);
-        $this->castVillageMisvote($gameBuilder, $targetPlayerBuilder);
+        $this->villageMisvote($gameBuilder, $targetPlayerBuilder);
 
         $this->em->flush();
     }

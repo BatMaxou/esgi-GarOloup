@@ -35,7 +35,7 @@ class SeerRevealTest extends GarOloupApiTestCase
         When::asUser($seerUserBuilder)->game()->seerReveal($werewolfPlayerId->toString());
         $this->assertResponseStatusCodeSame(200);
 
-        $response = When::asUser($seerUserBuilder)->player()->getCurrent();
+        $response = When::player()->getCurrent();
         $this->assertSame(GameRoleEnum::SEER->value, $response->get('[role][type]'));
         $this->assertSame(GameRoleEnum::WEREWOLF->value, $response->get('[role][lastObservedRole]'));
         $this->assertSame($werewolfPlayerId->toString(), $response->get('[role][lastObservedPlayerId]'));
@@ -134,7 +134,7 @@ class SeerRevealTest extends GarOloupApiTestCase
         When::asUser($seerUserBuilder)->game()->seerReveal($werewolf1PlayerId->toString());
         $this->assertResponseStatusCodeSame(200);
 
-        When::asUser($seerUserBuilder)->game()->seerReveal($werewolf2PlayerId->toString());
+        When::game()->seerReveal($werewolf2PlayerId->toString());
         $this->assertResponseStatusCodeSame(403);
     }
 

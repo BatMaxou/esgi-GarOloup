@@ -81,6 +81,10 @@ export type WildChildRole = GameRole & {
   transformed?: boolean;
 };
 
+export type HunterRole = GameRole & {
+  hasShot?: boolean;
+};
+
 export type Player = {
   id: string;
   user?: User;

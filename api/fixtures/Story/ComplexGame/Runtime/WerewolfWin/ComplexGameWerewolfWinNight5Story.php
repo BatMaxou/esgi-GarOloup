@@ -19,7 +19,9 @@ class ComplexGameWerewolfWinNight5Story extends ComplexGameWerewolfWinVote4Story
 
         $victimPlayerBuilder = $this->getState(self::SEER);
         \assert($victimPlayerBuilder instanceof PlayerBuilder);
-        $this->castWerewolfKill($gameBuilder, $victimPlayerBuilder);
+        $this->werewolfKill($gameBuilder, $victimPlayerBuilder);
+        $this->nightOrchestrator->advance($game);
+
         $this->nightOrchestrator->advance($game);
 
         $this->nightOrchestrator->advance($game);

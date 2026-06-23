@@ -7,6 +7,8 @@ use App\Fixtures\Story\Role\GameRoleInitializedStory;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
 use App\Tests\Helper\Builder\Game\Role\GameRoleBuilderBag;
+use App\Tests\Helper\Builder\Game\Role\HunterRoleBuilder;
+use App\Tests\Helper\Builder\Game\Role\InfectFatherRoleBuilder;
 use App\Tests\Helper\Builder\Game\Role\SeerRoleBuilder;
 use App\Tests\Helper\Builder\Game\Role\VillagerRoleBuilder;
 use App\Tests\Helper\Builder\Game\Role\WerewolfRoleBuilder;
@@ -21,13 +23,16 @@ class ComplexGameDispatchedStory extends ComplexGameConfiguredStory
     public const VILLAGER_3 = 'villager_3';
     public const VILLAGER_4 = 'villager_4';
     public const VILLAGER_5 = 'villager_5';
-    public const VILLAGER_6 = 'villager_6';
+
+    public const HUNTER = 'hunter';
 
     public const SEER = 'seer';
 
     public const WEREWOLF_1 = 'werewolf_1';
     public const WEREWOLF_2 = 'werewolf_2';
     public const WEREWOLF_3 = 'werewolf_3';
+
+    public const INFECT_FATHER = self::WEREWOLF_3;
 
     public const WITCH = 'witch';
 
@@ -56,10 +61,10 @@ class ComplexGameDispatchedStory extends ComplexGameConfiguredStory
             [self::SEER, $gameRoleBagBuilder->getSeer()],
             [self::WEREWOLF_2, $gameRoleBagBuilder->getWerewolf()],
             [self::WITCH, $gameRoleBagBuilder->getWitch()],
-            [self::WEREWOLF_3, $gameRoleBagBuilder->getWerewolf()],
+            [self::WEREWOLF_3, $gameRoleBagBuilder->getInfectFather()],
             [self::VILLAGER_4, $gameRoleBagBuilder->getVillager()],
             [self::VILLAGER_5, $gameRoleBagBuilder->getVillager()],
-            [self::VILLAGER_6, $gameRoleBagBuilder->getVillager()],
+            [self::HUNTER, $gameRoleBagBuilder->getHunter()],
             [self::WILD_CHILD, $gameRoleBagBuilder->getWildChild()],
         ];
 
@@ -71,10 +76,12 @@ class ComplexGameDispatchedStory extends ComplexGameConfiguredStory
 
             $pool = match (true) {
                 $gameRoleBuilder instanceof VillagerRoleBuilder => self::VILLAGERS_POOL,
+                $gameRoleBuilder instanceof InfectFatherRoleBuilder => self::WEREWOLVES_POOL,
                 $gameRoleBuilder instanceof WerewolfRoleBuilder => self::WEREWOLVES_POOL,
                 $gameRoleBuilder instanceof SeerRoleBuilder => null,
                 $gameRoleBuilder instanceof WitchRoleBuilder => null,
                 $gameRoleBuilder instanceof WildChildRoleBuilder => null,
+                $gameRoleBuilder instanceof HunterRoleBuilder => null,
             };
 
             $this->addState($stateName, $playerBuilder, $pool);

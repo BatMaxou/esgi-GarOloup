@@ -9,6 +9,7 @@ use App\Domain\GameEvent\HttpGameExceptionMapper;
 use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Game\Game;
 use App\Entity\User\AbstractUser;
+use App\Enum\Game\GameRuntimeStepEnum;
 use App\Enum\TopicEnum;
 use App\Repository\Event\Game\GameEventRepository;
 use App\Repository\Game\PlayerRepository;
@@ -62,7 +63,10 @@ class TimeUpHandler
         }
 
         $lastGameEvent = $this->gameEventRepository->findLastByGame($game);
-        if ($lastGameEvent instanceof TimeUpGameEvent) {
+        if (
+            $lastGameEvent instanceof TimeUpGameEvent
+            && GameRuntimeStepEnum::INTERUPT !== $game->getRuntimeStep()
+        ) {
             return new BasicActionOutput(true);
         }
 

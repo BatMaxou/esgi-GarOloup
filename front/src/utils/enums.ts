@@ -63,6 +63,7 @@ export enum GameRoleEnum {
   SEER = 'seer',
   WITCH = 'witch',
   WILD_CHILD = 'wild_child',
+  HUNTER = 'hunter',
 }
 
 export enum GameTeamEnum {
