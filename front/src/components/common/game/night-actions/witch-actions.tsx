@@ -10,7 +10,12 @@ import Button from '@/components/ui/molecules/button';
 import { useWitch } from '@/contexts/roles/witch-context';
 import { useState } from 'react';
 import Tag from '@/components/ui/molecules/tag';
-import { getHealUserDuringThisNight, getHealUsernameUserDuringThisNight, getLastUserKilledDuringNight, getLastUsernameUserKilledDuringNight } from '@/utils/game';
+import {
+  getHealUserDuringThisNight,
+  getHealUsernameUserDuringThisNight,
+  getLastUserKilledDuringNight,
+  getLastUsernameUserKilledDuringNight,
+} from '@/utils/game';
 import { ArrowLeftIcon } from 'lucide-react';
 import { ApiClientError } from '@/lib/api/ApiClientError';
 import { useApiClient } from '@/contexts/api-context';
@@ -62,7 +67,9 @@ const WitchActions = () => {
 
         if (values.type === 'poison') {
           setSubmittedActionType('poison');
-          setSubmittedTargetName(game && lastUsernameUserKilled ? getHealUsernameUserDuringThisNight(game, game?.players ?? []) : null);
+          setSubmittedTargetName(
+            game && lastUsernameUserKilled ? getHealUsernameUserDuringThisNight(game, game?.players ?? []) : null
+          );
         }
 
         setActionEnded(true);
@@ -142,7 +149,9 @@ const WitchActions = () => {
                     {t('saveTitle')}
                   </Typography>
                   <Typography tag="span" variant="body-sm" className="text-primary/60">
-                    {lastUserKilled && lastUsernameUserKilled ? t('saveDescriptionWithTarget', { username: lastUsernameUserKilled }) : t('saveDescriptionWithoutTarget')}
+                    {lastUserKilled && lastUsernameUserKilled
+                      ? t('saveDescriptionWithTarget', { username: lastUsernameUserKilled })
+                      : t('saveDescriptionWithoutTarget')}
                   </Typography>
                   <Tag
                     label={healPotionAvailable ? t('healTag') : t('healTagDisabled')}
@@ -173,8 +182,8 @@ const WitchActions = () => {
               </>
             ) : (
               <div className="flex flex-col gap-2 w-full">
-                  <div className="flex flex-row items-center justify-start w-full gap-2">
-                  <ArrowLeftIcon className="w-4 h-4 mb-1 text-neutral-400" onClick={() => setKillStep(false)}/>
+                <div className="flex flex-row items-center justify-start w-full gap-2">
+                  <ArrowLeftIcon className="w-4 h-4 mb-1 text-neutral-400" onClick={() => setKillStep(false)} />
                   <Button
                     variant="text"
                     className="text-neutral-400 hover:text-neutral-200"
@@ -193,7 +202,7 @@ const WitchActions = () => {
                     {playerAliveList.map((player) => (
                       <Card
                         key={player.id}
-                        onClick={() => lastUserKilled !== player.id ? handleSelectPoisonTarget(player.id) : null}
+                        onClick={() => (lastUserKilled !== player.id ? handleSelectPoisonTarget(player.id) : null)}
                         isCurrentPlayer={lastUserKilled !== player.id ? poisonTargetId === player.id : false}
                         liftOnHover={false}
                         className={`flex flex-row border! w-full
@@ -244,7 +253,9 @@ const WitchActions = () => {
           </Typography>
           {submittedActionType === 'save' && (
             <Typography tag="p" variant="body-sm" className="text-success/80">
-              {submittedTargetName ? t('saveVoteEndedWithTarget', { username: submittedTargetName }) : t('saveVoteEndedWithoutTarget')}
+              {submittedTargetName
+                ? t('saveVoteEndedWithTarget', { username: submittedTargetName })
+                : t('saveVoteEndedWithoutTarget')}
             </Typography>
           )}
           {submittedActionType === 'poison' && submittedTargetName && (
