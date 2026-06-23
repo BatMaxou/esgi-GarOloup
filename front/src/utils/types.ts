@@ -1,4 +1,5 @@
 import {
+  GameNightActionTypeEnum,
   GameGlobalStepEnum,
   GameInitialisationStepEnum,
   GameRoleEnum,
@@ -98,9 +99,14 @@ export type Player = {
 
 export type NightAction = {
   source?: GameRoleEnum | GameTeamEnum;
+  type?: GameNightActionTypeEnum;
 };
 
 export type MurderAction = NightAction & {
+  targetPlayerId?: string;
+};
+
+export type SaveAction = NightAction & {
   targetPlayerId?: string;
 };
 

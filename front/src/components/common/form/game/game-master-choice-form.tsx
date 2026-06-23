@@ -11,7 +11,7 @@ const GameMasterChoiceForm = () => {
   const playerList =
     game?.players?.map((player) => ({
       id: player.id,
-      name: player.user?.username ?? '',
+      name: (player.user?.username || player.tempUser?.username) ?? '',
     })) ?? [];
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
 

@@ -21,7 +21,7 @@ const SeerActions = () => {
       ?.filter((gamePlayer) => player?.id !== gamePlayer.id && !gamePlayer.dead)
       .map((gamePlayer) => ({
         id: gamePlayer.id,
-        name: gamePlayer.user?.username ?? '',
+        name: (gamePlayer.user?.username || gamePlayer.tempUser?.username) ?? '',
       })) ?? [];
 
   const { handleSubmit, handleChange } = useFormik({
@@ -91,7 +91,7 @@ const SeerActions = () => {
                 </Typography>
                 {revealTargetId === player.id && (
                   <Typography variant="body" textColor="primary" className="flex items-center gap-2">
-                    <Icon name="skull" className="w-4 h-4 color-primary" />
+                    <Icon name="targetEye" className="w-4 h-4 color-primary" />
                     {t('revealTarget')}
                   </Typography>
                 )}

@@ -54,7 +54,6 @@
             "witchCamp": "Villager team",
             "roundDescription": "The witch can save a victim or kill another. Choose your target for tonight.",
             "saveTitle": "Save a victim",
-            "saveDescription": "The witch can save a victim from the night.",
             "poisonTitle": "Kill a victim",
             "poisonDescription": "The witch can kill a victim from the night.",
             "submitChoice": "Validate your choice",
@@ -64,7 +63,16 @@
             "poisonTag": "1 remaining use",
             "poisonTagDisabled": "Already used",
             "healTag": "1 remaining use",
-            "healTagDisabled": "Already used"
+            "healTagDisabled": "Already used",
+            "saveDescriptionWithTarget": "Save {username} from death.",
+            "saveDescriptionWithoutTarget": "No villager to save this night.",
+            "goBackToChoiceStep": "Back to choices",
+            "alreadyDead": "Already dead",
+            "actionEnded": "Your action has been saved.",
+            "saveVoteEndedWithTarget": "You chose to save {username}.",
+            "saveVoteEndedWithoutTarget": "You chose to save the victim.",
+            "poisonVoteEndedWithTarget": "You chose to poison {username}.",
+            "timeUp": "End turn"
           }
         }
       },

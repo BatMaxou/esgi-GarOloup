@@ -3,7 +3,7 @@ model: environment
 id: ev_F696ohE3ha
 workspaceId: wk_uXtATNFQmZ
 createdAt: 2026-02-27T22:39:05.977857610
-updatedAt: 2026-05-16T18:44:02.041436222
+updatedAt: 2026-06-13T01:00:47.327945
 name: Temp User 2
 public: true
 base: false
@@ -23,4 +23,4 @@ variables:
   value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3R2hCOHlIMDc0Y25Qdk1SY3RDUmJmZ1ZFOFQvbm1nU2lxNnJCUVRQRHQxcDg3WTJuTFFrcFlaVnVodWE2UlVSbnFN') ]}
   id: HBMk8BP7It
 color: var(--info)
-sortPriority: 2333.3333333333335
+sortPriority: 4000.0

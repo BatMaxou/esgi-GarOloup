@@ -25,7 +25,7 @@ const WerewolfActions = () => {
       )
       .map((gamePlayer) => ({
         id: gamePlayer.id,
-        name: gamePlayer.user?.username ?? '',
+        name: (gamePlayer.user?.username || gamePlayer.tempUser?.username) ?? '',
       })) ?? [];
 
   const { handleSubmit, handleChange, values } = useFormik({

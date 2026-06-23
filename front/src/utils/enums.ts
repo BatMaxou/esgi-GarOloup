@@ -52,6 +52,11 @@ export enum IdeaCategoryEnum {
   OTHER = 'other',
 }
 
+export enum GameNightActionTypeEnum {
+  MURDER = 'murder',
+  SAVE = 'save',
+}
+
 export enum GameRoleEnum {
   VILLAGER = 'villager',
   WEREWOLF = 'werewolf',

@@ -23,4 +23,4 @@ variables:
   value: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RW9MLzBSMm9VQUFwMUsrRW8wQTR0WjZKMGRIcGs5cndwY0J0WGFacFoyN3QxUkNDcGJIWG9SYjVPY0N1S1loYzZYamxiUUY0ekRoMzA9') ]}
   id: T3DAAiJ7jK
 color: var(--success)
-sortPriority: 3111.1111111111113
+sortPriority: 6000.0
