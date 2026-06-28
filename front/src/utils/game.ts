@@ -5,7 +5,6 @@ import { Game, MurderAction, Player, SaveAction, SeerRole } from './types';
 //////////////////////// Public Informations ////////////////////////
 /////////////////////////////////////////////////////////////////////
 
-
 export const getLastUserKilledDuringNight = (game: Game) => {
   const currentNight = (game.nights?.length ?? 1) - 1;
   const lastNightMurderAction = game.nights?.[currentNight]?.actions?.find(
@@ -31,7 +30,7 @@ export const getAllUsersKilledDuringNight = (game: Game): string[] => {
     .filter((targetPlayerId): targetPlayerId is string => Boolean(targetPlayerId));
 };
 
-// Action Heal de la witch 
+// Action Heal de la witch
 // À trasférer dans la section private informations quand mis en place en back
 
 export const getHealUserDuringThisNight = (game: Game) => {
@@ -59,7 +58,7 @@ export const getDeadUsersDuringNight = (game: Game): string[] => {
 
 /////////////////////////////////////////////////////////////////////
 //////////////////////// Private Informations ///////////////////////
-/////////////////////////////////////////////////////////////////////  
+/////////////////////////////////////////////////////////////////////
 
 export const getRevealUserDuringThisNight = (
   game: Game,

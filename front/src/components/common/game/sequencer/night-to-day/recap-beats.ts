@@ -1,8 +1,5 @@
 import { GameRoleEnum } from '@/utils/enums';
-import {
-  getDeadUsersDuringNight,
-  getRevealUserDuringThisNight,
-} from '@/utils/game';
+import { getDeadUsersDuringNight, getRevealUserDuringThisNight } from '@/utils/game';
 import { Game, Player } from '@/utils/types';
 
 export type RecapBeatType = 'death' | 'reveal' | 'revealDead' | 'calm';
