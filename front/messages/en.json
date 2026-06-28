@@ -79,6 +79,7 @@
           "death": "{username} died during the night.",
           "deathUnknown": "A victim fell during the night.",
           "reveal": "{username}'s role is: {role}.",
+          "revealDead": "{username} died during the night. Their role was: {role}.",
           "calm": "The night was peaceful. No victims.",
           "roles": {
             "villager": "Villager",

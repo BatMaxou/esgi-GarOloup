@@ -51,6 +51,12 @@ export const getHealUsernameUserDuringThisNight = (game: Game, players: Player[]
     : null;
 };
 
+export const getDeadUsersDuringNight = (game: Game): string[] => {
+  const killed = getAllUsersKilledDuringNight(game);
+  const healed = getHealUserDuringThisNight(game);
+  return healed ? killed.filter((playerId) => playerId !== healed) : killed;
+};
+
 /////////////////////////////////////////////////////////////////////
 //////////////////////// Private Informations ///////////////////////
 /////////////////////////////////////////////////////////////////////  

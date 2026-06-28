@@ -87,6 +87,7 @@
           "death": "{username} est mort cette nuit.",
           "deathUnknown": "Une victime est tombée cette nuit.",
           "reveal": "Le rôle de {username} est : {role}.",
+          "revealDead": "{username} est mort cette nuit. C'était : {role}.",
           "calm": "La nuit fut paisible. Aucune victime.",
           "roles": {
             "villager": "Villageois",

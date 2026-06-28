@@ -11,6 +11,7 @@ import { RecapBeat } from './recap-beats';
 const BEAT_ICONS: Record<RecapBeat['type'], IconName> = {
   death: 'skull',
   reveal: 'targetEye',
+  revealDead: 'skull',
   calm: 'moon',
 };
 
@@ -26,6 +27,11 @@ const NightRecap = ({ beat }: { beat: RecapBeat }) => {
           username: beat.username ?? '',
           role: beat.role ? t(`roles.${beat.role}`) : '',
         });
+      case 'revealDead':
+        return t('revealDead', {
+          username: beat.username ?? '',
+          role: beat.role ? t(`roles.${beat.role}`) : '',
+        });
       case 'calm':
       default:
         return t('calm');
@@ -33,7 +39,7 @@ const NightRecap = ({ beat }: { beat: RecapBeat }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-9999 flex flex-col items-center justify-center gap-6 bg-black/85 backdrop-blur-sm">
+    <div className="fixed inset-0 z-9999 flex flex-col items-center justify-center gap-6 bg-black/50 backdrop-blur-sm">
       <motion.div
         key={`${beat.id}-icon`}
         initial={{ opacity: 0 }}
