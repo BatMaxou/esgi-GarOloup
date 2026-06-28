@@ -6,14 +6,33 @@ import { Link } from '@/i18n/navigation';
 import { paths } from '@/utils/paths';
 import Typography from '@/components/ui/atoms/typography';
 import { useGame } from '@/contexts/game-context';
+import { useApiClient } from '@/contexts/api-context';
+import Timer from '@/components/ui/molecules/timer';
 
 import GameJoinCode from '../game/game-join-code';
 import { headerBorderClasses, headerSurfaceClasses } from './header-surface';
 import GameStepIndicator from '../game/game-step-indicator';
+import { GameGlobalStepEnum } from '@/utils/enums';
 
 const IngameNavbar = () => {
-  const { game } = useGame();
+  const { game, timeUp } = useGame();
+  const { isTokenInitialized } = useApiClient();
   const tg = useTranslations();
+
+  const rightSideContent = () => {
+    switch (game?.globalStep) {
+      case GameGlobalStepEnum.NEW:
+        return <GameJoinCode joinCode={game?.joinCode ?? ''} />;
+      case GameGlobalStepEnum.RUNNING:
+        return game?.stepEndAt && isTokenInitialized ? (
+          <Timer stepEndAt={game.stepEndAt} onTimeOut={() => timeUp()} />
+        ) : null;
+      case GameGlobalStepEnum.FINISH:
+        return null;
+      default:
+        return null;
+    }
+  };
 
   return (
     <nav
@@ -31,7 +50,7 @@ const IngameNavbar = () => {
       {/* <GameTimerDisplay /> */}
 
       {/* Join code avec copy */}
-      <GameJoinCode joinCode={game?.joinCode ?? ''} />
+      {rightSideContent()}
     </nav>
   );
 };

@@ -15,6 +15,7 @@ type Props = {
 type ApiClientContextType = {
   apiClient: ApiClient;
   tokenHasChanged: boolean;
+  isTokenInitialized: boolean;
 };
 
 export const ApiClientContext = createContext<ApiClientContextType | undefined>(undefined);
@@ -25,6 +26,7 @@ export const ApiClientProvider = ({ children }: Props) => {
   const { data: mainSession, refetch: refetchMain } = useSession();
   const { data: tempSession, refetch: refetchTemp } = useTempUserSession();
   const [tokenHasChanged, setTokenHasChanged] = useState(false);
+  const [isTokenInitialized, setIsTokenInitialized] = useState(!!apiClient.token);
 
   const propagateChangeToken = useCallback(
     async (token?: string | null, refreshToken?: string | null) => {
@@ -62,9 +64,15 @@ export const ApiClientProvider = ({ children }: Props) => {
     if (token && tokenChanged) {
       setTokenHasChanged(true); // eslint-disable-line react-hooks/set-state-in-effect
     }
+
+    setIsTokenInitialized(!!token);
   }, [mainSession?.user, tempSession?.user]);
 
-  return <ApiClientContext.Provider value={{ apiClient, tokenHasChanged }}>{children}</ApiClientContext.Provider>;
+  return (
+    <ApiClientContext.Provider value={{ apiClient, tokenHasChanged, isTokenInitialized }}>
+      {children}
+    </ApiClientContext.Provider>
+  );
 };
 
 export const useApiClient = () => {
