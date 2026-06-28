@@ -82,6 +82,21 @@
             "revealTarget": "Inspecter",
             "submitChoice": "Confirmer"
           }
+        },
+        "nightRecap": {
+          "death": "{username} est mort cette nuit.",
+          "deathUnknown": "Une victime est tombée cette nuit.",
+          "reveal": "Le rôle de {username} est : {role}.",
+          "calm": "La nuit fut paisible. Aucune victime.",
+          "roles": {
+            "villager": "Villageois",
+            "werewolf": "Loup-Garou",
+            "seer": "Voyante",
+            "witch": "Sorcière",
+            "wild_child": "Enfant sauvage",
+            "hunter": "Chasseur",
+            "infect_father": "Père infect"
+          }
         }
       },
       "home": {

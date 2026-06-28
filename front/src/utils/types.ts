@@ -86,15 +86,17 @@ export type HunterRole = GameRole & {
 };
 
 export type Player = {
-  id: string;
-  user?: User;
-  tempUser?: TempUser;
+  afkCount?: number;
   dead?: boolean;
   game?: Game;
+  gameMaster?: boolean;
   host?: boolean;
-  username?: string;
-  role?: GameRole;
+  id: string;
+  role?: GameRole | VillagerRole | SeerRole | WerewolfRole | WitchRole | HunterRole | WildChildRole;
   team?: GameTeamEnum;
+  tempUser?: TempUser;
+  user?: User;
+  username?: string;
 };
 
 export type NightAction = {

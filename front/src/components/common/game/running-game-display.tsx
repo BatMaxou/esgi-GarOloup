@@ -8,16 +8,21 @@ import { usePlayer } from '@/contexts/player-context';
 import WitchActions from './night-actions/witch-actions';
 import SeerActions from './night-actions/seer-actions';
 import { UserTurnAnimation } from './animations/user-turn-animation';
+import NightRecap from './sequencer/night-to-day';
+import { useNightRecap } from './sequencer/night-to-day/use-night-recap';
+
 const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameMaster: boolean }) => {
   const { game } = useGame();
   const { player } = usePlayer();
 
-  if (!game) {
+  const { isPlaying, currentBeat } = useNightRecap(game, player);
+
+  const runningStep = game?.runtimeStep;
+  const globalStep = game?.globalStep;
+
+  if (!game || !player) {
     return null;
   }
-
-  const globalStep = game.globalStep;
-  const runningStep = game.runtimeStep;
 
   if (globalStep === GameGlobalStepEnum.NEW) {
     return <NewGameDisplay game={game} isHost={isHost} isGameMaster={isGameMaster} />;
@@ -51,6 +56,14 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
         default:
           return null;
       }
+    }
+
+    if (runningStep === GameRuntimeStepEnum.DAY) {
+      return (
+        <>
+          {isPlaying && currentBeat && <NightRecap beat={currentBeat} />}
+        </>
+      );
     }
   }
 };

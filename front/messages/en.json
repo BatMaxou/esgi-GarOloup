@@ -74,6 +74,21 @@
             "poisonVoteEndedWithTarget": "You chose to poison {username}.",
             "timeUp": "End turn"
           }
+        },
+        "nightRecap": {
+          "death": "{username} died during the night.",
+          "deathUnknown": "A victim fell during the night.",
+          "reveal": "{username}'s role is: {role}.",
+          "calm": "The night was peaceful. No victims.",
+          "roles": {
+            "villager": "Villager",
+            "werewolf": "Werewolf",
+            "seer": "Seer",
+            "witch": "Witch",
+            "wild_child": "Wild child",
+            "hunter": "Hunter",
+            "infect_father": "Infect father"
+          }
         }
       },
       "home": {
