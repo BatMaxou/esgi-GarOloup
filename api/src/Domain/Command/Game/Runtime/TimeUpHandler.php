@@ -65,7 +65,9 @@ class TimeUpHandler
         $lastGameEvent = $this->gameEventRepository->findLastByGame($game);
         if (
             $lastGameEvent instanceof TimeUpGameEvent
-            && GameRuntimeStepEnum::INTERUPT !== $game->getRuntimeStep()
+            && $lastGameEvent->getCreatedAt() > $game->getStepEndAt()
+            // TODO: to check
+            // && GameRuntimeStepEnum::INTERUPT !== $game->getRuntimeStep()
         ) {
             return new BasicActionOutput(true);
         }
