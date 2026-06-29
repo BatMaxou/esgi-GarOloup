@@ -81,7 +81,7 @@ const GameClient = () => {
   return (
     <main className="flex h-full min-h-0 w-full flex-row justify-between items-start">
       <IngamePlayersSidebar players={playersList || []} />
-      <div className="px-8 py-8">{renderGameDisplay}</div>
+      <div className="px-8 py-8 h-full">{renderGameDisplay}</div>
       <IngamePlayersSidebar players={playersList || []} />
     </main>
   );
