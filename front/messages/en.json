@@ -98,6 +98,10 @@
           "hunterTurn": "It's the hunter's turn to play",
           "wildChildTurn": "It's the wild child's turn to play",
           "infectFatherTurn": "It's the infect father's turn to play"
+        },
+        "vote": {
+          "title": "Who do you eliminate?",
+          "description": "The player with the most votes will be eliminated and their role revealed."
         }
       },
       "home": {
@@ -540,7 +544,8 @@
       "setGameMasterError": "Error while setting the game master",
       "setGameMasterSuccess": "Game master set",
       "launchGameError": "Error launching game",
-      "launchGameSuccess": "Game launched"
+      "launchGameSuccess": "Game launched",
+      "voteError": "Error while voting"
     },
     "roles": {
       "werewolf": {

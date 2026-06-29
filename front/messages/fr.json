@@ -106,6 +106,10 @@
             "hunter": "Chasseur",
             "infect_father": "Père infect"
           }
+        },
+        "vote": {
+          "title": "Qui éliminez-vous ?",
+          "description": "Le joueur avec le plus de votes sera éliminé et son rôle révélé."
         }
       },
       "home": {
@@ -550,7 +554,8 @@
       "setGameMasterError": "Erreur lors de la désignation du maître du jeu",
       "setGameMasterSuccess": "Maître du jeu désigné",
       "launchGameError": "Erreur lors de la lancement de la partie",
-      "launchGameSuccess": "Partie lancée"
+      "launchGameSuccess": "Partie lancée",
+      "voteError": "Erreur lors du vote"
     },
     "roles": {
       "werewolf": {

@@ -13,6 +13,7 @@ import Witch from '@/assets/icons/witch.svg';
 import Heal from '@/assets/icons/heal.svg';
 import Seer from '@/assets/icons/seer.svg';
 import TargetEye from '@/assets/icons/target-eye.svg';
+import HelpCircle from '@/assets/icons/help-circle.svg';
 
 export type IconName = keyof typeof raw & string;
 export type IconType = LucideIcon | ComponentType<SVGProps<SVGSVGElement>>;
@@ -38,6 +39,7 @@ const raw = {
   heal: Heal,
   seer: Seer,
   targetEye: TargetEye,
+  questionMark: HelpCircle,
 };
 
 export const icons: Icons = raw;
