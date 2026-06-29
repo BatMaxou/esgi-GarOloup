@@ -34,6 +34,7 @@ type GameContextType = {
   dispatchRoles: (payload: RoleDispatchEntry[]) => void;
   resetRoleDispatch: () => void;
   launchGame: () => void;
+  vote: (targetPlayerId: string) => Promise<void>;
   timeUp: () => void;
 };
 
@@ -173,6 +174,14 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
     toast.success(t('launchGameSuccess'));
   };
 
+  const vote = async (targetPlayerId: string) => {
+    const response = await apiClient.game.vote(targetPlayerId);
+    if (response instanceof ApiClientError) {
+      toast.error(t('voteError'));
+      return;
+    }
+  };
+
   const timeUp = async () => {
     const response = await apiClient.game.timeUp();
     if (response instanceof ApiClientError) {
@@ -199,6 +208,7 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
         dispatchRoles,
         resetRoleDispatch,
         launchGame,
+        vote,
         timeUp,
       }}
     >

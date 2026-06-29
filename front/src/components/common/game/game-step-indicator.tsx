@@ -12,7 +12,9 @@ const GameStepIndicator = () => {
   }
 
   const runtimeStep = game.runtimeStep;
-  const roundCounter = (game.votes?.length ?? 0) + 1;
+  const nightCounter = game.nights?.length ?? 0;
+  const dayCounter = game.days?.length ?? 0;
+  const voteCounter = game.votes?.length ?? 0;
 
   if (runtimeStep === GameRuntimeStepEnum.SETUP) {
     return (
@@ -36,7 +38,7 @@ const GameStepIndicator = () => {
           {t('night')}
         </Typography>
         <Typography tag="span" className="phase-day-num">
-          — {t('round')} {roundCounter}
+          — {t('round')} {nightCounter}
         </Typography>
       </Card>
     );
@@ -51,7 +53,7 @@ const GameStepIndicator = () => {
           {t('day')}
         </Typography>
         <Typography tag="span" className="phase-day-num">
-          — {t('round')} {roundCounter}
+          — {t('round')} {dayCounter}
         </Typography>
       </Card>
     );
@@ -66,7 +68,7 @@ const GameStepIndicator = () => {
           {t('vote')}
         </Typography>
         <Typography tag="span" className="phase-day-num">
-          — {t('round')} {roundCounter}
+          — {t('round')} {voteCounter}
         </Typography>
       </Card>
     );

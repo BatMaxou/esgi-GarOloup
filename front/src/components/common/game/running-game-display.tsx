@@ -3,14 +3,15 @@
 import { GameGlobalStepEnum, GameRoleEnum, GameRuntimeStepEnum } from '@/utils/enums';
 import NewGameDisplay from './new-game-display';
 import { useGame } from '@/contexts/game-context';
-import WerewolfActions from './night-actions/werewolf-actions';
+import WerewolfActions from './running-step/night-actions/werewolf-actions';
 import { usePlayer } from '@/contexts/player-context';
-import WitchActions from './night-actions/witch-actions';
-import SeerActions from './night-actions/seer-actions';
+import WitchActions from './running-step/night-actions/witch-actions';
+import SeerActions from './running-step/night-actions/seer-actions';
 import { UserTurnAnimation } from './animations/user-turn-animation';
 import NightRecap from './sequencer/night-to-day';
 import { useNightRecap } from './sequencer/night-to-day/use-night-recap';
-import WaitingNightActions from './night-actions/waiting-night-actions';
+import WaitingNightActions from './running-step/night-actions/waiting-night-actions';
+import VoteDisplay from './running-step/vote/vote-display';
 
 const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameMaster: boolean }) => {
   const { game } = useGame();
@@ -60,6 +61,16 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
 
     if (runningStep === GameRuntimeStepEnum.DAY) {
       return <>{isPlaying && currentBeat && <NightRecap beat={currentBeat} />}</>;
+    }
+
+    if (runningStep === GameRuntimeStepEnum.VOTE) {
+      return (
+        <>
+          {/* Transition avec affichage "Il est l'heure de voter" */}
+          {/* Affichage du display de vote */}
+          <VoteDisplay />
+        </>
+      );
     }
   }
 };
