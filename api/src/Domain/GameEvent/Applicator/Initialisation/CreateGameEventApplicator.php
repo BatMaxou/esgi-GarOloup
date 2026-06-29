@@ -43,7 +43,7 @@ class CreateGameEventApplicator implements GameEventApplicatorInterface
         $player = new Player($user);
         $game = new Game($player)
             ->setMaxPlayers($maxPlayers)
-            ->setMaxTimeForDiscussion($maxTimeForDiscussion)
+            ->setMaxTimeForDiscussion($maxTimeForDiscussion * 60)
             ->setPublic($gameEvent->isPublic());
 
         $this->em->persist($player);
