@@ -15,7 +15,7 @@ import GameStepIndicator from '../game/game-step-indicator';
 import { GameGlobalStepEnum } from '@/utils/enums';
 
 const IngameNavbar = () => {
-  const { game } = useGame();
+  const { game, timeUp } = useGame();
   const { isTokenInitialized } = useApiClient();
   const tg = useTranslations();
 
@@ -24,7 +24,7 @@ const IngameNavbar = () => {
       case GameGlobalStepEnum.NEW:
         return <GameJoinCode joinCode={game?.joinCode ?? ''} />;
       case GameGlobalStepEnum.RUNNING:
-        return game?.stepEndAt && isTokenInitialized ? <Timer stepEndAt={game.stepEndAt} /> : null;
+        return game?.stepEndAt && isTokenInitialized ? <Timer stepEndAt={game.stepEndAt} onTimeOut={timeUp} /> : null;
       case GameGlobalStepEnum.FINISH:
         return null;
       default:
