@@ -59,9 +59,7 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
     }
 
     if (runningStep === GameRuntimeStepEnum.DAY) {
-      return <>
-        {isPlaying && currentBeat && <NightRecap beat={currentBeat} />}
-      </>;
+      return <>{isPlaying && currentBeat && <NightRecap beat={currentBeat} />}</>;
     }
   }
 };
