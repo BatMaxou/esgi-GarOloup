@@ -5,6 +5,7 @@ namespace App\Domain\Interceptor;
 use App\Domain\Interceptor\Interface\InterceptorInterface;
 use App\Entity\Game\Game;
 use App\Entity\Game\Role\HunterRole;
+use App\Enum\Game\GameRoleEnum;
 
 class HunterInterceptor implements InterceptorInterface
 {
@@ -18,5 +19,10 @@ class HunterInterceptor implements InterceptorInterface
         }
 
         return false;
+    }
+
+    public function getRole(): GameRoleEnum
+    {
+        return GameRoleEnum::HUNTER;
     }
 }

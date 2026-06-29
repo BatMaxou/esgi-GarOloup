@@ -165,6 +165,9 @@ class Game implements TopicRelatedObject
     #[ORM\Column(enumType: GameRuntimeStepEnum::class, nullable: true)]
     private ?GameRuntimeStepEnum $interruptedRuntimeStep = null;
 
+    #[ORM\Column(enumType: GameRoleEnum::class, nullable: true)]
+    private ?GameRoleEnum $interruptedByRole = null;
+
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $stepEndAt = null;
 
@@ -285,6 +288,23 @@ class Game implements TopicRelatedObject
         $this->interruptedRuntimeStep = $interruptedRuntimeStep;
 
         return $this;
+    }
+
+    public function getInterruptedByRole(): ?GameRoleEnum
+    {
+        return $this->interruptedByRole;
+    }
+
+    public function setInterruptedByRole(?GameRoleEnum $interruptedByRole): static
+    {
+        $this->interruptedByRole = $interruptedByRole;
+
+        return $this;
+    }
+
+    public function getInterruptedByTeam(): ?GameTeamEnum
+    {
+        return $this->interruptedByRole?->getTeam();
     }
 
     public function getStepEndAt(): ?\DateTimeImmutable
