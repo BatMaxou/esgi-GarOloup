@@ -50,6 +50,7 @@ class StartNextStepApplicator implements GameEventApplicatorInterface
 
             $interruptedStep = $game->getInterruptedRuntimeStep();
             $game->setInterruptedRuntimeStep(null);
+            $game->setInterruptedByRole(null);
 
             $isNightFinished = GameRuntimeStepEnum::NIGHT === $interruptedStep;
             $isDayFinished = GameRuntimeStepEnum::DAY === $interruptedStep;

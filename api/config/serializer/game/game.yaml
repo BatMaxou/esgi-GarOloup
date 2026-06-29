@@ -46,6 +46,12 @@ App\Entity\Game\Game:
         interruptedRuntimeStep:
             groups:
                 - game:read
+        interruptedByRole:
+            groups:
+                - game:read
+        interruptedByTeam:
+            groups:
+                - game:read
         nights:
             groups:
                 - game:read

@@ -37,6 +37,7 @@ class HunterInterruptApplicator implements GameEventApplicatorInterface
         }
 
         $game->setInterruptedRuntimeStep($game->getRuntimeStep());
+        $game->setInterruptedByRole($this->hunterInterceptor->getRole());
         $game->setRuntimeStep(GameRuntimeStepEnum::INTERUPT);
         $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $this->hunterStepDuration)));
 
