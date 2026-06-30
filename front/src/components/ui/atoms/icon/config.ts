@@ -14,6 +14,7 @@ import Heal from '@/assets/icons/heal.svg';
 import Seer from '@/assets/icons/seer.svg';
 import TargetEye from '@/assets/icons/target-eye.svg';
 import HelpCircle from '@/assets/icons/help-circle.svg';
+import Cancel from '@/assets/icons/cancel.svg';
 
 export type IconName = keyof typeof raw & string;
 export type IconType = LucideIcon | ComponentType<SVGProps<SVGSVGElement>>;
@@ -40,6 +41,7 @@ const raw = {
   seer: Seer,
   targetEye: TargetEye,
   questionMark: HelpCircle,
+  cancel: Cancel,
 };
 
 export const icons: Icons = raw;

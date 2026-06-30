@@ -293,6 +293,9 @@
           "logout": "Log out",
           "login": "Log in"
         },
+        "ingameNavbar": {
+          "dead": "You are dead"
+        },
         "footer": {
           "taglineLine1": "Strategy, bluff and betrayal.",
           "taglineLine2": "Will you survive the night?",
@@ -495,6 +498,11 @@
         "sameCampRoles": "Roles from the same team",
         "minPlayers": "Min. players",
         "maxPerGame": "Max / game"
+      },
+      "game": {
+        "gameClient": {
+          "spectator": "Spectator"
+        }
       }
     },
     "ui": {
