@@ -16,7 +16,11 @@ use App\Entity\Game\Period\Action\NightAction\MurderAction;
 use App\Entity\Game\Period\Action\NightAction\SaveAction;
 use App\Entity\Game\Role\WitchRole;
 use App\Enum\Game\GameRoleEnum;
+use App\Enum\TopicEnum;
 use App\Repository\Game\PlayerRepository;
+use App\Service\Mercure\TopicCollector;
+use App\Service\Mercure\TopicProvider;
+use Psr\Clock\ClockInterface;
 use Symfony\Component\Uid\Uuid;
 
 /** @implements GameEventApplicatorInterface<WitchSaveEvent|WitchPoisonEvent> */
@@ -28,6 +32,9 @@ class WitchApplicator implements GameEventApplicatorInterface
     public function __construct(
         private readonly WitchSpec $witchSpec,
         private readonly PlayerRepository $playerRepository,
+        private readonly ClockInterface $clock,
+        private readonly TopicProvider $topicProvider,
+        private readonly TopicCollector $topicCollector,
     ) {
     }
 
@@ -72,6 +79,9 @@ class WitchApplicator implements GameEventApplicatorInterface
             $night->addAction(new SaveAction($night, GameRoleEnum::WITCH, $targetPlayerId));
             $role->useHealPotion();
 
+            $game->setStepEndAt($this->clock->now());
+            $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_GAME, $game));
+
             return $game;
         }
 
@@ -85,6 +95,9 @@ class WitchApplicator implements GameEventApplicatorInterface
 
         $night->addAction(new MurderAction($night, GameRoleEnum::WITCH, $targetPlayerId));
         $role->usePoisonPotion();
+        $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_GAME, $game));
+
+        $game->setStepEndAt($this->clock->now());
 
         return $game;
     }
