@@ -77,14 +77,14 @@ class AppFixtures extends Fixture
         ThereIs::aStory(ClassicGameConfiguredStory::class)->execute();
         ThereIs::aStory(ClassicGameDispatchedStory::class)->execute();
         ThereIs::aStory(ClassicGameLaunchedStory::class)->execute();
-        ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
-        ThereIs::aStory(ClassicGameNight1SeerRevealedStory::class)->execute();
-        ThereIs::aStory(ClassicGameNight1WerewolfVotedStory::class)->execute();
-        ThereIs::aStory(ClassicGameDay1FinishedStory::class)->execute();
-        ThereIs::aStory(ClassicGameVote1ResolvedStory::class)->execute();
-        ThereIs::aStory(ClassicGameNight2SeerRevealedStory::class)->execute();
-        ThereIs::aStory(ClassicGameNight2WerewolfVotedStory::class)->execute();
-        ThereIs::aStory(ClassicGameDay2FinishedStory::class)->execute();
+        // ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
+        // ThereIs::aStory(ClassicGameNight1SeerRevealedStory::class)->execute();
+        // ThereIs::aStory(ClassicGameNight1WerewolfVotedStory::class)->execute();
+        // ThereIs::aStory(ClassicGameDay1FinishedStory::class)->execute();
+        // ThereIs::aStory(ClassicGameVote1ResolvedStory::class)->execute();
+        // ThereIs::aStory(ClassicGameNight2SeerRevealedStory::class)->execute();
+        // ThereIs::aStory(ClassicGameNight2WerewolfVotedStory::class)->execute();
+        // ThereIs::aStory(ClassicGameDay2FinishedStory::class)->execute();
 
         // // Game Master ---------------------------
         // ThereIs::aStory(ClassicGameFilledWithGameMasterStory::class)->execute();

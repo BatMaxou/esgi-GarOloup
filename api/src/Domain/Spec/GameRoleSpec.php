@@ -3,9 +3,12 @@
 namespace App\Domain\Spec;
 
 use App\Entity\Game\Role\GameRole;
+use App\Entity\Game\Role\HunterRole;
+use App\Entity\Game\Role\InfectFatherRole;
 use App\Entity\Game\Role\SeerRole;
 use App\Entity\Game\Role\VillagerRole;
 use App\Entity\Game\Role\WerewolfRole;
+use App\Entity\Game\Role\WildChildRole;
 use App\Entity\Game\Role\WitchRole;
 use App\Entity\Role;
 use App\Enum\Game\GameRoleEnum;
@@ -24,6 +27,9 @@ class GameRoleSpec
             GameRoleEnum::WEREWOLF => new WerewolfRole(),
             GameRoleEnum::SEER => new SeerRole(),
             GameRoleEnum::WITCH => new WitchRole(),
+            GameRoleEnum::WILD_CHILD => new WildChildRole(),
+            GameRoleEnum::HUNTER => new HunterRole(),
+            GameRoleEnum::INFECT_FATHER => new InfectFatherRole(),
             default => null,
         })?->setRole($role);
     }

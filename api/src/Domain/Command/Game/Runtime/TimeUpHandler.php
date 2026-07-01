@@ -9,13 +9,13 @@ use App\Domain\GameEvent\HttpGameExceptionMapper;
 use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Game\Game;
 use App\Entity\User\AbstractUser;
-use App\Enum\Game\GameRuntimeStepEnum;
 use App\Enum\TopicEnum;
-use App\Repository\Event\Game\GameEventRepository;
 use App\Repository\Game\PlayerRepository;
 use App\Service\Mercure\TopicCollector;
 use App\Service\Mercure\TopicProvider;
 use App\Service\Mercure\TopicPublisher;
+use Doctrine\DBAL\LockMode;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -32,7 +32,7 @@ class TimeUpHandler
         private readonly TopicCollector $topicCollector,
         private readonly TopicProvider $topicProvider,
         private readonly TopicPublisher $topicPublisher,
-        private readonly GameEventRepository $gameEventRepository,
+        private readonly EntityManagerInterface $em,
         private readonly ClockInterface $clock,
     ) {
     }
@@ -54,33 +54,35 @@ class TimeUpHandler
             throw new AccessDeniedHttpException('You do not have a current game');
         }
 
-        if (null === $game->getStepEndAt()) {
-            return new BasicActionOutput(true);
-        }
+        $timerNotExpired = $this->em->wrapInTransaction(function () use ($game, $currentUser): bool {
+            $this->em->lock($game, LockMode::PESSIMISTIC_WRITE);
+            $this->em->refresh($game);
 
-        if ($game->getStepEndAt() > $this->clock->now()) {
+            $stepEndAt = $game->getStepEndAt();
+            if (null === $stepEndAt) {
+                return false;
+            }
+
+            if ($stepEndAt > $this->clock->now()) {
+                return true;
+            }
+
+            $gameEvent = new TimeUpGameEvent()
+                ->setGame($game)
+                ->setUser($currentUser);
+
+            try {
+                $game = $this->gameEventDispatcher->dispatch($gameEvent, true);
+                $this->handleTopicUpdates($game);
+            } catch (GameException $e) {
+                throw HttpGameExceptionMapper::getHttpExceptionFor($e);
+            }
+
+            return false;
+        });
+
+        if ($timerNotExpired) {
             throw new ConflictHttpException('The step timer has not expired yet');
-        }
-
-        $lastGameEvent = $this->gameEventRepository->findLastByGame($game);
-        if (
-            $lastGameEvent instanceof TimeUpGameEvent
-            && $lastGameEvent->getCreatedAt() > $game->getStepEndAt()
-            // TODO: to check
-            // && GameRuntimeStepEnum::INTERUPT !== $game->getRuntimeStep()
-        ) {
-            return new BasicActionOutput(true);
-        }
-
-        $gameEvent = new TimeUpGameEvent()
-            ->setGame($game)
-            ->setUser($currentUser);
-
-        try {
-            $game = $this->gameEventDispatcher->dispatch($gameEvent);
-            $this->handleTopicUpdates($game);
-        } catch (GameException $e) {
-            throw HttpGameExceptionMapper::getHttpExceptionFor($e);
         }
 
         return new BasicActionOutput(true);
