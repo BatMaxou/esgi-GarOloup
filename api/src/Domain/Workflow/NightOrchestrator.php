@@ -6,6 +6,8 @@ use App\Domain\Workflow\Interface\NightResettableInterface;
 use App\Domain\Workflow\Interface\PeriodOrchestratorInterface;
 use App\Entity\Game\Game;
 use App\Entity\Game\Period\Night;
+use App\Entity\Game\Workflow;
+use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
 use Symfony\Component\Clock\ClockInterface;
 
@@ -32,6 +34,8 @@ class NightOrchestrator implements PeriodOrchestratorInterface
         }
 
         $workflow->reset();
+        $this->checkTurnValidity($game, $workflow);
+
         $game->setRuntimeStep(GameRuntimeStepEnum::NIGHT);
         $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $this->nightStepDuration)));
 
@@ -51,7 +55,7 @@ class NightOrchestrator implements PeriodOrchestratorInterface
             return $this->resolve($game);
         }
 
-        $workflow->setCurrentTurn($workflow->getStepAt($workflow->getCurrent()));
+        $this->checkTurnValidity($game, $workflow);
 
         return $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $this->nightStepDuration)));
     }
@@ -66,5 +70,25 @@ class NightOrchestrator implements PeriodOrchestratorInterface
         $night->setResolved(true);
 
         return $game;
+    }
+
+    private function checkTurnValidity(Game $game, Workflow $workflow): void
+    {
+        $pass = true;
+        foreach ($workflow->getCurrentTurn() as $role) {
+            if (GameRoleEnum::WEREWOLF === $role) {
+                $pass = false;
+
+                continue;
+            }
+
+            if ($player = $game->getPlayer($role)) {
+                $pass = $pass && $player->isDead();
+            }
+        }
+
+        if ($pass) {
+            $this->advance($game);
+        }
     }
 }

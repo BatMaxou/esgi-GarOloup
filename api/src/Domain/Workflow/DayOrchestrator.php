@@ -5,6 +5,7 @@ namespace App\Domain\Workflow;
 use App\Domain\Workflow\Interface\PeriodOrchestratorInterface;
 use App\Entity\Game\Game;
 use App\Entity\Game\Period\Day;
+use App\Entity\Game\Workflow;
 use App\Enum\Game\GameRuntimeStepEnum;
 use Symfony\Component\Clock\ClockInterface;
 
@@ -23,6 +24,8 @@ class DayOrchestrator implements PeriodOrchestratorInterface
         $game->addDay($day);
 
         $workflow->reset();
+        $this->checkTurnValidity($game, $workflow);
+
         $game->setRuntimeStep(GameRuntimeStepEnum::DAY);
         $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $game->getMaxTimeForDiscussion())));
 
@@ -38,7 +41,7 @@ class DayOrchestrator implements PeriodOrchestratorInterface
             return $this->resolve($game);
         }
 
-        $workflow->setCurrentTurn($workflow->getStepAt($workflow->getCurrent()));
+        $this->checkTurnValidity($game, $workflow);
 
         return $game;
     }
@@ -53,5 +56,24 @@ class DayOrchestrator implements PeriodOrchestratorInterface
         $day->setResolved(true);
 
         return $game;
+    }
+
+    private function checkTurnValidity(Game $game, Workflow $workflow): void
+    {
+        $currentTurn = $workflow->getCurrentTurn();
+        if (empty($currentTurn)) {
+            return;
+        }
+
+        $pass = true;
+        foreach ($currentTurn as $role) {
+            if ($player = $game->getPlayer($role)) {
+                $pass = $pass && $player->isDead();
+            }
+        }
+
+        if ($pass) {
+            $this->advance($game);
+        }
     }
 }

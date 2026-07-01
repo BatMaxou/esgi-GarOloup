@@ -24,7 +24,6 @@ class ComplexGameWerewolfWinNight5Story extends ComplexGameWerewolfWinVote4Story
 
         $this->nightOrchestrator->advance($game);
 
-        $this->nightOrchestrator->advance($game);
         $this->dayOrchestrator->start($game);
 
         $this->em->flush();

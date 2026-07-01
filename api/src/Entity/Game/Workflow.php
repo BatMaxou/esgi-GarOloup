@@ -90,6 +90,8 @@ class Workflow
 
         ++$this->current;
 
+        $this->setCurrentTurn($this->getStepAt($this->current));
+
         return $this;
     }
 

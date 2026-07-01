@@ -6,6 +6,7 @@ use App\Entity\Game\Game;
 use App\Entity\Game\Player;
 use App\Entity\User\AbstractUser;
 use App\Entity\User\TempUser;
+use App\Enum\Game\GameGlobalStepEnum;
 use App\Enum\Game\GameInitialisationStepEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Repository\Game\PlayerRepository;
@@ -22,13 +23,8 @@ class GameSpec
 
     public function canCreate(AbstractUser $user): bool
     {
-        $players = $this->playerRepository->findByUser($user);
-        if (0 === \count($players)) {
-            return true;
-        }
-
-        foreach ($players as $player) {
-            if (!$player->isDead()) {
+        foreach ($this->playerRepository->findByUser($user) as $player) {
+            if ($this->isPlayerBusy($player)) {
                 return false;
             }
         }
@@ -38,18 +34,22 @@ class GameSpec
 
     public function canJoin(AbstractUser $user, Game $game): bool
     {
-        $players = $this->playerRepository->findByUser($user);
-        if (0 === \count($players)) {
-            return true;
-        }
-
-        foreach ($players as $player) {
-            if (!$player->isDead()) {
+        foreach ($this->playerRepository->findByUser($user) as $player) {
+            if ($this->isPlayerBusy($player)) {
                 return false;
             }
         }
 
         return $game->getMaxPlayers() > $game->getPlayers()->count();
+    }
+
+    private function isPlayerBusy(Player $player): bool
+    {
+        $game = $player->getLinkedGame();
+
+        return null !== $game
+            && !$player->isDead()
+            && GameGlobalStepEnum::FINISH !== $game->getGlobalStep();
     }
 
     public function isUsernameAvailable(TempUser $user, Game $game): bool
