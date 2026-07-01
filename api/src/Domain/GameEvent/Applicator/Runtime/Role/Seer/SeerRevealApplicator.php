@@ -12,7 +12,11 @@ use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\SeerRevealEvent;
 use App\Entity\Game\Game;
 use App\Entity\Game\Role\SeerRole;
+use App\Enum\TopicEnum;
 use App\Repository\Game\PlayerRepository;
+use App\Service\Mercure\TopicCollector;
+use App\Service\Mercure\TopicProvider;
+use Psr\Clock\ClockInterface;
 use Symfony\Component\Uid\Uuid;
 
 /** @implements GameEventApplicatorInterface<SeerRevealEvent> */
@@ -24,6 +28,9 @@ class SeerRevealApplicator implements GameEventApplicatorInterface
     public function __construct(
         private readonly SeerSpec $seerSpec,
         private readonly PlayerRepository $playerRepository,
+        private readonly ClockInterface $clock,
+        private readonly TopicProvider $topicProvider,
+        private readonly TopicCollector $topicCollector,
     ) {
     }
 
@@ -62,6 +69,9 @@ class SeerRevealApplicator implements GameEventApplicatorInterface
         }
 
         $role->observe($targetPlayer);
+
+        $game->setStepEndAt($this->clock->now());
+        $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_GAME, $game));
 
         return $game;
     }
