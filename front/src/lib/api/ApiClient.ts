@@ -15,6 +15,7 @@ import { VillagerResource } from '@/lib/api/resources/VillagerResource';
 import { SeerResource } from '@/lib/api/resources/SeerResource';
 import { WitchResource } from '@/lib/api/resources/WitchResource';
 import { WildChildResource } from '@/lib/api/resources/WildChildResource';
+import { InfectFatherResource } from '@/lib/api/resources/InfectFatherResource';
 import { HunterResource } from '@/lib/api/resources/HunterResource';
 
 type PropagateChangeToken = (token?: string | null, refreshToken?: string | null) => void;
@@ -70,6 +71,7 @@ export class ApiClient {
   seer: SeerResource;
   witch: WitchResource;
   wildChild: WildChildResource;
+  infectFather: InfectFatherResource;
   hunter: HunterResource;
 
   constructor(
@@ -92,6 +94,7 @@ export class ApiClient {
     this.seer = new SeerResource(this);
     this.witch = new WitchResource(this);
     this.wildChild = new WildChildResource(this);
+    this.infectFather = new InfectFatherResource(this);
     this.hunter = new HunterResource(this);
   }
 

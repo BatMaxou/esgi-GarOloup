@@ -33,6 +33,9 @@ export const apiPaths = {
   wildChild: {
     setup: '/game/wild-child/setup',
   },
+  infectFather: {
+    infect: '/game/infect-father/infect',
+  },
   hunter: {
     shoot: '/game/hunter/shoot',
   },
