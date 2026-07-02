@@ -7,6 +7,7 @@ use App\Domain\Workflow\DayWorkflowComposer;
 use App\Domain\Workflow\NightOrchestrator;
 use App\Domain\Workflow\NightWorkflowComposer;
 use App\Domain\Workflow\VoteResolver;
+use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use Doctrine\ORM\EntityManagerInterface;
@@ -49,6 +50,7 @@ class ComplexGameNight1HunterInterruptStory extends ComplexGameNight1WerewolfKil
         $this->nightOrchestrator->advance($game);
 
         $game->setInterruptedRuntimeStep($game->getRuntimeStep());
+        $game->setInterruptedByRole(GameRoleEnum::HUNTER);
         $game->setRuntimeStep(GameRuntimeStepEnum::INTERUPT);
         $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $this->hunterStepDuration)));
 

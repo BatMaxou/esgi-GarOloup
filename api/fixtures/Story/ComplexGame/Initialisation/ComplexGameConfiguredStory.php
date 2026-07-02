@@ -30,11 +30,12 @@ class ComplexGameConfiguredStory extends ComplexGameClosedStory
         \assert($gameBuilder instanceof GameBuilder);
 
         $compositionBuilder = ThereIs::aComposition()
-            ->withRole($roleBagBuilder->getVillager(), 6)
+            ->withRole($roleBagBuilder->getVillager(), 5)
             ->withRole($roleBagBuilder->getSeer(), 1)
             ->withRole($roleBagBuilder->getWerewolf(), 2)
             ->withRole($roleBagBuilder->getInfectFather(), 1)
             ->withRole($roleBagBuilder->getWitch(), 1)
+            ->withRole($roleBagBuilder->getHunter(), 1)
             ->withRole($roleBagBuilder->getWildChild(), 1);
         $this->addState(self::COMPOSITION, $compositionBuilder);
 

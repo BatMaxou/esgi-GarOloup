@@ -4,6 +4,7 @@ namespace App\Domain\GameEvent\Applicator\Runtime\Workflow;
 
 use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
+use App\Domain\Interceptor\InterceptorHandler;
 use App\Domain\Workflow\GameFinisher;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\TimeUpGameEvent;
@@ -17,6 +18,7 @@ class TryFinishApplicator implements GameEventApplicatorInterface
 
     public function __construct(
         private readonly GameFinisher $gameFinisher,
+        private readonly InterceptorHandler $interceptorHandler,
     ) {
     }
 
@@ -28,6 +30,10 @@ class TryFinishApplicator implements GameEventApplicatorInterface
     public function apply(GameEvent $gameEvent): Game
     {
         $game = $this->ensureGame($gameEvent);
+
+        if ($this->interceptorHandler->hasPendingAction($game)) {
+            return $game;
+        }
 
         $this->gameFinisher->tryFinish($game);
 
