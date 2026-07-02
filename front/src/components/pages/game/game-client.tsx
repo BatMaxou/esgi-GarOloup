@@ -2,6 +2,8 @@
 
 import IngamePlayersSidebar from '@/components/common/game/ingame-players-sidebar';
 import RunningGameDisplay from '@/components/common/game/running-game-display';
+import Icon from '@/components/ui/atoms/icon';
+import Typography from '@/components/ui/atoms/typography';
 import { useGame } from '@/contexts/game-context';
 import { usePlayer } from '@/contexts/player-context';
 import { SeerProvider } from '@/contexts/roles/seer-context';
@@ -9,12 +11,16 @@ import { WereWolfProvider } from '@/contexts/roles/werewolf-context';
 import { WitchProvider } from '@/contexts/roles/witch-context';
 import { GameRoleEnum } from '@/utils/enums';
 import type { Player } from '@/utils/types';
+import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
 const GameClient = () => {
   const { game } = useGame();
   const { player } = usePlayer();
-
+  const t = useTranslations('components.pages.game.gameClient');
+  const isPlayerSpectator = game?.players?.some(
+    (currentPlayer) => currentPlayer.id === player?.id && currentPlayer.dead
+  );
   const playersList = useMemo(() => {
     if (!game) {
       return [];
@@ -81,7 +87,21 @@ const GameClient = () => {
   return (
     <main className="flex h-full min-h-0 w-full flex-row justify-between items-start">
       <IngamePlayersSidebar players={playersList || []} />
-      <div className="px-8 py-8 h-full">{renderGameDisplay}</div>
+      <div className="px-8 py-8 h-full w-full overflow-hidden relative">
+        {renderGameDisplay}
+        {isPlayerSpectator && (
+          <>
+            <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.6)_100%)]" />
+            {/* Render une icon d'oeil et un texte "Spectateur en absolute en haut à droite" */}
+            <div className="absolute top-8 right-4 z-20 flex items-center gap-2 rounded-full border border-error/40 bg-error/10 px-3 py-1">
+              <Icon name="targetEye" className="w-4 h-4 text-error" />
+              <Typography tag="span" variant="subtitle" className="text-error!" bold>
+                {t('spectator')}
+              </Typography>
+            </div>
+          </>
+        )}
+      </div>
       <IngamePlayersSidebar players={playersList || []} />
     </main>
   );

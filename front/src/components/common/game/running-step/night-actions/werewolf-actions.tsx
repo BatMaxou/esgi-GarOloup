@@ -28,16 +28,24 @@ const WerewolfActions = () => {
         name: (gamePlayer.user?.username || gamePlayer.tempUser?.username) ?? '',
       })) ?? [];
 
+  const isSpectator = game?.players?.some((currentPlayer) => currentPlayer.id === player?.id && currentPlayer.dead);
+
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
       targetId: '',
     },
     onSubmit: async (values) => {
+      if (isSpectator) {
+        return;
+      }
       await vote(values.targetId);
     },
   });
 
   const handleSelectPlayer = (playerId: string) => {
+    if (isSpectator) {
+      return;
+    }
     if (values.targetId === playerId) {
       handleChange(null);
       return;
@@ -70,17 +78,18 @@ const WerewolfActions = () => {
           {playerList.map((player) => (
             <Card
               key={player.id}
-              onClick={() => handleSelectPlayer(player.id)}
+              onClick={isSpectator ? undefined : () => handleSelectPlayer(player.id)}
               isCurrentPlayer={values.targetId === player.id}
               liftOnHover={false}
-              className={`cursor-pointer flex flex-row border! w-full 
+              className={`flex flex-row border! w-full 
+                ${isSpectator ? 'cursor-default' : 'cursor-pointer'}
                 ${
                   values.targetId === player.id
                     ? 'justify-between items-between! border-error! bg-error/20!'
                     : 'items-center! border-primary/15! justify-start! hover:bg-error/10 hover:border-error/50!'
                 }
               `}
-              hoverable={values.targetId !== player.id}
+              hoverable={values.targetId !== player.id && !isSpectator}
             >
               <Typography variant="body" textColor="light">
                 {player.name}
@@ -100,7 +109,7 @@ const WerewolfActions = () => {
         onClick={() => handleSubmit()}
         variant="gradient"
         className="w-full"
-        disabled={!values.targetId}
+        disabled={!values.targetId || isSpectator}
         label={t('submit')}
       />
     </div>

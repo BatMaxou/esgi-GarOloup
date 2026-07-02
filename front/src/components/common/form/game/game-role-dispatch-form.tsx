@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useFormik } from 'formik';
 import { useTranslations } from 'next-intl';
 import Typography from '@/components/ui/atoms/typography';
@@ -105,6 +105,42 @@ const GameRoleDispatchForm = () => {
     [values.dispatch]
   );
 
+  // Empêche l'auto-remplissage de réécrire un rôle que l'utilisateur vient de retirer
+  const skipAutoFillRef = useRef(false);
+
+  const clearPlayerRole = (playerId: string) => {
+    skipAutoFillRef.current = true;
+    setFieldValue(`dispatch.${playerId}`, '');
+  };
+
+  // Autocomplete : s'il ne reste qu'un seul rôle disponible, on l'attribue aux joueurs restants
+  useEffect(() => {
+    if (skipAutoFillRef.current) {
+      skipAutoFillRef.current = false;
+      return;
+    }
+
+    const rolesWithRemaining = (Object.keys(roleLimits) as GameRoleEnum[]).filter(
+      (roleType) => (roleLimits[roleType] ?? 0) - (roleUsageCount[roleType] ?? 0) > 0
+    );
+
+    if (rolesWithRemaining.length !== 1) {
+      return;
+    }
+
+    const lastRole = rolesWithRemaining[0];
+    const capacity = (roleLimits[lastRole] ?? 0) - (roleUsageCount[lastRole] ?? 0);
+    const unassignedPlayers = playerList.filter((player) => !values.dispatch[player.id]);
+
+    if (unassignedPlayers.length === 0) {
+      return;
+    }
+
+    unassignedPlayers.slice(0, capacity).forEach((player) => {
+      setFieldValue(`dispatch.${player.id}`, lastRole);
+    });
+  }, [values.dispatch, roleLimits, roleUsageCount, playerList, setFieldValue]);
+
   // Vérification si un rôle spécifique peut être assigné à un joueur
   const canAssignRole = (playerId: string, roleType: GameRoleEnum) => {
     const limit = roleLimits[roleType] ?? 0;
@@ -155,15 +191,21 @@ const GameRoleDispatchForm = () => {
                 <SelectInput
                   name={`dispatch.${player.id}`}
                   value={values.dispatch[player.id] ?? ''}
-                  onChange={(event) => setFieldValue(`dispatch.${player.id}`, event.target.value)}
+                  onChange={(event) =>
+                    event.target.value
+                      ? setFieldValue(`dispatch.${player.id}`, event.target.value)
+                      : clearPlayerRole(player.id)
+                  }
                   options={[{ label: '-', value: '' }, ...getAllowedOptionsForPlayer(player.id)]}
                 />
                 <Button
                   variant="text"
-                  className="cursor-pointer text-neutral-400 hover:text-primary w-2 h-2 transition-colors"
-                  onClick={() => setFieldValue(`dispatch.${player.id}`, '')}
-                  disabled={!values.dispatch[player.id]}
-                  leftIcon="crown"
+                  className={`cursor-pointer text-neutral-400 hover:text-primary w-2 h-2 transition-colors ${
+                    values.dispatch[player.id] ? '' : 'invisible'
+                  }`}
+                  onClick={() => clearPlayerRole(player.id)}
+                  leftIcon="cancel"
+                  type="button"
                 />
               </div>
             </div>

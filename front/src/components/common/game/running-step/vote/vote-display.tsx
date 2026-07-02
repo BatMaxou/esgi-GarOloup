@@ -65,8 +65,10 @@ const VoteDisplay = () => {
     [game?.players, player?.id]
   );
 
+  const isSpectator = game?.players?.some((currentPlayer) => currentPlayer.id === player?.id && currentPlayer.dead);
+
   const handleVote = async (targetId: string) => {
-    if (votingId) {
+    if (votingId || isSpectator) {
       return;
     }
     setVotingId(targetId);
@@ -84,7 +86,7 @@ const VoteDisplay = () => {
           {t('description')}
         </Typography>
       </div>
-      <div className="grid grid-cols-3 auto-rows-min gap-3 w-full flex-1 min-h-0 overflow-y-auto scrollbar">
+      <div className="grid grid-cols-3 auto-rows-min gap-3 w-full flex-1 min-h-0">
         {votablePlayers.map((gamePlayer) => {
           const knownRole = getKnownRole(gamePlayer.id);
           const iconName: IconName = (knownRole && roleIconMap[knownRole]) || 'questionMark';
@@ -94,15 +96,18 @@ const VoteDisplay = () => {
           return (
             <Card
               key={gamePlayer.id}
-              onClick={() => handleVote(gamePlayer.id)}
+              onClick={isSpectator ? undefined : () => handleVote(gamePlayer.id)}
               isCurrentPlayer={isMyTarget}
               liftOnHover={false}
-              hoverable={!isMyTarget}
-              className={`group relative flex flex-col items-center justify-center gap-3 min-h-32 border! cursor-pointer
+              hoverable={!isMyTarget && !isSpectator}
+              className={`group relative flex flex-col items-center justify-center gap-3 min-h-32 border!
+                ${isSpectator ? 'cursor-default' : 'cursor-pointer'}
                 ${
                   isMyTarget
                     ? 'border-error! bg-error/20!'
-                    : 'border-primary/15! hover:bg-primary/10 hover:border-primary/50!'
+                    : isSpectator
+                      ? 'border-primary/15!'
+                      : 'border-primary/15! hover:bg-primary/10 hover:border-primary/50!'
                 }
                 ${votingId === gamePlayer.id ? 'opacity-60 pointer-events-none' : ''}
               `}

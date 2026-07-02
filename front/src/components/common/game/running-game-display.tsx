@@ -31,6 +31,13 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
 
   if (globalStep === GameGlobalStepEnum.RUNNING) {
     if (runningStep === GameRuntimeStepEnum.NIGHT) {
+      if (
+        player.dead ||
+        game?.players?.some((currentPlayer) => currentPlayer.id === player?.id && currentPlayer.dead)
+      ) {
+        return <WaitingNightActions />;
+      }
+
       switch (true) {
         case player?.role?.type === GameRoleEnum.WEREWOLF &&
           game.nightWorkflow?.currentTurn?.werewolf === GameRoleEnum.WEREWOLF:

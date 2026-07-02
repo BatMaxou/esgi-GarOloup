@@ -301,6 +301,9 @@
           "logout": "Se déconnecter",
           "login": "Se connecter"
         },
+        "ingameNavbar": {
+          "dead": "Vous êtes mort"
+        },
         "footer": {
           "taglineLine1": "Stratégie, bluff et trahison.",
           "taglineLine2": "Survivrez-vous à la nuit ?",
@@ -505,6 +508,11 @@
         "sameCampRoles": "Rôles du même camp",
         "minPlayers": "Min. joueurs",
         "maxPerGame": "Max / partie"
+      },
+      "game": {
+        "gameClient": {
+          "spectator": "Spectateur"
+        }
       }
     },
     "ui": {
