@@ -1,6 +1,6 @@
 'use client';
 
-import { GameGlobalStepEnum, GameRoleEnum, GameRuntimeStepEnum } from '@/utils/enums';
+import { GameGlobalStepEnum, GameRoleEnum, GameRuntimeStepEnum, GameTeamEnum } from '@/utils/enums';
 import NewGameDisplay from './new-game-display';
 import { useGame } from '@/contexts/game-context';
 import WerewolfActions from './running-step/night-actions/werewolf-actions';
@@ -39,7 +39,7 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
       }
 
       switch (true) {
-        case player?.role?.type === GameRoleEnum.WEREWOLF &&
+        case player?.team === GameTeamEnum.WEREWOLF &&
           game.nightWorkflow?.currentTurn?.werewolf === GameRoleEnum.WEREWOLF:
           return (
             <>
