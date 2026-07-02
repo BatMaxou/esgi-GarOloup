@@ -2,6 +2,7 @@
 
 namespace App\Fixtures\Story\ComplexGame\Runtime\WerewolfWin;
 
+use App\Entity\Game\Role\HunterRole;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
 
@@ -23,6 +24,11 @@ class ComplexGameWerewolfWinVote4Story extends ComplexGameWerewolfWinNight4Story
         $this->villageMisvote($gameBuilder, $targetPlayerBuilder);
 
         $this->voteResolver->resolve($game);
+
+        $hunterRole = $targetPlayerBuilder->getEntity()->getRole();
+        \assert($hunterRole instanceof HunterRole);
+        $hunterRole->markShot();
+
         $this->nightOrchestrator->start($game);
 
         $this->em->flush();
