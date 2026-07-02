@@ -9,8 +9,9 @@ import { usePlayer } from '@/contexts/player-context';
 import { InfectFatherProvider } from '@/contexts/roles/infect-father-context';
 import { SeerProvider } from '@/contexts/roles/seer-context';
 import { WereWolfProvider } from '@/contexts/roles/werewolf-context';
+import { WildChildProvider } from '@/contexts/roles/wild-child-context';
 import { WitchProvider } from '@/contexts/roles/witch-context';
-import { GameRoleEnum } from '@/utils/enums';
+import { GameRoleEnum, GameTeamEnum } from '@/utils/enums';
 import type { Player } from '@/utils/types';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
@@ -57,37 +58,29 @@ const GameClient = () => {
   const isGameMaster = player?.id === game?.gameMaster?.id;
 
   const renderGameDisplay = useMemo(() => {
-    switch (true) {
-      case player?.role?.type === GameRoleEnum.WEREWOLF:
-        return (
-          <WereWolfProvider>
-            <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />
-          </WereWolfProvider>
-        );
-      case player?.role?.type === GameRoleEnum.INFECT_FATHER:
-        return (
-          <WereWolfProvider>
-            <InfectFatherProvider>
-              <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />
-            </InfectFatherProvider>
-          </WereWolfProvider>
-        );
-      case player?.role?.type === GameRoleEnum.WITCH:
-        return (
-          <WitchProvider>
-            <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />
-          </WitchProvider>
-        );
-      case player?.role?.type === GameRoleEnum.SEER:
-        return (
-          <SeerProvider>
-            <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />
-          </SeerProvider>
-        );
-      default:
-        return <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />;
+    let content = <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />;
+
+    switch (player?.role?.type) {
+      case GameRoleEnum.INFECT_FATHER:
+        content = <InfectFatherProvider>{content}</InfectFatherProvider>;
+        break;
+      case GameRoleEnum.WITCH:
+        content = <WitchProvider>{content}</WitchProvider>;
+        break;
+      case GameRoleEnum.SEER:
+        content = <SeerProvider>{content}</SeerProvider>;
+        break;
+      case GameRoleEnum.WILD_CHILD:
+        content = <WildChildProvider>{content}</WildChildProvider>;
+        break;
     }
-  }, [isGameMaster, isHost, player?.role?.type]);
+
+    if (player?.team === GameTeamEnum.WEREWOLF) {
+      content = <WereWolfProvider>{content}</WereWolfProvider>;
+    }
+
+    return content;
+  }, [isGameMaster, isHost, player?.role?.type, player?.team]);
 
   if (!game || !player) {
     return <>Loading...</>;
