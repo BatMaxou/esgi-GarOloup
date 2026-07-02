@@ -74,6 +74,10 @@ export type SeerRole = GameRole & {
 
 export type WerewolfRole = GameRole;
 
+export type InfectFatherRole = WerewolfRole & {
+  infectionAvailable?: boolean;
+};
+
 export type WitchRole = GameRole & {
   healPotionAvailable?: boolean;
   poisonPotionAvailable?: boolean;
@@ -95,7 +99,7 @@ export type Player = {
   gameMaster?: boolean;
   host?: boolean;
   id: string;
-  role?: GameRole | VillagerRole | SeerRole | WerewolfRole | WitchRole | HunterRole | WildChildRole;
+  role?: GameRole | VillagerRole | SeerRole | WerewolfRole | WitchRole | HunterRole | WildChildRole | InfectFatherRole;
   team?: GameTeamEnum;
   tempUser?: TempUser;
   user?: User;

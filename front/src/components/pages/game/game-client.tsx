@@ -6,6 +6,7 @@ import Icon from '@/components/ui/atoms/icon';
 import Typography from '@/components/ui/atoms/typography';
 import { useGame } from '@/contexts/game-context';
 import { usePlayer } from '@/contexts/player-context';
+import { InfectFatherProvider } from '@/contexts/roles/infect-father-context';
 import { SeerProvider } from '@/contexts/roles/seer-context';
 import { WereWolfProvider } from '@/contexts/roles/werewolf-context';
 import { WitchProvider } from '@/contexts/roles/witch-context';
@@ -61,6 +62,14 @@ const GameClient = () => {
         return (
           <WereWolfProvider>
             <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />
+          </WereWolfProvider>
+        );
+      case player?.role?.type === GameRoleEnum.INFECT_FATHER:
+        return (
+          <WereWolfProvider>
+            <InfectFatherProvider>
+              <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />
+            </InfectFatherProvider>
           </WereWolfProvider>
         );
       case player?.role?.type === GameRoleEnum.WITCH:

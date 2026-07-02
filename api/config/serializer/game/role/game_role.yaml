@@ -43,6 +43,12 @@ App\Entity\Game\Role\WildChildRole:
             groups:
                 - me:player:read
 
+App\Entity\Game\Role\InfectFatherRole:
+    attributes:
+        infectionAvailable:
+            groups:
+                - me:player:read
+
 App\Entity\Game\Role\HunterRole:
     attributes:
         hasShot:
