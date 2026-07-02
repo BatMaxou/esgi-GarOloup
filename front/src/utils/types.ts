@@ -30,6 +30,9 @@ export type Game = {
   globalStep?: GameGlobalStepEnum;
   initialisationStep?: GameInitialisationStepEnum;
   runtimeStep?: GameRuntimeStepEnum;
+  interruptedRuntimeStep?: GameRuntimeStepEnum;
+  interruptedByRole?: GameRoleEnum;
+  interruptedByTeam?: GameTeamEnum;
   joinCode?: string;
   players?: Player[];
   host?: Player;

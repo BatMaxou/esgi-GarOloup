@@ -1,0 +1,24 @@
+type: http_request
+model: http_request
+id: rq_GameRecap01
+createdAt: 2026-07-01T22:30:00
+updatedAt: 2026-07-01T21:21:37.150683763
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_bh6aMuFF23
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body:
+  text: '{}'
+bodyType: null
+description: ''
+headers:
+- enabled: true
+  name: ''
+  value: ''
+  id: 0TkCedAc45
+method: GET
+name: Get Game Recap
+sortPriority: 3500.0
+url: ${[ BASE_URL ]}/api/games/019f1f89-4097-73e2-a53d-322fcf0e27df/recap
+urlParameters: []

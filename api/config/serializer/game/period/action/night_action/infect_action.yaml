@@ -1,0 +1,5 @@
+App\Entity\Game\Period\Action\NightAction\InfectAction:
+    attributes:
+        targetPlayerId:
+            groups:
+                - game:read

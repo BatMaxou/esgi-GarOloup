@@ -2,9 +2,9 @@ type: http_request
 model: http_request
 id: rq_z8MkUc9hr9
 createdAt: 2026-04-27T10:33:41.442107938
-updatedAt: 2026-05-16T16:22:41.269370761
+updatedAt: 2026-06-29T20:33:18.243932736
 workspaceId: wk_uXtATNFQmZ
-folderId: fl_3whxhCpuFe
+folderId: fl_bh6aMuFF23
 authentication:
   token: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3RlhCdVNMZFlzK29xLzVCS0M1MXNpaFZKd05LRGRDWFhHYzdmVlZ1NTlqN2E5MmtlY2taSzdHa1EzcU1sSzBTa0k5Y3lMSA') ]}
 authenticationType: bearer
@@ -25,6 +25,6 @@ headers:
   id: 97ABI4J9n0
 method: PATCH
 name: Time Up
-sortPriority: 3000.0
+sortPriority: 4000.0
 url: ${[ BASE_URL ]}/api/game/time-up
 urlParameters: []
