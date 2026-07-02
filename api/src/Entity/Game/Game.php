@@ -11,6 +11,8 @@ use App\Api\Model\BasicActionOutput;
 use App\Api\Model\Game\CreateGameOutput;
 use App\Api\Provider\Game\CurrentGameProvider;
 use App\Api\Provider\Game\CurrentPublicGameProvider;
+use App\Api\Provider\Game\GameRecapProvider;
+use App\Api\Serializer\Normalizer\Game\Period\GameRecapActionsNormalizer;
 use App\Domain\Command\Game\Initialisation\CloseGameInvitationCommand;
 use App\Domain\Command\Game\Initialisation\CreateGameCommand;
 use App\Domain\Command\Game\Initialisation\GameRoleDispatchCommand;
@@ -49,6 +51,14 @@ use Doctrine\ORM\Mapping as ORM;
             provider: CurrentGameProvider::class,
             normalizationContext: [
                 'groups' => 'game:read',
+            ],
+        ),
+        new Get(
+            name: 'api_game_recap',
+            uriTemplate: '/games/{id}/recap',
+            provider: GameRecapProvider::class,
+            normalizationContext: [
+                'groups' => ['game:read', GameRecapActionsNormalizer::GROUP],
             ],
         ),
         new GetCollection(
