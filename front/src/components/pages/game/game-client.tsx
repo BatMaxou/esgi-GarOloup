@@ -11,7 +11,7 @@ import { SeerProvider } from '@/contexts/roles/seer-context';
 import { WereWolfProvider } from '@/contexts/roles/werewolf-context';
 import { WildChildProvider } from '@/contexts/roles/wild-child-context';
 import { WitchProvider } from '@/contexts/roles/witch-context';
-import { GameRoleEnum, GameTeamEnum } from '@/utils/enums';
+import { GameGlobalStepEnum, GameRoleEnum, GameRuntimeStepEnum, GameTeamEnum } from '@/utils/enums';
 import type { Player } from '@/utils/types';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
@@ -23,6 +23,10 @@ const GameClient = () => {
   const isPlayerSpectator = game?.players?.some(
     (currentPlayer) => currentPlayer.id === player?.id && currentPlayer.dead
   );
+  const isInterruptTurnForPlayer =
+    game?.runtimeStep === GameRuntimeStepEnum.INTERUPT && game?.interruptedByRole === player?.role?.type;
+  const showSpectatorOverlay =
+    isPlayerSpectator && !isInterruptTurnForPlayer && game?.globalStep === GameGlobalStepEnum.RUNNING;
   const playersList = useMemo(() => {
     if (!game) {
       return [];
@@ -91,7 +95,7 @@ const GameClient = () => {
       <IngamePlayersSidebar players={playersList || []} />
       <div className="px-8 py-8 h-full w-full overflow-hidden relative">
         {renderGameDisplay}
-        {isPlayerSpectator && (
+        {showSpectatorOverlay && (
           <>
             <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.6)_100%)]" />
             {/* Render une icon d'oeil et un texte "Spectateur en absolute en haut à droite" */}

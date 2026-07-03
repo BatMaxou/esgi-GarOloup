@@ -38,6 +38,7 @@
           "day": "Jour",
           "vote": "Vote",
           "round": "Tour",
+          "interrupted": "Évènement spécial",
           "ended": "Terminée"
         },
         "nightActions": {
@@ -89,7 +90,8 @@
           "seerTurn": "C'est au tour de la Voyante de jouer",
           "hunterTurn": "C'est au tour du Chasseur de jouer",
           "wildChildTurn": "C'est au tour de l'Enfant Sauvage de jouer",
-          "infectFatherTurn": "C'est au tour du Père Infect de jouer"
+          "infectFatherTurn": "C'est au tour du Père Infect de jouer",
+          "unknownTurn": "Un rôle est en train de jouer"
         },
         "nightRecap": {
           "death": "{username} est mort cette nuit.",
@@ -110,6 +112,11 @@
         "vote": {
           "title": "Qui éliminez-vous ?",
           "description": "Le joueur avec le plus de votes sera éliminé et son rôle révélé."
+        },
+        "hunterActions": {
+          "title": "Dernier tir du Chasseur",
+          "description": "Avant de mourir, choisissez un joueur à emporter avec vous.",
+          "submit": "Tirer"
         }
       },
       "home": {

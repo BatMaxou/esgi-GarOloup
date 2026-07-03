@@ -12,6 +12,8 @@ import NightRecap from './sequencer/night-to-day';
 import { useNightRecap } from './sequencer/night-to-day/use-night-recap';
 import WaitingNightActions from './running-step/night-actions/waiting-night-actions';
 import VoteDisplay from './running-step/vote/vote-display';
+import HunterActions from './running-step/interrupt/hunter-actions';
+import WaitingInterruptActions from './running-step/interrupt/waiting-interrupt-actions';
 
 const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameMaster: boolean }) => {
   const { game } = useGame();
@@ -20,6 +22,7 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
 
   const runningStep = game?.runtimeStep;
   const globalStep = game?.globalStep;
+  const interruptedBy = game?.interruptedByRole;
 
   if (!game || !player) {
     return null;
@@ -79,7 +82,21 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
         </>
       );
     }
+
+    if (runningStep === GameRuntimeStepEnum.INTERUPT) {
+      if (interruptedBy === player.role?.type) {
+        switch (interruptedBy) {
+          case GameRoleEnum.HUNTER:
+            return <HunterActions />;
+          default:
+            return null;
+        }
+      }
+      return <WaitingInterruptActions />;
+    }
   }
+
+  return null;
 };
 
 export default RunningGameDisplay;
