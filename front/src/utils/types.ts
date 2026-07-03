@@ -62,10 +62,6 @@ export type GameRole = {
   type?: GameRoleEnum;
 };
 
-export type VillagerRole = GameRole & {
-  friendId?: string;
-};
-
 export type SeerRole = GameRole & {
   lastObservedPlayerId?: string;
   lastObservedRole?: GameRoleEnum;
@@ -99,7 +95,7 @@ export type Player = {
   gameMaster?: boolean;
   host?: boolean;
   id: string;
-  role?: GameRole | VillagerRole | SeerRole | WerewolfRole | WitchRole | HunterRole | WildChildRole | InfectFatherRole;
+  role?: GameRole | SeerRole | WerewolfRole | WitchRole | HunterRole | WildChildRole | InfectFatherRole;
   team?: GameTeamEnum;
   tempUser?: TempUser;
   user?: User;

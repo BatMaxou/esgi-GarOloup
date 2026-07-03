@@ -11,7 +11,6 @@ import { FilterResource } from '@/lib/api/resources/FilterResource';
 import { HomepageResource } from '@/lib/api/resources/HomepageResource';
 import { MercureResource } from '@/lib/api/resources/MercureResource';
 import { WerewolfResource } from '@/lib/api/resources/WerewolfResource';
-import { VillagerResource } from '@/lib/api/resources/VillagerResource';
 import { SeerResource } from '@/lib/api/resources/SeerResource';
 import { WitchResource } from '@/lib/api/resources/WitchResource';
 import { WildChildResource } from '@/lib/api/resources/WildChildResource';
@@ -67,7 +66,6 @@ export class ApiClient {
   homepage: HomepageResource;
   mercure: MercureResource;
   werewolf: WerewolfResource;
-  villager: VillagerResource;
   seer: SeerResource;
   witch: WitchResource;
   wildChild: WildChildResource;
@@ -90,7 +88,6 @@ export class ApiClient {
     this.homepage = new HomepageResource(this);
     this.mercure = new MercureResource(this);
     this.werewolf = new WerewolfResource(this);
-    this.villager = new VillagerResource(this);
     this.seer = new SeerResource(this);
     this.witch = new WitchResource(this);
     this.wildChild = new WildChildResource(this);

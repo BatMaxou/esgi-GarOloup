@@ -20,9 +20,6 @@ export const apiPaths = {
     vote: '/game/vote',
     timeUp: '/game/time-up',
   },
-  villager: {
-    setup: '/game/villager/setup',
-  },
   seer: {
     reveal: '/game/seer/reveal',
   },

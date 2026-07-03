@@ -44,7 +44,6 @@ use App\Fixtures\Story\ComplexGame\Runtime\Night\Witch\ComplexGameNight1WitchSav
 use App\Fixtures\Story\ComplexGame\Runtime\Night\Witch\ComplexGameNight2WitchPassedStory;
 use App\Fixtures\Story\ComplexGame\Runtime\Night\Witch\ComplexGameNight3WitchPoisonedStory;
 use App\Fixtures\Story\ComplexGame\Runtime\Setup\ComplexGameSetupedStory;
-use App\Fixtures\Story\ComplexGame\Runtime\Setup\ComplexGameVillagerSetupedStory;
 use App\Fixtures\Story\ComplexGame\Runtime\Vote\ComplexGameVote1HunterEliminatedStory;
 use App\Fixtures\Story\ComplexGame\Runtime\Vote\ComplexGameVote1HunterInterruptStory;
 use App\Fixtures\Story\ComplexGame\Runtime\Vote\ComplexGameVote1ResolvedStory;
@@ -106,7 +105,6 @@ class AppFixtures extends Fixture
         // ThereIs::aStory(ComplexGameConfiguredStory::class)->execute();
         // ThereIs::aStory(ComplexGameDispatchedStory::class)->execute();
         // ThereIs::aStory(ComplexGameLaunchedStory::class)->execute();
-        // ThereIs::aStory(ComplexGameVillagerSetupedStory::class)->execute();
         // ThereIs::aStory(ComplexGameSetupedStory::class)->execute();
         // ThereIs::aStory(ComplexGameNight1SeerRevealedStory::class)->execute();
         // ThereIs::aStory(ComplexGameNight1WerewolfVotedStory::class)->execute();

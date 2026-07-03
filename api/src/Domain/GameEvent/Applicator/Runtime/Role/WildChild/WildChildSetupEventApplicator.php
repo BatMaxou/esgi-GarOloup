@@ -69,6 +69,7 @@ class WildChildSetupEventApplicator implements GameEventApplicatorInterface
         $role->setModelPlayerId($targetPlayerId);
         $role->setSetup(true);
 
+        // TODO: Must be handled in another place -> applicator
         if ($this->gameSpec->areAllRolesSetup($game)) {
             $this->nightOrchestrator->start($game);
         }
@@ -89,6 +90,7 @@ class WildChildSetupEventApplicator implements GameEventApplicatorInterface
             }
         }
 
+        // TODO: Must be handled in another place -> applicator
         if ($this->gameSpec->areAllRolesSetup($game)) {
             $this->nightOrchestrator->start($game);
         }

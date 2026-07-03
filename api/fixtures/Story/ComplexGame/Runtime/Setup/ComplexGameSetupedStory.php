@@ -8,12 +8,13 @@ use App\Domain\Workflow\NightOrchestrator;
 use App\Domain\Workflow\NightWorkflowComposer;
 use App\Domain\Workflow\VoteResolver;
 use App\Entity\Game\Role\WildChildRole;
+use App\Fixtures\Story\ComplexGame\Initialisation\ComplexGameLaunchedStory;
 use App\Tests\Helper\Builder\Game\GameBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Clock\ClockInterface;
 
-class ComplexGameSetupedStory extends ComplexGameVillagerSetupedStory
+class ComplexGameSetupedStory extends ComplexGameLaunchedStory
 {
     public function __construct(
         NightWorkflowComposer $nightWorkflowComposer,
