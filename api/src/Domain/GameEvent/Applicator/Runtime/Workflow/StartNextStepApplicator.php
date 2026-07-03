@@ -43,7 +43,7 @@ class StartNextStepApplicator implements GameEventApplicatorInterface
         $isDayFinished = GameRuntimeStepEnum::DAY === $game->getRuntimeStep() && $lastDay && $lastDay->isResolved();
         $isVoteFinished = GameRuntimeStepEnum::VOTE === $game->getRuntimeStep() && $lastVote && $lastVote->isResolved();
 
-        if (GameRuntimeStepEnum::INTERUPT === $game->getRuntimeStep()) {
+        if (GameRuntimeStepEnum::INTERRUPT === $game->getRuntimeStep()) {
             if ($this->interceptorHandler->hasPendingAction($game)) {
                 return $game;
             }
@@ -73,7 +73,7 @@ class StartNextStepApplicator implements GameEventApplicatorInterface
         return $gameEvent instanceof TimeUpGameEvent
             && \in_array(
                 $gameEvent->getGame()?->getRuntimeStep(),
-                [GameRuntimeStepEnum::NIGHT, GameRuntimeStepEnum::DAY, GameRuntimeStepEnum::VOTE, GameRuntimeStepEnum::INTERUPT],
+                [GameRuntimeStepEnum::NIGHT, GameRuntimeStepEnum::DAY, GameRuntimeStepEnum::VOTE, GameRuntimeStepEnum::INTERRUPT],
             );
     }
 }

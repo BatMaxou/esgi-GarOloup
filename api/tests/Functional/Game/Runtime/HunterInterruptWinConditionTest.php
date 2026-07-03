@@ -54,7 +54,7 @@ class HunterInterruptWinConditionTest extends GarOloupApiTestCase
 
         $game = $gameBuilder->getEntity();
         $this->assertTrue($hunterPlayerBuilder->getEntity()->isDead());
-        $this->assertSame(GameRuntimeStepEnum::INTERUPT, $game->getRuntimeStep());
+        $this->assertSame(GameRuntimeStepEnum::INTERRUPT, $game->getRuntimeStep());
         $this->assertNull($game->getWinningTeam());
         $this->assertSame(GameRoleEnum::HUNTER, $game->getInterruptedByRole());
     }

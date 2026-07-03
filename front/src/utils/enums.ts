@@ -24,7 +24,7 @@ export enum GameRuntimeStepEnum {
   DAY = 'day',
   VOTE = 'vote',
   FINISH = 'finish',
-  INTERUPT = 'interupt',
+  INTERRUPT = 'interrupt',
 }
 
 export enum ThemeEnum {

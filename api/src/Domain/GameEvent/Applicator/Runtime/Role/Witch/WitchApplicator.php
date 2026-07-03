@@ -95,9 +95,9 @@ class WitchApplicator implements GameEventApplicatorInterface
 
         $night->addAction(new MurderAction($night, GameRoleEnum::WITCH, $targetPlayerId));
         $role->usePoisonPotion();
-        $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_GAME, $game));
 
         $game->setStepEndAt($this->clock->now());
+        $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_GAME, $game));
 
         return $game;
     }
