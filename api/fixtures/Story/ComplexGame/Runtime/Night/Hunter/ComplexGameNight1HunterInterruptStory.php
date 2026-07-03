@@ -51,7 +51,7 @@ class ComplexGameNight1HunterInterruptStory extends ComplexGameNight1WerewolfKil
 
         $game->setInterruptedRuntimeStep($game->getRuntimeStep());
         $game->setInterruptedByRole(GameRoleEnum::HUNTER);
-        $game->setRuntimeStep(GameRuntimeStepEnum::INTERUPT);
+        $game->setRuntimeStep(GameRuntimeStepEnum::INTERRUPT);
         $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $this->hunterStepDuration)));
 
         $this->em->flush();

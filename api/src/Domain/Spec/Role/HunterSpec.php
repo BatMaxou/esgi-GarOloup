@@ -17,7 +17,7 @@ class HunterSpec
 
     public function canShoot(Player $hunter, Game $game, Player $target): bool
     {
-        if (GameRuntimeStepEnum::INTERUPT !== $game->getRuntimeStep()) {
+        if (GameRuntimeStepEnum::INTERRUPT !== $game->getRuntimeStep()) {
             return false;
         }
 

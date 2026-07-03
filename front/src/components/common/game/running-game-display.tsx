@@ -83,7 +83,7 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
       );
     }
 
-    if (runningStep === GameRuntimeStepEnum.INTERUPT) {
+    if (runningStep === GameRuntimeStepEnum.INTERRUPT) {
       if (interruptedBy === player.role?.type) {
         switch (interruptedBy) {
           case GameRoleEnum.HUNTER:

@@ -161,7 +161,7 @@ class HunterShootTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(404);
     }
 
-    public function test_hunter_cannot_shoot_when_not_interupt_step(): void
+    public function test_hunter_cannot_shoot_when_not_interrupt_step(): void
     {
         $story = ThereIs::aStory(ComplexGameNight1WerewolfKilledHunterStory::class)->execute();
         $hunterPlayerBuilder = $story->get(ComplexGameNight1WerewolfKilledHunterStory::HUNTER);
@@ -178,7 +178,7 @@ class HunterShootTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(403);
     }
 
-    public function test_hunter_cannot_shoot_after_interupt_timer_expired(): void
+    public function test_hunter_cannot_shoot_after_interrupt_timer_expired(): void
     {
         $clock = static::mockTime();
 

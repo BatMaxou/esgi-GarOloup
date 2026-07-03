@@ -24,7 +24,7 @@ const GameClient = () => {
     (currentPlayer) => currentPlayer.id === player?.id && currentPlayer.dead
   );
   const isInterruptTurnForPlayer =
-    game?.runtimeStep === GameRuntimeStepEnum.INTERUPT && game?.interruptedByRole === player?.role?.type;
+    game?.runtimeStep === GameRuntimeStepEnum.INTERRUPT && game?.interruptedByRole === player?.role?.type;
   const showSpectatorOverlay =
     isPlayerSpectator && !isInterruptTurnForPlayer && game?.globalStep === GameGlobalStepEnum.RUNNING;
   const playersList = useMemo(() => {

@@ -73,7 +73,7 @@ const GameStepIndicator = () => {
       </Card>
     );
   }
-  if (runtimeStep === GameRuntimeStepEnum.INTERUPT) {
+  if (runtimeStep === GameRuntimeStepEnum.INTERRUPT) {
     return (
       <Card hoverable={false} orientation="horizontal" className="p-4! gap-2">
         <Typography tag="span" className="phase-icon">

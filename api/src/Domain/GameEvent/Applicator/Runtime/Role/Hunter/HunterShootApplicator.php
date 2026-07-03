@@ -14,7 +14,11 @@ use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Game\Game;
 use App\Entity\Game\Role\HunterRole;
 use App\Enum\Game\GameRuntimeStepEnum;
+use App\Enum\TopicEnum;
 use App\Repository\Game\PlayerRepository;
+use App\Service\Mercure\TopicCollector;
+use App\Service\Mercure\TopicProvider;
+use Psr\Clock\ClockInterface;
 use Symfony\Component\Uid\Uuid;
 
 /** @implements GameEventApplicatorInterface<HunterShootEvent|TimeUpGameEvent> */
@@ -26,6 +30,9 @@ class HunterShootApplicator implements GameEventApplicatorInterface
     public function __construct(
         private readonly HunterSpec $hunterSpec,
         private readonly PlayerRepository $playerRepository,
+        private readonly ClockInterface $clock,
+        private readonly TopicProvider $topicProvider,
+        private readonly TopicCollector $topicCollector,
     ) {
     }
 
@@ -79,6 +86,9 @@ class HunterShootApplicator implements GameEventApplicatorInterface
         $targetPlayer->setDead(true);
         $role->markShot();
 
+        $game->setStepEndAt($this->clock->now());
+        $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_GAME, $game));
+
         return $game;
     }
 
@@ -89,6 +99,6 @@ class HunterShootApplicator implements GameEventApplicatorInterface
         }
 
         return $gameEvent instanceof TimeUpGameEvent
-            && GameRuntimeStepEnum::INTERUPT === $gameEvent->getGame()?->getRuntimeStep();
+            && GameRuntimeStepEnum::INTERRUPT === $gameEvent->getGame()?->getRuntimeStep();
     }
 }

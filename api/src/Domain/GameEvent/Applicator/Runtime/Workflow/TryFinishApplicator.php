@@ -45,7 +45,7 @@ class TryFinishApplicator implements GameEventApplicatorInterface
         return $gameEvent instanceof TimeUpGameEvent
             && \in_array(
                 $gameEvent->getGame()?->getRuntimeStep(),
-                [GameRuntimeStepEnum::NIGHT, GameRuntimeStepEnum::DAY, GameRuntimeStepEnum::VOTE, GameRuntimeStepEnum::INTERUPT],
+                [GameRuntimeStepEnum::NIGHT, GameRuntimeStepEnum::DAY, GameRuntimeStepEnum::VOTE, GameRuntimeStepEnum::INTERRUPT],
             );
     }
 }
