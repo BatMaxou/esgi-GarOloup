@@ -73,6 +73,21 @@ const GameStepIndicator = () => {
       </Card>
     );
   }
+  if (runtimeStep === GameRuntimeStepEnum.INTERUPT) {
+    return (
+      <Card hoverable={false} orientation="horizontal" className="p-4! gap-2">
+        <Typography tag="span" className="phase-icon">
+          ⭐️
+        </Typography>
+        <Typography tag="span" className="phase-label">
+          {t('interrupted')}
+        </Typography>
+        <Typography tag="span" className="phase-day-num">
+          — {t('round')} {game.interruptedRuntimeStep === GameRuntimeStepEnum.NIGHT ? nightCounter : voteCounter}
+        </Typography>
+      </Card>
+    );
+  }
   if (runtimeStep === GameRuntimeStepEnum.FINISH) {
     return (
       <Card hoverable={false} orientation="horizontal" className="p-4! gap-2">

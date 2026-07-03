@@ -38,6 +38,7 @@
           "day": "Day",
           "vote": "Vote",
           "round": "Round",
+          "interrupted": "Special event",
           "ended": "Ended"
         },
         "nightActions": {
@@ -97,11 +98,17 @@
           "seerTurn": "It's the seer's turn to play",
           "hunterTurn": "It's the hunter's turn to play",
           "wildChildTurn": "It's the wild child's turn to play",
-          "infectFatherTurn": "It's the infect father's turn to play"
+          "infectFatherTurn": "It's the infect father's turn to play",
+          "unknownTurn": "A role is currently playing"
         },
         "vote": {
           "title": "Who do you eliminate?",
           "description": "The player with the most votes will be eliminated and their role revealed."
+        },
+        "hunterActions": {
+          "title": "Hunter's last shot",
+          "description": "Before you die, choose a player to take down with you.",
+          "submit": "Shoot"
         }
       },
       "home": {
