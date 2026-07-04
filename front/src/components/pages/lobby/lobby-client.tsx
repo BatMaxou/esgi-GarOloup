@@ -18,7 +18,7 @@ const LobbyClient = () => {
   const joinCode = player?.game?.joinCode;
 
   return (
-    <main className="flex w-full flex-col items-center px-2 py-8 xs:px-8 sm:px-16 sm:py-16 md:px-32 md:py-32">
+    <main className="flex w-full flex-col items-center px-2 xs:px-8 sm:px-16 md:px-32 py-8 sm:py-16 md:py-24 lg:py-32">
       {player && (
         <Card variant="accent" liftOnHover={false} className="mb-8 w-full max-w-2xl px-5 py-5 sm:px-6 sm:py-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -54,6 +54,7 @@ const LobbyClient = () => {
           { label: t('create'), component: <CreateGame /> },
         ]}
         align="center"
+        className="max-w-full"
       />
     </main>
   );

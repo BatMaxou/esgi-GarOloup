@@ -35,9 +35,9 @@ const GameLayout = async ({ children }: Props) => {
     <RoleProvider>
       <PlayerProvider initialPlayer={maybePlayer}>
         <GameProvider initialGame={maybeGame}>
-          <div className="grid h-dvh grid-rows-[auto_1fr] overflow-hidden">
+          <div className="grid min-h-dvh grid-rows-[auto_1fr]">
             <IngameNavbar />
-            <div className="min-h-0 overflow-hidden">{children}</div>
+            <div className="min-h-0">{children}</div>
           </div>
         </GameProvider>
       </PlayerProvider>

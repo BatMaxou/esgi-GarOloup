@@ -76,12 +76,14 @@
 
 @layer base {
   :root[data-theme='light'] {
+    color-scheme: light;
     --theme-background-gradient-start: var(--color-light);
     --theme-background-gradient-end: var(--color-neutral-400);
   }
 
   :root,
   :root[data-theme='dark'] {
+    color-scheme: dark;
     --theme-background-gradient-start: var(--color-dark);
     --theme-background-gradient-end: var(--color-neutral-700);
   }

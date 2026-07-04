@@ -91,9 +91,9 @@ const GameClient = () => {
   }
 
   return (
-    <main className="flex h-full min-h-0 w-full flex-row justify-between items-start">
+    <main className="flex h-full w-full flex-row justify-between items-start">
       <IngamePlayersSidebar players={playersList || []} />
-      <div className="px-8 py-8 h-full w-full overflow-hidden relative">
+      <div className="px-8 py-8 w-full">
         {renderGameDisplay}
         {showSpectatorOverlay && (
           <>
@@ -108,7 +108,6 @@ const GameClient = () => {
           </>
         )}
       </div>
-      <IngamePlayersSidebar players={playersList || []} />
     </main>
   );
 };

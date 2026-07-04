@@ -188,12 +188,12 @@ export default function DataTable<Row>({
           value={filterQuery}
           onChange={(e) => setFilterQuery(e.target.value)}
           sizing="md"
-          className="max-w-md"
+          className="max-w-[200px]"
         />
       )}
 
-      <div className="overflow-x-auto rounded-sm border border-primary/15 bg-[rgba(26,28,46,0.45)] backdrop-blur-sm">
-        <table className={cn('w-full min-w-144 border-collapse text-left', tableClassName)}>
+      <div className="max-w-full overflow-x-auto scrollbar rounded-sm border border-primary/15 bg-[rgba(26,28,46,0.9)]">
+        <table className={cn('min-w-144 w-full border-collapse text-left', tableClassName)}>
           <thead>
             <tr className="border-b border-primary/15">
               {columns.map((column) =>

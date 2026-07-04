@@ -470,6 +470,8 @@
           "subtitle": "Entrez votre nouveau mot de passe"
         },
         "login": {
+          "guest": "Invité",
+          "member": "Membre",
           "playAsGuest": "Jouer en tant qu'invité",
           "alreadyHaveAccount": "J'ai déjà un compte",
           "playAsGuestTitle": "Comment vous appelle-t-on ?",

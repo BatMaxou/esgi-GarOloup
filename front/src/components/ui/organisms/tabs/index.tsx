@@ -20,14 +20,15 @@ type Props = {
   currentTab?: string;
   align?: TabAlign;
   translate?: boolean;
+  className?: string;
 };
 
-const Tabs = ({ currentTab, tabs, align = 'left', translate = false }: Props) => {
+const Tabs = ({ currentTab, tabs, align = 'left', translate = false, className }: Props) => {
   const [current, setCurrent] = useState(currentTab || tabs[0].label);
   const t = useTranslations();
 
   return (
-    <div className={tabsCva({ align })}>
+    <div className={tabsCva({ align, className })}>
       <GlassPanel className="w-fit p-1">
         {/*
           NOTE: put ::after styling to the parent, to ensure compatibitlity with browsers that don't support anchor positioning 
@@ -55,9 +56,10 @@ const Tabs = ({ currentTab, tabs, align = 'left', translate = false }: Props) =>
             current === tab.label && (
               <motion.div
                 key={tab.label}
-                initial={{ opacity: 0, scale: 0, backdropFilter: 'blur(0px)' }}
-                animate={{ opacity: 1, scale: 1, backdropFilter: 'blur(4px)' }}
-                exit={{ opacity: 0, scale: 0, backdropFilter: 'blur(0px)' }}
+                className="max-w-full"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
                 transition={{ duration: 0.2 }}
               >
                 {tab.component}

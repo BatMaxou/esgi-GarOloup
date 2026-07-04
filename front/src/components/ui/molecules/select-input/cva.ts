@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority';
 export const selectInputCva = cva(
   [
     'h-fit w-full min-w-0 cursor-pointer rounded-xs border font-semibold transition-all',
-    'border-primary/12 bg-[rgba(26,28,46,0.5)] text-neutral-200 backdrop-blur-md antialiased',
+    'border-primary/12 bg-[rgba(26,28,46,0.9)] text-neutral-200 antialiased',
     'appearance-none',
     'focus:border-primary focus:outline-none focus:input-shadow-primary',
     'hover:border-primary/20 hover:text-primary-pastel',

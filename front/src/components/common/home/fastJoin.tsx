@@ -16,7 +16,7 @@ const GAME_FILL: Record<(typeof GAME_INDICES)[number], number> = {
 };
 
 const gameCardClassName =
-  'items-center justify-between gap-4 !rounded-xs !border-primary/13 !bg-[rgba(26,28,46,0.55)] !px-5 !py-4 backdrop-blur-md duration-200 hover:!border-primary/30 hover:!bg-[rgba(62,65,90,0.45)] hover:!shadow-none';
+  'items-center justify-between gap-4 !rounded-xs !border-primary/13 !bg-[rgba(26,28,46,0.9)] !px-5 !py-4 duration-200 hover:!border-primary/30 hover:!bg-[rgba(62,65,90,0.85)] hover:!shadow-none';
 
 const FastJoin = () => {
   const t = useTranslations('components.common.home.fastJoin');

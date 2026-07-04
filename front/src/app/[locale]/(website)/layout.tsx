@@ -10,7 +10,7 @@ type Props = {
 
 const WebsiteLayout = ({ children }: Props) => {
   return (
-    <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
+    <div className="grid grid-rows-[auto_1fr_auto] grid-cols-[minmax(0,1fr)] min-h-screen">
       <Navbar />
       <PublicGamesProvider>{children}</PublicGamesProvider>
       <Footer />

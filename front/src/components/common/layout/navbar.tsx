@@ -18,7 +18,7 @@ const NavbarAuthActions = dynamic(() => import('@/components/common/layout/navba
 });
 
 const navbarCva = cva(
-  'border-b border-primary px-4 py-2 flex items-center justify-between fixed top-0 left-0 right-0 backdrop-blur-sm z-24',
+  'border-b border-primary px-4 py-2 flex items-center justify-between fixed top-0 left-0 right-0 bg-dark/80 z-24',
   {
     variants: {
       sticky: {
