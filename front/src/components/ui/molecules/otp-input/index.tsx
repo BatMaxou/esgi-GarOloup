@@ -159,7 +159,7 @@ const OTPInput = ({
           </Typography>
         </label>
       )}
-      <div className={cn('flex flex-row items-center gap-2 sm:gap-3', groupClassName)} role="group">
+      <div className={cn('flex flex-row flex-wrap items-center gap-2 sm:gap-3', groupClassName)} role="group">
         {name && <input type="hidden" name={name} value={otp} readOnly aria-hidden tabIndex={-1} />}
         {digits.map((digit, index) => (
           <input

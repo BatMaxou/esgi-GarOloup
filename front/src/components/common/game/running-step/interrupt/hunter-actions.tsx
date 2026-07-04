@@ -73,7 +73,7 @@ const HunterActions = () => {
           {t('description')}
         </Typography>
       </div>
-      <div className="grid grid-cols-3 auto-rows-min gap-3 w-full flex-1 min-h-0 overflow-y-auto scrollbar">
+      <div className="grid grid-cols-2 sm:grid-cols-3 auto-rows-min gap-3 w-full flex-1 overflow-y-auto scrollbar">
         {alivePlayers.map((gamePlayer) => {
           const knownRole = getKnownRole(gamePlayer.id);
           const iconName: IconName = (knownRole && roleIconMap[knownRole]) || 'questionMark';

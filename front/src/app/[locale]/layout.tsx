@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import type { Viewport } from 'next';
 import Image from 'next/image';
 import { NextIntlClientProvider } from 'next-intl';
 import { ToastContainer } from 'react-toastify';
@@ -8,6 +9,12 @@ import { ApiClientProvider } from '@/contexts/api-context';
 import { MercureClientProvider } from '@/contexts/mercure-context';
 import { AuthProvider } from '@/contexts/auth-context';
 import { ThemeProvider } from '@/contexts/theme-context';
+
+// Empêche l'auto-dark des navigateurs mobiles (Chrome Android) de délaver
+// l'image de fond en gris : on déclare que la page gère déjà le thème sombre.
+export const viewport: Viewport = {
+  colorScheme: 'dark',
+};
 
 type ProvidersProps = {
   children: ReactNode;

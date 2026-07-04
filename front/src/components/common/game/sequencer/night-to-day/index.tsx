@@ -39,7 +39,7 @@ const NightRecap = ({ beat }: { beat: RecapBeat }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-9999 flex flex-col items-center justify-center gap-6 bg-black/50 backdrop-blur-sm">
+    <div className="fixed inset-0 z-9999 flex flex-col items-center justify-center gap-6 bg-black/70">
       <motion.div
         key={`${beat.id}-icon`}
         initial={{ opacity: 0 }}

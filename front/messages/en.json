@@ -461,6 +461,8 @@
           "subtitle": "Enter your new password"
         },
         "login": {
+          "guest": "Guest",
+          "member": "Member",
           "playAsGuest": "Play as guest",
           "alreadyHaveAccount": "Already have an account",
           "playAsGuestTitle": "What's your name?",

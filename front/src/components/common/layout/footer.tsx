@@ -61,7 +61,7 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="relative z-10 mt-0 overflow-hidden border-t border-primary/13 bg-[rgba(26,28,46,0.85)] backdrop-blur-xl">
+      <footer className="relative z-10 mt-0 overflow-hidden border-t border-primary/13 bg-[rgba(26,28,46,0.92)]">
         <div
           className="pointer-events-none absolute bottom-[-60px] left-1/2 h-[200px] w-[600px] max-w-[100vw] -translate-x-1/2 bg-[radial-gradient(ellipse,rgba(159,154,214,0.08)_0%,transparent_70%)]"
           aria-hidden

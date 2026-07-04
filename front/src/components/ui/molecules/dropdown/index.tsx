@@ -34,7 +34,7 @@ const Dropdown = ({ trigger, children, className, open: controlledOpen, onOpenCh
   return (
     <div
       className={cn(
-        'overflow-hidden rounded-xs border border-primary/12 bg-[rgba(26,28,46,0.5)] backdrop-blur-md transition-colors duration-200',
+        'overflow-hidden rounded-xs border border-primary/12 bg-[rgba(26,28,46,0.95)] transition-colors duration-200',
         open && 'border-primary/30',
         className
       )}

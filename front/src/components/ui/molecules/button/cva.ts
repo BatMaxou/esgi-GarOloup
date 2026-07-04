@@ -25,7 +25,7 @@ export const buttonCva = cva(
       full: { true: 'w-full', false: 'w-fit' },
       disabled: { true: 'cursor-not-allowed opacity-50 hover:bg-transparent focus:bg-transparent' },
       glass: {
-        true: 'border-2 backdrop-blur-sm',
+        true: 'border-2',
         false: 'border-transparent',
       },
       popup: {

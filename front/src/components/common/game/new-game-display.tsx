@@ -144,7 +144,7 @@ const NewGameDisplay = ({ game, isHost, isGameMaster }: { game: Game; isHost: bo
                 onClick={openInvitation}
               />
             </div>
-            <Card className="w-full px-20! py-10!" orientation="vertical" hoverable={false}>
+            <Card className="w-full sm:px-20! sm:py-10!" orientation="vertical" hoverable={false}>
               <GameConfigForm
                 onTooMuchPlayers={(payload) => {
                   setTooMuchPlayersDialogData(payload);

@@ -1,5 +1,5 @@
 import { ComponentType, SVGProps } from 'react';
-import { MoonStar, Sun, LucideIcon, Github, X, Plus, Minus, Check } from 'lucide-react';
+import { MoonStar, Sun, LucideIcon, Github, X, Plus, Minus, Check, Users } from 'lucide-react';
 
 import Garoloup from '@/assets/icons/garoloup.svg';
 import Discord from '@/assets/icons/discord.svg';
@@ -42,6 +42,7 @@ const raw = {
   targetEye: TargetEye,
   questionMark: HelpCircle,
   cancel: Cancel,
+  users: Users,
 };
 
 export const icons: Icons = raw;

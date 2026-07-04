@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority';
 export const tooltipCva = cva(
   [
     'absolute z-50 w-max max-w-xs rounded-sm',
-    'border border-primary/15 bg-[rgba(26,28,46,0.85)] backdrop-blur-[16px]',
+    'border border-primary/15 bg-[rgba(26,28,46,0.95)]',
     'px-3 py-2 text-sm text-primary shadow-lg shadow-black/30',
     'transition-opacity duration-200 ease-out',
   ].join(' '),

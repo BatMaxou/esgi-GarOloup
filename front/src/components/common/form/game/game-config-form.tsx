@@ -216,7 +216,7 @@ const GameConfigForm = ({ onTooMuchPlayers }: { onTooMuchPlayers: (payload: TooM
               transition={{ duration: 0.2 }}
             >
               <div
-                className={`grid grid-cols-3 gap-4 max-h-128 overflow-y-scroll ${playableRoleList.length > 6 ? 'scrollbar pr-2' : ''}`}
+                className={`grid grid-cols-2 md:grid-cols-3 gap-4 max-h-128 overflow-y-scroll ${playableRoleList.length > 6 ? 'scrollbar pr-2' : ''}`}
               >
                 {playableRoleList.map((role) => (
                   <RoleCardCounter
@@ -229,8 +229,8 @@ const GameConfigForm = ({ onTooMuchPlayers }: { onTooMuchPlayers: (payload: TooM
                   />
                 ))}
               </div>
-              <div className="flex gap-3">
-                <div className="w-1/3">
+              <div className="flex justify-between gap-3 w-full">
+                <div className="flex-1">
                   <Button
                     type="button"
                     variant="secondary"
@@ -239,7 +239,7 @@ const GameConfigForm = ({ onTooMuchPlayers }: { onTooMuchPlayers: (payload: TooM
                     onClick={() => setCurrentStep(1)}
                   />
                 </div>
-                <div className={currentStep === 2 ? 'w-2/3' : 'w-full'}>
+                <div className={currentStep === 2 ? 'flex-2' : 'w-full'}>
                   <Button type={'submit'} variant="accent" label={t('submit')} full disabled={!isCompositionComplete} />
                 </div>
               </div>
