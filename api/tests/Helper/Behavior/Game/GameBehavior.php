@@ -191,6 +191,17 @@ class GameBehavior extends AbstractBehavior
         ]));
     }
 
+    public function cupidonSetup(?string $firstLoverId, ?string $secondLoverId): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/cupidon/setup', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [
+                'firstLoverId' => $firstLoverId,
+                'secondLoverId' => $secondLoverId,
+            ],
+        ]));
+    }
+
     public function infect(): BehaviorResponse
     {
         return new BehaviorResponse($this->client->request('PATCH', '/api/game/infect-father/infect', [

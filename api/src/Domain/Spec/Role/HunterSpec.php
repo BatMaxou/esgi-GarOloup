@@ -25,7 +25,7 @@ class HunterSpec
             return false;
         }
 
-        $role = $hunter->getRole();
+        $role = $hunter->getRoleAs(HunterRole::class);
         if (!$role instanceof HunterRole || $role->hasShot()) {
             return false;
         }

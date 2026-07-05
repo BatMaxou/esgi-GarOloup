@@ -203,20 +203,25 @@ class Player implements TopicRelatedObject
     }
 
     /**
-     * @template T of GameRole
+     * @template T of object
      *
      * @param class-string<T> $class
      *
-     * @return T|null
+     * @return (T&GameRole)|null
      */
     public function getRoleAs(string $class): ?GameRole
     {
-        if ($this->role instanceof $class) {
-            return $this->role;
-        }
+        $role = $this->role;
+        while (null !== $role) {
+            if ($role instanceof $class) {
+                return $role;
+            }
 
-        if ($this->role instanceof WrapperRoleInterface && $this->role->getOriginalRole() instanceof $class) {
-            return $this->role->getOriginalRole();
+            if (!$role instanceof WrapperRoleInterface) {
+                return null;
+            }
+
+            $role = $role->getOriginalRole();
         }
 
         return null;

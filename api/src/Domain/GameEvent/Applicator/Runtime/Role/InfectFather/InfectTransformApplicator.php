@@ -11,6 +11,7 @@ use App\Entity\Game\Period\Action\NightAction\InfectAction;
 use App\Entity\Game\Period\Night;
 use App\Entity\Game\Player;
 use App\Entity\Game\Role\InfectedRole;
+use App\Entity\Game\Role\LoverRole;
 use App\Enum\Game\GameTeamEnum;
 use App\Enum\TopicEnum;
 use App\Service\Mercure\TopicCollector;
@@ -53,12 +54,18 @@ class InfectTransformApplicator implements GameEventApplicatorInterface
             return $game;
         }
 
-        $infectedRole = new InfectedRole($originalRole);
-        $this->em->persist($infectedRole);
+        $loverRole = $victim->getRoleAs(LoverRole::class);
+        if ($loverRole instanceof LoverRole) {
+            $infectedRole = new InfectedRole($loverRole->getOriginalRole());
+            $this->em->persist($infectedRole);
+            $loverRole->setOriginalRole($infectedRole);
+        } else {
+            $infectedRole = new InfectedRole($originalRole);
+            $this->em->persist($infectedRole);
+            $victim->setRole($infectedRole);
+        }
 
-        $victim
-            ->setRole($infectedRole)
-            ->setTeam(GameTeamEnum::WEREWOLF);
+        $victim->setTeam(GameTeamEnum::WEREWOLF);
 
         $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_PLAYER, $victim));
         $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::WEREWOLF_TEAM, $game));

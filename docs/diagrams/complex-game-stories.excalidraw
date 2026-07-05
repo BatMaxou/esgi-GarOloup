@@ -298,6 +298,10 @@
         {
           "type": "text",
           "id": "pfJSphbJPT1hnJ6u"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-launched"
         }
       ],
       "updated": 1,
@@ -432,6 +436,10 @@
         {
           "type": "text",
           "id": "WzusHxh9PvQEzeKh"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-setuped"
         }
       ],
       "updated": 1,
@@ -2662,6 +2670,10 @@
         {
           "type": "text",
           "id": "2dm8kFXGyWvwD3bS"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-night4-h1"
         }
       ],
       "updated": 1,
@@ -2863,6 +2875,14 @@
         {
           "type": "text",
           "id": "uOYaRrvSxCTTaCRv"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-vote5-e1"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-vote5-e2"
         }
       ],
       "updated": 1,
@@ -4270,6 +4290,1944 @@
       },
       "endBinding": {
         "elementId": "Xc5o2UtyQEaqhRvtZB",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cup-title",
+      "type": "text",
+      "x": 1380,
+      "y": 600,
+      "width": 547.2,
+      "height": 20.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 16,
+      "fontFamily": 1,
+      "text": "Cupidon — couple (13e joueur · PATCH /game/cupidon/setup)",
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Cupidon — couple (13e joueur · PATCH /game/cupidon/setup)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-launched",
+      "type": "rectangle",
+      "x": 1380,
+      "y": 660,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "#eebefa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "cup-launched-txt"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-launched"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "cup-launched-txt",
+      "type": "text",
+      "x": 1388,
+      "y": 673.0,
+      "width": 344,
+      "height": 70.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Cupidon · Launched\nComplexGameCupidonLaunchedStory\n13e joueur Cupidon ajouté au lobby\n(pas encore de couple)",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cup-launched",
+      "originalText": "Cupidon · Launched\nComplexGameCupidonLaunchedStory\n13e joueur Cupidon ajouté au lobby\n(pas encore de couple)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-setuped",
+      "type": "rectangle",
+      "x": 1380,
+      "y": 960,
+      "width": 360,
+      "height": 100,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "#eebefa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "cup-setuped-txt"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-setuped"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a2-a3"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a2-b1"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "cup-setuped-txt",
+      "type": "text",
+      "x": 1388,
+      "y": 975.0,
+      "width": 344,
+      "height": 70.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Cupidon · Setuped  ◆ FORK ◆\nComplexGameCupidonSetupedStory\n13e joueur + couple VILLAGER_2 ♥ VILLAGER_3\n(LoverRole wrappe le rôle · équipes conservées)",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cup-setuped",
+      "originalText": "Cupidon · Setuped  ◆ FORK ◆\nComplexGameCupidonSetupedStory\n13e joueur + couple VILLAGER_2 ♥ VILLAGER_3\n(LoverRole wrappe le rôle · équipes conservées)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-n1-seer",
+      "type": "rectangle",
+      "x": 1380,
+      "y": 1110,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "#eebefa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "cup-n1-seer-txt"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a2-a3"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a3-a4"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "cup-n1-seer-txt",
+      "type": "text",
+      "x": 1388,
+      "y": 1131.75,
+      "width": 344,
+      "height": 52.5,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Cupidon · Nuit 1 · Voyante\nComplexGameCupidonNight1SeerRevealedStory\nLa voyante observe WEREWOLF_1",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cup-n1-seer",
+      "originalText": "Cupidon · Nuit 1 · Voyante\nComplexGameCupidonNight1SeerRevealedStory\nLa voyante observe WEREWOLF_1",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-n1-loverkilled",
+      "type": "rectangle",
+      "x": 1380,
+      "y": 1260,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "#eebefa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "cup-n1-loverkilled-txt"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a3-a4"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a4-a5"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a4-b3"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "cup-n1-loverkilled-txt",
+      "type": "text",
+      "x": 1388,
+      "y": 1281.75,
+      "width": 344,
+      "height": 52.5,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Cupidon · Nuit 1 · Loups  ◆ FORK ◆\nComplexGameCupidonNight1LoverKilledStory\nLes loups dévorent VILLAGER_2 (amoureux №1)",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cup-n1-loverkilled",
+      "originalText": "Cupidon · Nuit 1 · Loups  ◆ FORK ◆\nComplexGameCupidonNight1LoverKilledStory\nLes loups dévorent VILLAGER_2 (amoureux №1)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-n1-ifpassed",
+      "type": "rectangle",
+      "x": 1380,
+      "y": 1410,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "#eebefa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "cup-n1-ifpassed-txt"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a4-a5"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a5-a6"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a5-b4"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "cup-n1-ifpassed-txt",
+      "type": "text",
+      "x": 1388,
+      "y": 1431.75,
+      "width": 344,
+      "height": 52.5,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Cupidon · Nuit 1 · Infect père passe  ◆ FORK ◆\nComplexGameCupidonNight1InfectFatherPassedStory\nPas d'infection → tour de la sorcière",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cup-n1-ifpassed",
+      "originalText": "Cupidon · Nuit 1 · Infect père passe  ◆ FORK ◆\nComplexGameCupidonNight1InfectFatherPassedStory\nPas d'infection → tour de la sorcière",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-n1-witchpassed",
+      "type": "rectangle",
+      "x": 1380,
+      "y": 1560,
+      "width": 360,
+      "height": 100,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "#eebefa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "cup-n1-witchpassed-txt"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a5-a6"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a6-b5"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "cup-n1-witchpassed-txt",
+      "type": "text",
+      "x": 1388,
+      "y": 1575.0,
+      "width": 344,
+      "height": 70.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Cupidon · Nuit 1 · Sorcière passe  ◆ FORK ◆\nComplexGameCupidonNight1WitchPassedStory\nVILLAGER_2 meurt → jour démarré\n(base des tests de mort de chagrin)",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cup-n1-witchpassed",
+      "originalText": "Cupidon · Nuit 1 · Sorcière passe  ◆ FORK ◆\nComplexGameCupidonNight1WitchPassedStory\nVILLAGER_2 meurt → jour démarré\n(base des tests de mort de chagrin)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-wwlover-setuped",
+      "type": "rectangle",
+      "x": 1860,
+      "y": 960,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "#eebefa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "cup-wwlover-setuped-txt"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a2-b1"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-b1-b2"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "cup-wwlover-setuped-txt",
+      "type": "text",
+      "x": 1868,
+      "y": 973.0,
+      "width": 344,
+      "height": 70.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Variante · Amoureux loup\nComplexGameCupidonWerewolfLoverSetupedStory\ngetSecondLoverState() = WEREWOLF_1\n→ couple villageois ♥ loup",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cup-wwlover-setuped",
+      "originalText": "Variante · Amoureux loup\nComplexGameCupidonWerewolfLoverSetupedStory\ngetSecondLoverState() = WEREWOLF_1\n→ couple villageois ♥ loup",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-wwlover-seerpassed",
+      "type": "rectangle",
+      "x": 1860,
+      "y": 1110,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "#eebefa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "cup-wwlover-seerpassed-txt"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-b1-b2"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "cup-wwlover-seerpassed-txt",
+      "type": "text",
+      "x": 1868,
+      "y": 1123.0,
+      "width": 344,
+      "height": 70.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Nuit 1 · Voyante passe\nComplexGameCupidonWerewolfLoverNight1SeerPassedStory\nTour des loups atteint : l'amoureux-loup\nvote via WerewolfVoterInterface",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cup-wwlover-seerpassed",
+      "originalText": "Nuit 1 · Voyante passe\nComplexGameCupidonWerewolfLoverNight1SeerPassedStory\nTour des loups atteint : l'amoureux-loup\nvote via WerewolfVoterInterface",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-n1-loverinfected",
+      "type": "rectangle",
+      "x": 1860,
+      "y": 1260,
+      "width": 360,
+      "height": 100,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "#eebefa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "cup-n1-loverinfected-txt"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a4-b3"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "cup-n1-loverinfected-txt",
+      "type": "text",
+      "x": 1868,
+      "y": 1275.0,
+      "width": 344,
+      "height": 70.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Nuit 1 · Amoureux infecté\nComplexGameCupidonNight1LoverInfectedStory\nL'infect père infecte l'amoureux dévoré → il survit\n(LoverRole wrappe InfectedRole · rejoint les loups)",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cup-n1-loverinfected",
+      "originalText": "Nuit 1 · Amoureux infecté\nComplexGameCupidonNight1LoverInfectedStory\nL'infect père infecte l'amoureux dévoré → il survit\n(LoverRole wrappe InfectedRole · rejoint les loups)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-n1-bothkilled",
+      "type": "rectangle",
+      "x": 1860,
+      "y": 1560,
+      "width": 360,
+      "height": 100,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "#eebefa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "cup-n1-bothkilled-txt"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a5-b4"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "cup-n1-bothkilled-txt",
+      "type": "text",
+      "x": 1868,
+      "y": 1575.0,
+      "width": 344,
+      "height": 70.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Nuit 1 · Les 2 amoureux tués\nComplexGameCupidonNight1BothLoversKilledStory\nLoups → VILLAGER_2 · poison sorcière → VILLAGER_3\n→ pas de mort de chagrin (déjà morts)",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cup-n1-bothkilled",
+      "originalText": "Nuit 1 · Les 2 amoureux tués\nComplexGameCupidonNight1BothLoversKilledStory\nLoups → VILLAGER_2 · poison sorcière → VILLAGER_3\n→ pas de mort de chagrin (déjà morts)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-hunterlover",
+      "type": "rectangle",
+      "x": 1860,
+      "y": 1710,
+      "width": 360,
+      "height": 100,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "#eebefa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "cup-hunterlover-txt"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-a6-b5"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "cup-hunterlover-txt",
+      "type": "text",
+      "x": 1868,
+      "y": 1725.0,
+      "width": 344,
+      "height": 70.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Variante · Amoureux chasseur\nComplexGameCupidonHunterLoverNight1WitchPassedStory\ngetSecondLoverState() = HUNTER\n→ le chagrin déclenche l'interrupt du chasseur",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cup-hunterlover",
+      "originalText": "Variante · Amoureux chasseur\nComplexGameCupidonHunterLoverNight1WitchPassedStory\ngetSecondLoverState() = HUNTER\n→ le chagrin déclenche l'interrupt du chasseur",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-endgame-title",
+      "type": "text",
+      "x": 1380,
+      "y": 3560,
+      "width": 470.4,
+      "height": 20.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 16,
+      "fontFamily": 1,
+      "text": "Cupidon — endgames (fork de WerewolfWin · Vote 5)",
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Cupidon — endgames (fork de WerewolfWin · Vote 5)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-grief-endgame",
+      "type": "rectangle",
+      "x": 1380,
+      "y": 3610,
+      "width": 360,
+      "height": 110,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "#eebefa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "cup-grief-endgame-txt"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-vote5-e1"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "cup-grief-endgame-txt",
+      "type": "text",
+      "x": 1388,
+      "y": 3621.25,
+      "width": 344,
+      "height": 87.5,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Endgame · Chagrin\nComplexGameCupidonGriefEndgameStory\nCouple SORCIÈRE ♥ VILLAGER_1 (base WerewolfWinVote5)\nVote : la sorcière éliminée → VILLAGER_1 meurt de chagrin\n→ parité au même time-up → VICTOIRE LOUPS",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cup-grief-endgame",
+      "originalText": "Endgame · Chagrin\nComplexGameCupidonGriefEndgameStory\nCouple SORCIÈRE ♥ VILLAGER_1 (base WerewolfWinVote5)\nVote : la sorcière éliminée → VILLAGER_1 meurt de chagrin\n→ parité au même time-up → VICTOIRE LOUPS",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-couple-win",
+      "type": "rectangle",
+      "x": 1380,
+      "y": 3810,
+      "width": 360,
+      "height": 110,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "#eebefa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "cup-couple-win-txt"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-vote5-e2"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-e2-e3"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "cup-couple-win-txt",
+      "type": "text",
+      "x": 1388,
+      "y": 3821.25,
+      "width": 344,
+      "height": 87.5,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "Endgame · Couple survivant\nComplexGameCupidonCoupleWinStory\nCouple ENFANT_SAUVAGE (devenu loup) ♥ VILLAGER_1\nVote : la sorcière éliminée\n→ restent les 2 amoureux + Cupidon",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cup-couple-win",
+      "originalText": "Endgame · Couple survivant\nComplexGameCupidonCoupleWinStory\nCouple ENFANT_SAUVAGE (devenu loup) ♥ VILLAGER_1\nVote : la sorcière éliminée\n→ restent les 2 amoureux + Cupidon",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-couple-victory",
+      "type": "rectangle",
+      "x": 1380,
+      "y": 4010,
+      "width": 360,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#087f5b",
+      "backgroundColor": "#96f2d7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "cup-couple-victory-txt"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-e2-e3"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "cup-couple-victory-txt",
+      "type": "text",
+      "x": 1388,
+      "y": 4031.75,
+      "width": 344,
+      "height": 52.5,
+      "angle": 0,
+      "strokeColor": "#087f5b",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "★ VICTOIRE COUPLE\nAmoureux derniers survivants\n(Cupidon compté COUPLE tant que le couple vit)",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cup-couple-victory",
+      "originalText": "★ VICTOIRE COUPLE\nAmoureux derniers survivants\n(Cupidon compté COUPLE tant que le couple vit)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "hunter-endgame-vote",
+      "type": "rectangle",
+      "x": 1380,
+      "y": 3310,
+      "width": 360,
+      "height": 110,
+      "angle": 0,
+      "strokeColor": "#c2255c",
+      "backgroundColor": "#fcc2d7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "hunter-endgame-vote-txt"
+        },
+        {
+          "type": "arrow",
+          "id": "cup-ar-night4-h1"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "hunter-endgame-vote-txt",
+      "type": "text",
+      "x": 1388,
+      "y": 3321.25,
+      "width": 344,
+      "height": 87.5,
+      "angle": 0,
+      "strokeColor": "#c2255c",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "fontSize": 14,
+      "fontFamily": 1,
+      "text": "HunterEndgame · Vote\nComplexGameHunterEndgameVoteStory\nVote : la VOYANTE éliminée · nuit : la SORCIÈRE dévorée\n→ vote ouvert · 1 loup vs chasseur + villageois\n(le tir du chasseur peut encore décider la victoire)",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "hunter-endgame-vote",
+      "originalText": "HunterEndgame · Vote\nComplexGameHunterEndgameVoteStory\nVote : la VOYANTE éliminée · nuit : la SORCIÈRE dévorée\n→ vote ouvert · 1 loup vs chasseur + villageois\n(le tir du chasseur peut encore décider la victoire)",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "cup-ar-launched",
+      "type": "arrow",
+      "x": 780,
+      "y": 708.0,
+      "width": 600,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          600,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "ClcUAcYVTPedjXjP",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "cup-launched",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cup-ar-setuped",
+      "type": "arrow",
+      "x": 780,
+      "y": 1008.0,
+      "width": 600,
+      "height": 2.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          600,
+          2.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "iObK3NobatE4JUs3",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "cup-setuped",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cup-ar-a2-a3",
+      "type": "arrow",
+      "x": 1560.0,
+      "y": 1060,
+      "width": 0,
+      "height": 50,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          50
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "cup-setuped",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "cup-n1-seer",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cup-ar-a3-a4",
+      "type": "arrow",
+      "x": 1560.0,
+      "y": 1206,
+      "width": 0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "cup-n1-seer",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "cup-n1-loverkilled",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cup-ar-a4-a5",
+      "type": "arrow",
+      "x": 1560.0,
+      "y": 1356,
+      "width": 0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "cup-n1-loverkilled",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "cup-n1-ifpassed",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cup-ar-a5-a6",
+      "type": "arrow",
+      "x": 1560.0,
+      "y": 1506,
+      "width": 0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "cup-n1-ifpassed",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "cup-n1-witchpassed",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cup-ar-a2-b1",
+      "type": "arrow",
+      "x": 1740,
+      "y": 1010.0,
+      "width": 120,
+      "height": 2.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          -2.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "cup-setuped",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "cup-wwlover-setuped",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cup-ar-b1-b2",
+      "type": "arrow",
+      "x": 2040.0,
+      "y": 1056,
+      "width": 0,
+      "height": 54,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          54
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "cup-wwlover-setuped",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "cup-wwlover-seerpassed",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cup-ar-a4-b3",
+      "type": "arrow",
+      "x": 1740,
+      "y": 1308.0,
+      "width": 120,
+      "height": 2.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          2.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "cup-n1-loverkilled",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "cup-n1-loverinfected",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cup-ar-a5-b4",
+      "type": "arrow",
+      "x": 1740,
+      "y": 1458.0,
+      "width": 120,
+      "height": 152.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          152.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "cup-n1-ifpassed",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "cup-n1-bothkilled",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cup-ar-a6-b5",
+      "type": "arrow",
+      "x": 1740,
+      "y": 1610.0,
+      "width": 120,
+      "height": 150.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          150.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "cup-n1-witchpassed",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "cup-hunterlover",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cup-ar-vote5-e1",
+      "type": "arrow",
+      "x": 1260,
+      "y": 3858.0,
+      "width": 120,
+      "height": 193.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          -193.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "hDyOZteXPvQyNJFr",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "cup-grief-endgame",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cup-ar-vote5-e2",
+      "type": "arrow",
+      "x": 1260,
+      "y": 3858.0,
+      "width": 120,
+      "height": 7.0,
+      "angle": 0,
+      "strokeColor": "#9c36b5",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          7.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "hDyOZteXPvQyNJFr",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "cup-couple-win",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cup-ar-e2-e3",
+      "type": "arrow",
+      "x": 1560.0,
+      "y": 3920,
+      "width": 0,
+      "height": 90,
+      "angle": 0,
+      "strokeColor": "#087f5b",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          90
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "cup-couple-win",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "cup-couple-victory",
+        "focus": 0,
+        "gap": 4
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "cup-ar-night4-h1",
+      "type": "arrow",
+      "x": 1260,
+      "y": 3408.0,
+      "width": 120,
+      "height": 43.0,
+      "angle": 0,
+      "strokeColor": "#c2255c",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          -43.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "fPgp5AuoMDrO9lGW",
+        "focus": 0,
+        "gap": 4
+      },
+      "endBinding": {
+        "elementId": "hunter-endgame-vote",
         "focus": 0,
         "gap": 4
       },

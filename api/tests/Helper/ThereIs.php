@@ -16,6 +16,7 @@ use App\Tests\Helper\Builder\Game\Period\Action\NightAction\SaveActionBuilder;
 use App\Tests\Helper\Builder\Game\Period\Vote\BallotBuilder;
 use App\Tests\Helper\Builder\Game\PlayerBuilder;
 use App\Tests\Helper\Builder\Game\Role\GameRoleBuilderBag;
+use App\Tests\Helper\Builder\Game\Role\LoverRoleBuilder;
 use App\Tests\Helper\Builder\Role\RoleBuilder;
 use App\Tests\Helper\Builder\Role\RoleBuilderBag;
 use App\Tests\Helper\Builder\Security\RefreshTokenBuilder;
@@ -105,6 +106,11 @@ final class ThereIs
     public static function aGameRoleBag(RoleBuilderBag $roleBag): GameRoleBuilderBag
     {
         return new GameRoleBuilderBag($roleBag);
+    }
+
+    public static function aLoverRole(): LoverRoleBuilder
+    {
+        return new LoverRoleBuilder();
     }
 
     public static function anUploadFile(): UploadFileBuilder

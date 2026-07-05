@@ -23,7 +23,7 @@ class WitchSpec
             return false;
         }
 
-        $role = $witch->getRole();
+        $role = $witch->getRoleAs(WitchRole::class);
         if (!$role instanceof WitchRole || !$role->isHealPotionAvailable() || $role->hasActedThisNight()) {
             return false;
         }
@@ -41,7 +41,7 @@ class WitchSpec
             return false;
         }
 
-        $role = $witch->getRole();
+        $role = $witch->getRoleAs(WitchRole::class);
         if (!$role instanceof WitchRole || !$role->isPoisonPotionAvailable() || $role->hasActedThisNight()) {
             return false;
         }

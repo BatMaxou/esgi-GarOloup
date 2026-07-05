@@ -31,7 +31,7 @@ class SeerSpec
             return false;
         }
 
-        $role = $seer->getRole();
+        $role = $seer->getRoleAs(SeerRole::class);
         if (!$role instanceof SeerRole || $seer->isDead()) {
             return false;
         }

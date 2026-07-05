@@ -7,7 +7,7 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class Version20260703143232 extends AbstractMigration
+final class Version20260706195708 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -22,6 +22,8 @@ final class Version20260703143232 extends AbstractMigration
         $this->addSql('CREATE TABLE composition (id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE configuration (with_game_master TINYINT NOT NULL, with_random_dispatch TINYINT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, composition_id BINARY(16) DEFAULT NULL, UNIQUE INDEX UNIQ_A5E2A5D787A2E12 (composition_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE create_game_event (max_players INT NOT NULL, max_time_for_discussion INT NOT NULL, public TINYINT NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE cupidon_role (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE cupidon_setup_event (first_lover_id VARCHAR(36) NOT NULL, second_lover_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE day (number INT NOT NULL, resolved TINYINT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, game_id BINARY(16) NOT NULL, INDEX IDX_E5A02990E48FD905 (game_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE day_action (id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, role_source VARCHAR(255) DEFAULT NULL, team_source VARCHAR(255) DEFAULT NULL, day_id BINARY(16) NOT NULL, discr VARCHAR(255) NOT NULL, INDEX IDX_E012674F9C24126 (day_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE game (initialisation_step VARCHAR(255) NOT NULL, runtime_step VARCHAR(255) DEFAULT NULL, interrupted_runtime_step VARCHAR(255) DEFAULT NULL, interrupted_by_role VARCHAR(255) DEFAULT NULL, step_end_at DATETIME DEFAULT NULL, winning_team VARCHAR(255) DEFAULT NULL, join_code VARCHAR(8) NOT NULL, max_players INT NOT NULL, max_time_for_discussion INT NOT NULL, public TINYINT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, host_id BINARY(16) NOT NULL, game_master_id BINARY(16) DEFAULT NULL, configuration_id BINARY(16) NOT NULL, night_workflow_id BINARY(16) DEFAULT NULL, day_workflow_id BINARY(16) DEFAULT NULL, UNIQUE INDEX UNIQ_232B318C1FB8D185 (host_id), UNIQUE INDEX UNIQ_232B318CC1151A13 (game_master_id), UNIQUE INDEX UNIQ_232B318C73F32DD8 (configuration_id), UNIQUE INDEX UNIQ_232B318CAF648A3 (night_workflow_id), UNIQUE INDEX UNIQ_232B318C3A36637F (day_workflow_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
@@ -37,6 +39,7 @@ final class Version20260703143232 extends AbstractMigration
         $this->addSql('CREATE TABLE join_game_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE launch_game_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE leave_game_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE lover_role (partner_player_id VARCHAR(36) NOT NULL, original_role_id BINARY(16) NOT NULL, id BINARY(16) NOT NULL, INDEX IDX_92BE980E50838C5B (original_role_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE murder_action (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE night (number INT NOT NULL, resolved TINYINT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, game_id BINARY(16) NOT NULL, INDEX IDX_11DA0F97E48FD905 (game_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE night_action (id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, role_source VARCHAR(255) DEFAULT NULL, team_source VARCHAR(255) DEFAULT NULL, night_id BINARY(16) NOT NULL, discr VARCHAR(255) NOT NULL, INDEX IDX_4E26C6747F834C51 (night_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
@@ -74,6 +77,8 @@ final class Version20260703143232 extends AbstractMigration
         $this->addSql('ALTER TABLE close_game_invitation_event ADD CONSTRAINT FK_9E6235E7BF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE configuration ADD CONSTRAINT FK_A5E2A5D787A2E12 FOREIGN KEY (composition_id) REFERENCES composition (id)');
         $this->addSql('ALTER TABLE create_game_event ADD CONSTRAINT FK_1AD0C1CCBF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE cupidon_role ADD CONSTRAINT FK_7A2AC54ABF396750 FOREIGN KEY (id) REFERENCES game_role (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE cupidon_setup_event ADD CONSTRAINT FK_E2F204EBBF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE day ADD CONSTRAINT FK_E5A02990E48FD905 FOREIGN KEY (game_id) REFERENCES game (id)');
         $this->addSql('ALTER TABLE day_action ADD CONSTRAINT FK_E012674F9C24126 FOREIGN KEY (day_id) REFERENCES day (id)');
         $this->addSql('ALTER TABLE game ADD CONSTRAINT FK_232B318C1FB8D185 FOREIGN KEY (host_id) REFERENCES player (id)');
@@ -93,6 +98,8 @@ final class Version20260703143232 extends AbstractMigration
         $this->addSql('ALTER TABLE join_game_event ADD CONSTRAINT FK_61FF5DD1BF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE launch_game_event ADD CONSTRAINT FK_5690F2A0BF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE leave_game_event ADD CONSTRAINT FK_B9020AD0BF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE lover_role ADD CONSTRAINT FK_92BE980E50838C5B FOREIGN KEY (original_role_id) REFERENCES game_role (id)');
+        $this->addSql('ALTER TABLE lover_role ADD CONSTRAINT FK_92BE980EBF396750 FOREIGN KEY (id) REFERENCES game_role (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE murder_action ADD CONSTRAINT FK_5F12A317BF396750 FOREIGN KEY (id) REFERENCES night_action (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE night ADD CONSTRAINT FK_11DA0F97E48FD905 FOREIGN KEY (game_id) REFERENCES game (id)');
         $this->addSql('ALTER TABLE night_action ADD CONSTRAINT FK_4E26C6747F834C51 FOREIGN KEY (night_id) REFERENCES night (id)');
@@ -133,6 +140,8 @@ final class Version20260703143232 extends AbstractMigration
         $this->addSql('ALTER TABLE close_game_invitation_event DROP FOREIGN KEY FK_9E6235E7BF396750');
         $this->addSql('ALTER TABLE configuration DROP FOREIGN KEY FK_A5E2A5D787A2E12');
         $this->addSql('ALTER TABLE create_game_event DROP FOREIGN KEY FK_1AD0C1CCBF396750');
+        $this->addSql('ALTER TABLE cupidon_role DROP FOREIGN KEY FK_7A2AC54ABF396750');
+        $this->addSql('ALTER TABLE cupidon_setup_event DROP FOREIGN KEY FK_E2F204EBBF396750');
         $this->addSql('ALTER TABLE day DROP FOREIGN KEY FK_E5A02990E48FD905');
         $this->addSql('ALTER TABLE day_action DROP FOREIGN KEY FK_E012674F9C24126');
         $this->addSql('ALTER TABLE game DROP FOREIGN KEY FK_232B318C1FB8D185');
@@ -152,6 +161,8 @@ final class Version20260703143232 extends AbstractMigration
         $this->addSql('ALTER TABLE join_game_event DROP FOREIGN KEY FK_61FF5DD1BF396750');
         $this->addSql('ALTER TABLE launch_game_event DROP FOREIGN KEY FK_5690F2A0BF396750');
         $this->addSql('ALTER TABLE leave_game_event DROP FOREIGN KEY FK_B9020AD0BF396750');
+        $this->addSql('ALTER TABLE lover_role DROP FOREIGN KEY FK_92BE980E50838C5B');
+        $this->addSql('ALTER TABLE lover_role DROP FOREIGN KEY FK_92BE980EBF396750');
         $this->addSql('ALTER TABLE murder_action DROP FOREIGN KEY FK_5F12A317BF396750');
         $this->addSql('ALTER TABLE night DROP FOREIGN KEY FK_11DA0F97E48FD905');
         $this->addSql('ALTER TABLE night_action DROP FOREIGN KEY FK_4E26C6747F834C51');
@@ -187,6 +198,8 @@ final class Version20260703143232 extends AbstractMigration
         $this->addSql('DROP TABLE composition');
         $this->addSql('DROP TABLE configuration');
         $this->addSql('DROP TABLE create_game_event');
+        $this->addSql('DROP TABLE cupidon_role');
+        $this->addSql('DROP TABLE cupidon_setup_event');
         $this->addSql('DROP TABLE day');
         $this->addSql('DROP TABLE day_action');
         $this->addSql('DROP TABLE game');
@@ -202,6 +215,7 @@ final class Version20260703143232 extends AbstractMigration
         $this->addSql('DROP TABLE join_game_event');
         $this->addSql('DROP TABLE launch_game_event');
         $this->addSql('DROP TABLE leave_game_event');
+        $this->addSql('DROP TABLE lover_role');
         $this->addSql('DROP TABLE murder_action');
         $this->addSql('DROP TABLE night');
         $this->addSql('DROP TABLE night_action');

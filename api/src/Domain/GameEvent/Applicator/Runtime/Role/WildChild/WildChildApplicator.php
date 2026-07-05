@@ -34,7 +34,7 @@ class WildChildApplicator implements GameEventApplicatorInterface
     {
         $game = $this->ensureGame($gameEvent);
         $player = $game->getPlayer(GameRoleEnum::WILD_CHILD);
-        $role = $player?->getRole();
+        $role = $player?->getRoleAs(WildChildRole::class);
         if (!$player || !$role instanceof WildChildRole) {
             return $game;
         }
@@ -57,7 +57,7 @@ class WildChildApplicator implements GameEventApplicatorInterface
     public function supports(GameEvent $gameEvent): bool
     {
         $player = $gameEvent->getGame()?->getPlayer(GameRoleEnum::WILD_CHILD);
-        $role = $player?->getRole();
+        $role = $player?->getRoleAs(WildChildRole::class);
 
         return $player && !$player->isDead() && $role instanceof WildChildRole && !$role->isTransformed();
     }

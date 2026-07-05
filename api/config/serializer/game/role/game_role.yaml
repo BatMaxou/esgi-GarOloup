@@ -6,6 +6,9 @@ App\Entity\Game\Role\GameRole:
         type:
             groups:
                 - me:player:read
+        setup:
+            groups:
+                - me:player:read
 
 App\Entity\Game\Role\VillagerRole:
     attributes:
@@ -52,5 +55,11 @@ App\Entity\Game\Role\InfectFatherRole:
 App\Entity\Game\Role\HunterRole:
     attributes:
         hasShot:
+            groups:
+                - me:player:read
+
+App\Entity\Game\Role\LoverRole:
+    attributes:
+        partnerPlayerId:
             groups:
                 - me:player:read

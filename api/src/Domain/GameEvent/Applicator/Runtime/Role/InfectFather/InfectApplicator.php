@@ -55,7 +55,7 @@ class InfectApplicator implements GameEventApplicatorInterface
         $night = $game->getCurrentNight() ?? throw new \LogicException('No active night to register the infection');
         $night->addAction(new InfectAction($night, GameRoleEnum::INFECT_FATHER, $victimId));
 
-        $role = $player->getRole();
+        $role = $player->getRoleAs(InfectFatherRole::class);
         if (!$role instanceof InfectFatherRole) {
             throw new \LogicException(\sprintf('Role must be verified as a %s here', InfectFatherRole::class));
         }
