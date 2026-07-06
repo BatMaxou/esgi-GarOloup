@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 
@@ -122,9 +122,6 @@ const RoleDetailClient = ({ roleRef }: Props) => {
   const troles = useTranslations('roles');
   const locale = useLocale() as RoleSlugLocale;
   const { getRole, role, roleLoading, roleList, getAllRoles } = useRole();
-  const [nextRole, setNextRole] = useState<Role | null>(null);
-  const [previousRole, setPreviousRole] = useState<Role | null>(null);
-
   useEffect(() => {
     getRole({ ref: roleRef });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -133,15 +130,23 @@ const RoleDetailClient = ({ roleRef }: Props) => {
   useEffect(() => {
     if (roleList.length === 0) {
       getAllRoles();
-    } else if (role?.id) {
-      const currentRoleIndexOnList = roleList.findIndex((roleFromList) => roleFromList.id === role.id);
-      setPreviousRole(roleList[currentRoleIndexOnList - 1] ?? roleList[roleList.length - 1] ?? null);
-      setNextRole(roleList[currentRoleIndexOnList + 1] ?? roleList[0] ?? null);
     }
-  }, [roleList, role?.id, getAllRoles]);
+  }, [roleList, getAllRoles]);
+
+  const previousRole = useMemo(() => {
+    if (!role?.id || roleList.length === 0) return null;
+    const currentRoleIndexOnList = roleList.findIndex((roleFromList) => roleFromList.id === role.id);
+    return roleList[currentRoleIndexOnList - 1] ?? roleList[roleList.length - 1] ?? null;
+  }, [roleList, role]);
+
+  const nextRole = useMemo(() => {
+    if (!role?.id || roleList.length === 0) return null;
+    const currentRoleIndexOnList = roleList.findIndex((roleFromList) => roleFromList.id === role.id);
+    return roleList[currentRoleIndexOnList + 1] ?? roleList[0] ?? null;
+  }, [roleList, role]);
 
   const primaryTeam = role?.teams?.[0];
-  const campLabel = primaryTeam ? troles(primaryTeam) : '—';
+  const campLabel = primaryTeam ? troles(primaryTeam) : '-';
 
   if (roleLoading) {
     return <RoleDetailLoadingShell />;
