@@ -2,12 +2,14 @@
 
 namespace App\Entity\Game\Role;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Domain\Workflow\Interface\NightResettableInterface;
 use App\Entity\Game\Role\Interface\WrapperRoleInterface;
 use App\Enum\Game\GameRoleEnum;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
+#[ApiResource(operations: [])]
 class InfectedRole extends WerewolfRole implements WrapperRoleInterface
 {
     #[ORM\ManyToOne(targetEntity: GameRole::class)]

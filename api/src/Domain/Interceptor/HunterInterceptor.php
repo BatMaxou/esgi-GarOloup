@@ -12,7 +12,7 @@ class HunterInterceptor implements InterceptorInterface
     public function hasPendingAction(Game $game): bool
     {
         foreach ($game->getPlayers() as $player) {
-            $role = $player->getRole();
+            $role = $player->getRoleAs(HunterRole::class);
             if ($player->isDead() && $role instanceof HunterRole && !$role->hasShot()) {
                 return true;
             }

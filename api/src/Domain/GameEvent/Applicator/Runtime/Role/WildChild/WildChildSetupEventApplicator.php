@@ -9,9 +9,7 @@ use App\Domain\GameEvent\Applicator\Trait\UserAwareTrait;
 use App\Domain\GameEvent\Exception\PlayerNotFoundException;
 use App\Domain\GameEvent\Exception\UnauthorizedGameActionException;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
-use App\Domain\Spec\GameSpec;
 use App\Domain\Spec\Role\WildChildSpec;
-use App\Domain\Workflow\NightOrchestrator;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Event\Game\WildChildSetupEvent;
@@ -32,10 +30,8 @@ class WildChildSetupEventApplicator implements GameEventApplicatorInterface
     use RandomizationAwareTrait;
 
     public function __construct(
-        private readonly GameSpec $gameSpec,
         private readonly WildChildSpec $wildChildSpec,
         private readonly PlayerRepository $playerRepository,
-        private readonly NightOrchestrator $nightOrchestrator,
         private readonly int $afkThreshold,
     ) {
     }
@@ -61,18 +57,13 @@ class WildChildSetupEventApplicator implements GameEventApplicatorInterface
             throw new UnauthorizedGameActionException('You can not choose a model');
         }
 
-        $role = $player->getRole();
+        $role = $player->getRoleAs(WildChildRole::class);
         if (!$role instanceof WildChildRole) {
             throw new UnauthorizedGameActionException('You can not choose a model');
         }
 
         $role->setModelPlayerId($targetPlayerId);
         $role->setSetup(true);
-
-        // TODO: Must be handled in another place -> applicator
-        if ($this->gameSpec->areAllRolesSetup($game)) {
-            $this->nightOrchestrator->start($game);
-        }
 
         return $game;
     }
@@ -82,17 +73,12 @@ class WildChildSetupEventApplicator implements GameEventApplicatorInterface
         $game = $this->ensureGame($gameEvent);
 
         foreach ($game->getPlayers() as $player) {
-            $role = $player->getRole();
+            $role = $player->getRoleAs(WildChildRole::class);
             if ($role instanceof WildChildRole && !$role->isSetup()) {
                 $role->setModelPlayerId($this->getRandomModelId($game, $player));
                 $role->setSetup(true);
                 $this->handleAfkPlayer($player);
             }
-        }
-
-        // TODO: Must be handled in another place -> applicator
-        if ($this->gameSpec->areAllRolesSetup($game)) {
-            $this->nightOrchestrator->start($game);
         }
 
         return $game;
@@ -105,8 +91,7 @@ class WildChildSetupEventApplicator implements GameEventApplicatorInterface
         return $gameEvent instanceof TimeUpGameEvent
             && $game
             && GameRuntimeStepEnum::SETUP === $game->getRuntimeStep()
-            && $game->getPlayer(GameRoleEnum::WILD_CHILD)
-        ;
+            && $game->getPlayer(GameRoleEnum::WILD_CHILD);
     }
 
     protected function supportsAction(GameEvent $gameEvent): bool

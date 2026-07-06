@@ -36,6 +36,9 @@ export const apiPaths = {
   hunter: {
     shoot: '/game/hunter/shoot',
   },
+  cupidon: {
+    setup: '/game/cupidon/setup',
+  },
   player: {
     getCurrent: '/game/player',
     leave: '/game/player',

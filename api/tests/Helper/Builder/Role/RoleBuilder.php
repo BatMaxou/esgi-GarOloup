@@ -110,6 +110,18 @@ class RoleBuilder extends AbstractBuilder
             ->withMaxPerGame(1);
     }
 
+    public function cupidon(): static
+    {
+        $this->type = GameRoleEnum::CUPIDON;
+
+        return $this->withName('Cupidon')
+            ->withDescription('Description de Cupidon')
+            ->withAbility('Désigner deux amoureux au début de la partie, si l\'un meurt, l\'autre meurt avec lui')
+            ->withTeam(GameTeamEnum::VILLAGE)
+            ->withTeam(GameTeamEnum::COUPLE)
+            ->withMaxPerGame(1);
+    }
+
     public function withName(string $name): static
     {
         $this->name = $name;

@@ -37,6 +37,7 @@ use Doctrine\ORM\Mapping\InheritanceType;
     'wild_child_setup' => WildChildSetupEvent::class,
     'hunter_shoot' => HunterShootEvent::class,
     'infect' => InfectEvent::class,
+    'cupidon_setup' => CupidonSetupEvent::class,
 ])]
 abstract class GameEvent
 {

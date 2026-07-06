@@ -5,6 +5,7 @@ namespace App\Domain\GameEvent\Applicator\Runtime\Workflow;
 use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Interceptor\InterceptorHandler;
+use App\Domain\Spec\GameSpec;
 use App\Domain\Workflow\DayOrchestrator;
 use App\Domain\Workflow\NightOrchestrator;
 use App\Domain\Workflow\VoteResolver;
@@ -19,6 +20,7 @@ class StartNextStepApplicator implements GameEventApplicatorInterface
     use GameAwareTrait;
 
     public function __construct(
+        private readonly GameSpec $gameSpec,
         private readonly DayOrchestrator $dayOrchestrator,
         private readonly VoteResolver $voteResolver,
         private readonly NightOrchestrator $nightOrchestrator,
@@ -34,6 +36,12 @@ class StartNextStepApplicator implements GameEventApplicatorInterface
     public function apply(GameEvent $gameEvent): Game
     {
         $game = $this->ensureGame($gameEvent);
+
+        if (GameRuntimeStepEnum::SETUP === $game->getRuntimeStep() && $this->gameSpec->areAllRolesSetup($game)) {
+            $this->nightOrchestrator->start($game);
+
+            return $game;
+        }
 
         $lastNight = $game->getNights()->last();
         $lastDay = $game->getDays()->last();
@@ -73,7 +81,13 @@ class StartNextStepApplicator implements GameEventApplicatorInterface
         return $gameEvent instanceof TimeUpGameEvent
             && \in_array(
                 $gameEvent->getGame()?->getRuntimeStep(),
-                [GameRuntimeStepEnum::NIGHT, GameRuntimeStepEnum::DAY, GameRuntimeStepEnum::VOTE, GameRuntimeStepEnum::INTERRUPT],
+                [
+                    GameRuntimeStepEnum::SETUP,
+                    GameRuntimeStepEnum::NIGHT,
+                    GameRuntimeStepEnum::DAY,
+                    GameRuntimeStepEnum::VOTE,
+                    GameRuntimeStepEnum::INTERRUPT,
+                ],
             );
     }
 }

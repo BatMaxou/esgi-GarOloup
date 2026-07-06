@@ -6,7 +6,9 @@ import Icon from '@/components/ui/atoms/icon';
 import Typography from '@/components/ui/atoms/typography';
 import { useGame } from '@/contexts/game-context';
 import { usePlayer } from '@/contexts/player-context';
+import { CupidonProvider } from '@/contexts/roles/cupidon-context';
 import { InfectFatherProvider } from '@/contexts/roles/infect-father-context';
+import { isLoverRole, LoverProvider } from '@/contexts/roles/lover-context';
 import { SeerProvider } from '@/contexts/roles/seer-context';
 import { WereWolfProvider } from '@/contexts/roles/werewolf-context';
 import { WildChildProvider } from '@/contexts/roles/wild-child-context';
@@ -77,14 +79,21 @@ const GameClient = () => {
       case GameRoleEnum.WILD_CHILD:
         content = <WildChildProvider>{content}</WildChildProvider>;
         break;
+      case GameRoleEnum.CUPIDON:
+        content = <CupidonProvider>{content}</CupidonProvider>;
+        break;
     }
 
     if (player?.team === GameTeamEnum.WEREWOLF) {
       content = <WereWolfProvider>{content}</WereWolfProvider>;
     }
 
+    if (isLoverRole(player?.role)) {
+      content = <LoverProvider>{content}</LoverProvider>;
+    }
+
     return content;
-  }, [isGameMaster, isHost, player?.role?.type, player?.team]);
+  }, [isGameMaster, isHost, player?.role, player?.team]);
 
   if (!game || !player) {
     return <>Loading...</>;

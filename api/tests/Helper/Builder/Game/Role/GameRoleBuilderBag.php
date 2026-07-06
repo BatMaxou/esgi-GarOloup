@@ -26,6 +26,7 @@ class GameRoleBuilderBag
             GameRoleEnum::WILD_CHILD->value => fn () => new WildChildRoleBuilder($this->roleBuilderBag),
             GameRoleEnum::HUNTER->value => fn () => new HunterRoleBuilder($this->roleBuilderBag),
             GameRoleEnum::INFECT_FATHER->value => fn () => new InfectFatherRoleBuilder($this->roleBuilderBag),
+            GameRoleEnum::CUPIDON->value => fn () => new CupidonRoleBuilder($this->roleBuilderBag),
         ];
 
         return $this;
@@ -64,6 +65,11 @@ class GameRoleBuilderBag
     public function getInfectFather(): InfectFatherRoleBuilder
     {
         return $this->get(GameRoleEnum::INFECT_FATHER, InfectFatherRoleBuilder::class);
+    }
+
+    public function getCupidon(): CupidonRoleBuilder
+    {
+        return $this->get(GameRoleEnum::CUPIDON, CupidonRoleBuilder::class);
     }
 
     /**

@@ -68,7 +68,7 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
             throw new UnauthorizedGameActionException('You can not vote');
         }
 
-        $role = $player->getRole();
+        $role = $player->getRoleAs(WerewolfVoterInterface::class);
         if (!$role instanceof WerewolfVoterInterface) {
             throw new \LogicException(\sprintf('Role must be verified as a %s here', WerewolfVoterInterface::class));
         }
@@ -83,7 +83,7 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
         $game = $this->ensureGame($gameEvent);
 
         foreach ($game->getPlayers() as $player) {
-            $role = $player->getRole();
+            $role = $player->getRoleAs(WerewolfVoterInterface::class);
             if (
                 $role instanceof WerewolfVoterInterface
                 && GameTeamEnum::WEREWOLF === $player->getTeam()
@@ -175,7 +175,7 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
     {
         $tally = [];
         foreach ($game->getPlayers() as $player) {
-            $role = $player->getRole();
+            $role = $player->getRoleAs(WerewolfVoterInterface::class);
             if (!$role instanceof WerewolfVoterInterface || $player->isDead() || GameTeamEnum::WEREWOLF !== $player->getTeam()) {
                 continue;
             }

@@ -37,7 +37,7 @@ class InfectFatherSpec
             return false;
         }
 
-        $role = $actor->getRole();
+        $role = $actor->getRoleAs(InfectFatherRole::class);
         if (!$role instanceof InfectFatherRole || !$role->isInfectionAvailable()) {
             return false;
         }

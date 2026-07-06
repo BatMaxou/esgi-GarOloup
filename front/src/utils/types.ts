@@ -60,6 +60,7 @@ export type Workflow = {
 export type GameRole = {
   role?: Role;
   type?: GameRoleEnum;
+  setup?: boolean;
 };
 
 export type SeerRole = GameRole & {
@@ -88,6 +89,12 @@ export type HunterRole = GameRole & {
   hasShot?: boolean;
 };
 
+export type CupidonRole = GameRole;
+
+export type LoverRole = GameRole & {
+  partnerPlayerId?: string;
+};
+
 export type Player = {
   afkCount?: number;
   dead?: boolean;
@@ -95,7 +102,16 @@ export type Player = {
   gameMaster?: boolean;
   host?: boolean;
   id: string;
-  role?: GameRole | SeerRole | WerewolfRole | WitchRole | HunterRole | WildChildRole | InfectFatherRole;
+  role?:
+    | GameRole
+    | SeerRole
+    | WerewolfRole
+    | WitchRole
+    | HunterRole
+    | WildChildRole
+    | InfectFatherRole
+    | CupidonRole
+    | LoverRole;
   team?: GameTeamEnum;
   tempUser?: TempUser;
   user?: User;

@@ -32,6 +32,6 @@ class WildChildSpec
             }
         }
 
-        return $targetExists && $player->getRole() instanceof WildChildRole;
+        return $targetExists && null !== $player->getRoleAs(WildChildRole::class);
     }
 }

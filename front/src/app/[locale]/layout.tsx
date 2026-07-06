@@ -68,12 +68,9 @@ const RootLayout = async ({ children }: Props) => {
   return (
     <html lang="fr">
       <body className="bg-linear-(--background-gradient) bg-no-repeat text-foreground min-h-dvh scrollbar transition-colors relative">
-        <Image
-          src="/images/night-camp-background.png"
-          alt="Background"
-          className="opacity-90 dark:opacity-60 !fixed inset-0 object-cover object-center -z-1"
-          fill
-        />
+        <div className="opacity-90 dark:opacity-60 !fixed inset-0 -z-1">
+          <Image src="/images/night-camp-background.png" alt="Background" className="object-cover object-center" fill />
+        </div>
         <ToastContainer toastStyle={{ backgroundColor: 'var(--color-secondary)', color: 'white' }} />
         <ServiceWorkerRegistration />
         <Providers>{children}</Providers>
