@@ -43,6 +43,7 @@ const GameConfigForm = ({ onTooMuchPlayers }: { onTooMuchPlayers: (payload: TooM
   const isThereMorePlayersThanMinRequested = playerCount > minPlayersToLaunchGame;
   const canConfigureGameMaster = isThereMorePlayersThanMinRequested && !game?.public;
   const [currentStep, setCurrentStep] = useState<1 | 2>(canConfigureGameMaster ? 1 : 2);
+  const effectiveStep: 1 | 2 = !canConfigureGameMaster && currentStep === 1 ? 2 : currentStep;
 
   const { values, handleSubmit, handleChange, setFieldValue } = useFormik<GameConfigFormValues>({
     initialValues: {
@@ -88,12 +89,6 @@ const GameConfigForm = ({ onTooMuchPlayers }: { onTooMuchPlayers: (payload: TooM
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (!canConfigureGameMaster && currentStep === 1) {
-      setCurrentStep(2);
-    }
-  }, [canConfigureGameMaster, currentStep]);
-
   if (!game?.players) {
     return null;
   }
@@ -117,7 +112,7 @@ const GameConfigForm = ({ onTooMuchPlayers }: { onTooMuchPlayers: (payload: TooM
         method="post"
         onSubmit={(e) => {
           e.preventDefault();
-          if (currentStep === 1) {
+          if (effectiveStep === 1) {
             setCurrentStep(2);
             return;
           }
@@ -132,12 +127,12 @@ const GameConfigForm = ({ onTooMuchPlayers }: { onTooMuchPlayers: (payload: TooM
             {t('sectionTitle')}
           </Typography>
           <Typography variant="body" textColor="secondary" className="text-center">
-            {currentStep === 1 ? t('stepSettingsSubtitle') : t('stepRolesSubtitle')}
+            {effectiveStep === 1 ? t('stepSettingsSubtitle') : t('stepRolesSubtitle')}
           </Typography>
         </div>
 
         <AnimatePresence mode="wait" initial={false}>
-          {currentStep === 1 ? (
+          {effectiveStep === 1 ? (
             <motion.div
               key="step-settings"
               className="flex flex-col gap-6"
@@ -239,7 +234,7 @@ const GameConfigForm = ({ onTooMuchPlayers }: { onTooMuchPlayers: (payload: TooM
                     onClick={() => setCurrentStep(1)}
                   />
                 </div>
-                <div className={currentStep === 2 ? 'flex-2' : 'w-full'}>
+                <div className={effectiveStep === 2 ? 'flex-2' : 'w-full'}>
                   <Button type={'submit'} variant="accent" label={t('submit')} full disabled={!isCompositionComplete} />
                 </div>
               </div>
