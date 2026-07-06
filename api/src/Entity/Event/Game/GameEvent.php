@@ -30,7 +30,6 @@ use Doctrine\ORM\Mapping\InheritanceType;
     'set_game_master' => SetGameMasterEvent::class,
     'seer_reveal' => SeerRevealEvent::class,
     'time_up' => TimeUpGameEvent::class,
-    'villager_setup' => VillagerSetupEvent::class,
     'vote' => VoteEvent::class,
     'werewolf_vote' => WerewolfVoteEvent::class,
     'witch_save' => WitchSaveEvent::class,

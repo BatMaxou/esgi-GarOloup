@@ -7,7 +7,7 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class Version20260629233005 extends AbstractMigration
+final class Version20260703143232 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -56,8 +56,7 @@ final class Version20260629233005 extends AbstractMigration
         $this->addSql('CREATE TABLE temp_user (username VARCHAR(255) NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, roles JSON NOT NULL, ip VARCHAR(255) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE time_up_game_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE user (username VARCHAR(255) NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, roles JSON NOT NULL, email VARCHAR(180) NOT NULL, password VARCHAR(255) NOT NULL, reset_token VARCHAR(255) DEFAULT NULL, type VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_IDENTIFIER_EMAIL (email), UNIQUE INDEX UNIQ_IDENTIFIER_USERNAME (username), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
-        $this->addSql('CREATE TABLE villager_role (friend_id VARCHAR(255) DEFAULT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
-        $this->addSql('CREATE TABLE villager_setup_event (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE villager_role (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE vote (number INT NOT NULL, resolved TINYINT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, game_id BINARY(16) NOT NULL, INDEX IDX_5A108564E48FD905 (game_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE vote_event (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE werewolf_role (target_player_id VARCHAR(36) DEFAULT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
@@ -114,7 +113,6 @@ final class Version20260629233005 extends AbstractMigration
         $this->addSql('ALTER TABLE set_game_master_event ADD CONSTRAINT FK_CD7A9ACEBF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE time_up_game_event ADD CONSTRAINT FK_56568D2BF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE villager_role ADD CONSTRAINT FK_F3B7ADE2BF396750 FOREIGN KEY (id) REFERENCES game_role (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE villager_setup_event ADD CONSTRAINT FK_CBD60EC5BF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE vote ADD CONSTRAINT FK_5A108564E48FD905 FOREIGN KEY (game_id) REFERENCES game (id)');
         $this->addSql('ALTER TABLE vote_event ADD CONSTRAINT FK_6AC7686CBF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE werewolf_role ADD CONSTRAINT FK_2A5ED8F1BF396750 FOREIGN KEY (id) REFERENCES game_role (id) ON DELETE CASCADE');
@@ -174,7 +172,6 @@ final class Version20260629233005 extends AbstractMigration
         $this->addSql('ALTER TABLE set_game_master_event DROP FOREIGN KEY FK_CD7A9ACEBF396750');
         $this->addSql('ALTER TABLE time_up_game_event DROP FOREIGN KEY FK_56568D2BF396750');
         $this->addSql('ALTER TABLE villager_role DROP FOREIGN KEY FK_F3B7ADE2BF396750');
-        $this->addSql('ALTER TABLE villager_setup_event DROP FOREIGN KEY FK_CBD60EC5BF396750');
         $this->addSql('ALTER TABLE vote DROP FOREIGN KEY FK_5A108564E48FD905');
         $this->addSql('ALTER TABLE vote_event DROP FOREIGN KEY FK_6AC7686CBF396750');
         $this->addSql('ALTER TABLE werewolf_role DROP FOREIGN KEY FK_2A5ED8F1BF396750');
@@ -225,7 +222,6 @@ final class Version20260629233005 extends AbstractMigration
         $this->addSql('DROP TABLE time_up_game_event');
         $this->addSql('DROP TABLE user');
         $this->addSql('DROP TABLE villager_role');
-        $this->addSql('DROP TABLE villager_setup_event');
         $this->addSql('DROP TABLE vote');
         $this->addSql('DROP TABLE vote_event');
         $this->addSql('DROP TABLE werewolf_role');
