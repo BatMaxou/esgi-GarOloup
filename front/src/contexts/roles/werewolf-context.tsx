@@ -28,6 +28,7 @@ export const WereWolfProvider = ({ children }: Props) => {
   const { mercureClient, isCredentialsInitialized } = useMercureClient();
   const { user } = useAuth();
   const t = useTranslations('contexts.roles.werewolf');
+
   useEffect(() => {
     if (team) {
       return;

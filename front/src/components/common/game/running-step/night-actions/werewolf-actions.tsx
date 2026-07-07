@@ -28,6 +28,8 @@ const WerewolfActions = () => {
         name: (gamePlayer.user?.username || gamePlayer.tempUser?.username) ?? '',
       })) ?? [];
 
+  const teammates = team?.members.filter((member) => member.id !== player?.id) ?? [];
+
   const isSpectator = game?.players?.some((currentPlayer) => currentPlayer.id === player?.id && currentPlayer.dead);
 
   const { handleSubmit, handleChange, values } = useFormik({
@@ -69,6 +71,21 @@ const WerewolfActions = () => {
       <Typography tag="p" variant="body">
         {t('roundDescription')}
       </Typography>
+      {teammates.length > 0 && (
+        <Card hoverable={false}>
+          <Typography tag="span" className="phase-icon">
+            {t('teamLabel')}
+          </Typography>
+          <div className="flex flex-row flex-wrap gap-x-6 gap-y-2">
+            {teammates.map((member) => (
+              <Typography key={member.id} variant="body" textColor="light" className="flex items-center gap-2">
+                <Icon name="werewolf" className="w-4 h-4 color-error" />
+                {member.username}
+              </Typography>
+            ))}
+          </div>
+        </Card>
+      )}
       <Card hoverable={false}>
         <Typography tag="span" className="phase-icon">
           {t('actionLabel')}

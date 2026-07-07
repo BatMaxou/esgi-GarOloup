@@ -46,6 +46,7 @@
             "werewolf": "Loup-Garou",
             "werewolfCamp": "Camp des Loups",
             "roundDescription": "Les loups ouvrent les yeux et désignent une victime ensemble. Choisissez votre cible pour cette nuit.",
+            "teamLabel": "Votre meute",
             "actionLabel": "Désigner une victime",
             "focused": "Ciblé",
             "submit": "Tuer la victime"

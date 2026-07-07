@@ -183,11 +183,7 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
   };
 
   const timeUp = async () => {
-    const response = await apiClient.game.timeUp();
-    if (response instanceof ApiClientError) {
-      toast.error(t('timeUpError'));
-      return;
-    }
+    await apiClient.game.timeUp();
   };
 
   return (

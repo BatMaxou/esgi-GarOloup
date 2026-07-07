@@ -24,21 +24,21 @@ const IngamePlayersSidebar = ({ players }: { players: Player[] }) => {
         type="button"
         aria-label={t('players')}
         className={cn(
-          'fixed bottom-4 left-4 z-50 flex cursor-pointer items-center justify-center rounded-full border border-primary/20 p-3 bg-dark/70 md:hidden'
+          'fixed bottom-4 left-4 z-50 flex cursor-pointer items-center justify-center rounded-full border border-primary/20 p-3 bg-dark/70 lg:hidden'
         )}
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <Icon name={isOpen ? 'x' : 'users'} className="h-5 w-5 text-primary" />
       </button>
       {isOpen && (
-        <div className="fixed inset-0 z-30 bg-black/50 md:hidden" onClick={() => setIsOpen(false)} aria-hidden="true" />
+        <div className="fixed inset-0 z-30 bg-black/50 lg:hidden" onClick={() => setIsOpen(false)} aria-hidden="true" />
       )}
       <aside
         className={cn(
           'flex h-full flex-col',
-          'max-md:fixed max-md:inset-y-0 max-md:left-0 max-md:z-40 max-md:w-72 max-md:max-w-[80vw] max-md:transition-transform max-md:duration-300',
-          isOpen ? 'max-md:translate-x-0' : 'max-md:-translate-x-full',
-          'md:w-1/6 md:shrink-0'
+          'max-lg:fixed max-lg:inset-y-0 max-lg:left-0 max-lg:z-40 max-lg:w-72 max-lg:max-w-[80vw] max-lg:transition-transform max-lg:duration-300',
+          isOpen ? 'max-lg:translate-x-0' : 'max-lg:-translate-x-full',
+          'lg:w-1/6 lg:shrink-0'
         )}
       >
         <Card

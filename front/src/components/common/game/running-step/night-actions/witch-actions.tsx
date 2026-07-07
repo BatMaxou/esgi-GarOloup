@@ -136,12 +136,12 @@ const WitchActions = () => {
           <Typography tag="p" variant="body">
             {t('roundDescription')}
           </Typography>
-          <div className="flex flex-row justify-center gap-2">
+          <div className="flex flex-col flex-wrap justify-center gap-2 sm:flex-row">
             {!killStep ? (
               <>
                 <Card
                   liftOnHover={false}
-                  className={`flex flex-col gap-2 items-center cursor-pointer ${actionType === 'save' ? 'border-success/40!' : 'm-0.5'}`}
+                  className={`flex max-lg:flex-1 flex-col gap-2 items-center cursor-pointer ${actionType === 'save' ? 'border-success/40!' : 'm-0.5'}`}
                   onClick={() => handleSelectActionType('save')}
                 >
                   <Icon name="heal" className="w-10 h-10 text-success/60" />
@@ -162,7 +162,7 @@ const WitchActions = () => {
                 </Card>
                 <Card
                   liftOnHover={false}
-                  className={`flex flex-col gap-2 items-center cursor-pointer ${actionType === 'poison' ? 'border-error/40! border-2' : 'm-0.5'}`}
+                  className={`flex max-lg:flex-1 flex-col gap-2 items-center cursor-pointer ${actionType === 'poison' ? 'border-error/40! border-2' : 'm-0.5'}`}
                   onClick={() => handleSelectActionType('poison')}
                 >
                   <Icon name="poison" className="w-10 h-10 text-error/60" />
