@@ -84,22 +84,18 @@ const GameClient = () => {
         break;
     }
 
-    if (player?.team === GameTeamEnum.WEREWOLF) {
-      content = <WereWolfProvider>{content}</WereWolfProvider>;
-    }
-
     if (isLoverRole(player?.role)) {
       content = <LoverProvider>{content}</LoverProvider>;
     }
 
     return content;
-  }, [isGameMaster, isHost, player?.role, player?.team]);
+  }, [isGameMaster, isHost, player?.role]);
 
   if (!game || !player) {
     return <>Loading...</>;
   }
 
-  return (
+  const content = (
     <main className="flex h-full w-full flex-row justify-between items-start">
       <IngamePlayersSidebar players={playersList || []} />
       <div className="px-8 py-8 w-full">
@@ -119,6 +115,12 @@ const GameClient = () => {
       </div>
     </main>
   );
+
+  if (player.team === GameTeamEnum.WEREWOLF) {
+    return <WereWolfProvider>{content}</WereWolfProvider>;
+  }
+
+  return content;
 };
 
 export default GameClient;

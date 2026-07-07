@@ -46,6 +46,7 @@
             "werewolf": "Werewolf",
             "werewolfCamp": "Werewolf team",
             "roundDescription": "The werewolves open their eyes and choose a victim together. Choose your target for tonight.",
+            "teamLabel": "Your pack",
             "actionLabel": "Choose a victim",
             "focused": "Focused",
             "submit": "Kill the victim"
