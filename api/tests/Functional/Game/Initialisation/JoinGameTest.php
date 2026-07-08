@@ -156,7 +156,7 @@ class JoinGameTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(404);
     }
 
-    public function test_temp_user_cant_join_game_if_username_already_taken_by_another_user(): void
+    public function test_temp_user_joining_is_renamed_when_username_already_taken_by_another_user(): void
     {
         $userBuilder = ThereIs::anUser()->withUsername('SLiipMan')->build();
         $tempUserBuilder = ThereIs::aTempUser()->withUsername('SLiipMan')->build();
@@ -168,7 +168,10 @@ class JoinGameTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(201);
 
         When::asTempUser($tempUserBuilder)->game()->join($gameBuilder->joinCode);
-        $this->assertResponseStatusCodeSame(409);
+        $this->assertResponseStatusCodeSame(201);
+
+        $this->assertEquals(3, $gameBuilder->getEntity()->getPlayers()->count());
+        $this->assertEquals('SLiipMan-2', $tempUserBuilder->getEntity()->getUsername());
     }
 
     public function test_user_joining_renames_conflicting_temp_user(): void
