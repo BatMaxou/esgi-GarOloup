@@ -6,6 +6,7 @@ import Icon from '@/components/ui/atoms/icon';
 import Typography from '@/components/ui/atoms/typography';
 import { useGame } from '@/contexts/game-context';
 import { usePlayer } from '@/contexts/player-context';
+import { AssassinProvider } from '@/contexts/roles/assassin-context';
 import { CupidonProvider } from '@/contexts/roles/cupidon-context';
 import { InfectFatherProvider } from '@/contexts/roles/infect-father-context';
 import { isLoverRole, LoverProvider } from '@/contexts/roles/lover-context';
@@ -81,6 +82,9 @@ const GameClient = () => {
         break;
       case GameRoleEnum.CUPIDON:
         content = <CupidonProvider>{content}</CupidonProvider>;
+        break;
+      case GameRoleEnum.ASSASSIN:
+        content = <AssassinProvider>{content}</AssassinProvider>;
         break;
     }
 

@@ -91,6 +91,10 @@ export type HunterRole = GameRole & {
 
 export type CupidonRole = GameRole;
 
+export type AssassinRole = GameRole & {
+  actedThisNight?: boolean;
+};
+
 export type LoverRole = GameRole & {
   partnerPlayerId?: string;
 };
@@ -111,6 +115,7 @@ export type Player = {
     | WildChildRole
     | InfectFatherRole
     | CupidonRole
+    | AssassinRole
     | LoverRole;
   team?: GameTeamEnum;
   tempUser?: TempUser;
