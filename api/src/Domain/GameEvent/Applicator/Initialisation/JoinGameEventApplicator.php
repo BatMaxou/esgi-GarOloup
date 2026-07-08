@@ -5,7 +5,6 @@ namespace App\Domain\GameEvent\Applicator\Initialisation;
 use App\Domain\GameEvent\Applicator\Trait\GameAwareTrait;
 use App\Domain\GameEvent\Applicator\Trait\UserAwareTrait;
 use App\Domain\GameEvent\Exception\AlreadyInAnotherGameException;
-use App\Domain\GameEvent\Exception\UsernameAlreadyTakenException;
 use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Domain\Spec\GameSpec;
 use App\Entity\Event\Game\GameEvent;
@@ -38,7 +37,7 @@ class JoinGameEventApplicator implements GameEventApplicatorInterface
 
         if ($user instanceof TempUser) {
             if (!$this->gameSpec->isUsernameAvailable($user, $game)) {
-                throw new UsernameAlreadyTakenException('This username is already taken');
+                $this->renameUntilAvailable($user, $game);
             }
         } else {
             foreach ($game->getPlayers() as $player) {
@@ -48,11 +47,7 @@ class JoinGameEventApplicator implements GameEventApplicatorInterface
                         throw new \LogicException('Player with same username of a valid user should be a temp user');
                     }
 
-                    $counter = 2;
-                    $alreadyTakenUsername = $tempUser->getUsername();
-                    do {
-                        $tempUser->setUsername(\sprintf('%s-%d', $alreadyTakenUsername, $counter++));
-                    } while (!$this->gameSpec->isUsernameAvailable($tempUser, $game));
+                    $this->renameUntilAvailable($tempUser, $game);
                 }
             }
         }
@@ -63,6 +58,15 @@ class JoinGameEventApplicator implements GameEventApplicatorInterface
         $this->em->persist($player);
 
         return $game;
+    }
+
+    private function renameUntilAvailable(TempUser $tempUser, Game $game): void
+    {
+        $counter = 2;
+        $baseUsername = $tempUser->getUsername();
+        do {
+            $tempUser->setUsername(\sprintf('%s-%d', $baseUsername, $counter++));
+        } while (!$this->gameSpec->isUsernameAvailable($tempUser, $game));
     }
 
     public function supports(GameEvent $gameEvent): bool
