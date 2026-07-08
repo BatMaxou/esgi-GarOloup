@@ -122,6 +122,17 @@ class RoleBuilder extends AbstractBuilder
             ->withMaxPerGame(1);
     }
 
+    public function assassin(): static
+    {
+        $this->type = GameRoleEnum::ASSASSIN;
+
+        return $this->withName('Assassin')
+            ->withDescription('Description de l\'Assassin')
+            ->withAbility('Éliminer un joueur chaque nuit sauf la première ; immunisé au vote des loups')
+            ->withTeam(GameTeamEnum::SOLO)
+            ->withMaxPerGame(1);
+    }
+
     public function withName(string $name): static
     {
         $this->name = $name;

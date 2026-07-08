@@ -6,6 +6,7 @@ use App\Entity\Game\Game;
 use App\Entity\Game\Period\Action\NightAction\MurderAction;
 use App\Entity\Game\Player;
 use App\Entity\Game\Role\InfectFatherRole;
+use App\Entity\Game\Role\Interface\NightKillImmuneInterface;
 use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Enum\Game\GameTeamEnum;
@@ -42,7 +43,12 @@ class InfectFatherSpec
             return false;
         }
 
-        return null !== $this->findWerewolfVictimId($game);
+        $victimId = $this->findWerewolfVictimId($game);
+        if (null === $victimId) {
+            return false;
+        }
+
+        return !$this->isVictimImmune($game, $victimId);
     }
 
     public function findWerewolfVictimId(Game $game): ?string
@@ -59,5 +65,18 @@ class InfectFatherSpec
         }
 
         return null;
+    }
+
+    private function isVictimImmune(Game $game, string $victimId): bool
+    {
+        foreach ($game->getPlayers() as $player) {
+            if ((string) $player->getId() === $victimId) {
+                $immuneRole = $player->getRoleAs(NightKillImmuneInterface::class);
+
+                return null !== $immuneRole && $immuneRole->isImmuneToNightMurder(GameRoleEnum::WEREWOLF);
+            }
+        }
+
+        return false;
     }
 }

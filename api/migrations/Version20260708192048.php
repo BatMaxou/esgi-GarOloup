@@ -7,7 +7,7 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class Version20260706195708 extends AbstractMigration
+final class Version20260708192048 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -17,6 +17,8 @@ final class Version20260706195708 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $this->addSql('CREATE TABLE admin (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE assassin_kill_event (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE assassin_role (acted_this_night TINYINT NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE ballot (id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, vote_id BINARY(16) NOT NULL, player_id BINARY(16) NOT NULL, target_id BINARY(16) NOT NULL, INDEX IDX_D59CE9BD72DCDAFC (vote_id), INDEX IDX_D59CE9BD99E6F5DF (player_id), INDEX IDX_D59CE9BD158E0B66 (target_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE close_game_invitation_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE composition (id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
@@ -71,6 +73,8 @@ final class Version20260706195708 extends AbstractMigration
         $this->addSql('CREATE TABLE witch_save_event (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE workflow (steps JSON NOT NULL, current INT NOT NULL, current_turn JSON NOT NULL, completed TINYINT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('ALTER TABLE admin ADD CONSTRAINT FK_880E0D76BF396750 FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE assassin_kill_event ADD CONSTRAINT FK_D5226F4CBF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE assassin_role ADD CONSTRAINT FK_DD6F4EF2BF396750 FOREIGN KEY (id) REFERENCES game_role (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE ballot ADD CONSTRAINT FK_D59CE9BD72DCDAFC FOREIGN KEY (vote_id) REFERENCES vote (id)');
         $this->addSql('ALTER TABLE ballot ADD CONSTRAINT FK_D59CE9BD99E6F5DF FOREIGN KEY (player_id) REFERENCES player (id)');
         $this->addSql('ALTER TABLE ballot ADD CONSTRAINT FK_D59CE9BD158E0B66 FOREIGN KEY (target_id) REFERENCES player (id)');
@@ -134,6 +138,8 @@ final class Version20260706195708 extends AbstractMigration
     public function down(Schema $schema): void
     {
         $this->addSql('ALTER TABLE admin DROP FOREIGN KEY FK_880E0D76BF396750');
+        $this->addSql('ALTER TABLE assassin_kill_event DROP FOREIGN KEY FK_D5226F4CBF396750');
+        $this->addSql('ALTER TABLE assassin_role DROP FOREIGN KEY FK_DD6F4EF2BF396750');
         $this->addSql('ALTER TABLE ballot DROP FOREIGN KEY FK_D59CE9BD72DCDAFC');
         $this->addSql('ALTER TABLE ballot DROP FOREIGN KEY FK_D59CE9BD99E6F5DF');
         $this->addSql('ALTER TABLE ballot DROP FOREIGN KEY FK_D59CE9BD158E0B66');
@@ -193,6 +199,8 @@ final class Version20260706195708 extends AbstractMigration
         $this->addSql('ALTER TABLE witch_role DROP FOREIGN KEY FK_BD528821BF396750');
         $this->addSql('ALTER TABLE witch_save_event DROP FOREIGN KEY FK_9A09FCDEBF396750');
         $this->addSql('DROP TABLE admin');
+        $this->addSql('DROP TABLE assassin_kill_event');
+        $this->addSql('DROP TABLE assassin_role');
         $this->addSql('DROP TABLE ballot');
         $this->addSql('DROP TABLE close_game_invitation_event');
         $this->addSql('DROP TABLE composition');

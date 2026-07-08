@@ -12,6 +12,7 @@ enum GameRoleEnum: string
     case WILD_CHILD = 'wild_child';
     case INFECT_FATHER = 'infect_father';
     case CUPIDON = 'cupidon';
+    case ASSASSIN = 'assassin';
 
     // TODO: To be implemented
     case LOOKALIKE = 'lookalike';
@@ -32,6 +33,7 @@ enum GameRoleEnum: string
             self::WEREWOLF => 4,
             self::INFECT_FATHER => 5,
             self::WITCH => 6,
+            self::ASSASSIN => 7,
         };
     }
 
@@ -47,7 +49,8 @@ enum GameRoleEnum: string
             self::WITCH,
             self::WILD_CHILD,
             self::CUPIDON,
-            self::INFECT_FATHER => null,
+            self::INFECT_FATHER,
+            self::ASSASSIN => null,
             self::DICTATOR => 1,
         };
     }
@@ -66,6 +69,7 @@ enum GameRoleEnum: string
             self::DICTATOR,
             self::CUPIDON,
             self::WILD_CHILD => GameTeamEnum::VILLAGE,
+            self::ASSASSIN => GameTeamEnum::SOLO,
         };
     }
 }
