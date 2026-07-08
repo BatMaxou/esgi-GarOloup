@@ -15,6 +15,7 @@ export const ROLE_SLUG_BY_LOCALE: Record<GameRoleEnum, Record<RoleSlugLocale, st
   [GameRoleEnum.HUNTER]: { fr: 'chasseur', en: 'hunter' },
   [GameRoleEnum.INFECT_FATHER]: { fr: 'infect-pere', en: 'infect-father' },
   [GameRoleEnum.CUPIDON]: { fr: 'cupidon', en: 'cupidon' },
+  [GameRoleEnum.ASSASSIN]: { fr: 'assassin', en: 'assassin' },
 };
 
 /**

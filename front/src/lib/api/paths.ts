@@ -39,6 +39,9 @@ export const apiPaths = {
   cupidon: {
     setup: '/game/cupidon/setup',
   },
+  assassin: {
+    kill: '/game/assassin/kill',
+  },
   player: {
     getCurrent: '/game/player',
     leave: '/game/player',
