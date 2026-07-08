@@ -2,6 +2,7 @@
 
 namespace App\Domain\Spec;
 
+use App\Entity\Game\Role\AssassinRole;
 use App\Entity\Game\Role\CupidonRole;
 use App\Entity\Game\Role\GameRole;
 use App\Entity\Game\Role\HunterRole;
@@ -32,6 +33,7 @@ class GameRoleSpec
             GameRoleEnum::HUNTER => new HunterRole(),
             GameRoleEnum::INFECT_FATHER => new InfectFatherRole(),
             GameRoleEnum::CUPIDON => new CupidonRole(),
+            GameRoleEnum::ASSASSIN => new AssassinRole(),
             default => null,
         })?->setRole($role);
     }

@@ -24,6 +24,7 @@ use Doctrine\ORM\Mapping\InheritanceType;
     GameRoleEnum::HUNTER->value => HunterRole::class,
     GameRoleEnum::INFECT_FATHER->value => InfectFatherRole::class,
     GameRoleEnum::CUPIDON->value => CupidonRole::class,
+    GameRoleEnum::ASSASSIN->value => AssassinRole::class,
     'infected' => InfectedRole::class,
     'lover' => LoverRole::class,
 ])]

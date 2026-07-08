@@ -28,6 +28,8 @@ services:
             tags: ['win_condition.checker']
         App\Domain\Interceptor\Interface\InterceptorInterface:
             tags: ['game.interceptor']
+        App\Domain\Workflow\TurnRule\Interface\TurnRuleInterface:
+            tags: ['workflow.turn_rule']
 
     App\Fixtures\:
         resource: '../fixtures'
@@ -54,3 +56,6 @@ services:
         arguments:
             $interceptors: !tagged_iterator game.interceptor
 
+    App\Domain\Workflow\TurnRule\TurnValidator:
+        arguments:
+            $rules: !tagged_iterator workflow.turn_rule

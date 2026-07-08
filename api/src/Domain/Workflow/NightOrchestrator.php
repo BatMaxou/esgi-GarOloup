@@ -4,10 +4,10 @@ namespace App\Domain\Workflow;
 
 use App\Domain\Workflow\Interface\NightResettableInterface;
 use App\Domain\Workflow\Interface\PeriodOrchestratorInterface;
+use App\Domain\Workflow\TurnRule\TurnValidator;
 use App\Entity\Game\Game;
 use App\Entity\Game\Period\Night;
 use App\Entity\Game\Workflow;
-use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
 use Symfony\Component\Clock\ClockInterface;
 
@@ -16,6 +16,7 @@ class NightOrchestrator implements PeriodOrchestratorInterface
     public function __construct(
         private readonly ClockInterface $clock,
         private readonly int $nightStepDuration,
+        private readonly TurnValidator $turnValidator,
     ) {
     }
 
@@ -74,20 +75,16 @@ class NightOrchestrator implements PeriodOrchestratorInterface
 
     private function checkTurnValidity(Game $game, Workflow $workflow): void
     {
-        $pass = true;
+        $shouldPlay = false;
         foreach ($workflow->getCurrentTurn() as $role) {
-            if (GameRoleEnum::WEREWOLF === $role) {
-                $pass = false;
+            if ($this->turnValidator->shouldPlay($game, $role)) {
+                $shouldPlay = true;
 
-                continue;
-            }
-
-            if ($player = $game->getPlayer($role)) {
-                $pass = $pass && $player->isDead();
+                break;
             }
         }
 
-        if ($pass) {
+        if (!$shouldPlay) {
             $this->advance($game);
         }
     }

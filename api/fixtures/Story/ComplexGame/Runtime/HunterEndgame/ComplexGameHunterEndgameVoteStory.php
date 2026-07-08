@@ -31,7 +31,6 @@ class ComplexGameHunterEndgameVoteStory extends ComplexGameWerewolfWinNight4Stor
         $this->werewolfKill($gameBuilder, $witchPlayerBuilder);
 
         $this->nightOrchestrator->advance($game);
-        $this->nightOrchestrator->advance($game);
         $this->dayOrchestrator->start($game);
 
         $this->dayOrchestrator->resolve($game);

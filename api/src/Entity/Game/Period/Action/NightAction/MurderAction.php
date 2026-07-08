@@ -6,6 +6,7 @@ use App\Entity\Game\Game;
 use App\Entity\Game\Period\Action\NightAction;
 use App\Entity\Game\Period\Interface\PeriodInterface;
 use App\Entity\Game\Period\Night;
+use App\Entity\Game\Role\Interface\NightKillImmuneInterface;
 use App\Enum\Game\GameActionTypeEnum;
 use App\Enum\Game\GameRoleEnum;
 use App\Repository\Game\Period\Action\NightAction\MurderActionRepository;
@@ -32,6 +33,12 @@ class MurderAction extends NightAction
     {
         foreach ($game->getPlayers() as $player) {
             if ((string) $player->getId() === $this->targetPlayerId) {
+                $immuneRole = $player->getRoleAs(NightKillImmuneInterface::class);
+                $source = $this->getSource();
+                if (null !== $immuneRole && $source instanceof GameRoleEnum && $immuneRole->isImmuneToNightMurder($source)) {
+                    return;
+                }
+
                 $player->setDead(true);
 
                 return;
