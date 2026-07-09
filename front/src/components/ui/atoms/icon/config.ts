@@ -15,6 +15,7 @@ import Seer from '@/assets/icons/seer.svg';
 import TargetEye from '@/assets/icons/target-eye.svg';
 import HelpCircle from '@/assets/icons/help-circle.svg';
 import Cancel from '@/assets/icons/cancel.svg';
+import WildChild from '@/assets/icons/wild-child.svg';
 
 export type IconName = keyof typeof raw & string;
 export type IconType = LucideIcon | ComponentType<SVGProps<SVGSVGElement>>;
@@ -43,6 +44,7 @@ const raw = {
   questionMark: HelpCircle,
   cancel: Cancel,
   users: Users,
+  wildChild: WildChild,
 };
 
 export const icons: Icons = raw;

@@ -14,6 +14,8 @@ import WaitingNightActions from './running-step/night-actions/waiting-night-acti
 import VoteDisplay from './running-step/vote/vote-display';
 import HunterActions from './running-step/interrupt/hunter-actions';
 import WaitingInterruptActions from './running-step/interrupt/waiting-interrupt-actions';
+import WildChildActions from './running-step/setup/wild-child-actions';
+import WaitingSetupActions from './running-step/setup/waiting-setup-actions';
 
 const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameMaster: boolean }) => {
   const { game } = useGame();
@@ -33,6 +35,14 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
   }
 
   if (globalStep === GameGlobalStepEnum.RUNNING) {
+    if(runningStep === GameRuntimeStepEnum.SETUP) {
+      switch(true) {
+        case player?.role?.type === GameRoleEnum.WILD_CHILD:
+          return <WildChildActions />;
+        default:
+          return <WaitingSetupActions/>;
+      }
+    }
     if (runningStep === GameRuntimeStepEnum.NIGHT) {
       if (
         player.dead ||
