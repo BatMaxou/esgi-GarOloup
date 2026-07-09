@@ -102,7 +102,7 @@ const GameClient = () => {
   const content = (
     <main className="flex h-full w-full flex-row justify-between items-start">
       <IngamePlayersSidebar players={playersList || []} />
-      <div className="px-8 py-8 w-full">
+      <div className="px-8 py-8 w-full h-full">
         {renderGameDisplay}
         {showSpectatorOverlay && (
           <>
