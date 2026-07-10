@@ -35,12 +35,12 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
   }
 
   if (globalStep === GameGlobalStepEnum.RUNNING) {
-    if(runningStep === GameRuntimeStepEnum.SETUP) {
-      switch(true) {
+    if (runningStep === GameRuntimeStepEnum.SETUP) {
+      switch (true) {
         case player?.role?.type === GameRoleEnum.WILD_CHILD:
           return <WildChildActions />;
         default:
-          return <WaitingSetupActions/>;
+          return <WaitingSetupActions />;
       }
     }
     if (runningStep === GameRuntimeStepEnum.NIGHT) {
