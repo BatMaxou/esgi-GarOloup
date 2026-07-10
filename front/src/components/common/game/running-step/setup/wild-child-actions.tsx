@@ -7,19 +7,11 @@ import { usePlayer } from '@/contexts/player-context';
 import { useGame } from '@/contexts/game-context';
 import { useWildChild } from '@/contexts/roles/wild-child-context';
 import Icon from '@/components/ui/atoms/icon';
-import { IconName } from '@/components/ui/atoms/icon/config';
 import Typography from '@/components/ui/atoms/typography';
 import Card from '@/components/ui/molecules/card';
 import Button from '@/components/ui/molecules/button';
-import { GameRoleEnum } from '@/utils/enums';
 import { ApiClientError } from '@/lib/api/ApiClientError';
-import type { Player, SeerRole } from '@/utils/types';
-
-const roleIconMap: Partial<Record<GameRoleEnum, IconName>> = {
-  [GameRoleEnum.WEREWOLF]: 'werewolf',
-  [GameRoleEnum.WITCH]: 'witch',
-  [GameRoleEnum.SEER]: 'seer',
-};
+import type { Player } from '@/utils/types';
 
 const getUsername = (gamePlayer?: Player) =>
   (gamePlayer?.user?.username || gamePlayer?.tempUser?.username || gamePlayer?.username) ?? '';
@@ -40,19 +32,6 @@ const WildChildActions = () => {
     const modelPlayer = game.players.find((gamePlayer) => gamePlayer.id === modelPlayerId);
     return modelPlayer ? getUsername(modelPlayer) : null;
   });
-
-  const myRole = player?.role;
-  const observedRoles = useMemo(
-    () => (myRole?.type === GameRoleEnum.SEER ? ((myRole as SeerRole).observedRoles ?? {}) : {}),
-    [myRole]
-  );
-
-  const getKnownRole = (playerId: string): GameRoleEnum | null => {
-    if (player && playerId === player.id) {
-      return myRole?.type ?? null;
-    }
-    return observedRoles[playerId] ?? null;
-  };
 
   const selectablePlayers = useMemo(
     () => game?.players?.filter((gamePlayer) => gamePlayer.id !== player?.id) ?? [],
@@ -125,8 +104,6 @@ const WildChildActions = () => {
 
       <div className="grid grid-cols-3 auto-rows-min gap-3 w-full flex-1 min-h-0 overflow-y-auto scrollbar">
         {selectablePlayers.map((gamePlayer) => {
-          const knownRole = getKnownRole(gamePlayer.id);
-          const iconName: IconName = (knownRole && roleIconMap[knownRole]) || 'questionMark';
           const isTarget = targetId === gamePlayer.id;
 
           return (
@@ -145,7 +122,6 @@ const WildChildActions = () => {
                 ${submitting ? 'opacity-60 pointer-events-none' : ''}
               `}
             >
-              <Icon name={iconName} className="w-8 h-8 text-primary/70" />
               <Typography variant="body" textColor="light" center>
                 {getUsername(gamePlayer)}
               </Typography>
