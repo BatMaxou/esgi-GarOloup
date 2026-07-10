@@ -10,10 +10,7 @@ import Button from '@/components/ui/molecules/button';
 import { useWitch } from '@/contexts/roles/witch-context';
 import { useState } from 'react';
 import Tag from '@/components/ui/molecules/tag';
-import {
-  getLastUserKilledDuringNight,
-  getLastUsernameUserKilledDuringNight,
-} from '@/utils/game';
+import { getLastUserKilledDuringNight, getLastUsernameUserKilledDuringNight } from '@/utils/game';
 import { ArrowLeftIcon } from 'lucide-react';
 
 const WitchActions = () => {
