@@ -11,32 +11,21 @@ import { useWitch } from '@/contexts/roles/witch-context';
 import { useState } from 'react';
 import Tag from '@/components/ui/molecules/tag';
 import {
-  getHealUserDuringThisNight,
-  getHealUsernameUserDuringThisNight,
   getLastUserKilledDuringNight,
   getLastUsernameUserKilledDuringNight,
 } from '@/utils/game';
 import { ArrowLeftIcon } from 'lucide-react';
-import { ApiClientError } from '@/lib/api/ApiClientError';
-import { useApiClient } from '@/contexts/api-context';
 
 const WitchActions = () => {
   const { player } = usePlayer();
   const { game } = useGame();
-  const { apiClient } = useApiClient();
   const { healPotionAvailable, poisonPotionAvailable, save, poison } = useWitch();
   const t = useTranslations('components.common.game.nightActions.witchActions');
-  const lastHealedUser = game ? getHealUserDuringThisNight(game) : null;
-  const lastUsernameHealed = game ? getHealUsernameUserDuringThisNight(game, game?.players ?? []) : null;
   const lastUserKilled = game ? getLastUserKilledDuringNight(game) : null;
   const lastUsernameUserKilled = game ? getLastUsernameUserKilledDuringNight(game, game?.players ?? []) : null;
   const [actionType, setActionType] = useState<'save' | 'poison' | null>(null);
   const [killStep, setKillStep] = useState(false);
   const [poisonTargetId, setPoisonTargetId] = useState<string | null>(null);
-  const [actionEnded, setActionEnded] = useState(lastHealedUser ? true : false);
-  const [submittedActionType, setSubmittedActionType] = useState<'save' | 'poison' | null>(null);
-  const [submittedTargetName, setSubmittedTargetName] = useState<string | null>(null);
-  const [timeUpLoading, setTimeUpLoading] = useState(false);
 
   const playerAliveList =
     game?.players
@@ -52,27 +41,10 @@ const WitchActions = () => {
       targetId: '',
     },
     onSubmit: async (values) => {
-      let response;
       if (values.type === 'save') {
-        response = await save(values.targetId);
+        await save(values.targetId);
       } else if (values.type === 'poison') {
-        response = await poison(values.targetId);
-      }
-
-      if (!(response instanceof ApiClientError)) {
-        if (values.type === 'save') {
-          setSubmittedActionType('save');
-          setSubmittedTargetName(lastUsernameHealed ?? null);
-        }
-
-        if (values.type === 'poison') {
-          setSubmittedActionType('poison');
-          setSubmittedTargetName(
-            game && lastUsernameUserKilled ? getHealUsernameUserDuringThisNight(game, game?.players ?? []) : null
-          );
-        }
-
-        setActionEnded(true);
+        await poison(values.targetId);
       }
     },
   });
@@ -105,17 +77,6 @@ const WitchActions = () => {
       return;
     }
     setPoisonTargetId(playerId);
-  };
-
-  const handleTimeUp = async () => {
-    setTimeUpLoading(true);
-    const response = await apiClient.game.timeUp();
-    if (response instanceof ApiClientError) {
-      setTimeUpLoading(false);
-      return;
-    }
-
-    setTimeUpLoading(false);
   };
 
   return (
