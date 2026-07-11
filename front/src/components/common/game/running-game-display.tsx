@@ -14,6 +14,7 @@ import WaitingNightActions from './running-step/night-actions/waiting-night-acti
 import VoteDisplay from './running-step/vote/vote-display';
 import HunterActions from './running-step/interrupt/hunter-actions';
 import WaitingInterruptActions from './running-step/interrupt/waiting-interrupt-actions';
+import AssassinActions from './running-step/night-actions/assassin-action';
 
 const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameMaster: boolean }) => {
   const { game } = useGame();
@@ -62,6 +63,14 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
             <>
               <UserTurnAnimation animateOnce />
               <SeerActions />
+            </>
+          );
+        case player?.role?.type === GameRoleEnum.ASSASSIN &&
+          game.nightWorkflow?.currentTurn?.assassin === GameRoleEnum.ASSASSIN:
+          return (
+            <>
+              <UserTurnAnimation animateOnce />
+              <AssassinActions />
             </>
           );
         default:
