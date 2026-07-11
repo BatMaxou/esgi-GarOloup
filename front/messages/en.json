@@ -137,6 +137,14 @@
             "submit": "Confirm",
             "actionEnded": "Your choice has been saved.",
             "modelChosen": "You chose {username} as your model."
+          },
+          "cupidonActions": {
+            "alreadyShotTitle": "You have shot both arrows.",
+            "alreadyShotSubtitle": "A new couple has been formed.",
+            "cupidon": "Cupidon",
+            "cupidonCamp": "Villager team",
+            "roundDescription": "Choose two players to form a couple",
+            "submit": "Shoot your arrows"
           }
         }
       },
@@ -574,6 +582,11 @@
               "discussion": "Debate",
               "actions": "Action"
             }
+          }
+        },
+        "items": {
+          "playerSidebarItem": {
+            "you": "You"
           }
         }
       }
