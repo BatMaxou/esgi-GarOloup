@@ -527,6 +527,15 @@
         "gameClient": {
           "spectator": "Spectator"
         }
+      },
+      "notFound": {
+        "eyebrow": "Error 404",
+        "title": "You got lost in the night…",
+        "description": "The trail you were following leads nowhere. Turn back before the pack finds you.",
+        "actions": {
+          "home": "Back to the village",
+          "join": "Join a game"
+        }
       }
     },
     "ui": {

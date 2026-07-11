@@ -537,6 +537,15 @@
         "gameClient": {
           "spectator": "Spectateur"
         }
+      },
+      "notFound": {
+        "eyebrow": "Erreur 404",
+        "title": "Vous vous êtes perdu dans la nuit…",
+        "description": "Le sentier que vous suivez ne mène plus nulle part. Rebroussez chemin avant que la meute ne vous retrouve.",
+        "actions": {
+          "home": "Retour au village",
+          "join": "Rejoindre une partie"
+        }
       }
     },
     "ui": {
