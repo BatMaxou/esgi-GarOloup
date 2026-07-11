@@ -2,6 +2,7 @@
 
 namespace App\Tests\Functional\Game\Runtime;
 
+use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Enum\Game\GameTeamEnum;
 use App\Fixtures\Story\ComplexGame\Runtime\Assassin\ComplexGameAssassinWinCoupleStory;
@@ -46,6 +47,7 @@ class AssassinVictoryTest extends GarOloupApiTestCase
         $this->assertTrue($lastVillagerPlayerBuilder->getEntity()->isDead());
         $this->assertFalse($assassinPlayerBuilder->getEntity()->isDead());
         $this->assertSame(GameTeamEnum::SOLO, $game->getWinningTeam());
+        $this->assertSame(GameRoleEnum::ASSASSIN, $game->getWinningRole());
         $this->assertSame(GameRuntimeStepEnum::FINISH, $game->getRuntimeStep());
     }
 

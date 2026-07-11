@@ -5,6 +5,7 @@ namespace App\Entity\Game\Period\Action\NightAction;
 use App\Entity\Game\Game;
 use App\Entity\Game\Period\Action\NightAction;
 use App\Entity\Game\Period\Interface\PeriodInterface;
+use App\Entity\Game\Period\Interface\TargetableActionInterface;
 use App\Entity\Game\Period\Night;
 use App\Enum\Game\GameActionTypeEnum;
 use App\Enum\Game\GameRoleEnum;
@@ -12,7 +13,7 @@ use App\Repository\Game\Period\Action\NightAction\InfectActionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: InfectActionRepository::class)]
-class InfectAction extends NightAction
+class InfectAction extends NightAction implements TargetableActionInterface
 {
     #[ORM\Column(length: 36)]
     private string $targetPlayerId;

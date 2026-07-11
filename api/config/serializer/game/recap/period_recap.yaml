@@ -1,0 +1,17 @@
+App\Api\Model\Recap\PeriodRecap:
+    attributes:
+        type:
+            groups:
+                - recap:read
+        number:
+            groups:
+                - recap:read
+        actions:
+            groups:
+                - recap:read
+        ballots:
+            groups:
+                - recap:read
+        eliminatedPlayerId:
+            groups:
+                - recap:read

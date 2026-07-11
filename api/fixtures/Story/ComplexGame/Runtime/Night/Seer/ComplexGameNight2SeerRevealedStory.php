@@ -2,6 +2,7 @@
 
 namespace App\Fixtures\Story\ComplexGame\Runtime\Night\Seer;
 
+use App\Entity\Game\Period\Action\NightAction\RevealAction;
 use App\Entity\Game\Role\SeerRole;
 use App\Fixtures\Story\ComplexGame\Runtime\Vote\ComplexGameVote1ResolvedStory;
 use App\Tests\Helper\Builder\Game\GameBuilder;
@@ -26,6 +27,9 @@ class ComplexGameNight2SeerRevealedStory extends ComplexGameVote1ResolvedStory
         \assert($werewolf2PlayerBuilder instanceof PlayerBuilder);
 
         $seerRole->observe($werewolf2PlayerBuilder->getEntity());
+
+        $night = $game->getCurrentNight() ?? throw new \LogicException('No active night to register the reveal');
+        $night->addAction(new RevealAction($night, (string) $werewolf2PlayerBuilder->getEntity()->getId()));
 
         $this->nightOrchestrator->advance($game);
 

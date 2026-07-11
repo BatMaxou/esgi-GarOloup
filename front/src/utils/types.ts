@@ -204,6 +204,47 @@ export type MercureToken = {
   token?: string;
 };
 
+// ------------------ Recap ------------------
+
+export type PlayerRecap = {
+  playerId: string;
+  userId: string;
+  username: string;
+  role?: GameRoleEnum;
+  team?: GameTeamEnum;
+  isInfected: boolean;
+  isInCouple: boolean;
+  isDead: boolean;
+};
+
+export type ActionRecap = {
+  actionType: string;
+  source?: string;
+  targetPlayerId?: string;
+};
+
+export type BallotRecap = {
+  playerId: string;
+  targetPlayerId: string;
+};
+
+export type PeriodRecap = {
+  type: GameRuntimeStepEnum;
+  number: number;
+  actions: ActionRecap[];
+  ballots: BallotRecap[];
+  eliminatedPlayerId?: string;
+};
+
+export type Recap = {
+  id: string;
+  gameId: string;
+  winningTeam: GameTeamEnum;
+  winningRole?: GameRoleEnum;
+  players: PlayerRecap[];
+  periods: PeriodRecap[];
+};
+
 // ------------------ Model ------------------
 
 export type Homepage = {

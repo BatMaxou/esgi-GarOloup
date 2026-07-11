@@ -31,9 +31,10 @@ class VoteResolver
     {
         $vote = $game->getCurrentVote() ?? throw new \LogicException('No active vote to resolve');
 
-        $target = $this->resolveTarget($vote) ?? $this->getRandomAlivePlayer($game);
+        $target = $this->resolveTarget($vote);
         $target?->setDead(true);
 
+        $vote->setEliminatedPlayer($target);
         $vote->setResolved(true);
 
         return $game;
@@ -62,21 +63,5 @@ class VoteResolver
         $topTargets = \array_keys(\array_filter($tally, fn (int $count) => $count === $maxVotes));
 
         return $targets[$topTargets[\array_rand($topTargets)]];
-    }
-
-    private function getRandomAlivePlayer(Game $game): ?Player
-    {
-        $candidates = [];
-        foreach ($game->getPlayers() as $player) {
-            if (!$player->isDead()) {
-                $candidates[] = $player;
-            }
-        }
-
-        if (empty($candidates)) {
-            return null;
-        }
-
-        return $candidates[\array_rand($candidates)];
     }
 }

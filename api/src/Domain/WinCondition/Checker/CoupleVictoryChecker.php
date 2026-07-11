@@ -4,6 +4,7 @@ namespace App\Domain\WinCondition\Checker;
 
 use App\Domain\WinCondition\Interface\WinConditionCheckerInterface;
 use App\Domain\WinCondition\Trait\AliveTeamCountTrait;
+use App\Domain\WinCondition\WinResult;
 use App\Entity\Game\Game;
 use App\Enum\Game\GameTeamEnum;
 
@@ -24,9 +25,9 @@ class CoupleVictoryChecker implements WinConditionCheckerInterface
             && 0 === $this->countAlive($game, GameTeamEnum::SOLO);
     }
 
-    public function getWinningTeam(): GameTeamEnum
+    public function getWinResult(): WinResult
     {
-        return GameTeamEnum::COUPLE;
+        return new WinResult(GameTeamEnum::COUPLE);
     }
 
     public static function getPriority(): int

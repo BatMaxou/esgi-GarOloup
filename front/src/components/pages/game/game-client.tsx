@@ -17,12 +17,21 @@ import { WitchProvider } from '@/contexts/roles/witch-context';
 import { GameGlobalStepEnum, GameRoleEnum, GameRuntimeStepEnum, GameTeamEnum } from '@/utils/enums';
 import type { Player } from '@/utils/types';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
+import { useRouter } from '@/i18n/navigation';
+import { paths } from '@/utils/paths';
 
 const GameClient = () => {
   const { game } = useGame();
   const { player } = usePlayer();
   const t = useTranslations('components.pages.game.gameClient');
+  const router = useRouter();
+
+  useEffect(() => {
+    if (game?.globalStep === GameGlobalStepEnum.FINISH && game?.id) {
+      router.push({ pathname: paths.recap, params: { gameId: game.id } });
+    }
+  }, [game?.globalStep, game?.id, router]);
   const isPlayerSpectator = game?.players?.some(
     (currentPlayer) => currentPlayer.id === player?.id && currentPlayer.dead
   );

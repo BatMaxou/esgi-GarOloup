@@ -74,4 +74,7 @@ export const apiPaths = {
     team: '/game/werewolf/team',
     vote: '/game/werewolf/vote',
   },
+  recap: {
+    getByGame: (gameId: string) => `/games/${gameId}/recap`,
+  },
 };

@@ -36,4 +36,8 @@ export const pathnames = {
     fr: '/lobby',
     en: '/lobby',
   },
+  '/[gameId]/recap': {
+    fr: '/[gameId]/recap',
+    en: '/[gameId]/recap',
+  },
 };

@@ -1,0 +1,26 @@
+App\Api\Model\Recap\PlayerRecap:
+    attributes:
+        playerId:
+            groups:
+                - recap:read
+        userId:
+            groups:
+                - recap:read
+        username:
+            groups:
+                - recap:read
+        role:
+            groups:
+                - recap:read
+        team:
+            groups:
+                - recap:read
+        isInfected:
+            groups:
+                - recap:read
+        isInCouple:
+            groups:
+                - recap:read
+        isDead:
+            groups:
+                - recap:read

@@ -2,8 +2,8 @@
 
 namespace App\Domain\WinCondition\Interface;
 
+use App\Domain\WinCondition\WinResult;
 use App\Entity\Game\Game;
-use App\Enum\Game\GameTeamEnum;
 
 interface WinConditionCheckerInterface
 {
@@ -15,7 +15,7 @@ interface WinConditionCheckerInterface
 
     public function isMet(Game $game): bool;
 
-    public function getWinningTeam(): GameTeamEnum;
+    public function getWinResult(): WinResult;
 
     public static function getPriority(): int;
 }

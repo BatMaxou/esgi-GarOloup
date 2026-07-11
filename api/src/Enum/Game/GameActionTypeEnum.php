@@ -7,4 +7,5 @@ enum GameActionTypeEnum: string
     case MURDER = 'murder';
     case SAVE = 'save';
     case INFECTION = 'infection';
+    case REVEAL = 'reveal';
 }

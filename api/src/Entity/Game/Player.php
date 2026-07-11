@@ -62,7 +62,7 @@ class Player implements TopicRelatedObject
     #[ORM\ManyToOne(inversedBy: 'players')]
     private ?Game $game = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(cascade: ['remove'])]
     private ?GameRole $role = null;
 
     #[ORM\Column(enumType: GameTeamEnum::class, nullable: true)]

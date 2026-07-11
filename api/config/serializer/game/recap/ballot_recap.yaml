@@ -1,0 +1,8 @@
+App\Api\Model\Recap\BallotRecap:
+    attributes:
+        playerId:
+            groups:
+                - recap:read
+        targetPlayerId:
+            groups:
+                - recap:read

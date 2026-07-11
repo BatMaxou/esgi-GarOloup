@@ -4,7 +4,6 @@ namespace App\Domain\WinCondition;
 
 use App\Domain\WinCondition\Interface\WinConditionCheckerInterface;
 use App\Entity\Game\Game;
-use App\Enum\Game\GameTeamEnum;
 
 class WinDetector
 {
@@ -21,11 +20,11 @@ class WinDetector
         );
     }
 
-    public function detect(Game $game): ?GameTeamEnum
+    public function detect(Game $game): ?WinResult
     {
         foreach ($this->checkers as $checker) {
             if ($checker->supports($game) && $checker->isMet($game)) {
-                return $checker->getWinningTeam();
+                return $checker->getWinResult();
             }
         }
 

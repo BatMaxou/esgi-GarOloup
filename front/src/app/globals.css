@@ -16,6 +16,26 @@
   --color-neutral-800: #2b2e44;
   --color-neutral-900: #1a1c2e;
 
+  --color-green-500: #32ba55;
+  --color-green-400: #c9f3d3;
+
+  --color-red-500: #d33e36;
+  --color-red-400: #fff3f3;
+
+  --color-yellow-500: #eca72c;
+  --color-yellow-400: #f5e6a6;
+
+  --color-blue-500: #007aff;
+  --color-blue-400: #c3e0ff;
+
+  --color-pink-500: #ff99dd;
+  --color-pink-400: #ffe6f0;
+
+  --color-purple-700: #4f4c70;
+  --color-purple-600: #9e9bbf;
+  --color-purple-500: #9f9ad6;
+  --color-purple-400: #c8c5ed;
+
   --color-light: var(--color-neutral-100);
   --color-dark: var(--color-neutral-900);
 
@@ -23,20 +43,23 @@
   --color-background: var(--theme-background-gradient-start);
   --color-background-contrast: var(--theme-background-gradient-end);
 
-  --color-primary: #9f9ad6;
-  --color-primary-pastel: #c8c5ed;
+  --color-primary: var(--color-purple-500);
+  --color-primary-pastel: var(--color-purple-400);
 
-  --color-secondary: #4f4c70;
-  --color-secondary-pastel: #9e9bbf;
+  --color-secondary: var(--color-purple-700);
+  --color-secondary-pastel: var(--color-purple-600);
 
-  --color-accent: #eca72c;
-  --color-accent-pastel: #f5e6a6;
+  --color-accent: var(--color-yellow-500);
+  --color-accent-pastel: var(--color-yellow-200);
 
-  --color-success: #32ba55;
-  --color-success-pastel: #c9f3d3;
+  --color-success: var(--color-green-500);
+  --color-success-pastel: var(--color-green-200);
 
-  --color-error: #d33e36;
-  --color-error-pastel: #fff3f3;
+  --color-error: var(--color-red-500);
+  --color-error-pastel: var(--color-red-200);
+
+  --color-info: var(--color-blue-500);
+  --color-info-pastel: var(--color-blue-200);
 
   --breakpoint-xs: 24rem; /* 384px*/
   --breakpoint-sm: 40rem; /* 640px */

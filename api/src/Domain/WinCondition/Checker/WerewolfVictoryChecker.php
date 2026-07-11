@@ -4,6 +4,7 @@ namespace App\Domain\WinCondition\Checker;
 
 use App\Domain\WinCondition\Interface\WinConditionCheckerInterface;
 use App\Domain\WinCondition\Trait\AliveTeamCountTrait;
+use App\Domain\WinCondition\WinResult;
 use App\Entity\Game\Game;
 use App\Enum\Game\GameTeamEnum;
 
@@ -26,9 +27,9 @@ class WerewolfVictoryChecker implements WinConditionCheckerInterface
             && $this->hasNoLoneTeamAlive($game);
     }
 
-    public function getWinningTeam(): GameTeamEnum
+    public function getWinResult(): WinResult
     {
-        return GameTeamEnum::WEREWOLF;
+        return new WinResult(GameTeamEnum::WEREWOLF);
     }
 
     public static function getPriority(): int

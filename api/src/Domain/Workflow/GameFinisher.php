@@ -3,33 +3,38 @@
 namespace App\Domain\Workflow;
 
 use App\Domain\WinCondition\WinDetector;
+use App\Domain\WinCondition\WinResult;
 use App\Entity\Game\Game;
 use App\Enum\Game\GameRuntimeStepEnum;
-use App\Enum\Game\GameTeamEnum;
+use App\Service\Game\RecapFactory;
 
 class GameFinisher
 {
     public function __construct(
         private readonly WinDetector $winDetector,
+        private readonly RecapFactory $recapFactory,
     ) {
     }
 
     public function tryFinish(Game $game): bool
     {
-        $team = $this->winDetector->detect($game);
-        if (null === $team) {
+        $result = $this->winDetector->detect($game);
+        if (null === $result) {
             return false;
         }
 
-        $this->finish($game, $team);
+        $this->finish($game, $result);
 
         return true;
     }
 
-    public function finish(Game $game, GameTeamEnum $winningTeam): void
+    public function finish(Game $game, WinResult $result): void
     {
         $game->setRuntimeStep(GameRuntimeStepEnum::FINISH);
         $game->setStepEndAt(null);
-        $game->setWinningTeam($winningTeam);
+        $game->setWinningTeam($result->team);
+        $game->setWinningRole($result->winningRole);
+
+        $this->recapFactory->createFromGame($game);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Tests\Functional\Game\Runtime;
 
 use App\Entity\Event\Game\VoteEvent;
+use App\Entity\Game\Period\Vote;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Fixtures\Story\ClassicGame\Runtime\Day\ClassicGameDay1FinishedStory;
 use App\Fixtures\Story\ClassicGame\Runtime\Setup\ClassicGameSetupedStory;
@@ -275,7 +276,7 @@ class VoteTest extends GarOloupApiTestCase
         $this->assertSame($expectedStep, $game->getRuntimeStep());
     }
 
-    public function test_no_ballot_eliminates_a_random_player_on_time_up(): void
+    public function test_no_ballot_eliminates_nobody_on_time_up(): void
     {
         $clock = static::mockTime();
 
@@ -295,9 +296,13 @@ class VoteTest extends GarOloupApiTestCase
         When::asUser($voterUserBuilder)->game()->timeUp();
         $this->assertResponseStatusCodeSame(200);
 
-        $this->assertSame($deadBefore + 1, $game->countDeadPlayers());
-        $expectedStep = null === $game->getWinningTeam() ? GameRuntimeStepEnum::NIGHT : GameRuntimeStepEnum::FINISH;
-        $this->assertSame($expectedStep, $game->getRuntimeStep());
+        $this->assertSame($deadBefore, $game->countDeadPlayers());
+
+        $vote = $game->getVotes()->last();
+        $this->assertInstanceOf(Vote::class, $vote);
+        $this->assertNull($vote->getEliminatedPlayer());
+
+        $this->assertSame(GameRuntimeStepEnum::NIGHT, $game->getRuntimeStep());
     }
 
     public function test_game_event_dispatched_by_vote(): void

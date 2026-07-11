@@ -56,6 +56,7 @@ use App\Fixtures\Story\ComplexGame\Runtime\WerewolfWin\ComplexGameWerewolfWinVot
 use App\Fixtures\Story\ComplexGame\Runtime\WerewolfWin\ComplexGameWerewolfWinVote4Story;
 use App\Fixtures\Story\ComplexGame\Runtime\WerewolfWin\ComplexGameWerewolfWinVote5Story;
 use App\Fixtures\Story\Game\GameCreatedStory;
+use App\Fixtures\Story\Role\GameRoleInitializedStory;
 use App\Tests\Helper\ThereIs;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -68,14 +69,16 @@ class AppFixtures extends Fixture
         ThereIs::anUser()->withEmail('test@garoloup.com')->withUsername('Test')->build();
         ThereIs::anUser()->build(10);
 
-        ThereIs::aStory(GameCreatedStory::class)->execute();
+        ThereIs::aStory(GameRoleInitializedStory::class)->execute();
+
+        // ThereIs::aStory(GameCreatedStory::class)->execute();
 
         // Classic Game ---------------------------
-        ThereIs::aStory(ClassicGameFilledStory::class)->execute();
-        ThereIs::aStory(ClassicGameClosedStory::class)->execute();
-        ThereIs::aStory(ClassicGameConfiguredStory::class)->execute();
-        ThereIs::aStory(ClassicGameDispatchedStory::class)->execute();
-        ThereIs::aStory(ClassicGameLaunchedStory::class)->execute();
+        // ThereIs::aStory(ClassicGameFilledStory::class)->execute();
+        // ThereIs::aStory(ClassicGameClosedStory::class)->execute();
+        // ThereIs::aStory(ClassicGameConfiguredStory::class)->execute();
+        // ThereIs::aStory(ClassicGameDispatchedStory::class)->execute();
+        // ThereIs::aStory(ClassicGameLaunchedStory::class)->execute();
         // ThereIs::aStory(ClassicGameSetupedStory::class)->execute();
         // ThereIs::aStory(ClassicGameNight1SeerRevealedStory::class)->execute();
         // ThereIs::aStory(ClassicGameNight1WerewolfVotedStory::class)->execute();
