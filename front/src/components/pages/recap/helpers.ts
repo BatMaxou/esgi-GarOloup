@@ -1,7 +1,21 @@
-import { GameRuntimeStepEnum } from '@/utils/enums';
+import { GameRoleEnum, GameRuntimeStepEnum, GameTeamEnum } from '@/utils/enums';
 import type { PeriodRecap, PlayerRecap, ActionRecap } from '@/utils/types';
 import { actionEventMeta } from './config';
 import type { JournalEvent, Translate } from './types';
+
+export const areBothLoversAlive = (players: PlayerRecap[]): boolean => {
+  const lovers = players.filter((p) => p.isInCouple);
+
+  return lovers.length === 2 && lovers.every((p) => !p.isDead);
+};
+
+export const recapPlayerTeam = (player: PlayerRecap, bothLoversAlive: boolean): GameTeamEnum | undefined => {
+  if (player.isInCouple || (player.role === GameRoleEnum.CUPIDON && bothLoversAlive)) {
+    return GameTeamEnum.COUPLE;
+  }
+
+  return player.team;
+};
 
 export const resolveActionKey = (action: ActionRecap): keyof typeof actionEventMeta => {
   switch (action.actionType) {

@@ -59,7 +59,7 @@ export const RoleProvider = ({ children }: Props) => {
         setRoleListLoading(false);
         return;
       }
-      setRoleList(roles as Role[]);
+      setRoleList(roles);
       setRoleListLoading(false);
     });
     return;

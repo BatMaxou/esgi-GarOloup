@@ -61,6 +61,7 @@ export type GameRole = {
   role?: Role;
   type?: GameRoleEnum;
   setup?: boolean;
+  infected?: boolean;
 };
 
 export type SeerRole = GameRole & {

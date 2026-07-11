@@ -71,7 +71,7 @@ function TagFilter<T extends string>({
                 <Tag
                   label={t(label as string)}
                   size="lg"
-                  variant={tagVariant ? tagVariant(label as T) : 'secondary'}
+                  variant={tagVariant ? tagVariant(label) : 'secondary'}
                   active={active}
                   lowerCase
                 />
