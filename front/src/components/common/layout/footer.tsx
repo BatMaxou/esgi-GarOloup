@@ -13,8 +13,7 @@ import IdeaReportModal from '@/components/ui/organisms/modals/ideaReportModal';
 type ColumnId = 'play' | 'discover' | 'project';
 
 type FooterLink =
-  | { type: 'href'; href: string; labelKey: string }
-  | { type: 'modal'; modal: 'bug' | 'idea'; labelKey: string };
+  { type: 'href'; href: string; labelKey: string } | { type: 'modal'; modal: 'bug' | 'idea'; labelKey: string };
 
 const FOOTER_NAV: { column: ColumnId; links: FooterLink[] }[] = [
   {
