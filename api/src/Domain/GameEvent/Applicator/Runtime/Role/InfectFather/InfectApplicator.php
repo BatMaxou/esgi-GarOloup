@@ -14,7 +14,11 @@ use App\Entity\Game\Game;
 use App\Entity\Game\Period\Action\NightAction\InfectAction;
 use App\Entity\Game\Role\InfectFatherRole;
 use App\Enum\Game\GameRoleEnum;
+use App\Enum\TopicEnum;
 use App\Repository\Game\PlayerRepository;
+use App\Service\Mercure\TopicCollector;
+use App\Service\Mercure\TopicProvider;
+use Psr\Clock\ClockInterface;
 
 /** @implements GameEventApplicatorInterface<InfectEvent> */
 class InfectApplicator implements GameEventApplicatorInterface
@@ -25,6 +29,9 @@ class InfectApplicator implements GameEventApplicatorInterface
     public function __construct(
         private readonly InfectFatherSpec $infectFatherSpec,
         private readonly PlayerRepository $playerRepository,
+        private readonly ClockInterface $clock,
+        private readonly TopicProvider $topicProvider,
+        private readonly TopicCollector $topicCollector,
     ) {
     }
 
@@ -61,6 +68,9 @@ class InfectApplicator implements GameEventApplicatorInterface
         }
 
         $role->useInfection();
+
+        $game->setStepEndAt($this->clock->now());
+        $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_GAME, $game));
 
         return $game;
     }
