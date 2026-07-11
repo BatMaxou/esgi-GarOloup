@@ -11,6 +11,7 @@ use App\Entity\Game\Role\WildChildRole;
 use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameTeamEnum;
 use App\Enum\TopicEnum;
+use App\Service\Game\WerewolfTeamFactory;
 use App\Service\Mercure\TopicCollector;
 use App\Service\Mercure\TopicProvider;
 
@@ -22,6 +23,7 @@ class WildChildApplicator implements GameEventApplicatorInterface
     public function __construct(
         private readonly TopicCollector $topicCollector,
         private readonly TopicProvider $topicProvider,
+        private readonly WerewolfTeamFactory $werewolfTeamFactory,
     ) {
     }
 
@@ -45,7 +47,11 @@ class WildChildApplicator implements GameEventApplicatorInterface
                 $player->setTeam(GameTeamEnum::WEREWOLF);
 
                 $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_PLAYER, $player));
-                $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::WEREWOLF_TEAM, $game));
+
+                $werewolfTeam = $this->werewolfTeamFactory->fromGame($game);
+                if (null !== $werewolfTeam) {
+                    $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::WEREWOLF_TEAM, $werewolfTeam));
+                }
 
                 break;
             }

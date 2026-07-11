@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: Props) => {
   const [isTempUserLoginLoading, setIsTempUserLoginLoading] = useState(false);
 
   const user = useMemo(() => {
-    return (mainSession?.user ?? tempSession?.user ?? null) as User | null;
+    return mainSession?.user ?? tempSession?.user ?? null;
   }, [mainSession?.user, tempSession?.user]);
 
   const login = useCallback(

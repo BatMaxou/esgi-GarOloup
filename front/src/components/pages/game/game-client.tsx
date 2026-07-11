@@ -1,6 +1,7 @@
 'use client';
 
 import IngamePlayersSidebar from '@/components/common/game/ingame-players-sidebar';
+import MyStatusBadges from '@/components/common/game/my-role/my-status-badges';
 import RunningGameDisplay from '@/components/common/game/running-game-display';
 import Icon from '@/components/ui/atoms/icon';
 import Typography from '@/components/ui/atoms/typography';
@@ -92,6 +93,7 @@ const GameClient = () => {
             </>
           )}
         </div>
+        <MyStatusBadges />
       </>
     );
 

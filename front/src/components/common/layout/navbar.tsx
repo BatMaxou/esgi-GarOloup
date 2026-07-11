@@ -10,6 +10,7 @@ import Button from '@/components/ui/molecules/button';
 import { useAuth } from '@/contexts/auth-context';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { paths } from '@/utils/paths';
+import { headerSafeAreaPaddingClasses } from '@/components/common/layout/header-surface';
 
 const ThemeSwitcher = dynamic(() => import('@/components/common/layout/theme-switcher'), { ssr: false });
 const NavbarAuthActions = dynamic(() => import('@/components/common/layout/navbar-auth-actions'), {
@@ -18,7 +19,7 @@ const NavbarAuthActions = dynamic(() => import('@/components/common/layout/navba
 });
 
 const navbarCva = cva(
-  'border-b border-primary px-4 py-2 flex items-center justify-between fixed top-0 left-0 right-0 backdrop-blur-sm z-24',
+  `border-b border-primary px-4 ${headerSafeAreaPaddingClasses} flex items-center justify-between fixed top-0 left-0 right-0 backdrop-blur-sm z-24`,
   {
     variants: {
       sticky: {

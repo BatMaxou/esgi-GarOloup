@@ -93,7 +93,7 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
       toast.error(t('getPublicGamesError'));
       return;
     }
-    setPublicGames(response as CollectionResponse<Game>);
+    setPublicGames(response);
     setPublicGamesLoading(false);
   };
 

@@ -9,6 +9,17 @@
   "components": {
     "common": {
       "game": {
+        "myRole": {
+          "youAre": "Vous êtes :",
+          "linkedTo": "Vous êtes lié à {name}",
+          "infected": "Vous êtes infecté",
+          "label": "Voir votre rôle",
+          "title": "Votre rôle",
+          "loading": "Chargement…",
+          "description": "Description",
+          "ability": "Pouvoir",
+          "notFound": "Rôle introuvable"
+        },
         "ingame-players-sidebar": {
           "players": "Joueurs"
         },

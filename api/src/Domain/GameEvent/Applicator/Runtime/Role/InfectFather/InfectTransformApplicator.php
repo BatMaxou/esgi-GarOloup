@@ -14,6 +14,7 @@ use App\Entity\Game\Role\InfectedRole;
 use App\Entity\Game\Role\LoverRole;
 use App\Enum\Game\GameTeamEnum;
 use App\Enum\TopicEnum;
+use App\Service\Game\WerewolfTeamFactory;
 use App\Service\Mercure\TopicCollector;
 use App\Service\Mercure\TopicProvider;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,6 +28,7 @@ class InfectTransformApplicator implements GameEventApplicatorInterface
         private readonly TopicCollector $topicCollector,
         private readonly TopicProvider $topicProvider,
         private readonly EntityManagerInterface $em,
+        private readonly WerewolfTeamFactory $werewolfTeamFactory,
     ) {
     }
 
@@ -68,7 +70,11 @@ class InfectTransformApplicator implements GameEventApplicatorInterface
         $victim->setTeam(GameTeamEnum::WEREWOLF);
 
         $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_PLAYER, $victim));
-        $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::WEREWOLF_TEAM, $game));
+
+        $werewolfTeam = $this->werewolfTeamFactory->fromGame($game);
+        if (null !== $werewolfTeam) {
+            $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::WEREWOLF_TEAM, $werewolfTeam));
+        }
 
         return $game;
     }

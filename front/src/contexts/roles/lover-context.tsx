@@ -17,7 +17,7 @@ type LoverContextType = {
 };
 
 export const isLoverRole = (role?: GameRole): role is LoverRole =>
-  Boolean(role && 'partnerPlayerId' in role && (role as LoverRole).partnerPlayerId);
+  Boolean(role && 'partnerPlayerId' in role && role.partnerPlayerId);
 
 export const LoverContext = createContext<LoverContextType | undefined>(undefined);
 

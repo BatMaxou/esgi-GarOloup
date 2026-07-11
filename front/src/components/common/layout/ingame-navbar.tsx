@@ -12,7 +12,7 @@ import { useApiClient } from '@/contexts/api-context';
 import Timer from '@/components/ui/molecules/timer';
 
 import GameJoinCode from '../game/game-join-code';
-import { headerBorderClasses, headerSurfaceClasses } from './header-surface';
+import { headerBorderClasses, headerSafeAreaPaddingClasses, headerSurfaceClasses } from './header-surface';
 import GameStepIndicator from '../game/game-step-indicator';
 import { GameGlobalStepEnum } from '@/utils/enums';
 
@@ -50,7 +50,7 @@ const IngameNavbar = () => {
 
   return (
     <nav
-      className={`border-b ${headerBorderClasses} px-4 py-2 flex shrink-0 items-center justify-between sticky top-0 z-24 w-full ${headerSurfaceClasses}`}
+      className={`border-b ${headerBorderClasses} px-4 ${headerSafeAreaPaddingClasses} flex shrink-0 items-center justify-between sticky top-0 z-24 w-full ${headerSurfaceClasses}`}
     >
       <Link href={paths.home} className="flex items-center">
         <Typography tag="h1" variant="subtitle" textColor="accent" special className="text-glow-accent">

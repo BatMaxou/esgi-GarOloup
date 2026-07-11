@@ -83,5 +83,10 @@ abstract class GameRole
         return $this;
     }
 
+    public function isInfected(): bool
+    {
+        return false;
+    }
+
     abstract protected function needSetup(): bool;
 }

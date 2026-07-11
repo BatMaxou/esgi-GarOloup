@@ -43,6 +43,11 @@ class InfectedRole extends WerewolfRole implements WrapperRoleInterface
         return $this->originalRole->getType() ?? ($this->type ?? null);
     }
 
+    public function isInfected(): bool
+    {
+        return true;
+    }
+
     public function clearNightState(): void
     {
         parent::clearNightState();

@@ -8,6 +8,7 @@ use App\Api\Model\Game\WerewolfTeam;
 use App\Domain\Spec\Role\WerewolfSpec;
 use App\Entity\User\AbstractUser;
 use App\Repository\Game\PlayerRepository;
+use App\Service\Game\WerewolfTeamFactory;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
@@ -18,6 +19,7 @@ class WerewolfTeamProvider implements ProviderInterface
         private readonly Security $security,
         private readonly PlayerRepository $playerRepository,
         private readonly WerewolfSpec $werewolfSpec,
+        private readonly WerewolfTeamFactory $werewolfTeamFactory,
     ) {
     }
 
@@ -42,13 +44,6 @@ class WerewolfTeamProvider implements ProviderInterface
             throw new AccessDeniedHttpException();
         }
 
-        $gameId = $game->getId();
-        if (!$gameId) {
-            return null;
-        }
-
-        $members = $this->playerRepository->findWerewolvesByGame($game);
-
-        return new WerewolfTeam((string) $gameId, $members);
+        return $this->werewolfTeamFactory->fromGame($game);
     }
 }

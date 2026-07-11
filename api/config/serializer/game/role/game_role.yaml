@@ -9,6 +9,9 @@ App\Entity\Game\Role\GameRole:
         setup:
             groups:
                 - me:player:read
+        infected:
+            groups:
+                - me:player:read
 
 App\Entity\Game\Role\VillagerRole:
     attributes:

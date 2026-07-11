@@ -2,17 +2,18 @@ import { useTranslations } from 'next-intl';
 
 import Icon from '@/components/ui/atoms/icon';
 import Typography from '@/components/ui/atoms/typography';
-import { GameTeamEnum } from '@/utils/enums';
 import type { PlayerRecap } from '@/utils/types';
 import { roleIcon, teamCardClasses } from './config';
+import { recapPlayerTeam } from './helpers';
 
 type Props = {
   player: PlayerRecap;
+  bothLoversAlive: boolean;
 };
 
-const PlayerCard = ({ player }: Props) => {
+const PlayerCard = ({ player, bothLoversAlive }: Props) => {
   const t = useTranslations();
-  const team = player.team as GameTeamEnum | undefined;
+  const team = recapPlayerTeam(player, bothLoversAlive);
   const colorClass = team ? teamCardClasses[team] : 'border-primary/15';
 
   return (
