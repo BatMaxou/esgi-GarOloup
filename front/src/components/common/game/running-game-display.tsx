@@ -17,6 +17,7 @@ import WaitingInterruptActions from './running-step/interrupt/waiting-interrupt-
 import WildChildActions from './running-step/setup/wild-child-actions';
 import WaitingSetupActions from './running-step/setup/waiting-setup-actions';
 import AssassinActions from './running-step/night-actions/assassin-action';
+import InfectFatherActions from './running-step/night-actions/infect-father-actions';
 import CupidonActions from './running-step/setup/cupidon-action';
 
 const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameMaster: boolean }) => {
@@ -62,6 +63,14 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
             <>
               <UserTurnAnimation animateOnce />
               <WerewolfActions />
+            </>
+          );
+        case player?.role?.type === GameRoleEnum.INFECT_FATHER &&
+          game.nightWorkflow?.currentTurn?.infect_father === GameRoleEnum.INFECT_FATHER:
+          return (
+            <>
+              <UserTurnAnimation animateOnce />
+              <InfectFatherActions />
             </>
           );
         case player?.role?.type === GameRoleEnum.WITCH && game.nightWorkflow?.currentTurn?.witch === GameRoleEnum.WITCH:

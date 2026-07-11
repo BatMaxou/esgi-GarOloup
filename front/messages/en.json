@@ -95,11 +95,24 @@
             "revealTarget": "Inspect",
             "submitChoice": "Confirm"
           },
-          "asssassinActions": {
+          "assassinActions": {
             "assassin": "Murderer",
             "assassinCamp": "Solo player",
             "roundDescription": "Choose the victim to murder this night.",
             "submit": "Kill"
+          },
+          "infectFatherActions": {
+            "infectFather": "Infect Father",
+            "werewolfCamp": "Werewolf team",
+            "roundDescription": "You can infect the werewolves' victim tonight. Remember, you can only do this once in the whole game.",
+            "teamLabel": "Your pack",
+            "infectTitle": "Infect the victim",
+            "infectDescription": "Turn {username}, the werewolves' victim, into a werewolf.",
+            "infectTag": "1 remaining use",
+            "infectTagDisabled": "Unavailable",
+            "passTitle": "Do nothing",
+            "passDescription": "Skip your turn without infecting anyone.",
+            "passEnded": "You chose to do nothing this night."
           }
         },
         "nightRecap": {
@@ -126,6 +139,9 @@
           "wildChildTurn": "It's the wild child's turn to play",
           "infectFatherTurn": "It's the infect father's turn to play",
           "unknownTurn": "A role is currently playing"
+        },
+        "waitingSetupActions": {
+          "waitingSetup": "Waiting for players's choices"
         },
         "vote": {
           "title": "Who do you eliminate?",
