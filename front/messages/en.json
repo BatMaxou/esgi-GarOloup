@@ -75,6 +75,20 @@
             "saveVoteEndedWithoutTarget": "You chose to save the victim.",
             "poisonVoteEndedWithTarget": "You chose to poison {username}.",
             "timeUp": "End turn"
+          },
+          "seerActions": {
+            "seer": "Seer",
+            "seerCamp": "Villager team",
+            "roundDescription": "Choose a player to reveal his secret role. This information is only known by you.",
+            "revealChoiceTitle": "Inspect a player",
+            "revealTarget": "Inspect",
+            "submitChoice": "Confirm"
+          },
+          "asssassinActions": {
+            "assassin": "Murderer",
+            "assassinCamp": "Solo player",
+            "roundDescription": "Choose the victim to murder this night.",
+            "submit": "Kill"
           }
         },
         "nightRecap": {
