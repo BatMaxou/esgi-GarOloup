@@ -21,8 +21,6 @@ class CupidonSpec
             GameRuntimeStepEnum::SETUP !== $game->getRuntimeStep()
             || $game->getStepEndAt() < $this->clock->now()
             || $firstLoverId === $secondLoverId
-            || $cupidon->getId()?->toString() === $firstLoverId
-            || $cupidon->getId()?->toString() === $secondLoverId
         ) {
             return false;
         }

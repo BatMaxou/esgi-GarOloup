@@ -120,24 +120,6 @@ class CupidonSetupTest extends GarOloupApiTestCase
         $this->assertResponseStatusCodeSame(403);
     }
 
-    public function test_cupidon_cannot_choose_itself_as_lover(): void
-    {
-        $story = ThereIs::aStory(ComplexGameCupidonLaunchedStory::class)->execute();
-        $cupidonPlayerBuilder = $story->get(ComplexGameCupidonLaunchedStory::CUPIDON);
-        $this->assertInstanceOf(PlayerBuilder::class, $cupidonPlayerBuilder);
-        $cupidonUserBuilder = $cupidonPlayerBuilder->user;
-        $this->assertInstanceOf(UserBuilder::class, $cupidonUserBuilder);
-        $cupidonPlayerId = $cupidonPlayerBuilder->getEntity()->getId();
-        $this->assertNotNull($cupidonPlayerId);
-        $secondLoverPlayerBuilder = $story->get(ComplexGameCupidonLaunchedStory::VILLAGER_2);
-        $this->assertInstanceOf(PlayerBuilder::class, $secondLoverPlayerBuilder);
-        $secondLoverId = $secondLoverPlayerBuilder->getEntity()->getId();
-        $this->assertNotNull($secondLoverId);
-
-        When::asUser($cupidonUserBuilder)->game()->cupidonSetup($cupidonPlayerId->toString(), $secondLoverId->toString());
-        $this->assertResponseStatusCodeSame(403);
-    }
-
     public function test_cupidon_cannot_choose_the_same_player_for_both_lovers(): void
     {
         $story = ThereIs::aStory(ComplexGameCupidonLaunchedStory::class)->execute();

@@ -8,10 +8,13 @@ import Icon from '@/components/ui/atoms/icon';
 import type { IconName } from '@/components/ui/atoms/icon/config';
 import Typography from '@/components/ui/atoms/typography';
 import { usePlayer } from '@/contexts/player-context';
+import { useGame } from '@/contexts/game-context';
 import { useRole } from '@/contexts/role-context';
 import { LoverContext } from '@/contexts/roles/lover-context';
 import { roleIcon } from '@/components/pages/recap/config';
 import { roleTypeToSlug, type RoleSlugLocale } from '@/utils/roleSlug';
+import { GameRoleEnum } from '@/utils/enums';
+import type { WildChildRole } from '@/utils/types';
 
 import MyRoleDialog from './my-role-dialog';
 
@@ -61,12 +64,13 @@ const ExpandablePill = ({
 
 const MyStatusBadges = () => {
   const { player } = usePlayer();
+  const { game } = useGame();
   const { role, roleLoading, getRole } = useRole();
   const lover = useContext(LoverContext);
   const t = useTranslations('components.common.game.myRole');
   const locale = useLocale() as RoleSlugLocale;
   const [open, setOpen] = useState(false);
-  const [expandedKey, setExpandedKey] = useState<'couple' | 'infect' | null>(null);
+  const [expandedKey, setExpandedKey] = useState<'couple' | 'infect' | 'wildChild' | null>(null);
 
   const roleType = player?.role?.type;
 
@@ -88,7 +92,14 @@ const MyStatusBadges = () => {
   const partnerName = partner?.user?.username ?? partner?.tempUser?.username ?? partner?.username;
   const isInfected = Boolean(player?.role?.infected);
 
-  const toggle = (key: 'couple' | 'infect') => setExpandedKey((current) => (current === key ? null : key));
+  const wildChildRole = roleType === GameRoleEnum.WILD_CHILD ? (player?.role as WildChildRole | undefined) : undefined;
+  const isWildChild = Boolean(wildChildRole);
+  const isWildChildTransformed = Boolean(wildChildRole?.transformed);
+  const modelPlayer = game?.players?.find((gamePlayer) => gamePlayer.id === wildChildRole?.modelPlayerId);
+  const modelName = modelPlayer?.user?.username ?? modelPlayer?.tempUser?.username ?? modelPlayer?.username ?? '';
+
+  const toggle = (key: 'couple' | 'infect' | 'wildChild') =>
+    setExpandedKey((current) => (current === key ? null : key));
 
   return (
     <>
@@ -107,13 +118,34 @@ const MyStatusBadges = () => {
         {isInfected && (
           <ExpandablePill
             icon="werewolf"
-            colorClass="border-red-500/40 text-red-500"
+            colorClass="border-red-500/40 text-red-400"
             label={t('infected')}
             ariaLabel={t('infected')}
             expanded={expandedKey === 'infect'}
             onClick={() => toggle('infect')}
           />
         )}
+
+        {isWildChild &&
+          (isWildChildTransformed ? (
+            <ExpandablePill
+              icon="werewolf"
+              colorClass="border-red-500/40 text-red-400"
+              label={t('wildChildTransformed')}
+              ariaLabel={t('wildChildTransformed')}
+              expanded={expandedKey === 'wildChild'}
+              onClick={() => toggle('wildChild')}
+            />
+          ) : (
+            <ExpandablePill
+              icon="villager"
+              colorClass="border-green-500/40 text-green-400"
+              label={t('wildChildVillager', { name: modelName })}
+              ariaLabel={t('wildChildVillager', { name: modelName })}
+              expanded={expandedKey === 'wildChild'}
+              onClick={() => toggle('wildChild')}
+            />
+          ))}
 
         <ExpandablePill
           icon={iconName}
