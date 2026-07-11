@@ -124,6 +124,20 @@
           "title": "Dernier tir du Chasseur",
           "description": "Avant de mourir, choisissez un joueur à emporter avec vous.",
           "submit": "Tirer"
+        },
+        "setupActions": {
+          "wildChildActions": {
+            "wildChild": "Enfant Sauvage",
+            "wildChildCamp": "Camp des Villageois",
+            "roundDescription": "Choisissez un joueur comme modèle. Si votre modèle meurt, vous rejoindrez son camp.",
+            "actionLabel": "Choisir un modèle",
+            "focused": "Modèle",
+            "title": "Qui est votre modèle ?",
+            "description": "Choisissez un joueur. Si votre modèle meurt, vous rejoindrez son camp.",
+            "submit": "Confirmer",
+            "actionEnded": "Votre choix a été enregistré.",
+            "modelChosen": "Vous avez choisi {username} comme modèle."
+          }
         }
       },
       "home": {

@@ -124,6 +124,20 @@
           "title": "Hunter's last shot",
           "description": "Before you die, choose a player to take down with you.",
           "submit": "Shoot"
+        },
+        "setupActions": {
+          "wildChildActions": {
+            "wildChild": "Wild Child",
+            "wildChildCamp": "Villager team",
+            "roundDescription": "Choose a player as your model. If your model dies, you will join their team.",
+            "actionLabel": "Choose a model",
+            "focused": "Model",
+            "title": "Who is your model?",
+            "description": "Choose a player. If your model dies, you will join their team.",
+            "submit": "Confirm",
+            "actionEnded": "Your choice has been saved.",
+            "modelChosen": "You chose {username} as your model."
+          }
         }
       },
       "home": {
