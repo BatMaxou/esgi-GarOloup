@@ -18,6 +18,7 @@ import { InfectFatherResource } from '@/lib/api/resources/InfectFatherResource';
 import { HunterResource } from '@/lib/api/resources/HunterResource';
 import { CupidonResource } from '@/lib/api/resources/CupidonResource';
 import { AssassinResource } from '@/lib/api/resources/AssassinResource';
+import { RecapResource } from '@/lib/api/resources/RecapResource';
 
 type PropagateChangeToken = (token?: string | null, refreshToken?: string | null) => void;
 
@@ -75,6 +76,7 @@ export class ApiClient {
   hunter: HunterResource;
   cupidon: CupidonResource;
   assassin: AssassinResource;
+  recap: RecapResource;
 
   constructor(
     public baseUrl: string,
@@ -99,6 +101,7 @@ export class ApiClient {
     this.hunter = new HunterResource(this);
     this.cupidon = new CupidonResource(this);
     this.assassin = new AssassinResource(this);
+    this.recap = new RecapResource(this);
   }
 
   public initPropagateChangeToken(propagateChangeToken: PropagateChangeToken) {

@@ -13,7 +13,7 @@ class ActionVisibilityResolver
     /** @param iterable<PeriodAction> $periodActions */
     public function isMasked(PeriodAction $action, ?Player $currentPlayer, iterable $periodActions): bool
     {
-        if (\in_array($action->getType(), [GameActionTypeEnum::SAVE, GameActionTypeEnum::INFECTION], true)) {
+        if (\in_array($action->getType(), [GameActionTypeEnum::SAVE, GameActionTypeEnum::INFECTION, GameActionTypeEnum::REVEAL], true)) {
             return true;
         }
 

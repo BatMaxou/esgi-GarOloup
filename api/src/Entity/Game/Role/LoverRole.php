@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ApiResource(operations: [])]
 class LoverRole extends GameRole implements WrapperRoleInterface, NightResettableInterface
 {
-    #[ORM\ManyToOne(targetEntity: GameRole::class)]
+    #[ORM\ManyToOne(targetEntity: GameRole::class, cascade: ['remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private GameRole $originalRole;
 

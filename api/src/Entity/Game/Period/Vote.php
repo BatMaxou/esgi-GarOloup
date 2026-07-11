@@ -5,6 +5,7 @@ namespace App\Entity\Game\Period;
 use App\Entity\Game\Game;
 use App\Entity\Game\Period\Interface\PeriodInterface;
 use App\Entity\Game\Period\Vote\Ballot;
+use App\Entity\Game\Player;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Repository\Game\Period\VoteRepository;
@@ -27,6 +28,10 @@ class Vote implements PeriodInterface
 
     #[ORM\Column]
     private bool $resolved = false;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Player $eliminatedPlayer = null;
 
     /** @var Collection<int, Ballot> */
     #[ORM\OneToMany(targetEntity: Ballot::class, mappedBy: 'vote', cascade: ['persist', 'remove'], orphanRemoval: true)]
@@ -58,6 +63,18 @@ class Vote implements PeriodInterface
     public function setResolved(bool $resolved): static
     {
         $this->resolved = $resolved;
+
+        return $this;
+    }
+
+    public function getEliminatedPlayer(): ?Player
+    {
+        return $this->eliminatedPlayer;
+    }
+
+    public function setEliminatedPlayer(?Player $eliminatedPlayer): static
+    {
+        $this->eliminatedPlayer = $eliminatedPlayer;
 
         return $this;
     }

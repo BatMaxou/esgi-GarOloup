@@ -11,8 +11,6 @@ use App\Api\Model\BasicActionOutput;
 use App\Api\Model\Game\CreateGameOutput;
 use App\Api\Provider\Game\CurrentGameProvider;
 use App\Api\Provider\Game\CurrentPublicGameProvider;
-use App\Api\Provider\Game\GameRecapProvider;
-use App\Api\Serializer\Normalizer\Game\Period\GameRecapActionsNormalizer;
 use App\Domain\Command\Game\Initialisation\CloseGameInvitationCommand;
 use App\Domain\Command\Game\Initialisation\CreateGameCommand;
 use App\Domain\Command\Game\Initialisation\GameRoleDispatchCommand;
@@ -51,14 +49,6 @@ use Doctrine\ORM\Mapping as ORM;
             provider: CurrentGameProvider::class,
             normalizationContext: [
                 'groups' => 'game:read',
-            ],
-        ),
-        new Get(
-            name: 'api_game_recap',
-            uriTemplate: '/games/{id}/recap',
-            provider: GameRecapProvider::class,
-            normalizationContext: [
-                'groups' => ['game:read', GameRecapActionsNormalizer::GROUP],
             ],
         ),
         new GetCollection(
@@ -184,6 +174,9 @@ class Game implements TopicRelatedObject
     #[ORM\Column(enumType: GameTeamEnum::class, nullable: true)]
     private ?GameTeamEnum $winningTeam = null;
 
+    #[ORM\Column(enumType: GameRoleEnum::class, nullable: true)]
+    private ?GameRoleEnum $winningRole = null;
+
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private Player $host;
@@ -208,7 +201,7 @@ class Game implements TopicRelatedObject
     private Configuration $configuration;
 
     /** @var Collection<int, Player> */
-    #[ORM\OneToMany(targetEntity: Player::class, mappedBy: 'game')]
+    #[ORM\OneToMany(targetEntity: Player::class, mappedBy: 'game', cascade: ['remove'])]
     private Collection $players;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
@@ -603,6 +596,18 @@ class Game implements TopicRelatedObject
     public function setWinningTeam(?GameTeamEnum $winningTeam): static
     {
         $this->winningTeam = $winningTeam;
+
+        return $this;
+    }
+
+    public function getWinningRole(): ?GameRoleEnum
+    {
+        return $this->winningRole;
+    }
+
+    public function setWinningRole(?GameRoleEnum $winningRole): static
+    {
+        $this->winningRole = $winningRole;
 
         return $this;
     }

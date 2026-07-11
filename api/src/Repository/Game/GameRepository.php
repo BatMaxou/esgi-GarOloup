@@ -4,6 +4,7 @@ namespace App\Repository\Game;
 
 use App\Entity\Game\Game;
 use App\Enum\Game\GameInitialisationStepEnum;
+use App\Enum\Game\GameRuntimeStepEnum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -27,6 +28,20 @@ class GameRepository extends ServiceEntityRepository
             ->setParameter('step', GameInitialisationStepEnum::NEW)
             ->getQuery()
             ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+     * @return Game[]
+     */
+    public function findFinished(): array
+    {
+        /** @var Game[] */
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.runtimeStep = :step')
+            ->setParameter('step', GameRuntimeStepEnum::FINISH)
+            ->getQuery()
+            ->getResult()
         ;
     }
 }

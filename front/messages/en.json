@@ -558,6 +558,50 @@
           "home": "Back to the village",
           "join": "Join a game"
         }
+      },
+      "recap": {
+        "winnerTeam": "Victory: {team}",
+        "backToVillage": "Back to the village",
+        "winnersLabel": "Winning team",
+        "othersLabel": "Other players",
+        "tabs": {
+          "players": "Players",
+          "journal": "Journal"
+        },
+        "period": {
+          "night": "Night {number}",
+          "day": "Day {number}",
+          "vote": "Vote {number}"
+        },
+        "voteEliminated": "Eliminated by vote: {username}",
+        "voteNoVictim": "No victim",
+        "voteDetails": "Vote details",
+        "role": {
+          "villager": "Villager",
+          "werewolf": "Werewolf",
+          "seer": "Seer",
+          "witch": "Witch",
+          "wild_child": "Wild child",
+          "hunter": "Hunter",
+          "infect_father": "Infect father",
+          "cupidon": "Cupid",
+          "assassin": "Assassin"
+        },
+        "team": {
+          "village": "Village",
+          "werewolf": "Werewolves",
+          "couple": "Couple",
+          "solo": "Solo"
+        },
+        "event": {
+          "werewolfMurder": "The Werewolves devoured {username}",
+          "witchPoison": "The Witch poisoned {username}",
+          "assassinMurder": "The Assassin eliminated {username}",
+          "infection": "The Infect Father infected {username}",
+          "witchSave": "The Witch saved {username}",
+          "seerReveal": "The Seer inspected {username}",
+          "calmNight": "A peaceful night, no victims"
+        }
       }
     },
     "ui": {

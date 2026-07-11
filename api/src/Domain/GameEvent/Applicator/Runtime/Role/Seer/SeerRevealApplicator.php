@@ -11,6 +11,7 @@ use App\Domain\Spec\Role\SeerSpec;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\SeerRevealEvent;
 use App\Entity\Game\Game;
+use App\Entity\Game\Period\Action\NightAction\RevealAction;
 use App\Entity\Game\Role\SeerRole;
 use App\Enum\TopicEnum;
 use App\Repository\Game\PlayerRepository;
@@ -69,6 +70,9 @@ class SeerRevealApplicator implements GameEventApplicatorInterface
         }
 
         $role->observe($targetPlayer);
+
+        $night = $game->getCurrentNight() ?? throw new \LogicException('No active night to register the reveal');
+        $night->addAction(new RevealAction($night, (string) $targetPlayer->getId()));
 
         $game->setStepEndAt($this->clock->now());
         $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_GAME, $game));

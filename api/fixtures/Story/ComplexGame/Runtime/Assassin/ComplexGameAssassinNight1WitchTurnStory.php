@@ -2,6 +2,7 @@
 
 namespace App\Fixtures\Story\ComplexGame\Runtime\Assassin;
 
+use App\Entity\Game\Period\Action\NightAction\RevealAction;
 use App\Entity\Game\Role\SeerRole;
 use App\Entity\Game\Role\WerewolfRole;
 use App\Enum\Game\GameRoleEnum;
@@ -26,6 +27,9 @@ class ComplexGameAssassinNight1WitchTurnStory extends ComplexGameAssassinSetuped
         $werewolf1PlayerBuilder = $this->getState(self::WEREWOLF_1);
         \assert($werewolf1PlayerBuilder instanceof PlayerBuilder);
         $seerRole->observe($werewolf1PlayerBuilder->getEntity());
+
+        $night = $game->getCurrentNight() ?? throw new \LogicException('No active night to register the reveal');
+        $night->addAction(new RevealAction($night, (string) $werewolf1PlayerBuilder->getEntity()->getId()));
 
         $this->nightOrchestrator->advance($game);
 

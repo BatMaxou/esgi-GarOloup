@@ -1,0 +1,21 @@
+App\Entity\Game\Recap:
+    attributes:
+        id:
+            groups:
+                - recap:read
+        gameId:
+            identifier: true
+            groups:
+                - recap:read
+        winningTeam:
+            groups:
+                - recap:read
+        winningRole:
+            groups:
+                - recap:read
+        players:
+            groups:
+                - recap:read
+        periods:
+            groups:
+                - recap:read

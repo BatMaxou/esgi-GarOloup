@@ -560,6 +560,50 @@
           "home": "Retour au village",
           "join": "Rejoindre une partie"
         }
+      },
+      "recap": {
+        "winnerTeam": "Victoire : {team}",
+        "backToVillage": "Retour au village",
+        "winnersLabel": "Équipe victorieuse",
+        "othersLabel": "Autres joueurs",
+        "tabs": {
+          "players": "Joueurs",
+          "journal": "Journal"
+        },
+        "period": {
+          "night": "Nuit {number}",
+          "day": "Jour {number}",
+          "vote": "Vote {number}"
+        },
+        "voteEliminated": "Éliminé au vote : {username}",
+        "voteNoVictim": "Aucune victime",
+        "voteDetails": "Détail des votes",
+        "role": {
+          "villager": "Villageois",
+          "werewolf": "Loup-Garou",
+          "seer": "Voyante",
+          "witch": "Sorcière",
+          "wild_child": "Enfant sauvage",
+          "hunter": "Chasseur",
+          "infect_father": "Père infect",
+          "cupidon": "Cupidon",
+          "assassin": "Assassin"
+        },
+        "team": {
+          "village": "Village",
+          "werewolf": "Loups-Garou",
+          "couple": "Couple",
+          "solo": "Solo"
+        },
+        "event": {
+          "werewolfMurder": "Les Loups-Garous ont dévoré {username}",
+          "witchPoison": "La Sorcière a empoisonné {username}",
+          "assassinMurder": "L'Assassin a éliminé {username}",
+          "infection": "Le Père Infect a infecté {username}",
+          "witchSave": "La Sorcière a sauvé {username}",
+          "seerReveal": "La Voyante a inspecté {username}",
+          "calmNight": "Nuit paisible, aucune victime"
+        }
       }
     },
     "ui": {

@@ -1,0 +1,11 @@
+App\Api\Model\Recap\ActionRecap:
+    attributes:
+        actionType:
+            groups:
+                - recap:read
+        source:
+            groups:
+                - recap:read
+        targetPlayerId:
+            groups:
+                - recap:read
