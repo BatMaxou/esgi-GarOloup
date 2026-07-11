@@ -37,7 +37,7 @@ class WildChildApplicator implements GameEventApplicatorInterface
         $game = $this->ensureGame($gameEvent);
         $player = $game->getPlayer(GameRoleEnum::WILD_CHILD);
         $role = $player?->getRoleAs(WildChildRole::class);
-        if (!$player || !$role instanceof WildChildRole) {
+        if (!$player || $player->isDead() || !$role instanceof WildChildRole) {
             return $game;
         }
 
