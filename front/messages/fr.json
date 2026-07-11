@@ -33,13 +33,13 @@
           "launchGameButton": "Lancer la partie"
         },
         "gameStepIndicator": {
-          "setup": "Nouvelle partie",
+          "setup": "Initialisation",
           "night": "Nuit",
           "day": "Jour",
           "vote": "Vote",
           "round": "Tour",
           "interrupted": "Évènement spécial",
-          "ended": "Terminée"
+          "ended": "Terminé"
         },
         "nightActions": {
           "werewolfActions": {
@@ -83,6 +83,12 @@
             "revealChoiceTitle": "Inspecter un joueur",
             "revealTarget": "Inspecter",
             "submitChoice": "Confirmer"
+          },
+          "asssassinActions": {
+            "assassin": "Assassin",
+            "assassinCamp": "Camp des joueurs solo",
+            "roundDescription": "Choisissez un joueur à assassiner cette nuit.",
+            "submit": "Assassiner"
           }
         },
         "waitingNightActions": {

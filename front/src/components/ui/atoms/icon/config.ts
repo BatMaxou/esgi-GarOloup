@@ -8,6 +8,7 @@ import Timer from '@/assets/icons/timer.svg';
 import Copy from '@/assets/icons/copy.svg';
 import Skull from '@/assets/icons/skull.svg';
 import Werewolf from '@/assets/icons/werewolf.svg';
+import Assassin from '@/assets/icons/asssassin.svg';
 import Poison from '@/assets/icons/poison.svg';
 import Witch from '@/assets/icons/witch.svg';
 import Heal from '@/assets/icons/heal.svg';
@@ -36,6 +37,7 @@ const raw = {
   check: Check,
   skull: Skull,
   werewolf: Werewolf,
+  assassin: Assassin,
   poison: Poison,
   witch: Witch,
   heal: Heal,
