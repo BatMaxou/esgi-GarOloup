@@ -26,7 +26,7 @@ const AssassinActions = () => {
   const [submitting, setSubmitting] = useState(false);
 
   const selectablePlayers = useMemo(
-    () => game?.players?.filter((gamePlayer) => gamePlayer.id !== player?.id) ?? [],
+    () => game?.players?.filter((gamePlayer) => gamePlayer.id !== player?.id && !gamePlayer.dead) ?? [],
     [game?.players, player?.id]
   );
 
