@@ -114,9 +114,9 @@ const PublicGamesList = ({ publicGames }: Props) => {
         sortable: true,
         compareAscending: (left, right) =>
           compareNumbersAsc(left.maxTimeForDiscussion ?? 0, right.maxTimeForDiscussion ?? 0),
-        getFilterText: (game) => String(game.maxTimeForDiscussion ?? ''),
+        getFilterText: (game) => (game.maxTimeForDiscussion ? String(Math.round(game.maxTimeForDiscussion / 60)) : ''),
         cell: (game) => {
-          const minutes = game.maxTimeForDiscussion ?? 0;
+          const minutes = Math.round((game.maxTimeForDiscussion ?? 0) / 60);
           return minutes > 0 ? (
             <span className="inline-flex items-center gap-2">
               <Icon name="timer" className="size-4 shrink-0 text-neutral-300" />

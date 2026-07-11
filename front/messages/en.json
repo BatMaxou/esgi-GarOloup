@@ -13,6 +13,8 @@
           "youAre": "You are:",
           "linkedTo": "You are linked to {name}",
           "infected": "You are infected",
+          "wildChildVillager": "Your model is {name}",
+          "wildChildTransformed": "You have transformed",
           "label": "View your role",
           "title": "Your role",
           "loading": "Loading…",
