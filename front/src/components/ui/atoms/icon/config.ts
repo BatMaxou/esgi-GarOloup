@@ -34,6 +34,8 @@ import Cancel from '@/assets/icons/cancel.svg';
 import WildChild from '@/assets/icons/wild-child.svg';
 import Cupidon from '@/assets/icons/cupidon.svg';
 import Heart from '@/assets/icons/heart.svg';
+import Infect from '@/assets/icons/infect.svg';
+import Hand from '@/assets/icons/hand.svg';
 
 export type IconName = keyof typeof raw & string;
 export type IconType = LucideIcon | ComponentType<SVGProps<SVGSVGElement>>;
@@ -71,6 +73,8 @@ const raw = {
   wildChild: WildChild,
   cupidon: Cupidon,
   heart: Heart,
+  infect: Infect,
+  hand: Hand,
 };
 
 export const icons: Icons = raw;

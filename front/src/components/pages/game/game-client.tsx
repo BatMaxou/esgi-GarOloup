@@ -79,7 +79,7 @@ const GameClient = () => {
       <>
         <IngamePlayersSidebar players={playersList || []} />
         <div className="px-8 py-8 w-full h-full">
-          <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />;
+          <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />
           {showSpectatorOverlay && (
             <>
               <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.6)_100%)]" />

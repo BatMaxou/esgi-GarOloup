@@ -95,11 +95,24 @@
             "revealTarget": "Inspecter",
             "submitChoice": "Confirmer"
           },
-          "asssassinActions": {
+          "assassinActions": {
             "assassin": "Assassin",
             "assassinCamp": "Camp des joueurs solo",
             "roundDescription": "Choisissez un joueur à assassiner cette nuit.",
             "submit": "Assassiner"
+          },
+          "infectFatherActions": {
+            "infectFather": "Père Infect",
+            "werewolfCamp": "Camp des Loups",
+            "roundDescription": "Vous pouvez infecter la victime des loups cette nuit. Attention, vous ne pourrez le faire qu'une seule fois dans la partie.",
+            "teamLabel": "Votre meute",
+            "infectTitle": "Infecter la victime",
+            "infectDescription": "Transformez {username}, victime des loups, en loup-garou.",
+            "infectTag": "1 utilisation restante",
+            "infectTagDisabled": "Indisponible",
+            "passTitle": "Ne rien faire",
+            "passDescription": "Passer votre tour sans infecter personne.",
+            "passEnded": "Vous avez choisi de ne rien faire cette nuit."
           }
         },
         "waitingNightActions": {
@@ -110,6 +123,9 @@
           "wildChildTurn": "C'est au tour de l'Enfant Sauvage de jouer",
           "infectFatherTurn": "C'est au tour du Père Infect de jouer",
           "unknownTurn": "Un rôle est en train de jouer"
+        },
+        "waitingSetupActions": {
+          "waitingSetup": "En attente du choix des joueurs"
         },
         "nightRecap": {
           "death": "{username} est mort cette nuit.",

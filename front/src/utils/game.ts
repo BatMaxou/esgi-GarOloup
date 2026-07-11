@@ -52,8 +52,8 @@ export const getHealUsernameUserDuringThisNight = (game: Game, players: Player[]
 
 export const getDeadUsersDuringNight = (game: Game): string[] => {
   const killed = getAllUsersKilledDuringNight(game);
-  const healed = getHealUserDuringThisNight(game);
-  return healed ? killed.filter((playerId) => playerId !== healed) : killed;
+  const realDeadPlayers = game.players?.filter((player) => player.dead);
+  return killed.filter((playerId) => realDeadPlayers?.some((player) => player.id === playerId));
 };
 
 /////////////////////////////////////////////////////////////////////
