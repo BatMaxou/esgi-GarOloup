@@ -17,6 +17,7 @@ import WaitingInterruptActions from './running-step/interrupt/waiting-interrupt-
 import WildChildActions from './running-step/setup/wild-child-actions';
 import WaitingSetupActions from './running-step/setup/waiting-setup-actions';
 import AssassinActions from './running-step/night-actions/assassin-action';
+import CupidonActions from './running-step/setup/cupidon-action';
 
 const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameMaster: boolean }) => {
   const { game } = useGame();
@@ -40,6 +41,8 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
       switch (true) {
         case player?.role?.type === GameRoleEnum.WILD_CHILD:
           return <WildChildActions />;
+        case player?.role?.type === GameRoleEnum.CUPIDON:
+          return <CupidonActions />;
         default:
           return <WaitingSetupActions />;
       }

@@ -65,7 +65,26 @@ const GameClient = () => {
   const isGameMaster = player?.id === game?.gameMaster?.id;
 
   const renderGameDisplay = useMemo(() => {
-    let content = <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />;
+    let content = (
+      <>
+        <IngamePlayersSidebar players={playersList || []} />
+        <div className="px-8 py-8 w-full h-full">
+          <RunningGameDisplay isHost={isHost} isGameMaster={isGameMaster} />;
+          {showSpectatorOverlay && (
+            <>
+              <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.6)_100%)]" />
+              {/* Render une icon d'oeil et un texte "Spectateur en absolute en haut à droite" */}
+              <div className="absolute top-8 right-4 z-20 flex items-center gap-2 rounded-full border border-error/40 bg-error/10 px-3 py-1">
+                <Icon name="targetEye" className="w-4 h-4 text-error" />
+                <Typography tag="span" variant="subtitle" className="text-error!" bold>
+                  {t('spectator')}
+                </Typography>
+              </div>
+            </>
+          )}
+        </div>
+      </>
+    );
 
     switch (player?.role?.type) {
       case GameRoleEnum.INFECT_FATHER:
@@ -93,32 +112,13 @@ const GameClient = () => {
     }
 
     return content;
-  }, [isGameMaster, isHost, player?.role]);
+  }, [isGameMaster, isHost, player?.role, playersList, showSpectatorOverlay, t]);
 
   if (!game || !player) {
     return <>Loading...</>;
   }
 
-  const content = (
-    <main className="flex h-full w-full flex-row justify-between items-start">
-      <IngamePlayersSidebar players={playersList || []} />
-      <div className="px-8 py-8 w-full h-full">
-        {renderGameDisplay}
-        {showSpectatorOverlay && (
-          <>
-            <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.6)_100%)]" />
-            {/* Render une icon d'oeil et un texte "Spectateur en absolute en haut à droite" */}
-            <div className="absolute top-8 right-4 z-20 flex items-center gap-2 rounded-full border border-error/40 bg-error/10 px-3 py-1">
-              <Icon name="targetEye" className="w-4 h-4 text-error" />
-              <Typography tag="span" variant="subtitle" className="text-error!" bold>
-                {t('spectator')}
-              </Typography>
-            </div>
-          </>
-        )}
-      </div>
-    </main>
-  );
+  const content = <main className="flex h-full w-full flex-row justify-between items-start">{renderGameDisplay}</main>;
 
   if (player.team === GameTeamEnum.WEREWOLF) {
     return <WereWolfProvider>{content}</WereWolfProvider>;

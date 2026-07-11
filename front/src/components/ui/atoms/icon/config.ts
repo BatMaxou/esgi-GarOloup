@@ -8,7 +8,7 @@ import Timer from '@/assets/icons/timer.svg';
 import Copy from '@/assets/icons/copy.svg';
 import Skull from '@/assets/icons/skull.svg';
 import Werewolf from '@/assets/icons/werewolf.svg';
-import Assassin from '@/assets/icons/asssassin.svg';
+import Assassin from '@/assets/icons/assassin.svg';
 import Poison from '@/assets/icons/poison.svg';
 import Witch from '@/assets/icons/witch.svg';
 import Heal from '@/assets/icons/heal.svg';
@@ -17,6 +17,8 @@ import TargetEye from '@/assets/icons/target-eye.svg';
 import HelpCircle from '@/assets/icons/help-circle.svg';
 import Cancel from '@/assets/icons/cancel.svg';
 import WildChild from '@/assets/icons/wild-child.svg';
+import Cupidon from '@/assets/icons/cupidon.svg';
+import Heart from '@/assets/icons/heart.svg';
 
 export type IconName = keyof typeof raw & string;
 export type IconType = LucideIcon | ComponentType<SVGProps<SVGSVGElement>>;
@@ -47,6 +49,8 @@ const raw = {
   cancel: Cancel,
   users: Users,
   wildChild: WildChild,
+  cupidon: Cupidon,
+  heart: Heart,
 };
 
 export const icons: Icons = raw;

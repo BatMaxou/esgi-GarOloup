@@ -137,6 +137,14 @@
             "submit": "Confirmer",
             "actionEnded": "Votre choix a été enregistré.",
             "modelChosen": "Vous avez choisi {username} comme modèle."
+          },
+          "cupidonActions": {
+            "alreadyShotTitle": "Vous avez tiré vous deux flèches.",
+            "alreadyShotSubtitle": "Un nouveau couple est né.",
+            "cupidon": "Cupidon",
+            "cupidonCamp": "Camp des Villageois",
+            "roundDescription": "Choisissez deux joueurs pour former un couple",
+            "submit": "Tirer vos flèches"
           }
         }
       },
@@ -576,6 +584,11 @@
               "discussion": "Débat",
               "actions": "Action"
             }
+          }
+        },
+        "items": {
+          "playerSidebarItem": {
+            "you": "Toi"
           }
         }
       }

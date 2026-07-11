@@ -68,6 +68,7 @@ export enum GameRoleEnum {
   INFECT_FATHER = 'infect_father',
   CUPIDON = 'cupidon',
   ASSASSIN = 'assassin',
+  LOVER = 'lover',
 }
 
 export enum GameTeamEnum {
