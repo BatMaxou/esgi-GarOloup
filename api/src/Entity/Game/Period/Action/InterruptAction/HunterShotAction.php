@@ -4,7 +4,9 @@ namespace App\Entity\Game\Period\Action\InterruptAction;
 
 use App\Entity\Game\Game;
 use App\Entity\Game\Period\Action\InterruptAction;
+use App\Entity\Game\Period\Action\Trait\RevealedRoleActionTrait;
 use App\Entity\Game\Period\Interface\PeriodInterface;
+use App\Entity\Game\Period\Interface\RevealedRoleActionInterface;
 use App\Entity\Game\Period\Interface\TargetableActionInterface;
 use App\Entity\Game\Period\Interrupt;
 use App\Enum\Game\GameActionTypeEnum;
@@ -12,8 +14,10 @@ use App\Enum\Game\GameRoleEnum;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-class HunterShotAction extends InterruptAction implements TargetableActionInterface
+class HunterShotAction extends InterruptAction implements TargetableActionInterface, RevealedRoleActionInterface
 {
+    use RevealedRoleActionTrait;
+
     #[ORM\Column(length: 36)]
     private string $targetPlayerId;
 

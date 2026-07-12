@@ -4,7 +4,9 @@ namespace App\Entity\Game\Period\Action\NightAction;
 
 use App\Entity\Game\Game;
 use App\Entity\Game\Period\Action\NightAction;
+use App\Entity\Game\Period\Action\Trait\RevealedRoleActionTrait;
 use App\Entity\Game\Period\Interface\PeriodInterface;
+use App\Entity\Game\Period\Interface\RevealedRoleActionInterface;
 use App\Entity\Game\Period\Interface\TargetableActionInterface;
 use App\Entity\Game\Period\Night;
 use App\Entity\Game\Role\Interface\NightKillImmuneInterface;
@@ -14,8 +16,10 @@ use App\Repository\Game\Period\Action\NightAction\MurderActionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MurderActionRepository::class)]
-class MurderAction extends NightAction implements TargetableActionInterface
+class MurderAction extends NightAction implements TargetableActionInterface, RevealedRoleActionInterface
 {
+    use RevealedRoleActionTrait;
+
     #[ORM\Column(length: 36)]
     private string $targetPlayerId;
 
@@ -41,6 +45,7 @@ class MurderAction extends NightAction implements TargetableActionInterface
                 }
 
                 $player->setDead(true);
+                $this->setRevealedRole($player->getRole()?->getType());
 
                 return;
             }

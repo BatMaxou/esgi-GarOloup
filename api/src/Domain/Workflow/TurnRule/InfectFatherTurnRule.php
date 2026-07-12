@@ -4,6 +4,7 @@ namespace App\Domain\Workflow\TurnRule;
 
 use App\Domain\Workflow\TurnRule\Interface\TurnRuleInterface;
 use App\Entity\Game\Game;
+use App\Entity\Game\Period\Action\NightAction\ImmuneAction;
 use App\Entity\Game\Role\InfectFatherRole;
 use App\Enum\Game\GameRoleEnum;
 
@@ -22,10 +23,26 @@ class InfectFatherTurnRule implements TurnRuleInterface
         }
 
         $infectFatherRole = $player->getRoleAs(InfectFatherRole::class);
-        if (null === $infectFatherRole) {
+        if (null === $infectFatherRole || !$infectFatherRole->isInfectionAvailable()) {
             return false;
         }
 
-        return $infectFatherRole->isInfectionAvailable();
+        return !$this->isWerewolfVictimImmune($game);
+    }
+
+    private function isWerewolfVictimImmune(Game $game): bool
+    {
+        $night = $game->getCurrentNight();
+        if (null === $night) {
+            return false;
+        }
+
+        foreach ($night->getActions() as $action) {
+            if ($action instanceof ImmuneAction && GameRoleEnum::WEREWOLF === $action->getSource()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

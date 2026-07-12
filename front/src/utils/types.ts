@@ -133,6 +133,7 @@ export type NightAction = {
 
 export type MurderAction = NightAction & {
   targetPlayerId?: string;
+  revealedRole?: GameRoleEnum;
 };
 
 export type SaveAction = NightAction & {
@@ -226,6 +227,7 @@ export type ActionRecap = {
   targetPlayerId?: string;
   secondaryPlayerId?: string;
   seenRole?: string;
+  revealedRole?: string;
 };
 
 export type BallotRecap = {

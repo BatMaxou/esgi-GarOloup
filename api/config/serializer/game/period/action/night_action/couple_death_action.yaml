@@ -1,6 +1,9 @@
-App\Entity\Game\Period\Action\InterruptAction\HunterShotAction:
+App\Entity\Game\Period\Action\NightAction\CoupleDeathAction:
     attributes:
         targetPlayerId:
+            groups:
+                - game:read
+        secondaryPlayerId:
             groups:
                 - game:read
         revealedRole:

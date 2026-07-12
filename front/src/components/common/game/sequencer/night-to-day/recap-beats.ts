@@ -1,6 +1,6 @@
-import { GameRoleEnum } from '@/utils/enums';
+import { GameNightActionTypeEnum, GameRoleEnum } from '@/utils/enums';
 import { getDeadUsersDuringNight } from '@/utils/game';
-import { Game, Player } from '@/utils/types';
+import { Game, MurderAction, Player } from '@/utils/types';
 
 export type RecapBeatType = 'death' | 'calm';
 
@@ -22,15 +22,24 @@ const resolveUsername = (players: Player[], playerId: string): string | null => 
   return target?.user?.username ?? target?.tempUser?.username ?? null;
 };
 
+const resolveRevealedRole = (game: Game, playerId: string): GameRoleEnum | null => {
+  const currentNight = (game.nights?.length ?? 1) - 1;
+  const murder = game.nights?.[currentNight]?.actions?.find(
+    (action) => action.type === GameNightActionTypeEnum.MURDER && (action as MurderAction).targetPlayerId === playerId
+  ) as MurderAction | undefined;
+  return murder?.revealedRole ?? null;
+};
+
 export const buildPublicBeats = (game: Game, players: Player[]): RecapBeat[] =>
   getDeadUsersDuringNight(game).map((playerId) => ({
     id: `death-${playerId}`,
     type: 'death',
     durationMs: BEAT_DURATIONS.death,
     username: resolveUsername(players, playerId),
+    role: resolveRevealedRole(game, playerId),
   }));
 
-export const buildRecapBeats = (game: Game, players: Player[], player: Player): RecapBeat[] => {
+export const buildRecapBeats = (game: Game, players: Player[]): RecapBeat[] => {
   const publicBeats = buildPublicBeats(game, players);
   // const privateBeats = buildPrivateBeats(game, players, player);
 

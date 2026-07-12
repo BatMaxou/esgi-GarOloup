@@ -52,6 +52,11 @@ class LoverRole extends GameRole implements WrapperRoleInterface, NightResettabl
         return $this->originalRole->getType() ?? ($this->type ?? null);
     }
 
+    public function isInfected(): bool
+    {
+        return $this->originalRole->isInfected();
+    }
+
     public function isSetup(): bool
     {
         return $this->originalRole->isSetup();

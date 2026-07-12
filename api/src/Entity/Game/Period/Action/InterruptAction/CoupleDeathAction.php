@@ -5,7 +5,9 @@ namespace App\Entity\Game\Period\Action\InterruptAction;
 use App\Entity\Game\Game;
 use App\Entity\Game\Period\Action\InterruptAction;
 use App\Entity\Game\Period\Action\Trait\CoupleDeathActionTrait;
+use App\Entity\Game\Period\Action\Trait\RevealedRoleActionTrait;
 use App\Entity\Game\Period\Interface\PeriodInterface;
+use App\Entity\Game\Period\Interface\RevealedRoleActionInterface;
 use App\Entity\Game\Period\Interface\SecondaryTargetableActionInterface;
 use App\Entity\Game\Period\Interface\TargetableActionInterface;
 use App\Entity\Game\Period\Interrupt;
@@ -14,9 +16,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'couple_death_interrupt_action')]
-class CoupleDeathAction extends InterruptAction implements TargetableActionInterface, SecondaryTargetableActionInterface
+class CoupleDeathAction extends InterruptAction implements TargetableActionInterface, SecondaryTargetableActionInterface, RevealedRoleActionInterface
 {
     use CoupleDeathActionTrait;
+    use RevealedRoleActionTrait;
 
     public function __construct(Interrupt $interrupt, string $targetPlayerId, string $secondaryPlayerId)
     {

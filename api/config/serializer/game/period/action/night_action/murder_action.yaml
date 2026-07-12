@@ -3,3 +3,6 @@ App\Entity\Game\Period\Action\NightAction\MurderAction:
         targetPlayerId:
             groups:
                 - game:read
+        revealedRole:
+            groups:
+                - game:read

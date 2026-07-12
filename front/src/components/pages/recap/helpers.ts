@@ -53,8 +53,11 @@ export const buildPeriodEvents = (period: PeriodRecap, players: PlayerRecap[], t
     const params: Record<string, string> = { username: nameOf(action.targetPlayerId) };
     if (key === 'couple' || key === 'coupleDeath') {
       params.partner = nameOf(action.secondaryPlayerId);
-    } else if (key === 'seerReveal') {
+    }
+    if (key === 'seerReveal') {
       params.role = action.seenRole ? t(`components.pages.recap.role.${action.seenRole}`) : '?';
+    } else {
+      params.role = action.revealedRole ? t(`components.pages.recap.role.${action.revealedRole}`) : 'none';
     }
     events.push({
       id: `action-${idx}`,

@@ -55,6 +55,7 @@ const Navbar = () => {
         <li>
           <Button asLink variant="text" label={t('roles')} href={paths.roles} />
         </li>
+        {/*
         <li>
           <Button asLink variant="text" label={t('mockLinks.ui')} href={paths.ui} />
         </li>
@@ -64,10 +65,11 @@ const Navbar = () => {
         <li>
           <Button asLink variant="text" label={t('mockLinks.formUi')} href={paths.formUi} />
         </li>
+        */}
       </ul>
 
-      <ul className="hidden sm:flex items-center gap-4">
-        <li>
+      <ul className="flex items-center gap-4">
+        <li className="hidden md:block">
           <Button variant="accent" size="sm" label={t('playNow')} onClick={handleJoinGame} />
         </li>
         <li className="flex min-h-8 min-w-22 items-center justify-end">

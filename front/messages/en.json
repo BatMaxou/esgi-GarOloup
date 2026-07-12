@@ -632,16 +632,16 @@
           "solo": "Solo"
         },
         "event": {
-          "werewolfMurder": "The Werewolves devoured {username}",
-          "witchPoison": "The Witch poisoned {username}",
-          "assassinMurder": "The Assassin eliminated {username}",
+          "werewolfMurder": "The Werewolves devoured {username}{role, select, none {} other { (they were a {role})}}",
+          "witchPoison": "The Witch poisoned {username}{role, select, none {} other { (they were a {role})}}",
+          "assassinMurder": "The Assassin eliminated {username}{role, select, none {} other { (they were a {role})}}",
           "infection": "The Infect Father infected {username}",
           "witchSave": "The Witch saved {username}",
           "seerReveal": "The Seer saw that {username} is a {role}",
           "wildChildModel": "The Wild Child chose {username} as a model",
           "couple": "{username} and {partner} form a couple",
-          "coupleDeath": "In a surge of grief, {username} left with {partner}",
-          "hunterShot": "The Hunter shot {username}",
+          "coupleDeath": "In a surge of grief, {username}{role, select, none {} other { (they were a {role})}} left with {partner}",
+          "hunterShot": "The Hunter shot {username}{role, select, none {} other { (they were a {role})}}",
           "immune": "{username} was immune",
           "calmNight": "A peaceful night, no victims"
         }

@@ -6,3 +6,6 @@ App\Entity\Game\Period\Action\VoteAction\CoupleDeathAction:
         secondaryPlayerId:
             groups:
                 - game:read
+        revealedRole:
+            groups:
+                - game:read
