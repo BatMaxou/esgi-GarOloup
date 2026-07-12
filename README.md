@@ -51,3 +51,7 @@ make fixtures
 compte admin : `admin@garoloup.com`
 
 compte test : `test@garoloup.com`
+
+### Yaak
+
+Yaak collection is available in the `.yaak` folder to test the API endpoints.
