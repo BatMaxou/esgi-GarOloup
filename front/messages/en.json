@@ -134,7 +134,10 @@
             "witch": "Witch",
             "wild_child": "Wild child",
             "hunter": "Hunter",
-            "infect_father": "Infect father"
+            "infect_father": "Infect father",
+            "lover": "Lover",
+            "cupidon": "Cupidon",
+            "assassin": "Assassin"
           }
         },
         "waitingNightActions": {

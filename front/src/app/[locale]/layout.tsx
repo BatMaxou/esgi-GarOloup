@@ -71,7 +71,14 @@ const RootLayout = async ({ children }: Props) => {
         <div className="opacity-90 dark:opacity-60 !fixed inset-0 -z-1">
           <Image src="/images/night-camp-background.png" alt="Background" className="object-cover object-center" fill />
         </div>
-        <ToastContainer toastStyle={{ backgroundColor: 'var(--color-secondary)', color: 'white' }} />
+        <ToastContainer
+          toastStyle={{ backgroundColor: 'var(--color-secondary)', color: 'white' }}
+          position="bottom-left"
+          autoClose={3000}
+          closeOnClick={false}
+          pauseOnHover={false}
+          draggable
+        />
         <ServiceWorkerRegistration />
         <Providers>{children}</Providers>
       </body>
