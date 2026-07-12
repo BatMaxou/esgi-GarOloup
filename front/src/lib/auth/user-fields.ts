@@ -4,11 +4,13 @@ import type { User } from '@/utils/types';
 export const userAdditionalFields = {
   token: {
     type: 'string',
+    input: true,
     returned: true,
     required: false,
   },
   refreshToken: {
     type: 'string',
+    input: true,
     returned: true,
     required: false,
   },

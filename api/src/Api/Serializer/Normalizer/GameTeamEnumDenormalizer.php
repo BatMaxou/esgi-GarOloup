@@ -15,12 +15,10 @@ final class GameTeamEnumDenormalizer implements DenormalizerInterface
         }
 
         if (!\is_string($data) || null === $team = GameTeamEnum::tryFrom($data)) {
-            throw NotNormalizableValueException::createForUnexpectedDataType(
-                \sprintf('The value "%s" is not a valid %s.', \is_scalar($data) ? (string) $data : \get_debug_type($data), GameTeamEnum::class),
-                $data,
-                [GameTeamEnum::class],
-                $context['deserialization_path'] ?? null,
-            );
+            $path = $context['deserialization_path'] ?? null;
+            $path = \is_string($path) ? $path : null;
+
+            throw NotNormalizableValueException::createForUnexpectedDataType(\sprintf('The value "%s" is not a valid %s.', \is_scalar($data) ? (string) $data : \get_debug_type($data), GameTeamEnum::class), $data, [GameTeamEnum::class], $path);
         }
 
         return $team;
