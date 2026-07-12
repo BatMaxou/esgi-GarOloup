@@ -146,7 +146,10 @@
             "witch": "Sorcière",
             "wild_child": "Enfant sauvage",
             "hunter": "Chasseur",
-            "infect_father": "Père infect"
+            "infect_father": "Père infect",
+            "lover": "Amoureux",
+            "assassin": "Assassin",
+            "cupidon": "Cupidon"
           }
         },
         "vote": {

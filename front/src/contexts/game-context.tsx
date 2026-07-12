@@ -103,7 +103,6 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
       toast.error(t('openInvitationError'));
       return;
     }
-    toast.success(t('openInvitationSuccess'));
   };
 
   const closeInvitation = async () => {
@@ -112,7 +111,6 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
       toast.error(t('closeInvitationError'));
       return;
     }
-    toast.success(t('closeInvitationSuccess'));
   };
 
   const setConfiguration = async (configuration: GameConfigurationPayload) => {
@@ -121,7 +119,6 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
       toast.error(t('setConfigurationError'));
       return;
     }
-    toast.success(t('setConfigurationSuccess'));
   };
 
   const resetConfiguration = async () => {
@@ -138,7 +135,6 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
       toast.error(t('setGameMasterError'));
       return;
     }
-    toast.success(t('setGameMasterSuccess'));
   };
 
   const resetGameMaster = async () => {
@@ -171,7 +167,6 @@ export const GameProvider = ({ children, initialGame = null }: Props) => {
       toast.error(t('launchGameError'));
       return;
     }
-    toast.success(t('launchGameSuccess'));
   };
 
   const vote = async (targetPlayerId: string) => {
