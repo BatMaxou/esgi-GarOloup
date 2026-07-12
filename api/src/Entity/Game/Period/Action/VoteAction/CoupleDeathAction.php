@@ -4,8 +4,10 @@ namespace App\Entity\Game\Period\Action\VoteAction;
 
 use App\Entity\Game\Game;
 use App\Entity\Game\Period\Action\Trait\CoupleDeathActionTrait;
+use App\Entity\Game\Period\Action\Trait\RevealedRoleActionTrait;
 use App\Entity\Game\Period\Action\VoteAction;
 use App\Entity\Game\Period\Interface\PeriodInterface;
+use App\Entity\Game\Period\Interface\RevealedRoleActionInterface;
 use App\Entity\Game\Period\Interface\SecondaryTargetableActionInterface;
 use App\Entity\Game\Period\Interface\TargetableActionInterface;
 use App\Entity\Game\Period\Vote;
@@ -14,9 +16,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'couple_death_vote_action')]
-class CoupleDeathAction extends VoteAction implements TargetableActionInterface, SecondaryTargetableActionInterface
+class CoupleDeathAction extends VoteAction implements TargetableActionInterface, SecondaryTargetableActionInterface, RevealedRoleActionInterface
 {
     use CoupleDeathActionTrait;
+    use RevealedRoleActionTrait;
 
     public function __construct(Vote $vote, string $targetPlayerId, string $secondaryPlayerId)
     {

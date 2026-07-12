@@ -3,7 +3,7 @@
 namespace App\Api\Model\Recap;
 
 /**
- * @phpstan-type ActionRecapArray array{actionType: string, source: string|null, targetPlayerId: string|null, secondaryPlayerId?: string|null, seenRole?: string|null}
+ * @phpstan-type ActionRecapArray array{actionType: string, source: string|null, targetPlayerId: string|null, secondaryPlayerId?: string|null, seenRole?: string|null, revealedRole?: string|null}
  */
 final readonly class ActionRecap
 {
@@ -13,6 +13,7 @@ final readonly class ActionRecap
         public ?string $targetPlayerId,
         public ?string $secondaryPlayerId = null,
         public ?string $seenRole = null,
+        public ?string $revealedRole = null,
     ) {
     }
 
@@ -27,6 +28,7 @@ final readonly class ActionRecap
             'targetPlayerId' => $this->targetPlayerId,
             'secondaryPlayerId' => $this->secondaryPlayerId,
             'seenRole' => $this->seenRole,
+            'revealedRole' => $this->revealedRole,
         ];
     }
 
@@ -41,6 +43,7 @@ final readonly class ActionRecap
             targetPlayerId: $data['targetPlayerId'] ?? null,
             secondaryPlayerId: $data['secondaryPlayerId'] ?? null,
             seenRole: $data['seenRole'] ?? null,
+            revealedRole: $data['revealedRole'] ?? null,
         );
     }
 }

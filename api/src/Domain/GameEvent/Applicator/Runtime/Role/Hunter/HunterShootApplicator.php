@@ -12,6 +12,7 @@ use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\HunterShootEvent;
 use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Game\Game;
+use App\Entity\Game\Period\Interface\RevealedRoleActionInterface;
 use App\Entity\Game\Role\HunterRole;
 use App\Enum\Game\GameActionTypeEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
@@ -88,7 +89,10 @@ class HunterShootApplicator implements GameEventApplicatorInterface
 
         $targetPlayer->setDead(true);
         $role->markShot();
-        $this->periodActionFactory->createForCurrentPeriod($game, GameActionTypeEnum::HUNTER_SHOT, $targetPlayerId);
+        $action = $this->periodActionFactory->createForCurrentPeriod($game, GameActionTypeEnum::HUNTER_SHOT, $targetPlayerId);
+        if ($action instanceof RevealedRoleActionInterface) {
+            $action->setRevealedRole($targetPlayer->getRole()?->getType());
+        }
 
         $game->setStepEndAt($this->clock->now());
         $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_GAME, $game));

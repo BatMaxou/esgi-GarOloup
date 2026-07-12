@@ -634,16 +634,16 @@
           "solo": "Solo"
         },
         "event": {
-          "werewolfMurder": "Les Loups-Garous ont dévoré {username}",
-          "witchPoison": "La Sorcière a empoisonné {username}",
-          "assassinMurder": "L'Assassin a éliminé {username}",
+          "werewolfMurder": "Les Loups-Garous ont dévoré {username}{role, select, none {} other { (c'était {role})}}",
+          "witchPoison": "La Sorcière a empoisonné {username}{role, select, none {} other { (c'était {role})}}",
+          "assassinMurder": "L'Assassin a éliminé {username}{role, select, none {} other { (c'était {role})}}",
           "infection": "Le Père Infect a infecté {username}",
           "witchSave": "La Sorcière a sauvé {username}",
           "seerReveal": "La Voyante a vu que {username} est {role}",
           "wildChildModel": "L'Enfant Sauvage a choisi {username} comme modèle",
           "couple": "{username} et {partner} forment un couple",
-          "coupleDeath": "Dans un élan de chagrin, {username} est parti avec {partner}",
-          "hunterShot": "Le Chasseur a tiré sur {username}",
+          "coupleDeath": "Dans un élan de chagrin, {username}{role, select, none {} other { (c'était {role})}} est parti avec {partner}",
+          "hunterShot": "Le Chasseur a tiré sur {username}{role, select, none {} other { (c'était {role})}}",
           "immune": "{username} a été immunisé",
           "calmNight": "Nuit paisible, aucune victime"
         }

@@ -31,7 +31,7 @@ export const useNightRecap = (game: Game | null, player: Player | null): UseNigh
       playedNight !== nightNumber
     ) {
       setPlayedNight(nightNumber);
-      setBeats(buildRecapBeats(game, game.players ?? [], player));
+      setBeats(buildRecapBeats(game, game.players ?? []));
       setBeatIndex(0);
     }
   }
