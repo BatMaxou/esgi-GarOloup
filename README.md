@@ -15,14 +15,14 @@ Plateforme de jeu du Loup-Garou en temps réel.
 
 Copy `api/.env.example` to `api/.env` and edit it if needed.
 ```bash
-cp api/.env.example api/.env
+cp api/.env.example api/.env.local
 ```
 
 #### Front
 
 Copy `front/.env.example` to `front.env` and edit it if needed.
 ```bash
-cp front/.env.example front/.env
+cp front/.env.example front/.env.local
 ```
 
 #### Docker services
@@ -31,6 +31,8 @@ Copy `compose.override.example.yaml` to `compose.override.yaml` and edit it if n
 ```bash
 cp compose.override.example.yaml compose.override.yaml
 ```
+
+Front : port 3000
 
 ### Installation
 
@@ -43,3 +45,9 @@ make install
 ```bash
 make fixtures
 ```
+
+### Fixtures
+
+compte admin : `admin@garoloup.com`
+
+compte test : `test@garoloup.com`
