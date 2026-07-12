@@ -62,6 +62,7 @@
             "teamLabel": "Your pack",
             "actionLabel": "Choose a victim",
             "focused": "Focused",
+            "loverPartner": "In couple",
             "submit": "Kill the victim"
           },
           "witchActions": {

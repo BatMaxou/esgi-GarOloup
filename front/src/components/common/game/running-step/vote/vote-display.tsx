@@ -12,6 +12,8 @@ import Card from '@/components/ui/molecules/card';
 import { GameRoleEnum } from '@/utils/enums';
 import type { Ballot, Player, SeerRole } from '@/utils/types';
 import Tooltip from '@/components/ui/atoms/tooltip';
+import { isLoverRole, useOptionalLover } from '@/contexts/roles/lover-context';
+import PlayerLoverPartnerIcon from '@/components/ui/molecules/icon/player-lover-partner-item';
 
 const roleIconMap: Partial<Record<GameRoleEnum, IconName>> = {
   [GameRoleEnum.WEREWOLF]: 'werewolf',
@@ -25,8 +27,10 @@ const getUsername = (player?: Player) =>
 const VoteDisplay = () => {
   const { game, vote } = useGame();
   const { player } = usePlayer();
+  const { partnerPlayerId: loverPartnerId } = useOptionalLover();
   const t = useTranslations('components.common.game.vote');
   const [votingId, setVotingId] = useState<string | null>(null);
+  const partnerPlayerId = loverPartnerId ?? (isLoverRole(player?.role) ? (player?.role.partnerPlayerId ?? null) : null);
 
   const myRole = player?.role;
   const observedRoles = useMemo(
@@ -96,10 +100,14 @@ const VoteDisplay = () => {
           return (
             <Card
               key={gamePlayer.id}
-              onClick={isSpectator ? undefined : () => handleVote(gamePlayer.id)}
+              onClick={
+                isSpectator || (isLoverRole(player?.role) && gamePlayer.id === partnerPlayerId)
+                  ? undefined
+                  : () => handleVote(gamePlayer.id)
+              }
               isCurrentPlayer={isMyTarget}
               liftOnHover={false}
-              hoverable={!isMyTarget && !isSpectator}
+              hoverable={!isMyTarget && !isSpectator && !isLoverRole(player?.role) && gamePlayer.id !== partnerPlayerId}
               className={`group relative flex flex-col items-center justify-center gap-3 min-h-32 border!
                 ${isSpectator ? 'cursor-default' : 'cursor-pointer'}
                 ${
@@ -107,11 +115,18 @@ const VoteDisplay = () => {
                     ? 'border-error! bg-error/20!'
                     : isSpectator
                       ? 'border-primary/15!'
-                      : 'border-primary/15! hover:bg-primary/10 hover:border-primary/50!'
+                      : isLoverRole(player?.role) && gamePlayer.id === partnerPlayerId
+                        ? 'border-pink-700! bg-pink-700/20! cursor-default!'
+                        : 'border-primary/15! hover:bg-primary/10 hover:border-primary/50!'
                 }
                 ${votingId === gamePlayer.id ? 'opacity-60 pointer-events-none' : ''}
               `}
             >
+              {isLoverRole(player?.role) && gamePlayer.id === partnerPlayerId && (
+                <div className="absolute top-2 left-2">
+                  <PlayerLoverPartnerIcon player={gamePlayer} className="w-4 h-4 text-pink-700" />
+                </div>
+              )}
               {voters.length > 0 && (
                 <div className="absolute top-2 right-2 flex flex-row -space-x-3 group-hover:-space-x-1">
                   {(voters.length > 2 ? voters.slice(0, 2) : voters).map((ballot) => (

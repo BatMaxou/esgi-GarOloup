@@ -45,6 +45,14 @@ export const LoverProvider = ({ children }: Props) => {
   );
 };
 
+const defaultLoverContext: LoverContextType = {
+  isLover: false,
+  partnerPlayerId: null,
+  partner: null,
+};
+
+export const useOptionalLover = (): LoverContextType => useContext(LoverContext) ?? defaultLoverContext;
+
 export const useLover = () => {
   const context = useContext(LoverContext);
   if (!context) {
