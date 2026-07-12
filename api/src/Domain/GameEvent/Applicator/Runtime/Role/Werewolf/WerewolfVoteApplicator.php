@@ -14,8 +14,10 @@ use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Event\Game\WerewolfVoteEvent;
 use App\Entity\Game\Game;
+use App\Entity\Game\Period\Action\NightAction\ImmuneAction;
 use App\Entity\Game\Period\Action\NightAction\MurderAction;
 use App\Entity\Game\Player;
+use App\Entity\Game\Role\Interface\NightKillImmuneInterface;
 use App\Entity\Game\Role\Interface\WerewolfVoterInterface;
 use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
@@ -164,11 +166,29 @@ class WerewolfVoteApplicator implements GameEventApplicatorInterface
         $victimId = $this->resolveVictim($game);
         if (null !== $victimId) {
             $night = $game->getCurrentNight() ?? throw new \LogicException('No active night to register the murder');
-            $murder = new MurderAction($night, GameRoleEnum::WEREWOLF, $victimId);
-            $night->addAction($murder);
+            $night->addAction(new MurderAction($night, GameRoleEnum::WEREWOLF, $victimId));
+
+            if ($this->isImmuneToWerewolf($game, $victimId)) {
+                $night->addAction(new ImmuneAction($night, GameRoleEnum::WEREWOLF, $victimId));
+            }
         }
 
         return $game;
+    }
+
+    private function isImmuneToWerewolf(Game $game, string $victimId): bool
+    {
+        foreach ($game->getPlayers() as $player) {
+            if ((string) $player->getId() !== $victimId) {
+                continue;
+            }
+
+            $immuneRole = $player->getRoleAs(NightKillImmuneInterface::class);
+
+            return null !== $immuneRole && $immuneRole->isImmuneToNightMurder(GameRoleEnum::WEREWOLF);
+        }
+
+        return false;
     }
 
     private function resolveVictim(Game $game): ?string

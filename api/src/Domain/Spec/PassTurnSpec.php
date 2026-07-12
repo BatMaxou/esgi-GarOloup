@@ -29,8 +29,8 @@ class PassTurnSpec
             return false;
         }
 
-        $role = $player->getRole();
-        if (!$role instanceof PassableRoleInterface) {
+        $role = $player->getRoleAs(PassableRoleInterface::class);
+        if (null === $role) {
             return false;
         }
 

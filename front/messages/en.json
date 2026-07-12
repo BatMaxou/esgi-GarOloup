@@ -642,6 +642,7 @@
           "couple": "{username} and {partner} form a couple",
           "coupleDeath": "In a surge of grief, {username} left with {partner}",
           "hunterShot": "The Hunter shot {username}",
+          "immune": "{username} was immune",
           "calmNight": "A peaceful night, no victims"
         }
       }

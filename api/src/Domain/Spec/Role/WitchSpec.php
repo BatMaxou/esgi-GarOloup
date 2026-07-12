@@ -6,6 +6,7 @@ use App\Entity\Game\Game;
 use App\Entity\Game\Period\Action\NightAction\InfectAction;
 use App\Entity\Game\Period\Action\NightAction\MurderAction;
 use App\Entity\Game\Player;
+use App\Entity\Game\Role\Interface\NightKillImmuneInterface;
 use App\Entity\Game\Role\WitchRole;
 use App\Enum\Game\GameRoleEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
@@ -94,6 +95,12 @@ class WitchSpec
 
         foreach ($night->getActions() as $action) {
             if ($action instanceof MurderAction && $action->getTargetPlayerId() === $targetId) {
+                $source = $action->getSource();
+                $immuneRole = $target->getRoleAs(NightKillImmuneInterface::class);
+                if (null !== $immuneRole && $source instanceof GameRoleEnum && $immuneRole->isImmuneToNightMurder($source)) {
+                    return false;
+                }
+
                 return true;
             }
         }
