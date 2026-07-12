@@ -1,6 +1,6 @@
 import { GameTeamEnum } from './enums';
 
-export type GameTeamVariantType = 'success' | 'error' | 'primary' | 'accent' | 'secondary';
+export type GameTeamVariantType = 'success' | 'error' | 'primary' | 'accent' | 'secondary' | 'couple';
 
 export const gameTeamVariant = (gameTeam: GameTeamEnum): GameTeamVariantType => {
   switch (gameTeam) {
@@ -11,7 +11,7 @@ export const gameTeamVariant = (gameTeam: GameTeamEnum): GameTeamVariantType => 
     case GameTeamEnum.SOLO:
       return 'secondary';
     case GameTeamEnum.COUPLE:
-      return 'accent';
+      return 'couple';
     default:
       return 'secondary';
   }

@@ -10,18 +10,21 @@ import Tag from '@/components/ui/molecules/tag';
 import Divider from '@/components/ui/atoms/divider';
 import Button from '@/components/ui/molecules/button';
 import { getImagePath } from '@/utils/getImagePath';
-import { GameTeamEnum } from '@/utils/enums';
+import { GameTeamEnum, RoleEnum } from '@/utils/enums';
 import { Role } from '@/utils/types';
 import { TagFilter } from '@/components/ui/molecules/filters';
 import { gameTeamVariant } from '@/utils/variants';
 import Image from 'next/image';
 import { paths } from '@/utils/paths';
 import { roleTypeToSlug, type RoleSlugLocale } from '@/utils/roleSlug';
+import { useAuth } from '@/contexts/auth-context';
 
 const RolesClient = () => {
   const troles = useTranslations('roles');
   const t = useTranslations('components.pages.roles');
   const locale = useLocale() as RoleSlugLocale;
+  const { user } = useAuth();
+
   const {
     roleList,
     roleListLoading,
@@ -34,7 +37,18 @@ const RolesClient = () => {
   } = useRole();
   const [selectedGameTeamFilter, setSelectedGameTeamFilter] = useState<GameTeamEnum | 'all'>('all');
   const roleListDynamic = useMemo(() => {
-    return selectedGameTeamFilter !== 'all' ? filteredRoleList : roleList;
+    const list = selectedGameTeamFilter !== 'all' ? filteredRoleList : roleList;
+
+    return [...list].sort((left, right) => {
+      const leftIsComingSoon = !left.type ? 0 : 1;
+      const rightIsComingSoon = !right.type ? 0 : 1;
+
+      if (leftIsComingSoon !== rightIsComingSoon) {
+        return leftIsComingSoon - rightIsComingSoon;
+      }
+
+      return (left.name ?? '').localeCompare(right.name ?? '', undefined, { sensitivity: 'base' });
+    });
   }, [filteredRoleList, roleList, selectedGameTeamFilter]);
 
   useEffect(() => {
@@ -55,22 +69,28 @@ const RolesClient = () => {
 
   return (
     <main className="px-6 py-[100px] mx-auto max-w-[1100px] w-full">
-      <div className="mb-8">
-        <Typography tag="div" textColor="primary" bold>
-          {t('eyebrow')}
-        </Typography>
-        <Typography tag="h1" variant="heading-2" bold>
-          {t('title')}
-        </Typography>
-        <Typography tag="p" className="mb-10">
-          {t('subtitle')}
-        </Typography>
+      <div className="flex flex-row flex-wrap items-center justify-between">
+        <div className="sm:mb-8 mb-4">
+          <Typography tag="div" textColor="primary" bold>
+            {t('eyebrow')}
+          </Typography>
+          <Typography tag="h1" variant="heading-2" bold>
+            {t('title')}
+          </Typography>
+          <Typography tag="p" className="sm:mb-10 mb-0">
+            {t('subtitle')}
+          </Typography>
+        </div>
+        {user?.roles?.includes(RoleEnum.ADMIN) && (
+          <div className="sm:mb-0 mb-4">
+            <Button variant="accent" label={t('manageRoles')} asLink href={paths.adminRoles} />
+          </div>
+        )}
       </div>
-      <div className="mb-4 flex flex-row items-center justify-start gap-2">
+      <div className="mb-4 flex flex-row flex-wrap items-center justify-start gap-2">
         <Typography tag="h2" variant="body-sm" bold>
-          {t('camp')}
+          {t('camp')} -
         </Typography>{' '}
-        -
         <TagFilter
           labels={gameTeamFilters}
           traductionPath="roles"
@@ -137,7 +157,8 @@ const RolesClient = () => {
                           variant={role.teams && role.teams.length > 0 ? gameTeamVariant(role.teams[0]) : null}
                         />
                       </div>
-                      <div className="px-4">
+                      <div className="px-4 flex flex-col gap-2">
+                        {!role.type && <Tag label={t('comingSoon')} variant="accent" />}
                         <Typography variant="subtitle" bold className="text-glow-dark">
                           {role.name}
                         </Typography>

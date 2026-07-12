@@ -59,7 +59,7 @@ function TagFilter<T extends string>({
           >
             <Tag label={allLabel} size="lg" variant={'secondary'} active={selected === 'all'} lowerCase />
           </button>
-          {labels.map((label) => {
+          {labels?.map((label) => {
             const active = selected === label;
             return (
               <button

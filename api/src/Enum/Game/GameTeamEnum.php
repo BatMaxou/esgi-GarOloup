@@ -29,6 +29,7 @@ enum GameTeamEnum: string implements FilterAwareInterface
             self::VILLAGE->value,
             self::WEREWOLF->value,
             self::SOLO->value,
+            self::COUPLE->value,
         ];
     }
 }

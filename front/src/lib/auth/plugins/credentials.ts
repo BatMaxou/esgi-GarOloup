@@ -3,8 +3,10 @@ import { User as BetterAuthUser } from 'better-auth/types';
 import { z } from 'zod';
 
 import { User } from '@/utils/types';
-import { getApiClient } from '@/utils/server/clients';
+import { apiBaseUrl } from '@/utils/tools';
+import { ApiClient } from '@/lib/api/ApiClient';
 import { ApiClientError } from '@/lib/api/ApiClientError';
+import { mapApiUserToAuthUser } from '@/lib/auth/user-fields';
 
 export const credentialsPlugin = credentials({
   autoSignUp: true,
@@ -18,7 +20,7 @@ export const credentialsPlugin = credentials({
   callback: async (ctx, parsed) => {
     const { email, password } = parsed;
 
-    const apiClient = await getApiClient();
+    const apiClient = new ApiClient(apiBaseUrl);
 
     const maybeLoginResponse = await apiClient.login(email, password);
     if (maybeLoginResponse instanceof ApiClientError) {
@@ -36,7 +38,7 @@ export const credentialsPlugin = credentials({
     const user = maybeMeResponse;
 
     return {
-      ...user,
+      ...mapApiUserToAuthUser(user, email),
       token,
       refreshToken,
     };

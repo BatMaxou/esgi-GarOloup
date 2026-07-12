@@ -2,7 +2,8 @@ import { credentials } from 'better-auth-credentials-plugin';
 import { User as BetterAuthUser } from 'better-auth/types';
 
 import { User } from '@/utils/types';
-import { getApiClient } from '@/utils/server/clients';
+import { apiBaseUrl } from '@/utils/tools';
+import { ApiClient } from '@/lib/api/ApiClient';
 import { ApiClientError } from '@/lib/api/ApiClientError';
 
 import { tempUserCredentialsSchema } from '@/lib/auth/plugins/temp-user-credentials-schema';
@@ -16,7 +17,7 @@ export const tempUserCredentialsPlugin = credentials({
   callback: async (ctx, parsed) => {
     const { username } = parsed;
 
-    const apiClient = await getApiClient();
+    const apiClient = new ApiClient(apiBaseUrl);
 
     const maybeTempUserResponse = await apiClient.tempUser.get(username);
     if (maybeTempUserResponse instanceof ApiClientError) {

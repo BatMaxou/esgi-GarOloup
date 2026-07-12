@@ -12,7 +12,7 @@ export const tempUserAuth = betterAuth({
   session: {
     expiresIn: 60 * 60 * 24 * 7,
     cookieCache: {
-      version: 'v1',
+      version: 'v2',
       enabled: true,
       maxAge: 60 * 60 * 24 * 7,
       strategy: 'jwt',
@@ -27,11 +27,13 @@ export const tempUserAuth = betterAuth({
     additionalFields: {
       token: {
         type: 'string',
+        input: true,
         returned: true,
         required: false,
       },
       refreshToken: {
         type: 'string',
+        input: true,
         returned: true,
         required: false,
       },

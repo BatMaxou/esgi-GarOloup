@@ -86,7 +86,7 @@ const AssassinActions = () => {
                   isTarget
                     ? 'border-error! bg-error/20!'
                     : isLoverRole(player?.role) && gamePlayer.id === partnerPlayerId
-                      ? 'border-pink-700! bg-pink-700/20! cursor-default!'
+                      ? 'border-pink-500! bg-pink-500/20! cursor-default!'
                       : 'border-primary/15! hover:bg-primary/10 hover:border-primary/50!'
                 }
                 ${submitting ? 'opacity-60 pointer-events-none' : ''}
@@ -94,7 +94,7 @@ const AssassinActions = () => {
             >
               {isLoverRole(player?.role) && gamePlayer.id === partnerPlayerId && (
                 <div className="absolute top-2 left-2">
-                  <PlayerLoverPartnerIcon player={gamePlayer} className="w-4 h-4 text-pink-700" />
+                  <PlayerLoverPartnerIcon player={gamePlayer} className="w-4 h-4 text-pink-500" />
                 </div>
               )}
               <Typography variant="body" textColor="light" center>
