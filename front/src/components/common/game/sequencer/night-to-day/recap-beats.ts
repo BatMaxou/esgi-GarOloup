@@ -1,8 +1,8 @@
 import { GameRoleEnum } from '@/utils/enums';
-import { getDeadUsersDuringNight, getRevealUserDuringThisNight } from '@/utils/game';
+import { getDeadUsersDuringNight } from '@/utils/game';
 import { Game, Player } from '@/utils/types';
 
-export type RecapBeatType = 'death' | 'reveal' | 'revealDead' | 'calm';
+export type RecapBeatType = 'death' | 'calm';
 
 export type RecapBeat = {
   id: string;
@@ -14,8 +14,6 @@ export type RecapBeat = {
 
 export const BEAT_DURATIONS: Record<RecapBeatType, number> = {
   death: 3500,
-  reveal: 4000,
-  revealDead: 4000,
   calm: 3500,
 };
 
@@ -32,32 +30,12 @@ export const buildPublicBeats = (game: Game, players: Player[]): RecapBeat[] =>
     username: resolveUsername(players, playerId),
   }));
 
-export const buildPrivateBeats = (game: Game, players: Player[], player: Player): RecapBeat[] => {
-  const reveal = getRevealUserDuringThisNight(game, player);
-  if (!reveal) {
-    return [];
-  }
-
-  const observedDiedThisNight = getDeadUsersDuringNight(game).includes(reveal.observedPlayerId);
-  const type: RecapBeatType = observedDiedThisNight ? 'revealDead' : 'reveal';
-
-  return [
-    {
-      id: `reveal-${reveal.observedPlayerId}`,
-      type,
-      durationMs: BEAT_DURATIONS[type],
-      username: resolveUsername(players, reveal.observedPlayerId),
-      role: reveal.observedRole,
-    },
-  ];
-};
-
 export const buildRecapBeats = (game: Game, players: Player[], player: Player): RecapBeat[] => {
   const publicBeats = buildPublicBeats(game, players);
-  const privateBeats = buildPrivateBeats(game, players, player);
+  // const privateBeats = buildPrivateBeats(game, players, player);
 
   const openingBeats: RecapBeat[] =
     publicBeats.length === 0 ? [{ id: 'calm', type: 'calm', durationMs: BEAT_DURATIONS.calm }] : publicBeats;
 
-  return [...openingBeats, ...privateBeats];
+  return [...openingBeats];
 };

@@ -26,7 +26,7 @@ export const SeerContext = createContext<SeerContextType | undefined>(undefined)
 
 export const SeerProvider = ({ children }: Props) => {
   const { apiClient } = useApiClient();
-  const { player } = usePlayer();
+  const { player, setPlayer } = usePlayer();
 
   const playerRole = player?.role;
   const role = isSeerRole(playerRole) ? playerRole : undefined;
@@ -35,7 +35,21 @@ export const SeerProvider = ({ children }: Props) => {
   const lastObservedRole = role?.lastObservedRole ?? null;
   const observedRoles = role?.observedRoles ?? {};
 
-  const reveal = useCallback((targetPlayerId: string) => apiClient.seer.reveal(targetPlayerId), [apiClient]);
+  const reveal = useCallback(
+    async (targetPlayerId: string) => {
+      const response = await apiClient.seer.reveal(targetPlayerId);
+
+      if (!(response instanceof ApiClientError)) {
+        const updatedPlayer = await apiClient.player.getCurrent();
+        if (!(updatedPlayer instanceof ApiClientError)) {
+          setPlayer(updatedPlayer);
+        }
+      }
+
+      return response;
+    },
+    [apiClient, setPlayer]
+  );
 
   return (
     <SeerContext.Provider value={{ lastObservedPlayerId, lastObservedRole, observedRoles, reveal }}>
@@ -43,6 +57,8 @@ export const SeerProvider = ({ children }: Props) => {
     </SeerContext.Provider>
   );
 };
+
+export const useOptionalSeer = () => useContext(SeerContext) ?? null;
 
 export const useSeer = () => {
   const context = useContext(SeerContext);

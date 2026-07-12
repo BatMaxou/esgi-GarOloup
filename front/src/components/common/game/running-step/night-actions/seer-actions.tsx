@@ -9,6 +9,7 @@ import Card from '@/components/ui/molecules/card';
 import Button from '@/components/ui/molecules/button';
 import { useState } from 'react';
 import { useSeer } from '@/contexts/roles/seer-context';
+import { SeerRole } from '@/utils/types';
 
 const SeerActions = () => {
   const { player } = usePlayer();
@@ -16,13 +17,14 @@ const SeerActions = () => {
   const { reveal } = useSeer();
   const t = useTranslations('components.common.game.nightActions.seerActions');
   const [revealTargetId, setRevealTargetId] = useState<string | null>(null);
-  const playerAliveList =
+  const playerAliveListAndUnrevealed =
     game?.players
       ?.filter((gamePlayer) => player?.id !== gamePlayer.id && !gamePlayer.dead)
       .map((gamePlayer) => ({
         id: gamePlayer.id,
         name: (gamePlayer.user?.username || gamePlayer.tempUser?.username) ?? '',
-      })) ?? [];
+      }))
+      .filter((gamePlayer) => !(player?.role as SeerRole)?.observedRoles?.[gamePlayer.id]) ?? [];
 
   const { handleSubmit, handleChange } = useFormik({
     initialValues: {
@@ -71,7 +73,7 @@ const SeerActions = () => {
             </Typography>
           </div>
           <div className="flex flex-col gap-2 pr-2 w-full overflow-y-scroll scrollbar max-h-96">
-            {playerAliveList.map((player) => (
+            {playerAliveListAndUnrevealed.map((player) => (
               <Card
                 key={player.id}
                 onClick={() => handleSelectRevealTarget(player.id)}

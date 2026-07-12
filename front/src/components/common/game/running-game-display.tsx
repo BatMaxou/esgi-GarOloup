@@ -1,6 +1,7 @@
 'use client';
 
 import { GameGlobalStepEnum, GameRoleEnum, GameRuntimeStepEnum, GameTeamEnum } from '@/utils/enums';
+import { isRoleNightTurn, isSeerNightTurn } from '@/utils/game';
 import NewGameDisplay from './new-game-display';
 import { useGame } from '@/contexts/game-context';
 import WerewolfActions from './running-step/night-actions/werewolf-actions';
@@ -19,6 +20,7 @@ import WaitingSetupActions from './running-step/setup/waiting-setup-actions';
 import AssassinActions from './running-step/night-actions/assassin-action';
 import InfectFatherActions from './running-step/night-actions/infect-father-actions';
 import CupidonActions from './running-step/setup/cupidon-action';
+import SeerRevealAnimation from './sequencer/seer-reveal';
 
 const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameMaster: boolean }) => {
   const { game } = useGame();
@@ -33,101 +35,109 @@ const RunningGameDisplay = ({ isHost, isGameMaster }: { isHost: boolean; isGameM
     return null;
   }
 
-  if (globalStep === GameGlobalStepEnum.NEW) {
-    return <NewGameDisplay game={game} isHost={isHost} isGameMaster={isGameMaster} />;
-  }
-
-  if (globalStep === GameGlobalStepEnum.RUNNING) {
-    if (runningStep === GameRuntimeStepEnum.SETUP) {
-      switch (true) {
-        case player?.role?.type === GameRoleEnum.WILD_CHILD:
-          return <WildChildActions />;
-        case player?.role?.type === GameRoleEnum.CUPIDON:
-          return <CupidonActions />;
-        default:
-          return <WaitingSetupActions />;
-      }
-    }
-    if (runningStep === GameRuntimeStepEnum.NIGHT) {
-      if (
-        player.dead ||
-        game?.players?.some((currentPlayer) => currentPlayer.id === player?.id && currentPlayer.dead)
-      ) {
-        return <WaitingNightActions />;
-      }
-
-      switch (true) {
-        case player?.team === GameTeamEnum.WEREWOLF &&
-          game.nightWorkflow?.currentTurn?.werewolf === GameRoleEnum.WEREWOLF:
-          return (
-            <>
-              <UserTurnAnimation animateOnce />
-              <WerewolfActions />
-            </>
-          );
-        case player?.role?.type === GameRoleEnum.INFECT_FATHER &&
-          game.nightWorkflow?.currentTurn?.infect_father === GameRoleEnum.INFECT_FATHER:
-          return (
-            <>
-              <UserTurnAnimation animateOnce />
-              <InfectFatherActions />
-            </>
-          );
-        case player?.role?.type === GameRoleEnum.WITCH && game.nightWorkflow?.currentTurn?.witch === GameRoleEnum.WITCH:
-          return (
-            <>
-              <UserTurnAnimation animateOnce />
-              <WitchActions />
-            </>
-          );
-        case player?.role?.type === GameRoleEnum.SEER && game.nightWorkflow?.currentTurn?.seer === GameRoleEnum.SEER:
-          return (
-            <>
-              <UserTurnAnimation animateOnce />
-              <SeerActions />
-            </>
-          );
-        case player?.role?.type === GameRoleEnum.ASSASSIN &&
-          game.nightWorkflow?.currentTurn?.assassin === GameRoleEnum.ASSASSIN:
-          return (
-            <>
-              <UserTurnAnimation animateOnce />
-              <AssassinActions />
-            </>
-          );
-        default:
-          return <WaitingNightActions />;
-      }
+  const renderGame = () => {
+    if (globalStep === GameGlobalStepEnum.NEW) {
+      return <NewGameDisplay game={game} isHost={isHost} isGameMaster={isGameMaster} />;
     }
 
-    if (runningStep === GameRuntimeStepEnum.DAY) {
-      return <>{isPlaying && currentBeat && <NightRecap beat={currentBeat} />}</>;
-    }
-
-    if (runningStep === GameRuntimeStepEnum.VOTE) {
-      return (
-        <>
-          {/* Transition avec affichage "Il est l'heure de voter" */}
-          {/* Affichage du display de vote */}
-          <VoteDisplay />
-        </>
-      );
-    }
-
-    if (runningStep === GameRuntimeStepEnum.INTERRUPT) {
-      if (interruptedBy === player.role?.type) {
-        switch (interruptedBy) {
-          case GameRoleEnum.HUNTER:
-            return <HunterActions />;
+    if (globalStep === GameGlobalStepEnum.RUNNING) {
+      if (runningStep === GameRuntimeStepEnum.SETUP) {
+        switch (true) {
+          case player?.role?.type === GameRoleEnum.WILD_CHILD:
+            return <WildChildActions />;
+          case player?.role?.type === GameRoleEnum.CUPIDON:
+            return <CupidonActions />;
           default:
-            return null;
+            return <WaitingSetupActions />;
         }
       }
-      return <WaitingInterruptActions />;
-    }
-  }
+      if (runningStep === GameRuntimeStepEnum.NIGHT) {
+        if (
+          player.dead ||
+          game?.players?.some((currentPlayer) => currentPlayer.id === player?.id && currentPlayer.dead)
+        ) {
+          return <WaitingNightActions />;
+        }
 
-  return null;
+        switch (true) {
+          case player?.team === GameTeamEnum.WEREWOLF &&
+            isRoleNightTurn(game.nightWorkflow?.currentTurn, GameRoleEnum.WEREWOLF):
+            return (
+              <>
+                <UserTurnAnimation animateOnce />
+                <WerewolfActions />
+              </>
+            );
+          case player?.role?.type === GameRoleEnum.INFECT_FATHER &&
+            isRoleNightTurn(game.nightWorkflow?.currentTurn, GameRoleEnum.INFECT_FATHER):
+            return (
+              <>
+                <UserTurnAnimation animateOnce />
+                <InfectFatherActions />
+              </>
+            );
+          case player?.role?.type === GameRoleEnum.WITCH &&
+            isRoleNightTurn(game.nightWorkflow?.currentTurn, GameRoleEnum.WITCH):
+            return (
+              <>
+                <UserTurnAnimation animateOnce />
+                <WitchActions />
+              </>
+            );
+          case player?.role?.type === GameRoleEnum.SEER && isSeerNightTurn(game.nightWorkflow?.currentTurn):
+            return (
+              <>
+                <UserTurnAnimation animateOnce />
+                <SeerActions />
+              </>
+            );
+          case player?.role?.type === GameRoleEnum.ASSASSIN &&
+            isRoleNightTurn(game.nightWorkflow?.currentTurn, GameRoleEnum.ASSASSIN):
+            return (
+              <>
+                <UserTurnAnimation animateOnce />
+                <AssassinActions />
+              </>
+            );
+          default:
+            return <WaitingNightActions />;
+        }
+      }
+
+      if (runningStep === GameRuntimeStepEnum.DAY) {
+        return <>{isPlaying && currentBeat && <NightRecap beat={currentBeat} />}</>;
+      }
+
+      if (runningStep === GameRuntimeStepEnum.VOTE) {
+        return (
+          <>
+            {/* Transition avec affichage "Il est l'heure de voter" */}
+            {/* Affichage du display de vote */}
+            <VoteDisplay />
+          </>
+        );
+      }
+
+      if (runningStep === GameRuntimeStepEnum.INTERRUPT) {
+        if (interruptedBy === player.role?.type) {
+          switch (interruptedBy) {
+            case GameRoleEnum.HUNTER:
+              return <HunterActions />;
+            default:
+              return null;
+          }
+        }
+        return <WaitingInterruptActions />;
+      }
+    }
+  };
+
+  return (
+    <>
+      <SeerRevealAnimation />
+      {renderGame()}
+    </>
+  );
 };
 
 export default RunningGameDisplay;
