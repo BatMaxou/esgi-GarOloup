@@ -2,6 +2,7 @@
 
 namespace App\Service\Game\Period;
 
+use App\Entity\Game\Period\Action\NightAction\ImmuneAction;
 use App\Entity\Game\Period\Action\NightAction\InfectAction;
 use App\Entity\Game\Period\Action\NightAction\MurderAction;
 use App\Entity\Game\Period\Action\NightAction\SaveAction;
@@ -14,7 +15,7 @@ class ActionVisibilityResolver
     /** @param iterable<PeriodAction> $periodActions */
     public function isMasked(PeriodAction $action, ?Player $currentPlayer, iterable $periodActions): bool
     {
-        if (\in_array($action->getType(), [GameActionTypeEnum::SAVE, GameActionTypeEnum::INFECTION, GameActionTypeEnum::REVEAL], true)) {
+        if (\in_array($action->getType(), [GameActionTypeEnum::SAVE, GameActionTypeEnum::INFECTION, GameActionTypeEnum::REVEAL, GameActionTypeEnum::IMMUNE], true)) {
             return true;
         }
 
@@ -23,6 +24,10 @@ class ActionVisibilityResolver
         }
 
         if ($action instanceof MurderAction && $this->isCancelledByInfection($action, $periodActions)) {
+            return true;
+        }
+
+        if ($action instanceof MurderAction && $this->isCancelledByImmune($action, $periodActions)) {
             return true;
         }
 
@@ -46,6 +51,18 @@ class ActionVisibilityResolver
     {
         foreach ($periodActions as $action) {
             if ($action instanceof InfectAction && $action->getTargetPlayerId() === $murder->getTargetPlayerId()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /** @param iterable<PeriodAction> $periodActions */
+    private function isCancelledByImmune(MurderAction $murder, iterable $periodActions): bool
+    {
+        foreach ($periodActions as $action) {
+            if ($action instanceof ImmuneAction && $action->getTargetPlayerId() === $murder->getTargetPlayerId()) {
                 return true;
             }
         }

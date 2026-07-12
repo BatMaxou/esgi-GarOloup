@@ -641,6 +641,7 @@
           "couple": "{username} et {partner} forment un couple",
           "coupleDeath": "Dans un élan de chagrin, {username} est parti avec {partner}",
           "hunterShot": "Le Chasseur a tiré sur {username}",
+          "immune": "{username} a été immunisé",
           "calmNight": "Nuit paisible, aucune victime"
         }
       }

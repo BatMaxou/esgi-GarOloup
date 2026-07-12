@@ -33,6 +33,8 @@ export const resolveActionKey = (action: ActionRecap): keyof typeof actionEventM
       return 'coupleDeath';
     case 'hunter_shot':
       return 'hunterShot';
+    case 'immune':
+      return 'immune';
     case 'murder':
     default:
       if (action.source === 'witch') return 'witchPoison';
