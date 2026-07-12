@@ -9,6 +9,7 @@ use App\Api\Model\Recap\PlayerRecap;
 use App\Entity\Game\Game;
 use App\Entity\Game\Period\Day;
 use App\Entity\Game\Period\Interface\PeriodAction;
+use App\Entity\Game\Period\Interface\RevealedRoleActionInterface;
 use App\Entity\Game\Period\Interface\SecondaryTargetableActionInterface;
 use App\Entity\Game\Period\Interface\SeenRoleActionInterface;
 use App\Entity\Game\Period\Interface\TargetableActionInterface;
@@ -159,6 +160,7 @@ class RecapFactory
             targetPlayerId: $action instanceof TargetableActionInterface ? $action->getTargetPlayerId() : null,
             secondaryPlayerId: $action instanceof SecondaryTargetableActionInterface ? $action->getSecondaryPlayerId() : null,
             seenRole: $action instanceof SeenRoleActionInterface ? $action->getSeenRole()?->value : null,
+            revealedRole: $action instanceof RevealedRoleActionInterface ? $action->getRevealedRole()?->value : null,
         );
     }
 }

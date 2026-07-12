@@ -7,7 +7,7 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class Version20260712101516 extends AbstractMigration
+final class Version20260712173007 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -24,9 +24,9 @@ final class Version20260712101516 extends AbstractMigration
         $this->addSql('CREATE TABLE composition (id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE configuration (with_game_master TINYINT NOT NULL, with_random_dispatch TINYINT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, composition_id BINARY(16) DEFAULT NULL, UNIQUE INDEX UNIQ_A5E2A5D787A2E12 (composition_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE couple_action (target_player_id VARCHAR(36) NOT NULL, secondary_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
-        $this->addSql('CREATE TABLE couple_death_interrupt_action (target_player_id VARCHAR(36) NOT NULL, secondary_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
-        $this->addSql('CREATE TABLE couple_death_night_action (target_player_id VARCHAR(36) NOT NULL, secondary_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
-        $this->addSql('CREATE TABLE couple_death_vote_action (target_player_id VARCHAR(36) NOT NULL, secondary_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE couple_death_interrupt_action (target_player_id VARCHAR(36) NOT NULL, secondary_player_id VARCHAR(36) NOT NULL, revealed_role VARCHAR(255) DEFAULT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE couple_death_night_action (target_player_id VARCHAR(36) NOT NULL, secondary_player_id VARCHAR(36) NOT NULL, revealed_role VARCHAR(255) DEFAULT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE couple_death_vote_action (target_player_id VARCHAR(36) NOT NULL, secondary_player_id VARCHAR(36) NOT NULL, revealed_role VARCHAR(255) DEFAULT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE create_game_event (max_players INT NOT NULL, max_time_for_discussion INT NOT NULL, public TINYINT NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE cupidon_role (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE cupidon_setup_event (first_lover_id VARCHAR(36) NOT NULL, second_lover_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
@@ -38,7 +38,8 @@ final class Version20260712101516 extends AbstractMigration
         $this->addSql('CREATE TABLE game_role_dispatch_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE hunter_role (has_shot TINYINT NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE hunter_shoot_event (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
-        $this->addSql('CREATE TABLE hunter_shot_action (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE hunter_shot_action (target_player_id VARCHAR(36) NOT NULL, revealed_role VARCHAR(255) DEFAULT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE immune_action (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE infect_action (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE infect_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE infect_father_role (infection_available TINYINT NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
@@ -49,7 +50,7 @@ final class Version20260712101516 extends AbstractMigration
         $this->addSql('CREATE TABLE launch_game_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE leave_game_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE lover_role (partner_player_id VARCHAR(36) NOT NULL, original_role_id BINARY(16) NOT NULL, id BINARY(16) NOT NULL, INDEX IDX_92BE980E50838C5B (original_role_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
-        $this->addSql('CREATE TABLE murder_action (target_player_id VARCHAR(36) NOT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE murder_action (target_player_id VARCHAR(36) NOT NULL, revealed_role VARCHAR(255) DEFAULT NULL, id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE night (number INT NOT NULL, resolved TINYINT NOT NULL, id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, game_id BINARY(16) NOT NULL, INDEX IDX_11DA0F97E48FD905 (game_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE night_action (id BINARY(16) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, role_source VARCHAR(255) DEFAULT NULL, team_source VARCHAR(255) DEFAULT NULL, night_id BINARY(16) NOT NULL, discr VARCHAR(255) NOT NULL, INDEX IDX_4E26C6747F834C51 (night_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('CREATE TABLE pass_turn_event (id BINARY(16) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
@@ -114,6 +115,7 @@ final class Version20260712101516 extends AbstractMigration
         $this->addSql('ALTER TABLE hunter_role ADD CONSTRAINT FK_7E418FF5BF396750 FOREIGN KEY (id) REFERENCES game_role (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE hunter_shoot_event ADD CONSTRAINT FK_39D39D4FBF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE hunter_shot_action ADD CONSTRAINT FK_23E2B7FDBF396750 FOREIGN KEY (id) REFERENCES interrupt_action (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE immune_action ADD CONSTRAINT FK_94F62EB7BF396750 FOREIGN KEY (id) REFERENCES night_action (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE infect_action ADD CONSTRAINT FK_A6B92C09BF396750 FOREIGN KEY (id) REFERENCES night_action (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE infect_event ADD CONSTRAINT FK_409689ECBF396750 FOREIGN KEY (id) REFERENCES game_event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE infect_father_role ADD CONSTRAINT FK_EE6A0EF8BF396750 FOREIGN KEY (id) REFERENCES game_role (id) ON DELETE CASCADE');
@@ -193,6 +195,7 @@ final class Version20260712101516 extends AbstractMigration
         $this->addSql('ALTER TABLE hunter_role DROP FOREIGN KEY FK_7E418FF5BF396750');
         $this->addSql('ALTER TABLE hunter_shoot_event DROP FOREIGN KEY FK_39D39D4FBF396750');
         $this->addSql('ALTER TABLE hunter_shot_action DROP FOREIGN KEY FK_23E2B7FDBF396750');
+        $this->addSql('ALTER TABLE immune_action DROP FOREIGN KEY FK_94F62EB7BF396750');
         $this->addSql('ALTER TABLE infect_action DROP FOREIGN KEY FK_A6B92C09BF396750');
         $this->addSql('ALTER TABLE infect_event DROP FOREIGN KEY FK_409689ECBF396750');
         $this->addSql('ALTER TABLE infect_father_role DROP FOREIGN KEY FK_EE6A0EF8BF396750');
@@ -263,6 +266,7 @@ final class Version20260712101516 extends AbstractMigration
         $this->addSql('DROP TABLE hunter_role');
         $this->addSql('DROP TABLE hunter_shoot_event');
         $this->addSql('DROP TABLE hunter_shot_action');
+        $this->addSql('DROP TABLE immune_action');
         $this->addSql('DROP TABLE infect_action');
         $this->addSql('DROP TABLE infect_event');
         $this->addSql('DROP TABLE infect_father_role');

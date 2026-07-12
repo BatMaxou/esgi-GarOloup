@@ -14,6 +14,7 @@ import {
   Biohazard,
   PawPrint,
   ArrowRight,
+  ShieldCheck,
 } from 'lucide-react';
 
 import Garoloup from '@/assets/icons/garoloup.svg';
@@ -81,6 +82,7 @@ const raw = {
   turnOff: TurnOff,
   pencil: Pencil,
   eye: Eye,
+  shield: ShieldCheck,
 };
 
 export const icons: Icons = raw;

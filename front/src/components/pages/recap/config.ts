@@ -46,6 +46,8 @@ export const eventCardClasses: Record<EventColor, string> = {
     'border-green-500/30 shadow-[0_8px_30px_oklch(from_var(--color-green-500)_l_c_h_/_0.12)] before:bg-[radial-gradient(circle_at_50%_0%,oklch(from_var(--color-green-500)_l_c_h_/_0.16),transparent_70%)]',
   blue: 'border-blue-500/30 shadow-[0_8px_30px_oklch(from_var(--color-blue-500)_l_c_h_/_0.12)] before:bg-[radial-gradient(circle_at_50%_0%,oklch(from_var(--color-blue-500)_l_c_h_/_0.16),transparent_70%)]',
   pink: 'border-pink-500/30 shadow-[0_8px_30px_oklch(from_var(--color-pink-500)_l_c_h_/_0.12)] before:bg-[radial-gradient(circle_at_50%_0%,oklch(from_var(--color-pink-500)_l_c_h_/_0.16),transparent_70%)]',
+  yellow:
+    'border-yellow-500/30 shadow-[0_8px_30px_oklch(from_var(--color-yellow-500)_l_c_h_/_0.12)] before:bg-[radial-gradient(circle_at_50%_0%,oklch(from_var(--color-yellow-500)_l_c_h_/_0.16),transparent_70%)]',
   neutral: 'border-primary/15',
 };
 
@@ -54,13 +56,14 @@ export const eventIconColor: Record<EventColor, string> = {
   green: 'text-green-500',
   blue: 'text-blue-500',
   pink: 'text-pink-500',
+  yellow: 'text-yellow-500',
   neutral: 'text-neutral-500',
 };
 
 export const actionEventMeta: Record<string, { icon: IconName; color: EventColor }> = {
   werewolfMurder: { icon: 'werewolf', color: 'red' },
   witchPoison: { icon: 'poison', color: 'red' },
-  assassinMurder: { icon: 'skull', color: 'red' },
+  assassinMurder: { icon: 'skull', color: 'yellow' },
   infection: { icon: 'werewolf', color: 'red' },
   witchSave: { icon: 'heal', color: 'green' },
   seerReveal: { icon: 'seer', color: 'blue' },
@@ -68,4 +71,5 @@ export const actionEventMeta: Record<string, { icon: IconName; color: EventColor
   couple: { icon: 'cupidon', color: 'pink' },
   coupleDeath: { icon: 'heart', color: 'pink' },
   hunterShot: { icon: 'hunter', color: 'red' },
+  immune: { icon: 'shield', color: 'green' },
 };

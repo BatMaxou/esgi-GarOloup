@@ -7,6 +7,7 @@ use App\Domain\GameEvent\Interface\GameEventApplicatorInterface;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Game\Game;
+use App\Entity\Game\Period\Interface\RevealedRoleActionInterface;
 use App\Entity\Game\Player;
 use App\Entity\Game\Role\LoverRole;
 use App\Enum\Game\GameActionTypeEnum;
@@ -60,7 +61,10 @@ class CoupleChainDeathApplicator implements GameEventApplicatorInterface
             return;
         }
 
-        $this->periodActionFactory->createForCurrentPeriod($game, GameActionTypeEnum::COUPLE_DEATH, $grieverId, $deceasedId);
+        $action = $this->periodActionFactory->createForCurrentPeriod($game, GameActionTypeEnum::COUPLE_DEATH, $grieverId, $deceasedId);
+        if ($action instanceof RevealedRoleActionInterface) {
+            $action->setRevealedRole($griever->getRole()?->getType());
+        }
     }
 
     public function supports(GameEvent $gameEvent): bool

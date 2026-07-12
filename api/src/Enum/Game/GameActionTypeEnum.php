@@ -12,4 +12,5 @@ enum GameActionTypeEnum: string
     case COUPLE = 'couple';
     case COUPLE_DEATH = 'couple_death';
     case HUNTER_SHOT = 'hunter_shot';
+    case IMMUNE = 'immune';
 }

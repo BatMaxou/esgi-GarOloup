@@ -33,13 +33,17 @@ const GameClient = () => {
       router.push({ pathname: paths.recap, params: { gameId: game.id } });
     }
   }, [game?.globalStep, game?.id, router]);
+
   const isPlayerSpectator = game?.players?.some(
     (currentPlayer) => currentPlayer.id === player?.id && currentPlayer.dead
   );
+
   const isInterruptTurnForPlayer =
     game?.runtimeStep === GameRuntimeStepEnum.INTERRUPT && game?.interruptedByRole === player?.role?.type;
+
   const showSpectatorOverlay =
     isPlayerSpectator && !isInterruptTurnForPlayer && game?.globalStep === GameGlobalStepEnum.RUNNING;
+
   const playersList = useMemo(() => {
     if (!game) {
       return [];
@@ -71,6 +75,7 @@ const GameClient = () => {
     );
     return [normalizedGameMaster, ...playersWithoutGameMaster];
   }, [game]);
+
   const isHost = player?.id === game?.host?.id;
   const isGameMaster = player?.id === game?.gameMaster?.id;
 

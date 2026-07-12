@@ -19,7 +19,13 @@ const NightRecap = ({ beat }: { beat: RecapBeat }) => {
   const renderMessage = () => {
     switch (beat.type) {
       case 'death':
-        return beat.username ? t('death', { username: beat.username }) : t('deathUnknown');
+        if (!beat.username) {
+          return t('deathUnknown');
+        }
+
+        return beat.role
+          ? t('revealDead', { username: beat.username, role: t(`roles.${beat.role}`) })
+          : t('death', { username: beat.username });
       case 'calm':
       default:
         return t('calm');

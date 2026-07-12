@@ -26,6 +26,6 @@ export const paths = {
   adminRolesCreate: '/admin/roles/create',
   adminRolesEdit: '/admin/roles/[roleId]/edit',
   roleDetails: '/roles/[roleRef]',
-  recap: '/[gameId]/recap',
+  recap: '/games/[gameId]/recap',
   ...loggedAreaPaths,
 } as const satisfies Record<string, keyof typeof pathnames>;
