@@ -10,8 +10,6 @@ import { RecapBeat } from './recap-beats';
 
 const BEAT_ICONS: Record<RecapBeat['type'], IconName> = {
   death: 'skull',
-  reveal: 'targetEye',
-  revealDead: 'skull',
   calm: 'moon',
 };
 
@@ -22,16 +20,6 @@ const NightRecap = ({ beat }: { beat: RecapBeat }) => {
     switch (beat.type) {
       case 'death':
         return beat.username ? t('death', { username: beat.username }) : t('deathUnknown');
-      case 'reveal':
-        return t('reveal', {
-          username: beat.username ?? '',
-          role: beat.role ? t(`roles.${beat.role}`) : '',
-        });
-      case 'revealDead':
-        return t('revealDead', {
-          username: beat.username ?? '',
-          role: beat.role ? t(`roles.${beat.role}`) : '',
-        });
       case 'calm':
       default:
         return t('calm');

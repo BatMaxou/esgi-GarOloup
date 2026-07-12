@@ -12,6 +12,8 @@ import { WereWolfContext } from '@/contexts/roles/werewolf-context';
 import { useTranslations } from 'next-intl';
 import PlayerLoverPartnerIcon from '../../molecules/icon/player-lover-partner-item';
 import { isLoverRole } from '@/contexts/roles/lover-context';
+import { useOptionalSeer } from '@/contexts/roles/seer-context';
+import { roleIcon } from '@/components/pages/recap/config';
 
 type Props = {
   player: Player;
@@ -22,6 +24,10 @@ const PlayerSidebarItem = ({ player }: Props) => {
   const { game } = useGame();
   const t = useTranslations('components.ui.organisms.items.playerSidebarItem');
   const werewolfContext = useContext(WereWolfContext);
+  const seerContext = useOptionalSeer();
+  const observedRoles = seerContext?.observedRoles ?? {};
+  const revealedRole = player.id in observedRoles ? observedRoles[player.id] : null;
+  const revealedRoleIcon = revealedRole ? (roleIcon[revealedRole] ?? 'questionMark') : null;
   const isGameMaster = game?.gameMaster?.id === player.id;
   const isWerewolfTeammate = werewolfContext?.team?.members.some((member) => member.id === player.id) ?? false;
 
@@ -56,6 +62,12 @@ const PlayerSidebarItem = ({ player }: Props) => {
         {isDead && (
           <Typography tag="p" variant="body-sm" textColor="primary" bold>
             <Icon name="skull" className="w-4 h-4 color-white" />
+          </Typography>
+        )}
+
+        {seerContext && revealedRole && revealedRoleIcon && (
+          <Typography tag="p" variant="body-sm" textColor="primary" bold>
+            <Icon name={revealedRoleIcon} className="w-4 h-4 color-primary" />
           </Typography>
         )}
 

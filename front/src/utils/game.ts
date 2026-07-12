@@ -1,5 +1,47 @@
 import { GameNightActionTypeEnum, GameRoleEnum } from './enums';
-import { Game, MurderAction, Player, SaveAction, SeerRole } from './types';
+import { Game, MurderAction, NightCurrentTurn, Player, SaveAction, SeerRole } from './types';
+
+export const getActiveNightTurnRoles = (currentTurn?: NightCurrentTurn): GameRoleEnum[] => {
+  if (!currentTurn) {
+    return [];
+  }
+
+  if (Array.isArray(currentTurn)) {
+    return currentTurn;
+  }
+
+  return Object.values(currentTurn);
+};
+
+export const isSeerNightTurn = (currentTurn?: NightCurrentTurn): boolean =>
+  getActiveNightTurnRoles(currentTurn).includes(GameRoleEnum.SEER);
+
+export const isRoleNightTurn = (currentTurn: NightCurrentTurn | undefined, role: GameRoleEnum): boolean =>
+  getActiveNightTurnRoles(currentTurn).includes(role);
+
+export const getCurrentNightNumber = (game: Game): number => Math.max(0, (game.nights?.length ?? 1) - 1);
+
+export const getLatestSeerReveal = (
+  player: Player
+): { observedPlayerId: string; observedRole: GameRoleEnum } | null => {
+  const role = player.role;
+  if (!role || role.type !== GameRoleEnum.SEER) {
+    return null;
+  }
+
+  const seerRole = role as SeerRole;
+  const observedPlayerId = seerRole.lastObservedPlayerId;
+  if (!observedPlayerId) {
+    return null;
+  }
+
+  const observedRole = seerRole.observedRoles?.[observedPlayerId];
+  if (!observedRole) {
+    return null;
+  }
+
+  return { observedPlayerId, observedRole };
+};
 
 /////////////////////////////////////////////////////////////////////
 //////////////////////// Public Informations ////////////////////////
@@ -63,24 +105,7 @@ export const getDeadUsersDuringNight = (game: Game): string[] => {
 export const getRevealUserDuringThisNight = (
   game: Game,
   player: Player
-): { observedPlayerId: string; observedRole: GameRoleEnum } | null => {
-  const role = player.role;
-  if (!role || role.type !== GameRoleEnum.SEER) {
-    return null;
-  }
-
-  const observedRoles = (role as SeerRole).observedRoles ?? {};
-  const currentNight = (game.nights?.length ?? 1) - 1;
-
-  // TODO: logique d'index fragile (observedRoles est indexé par idJoueur, pas par nuit).
-  // À fiabiliser quand le back exposera une clé de nuit explicite sur les rôles observés.
-  const entry = Object.entries(observedRoles)[currentNight];
-  if (!entry) {
-    return null;
-  }
-
-  return { observedPlayerId: entry[0], observedRole: entry[1] };
-};
+): { observedPlayerId: string; observedRole: GameRoleEnum } | null => getLatestSeerReveal(player);
 
 export const getRevealUsernameUserDuringThisNight = (game: Game, players: Player[], player: Player) => {
   const reveal = getRevealUserDuringThisNight(game, player);

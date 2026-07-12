@@ -49,11 +49,13 @@ export type Game = {
   votes?: Vote[];
 };
 
+export type NightCurrentTurn = GameRoleEnum[] | Partial<Record<GameRoleEnum, GameRoleEnum>>;
+
 export type Workflow = {
   id: string;
   steps?: GameRoleEnum[][];
   current?: number;
-  currentTurn?: Record<GameRoleEnum, GameRoleEnum>;
+  currentTurn?: NightCurrentTurn;
   completed?: boolean;
 };
 
