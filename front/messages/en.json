@@ -563,7 +563,134 @@
         "game": "game",
         "camp": "Camp",
         "noRolesFoundForThisCamp": "The roles for this camp are not yet available...",
-        "seeRole": "See"
+        "seeRole": "See",
+        "manageRoles": "Manage roles",
+        "comingSoon": "Coming soon"
+      },
+      "admin": {
+        "eyebrow": "Administration",
+        "title": "Admin dashboard",
+        "subtitle": "Manage game content and settings.",
+        "sections": {
+          "roles": {
+            "title": "Role management",
+            "description": "View, create and edit bestiary roles."
+          }
+        },
+        "roles": {
+          "eyebrow": "Administration",
+          "title": "Role management",
+          "subtitle": "List of roles available in the game.",
+          "backToAdmin": "Back to dashboard",
+          "createRole": "Create role",
+          "listTitle": "Existing roles",
+          "empty": "No roles found.",
+          "unnamedRole": "Unnamed role",
+          "type": "Type",
+          "viewPublicRole": "View",
+          "editRole": "Edit",
+          "disableRole": "Disable",
+          "enableRole": "Enable",
+          "statusEnabled": "Enabled",
+          "statusDisabled": "Disabled",
+          "disableRoleModal": {
+            "title": "Disable this role?",
+            "description": "The role « {name} » will no longer be available in games. Its type will be removed.",
+            "confirm": "Disable",
+            "cancel": "Cancel"
+          },
+          "enableRoleModal": {
+            "title": "Enable this role?",
+            "description": "Choose the type to apply to « {name} » to make it available in games.",
+            "typeLabel": "Type",
+            "typePlaceholder": "— Select a type —",
+            "noTypeAvailable": "All types are already assigned to other roles.",
+            "confirm": "Enable",
+            "cancel": "Cancel"
+          },
+          "filterLabel": "Filter",
+          "filterPlaceholder": "Name, type, team…",
+          "noMatchingFilter": "No roles match this filter.",
+          "playersRange": "{min} min. · {max} max/game",
+          "column": {
+            "name": "Name",
+            "type": "Type",
+            "status": "Status",
+            "teams": "Teams",
+            "players": "Players",
+            "actions": "Action"
+          }
+        },
+        "rolesCreate": {
+          "title": "Create role",
+          "subtitle": "Add a new role to the bestiary.",
+          "eyebrow": "Administration",
+          "backToRoles": "Back to management",
+          "submit": "Create role",
+          "fields": {
+            "name": "Name",
+            "namePlaceholder": "E.g. Hunter",
+            "description": "Description",
+            "descriptionPlaceholder": "Describe the role and how it plays…",
+            "ability": "Ability",
+            "abilityPlaceholder": "Describe the role's special ability (optional)…",
+            "type": "Type",
+            "typePlaceholder": "— Select a type —",
+            "team": "Teams",
+            "teamPlaceholder": "— No team —",
+            "minPlayers": "Minimum players",
+            "minPlayersPlaceholder": "E.g. 8",
+            "maxPerGame": "Maximum per game",
+            "maxPerGamePlaceholder": "E.g. 1",
+            "picture": "Illustration",
+            "pictureHint": "No file selected",
+            "rolePlayableStatus": "Playable role",
+            "roleUnplayableStatus": "Unplayable role",
+            "rolePlayableHint": "The role will be available in games. Type is required.",
+            "roleUnplayableHint": "The role is not implemented on the backend yet. Type is hidden."
+          },
+          "errors": {
+            "nameRequired": "Name is required.",
+            "descriptionRequired": "Description is required.",
+            "typeRequired": "Type is required for a playable role."
+          }
+        },
+        "rolesUpdate": {
+          "title": "Edit role",
+          "subtitle": "Update the role information.",
+          "eyebrow": "Administration",
+          "backToRoles": "Back to management",
+          "submit": "Save changes",
+          "loading": "Loading…",
+          "notFound": "Role not found.",
+          "fields": {
+            "name": "Name",
+            "namePlaceholder": "E.g. Hunter",
+            "description": "Description",
+            "descriptionPlaceholder": "Describe the role and how it plays…",
+            "ability": "Ability",
+            "abilityPlaceholder": "Describe the role's special ability (optional)…",
+            "type": "Type",
+            "typePlaceholder": "— Select a type —",
+            "team": "Teams",
+            "teamPlaceholder": "— No team —",
+            "minPlayers": "Minimum players",
+            "minPlayersPlaceholder": "E.g. 8",
+            "maxPerGame": "Maximum per game",
+            "maxPerGamePlaceholder": "E.g. 1",
+            "picture": "Illustration",
+            "pictureHint": "No file selected",
+            "rolePlayableStatus": "Playable role",
+            "roleUnplayableStatus": "Unplayable role",
+            "rolePlayableHint": "The role will be available in games. Type is required.",
+            "roleUnplayableHint": "The role is not implemented on the backend yet. Type is hidden."
+          },
+          "errors": {
+            "nameRequired": "Name is required.",
+            "descriptionRequired": "Description is required.",
+            "typeRequired": "Type is required for a playable role."
+          }
+        }
       },
       "roleDetail": {
         "previousRole": "Previous",
@@ -678,11 +805,21 @@
       }
     }
   },
+  "layouts": {
+    "admin": {
+      "forbidden": "You are not allowed to access this page"
+    }
+  },
   "contexts": {
     "role": {
       "roleListError": "Error retrieving role list",
       "roleNotFound": "Role not found.",
-      "gameTeamFiltersError": "Error retrieving game team filters"
+      "gameTeamFiltersError": "Error retrieving game team filters",
+      "roleCreateError": "Error creating role",
+      "roleCreateSuccess": "Role created successfully",
+      "roleUpdateError": "Error updating role",
+      "roleUpdateSuccess": "Role updated successfully",
+      "rolePictureUploadError": "Error uploading illustration"
     },
     "auth": {
       "errorRegistrationTempUser": "An error occurred. Please try again.",

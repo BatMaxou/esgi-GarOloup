@@ -1,0 +1,32 @@
+type: http_request
+model: http_request
+id: rq_RDrMTvxwQr
+createdAt: 2026-07-12T18:56:26.672836
+updatedAt: 2026-07-12T19:07:00.018257
+workspaceId: wk_uXtATNFQmZ
+folderId: fl_WxKE8boAAj
+authentication:
+  token: ${[ secure(value=b64'WUVOQ19lVUUwYXpOdVF3R2lkeEFRaUxlUURZUFFOY0l3b3VjakhXdk16bWZiVHhvZGRJTmZ0RkREYzVnMGJFWmdRZSt3MmZ1cW56Qkx2aXo0UXFkcg') ]}
+authenticationType: bearer
+body:
+  text: |-
+    {
+      "name":"Tueur d'enfant",
+      "description":"chaud",
+      "ability":"très chaud",
+      "teams":["solo"],
+      "minPlayers":0,
+      "maxPerGame":1
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/json
+  id: isTjMc59e4
+method: POST
+name: Create Role
+sortPriority: 0.002
+url: ${[ BASE_URL ]}/api/roles
+urlParameters: []

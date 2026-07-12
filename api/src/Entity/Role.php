@@ -34,6 +34,16 @@ use Vich\UploaderBundle\Mapping\Attribute as Vich;
                 'groups' => 'role:list',
             ],
         ),
+        new Post(
+            name: 'api_create_role',
+            security: 'is_granted("'.RoleEnum::ADMIN->value.'")',
+            normalizationContext: [
+                'groups' => 'role:read',
+            ],
+            denormalizationContext: [
+                'groups' => 'role:write',
+            ],
+        ),
         new Patch(
             name: 'api_patch_role',
             security: 'is_granted("'.RoleEnum::ADMIN->value.'")',

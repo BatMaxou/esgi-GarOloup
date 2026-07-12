@@ -111,7 +111,7 @@ const WerewolfActions = () => {
                   values.targetId === gamePlayer.id
                     ? 'justify-between items-between! border-error! bg-error/20!'
                     : isLoverRole(player?.role) && gamePlayer.id === partnerPlayerId
-                      ? 'justify-between items-between! border-pink-700! bg-pink-700/20! cursor-default!'
+                      ? 'justify-between items-between! border-pink-500! bg-pink-500/20! cursor-default!'
                       : 'items-center! border-primary/15! justify-start! hover:bg-error/10 hover:border-error/50!'
                 }
               `}
@@ -127,8 +127,8 @@ const WerewolfActions = () => {
                 </Typography>
               )}
               {isLoverRole(player?.role) && gamePlayer.id === partnerPlayerId && (
-                <Typography variant="body" textColor="controlled" className="flex items-center gap-2 text-pink-700">
-                  <PlayerLoverPartnerIcon player={gamePlayer} className="w-4 h-4 color-pink-700" />
+                <Typography variant="body" textColor="controlled" className="flex items-center gap-2 text-pink-500">
+                  <PlayerLoverPartnerIcon player={gamePlayer} className="w-4 h-4 color-pink-500" />
                   {t('loverPartner')}
                 </Typography>
               )}

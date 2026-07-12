@@ -60,6 +60,7 @@ export const apiPaths = {
   refreshToken: '/token/refresh',
   role: {
     list: '/roles',
+    create: '/roles',
     get: (id: string) => `/roles/${id}`,
     update: (id: string) => `/roles/${id}`,
     updateFiles: (id: string) => `/roles/${id}/files`,

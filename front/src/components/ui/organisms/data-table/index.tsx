@@ -188,7 +188,7 @@ export default function DataTable<Row>({
           value={filterQuery}
           onChange={(e) => setFilterQuery(e.target.value)}
           sizing="md"
-          className="max-w-[200px]"
+          className="w-full sm:max-w-[200px]"
         />
       )}
 

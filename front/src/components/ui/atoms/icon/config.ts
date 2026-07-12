@@ -36,6 +36,9 @@ import Cupidon from '@/assets/icons/cupidon.svg';
 import Heart from '@/assets/icons/heart.svg';
 import Infect from '@/assets/icons/infect.svg';
 import Hand from '@/assets/icons/hand.svg';
+import TurnOff from '@/assets/icons/turn-off.svg';
+import Pencil from '@/assets/icons/pencil.svg';
+import Eye from '@/assets/icons/eye.svg';
 
 export type IconName = keyof typeof raw & string;
 export type IconType = LucideIcon | ComponentType<SVGProps<SVGSVGElement>>;
@@ -75,6 +78,9 @@ const raw = {
   heart: Heart,
   infect: Infect,
   hand: Hand,
+  turnOff: TurnOff,
+  pencil: Pencil,
+  eye: Eye,
 };
 
 export const icons: Icons = raw;

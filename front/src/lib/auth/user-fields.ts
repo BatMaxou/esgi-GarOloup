@@ -47,3 +47,5 @@ export const mapApiUserToAuthUser = (user: User, email: string) => ({
   username: user.username,
   roles: user.roles ?? [],
 });
+
+export const hasAdminRole = (roles: unknown): boolean => normalizeRoles(roles).includes(RoleEnum.ADMIN);

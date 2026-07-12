@@ -565,7 +565,134 @@
         "game": "partie",
         "camp": "Camp",
         "noRolesFoundForThisCamp": "Les rôles de ce camp ne sont pas encore disponibles...",
-        "seeRole": "Voir"
+        "seeRole": "Voir",
+        "manageRoles": "Gérer les rôles",
+        "comingSoon": "À venir"
+      },
+      "admin": {
+        "eyebrow": "Administration",
+        "title": "Panneau d'administration",
+        "subtitle": "Gérez les contenus et les paramètres du jeu.",
+        "sections": {
+          "roles": {
+            "title": "Gestion des rôles",
+            "description": "Consulter, créer et modifier les rôles du bestiaire."
+          }
+        },
+        "roles": {
+          "eyebrow": "Administration",
+          "title": "Gestion des rôles",
+          "subtitle": "Liste des rôles disponibles dans le jeu.",
+          "backToAdmin": "Retour au panneau",
+          "createRole": "Créer un rôle",
+          "listTitle": "Rôles existants",
+          "empty": "Aucun rôle trouvé.",
+          "unnamedRole": "Rôle sans nom",
+          "type": "Type",
+          "viewPublicRole": "Consulter",
+          "editRole": "Modifier",
+          "disableRole": "Désactiver",
+          "enableRole": "Activer",
+          "statusEnabled": "Activé",
+          "statusDisabled": "Désactivé",
+          "disableRoleModal": {
+            "title": "Désactiver ce rôle ?",
+            "description": "Le rôle « {name} » ne sera plus disponible en partie. Son type sera retiré.",
+            "confirm": "Désactiver",
+            "cancel": "Annuler"
+          },
+          "enableRoleModal": {
+            "title": "Activer ce rôle ?",
+            "description": "Choisissez le type à appliquer au rôle « {name} » pour le rendre disponible en partie.",
+            "typeLabel": "Type",
+            "typePlaceholder": "— Choisir un type —",
+            "noTypeAvailable": "Tous les types sont déjà attribués à d'autres rôles.",
+            "confirm": "Activer",
+            "cancel": "Annuler"
+          },
+          "filterLabel": "Filtrer",
+          "filterPlaceholder": "Nom, type, camp…",
+          "noMatchingFilter": "Aucun rôle ne correspond à ce filtre.",
+          "playersRange": "{min} min. · {max} max/partie",
+          "column": {
+            "name": "Nom",
+            "type": "Type",
+            "status": "Statut",
+            "teams": "Camps",
+            "players": "Joueurs",
+            "actions": "Action"
+          }
+        },
+        "rolesCreate": {
+          "title": "Créer un rôle",
+          "subtitle": "Ajoutez un nouveau rôle au bestiaire.",
+          "eyebrow": "Administration",
+          "backToRoles": "Retour à la gestion",
+          "submit": "Créer le rôle",
+          "fields": {
+            "name": "Nom",
+            "namePlaceholder": "Ex. : Chasseur",
+            "description": "Description",
+            "descriptionPlaceholder": "Décrivez le rôle et son comportement en jeu…",
+            "ability": "Pouvoir",
+            "abilityPlaceholder": "Décrivez le pouvoir spécial du rôle (optionnel)…",
+            "type": "Type",
+            "typePlaceholder": "— Choisir un type —",
+            "team": "Camps",
+            "teamPlaceholder": "— Aucun camp —",
+            "minPlayers": "Joueurs minimum",
+            "minPlayersPlaceholder": "Ex. : 8",
+            "maxPerGame": "Maximum par partie",
+            "maxPerGamePlaceholder": "Ex. : 1",
+            "picture": "Illustration",
+            "pictureHint": "Aucun fichier sélectionné",
+            "rolePlayableStatus": "Rôle jouable",
+            "roleUnplayableStatus": "Rôle injouable",
+            "rolePlayableHint": "Le rôle sera disponible en partie. Le type est obligatoire.",
+            "roleUnplayableHint": "Le rôle n'est pas encore implémenté côté back. Le type est masqué."
+          },
+          "errors": {
+            "nameRequired": "Le nom est obligatoire.",
+            "descriptionRequired": "La description est obligatoire.",
+            "typeRequired": "Le type est obligatoire pour un rôle jouable."
+          }
+        },
+        "rolesUpdate": {
+          "title": "Modifier un rôle",
+          "subtitle": "Mettez à jour les informations du rôle.",
+          "eyebrow": "Administration",
+          "backToRoles": "Retour à la gestion",
+          "submit": "Enregistrer les modifications",
+          "loading": "Chargement…",
+          "notFound": "Rôle introuvable.",
+          "fields": {
+            "name": "Nom",
+            "namePlaceholder": "Ex. : Chasseur",
+            "description": "Description",
+            "descriptionPlaceholder": "Décrivez le rôle et son comportement en jeu…",
+            "ability": "Pouvoir",
+            "abilityPlaceholder": "Décrivez le pouvoir spécial du rôle (optionnel)…",
+            "type": "Type",
+            "typePlaceholder": "— Choisir un type —",
+            "team": "Camps",
+            "teamPlaceholder": "— Aucun camp —",
+            "minPlayers": "Joueurs minimum",
+            "minPlayersPlaceholder": "Ex. : 8",
+            "maxPerGame": "Maximum par partie",
+            "maxPerGamePlaceholder": "Ex. : 1",
+            "picture": "Illustration",
+            "pictureHint": "Aucun fichier sélectionné",
+            "rolePlayableStatus": "Rôle jouable",
+            "roleUnplayableStatus": "Rôle injouable",
+            "rolePlayableHint": "Le rôle sera disponible en partie. Le type est obligatoire.",
+            "roleUnplayableHint": "Le rôle n'est pas encore implémenté côté back. Le type est masqué."
+          },
+          "errors": {
+            "nameRequired": "Le nom est obligatoire.",
+            "descriptionRequired": "La description est obligatoire.",
+            "typeRequired": "Le type est obligatoire pour un rôle jouable."
+          }
+        }
       },
       "roleDetail": {
         "previousRole": "Précédent",
@@ -680,11 +807,21 @@
       }
     }
   },
+  "layouts": {
+    "admin": {
+      "forbidden": "Vous n'avez pas le droit d'accéder à cette page"
+    }
+  },
   "contexts": {
     "role": {
       "roleListError": "Erreur lors de la récupération des rôles",
       "roleNotFound": "Rôle introuvable.",
-      "gameTeamFiltersError": "Erreur lors de la récupération des filtres de rôles"
+      "gameTeamFiltersError": "Erreur lors de la récupération des filtres de rôles",
+      "roleCreateError": "Erreur lors de la création du rôle",
+      "roleCreateSuccess": "Rôle créé avec succès",
+      "roleUpdateError": "Erreur lors de la mise à jour du rôle",
+      "roleUpdateSuccess": "Rôle mis à jour avec succès",
+      "rolePictureUploadError": "Erreur lors de l'envoi de l'illustration"
     },
     "auth": {
       "errorRegistrationTempUser": "Un problème est survenu. Veuillez réessayer.",

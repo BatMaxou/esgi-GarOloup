@@ -9,6 +9,7 @@ export const tagCva = cva('h-fit w-fit flex items-center justify-center rounded-
       neutral: 'border-foreground/40 text-foreground',
       error: 'border-error/40 text-error',
       success: 'border-success/40 text-success',
+      couple: 'border-pink-500/40 text-pink-500',
     },
     size: {
       lg: 'px-3 py-1 gap-1.5',
@@ -36,6 +37,8 @@ export const tagCva = cva('h-fit w-fit flex items-center justify-center rounded-
     { variant: 'error', active: true, class: 'bg-error/28' },
     { variant: 'success', active: false, class: 'bg-success/10' },
     { variant: 'success', active: true, class: 'bg-success/28' },
+    { variant: 'couple', active: false, class: 'bg-pink-500/20' },
+    { variant: 'couple', active: true, class: 'bg-pink-500/28' },
   ],
   defaultVariants: {
     variant: 'neutral',

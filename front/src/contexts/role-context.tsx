@@ -9,9 +9,14 @@ import { ApiClientError } from '@/lib/api/ApiClientError';
 import { Role, RolePlayable } from '@/utils/types';
 import { GameTeamEnum } from '@/utils/enums';
 import { slugToRoleType } from '@/utils/roleSlug';
+import type { RolePayload } from '@/components/common/form/admin/role-form-shared';
 
 type Props = {
   children: ReactNode;
+};
+
+type GetRoleParams = {
+  ref: string;
 };
 
 type RoleContextType = {
@@ -27,13 +32,24 @@ type RoleContextType = {
   gameTeamFilters: GameTeamEnum[];
   gameTeamFiltersLoading: boolean;
   getAllGameTeamFilters: () => void;
-};
-
-type GetRoleParams = {
-  ref: string;
+  createRole: (data: RolePayload) => Promise<Role | null>;
+  createRoleLoading: boolean;
+  updateRole: (id: string, data: RolePayload) => Promise<Role | null>;
+  updateRoleLoading: boolean;
+  uploadRolePicture: (id: string, picture: File) => Promise<Role | null>;
+  uploadRolePictureLoading: boolean;
 };
 
 const isRolePlayable = (role: Role): role is RolePlayable => Boolean(role.type && role.name);
+
+const upsertRoleInList = (roles: Role[], updatedRole: Role): Role[] => {
+  const existingIndex = roles.findIndex((item) => item.id === updatedRole.id);
+  if (existingIndex === -1) {
+    return [...roles, updatedRole];
+  }
+
+  return roles.map((item) => (item.id === updatedRole.id ? updatedRole : item));
+};
 
 export const RoleContext = createContext<RoleContextType | undefined>(undefined);
 
@@ -50,6 +66,9 @@ export const RoleProvider = ({ children }: Props) => {
   const [roleLoading, setRoleLoading] = useState<boolean>(true);
   const [gameTeamFilters, setGameTeamFilters] = useState<GameTeamEnum[]>([]);
   const [gameTeamFiltersLoading, setGameTeamFiltersLoading] = useState<boolean>(true);
+  const [createRoleLoading, setCreateRoleLoading] = useState(false);
+  const [updateRoleLoading, setUpdateRoleLoading] = useState(false);
+  const [uploadRolePictureLoading, setUploadRolePictureLoading] = useState(false);
 
   const getAllRoles = async () => {
     setRoleListLoading(true);
@@ -140,6 +159,63 @@ export const RoleProvider = ({ children }: Props) => {
     setRoleLoading(false);
   };
 
+  const syncRole = (updatedRole: Role) => {
+    setRoleList((current) => upsertRoleInList(current, updatedRole));
+    setHydratedRoleList((current) => upsertRoleInList(current, updatedRole));
+    setFilteredRoleList((current) => upsertRoleInList(current, updatedRole));
+    setRole((current) => (current?.id === updatedRole.id ? updatedRole : current));
+  };
+
+  const createRole = async (data: RolePayload): Promise<Role | null> => {
+    setCreateRoleLoading(true);
+
+    const result = await apiClient.role.create(data);
+    if (result instanceof ApiClientError) {
+      toast.error(t('roleCreateError'));
+      setCreateRoleLoading(false);
+      return null;
+    }
+
+    syncRole(result);
+    toast.success(t('roleCreateSuccess'));
+    setCreateRoleLoading(false);
+    return result;
+  };
+
+  const updateRole = async (id: string, data: RolePayload): Promise<Role | null> => {
+    setUpdateRoleLoading(true);
+
+    const result = await apiClient.role.update(id, data);
+    if (result instanceof ApiClientError) {
+      toast.error(t('roleUpdateError'));
+      setUpdateRoleLoading(false);
+      return null;
+    }
+
+    syncRole(result);
+    toast.success(t('roleUpdateSuccess'));
+    setUpdateRoleLoading(false);
+    return result;
+  };
+
+  const uploadRolePicture = async (id: string, picture: File): Promise<Role | null> => {
+    setUploadRolePictureLoading(true);
+
+    const formData = new FormData();
+    formData.append('picture', picture);
+
+    const result = await apiClient.role.updateFiles(id, formData);
+    if (result instanceof ApiClientError) {
+      toast.error(t('rolePictureUploadError'));
+      setUploadRolePictureLoading(false);
+      return null;
+    }
+
+    syncRole(result);
+    setUploadRolePictureLoading(false);
+    return result;
+  };
+
   return (
     <RoleContext.Provider
       value={{
@@ -155,6 +231,12 @@ export const RoleProvider = ({ children }: Props) => {
         gameTeamFilters,
         gameTeamFiltersLoading,
         getAllGameTeamFilters,
+        createRole,
+        createRoleLoading,
+        updateRole,
+        updateRoleLoading,
+        uploadRolePicture,
+        uploadRolePictureLoading,
       }}
     >
       {children}
