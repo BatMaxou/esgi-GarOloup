@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { User } from '@/utils/types';
 import { getApiClient } from '@/utils/server/clients';
 import { ApiClientError } from '@/lib/api/ApiClientError';
+import { mapApiUserToAuthUser } from '@/lib/auth/user-fields';
 
 export const credentialsPlugin = credentials({
   autoSignUp: true,
@@ -36,7 +37,7 @@ export const credentialsPlugin = credentials({
     const user = maybeMeResponse;
 
     return {
-      ...user,
+      ...mapApiUserToAuthUser(user, email),
       token,
       refreshToken,
     };

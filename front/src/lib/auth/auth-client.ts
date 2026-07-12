@@ -1,5 +1,5 @@
 import { credentialsClient, defaultCredentialsSchema } from 'better-auth-credentials-plugin/client';
-import { inferAdditionalFields } from 'better-auth/client/plugins';
+import { customSessionClient, inferAdditionalFields } from 'better-auth/client/plugins';
 import { createAuthClient } from 'better-auth/react';
 import { User as BetterAuthUser } from 'better-auth/types';
 
@@ -10,5 +10,6 @@ export const { signIn, signUp, signOut, useSession, updateUser, ...authClient } 
   plugins: [
     credentialsClient<User & BetterAuthUser, '/sign-in/garoloup', typeof defaultCredentialsSchema>(),
     inferAdditionalFields<typeof auth>(),
+    customSessionClient<typeof auth>(),
   ],
 });

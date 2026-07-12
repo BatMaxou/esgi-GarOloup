@@ -21,6 +21,7 @@ export const paths = {
   resetPassword: '/reset-password',
   test: '/test',
   roles: '/roles',
+  adminRoles: '/admin/roles',
   roleDetails: '/roles/[roleRef]',
   recap: '/[gameId]/recap',
   ...loggedAreaPaths,
