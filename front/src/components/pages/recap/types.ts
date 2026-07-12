@@ -4,7 +4,7 @@ import type { IconName } from '@/components/ui/atoms/icon/config';
 
 export type Translate = ReturnType<typeof useTranslations>;
 
-export type EventColor = 'red' | 'green' | 'blue' | 'neutral';
+export type EventColor = 'red' | 'green' | 'blue' | 'pink' | 'neutral';
 
 export type JournalEvent = {
   id: string;

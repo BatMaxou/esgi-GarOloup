@@ -16,13 +16,14 @@ import { ArrowLeftIcon } from 'lucide-react';
 const WitchActions = () => {
   const { player } = usePlayer();
   const { game } = useGame();
-  const { healPotionAvailable, poisonPotionAvailable, save, poison } = useWitch();
+  const { healPotionAvailable, poisonPotionAvailable, save, poison, pass } = useWitch();
   const t = useTranslations('components.common.game.nightActions.witchActions');
   const lastUserKilled = game ? getLastUserKilledDuringNight(game) : null;
   const lastUsernameUserKilled = game ? getLastUsernameUserKilledDuringNight(game, game?.players ?? []) : null;
-  const [actionType, setActionType] = useState<'save' | 'poison' | null>(null);
+  const [actionType, setActionType] = useState<'save' | 'poison' | 'pass' | null>(null);
   const [killStep, setKillStep] = useState(false);
   const [poisonTargetId, setPoisonTargetId] = useState<string | null>(null);
+  const [passed, setPassed] = useState(false);
 
   const playerAliveList =
     game?.players
@@ -46,7 +47,7 @@ const WitchActions = () => {
     },
   });
 
-  const handleSelectActionType = (type: 'save' | 'poison' | null) => {
+  const handleSelectActionType = (type: 'save' | 'poison' | 'pass' | null) => {
     if (actionType === type) {
       setActionType(null);
       return;
@@ -59,6 +60,9 @@ const WitchActions = () => {
       handleChange({ target: { name: 'targetId', value: lastUserKilled } });
       handleChange({ target: { name: 'type', value: 'save' } });
       handleSubmit();
+    } else if (actionType === 'pass') {
+      setPassed(true);
+      pass();
     } else if (actionType === 'poison' && !killStep) {
       setKillStep(true);
     } else if (killStep) {
@@ -75,6 +79,29 @@ const WitchActions = () => {
     }
     setPoisonTargetId(playerId);
   };
+
+  if (passed) {
+    return (
+      <div className="flex flex-col gap-8">
+        <Card hoverable={false} orientation="horizontal" className="gap-6 items-center">
+          <Icon name="witch" className="w-10 h-10" />
+          <div className="flex flex-col gap-2">
+            <Typography tag="h3" variant="subtitle" bold>
+              {t('witch')}
+            </Typography>
+            <Typography tag="span" className="text-sm text-success!" bold>
+              {t('witchCamp')}
+            </Typography>
+          </div>
+        </Card>
+        <div className="flex flex-col gap-2 mt-8 items-center justify-center">
+          <Typography tag="p" variant="subtitle" bold>
+            {t('passEnded')}
+          </Typography>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-8">
@@ -134,6 +161,19 @@ const WitchActions = () => {
                 disabled={!poisonPotionAvailable}
                 size="lg"
               />
+            </Card>
+            <Card
+              liftOnHover={false}
+              className={`flex max-lg:flex-1 flex-col gap-2 items-center cursor-pointer ${actionType === 'pass' ? 'border-neutral/40!' : 'm-0.5'}`}
+              onClick={() => handleSelectActionType('pass')}
+            >
+              <Icon name="hand" className="w-10 h-10 text-neutral/60" />
+              <Typography tag="span" variant="body" className="font-bold">
+                {t('passTitle')}
+              </Typography>
+              <Typography tag="span" variant="body-sm" className="text-primary/60">
+                {t('passDescription')}
+              </Typography>
             </Card>
           </>
         ) : (

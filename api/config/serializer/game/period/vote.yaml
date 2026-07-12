@@ -12,3 +12,6 @@ App\Entity\Game\Period\Vote:
         ballots:
             groups:
                 - game:read
+        actions:
+            groups:
+                - game:read

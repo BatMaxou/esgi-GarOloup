@@ -2,6 +2,7 @@
 
 namespace App\Service\Game\Period;
 
+use App\Entity\Game\Period\Action\NightAction\InfectAction;
 use App\Entity\Game\Period\Action\NightAction\MurderAction;
 use App\Entity\Game\Period\Action\NightAction\SaveAction;
 use App\Entity\Game\Period\Interface\PeriodAction;
@@ -21,6 +22,10 @@ class ActionVisibilityResolver
             return true;
         }
 
+        if ($action instanceof MurderAction && $this->isCancelledByInfection($action, $periodActions)) {
+            return true;
+        }
+
         return false;
     }
 
@@ -29,6 +34,18 @@ class ActionVisibilityResolver
     {
         foreach ($periodActions as $action) {
             if ($action instanceof SaveAction && $action->getTargetPlayerId() === $murder->getTargetPlayerId()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /** @param iterable<PeriodAction> $periodActions */
+    private function isCancelledByInfection(MurderAction $murder, iterable $periodActions): bool
+    {
+        foreach ($periodActions as $action) {
+            if ($action instanceof InfectAction && $action->getTargetPlayerId() === $murder->getTargetPlayerId()) {
                 return true;
             }
         }

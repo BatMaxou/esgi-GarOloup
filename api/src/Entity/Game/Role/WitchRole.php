@@ -8,6 +8,7 @@ use App\Api\Model\BasicActionOutput;
 use App\Domain\Command\Game\Runtime\WitchPoisonCommand;
 use App\Domain\Command\Game\Runtime\WitchSaveCommand;
 use App\Domain\Workflow\Interface\NightResettableInterface;
+use App\Entity\Game\Role\Interface\PassableRoleInterface;
 use App\Enum\Game\GameRoleEnum;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -30,7 +31,7 @@ use Doctrine\ORM\Mapping as ORM;
         ),
     ],
 )]
-class WitchRole extends GameRole implements NightResettableInterface
+class WitchRole extends GameRole implements NightResettableInterface, PassableRoleInterface
 {
     #[ORM\Column]
     private bool $healPotionAvailable = true;

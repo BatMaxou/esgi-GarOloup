@@ -9,3 +9,9 @@ App\Api\Model\Recap\ActionRecap:
         targetPlayerId:
             groups:
                 - recap:read
+        secondaryPlayerId:
+            groups:
+                - recap:read
+        seenRole:
+            groups:
+                - recap:read

@@ -1,0 +1,11 @@
+App\Entity\Game\Period\Interrupt:
+    attributes:
+        id:
+            groups:
+                - game:read
+        number:
+            groups:
+                - game:read
+        actions:
+            groups:
+                - game:read

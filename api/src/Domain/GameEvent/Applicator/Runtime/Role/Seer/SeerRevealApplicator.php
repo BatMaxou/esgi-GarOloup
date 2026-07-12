@@ -72,7 +72,7 @@ class SeerRevealApplicator implements GameEventApplicatorInterface
         $role->observe($targetPlayer);
 
         $night = $game->getCurrentNight() ?? throw new \LogicException('No active night to register the reveal');
-        $night->addAction(new RevealAction($night, (string) $targetPlayer->getId()));
+        $night->addAction(new RevealAction($night, (string) $targetPlayer->getId(), $targetPlayer->getRole()?->getType()));
 
         $game->setStepEndAt($this->clock->now());
         $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_GAME, $game));

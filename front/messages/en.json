@@ -87,7 +87,10 @@
             "saveVoteEndedWithTarget": "You chose to save {username}.",
             "saveVoteEndedWithoutTarget": "You chose to save the victim.",
             "poisonVoteEndedWithTarget": "You chose to poison {username}.",
-            "timeUp": "End turn"
+            "timeUp": "End turn",
+            "passTitle": "Do nothing",
+            "passDescription": "Skip your turn without using a potion.",
+            "passEnded": "You chose to do nothing this night."
           },
           "seerActions": {
             "seer": "Seer",
@@ -598,9 +601,11 @@
           "journal": "Journal"
         },
         "period": {
+          "setup": "Setup",
           "night": "Night {number}",
           "day": "Day {number}",
-          "vote": "Vote {number}"
+          "vote": "Vote {number}",
+          "interrupt": "Interruption"
         },
         "voteEliminated": "Eliminated by vote: {username}",
         "voteNoVictim": "No victim",
@@ -628,7 +633,11 @@
           "assassinMurder": "The Assassin eliminated {username}",
           "infection": "The Infect Father infected {username}",
           "witchSave": "The Witch saved {username}",
-          "seerReveal": "The Seer inspected {username}",
+          "seerReveal": "The Seer saw that {username} is a {role}",
+          "wildChildModel": "The Wild Child chose {username} as a model",
+          "couple": "{username} and {partner} form a couple",
+          "coupleDeath": "In a surge of grief, {username} left with {partner}",
+          "hunterShot": "The Hunter shot {username}",
           "calmNight": "A peaceful night, no victims"
         }
       }

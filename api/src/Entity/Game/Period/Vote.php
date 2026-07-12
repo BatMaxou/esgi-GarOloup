@@ -3,7 +3,8 @@
 namespace App\Entity\Game\Period;
 
 use App\Entity\Game\Game;
-use App\Entity\Game\Period\Interface\PeriodInterface;
+use App\Entity\Game\Period\Action\VoteAction;
+use App\Entity\Game\Period\Interface\ActionPeriodInterface;
 use App\Entity\Game\Period\Vote\Ballot;
 use App\Entity\Game\Player;
 use App\Entity\Trait\TimestampableTrait;
@@ -14,7 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: VoteRepository::class)]
-class Vote implements PeriodInterface
+class Vote implements ActionPeriodInterface
 {
     use UuidTrait;
     use TimestampableTrait;
@@ -38,11 +39,17 @@ class Vote implements PeriodInterface
     #[ORM\OrderBy(['createdAt' => 'ASC'])]
     private Collection $ballots;
 
+    /** @var Collection<int, VoteAction> */
+    #[ORM\OneToMany(targetEntity: VoteAction::class, mappedBy: 'vote', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OrderBy(['createdAt' => 'ASC'])]
+    private Collection $actions;
+
     public function __construct(Game $game, int $number)
     {
         $this->game = $game;
         $this->number = $number;
         $this->ballots = new ArrayCollection();
+        $this->actions = new ArrayCollection();
     }
 
     public function getGame(): Game
@@ -91,6 +98,23 @@ class Vote implements PeriodInterface
     {
         if (!$this->ballots->contains($ballot)) {
             $this->ballots->add($ballot);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, VoteAction>
+     */
+    public function getActions(): Collection
+    {
+        return $this->actions;
+    }
+
+    public function addAction(VoteAction $action): static
+    {
+        if (!$this->actions->contains($action)) {
+            $this->actions->add($action);
         }
 
         return $this;

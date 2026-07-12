@@ -7,11 +7,12 @@ use App\Api\Model\Recap\BallotRecap;
 use App\Api\Model\Recap\PeriodRecap;
 use App\Api\Model\Recap\PlayerRecap;
 use App\Entity\Game\Game;
-use App\Entity\Game\Period\Action\DayAction;
-use App\Entity\Game\Period\Action\NightAction;
 use App\Entity\Game\Period\Day;
 use App\Entity\Game\Period\Interface\PeriodAction;
+use App\Entity\Game\Period\Interface\SecondaryTargetableActionInterface;
+use App\Entity\Game\Period\Interface\SeenRoleActionInterface;
 use App\Entity\Game\Period\Interface\TargetableActionInterface;
+use App\Entity\Game\Period\Interrupt;
 use App\Entity\Game\Period\Night;
 use App\Entity\Game\Period\Vote;
 use App\Entity\Game\Player;
@@ -80,42 +81,45 @@ class RecapFactory
             $items[] = [$vote->getCreatedAt(), $this->buildVotePeriod($vote)];
         }
 
+        foreach ($game->getInterrupts() as $interrupt) {
+            $items[] = [$interrupt->getCreatedAt(), $this->buildInterruptPeriod($interrupt)];
+        }
+
         \usort($items, static fn (array $a, array $b): int => $a[0] <=> $b[0]);
 
-        return \array_column($items, 1);
+        $periods = \array_column($items, 1);
+
+        $setup = $this->buildSetupPeriod($game);
+        if (null !== $setup) {
+            \array_unshift($periods, $setup);
+        }
+
+        return $periods;
+    }
+
+    private function buildSetupPeriod(Game $game): ?PeriodRecap
+    {
+        $setup = $game->getSetup();
+        if (null === $setup || $setup->getActions()->isEmpty()) {
+            return null;
+        }
+
+        return new PeriodRecap(GameRuntimeStepEnum::SETUP, 0, $this->buildActions($setup->getActions()->toArray()), []);
     }
 
     private function buildNightPeriod(Night $night): PeriodRecap
     {
-        $actions = \array_map(
-            fn (NightAction $action) => new ActionRecap(
-                actionType: $action->getType()->value,
-                source: $action->getSource()?->value,
-                targetPlayerId: $this->resolveTargetPlayerId($action),
-            ),
-            $night->getActions()->toArray(),
-        );
-
-        return new PeriodRecap(GameRuntimeStepEnum::NIGHT, $night->getNumber(), $actions, []);
+        return new PeriodRecap(GameRuntimeStepEnum::NIGHT, $night->getNumber(), $this->buildActions($night->getActions()->toArray()), []);
     }
 
     private function buildDayPeriod(Day $day): PeriodRecap
     {
-        $actions = \array_map(
-            fn (DayAction $action) => new ActionRecap(
-                actionType: $action->getType()->value,
-                source: $action->getSource()?->value,
-                targetPlayerId: $this->resolveTargetPlayerId($action),
-            ),
-            $day->getActions()->toArray(),
-        );
-
-        return new PeriodRecap(GameRuntimeStepEnum::DAY, $day->getNumber(), $actions, []);
+        return new PeriodRecap(GameRuntimeStepEnum::DAY, $day->getNumber(), $this->buildActions($day->getActions()->toArray()), []);
     }
 
-    private function resolveTargetPlayerId(PeriodAction $action): ?string
+    private function buildInterruptPeriod(Interrupt $interrupt): PeriodRecap
     {
-        return $action instanceof TargetableActionInterface ? $action->getTargetPlayerId() : null;
+        return new PeriodRecap(GameRuntimeStepEnum::INTERRUPT, $interrupt->getNumber(), $this->buildActions($interrupt->getActions()->toArray()), []);
     }
 
     private function buildVotePeriod(Vote $vote): PeriodRecap
@@ -131,9 +135,30 @@ class RecapFactory
         return new PeriodRecap(
             GameRuntimeStepEnum::VOTE,
             $vote->getNumber(),
-            [],
+            $this->buildActions($vote->getActions()->toArray()),
             $ballots,
             eliminatedPlayerId: (string) $vote->getEliminatedPlayer()?->getId() ?: null,
+        );
+    }
+
+    /**
+     * @param PeriodAction[] $actions
+     *
+     * @return ActionRecap[]
+     */
+    private function buildActions(array $actions): array
+    {
+        return \array_map($this->buildActionRecap(...), $actions);
+    }
+
+    private function buildActionRecap(PeriodAction $action): ActionRecap
+    {
+        return new ActionRecap(
+            actionType: $action->getType()->value,
+            source: $action->getSource()?->value,
+            targetPlayerId: $action instanceof TargetableActionInterface ? $action->getTargetPlayerId() : null,
+            secondaryPlayerId: $action instanceof SecondaryTargetableActionInterface ? $action->getSecondaryPlayerId() : null,
+            seenRole: $action instanceof SeenRoleActionInterface ? $action->getSeenRole()?->value : null,
         );
     }
 }

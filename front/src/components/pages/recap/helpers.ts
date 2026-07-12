@@ -25,6 +25,14 @@ export const resolveActionKey = (action: ActionRecap): keyof typeof actionEventM
       return 'infection';
     case 'reveal':
       return 'seerReveal';
+    case 'wild_child_model':
+      return 'wildChildModel';
+    case 'couple':
+      return 'couple';
+    case 'couple_death':
+      return 'coupleDeath';
+    case 'hunter_shot':
+      return 'hunterShot';
     case 'murder':
     default:
       if (action.source === 'witch') return 'witchPoison';
@@ -40,11 +48,17 @@ export const buildPeriodEvents = (period: PeriodRecap, players: PlayerRecap[], t
   period.actions.forEach((action, idx) => {
     const key = resolveActionKey(action);
     const meta = actionEventMeta[key];
+    const params: Record<string, string> = { username: nameOf(action.targetPlayerId) };
+    if (key === 'couple' || key === 'coupleDeath') {
+      params.partner = nameOf(action.secondaryPlayerId);
+    } else if (key === 'seerReveal') {
+      params.role = action.seenRole ? t(`components.pages.recap.role.${action.seenRole}`) : '?';
+    }
     events.push({
       id: `action-${idx}`,
       icon: meta.icon,
       color: meta.color,
-      text: t(`components.pages.recap.event.${key}`, { username: nameOf(action.targetPlayerId) }),
+      text: t(`components.pages.recap.event.${key}`, params),
     });
   });
 

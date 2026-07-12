@@ -3,6 +3,7 @@
 namespace App\Domain\Spec\Role;
 
 use App\Entity\Game\Game;
+use App\Entity\Game\Period\Action\NightAction\InfectAction;
 use App\Entity\Game\Period\Action\NightAction\MurderAction;
 use App\Entity\Game\Player;
 use App\Entity\Game\Role\WitchRole;
@@ -84,6 +85,13 @@ class WitchSpec
         }
 
         $targetId = $target->getId()?->toString();
+
+        foreach ($night->getActions() as $action) {
+            if ($action instanceof InfectAction && $action->getTargetPlayerId() === $targetId) {
+                return false;
+            }
+        }
+
         foreach ($night->getActions() as $action) {
             if ($action instanceof MurderAction && $action->getTargetPlayerId() === $targetId) {
                 return true;

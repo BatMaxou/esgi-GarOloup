@@ -222,6 +222,8 @@ export type ActionRecap = {
   actionType: string;
   source?: string;
   targetPlayerId?: string;
+  secondaryPlayerId?: string;
+  seenRole?: string;
 };
 
 export type BallotRecap = {

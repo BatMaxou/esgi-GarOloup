@@ -237,4 +237,12 @@ class GameBehavior extends AbstractBehavior
             'json' => [],
         ]));
     }
+
+    public function passTurn(): BehaviorResponse
+    {
+        return new BehaviorResponse($this->client->request('PATCH', '/api/game/pass-turn', [
+            'headers' => $this->getPatchHeaders(),
+            'json' => [],
+        ]));
+    }
 }

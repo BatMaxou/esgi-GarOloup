@@ -23,7 +23,7 @@ const PeriodSection = ({ period, players }: Props) => {
   }
 
   const iconName = periodTypeIcon[period.type as keyof typeof periodTypeIcon];
-  const periodKey = period.type.toLowerCase() as 'night' | 'day' | 'vote';
+  const periodKey = period.type.toLowerCase() as 'night' | 'day' | 'vote' | 'setup' | 'interrupt';
   const nameOf = (id?: string) => players.find((p) => p.playerId === id)?.username ?? '?';
   const showBallots = period.type === GameRuntimeStepEnum.VOTE && period.ballots.length > 0;
 

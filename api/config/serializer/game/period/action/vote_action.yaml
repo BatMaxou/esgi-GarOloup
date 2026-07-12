@@ -1,0 +1,8 @@
+App\Entity\Game\Period\Action\VoteAction:
+    attributes:
+        type:
+            groups:
+                - game:read
+        source:
+            groups:
+                - game:read

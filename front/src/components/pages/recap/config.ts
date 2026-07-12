@@ -33,9 +33,11 @@ export const roleIcon: Record<string, IconName> = {
 };
 
 export const periodTypeIcon = {
+  [GameRuntimeStepEnum.SETUP]: 'timer',
   [GameRuntimeStepEnum.NIGHT]: 'moon',
   [GameRuntimeStepEnum.DAY]: 'sun',
   [GameRuntimeStepEnum.VOTE]: 'users',
+  [GameRuntimeStepEnum.INTERRUPT]: 'hunter',
 } as const;
 
 export const eventCardClasses: Record<EventColor, string> = {
@@ -43,6 +45,7 @@ export const eventCardClasses: Record<EventColor, string> = {
   green:
     'border-green-500/30 shadow-[0_8px_30px_oklch(from_var(--color-green-500)_l_c_h_/_0.12)] before:bg-[radial-gradient(circle_at_50%_0%,oklch(from_var(--color-green-500)_l_c_h_/_0.16),transparent_70%)]',
   blue: 'border-blue-500/30 shadow-[0_8px_30px_oklch(from_var(--color-blue-500)_l_c_h_/_0.12)] before:bg-[radial-gradient(circle_at_50%_0%,oklch(from_var(--color-blue-500)_l_c_h_/_0.16),transparent_70%)]',
+  pink: 'border-pink-500/30 shadow-[0_8px_30px_oklch(from_var(--color-pink-500)_l_c_h_/_0.12)] before:bg-[radial-gradient(circle_at_50%_0%,oklch(from_var(--color-pink-500)_l_c_h_/_0.16),transparent_70%)]',
   neutral: 'border-primary/15',
 };
 
@@ -50,6 +53,7 @@ export const eventIconColor: Record<EventColor, string> = {
   red: 'text-red-500',
   green: 'text-green-500',
   blue: 'text-blue-500',
+  pink: 'text-pink-500',
   neutral: 'text-neutral-500',
 };
 
@@ -60,4 +64,8 @@ export const actionEventMeta: Record<string, { icon: IconName; color: EventColor
   infection: { icon: 'werewolf', color: 'red' },
   witchSave: { icon: 'heal', color: 'green' },
   seerReveal: { icon: 'seer', color: 'blue' },
+  wildChildModel: { icon: 'wild-child', color: 'neutral' },
+  couple: { icon: 'cupidon', color: 'pink' },
+  coupleDeath: { icon: 'heart', color: 'pink' },
+  hunterShot: { icon: 'hunter', color: 'red' },
 };

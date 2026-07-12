@@ -61,6 +61,9 @@ App\Entity\Game\Game:
         votes:
             groups:
                 - game:read
+        interrupts:
+            groups:
+                - game:read
         nightWorkflow:
             groups:
                 - game:read

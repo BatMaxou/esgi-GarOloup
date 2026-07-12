@@ -1,0 +1,8 @@
+App\Entity\Game\Period\Action\VoteAction\CoupleDeathAction:
+    attributes:
+        targetPlayerId:
+            groups:
+                - game:read
+        secondaryPlayerId:
+            groups:
+                - game:read

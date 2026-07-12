@@ -14,6 +14,7 @@ use App\Entity\Event\Game\CupidonSetupEvent;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Game\Game;
+use App\Entity\Game\Period\Action\SetupAction\CoupleAction;
 use App\Entity\Game\Player;
 use App\Entity\Game\Role\CupidonRole;
 use App\Entity\Game\Role\LoverRole;
@@ -122,6 +123,11 @@ class CupidonSetupApplicator implements GameEventApplicatorInterface
 
         $this->wrapAsLover($first, $secondLoverId);
         $this->wrapAsLover($second, $firstLoverId);
+
+        $setup = $game->getSetup();
+        if (null !== $setup) {
+            $setup->addAction(new CoupleAction($setup, $firstLoverId, $secondLoverId));
+        }
 
         $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_PLAYER, $first));
         $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_PLAYER, $second));

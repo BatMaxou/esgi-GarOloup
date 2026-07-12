@@ -1,0 +1,8 @@
+App\Entity\Game\Period\Action\InterruptAction\CoupleDeathAction:
+    attributes:
+        targetPlayerId:
+            groups:
+                - game:read
+        secondaryPlayerId:
+            groups:
+                - game:read
