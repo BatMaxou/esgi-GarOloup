@@ -12,6 +12,8 @@ import Card from '@/components/ui/molecules/card';
 import Button from '@/components/ui/molecules/button';
 import { ApiClientError } from '@/lib/api/ApiClientError';
 import type { Player } from '@/utils/types';
+import { isLoverRole, useOptionalLover } from '@/contexts/roles/lover-context';
+import PlayerLoverPartnerIcon from '@/components/ui/molecules/icon/player-lover-partner-item';
 
 const getUsername = (gamePlayer?: Player) =>
   (gamePlayer?.user?.username || gamePlayer?.tempUser?.username || gamePlayer?.username) ?? '';
@@ -20,8 +22,9 @@ const AssassinActions = () => {
   const { player } = usePlayer();
   const { game } = useGame();
   const { kill } = useAssassin();
-  const t = useTranslations('components.common.game.setupActions.assassinActions');
-
+  const t = useTranslations('components.common.game.nightActions.assassinActions');
+  const { partnerPlayerId: loverPartnerId } = useOptionalLover();
+  const partnerPlayerId = loverPartnerId ?? (isLoverRole(player?.role) ? (player?.role.partnerPlayerId ?? null) : null);
   const [targetId, setTargetId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -70,19 +73,30 @@ const AssassinActions = () => {
           return (
             <Card
               key={gamePlayer.id}
-              onClick={() => setTargetId(gamePlayer.id)}
+              onClick={
+                isLoverRole(player?.role) && gamePlayer.id === partnerPlayerId
+                  ? undefined
+                  : () => setTargetId(gamePlayer.id)
+              }
               isCurrentPlayer={isTarget}
               liftOnHover={false}
-              hoverable={!isTarget}
+              hoverable={!isTarget && !isLoverRole(player?.role) && gamePlayer.id !== partnerPlayerId}
               className={`relative flex flex-col items-center justify-center gap-3 min-h-32 border! cursor-pointer
                 ${
                   isTarget
                     ? 'border-error! bg-error/20!'
-                    : 'border-primary/15! hover:bg-primary/10 hover:border-primary/50!'
+                    : isLoverRole(player?.role) && gamePlayer.id === partnerPlayerId
+                      ? 'border-pink-700! bg-pink-700/20! cursor-default!'
+                      : 'border-primary/15! hover:bg-primary/10 hover:border-primary/50!'
                 }
                 ${submitting ? 'opacity-60 pointer-events-none' : ''}
               `}
             >
+              {isLoverRole(player?.role) && gamePlayer.id === partnerPlayerId && (
+                <div className="absolute top-2 left-2">
+                  <PlayerLoverPartnerIcon player={gamePlayer} className="w-4 h-4 text-pink-700" />
+                </div>
+              )}
               <Typography variant="body" textColor="light" center>
                 {getUsername(gamePlayer)}
               </Typography>

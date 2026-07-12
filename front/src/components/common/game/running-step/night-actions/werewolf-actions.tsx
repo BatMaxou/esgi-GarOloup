@@ -8,13 +8,16 @@ import Typography from '@/components/ui/atoms/typography';
 import Card from '@/components/ui/molecules/card';
 import Button from '@/components/ui/molecules/button';
 import { useWerewolf } from '@/contexts/roles/werewolf-context';
+import { isLoverRole, useOptionalLover } from '@/contexts/roles/lover-context';
+import PlayerLoverPartnerIcon from '@/components/ui/molecules/icon/player-lover-partner-item';
 
 const WerewolfActions = () => {
   const { player } = usePlayer();
   const { game } = useGame();
   const { team, vote } = useWerewolf();
   const t = useTranslations('components.common.game.nightActions.werewolfActions');
-
+  const { partnerPlayerId: loverPartnerId } = useOptionalLover();
+  const partnerPlayerId = loverPartnerId ?? (isLoverRole(player?.role) ? (player?.role.partnerPlayerId ?? null) : null);
   const playerList =
     game?.players
       ?.filter(
@@ -92,29 +95,41 @@ const WerewolfActions = () => {
         </Typography>
 
         <div className="flex flex-col gap-2 pr-2 overflow-y-scroll scrollbar max-h-96">
-          {playerList.map((player) => (
+          {playerList.map((gamePlayer) => (
             <Card
-              key={player.id}
-              onClick={isSpectator ? undefined : () => handleSelectPlayer(player.id)}
-              isCurrentPlayer={values.targetId === player.id}
+              key={gamePlayer.id}
+              onClick={
+                isSpectator || (isLoverRole(player?.role) && gamePlayer.id === partnerPlayerId)
+                  ? undefined
+                  : () => handleSelectPlayer(gamePlayer.id)
+              }
+              isCurrentPlayer={values.targetId === gamePlayer.id}
               liftOnHover={false}
               className={`flex flex-row border! w-full 
                 ${isSpectator ? 'cursor-default' : 'cursor-pointer'}
                 ${
-                  values.targetId === player.id
+                  values.targetId === gamePlayer.id
                     ? 'justify-between items-between! border-error! bg-error/20!'
-                    : 'items-center! border-primary/15! justify-start! hover:bg-error/10 hover:border-error/50!'
+                    : isLoverRole(player?.role) && gamePlayer.id === partnerPlayerId
+                      ? 'justify-between items-between! border-pink-700! bg-pink-700/20! cursor-default!'
+                      : 'items-center! border-primary/15! justify-start! hover:bg-error/10 hover:border-error/50!'
                 }
               `}
-              hoverable={values.targetId !== player.id && !isSpectator}
+              hoverable={values.targetId !== gamePlayer.id && !isSpectator}
             >
               <Typography variant="body" textColor="light">
-                {player.name}
+                {gamePlayer.name}{' '}
               </Typography>
-              {values.targetId === player.id && (
+              {values.targetId === gamePlayer.id && (
                 <Typography variant="body" textColor="error" className="flex items-center gap-2">
                   <Icon name="skull" className="w-4 h-4 color-error" />
                   {t('focused')}
+                </Typography>
+              )}
+              {isLoverRole(player?.role) && gamePlayer.id === partnerPlayerId && (
+                <Typography variant="body" textColor="controlled" className="flex items-center gap-2 text-pink-700">
+                  <PlayerLoverPartnerIcon player={gamePlayer} className="w-4 h-4 color-pink-700" />
+                  {t('loverPartner')}
                 </Typography>
               )}
             </Card>

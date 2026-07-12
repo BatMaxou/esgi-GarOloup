@@ -59,7 +59,7 @@ const PlayerSidebarItem = ({ player }: Props) => {
           </Typography>
         )}
 
-        {isLoverRole(currentPlayer?.role) && <PlayerLoverPartnerIcon currentPlayer={currentPlayer} player={player} />}
+        {isLoverRole(currentPlayer?.role) && <PlayerLoverPartnerIcon player={player} />}
       </div>
     </Card>
   );
