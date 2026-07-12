@@ -90,4 +90,8 @@ export class GameResource {
   public async timeUp(): Promise<BasicActionResponse | ApiClientError> {
     return this.apiClient.patch<BasicActionResponse>(apiPaths.game.timeUp);
   }
+
+  public async passTurn(): Promise<BasicActionResponse | ApiClientError> {
+    return this.apiClient.patch<BasicActionResponse>(apiPaths.game.passTurn);
+  }
 }

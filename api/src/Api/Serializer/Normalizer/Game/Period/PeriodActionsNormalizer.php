@@ -2,7 +2,11 @@
 
 namespace App\Api\Serializer\Normalizer\Game\Period;
 
+use App\Entity\Game\Period\Day;
+use App\Entity\Game\Period\Interface\ActionPeriodInterface;
+use App\Entity\Game\Period\Interrupt;
 use App\Entity\Game\Period\Night;
+use App\Entity\Game\Period\Vote;
 use App\Entity\User\AbstractUser;
 use App\Repository\Game\PlayerRepository;
 use App\Service\Game\Period\ActionVisibilityResolver;
@@ -11,11 +15,15 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class NightActionsNormalizer implements NormalizerInterface, NormalizerAwareInterface
+/**
+ * Filters out the actions the current player is not allowed to see (see ActionVisibilityResolver)
+ * from any period exposing actions (night, day, vote, interrupt).
+ */
+class PeriodActionsNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
     use NormalizerAwareTrait;
 
-    private const ALREADY_CALLED = 'night_actions_normalizer_already_called';
+    private const ALREADY_CALLED = 'period_actions_normalizer_already_called';
 
     public function __construct(
         private readonly Security $security,
@@ -24,14 +32,14 @@ class NightActionsNormalizer implements NormalizerInterface, NormalizerAwareInte
     ) {
     }
 
-    /** @param Night $object */
+    /** @param ActionPeriodInterface $object */
     public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         $context[self::ALREADY_CALLED] = true;
         $normalized = $this->normalizer->normalize($object, $format, $context);
 
         if (!\is_array($normalized)) {
-            throw new \LogicException(\sprintf('Normalized data should be an array for %s', Night::class));
+            throw new \LogicException(\sprintf('Normalized data should be an array for %s', $object::class));
         }
 
         $normalizedActions = $normalized['actions'] ?? null;
@@ -65,13 +73,16 @@ class NightActionsNormalizer implements NormalizerInterface, NormalizerAwareInte
 
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return $data instanceof Night && false === ($context[self::ALREADY_CALLED] ?? false);
+        return $data instanceof ActionPeriodInterface && false === ($context[self::ALREADY_CALLED] ?? false);
     }
 
     public function getSupportedTypes(?string $format): array
     {
         return [
             Night::class => false,
+            Day::class => false,
+            Vote::class => false,
+            Interrupt::class => false,
         ];
     }
 }

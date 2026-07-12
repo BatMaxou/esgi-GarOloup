@@ -8,6 +8,7 @@ use App\Domain\Interceptor\HunterInterceptor;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Game\Game;
+use App\Entity\Game\Period\Interrupt;
 use App\Enum\Game\GameRuntimeStepEnum;
 use Symfony\Component\Clock\ClockInterface;
 
@@ -40,6 +41,8 @@ class HunterInterruptApplicator implements GameEventApplicatorInterface
         $game->setInterruptedByRole($this->hunterInterceptor->getRole());
         $game->setRuntimeStep(GameRuntimeStepEnum::INTERRUPT);
         $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $this->hunterStepDuration)));
+
+        $game->addInterrupt(new Interrupt($game, $game->getInterrupts()->count() + 1));
 
         return $game;
     }

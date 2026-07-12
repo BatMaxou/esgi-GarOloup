@@ -3,6 +3,7 @@
 namespace App\Entity\Game\Period\Action;
 
 use App\Entity\Game\Game;
+use App\Entity\Game\Period\Action\NightAction\CoupleDeathAction;
 use App\Entity\Game\Period\Action\NightAction\InfectAction;
 use App\Entity\Game\Period\Action\NightAction\MurderAction;
 use App\Entity\Game\Period\Action\NightAction\RevealAction;
@@ -29,6 +30,7 @@ use Doctrine\ORM\Mapping\InheritanceType;
     'save' => SaveAction::class,
     'infection' => InfectAction::class,
     'reveal' => RevealAction::class,
+    'couple_death' => CoupleDeathAction::class,
 ])]
 abstract class NightAction implements PeriodAction
 {

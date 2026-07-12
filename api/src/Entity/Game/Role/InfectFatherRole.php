@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Patch;
 use App\Api\Model\BasicActionOutput;
 use App\Domain\Command\Game\Runtime\InfectCommand;
+use App\Entity\Game\Role\Interface\PassableRoleInterface;
 use App\Enum\Game\GameRoleEnum;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -21,7 +22,7 @@ use Doctrine\ORM\Mapping as ORM;
         ),
     ],
 )]
-class InfectFatherRole extends WerewolfRole
+class InfectFatherRole extends WerewolfRole implements PassableRoleInterface
 {
     #[ORM\Column]
     private bool $infectionAvailable = true;

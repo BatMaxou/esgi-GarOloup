@@ -4,7 +4,7 @@ namespace App\Entity\Game\Period;
 
 use App\Entity\Game\Game;
 use App\Entity\Game\Period\Action\DayAction;
-use App\Entity\Game\Period\Interface\PeriodInterface;
+use App\Entity\Game\Period\Interface\ActionPeriodInterface;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
 use App\Repository\Game\Period\DayRepository;
@@ -13,7 +13,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DayRepository::class)]
-class Day implements PeriodInterface
+class Day implements ActionPeriodInterface
 {
     use UuidTrait;
     use TimestampableTrait;

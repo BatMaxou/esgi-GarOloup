@@ -1,0 +1,8 @@
+App\Entity\Game\Period\Action\InterruptAction:
+    attributes:
+        type:
+            groups:
+                - game:read
+        source:
+            groups:
+                - game:read

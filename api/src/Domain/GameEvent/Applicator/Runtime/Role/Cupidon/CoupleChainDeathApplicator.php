@@ -9,8 +9,10 @@ use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Game\Game;
 use App\Entity\Game\Player;
 use App\Entity\Game\Role\LoverRole;
+use App\Enum\Game\GameActionTypeEnum;
 use App\Enum\Game\GameRoleEnum;
 use App\Enum\TopicEnum;
+use App\Service\Game\Period\PeriodActionFactory;
 use App\Service\Mercure\TopicCollector;
 use App\Service\Mercure\TopicProvider;
 
@@ -22,6 +24,7 @@ class CoupleChainDeathApplicator implements GameEventApplicatorInterface
     public function __construct(
         private readonly TopicCollector $topicCollector,
         private readonly TopicProvider $topicProvider,
+        private readonly PeriodActionFactory $periodActionFactory,
     ) {
     }
 
@@ -34,16 +37,30 @@ class CoupleChainDeathApplicator implements GameEventApplicatorInterface
     {
         $game = $this->ensureGame($gameEvent);
 
-        $partner = $this->findGrievingPartner($game);
-        if (null === $partner) {
+        $pair = $this->findGrievingPair($game);
+        if (null === $pair) {
             return $game;
         }
 
-        $partner->setDead(true);
+        [$griever, $deceased] = $pair;
 
-        $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_PLAYER, $partner));
+        $griever->setDead(true);
+        $this->recordGriefDeath($game, $griever, $deceased);
+
+        $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_PLAYER, $griever));
 
         return $game;
+    }
+
+    private function recordGriefDeath(Game $game, Player $griever, Player $deceased): void
+    {
+        $grieverId = $griever->getId()?->toString();
+        $deceasedId = $deceased->getId()?->toString();
+        if (null === $grieverId || null === $deceasedId) {
+            return;
+        }
+
+        $this->periodActionFactory->createForCurrentPeriod($game, GameActionTypeEnum::COUPLE_DEATH, $grieverId, $deceasedId);
     }
 
     public function supports(GameEvent $gameEvent): bool
@@ -55,7 +72,10 @@ class CoupleChainDeathApplicator implements GameEventApplicatorInterface
             && $game->getPlayer(GameRoleEnum::CUPIDON);
     }
 
-    private function findGrievingPartner(Game $game): ?Player
+    /**
+     * @return array{0: Player, 1: Player}|null the grieving partner (still alive) and the lover already dead
+     */
+    private function findGrievingPair(Game $game): ?array
     {
         foreach ($game->getPlayers() as $player) {
             $role = $player->getRoleAs(LoverRole::class);
@@ -65,7 +85,7 @@ class CoupleChainDeathApplicator implements GameEventApplicatorInterface
 
             foreach ($game->getPlayers() as $candidate) {
                 if ($candidate->getId()?->toString() === $role->getPartnerPlayerId() && !$candidate->isDead()) {
-                    return $candidate;
+                    return [$candidate, $player];
                 }
             }
         }

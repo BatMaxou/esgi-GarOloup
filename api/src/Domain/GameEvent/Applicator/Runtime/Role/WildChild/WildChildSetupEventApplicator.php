@@ -14,6 +14,7 @@ use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Event\Game\WildChildSetupEvent;
 use App\Entity\Game\Game;
+use App\Entity\Game\Period\Action\SetupAction\WildChildModelAction;
 use App\Entity\Game\Player;
 use App\Entity\Game\Role\WildChildRole;
 use App\Enum\Game\GameRoleEnum;
@@ -64,6 +65,7 @@ class WildChildSetupEventApplicator implements GameEventApplicatorInterface
 
         $role->setModelPlayerId($targetPlayerId);
         $role->setSetup(true);
+        $this->recordModelChoice($game, $targetPlayerId);
 
         return $game;
     }
@@ -75,13 +77,23 @@ class WildChildSetupEventApplicator implements GameEventApplicatorInterface
         foreach ($game->getPlayers() as $player) {
             $role = $player->getRoleAs(WildChildRole::class);
             if ($role instanceof WildChildRole && !$role->isSetup()) {
-                $role->setModelPlayerId($this->getRandomModelId($game, $player));
+                $modelId = $this->getRandomModelId($game, $player);
+                $role->setModelPlayerId($modelId);
                 $role->setSetup(true);
+                $this->recordModelChoice($game, $modelId);
                 $this->handleAfkPlayer($player);
             }
         }
 
         return $game;
+    }
+
+    private function recordModelChoice(Game $game, string $modelId): void
+    {
+        $setup = $game->getSetup();
+        if (null !== $setup) {
+            $setup->addAction(new WildChildModelAction($setup, $modelId));
+        }
     }
 
     protected function supportsRandomization(GameEvent $gameEvent): bool

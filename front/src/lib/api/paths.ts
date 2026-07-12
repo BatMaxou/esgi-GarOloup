@@ -19,6 +19,7 @@ export const apiPaths = {
     launch: '/game/launch',
     vote: '/game/vote',
     timeUp: '/game/time-up',
+    passTurn: '/game/pass-turn',
   },
   seer: {
     reveal: '/game/seer/reveal',

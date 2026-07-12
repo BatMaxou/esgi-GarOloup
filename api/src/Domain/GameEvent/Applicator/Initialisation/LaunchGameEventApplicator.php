@@ -12,6 +12,7 @@ use App\Domain\Workflow\NightWorkflowComposer;
 use App\Entity\Event\Game\GameEvent;
 use App\Entity\Event\Game\LaunchGameEvent;
 use App\Entity\Game\Game;
+use App\Entity\Game\Period\Setup;
 use App\Enum\Game\GameRuntimeStepEnum;
 use Symfony\Component\Clock\ClockInterface;
 
@@ -41,6 +42,8 @@ class LaunchGameEventApplicator implements GameEventApplicatorInterface
 
         $game->setRuntimeStep(GameRuntimeStepEnum::SETUP);
         $game->setStepEndAt($this->clock->now()->modify(\sprintf('+%d seconds', $this->setupDuration)));
+
+        $game->setSetup(new Setup());
 
         $game->setNightWorkflow($this->nightWorkflowComposer->for($game));
         $game->setDayWorkflow($this->dayWorkflowComposer->for($game));

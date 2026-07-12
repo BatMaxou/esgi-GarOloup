@@ -18,6 +18,7 @@ type WitchContextType = {
   poisonPotionAvailable: boolean;
   save: (targetPlayerId: string) => Promise<BasicActionResponse | ApiClientError>;
   poison: (targetPlayerId: string) => Promise<BasicActionResponse | ApiClientError>;
+  pass: () => Promise<BasicActionResponse | ApiClientError>;
 };
 
 const isWitchRole = (role?: GameRole): role is WitchRole => role?.type === GameRoleEnum.WITCH;
@@ -36,9 +37,10 @@ export const WitchProvider = ({ children }: Props) => {
 
   const save = useCallback((targetPlayerId: string) => apiClient.witch.save(targetPlayerId), [apiClient]);
   const poison = useCallback((targetPlayerId: string) => apiClient.witch.poison(targetPlayerId), [apiClient]);
+  const pass = useCallback(() => apiClient.game.passTurn(), [apiClient]);
 
   return (
-    <WitchContext.Provider value={{ healPotionAvailable, poisonPotionAvailable, save, poison }}>
+    <WitchContext.Provider value={{ healPotionAvailable, poisonPotionAvailable, save, poison, pass }}>
       {children}
     </WitchContext.Provider>
   );

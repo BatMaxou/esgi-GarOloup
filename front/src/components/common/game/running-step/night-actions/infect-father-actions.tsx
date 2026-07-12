@@ -16,7 +16,7 @@ import { useState } from 'react';
 const InfectFatherActions = () => {
   const { player } = usePlayer();
   const { game } = useGame();
-  const { infectionAvailable, infect } = useInfectFather();
+  const { infectionAvailable, infect, pass } = useInfectFather();
   const { team } = useWerewolf();
   const t = useTranslations('components.common.game.nightActions.infectFatherActions');
   const [passDisplay, setPassDisplay] = useState(false);
@@ -29,6 +29,7 @@ const InfectFatherActions = () => {
       infect();
     } else if (actionType === 'pass') {
       setPassDisplay(true);
+      pass();
     }
   };
 

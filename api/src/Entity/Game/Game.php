@@ -22,10 +22,13 @@ use App\Domain\Command\Game\Initialisation\ResetGameMasterCommand;
 use App\Domain\Command\Game\Initialisation\ResetRoleDispatchCommand;
 use App\Domain\Command\Game\Initialisation\SetGameConfigurationCommand;
 use App\Domain\Command\Game\Initialisation\SetGameMasterCommand;
+use App\Domain\Command\Game\Runtime\PassTurnCommand;
 use App\Domain\Command\Game\Runtime\TimeUpCommand;
 use App\Domain\Command\Game\Runtime\VoteCommand;
 use App\Entity\Game\Period\Day;
+use App\Entity\Game\Period\Interrupt;
 use App\Entity\Game\Period\Night;
+use App\Entity\Game\Period\Setup;
 use App\Entity\Game\Period\Vote;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Trait\UuidTrait;
@@ -143,6 +146,13 @@ use Doctrine\ORM\Mapping as ORM;
             output: BasicActionOutput::class,
         ),
         new Patch(
+            name: 'api_game_pass_turn',
+            uriTemplate: '/game/pass-turn',
+            messenger: 'input',
+            input: PassTurnCommand::class,
+            output: BasicActionOutput::class,
+        ),
+        new Patch(
             name: 'api_game_time_up',
             uriTemplate: '/game/time-up',
             messenger: 'input',
@@ -224,6 +234,14 @@ class Game implements TopicRelatedObject
     #[ORM\OneToMany(targetEntity: Vote::class, mappedBy: 'game', cascade: ['persist', 'remove'])]
     private Collection $votes;
 
+    /** @var Collection<int, Interrupt> */
+    #[ORM\OneToMany(targetEntity: Interrupt::class, mappedBy: 'game', cascade: ['persist', 'remove'])]
+    private Collection $interrupts;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Setup $setup = null;
+
     public function __construct(
         Player $host,
     ) {
@@ -241,6 +259,7 @@ class Game implements TopicRelatedObject
         $this->nights = new ArrayCollection();
         $this->days = new ArrayCollection();
         $this->votes = new ArrayCollection();
+        $this->interrupts = new ArrayCollection();
         $this->nightWorkflow = new Workflow();
         $this->dayWorkflow = new Workflow();
     }
@@ -581,6 +600,35 @@ class Game implements TopicRelatedObject
         }
 
         return null;
+    }
+
+    /**
+     * @return Collection<int, Interrupt>
+     */
+    public function getInterrupts(): Collection
+    {
+        return $this->interrupts;
+    }
+
+    public function addInterrupt(Interrupt $interrupt): static
+    {
+        if (!$this->interrupts->contains($interrupt)) {
+            $this->interrupts->add($interrupt);
+        }
+
+        return $this;
+    }
+
+    public function getSetup(): ?Setup
+    {
+        return $this->setup;
+    }
+
+    public function setSetup(?Setup $setup): static
+    {
+        $this->setup = $setup;
+
+        return $this;
     }
 
     public function getTopicIdentifier(): ?string

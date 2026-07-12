@@ -13,9 +13,11 @@ use App\Entity\Event\Game\HunterShootEvent;
 use App\Entity\Event\Game\TimeUpGameEvent;
 use App\Entity\Game\Game;
 use App\Entity\Game\Role\HunterRole;
+use App\Enum\Game\GameActionTypeEnum;
 use App\Enum\Game\GameRuntimeStepEnum;
 use App\Enum\TopicEnum;
 use App\Repository\Game\PlayerRepository;
+use App\Service\Game\Period\PeriodActionFactory;
 use App\Service\Mercure\TopicCollector;
 use App\Service\Mercure\TopicProvider;
 use Psr\Clock\ClockInterface;
@@ -33,6 +35,7 @@ class HunterShootApplicator implements GameEventApplicatorInterface
         private readonly ClockInterface $clock,
         private readonly TopicProvider $topicProvider,
         private readonly TopicCollector $topicCollector,
+        private readonly PeriodActionFactory $periodActionFactory,
     ) {
     }
 
@@ -85,6 +88,7 @@ class HunterShootApplicator implements GameEventApplicatorInterface
 
         $targetPlayer->setDead(true);
         $role->markShot();
+        $this->periodActionFactory->createForCurrentPeriod($game, GameActionTypeEnum::HUNTER_SHOT, $targetPlayerId);
 
         $game->setStepEndAt($this->clock->now());
         $this->topicCollector->collect($this->topicProvider->provide(TopicEnum::CURRENT_GAME, $game));
